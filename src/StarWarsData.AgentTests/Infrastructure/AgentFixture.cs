@@ -31,61 +31,30 @@ public class AgentFixture
     [AssemblyInitialize]
     public static void Initialize(TestContext context)
     {
-        var apiKey =
-            Environment.GetEnvironmentVariable("STARWARS_OPENAI_KEY")
-            ?? throw new InvalidOperationException(
-                "STARWARS_OPENAI_KEY environment variable is required"
-            );
+        var apiKey = Environment.GetEnvironmentVariable("STARWARS_OPENAI_KEY") ?? throw new InvalidOperationException("STARWARS_OPENAI_KEY environment variable is required");
 
         var mongoConnectionString =
             Environment.GetEnvironmentVariable("STARWARS_MONGO_CONNECTION")
-            ?? throw new InvalidOperationException(
-                "STARWARS_MONGO_CONNECTION environment variable is required (e.g. mongodb://user:pass@host:port/?authSource=admin)"
-            );
+            ?? throw new InvalidOperationException("STARWARS_MONGO_CONNECTION environment variable is required (e.g. mongodb://user:pass@host:port/?authSource=admin)");
 
-        var databaseName =
-            Environment.GetEnvironmentVariable("STARWARS_MONGO_DATABASE") ?? DefaultDatabaseName;
+        var databaseName = Environment.GetEnvironmentVariable("STARWARS_MONGO_DATABASE") ?? DefaultDatabaseName;
 
-        OpenAiClient = new OpenAIClient(
-            new ApiKeyCredential(apiKey),
-            new OpenAIClientOptions { NetworkTimeout = TimeSpan.FromMinutes(5) }
-        );
+        OpenAiClient = new OpenAIClient(new ApiKeyCredential(apiKey), new OpenAIClientOptions { NetworkTimeout = TimeSpan.FromMinutes(5) });
 
         MongoClient = new MongoClient(mongoConnectionString);
-        var settings = Options.Create(
-            new SettingsOptions
-            {
-                DatabaseName = databaseName,
-                HangfireDb = $"{databaseName}-hangfire",
-            }
-        );
+        var settings = Options.Create(new SettingsOptions { DatabaseName = databaseName, HangfireDb = $"{databaseName}-hangfire" });
 
         // Build toolkits — same as Program.cs
         var kgService = new KnowledgeGraphQueryService(MongoClient, settings);
         var embedder = new NoOpEmbeddingGenerator();
-        var searchLogger = Microsoft
-            .Extensions
-            .Logging
-            .Abstractions
-            .NullLogger<SemanticSearchService>
-            .Instance;
-        var semanticSearch = new SemanticSearchService(
-            MongoClient,
-            settings,
-            embedder,
-            searchLogger
-        );
+        var searchLogger = Microsoft.Extensions.Logging.Abstractions.NullLogger<SemanticSearchService>.Instance;
+        var semanticSearch = new SemanticSearchService(MongoClient, settings, embedder, searchLogger);
         GraphRAG = new GraphRAGToolkit(kgService, semanticSearch, MongoClient, databaseName);
         Components = new ComponentToolkit();
         var dataExplorer = new DataExplorerToolkit(MongoClient, settings);
 
-        var pagesCollection = MongoClient
-            .GetDatabase(databaseName)
-            .GetCollection<BsonDocument>(Collections.Pages);
-        var wikiSearchProvider = new StarWarsWikiSearchProvider(
-            pagesCollection,
-            NullLoggerFactory.Instance
-        );
+        var pagesCollection = MongoClient.GetDatabase(databaseName).GetCollection<BsonDocument>(Collections.Pages);
+        var wikiSearchProvider = new StarWarsWikiSearchProvider(pagesCollection, NullLoggerFactory.Instance);
 
         // Assemble tools — same order as production
         var tools = new List<AITool>();
@@ -101,35 +70,20 @@ public class AgentFixture
         );
         Tools = tools;
 
-        EvaluatorClient = new ChatClientBuilder(
-            OpenAiClient.GetChatClient("gpt-4o-mini").AsIChatClient()
-        ).Build();
+        EvaluatorClient = new ChatClientBuilder(OpenAiClient.GetChatClient("gpt-4o-mini").AsIChatClient()).Build();
     }
 
     /// <summary>
     /// Run a prompt through the agent with function invocation and capture tool calls.
     /// Creates a fresh chat client per call (captures are per-invocation) but reuses the shared OpenAI client.
     /// </summary>
-    public static async Task<ChatResponse> RunPrompt(
-        string userMessage,
-        ConversationCapture capture,
-        string? continuityPrefix = null
-    )
+    public static async Task<ChatResponse> RunPrompt(string userMessage, ConversationCapture capture, string? continuityPrefix = null)
     {
-        var chatClient = new ChatClientBuilder(
-            OpenAiClient.GetChatClient("gpt-4o-mini").AsIChatClient()
-        )
-            .UseFunctionInvocation()
-            .Use(capture.CreateMiddleware())
-            .Build();
+        var chatClient = new ChatClientBuilder(OpenAiClient.GetChatClient("gpt-4o-mini").AsIChatClient()).UseFunctionInvocation().Use(capture.CreateMiddleware()).Build();
 
         var prefix = continuityPrefix ?? "[CONTINUITY: Both] [PREFER: auto] ";
 
-        var messages = new List<ChatMessage>
-        {
-            new(ChatRole.System, AgentPrompt.Instructions),
-            new(ChatRole.User, prefix + userMessage),
-        };
+        var messages = new List<ChatMessage> { new(ChatRole.System, AgentPrompt.Instructions), new(ChatRole.User, prefix + userMessage) };
 
         var options = new ChatOptions { Tools = Tools };
 
@@ -144,11 +98,7 @@ internal sealed class NoOpEmbeddingGenerator : IEmbeddingGenerator<string, Embed
 {
     public EmbeddingGeneratorMetadata Metadata { get; } = new("no-op");
 
-    public Task<GeneratedEmbeddings<Embedding<float>>> GenerateAsync(
-        IEnumerable<string> values,
-        EmbeddingGenerationOptions? options = null,
-        CancellationToken cancellationToken = default
-    )
+    public Task<GeneratedEmbeddings<Embedding<float>>> GenerateAsync(IEnumerable<string> values, EmbeddingGenerationOptions? options = null, CancellationToken cancellationToken = default)
     {
         var embeddings = values.Select(_ => new Embedding<float>(new float[] { 0f })).ToList();
         return Task.FromResult(new GeneratedEmbeddings<Embedding<float>>(embeddings));

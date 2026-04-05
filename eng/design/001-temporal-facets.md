@@ -670,3 +670,52 @@ Rerelease date(s), Alternate release, International releases,
   International release, International release date(s),
   Early release date → publication.variant (secondary release events)
 ```
+
+## To Revisit: Explicit vs Derived Edge Temporal Bounds
+
+**Added:** 2026-04-04
+**Status:** Known limitation, not yet addressed
+
+Edges in `kg.edges` carry `fromYear` / `toYear` temporal bounds, populated via two paths:
+
+1. **Explicit** — parsed from parenthetical qualifiers in infobox values by `ExtractPrimaryLinks`, e.g. `"Darth Plagueis (84 BBY–32 BBY)"` → `fromYear: -84, toYear: -32`. These are the **actual relationship window** as stated in the source.
+
+2. **Derived** — computed by `InfoboxGraphService.BuildGraphAsync` as the overlap of source and target node lifespans when the edge has no explicit qualifier. E.g. the `Ahsoka Tano → apprentice_of → Anakin Skywalker` edge has no parenthetical in the infobox, so the builder sets `fromYear = max(ahsokaStart, anakinStart) = -36` and `toYear = min(ahsokaEnd, anakinEnd) = -20`. This is a **valid bounding envelope** (the edge cannot exist outside the overlap) but not the actual relationship window — the apprenticeship was ~3 years (22 BBY → 19 BBY), not 16.
+
+### Why this matters
+
+After the 2026-04-04 KG rebuild, the distribution is:
+
+- **648,314** total edges
+- **325,925** (50%) have `fromYear` stored
+- Most are **derived** from lifecycle overlap, not explicit from parenthetical qualifiers
+
+Consumers cannot distinguish explicit from derived. A query like "who was apprenticed in 30 BBY" would false-positive on Ahsoka Tano because her derived envelope covers 36–20 BBY even though the actual apprenticeship was 22–19 BBY.
+
+The `Evidence` field contains the parenthetical qualifier for explicit edges (e.g. `"Infobox field 'Masters': Darth Plagueis (84 BBY-32 BBY)"`) but that's unstructured — analytics tools can't filter on it.
+
+### Proposed fix
+
+Add a confidence/provenance flag to `RelationshipEdge`:
+
+```csharp
+/// <summary>
+/// True if FromYear/ToYear were parsed directly from the infobox value's
+/// parenthetical qualifier. False if derived from the overlap of source
+/// and target node lifespans (a broader bounding envelope).
+/// </summary>
+[BsonElement("temporalExplicit")]
+[BsonIgnoreIfDefault]
+public bool TemporalExplicit { get; set; }
+```
+
+Then:
+
+- Analytics tools can filter `{ temporalExplicit: true }` for precise temporal queries
+- Derived bounds remain useful for "could this have happened?" questions (they're necessarily true as outer bounds)
+- The KG builder sets the flag in the `ExtractPrimaryLinks` path vs the lifecycle-overlap derivation path
+- Downstream tools (KGAnalyticsToolkit, render_graph time-scoping) gain an explicit confidence dimension
+
+**Dependencies:** None — additive field, no schema migration needed beyond rebuilding the KG.
+
+**Next action:** When touching edge temporal queries (e.g. the proposed `count_related_by_year_range` tool for character-level time-series), add the flag at the same time so the new tool can use it for precise date filtering.

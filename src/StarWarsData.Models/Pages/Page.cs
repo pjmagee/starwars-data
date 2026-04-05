@@ -15,6 +15,14 @@ public class Page
     [BsonElement("infobox")]
     public PageInfobox? Infobox { get; set; }
 
+    /// <summary>
+    /// Raw infobox JSON string from the Fandom pageprops API (ppprop=infoboxes).
+    /// Stored so the infobox can be re-parsed locally without re-downloading from the wiki.
+    /// </summary>
+    [BsonElement("rawInfobox")]
+    [BsonIgnoreIfNull]
+    public string? RawInfobox { get; set; }
+
     [BsonElement("content")]
     public string Content { get; set; } = string.Empty;
 

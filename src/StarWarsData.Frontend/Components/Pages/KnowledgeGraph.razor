@@ -3,6 +3,7 @@
 @inject ISnackbar Snackbar
 @inject GlobalFilterService GlobalFilterService
 @inject NavigationManager Navigation
+@inject IJSRuntime JS
 @implements IDisposable
 
 <PageTitle>Knowledge Graph — Star Wars Data</PageTitle>
@@ -12,53 +13,113 @@
 
 <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-4 px-4">
 
-    <MudText Typo="Typo.h5" Class="mb-4">Knowledge Graph Nodes</MudText>
+    <MudText Typo="Typo.h5" Class="mb-4">Knowledge Graph</MudText>
+
+    <MudTabs Elevation="0" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-0 pt-4">
+    <MudTabPanel Text="Nodes" Icon="@Icons.Material.Filled.AccountTree">
+
+    @* ── Bulk action bar (visible when nodes are selected) ── *@
+    @if (_selectedItems.Count > 0)
+    {
+        <MudPaper Elevation="2" Class="pa-3 mb-3" Style="background-color: var(--mud-palette-primary-hover);">
+            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Primary" />
+                <MudText Typo="Typo.body1">
+                    <strong>@_selectedItems.Count</strong> node@(_selectedItems.Count == 1 ? "" : "s") selected
+                </MudText>
+                <MudSpacer />
+                <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                           StartIcon="@Icons.Material.Filled.Hub"
+                           OnClick="OpenSelectedInGraphExplorer"
+                           Disabled="@(_selectedItems.Count == 0)">
+                    Open in Graph Explorer
+                </MudButton>
+                <MudButton Variant="Variant.Outlined" Color="Color.Secondary"
+                           StartIcon="@Icons.Material.Filled.ContentCopy"
+                           OnClick="CopySelectedIds">
+                    Copy PageIds
+                </MudButton>
+                <MudButton Variant="Variant.Text" Color="Color.Default"
+                           StartIcon="@Icons.Material.Filled.Clear"
+                           OnClick="ClearSelection">
+                    Clear
+                </MudButton>
+            </MudStack>
+        </MudPaper>
+    }
 
     <MudTable T="TemporalNodeDto" ServerData="LoadData" @ref="_table" Dense="true"
               Hover="true" Bordered="false" Striped="true" Elevation="1"
-              Loading="_loading" LoadingProgressColor="Color.Primary">
+              Loading="_loading" LoadingProgressColor="Color.Primary"
+              AllowUnsorted="false"
+              MultiSelection="true" @bind-SelectedItems="_selectedItems"
+              SelectOnRowClick="false">
         <ToolBarContent>
-            <MudTextField T="string" @bind-Value="_search" Placeholder="Search entities..."
-                          Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
-                          Immediate="true" DebounceInterval="400" OnDebounceIntervalElapsed="OnSearchChanged"
-                          Clearable="true" Variant="Variant.Outlined" Margin="Margin.Dense"
-                          Style="max-width:280px;" Class="mr-3" />
-            <MudSelect T="string" @bind-Value="_selectedType" Variant="Variant.Outlined" Margin="Margin.Dense"
-                       @bind-Value:after="OnFilterChanged" Style="max-width:180px;" Clearable="true"
-                       Placeholder="All Types" Class="mr-3">
-                @foreach (var type in _entityTypes)
-                {
-                    <MudSelectItem T="string" Value="@type">@FormatTypeName(type)</MudSelectItem>
-                }
-            </MudSelect>
-            <MudSwitch T="bool" @bind-Value="_temporalOnly" @bind-Value:after="OnFilterChanged"
-                       Color="Color.Primary" Label="Temporal only" Class="mr-3" />
-            <MudSelect T="string" @bind-Value="_selectedSemantic" Variant="Variant.Outlined" Margin="Margin.Dense"
-                       @bind-Value:after="OnFilterChanged" Style="max-width:180px;" Clearable="true"
-                       Placeholder="All Dimensions" Class="mr-3">
-                <MudSelectItem T="string" Value="@("lifespan")">Lifespan</MudSelectItem>
-                <MudSelectItem T="string" Value="@("conflict")">Conflict</MudSelectItem>
-                <MudSelectItem T="string" Value="@("construction")">Construction</MudSelectItem>
-                <MudSelectItem T="string" Value="@("creation")">Creation</MudSelectItem>
-                <MudSelectItem T="string" Value="@("institutional")">Institutional</MudSelectItem>
-                <MudSelectItem T="string" Value="@("publication")">Publication</MudSelectItem>
-                <MudSelectItem T="string" Value="@("usage")">Usage</MudSelectItem>
-            </MudSelect>
-            <MudSelect T="string" @bind-Value="_selectedLabel" Variant="Variant.Outlined" Margin="Margin.Dense"
-                       @bind-Value:after="OnFilterChanged" Style="max-width:200px;" Clearable="true"
-                       Placeholder="All Relationships">
-                @foreach (var lbl in _edgeLabels)
-                {
-                    <MudSelectItem T="string" Value="@lbl">@FormatPropertyKey(lbl)</MudSelectItem>
-                }
-            </MudSelect>
+            <MudStack Row="true" Wrap="Wrap.Wrap" Spacing="2" AlignItems="AlignItems.Center" Class="flex-grow-1">
+                <MudTextField T="string" @bind-Value="_search" Placeholder="Search entities..."
+                              Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                              Immediate="true" DebounceInterval="400" OnDebounceIntervalElapsed="OnSearchChanged"
+                              Clearable="true" Variant="Variant.Outlined" Margin="Margin.Dense"
+                              Style="min-width:240px; max-width:280px;" />
+                <MudSelect T="string" @bind-Value="_selectedType" Variant="Variant.Outlined" Margin="Margin.Dense"
+                           @bind-Value:after="OnFilterChanged" Style="min-width:160px; max-width:180px;" Clearable="true"
+                           Placeholder="All Types">
+                    @foreach (var type in _entityTypes)
+                    {
+                        <MudSelectItem T="string" Value="@type">@FormatTypeName(type)</MudSelectItem>
+                    }
+                </MudSelect>
+                <MudSwitch T="bool" @bind-Value="_temporalOnly" @bind-Value:after="OnFilterChanged"
+                           Color="Color.Primary" Label="Temporal only" />
+                <MudSelect T="string" @bind-Value="_selectedSemantic" Variant="Variant.Outlined" Margin="Margin.Dense"
+                           @bind-Value:after="OnFilterChanged" Style="min-width:160px; max-width:180px;" Clearable="true"
+                           Placeholder="All Dimensions">
+                    <MudSelectItem T="string" Value="@("lifespan")">Lifespan</MudSelectItem>
+                    <MudSelectItem T="string" Value="@("conflict")">Conflict</MudSelectItem>
+                    <MudSelectItem T="string" Value="@("construction")">Construction</MudSelectItem>
+                    <MudSelectItem T="string" Value="@("creation")">Creation</MudSelectItem>
+                    <MudSelectItem T="string" Value="@("institutional")">Institutional</MudSelectItem>
+                    <MudSelectItem T="string" Value="@("publication")">Publication</MudSelectItem>
+                    <MudSelectItem T="string" Value="@("usage")">Usage</MudSelectItem>
+                </MudSelect>
+                <MudSelect T="string" @bind-Value="_selectedCalendar" Variant="Variant.Outlined" Margin="Margin.Dense"
+                           @bind-Value:after="OnFilterChanged" Style="min-width:160px; max-width:180px;" Clearable="true"
+                           Placeholder="All Calendars">
+                    <MudSelectItem T="string" Value="@("galactic")">Galactic (BBY/ABY)</MudSelectItem>
+                    <MudSelectItem T="string" Value="@("real")">Real-world (CE)</MudSelectItem>
+                </MudSelect>
+                <MudSelect T="string" @bind-Value="_selectedLabel" Variant="Variant.Outlined" Margin="Margin.Dense"
+                           @bind-Value:after="OnFilterChanged" Style="min-width:180px; max-width:200px;" Clearable="true"
+                           Placeholder="All Relationships">
+                    @foreach (var lbl in _edgeLabels)
+                    {
+                        <MudSelectItem T="string" Value="@lbl">@FormatPropertyKey(lbl)</MudSelectItem>
+                    }
+                </MudSelect>
+                <MudNumericField T="int?" @bind-Value="_yearFrom" @bind-Value:after="OnFilterChanged"
+                                 Placeholder="Year from" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                 Clearable="true" HideSpinButtons="true" Style="max-width:130px;"
+                                 HelperText="@GetYearHelperText()" />
+                <MudNumericField T="int?" @bind-Value="_yearTo" @bind-Value:after="OnFilterChanged"
+                                 Placeholder="Year to" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                 Clearable="true" HideSpinButtons="true" Style="max-width:130px;"
+                                 HelperText="@GetYearHelperText()" />
+            </MudStack>
         </ToolBarContent>
         <HeaderContent>
             <MudTh Style="width:50px"></MudTh>
-            <MudTh>Name</MudTh>
-            <MudTh>Type</MudTh>
-            <MudTh>Continuity</MudTh>
-            <MudTh>Temporal Data</MudTh>
+            <MudTh>
+                <MudTableSortLabel T="TemporalNodeDto" SortLabel="name" InitialDirection="SortDirection.Ascending">Name</MudTableSortLabel>
+            </MudTh>
+            <MudTh>
+                <MudTableSortLabel T="TemporalNodeDto" SortLabel="type">Type</MudTableSortLabel>
+            </MudTh>
+            <MudTh>
+                <MudTableSortLabel T="TemporalNodeDto" SortLabel="continuity">Continuity</MudTableSortLabel>
+            </MudTh>
+            <MudTh>
+                <MudTableSortLabel T="TemporalNodeDto" SortLabel="startyear">Temporal Data</MudTableSortLabel>
+            </MudTh>
             <MudTh Style="width:60px"></MudTh>
         </HeaderContent>
         <RowTemplate>
@@ -270,6 +331,118 @@
             </MudAlert>
         </NoRecordsContent>
     </MudTable>
+    </MudTabPanel>
+
+    <MudTabPanel Text="Edge Labels" Icon="@Icons.Material.Filled.Hub">
+        <MudTable T="EdgeLabelStatsDto" ServerData="LoadLabelStats" @ref="_labelTable" Dense="true"
+                  Hover="true" Bordered="false" Striped="true" Elevation="1"
+                  Loading="_labelsLoading" LoadingProgressColor="Color.Primary"
+                  AllowUnsorted="false">
+            <ToolBarContent>
+                <MudStack Row="true" Wrap="Wrap.Wrap" Spacing="2" AlignItems="AlignItems.Center" Class="flex-grow-1">
+                    <MudTextField T="string" @bind-Value="_labelSearch" Placeholder="Search labels..."
+                                  Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                                  Immediate="true" DebounceInterval="400" OnDebounceIntervalElapsed="OnLabelSearchChanged"
+                                  Clearable="true" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                  Style="min-width:240px; max-width:280px;" />
+                    <MudSelect T="string" @bind-Value="_labelFromType" Variant="Variant.Outlined" Margin="Margin.Dense"
+                               @bind-Value:after="OnLabelFilterChanged" Style="min-width:160px; max-width:180px;"
+                               Clearable="true" Placeholder="From type">
+                        @foreach (var t in _entityTypes)
+                        {
+                            <MudSelectItem T="string" Value="@t">@FormatTypeName(t)</MudSelectItem>
+                        }
+                    </MudSelect>
+                    <MudSelect T="string" @bind-Value="_labelToType" Variant="Variant.Outlined" Margin="Margin.Dense"
+                               @bind-Value:after="OnLabelFilterChanged" Style="min-width:160px; max-width:180px;"
+                               Clearable="true" Placeholder="To type">
+                        @foreach (var t in _entityTypes)
+                        {
+                            <MudSelectItem T="string" Value="@t">@FormatTypeName(t)</MudSelectItem>
+                        }
+                    </MudSelect>
+                    <MudNumericField T="long" @bind-Value="_labelMinCount" @bind-Value:after="OnLabelFilterChanged"
+                                     Placeholder="Min count" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                     HideSpinButtons="true" Style="max-width:130px;" />
+                </MudStack>
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>
+                    <MudTableSortLabel T="EdgeLabelStatsDto" SortLabel="label">Label</MudTableSortLabel>
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel T="EdgeLabelStatsDto" SortLabel="count" InitialDirection="SortDirection.Descending">Count</MudTableSortLabel>
+                </MudTh>
+                <MudTh>Continuity</MudTh>
+                <MudTh>From types</MudTh>
+                <MudTh>To types</MudTh>
+                <MudTh>
+                    <MudTableSortLabel T="EdgeLabelStatsDto" SortLabel="avgWeight">Avg conf.</MudTableSortLabel>
+                </MudTh>
+                <MudTh>Example</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Label">
+                    <MudLink Href="@($"/knowledge-graph")" OnClick="@(() => JumpToNodesFilteredByLabel(context.Label))" Underline="Underline.Hover">
+                        <strong>@FormatPropertyKey(context.Label)</strong>
+                    </MudLink>
+                </MudTd>
+                <MudTd DataLabel="Count">@context.Count.ToString("N0")</MudTd>
+                <MudTd DataLabel="Continuity">
+                    <MudStack Row="true" Spacing="1">
+                        @if (context.CanonCount > 0)
+                        {
+                            <MudChip T="string" Size="Size.Small" Variant="Variant.Filled" Color="Color.Primary" Style="font-size:10px;">C: @context.CanonCount.ToString("N0")</MudChip>
+                        }
+                        @if (context.LegendsCount > 0)
+                        {
+                            <MudChip T="string" Size="Size.Small" Variant="Variant.Filled" Color="Color.Secondary" Style="font-size:10px;">L: @context.LegendsCount.ToString("N0")</MudChip>
+                        }
+                    </MudStack>
+                </MudTd>
+                <MudTd DataLabel="From">
+                    <MudStack Row="true" Wrap="Wrap.Wrap" Spacing="1">
+                        @foreach (var tc in context.TopFromTypes)
+                        {
+                            <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Style="font-size:10px;">@FormatTypeName(tc.Type) · @tc.Count.ToString("N0")</MudChip>
+                        }
+                    </MudStack>
+                </MudTd>
+                <MudTd DataLabel="To">
+                    <MudStack Row="true" Wrap="Wrap.Wrap" Spacing="1">
+                        @foreach (var tc in context.TopToTypes)
+                        {
+                            <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Style="font-size:10px;">@FormatTypeName(tc.Type) · @tc.Count.ToString("N0")</MudChip>
+                        }
+                    </MudStack>
+                </MudTd>
+                <MudTd DataLabel="AvgWeight">@context.AvgWeight.ToString("F2")</MudTd>
+                <MudTd DataLabel="Sample">
+                    @if (context.Sample is { } s)
+                    {
+                        <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
+                            <MudLink Href="@($"/graph-explorer/{s.FromId}")" Underline="Underline.Hover">
+                                <MudText Typo="Typo.caption">@s.FromName</MudText>
+                            </MudLink>
+                            <MudIcon Icon="@Icons.Material.Filled.ArrowForward" Size="Size.Small" Style="opacity:.4; font-size:14px;" />
+                            <MudLink Href="@($"/graph-explorer/{s.ToId}")" Underline="Underline.Hover">
+                                <MudText Typo="Typo.caption">@s.ToName</MudText>
+                            </MudLink>
+                        </MudStack>
+                    }
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager PageSizeOptions="new[] { 25, 50, 100 }" />
+            </PagerContent>
+            <NoRecordsContent>
+                <MudAlert Severity="Severity.Info" Variant="Variant.Text" Dense="true">
+                    No relationship labels match your filters.
+                </MudAlert>
+            </NoRecordsContent>
+        </MudTable>
+    </MudTabPanel>
+    </MudTabs>
 
 </MudContainer>
 
@@ -281,11 +454,25 @@
     private bool _temporalOnly;
     private string _selectedSemantic = "";
     private string _selectedLabel = "";
+    private string _selectedCalendar = "";
+    private int? _yearFrom;
+    private int? _yearTo;
     private List<string> _entityTypes = [];
     private List<string> _edgeLabels = [];
     private int? _expandedNodeId;
     private List<string>? _expandedLabels;
     private bool _expandedLabelsLoading;
+
+    // Multi-selection: persist across pages by tracking selected ids, not row references
+    private HashSet<TemporalNodeDto> _selectedItems = new();
+
+    // Edge Labels tab state
+    private MudTable<EdgeLabelStatsDto>? _labelTable;
+    private bool _labelsLoading;
+    private string _labelSearch = "";
+    private string _labelFromType = "";
+    private string _labelToType = "";
+    private long _labelMinCount;
 
     private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
 
@@ -322,6 +509,7 @@
         await InvokeAsync(() =>
         {
             _table?.ReloadServerData();
+            _labelTable?.ReloadServerData();
             StateHasChanged();
         });
     }
@@ -346,10 +534,28 @@
                 qs["semantic"] = _selectedSemantic;
             if (!string.IsNullOrWhiteSpace(_selectedLabel))
                 qs["label"] = _selectedLabel;
+            if (!string.IsNullOrWhiteSpace(_selectedCalendar))
+                qs["calendar"] = _selectedCalendar;
+            if (_yearFrom.HasValue)
+                qs["yearFrom"] = _yearFrom.Value.ToString();
+            if (_yearTo.HasValue)
+                qs["yearTo"] = _yearTo.Value.ToString();
+
+            // Server-side sort via MudTableSortLabel
+            if (!string.IsNullOrWhiteSpace(state.SortLabel))
+            {
+                qs["sortBy"] = state.SortLabel;
+                qs["sortDirection"] = state.SortDirection == SortDirection.Descending
+                    ? "descending"
+                    : "ascending";
+            }
 
             var c = GlobalFilterService.GetContinuityQueryParam();
             if (!string.IsNullOrEmpty(c))
                 qs["continuity"] = c;
+            var u = GlobalFilterService.GetUniverseQueryParam();
+            if (!string.IsNullOrEmpty(u))
+                qs["universe"] = u;
 
             var result = await Api.GetFromJsonAsync<BrowseTemporalNodesResult>(
                 $"api/RelationshipGraph/temporal-nodes?{qs}", ct);
@@ -382,6 +588,78 @@
         _table?.ReloadServerData();
     }
 
+    private async Task<TableData<EdgeLabelStatsDto>> LoadLabelStats(TableState state, CancellationToken ct)
+    {
+        _labelsLoading = true;
+        try
+        {
+            var qs = System.Web.HttpUtility.ParseQueryString(string.Empty);
+            qs["page"] = (state.Page + 1).ToString();
+            qs["pageSize"] = state.PageSize.ToString();
+
+            if (!string.IsNullOrWhiteSpace(_labelSearch))
+                qs["q"] = _labelSearch;
+            if (!string.IsNullOrWhiteSpace(_labelFromType))
+                qs["fromType"] = _labelFromType;
+            if (!string.IsNullOrWhiteSpace(_labelToType))
+                qs["toType"] = _labelToType;
+            if (_labelMinCount > 0)
+                qs["minCount"] = _labelMinCount.ToString();
+
+            if (!string.IsNullOrWhiteSpace(state.SortLabel))
+            {
+                qs["sortBy"] = state.SortLabel;
+                qs["sortDirection"] = state.SortDirection == SortDirection.Descending
+                    ? "descending"
+                    : "ascending";
+            }
+
+            var c = GlobalFilterService.GetContinuityQueryParam();
+            if (!string.IsNullOrEmpty(c))
+                qs["continuity"] = c;
+            var u = GlobalFilterService.GetUniverseQueryParam();
+            if (!string.IsNullOrEmpty(u))
+                qs["universe"] = u;
+
+            var result = await Api.GetFromJsonAsync<BrowseEdgeLabelsResult>(
+                $"api/RelationshipGraph/edge-label-stats?{qs}", ct);
+
+            return new TableData<EdgeLabelStatsDto>
+            {
+                Items = result?.Items ?? [],
+                TotalItems = (int)(result?.Total ?? 0),
+            };
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Failed to load edge label stats: {ex.Message}", Severity.Error);
+            return new TableData<EdgeLabelStatsDto> { Items = [], TotalItems = 0 };
+        }
+        finally
+        {
+            _labelsLoading = false;
+        }
+    }
+
+    private void OnLabelSearchChanged(string value)
+    {
+        _labelSearch = value;
+        _labelTable?.ReloadServerData();
+    }
+
+    private void OnLabelFilterChanged()
+    {
+        _labelTable?.ReloadServerData();
+    }
+
+    private void JumpToNodesFilteredByLabel(string label)
+    {
+        // Switch the Nodes tab filter to this label and reload.
+        _selectedLabel = label;
+        _table?.ReloadServerData();
+        Snackbar.Add($"Filtered nodes by '{FormatPropertyKey(label)}' — switch to the Nodes tab to view.", Severity.Info);
+    }
+
     private async Task ToggleDetails(int nodeId)
     {
         if (_expandedNodeId == nodeId)
@@ -398,8 +676,9 @@
 
         try
         {
-            _expandedLabels = await Api.GetFromJsonAsync<List<string>>(
+            var result = await Api.GetFromJsonAsync<EntityLabelsResult>(
                 $"api/RelationshipGraph/labels/{nodeId}");
+            _expandedLabels = result?.Labels ?? [];
         }
         catch
         {
@@ -408,6 +687,54 @@
         finally
         {
             _expandedLabelsLoading = false;
+        }
+    }
+
+    private string GetYearHelperText() => _selectedCalendar switch
+    {
+        "galactic" => "neg=BBY, pos=ABY",
+        "real" => "CE year (e.g. 2015)",
+        _ => "BBY neg / ABY pos / CE",
+    };
+
+    private void ClearSelection()
+    {
+        _selectedItems = new HashSet<TemporalNodeDto>();
+    }
+
+    private void OpenSelectedInGraphExplorer()
+    {
+        if (_selectedItems.Count == 0)
+            return;
+
+        // Graph explorer currently takes a single root. Open the first; users
+        // can open additional nodes in new tabs via shift/ctrl-click on the
+        // individual row links. For now, show a note and navigate to the first.
+        var first = _selectedItems.First();
+        if (_selectedItems.Count > 1)
+        {
+            Snackbar.Add(
+                $"Graph Explorer takes one root at a time — opening '{first.Name}'. " +
+                $"{_selectedItems.Count - 1} other(s) remain selected.",
+                Severity.Info);
+        }
+        Navigation.NavigateTo($"/graph-explorer/{first.Id}");
+    }
+
+    private async Task CopySelectedIds()
+    {
+        if (_selectedItems.Count == 0)
+            return;
+
+        var ids = string.Join(",", _selectedItems.Select(n => n.Id));
+        try
+        {
+            await JS.InvokeVoidAsync("navigator.clipboard.writeText", ids);
+            Snackbar.Add($"Copied {_selectedItems.Count} PageId(s) to clipboard", Severity.Success);
+        }
+        catch
+        {
+            Snackbar.Add("Clipboard copy failed", Severity.Warning);
         }
     }
 

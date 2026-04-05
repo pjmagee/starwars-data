@@ -60,6 +60,12 @@ public class SettingsOptions
 /// </summary>
 public static class Collections
 {
+    /// <summary>
+    /// URL prefix for infobox template values stored in raw.pages.
+    /// e.g. "https://starwars.fandom.com/wiki/Template:Character"
+    /// </summary>
+    public const string TemplateUrlPrefix = "https://starwars.fandom.com/wiki/Template:";
+
     // ── Raw pages ──
     public const string Pages = "raw.pages";
     public const string JobState = "raw.job_state";

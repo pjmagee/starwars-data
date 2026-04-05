@@ -23,16 +23,10 @@ public class ComponentToolkit
                 + "The frontend uses this to filter the 'Pages' collection by infobox.Template — it is NOT a MongoDB collection name."
         )]
             string infoboxType,
-        [Description(
-            "Which infobox.Data label names to show as columns (e.g. [\"Born\", \"Died\", \"Homeworld\", \"Species\"]). Pick 3-6 relevant fields."
-        )]
-            List<string> fields,
+        [Description("Which infobox.Data label names to show as columns (e.g. [\"Born\", \"Died\", \"Homeworld\", \"Species\"]). Pick 3-6 relevant fields.")] List<string> fields,
         [Description("Optional text search to filter results by page title")] string? search = null,
         [Description("Number of rows per page (default 25)")] int pageSize = 25,
-        [Description(
-            "Optional source references (title + wikiUrl) from pages used to answer this query"
-        )]
-            List<Reference>? references = null
+        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")] List<Reference>? references = null
     )
     {
         TableResult = new TableDescriptor
@@ -58,12 +52,8 @@ public class ComponentToolkit
     public DataTableDescriptor RenderDataTable(
         [Description("Descriptive title for the table")] string title,
         [Description("Column header names")] List<string> columns,
-        [Description("Row data — each row is a list of string values in the same order as columns")]
-            List<List<string>> rows,
-        [Description(
-            "Optional source references (title + wikiUrl) from pages used to answer this query"
-        )]
-            List<Reference>? references = null
+        [Description("Row data — each row is a list of string values in the same order as columns")] List<List<string>> rows,
+        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")] List<Reference>? references = null
     )
     {
         DataTableResult = new DataTableDescriptor
@@ -82,26 +72,13 @@ public class ComponentToolkit
             + "You MUST aggregate the data first using search/query tools, then pass the results here."
     )]
     public ChartDescriptor RenderChart(
-        [Description("Bar, Line, Pie, Donut, Rose, StackedBar, TimeSeries, or Radar")]
-            string chartType,
+        [Description("Bar, Line, Pie, Donut, Rose, StackedBar, TimeSeries, or Radar")] string chartType,
         [Description("Descriptive title for the chart")] string title,
-        [Description(
-            "For Bar/Line/StackedBar/Radar: category labels for the X-axis (Radar: axis names)"
-        )]
-            List<string>? xAxisLabels = null,
+        [Description("For Bar/Line/StackedBar/Radar: category labels for the X-axis (Radar: axis names)")] List<string>? xAxisLabels = null,
         [Description("For Pie/Donut/Rose: slice labels")] List<string>? labels = null,
-        [Description(
-            "For Bar/Line/StackedBar/Pie/Donut/Rose/Radar: array of { name, data: number[] }"
-        )]
-            List<ChartSeries>? series = null,
-        [Description(
-            "For TimeSeries: array of { name, data: [{ x: ISO-date-string, y: number }] }"
-        )]
-            List<TimeSeriesChartSeries>? timeSeries = null,
-        [Description(
-            "Optional source references (title + wikiUrl) from pages used to answer this query"
-        )]
-            List<Reference>? references = null
+        [Description("For Bar/Line/StackedBar/Pie/Donut/Rose/Radar: array of { name, data: number[] }")] List<ChartSeries>? series = null,
+        [Description("For TimeSeries: array of { name, data: [{ x: ISO-date-string, y: number }] }")] List<TimeSeriesChartSeries>? timeSeries = null,
+        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")] List<Reference>? references = null
     )
     {
         if (!Enum.TryParse<AskChartType>(chartType, ignoreCase: true, out var parsedType))
@@ -132,8 +109,7 @@ public class ComponentToolkit
             + "'force' (default) = physics-based network for general exploration."
     )]
     public GraphDescriptor RenderGraph(
-        [Description("The entity's PageId from the knowledge graph (from search_entities)")]
-            int rootEntityId,
+        [Description("The entity's PageId from the knowledge graph (from search_entities)")] int rootEntityId,
         [Description("The entity's display name")] string rootEntityName,
         [Description("Descriptive title for the graph")] string title,
         [Description(
@@ -143,27 +119,17 @@ public class ComponentToolkit
                 + "['head_of_state', 'has_military_branch', 'has_executive_branch'] for hierarchies."
         )]
             List<string> labels,
-        [Description(
-            "How many hops to traverse from the root. Use 2 for direct + one-hop (default), "
-                + "3 for deeper hierarchies and family trees, 1 for simple direct relationships only."
-        )]
+        [Description("How many hops to traverse from the root. Use 2 for direct + one-hop (default), " + "3 for deeper hierarchies and family trees, 1 for simple direct relationships only.")]
             int maxDepth = 2,
-        [Description(
-            "Labels to enable by default in the UI. Subset of labels. Use this to pre-filter "
-                + "to the most important labels when passing many. If omitted, all labels are enabled."
-        )]
+        [Description("Labels to enable by default in the UI. Subset of labels. Use this to pre-filter " + "to the most important labels when passing many. If omitted, all labels are enabled.")]
             List<string>? enabledLabels = null,
         [Description(
             "Layout mode: 'tree' for hierarchical top-down layout (family trees, org charts, political hierarchies). "
                 + "'force' (default) for physics-based network. Use 'tree' whenever the question implies a hierarchy."
         )]
             string layoutMode = "force",
-        [Description("Optional continuity filter: Canon, Legends, or omit for all")]
-            string? continuity = null,
-        [Description(
-            "Optional source references (title + wikiUrl) from pages used to answer this query"
-        )]
-            List<Reference>? references = null
+        [Description("Optional continuity filter: Canon, Legends, or omit for all")] string? continuity = null,
+        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")] List<Reference>? references = null
     )
     {
         GraphResult = new GraphDescriptor
@@ -195,31 +161,15 @@ public class ComponentToolkit
     )]
     public TimelineDescriptor RenderTimeline(
         [Description("Descriptive title for the timeline")] string title,
-        [Description(
-            "Timeline event category names from timeline.* collections (e.g. [\"Battle\", \"War\", \"Character\"]). "
-                + "Call list_timeline_categories first to discover valid names."
-        )]
+        [Description("Timeline event category names from timeline.* collections (e.g. [\"Battle\", \"War\", \"Character\"]). " + "Call list_timeline_categories first to discover valid names.")]
             List<string> categories,
         [Description("Number of year groups per page (default 15)")] int pageSize = 15,
-        [Description(
-            "Start of year range (e.g. 41 for 41 BBY). Use to scope timeline to a specific period."
-        )]
-            float? yearFrom = null,
-        [Description("Demarcation for yearFrom: 'BBY' or 'ABY'")]
-            string? yearFromDemarcation = null,
-        [Description(
-            "End of year range (e.g. 4 for 4 ABY). Use to scope timeline to a specific period."
-        )]
-            float? yearTo = null,
+        [Description("Start of year range (e.g. 41 for 41 BBY). Use to scope timeline to a specific period.")] float? yearFrom = null,
+        [Description("Demarcation for yearFrom: 'BBY' or 'ABY'")] string? yearFromDemarcation = null,
+        [Description("End of year range (e.g. 4 for 4 ABY). Use to scope timeline to a specific period.")] float? yearTo = null,
         [Description("Demarcation for yearTo: 'BBY' or 'ABY'")] string? yearToDemarcation = null,
-        [Description(
-            "Optional text to filter timeline event titles (e.g. entity name like 'Skywalker')"
-        )]
-            string? search = null,
-        [Description(
-            "Optional source references (title + wikiUrl) from pages used to answer this query"
-        )]
-            List<Reference>? references = null
+        [Description("Optional text to filter timeline event titles (e.g. entity name like 'Skywalker')")] string? search = null,
+        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")] List<Reference>? references = null
     )
     {
         TimelineResult = new TimelineDescriptor
@@ -244,16 +194,9 @@ public class ComponentToolkit
             + "Can render multiple cards side-by-side for comparisons."
     )]
     public InfoboxDescriptor RenderInfobox(
-        [Description("Descriptive title (e.g. 'Mace Windu' or 'Yoda vs Count Dooku')")]
-            string title,
-        [Description(
-            "One or more PageId integers to display as infobox cards. Use search_pages_by_name to find these."
-        )]
-            List<int> pageIds,
-        [Description(
-            "Optional source references (title + wikiUrl) from pages used to answer this query"
-        )]
-            List<Reference>? references = null
+        [Description("Descriptive title (e.g. 'Mace Windu' or 'Yoda vs Count Dooku')")] string title,
+        [Description("One or more PageId integers to display as infobox cards. Use search_pages_by_name to find these.")] List<int> pageIds,
+        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")] List<Reference>? references = null
     )
     {
         InfoboxResult = new InfoboxDescriptor
@@ -284,10 +227,7 @@ public class ComponentToolkit
                 + "and optional sourcePageTitle for attribution."
         )]
             List<TextSection> sections,
-        [Description(
-            "Optional source references (title + wikiUrl) from pages used to answer this query"
-        )]
-            List<Reference>? references = null
+        [Description("Optional source references (title + wikiUrl) from pages used to answer this query")] List<Reference>? references = null
     )
     {
         // Sanitize markdown content from common AI formatting issues
@@ -311,20 +251,24 @@ public class ComponentToolkit
     /// </summary>
     static string SanitizeMarkdown(string md)
     {
-        // Ensure blank line before bullet lists (required for markdown parsers)
-        md = System.Text.RegularExpressions.Regex.Replace(
-            md,
-            @"([^\n])\n(- |\* |\d+\. )",
-            "$1\n\n$2"
-        );
+        // Normalize line endings to \n
+        md = md.Replace("\r\n", "\n").Replace("\r", "\n");
+
+        // Strip zero-width Unicode characters that break emphasis/list parsing
+        md = System.Text.RegularExpressions.Regex.Replace(md, "[\u200B\u200C\u200D\uFEFF\u00AD]", "");
+
+        // Strip code fence wrappers if the AI wrapped the whole content in ```markdown
+        md = System.Text.RegularExpressions.Regex.Replace(md, @"^\s*```\s*(?:markdown|md)?\s*\n([\s\S]*?)\n\s*```\s*$", "$1");
+
+        // Ensure blank line before bullet lists (required for CommonMark)
+        md = System.Text.RegularExpressions.Regex.Replace(md, @"([^\n])\n(- |\* |\d+\. )", "$1\n\n$2");
+
+        // Ensure blank line before bold-text sub-headings on their own line
+        // e.g. "some text\n**Heading**\n" → "some text\n\n**Heading**\n"
+        md = System.Text.RegularExpressions.Regex.Replace(md, @"([^\n])\n(\*\*[^*\n]+\*\*)\n", "$1\n\n$2\n");
 
         // Fix headings missing space after # (e.g. ##Title → ## Title)
-        md = System.Text.RegularExpressions.Regex.Replace(
-            md,
-            @"^(#{1,6})([^ #\n])",
-            "$1 $2",
-            System.Text.RegularExpressions.RegexOptions.Multiline
-        );
+        md = System.Text.RegularExpressions.Regex.Replace(md, @"^(#{1,6})([^ #\n])", "$1 $2", System.Text.RegularExpressions.RegexOptions.Multiline);
 
         // Fix broken links with space before paren: [text] (url) → [text](url)
         md = System.Text.RegularExpressions.Regex.Replace(md, @"\]\s+\(", "](");
@@ -339,12 +283,8 @@ public class ComponentToolkit
             + "Supports full markdown. Use when the user asks to see something in Aurebesh or Star Wars script."
     )]
     public AurebeshDescriptor RenderAurebesh(
-        [Description("Title shown above the Aurebesh output (displayed in normal English font)")]
-            string title,
-        [Description(
-            "Plain English text (with optional markdown formatting). "
-                + "This is automatically rendered as Aurebesh by the frontend. Do NOT transliterate — just write English."
-        )]
+        [Description("Title shown above the Aurebesh output (displayed in normal English font)")] string title,
+        [Description("Plain English text (with optional markdown formatting). " + "This is automatically rendered as Aurebesh by the frontend. Do NOT transliterate — just write English.")]
             string text,
         [Description("Optional source references")] List<Reference>? references = null
     )

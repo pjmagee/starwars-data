@@ -291,7 +291,7 @@
         if (ShowCategoryFilter)
         {
             await LoadCategories();
-            _eras = await Http.GetFromJsonAsync<Era[]>("Timeline/eras");
+            await LoadEras();
         }
 
         if (!string.IsNullOrEmpty(Category))
@@ -375,11 +375,20 @@
         await InvokeAsync(async () =>
         {
             await LoadCategories();
+            // Eras list is continuity-scoped too — reload so the chip bar matches
+            // the newly selected continuity and any era selections drop stale entries.
+            await LoadEras();
 
             if (_categories is not null)
             {
                 var visible = new HashSet<string>(_categories);
                 _selectedCategories = _selectedCategories.Where(c => visible.Contains(c)).ToList();
+            }
+
+            if (_eras is not null)
+            {
+                var visibleEras = new HashSet<string>(_eras.Select(e => e.Name));
+                _selectedEraNames = _selectedEraNames.Where(n => visibleEras.Contains(n)).ToList();
             }
 
             if (_selectedCategories.Any())
@@ -393,6 +402,21 @@
 
             StateHasChanged();
         });
+    }
+
+    /// <summary>
+    /// Load the era list from the API, scoped to the currently selected continuity.
+    /// Called on mount and whenever the global continuity filter changes.
+    /// </summary>
+    private async Task LoadEras()
+    {
+        var query = System.Web.HttpUtility.ParseQueryString(string.Empty);
+        var continuityParam = GlobalFilterService.GetContinuityQueryParam();
+        if (!string.IsNullOrEmpty(continuityParam))
+            query.Add("continuity", continuityParam);
+
+        var url = query.Count > 0 ? $"Timeline/eras?{query}" : "Timeline/eras";
+        _eras = await Http.GetFromJsonAsync<Era[]>(url);
     }
 
     private async Task InitializeColorMapping()

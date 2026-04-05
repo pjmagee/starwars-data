@@ -1,6 +1,6 @@
 namespace StarWarsData.Models.Queries;
 
-public class TemporalNodeDto
+public class TemporalNodeDto : IEquatable<TemporalNodeDto>
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
@@ -14,6 +14,15 @@ public class TemporalNodeDto
     public string? EndDateText { get; set; }
     public Dictionary<string, List<string>> Properties { get; set; } = new();
     public List<StarWarsData.Models.Entities.TemporalFacet> TemporalFacets { get; set; } = [];
+
+    // Identity-based equality so multi-selection in MudTable survives page reloads —
+    // each LoadData call produces fresh DTO instances, but two DTOs representing
+    // the same node (same PageId) are treated as equal for HashSet/SelectedItems.
+    public bool Equals(TemporalNodeDto? other) => other is not null && other.Id == Id;
+
+    public override bool Equals(object? obj) => obj is TemporalNodeDto d && Equals(d);
+
+    public override int GetHashCode() => Id.GetHashCode();
 }
 
 public class BrowseTemporalNodesResult

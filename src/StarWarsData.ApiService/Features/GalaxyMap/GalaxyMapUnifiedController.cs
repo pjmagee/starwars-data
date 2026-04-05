@@ -8,16 +8,15 @@ namespace StarWarsData.ApiService.Controllers;
 [ApiController]
 [Route("api/galaxy-map")]
 [Produces("application/json")]
-public class GalaxyMapUnifiedController(GalaxyMapReadService readService, MapService mapService)
-    : ControllerBase
+public class GalaxyMapUnifiedController(GalaxyMapReadService readService, MapService mapService) : ControllerBase
 {
     // ── Pre-computed temporal data (from galaxy.years collection) ──
 
     [HttpGet("overview")]
-    [ResponseCache(Duration = 600)]
-    public async Task<ActionResult<GalaxyOverviewDocument>> GetOverview(CancellationToken ct)
+    [ResponseCache(Duration = 600, VaryByQueryKeys = new[] { "continuity" })]
+    public async Task<ActionResult<GalaxyOverviewDocument>> GetOverview([FromQuery] Continuity? continuity = null, CancellationToken ct = default)
     {
-        var overview = await readService.GetOverviewAsync(ct);
+        var overview = await readService.GetOverviewAsync(continuity, ct);
         if (overview is null)
             return NotFound("Galaxy map not built yet. Run the ETL first.");
         return Ok(overview);
@@ -35,11 +34,7 @@ public class GalaxyMapUnifiedController(GalaxyMapReadService readService, MapSer
 
     [HttpGet("year-range")]
     [ResponseCache(Duration = 300)]
-    public async Task<ActionResult<List<GalaxyYearDocument>>> GetYearRange(
-        [FromQuery] int from,
-        [FromQuery] int to,
-        CancellationToken ct
-    )
+    public async Task<ActionResult<List<GalaxyYearDocument>>> GetYearRange([FromQuery] int from, [FromQuery] int to, CancellationToken ct)
     {
         var docs = await readService.GetYearRangeAsync(from, to, ct);
         return Ok(docs);
@@ -47,9 +42,7 @@ public class GalaxyMapUnifiedController(GalaxyMapReadService readService, MapSer
 
     [HttpGet("factions")]
     [ResponseCache(Duration = 600)]
-    public async Task<ActionResult<Dictionary<string, TerritoryFactionInfo>>> GetFactions(
-        CancellationToken ct
-    )
+    public async Task<ActionResult<Dictionary<string, TerritoryFactionInfo>>> GetFactions(CancellationToken ct)
     {
         var factions = await readService.GetFactionInfoAsync(ct);
         return Ok(factions);
@@ -59,10 +52,7 @@ public class GalaxyMapUnifiedController(GalaxyMapReadService readService, MapSer
 
     [HttpGet("geography")]
     [ResponseCache(Duration = 300)]
-    public async Task<ActionResult<GalaxyMapV2Overview>> GetGeography(
-        [FromQuery] Continuity? continuity = null,
-        CancellationToken ct = default
-    )
+    public async Task<ActionResult<GalaxyMapV2Overview>> GetGeography([FromQuery] Continuity? continuity = null, CancellationToken ct = default)
     {
         var data = await mapService.GetGalaxyMapV2OverviewAsync(continuity);
         return Ok(data);
@@ -79,21 +69,12 @@ public class GalaxyMapUnifiedController(GalaxyMapReadService readService, MapSer
         CancellationToken ct = default
     )
     {
-        var data = await mapService.GetSystemsInRangeAsync(
-            minCol,
-            maxCol,
-            minRow,
-            maxRow,
-            continuity
-        );
+        var data = await mapService.GetSystemsInRangeAsync(minCol, maxCol, minRow, maxRow, continuity);
         return Ok(data);
     }
 
     [HttpGet("search")]
-    public async Task<ActionResult<List<MapSearchResult>>> Search(
-        [FromQuery] string term,
-        [FromQuery] Continuity? continuity = null
-    )
+    public async Task<ActionResult<List<MapSearchResult>>> Search([FromQuery] string term, [FromQuery] Continuity? continuity = null)
     {
         if (string.IsNullOrWhiteSpace(term) || term.Length < 2)
             return BadRequest("Search term must be at least 2 characters");
@@ -102,11 +83,7 @@ public class GalaxyMapUnifiedController(GalaxyMapReadService readService, MapSer
     }
 
     [HttpGet("semantic-search")]
-    public async Task<ActionResult<List<MapSearchResult>>> SemanticSearch(
-        [FromQuery] string q,
-        [FromQuery] Continuity? continuity = null,
-        [FromQuery] bool debug = false
-    )
+    public async Task<ActionResult<List<MapSearchResult>>> SemanticSearch([FromQuery] string q, [FromQuery] Continuity? continuity = null, [FromQuery] bool debug = false)
     {
         if (string.IsNullOrWhiteSpace(q) || q.Length < 3)
             return BadRequest("Query must be at least 3 characters");

@@ -17,7 +17,8 @@ The KG edge extraction in `InfoboxGraphService` creates an edge for every wiki l
 Wookieepedia infobox fields contain **structured text with embedded links**. The Values array has the semantic meaning, while the Links array is a flat list of every hyperlink in the field.
 
 **Example: Galactic Empire → Head of state**
-```
+
+```json
 Values: [
   "Galactic Emperor (19 BBY–4 ABY)",
   "Grand Vizier (5 ABY, officially)",
@@ -33,7 +34,8 @@ Links: [
 The ETL creates 6 `head_of_state` edges — 3 TitleOrPosition targets + 3 Year targets. But the actual semantic relationships are "the title 'Galactic Emperor' served as head of state from 19 BBY to 4 ABY". The people who held the title (Palpatine, Mas Amedda) aren't even linked.
 
 **Example: Anakin Skywalker → Masters**
-```
+
+```json
 Values: [
   "Qui-Gon Jinn (informal Jedi Master)",
   "Obi-Wan Kenobi (Jedi Master)",
@@ -80,6 +82,7 @@ The ETL creates 8 `apprentice_of` edges — 4 real people + 4 qualifier noise (J
 In `InfoboxGraphService.BuildGraphAsync`, after resolving a link target to a PageId, check the target entity type before creating the edge:
 
 **Filter rules:**
+
 1. **Skip Year/Era targets** for relationship fields — if the edge label is a structural relationship (head_of_state, apprentice_of, affiliated_with, etc.), don't create an edge to a Year or Era entity. The temporal data is already captured in temporal facets.
 2. **Skip unresolved targets (toId=0)** — currently creates ~125k orphan edges. These should be dropped.
 3. **Skip qualifier targets** — if the target is a TitleOrPosition or ForcePower entity AND the edge label implies a person-to-person relationship (apprentice_of, master_of, led_by, commanded_by), skip it. The qualifier describes the relationship, not the target.
@@ -88,6 +91,7 @@ In `InfoboxGraphService.BuildGraphAsync`, after resolving a link target to a Pag
 The ETL already has the `wikiUrlToPageId` lookup. After resolving the target, look up the target's entity type from kg.nodes (or a pre-built type map) and apply filter rules.
 
 This requires a two-pass approach:
+
 1. First pass: build nodes (already done)
 2. Second pass: build edges, filtering by target node type
 
@@ -98,6 +102,7 @@ Or: build a `pageIdToType` map during node construction, then consult it during 
 The Values array contains structured text like `"Qui-Gon Jinn (informal Jedi Master)"`. The primary entity is the text BEFORE the parenthetical. The qualifier is inside the parentheses.
 
 For each infobox field value:
+
 1. Parse the primary entity name (before `(`)
 2. Match it to a link in the Links array
 3. Create an edge only for the primary entity link
@@ -109,6 +114,7 @@ This is more complex but produces much higher quality edges with metadata.
 ### Phase 3: Temporal Edge Enrichment
 
 When a Value contains temporal bounds (e.g. `"Imperial Senate (19 BBY–1 BBY, disbanded by Emperor Sheev Palpatine)"`):
+
 1. Create the primary edge: `has_legislative_branch → Imperial Senate`
 2. Set `fromYear = -19`, `toYear = -1` on the edge (temporal bounds)
 3. Store the qualifier text: `"disbanded by Emperor Sheev Palpatine"`

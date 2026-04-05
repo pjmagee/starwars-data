@@ -24,11 +24,7 @@ BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard
 BsonSerializer.RegisterIdGenerator(typeof(Guid), GuidGenerator.Instance);
 
 // Ensure all enums are serialized as strings (not integers) across all documents
-ConventionRegistry.Register(
-    "EnumAsString",
-    new ConventionPack { new EnumRepresentationConvention(BsonType.String) },
-    _ => true
-);
+ConventionRegistry.Register("EnumAsString", new ConventionPack { new EnumRepresentationConvention(BsonType.String) }, _ => true);
 
 builder.AddServiceDefaults();
 
@@ -38,11 +34,7 @@ builder.Services.AddMudServices();
 
 builder
     .Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .AddJsonFile(
-        $"appsettings.{builder.Environment.EnvironmentName}.json",
-        optional: true,
-        reloadOnChange: true
-    )
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables(prefix: "ASPNETCORE_")
     .AddEnvironmentVariables();
 
@@ -61,15 +53,13 @@ builder
     .AddScoped<InfoboxToEventsTransformer>()
     .AddScoped<RecordService>()
     .AddScoped<TimelineService>()
+    .AddScoped<KgTimelineBuilderService>()
     .AddScoped<GalaxyMapETLService>()
     .AddScoped<InfoboxGraphService>()
     .AddSingleton<OpenAIClient>(sp =>
     {
         var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
-        return new OpenAIClient(
-            new ApiKeyCredential(settings.OpenAiKey),
-            new OpenAIClientOptions { NetworkTimeout = TimeSpan.FromMinutes(5) }
-        );
+        return new OpenAIClient(new ApiKeyCredential(settings.OpenAiKey), new OpenAIClientOptions { NetworkTimeout = TimeSpan.FromMinutes(5) });
     })
     .AddSingleton<RelationshipAnalystToolkit>(sp =>
     {
@@ -83,22 +73,14 @@ builder
         {
             var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
             var openAiClient = sp.GetRequiredService<OpenAIClient>();
-            return new ChatClientBuilder(
-                openAiClient.GetChatClient(settings.RelationshipAnalystModel).AsIChatClient()
-            )
-                .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
-                .Build();
+            return new ChatClientBuilder(openAiClient.GetChatClient(settings.RelationshipAnalystModel).AsIChatClient()).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build();
         }
     )
     .AddSingleton<CharacterTimelineChatClient>(sp =>
     {
         var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
         var openAiClient = sp.GetRequiredService<OpenAIClient>();
-        var inner = new ChatClientBuilder(
-            openAiClient.GetChatClient(settings.CharacterTimelineModel).AsIChatClient()
-        )
-            .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
-            .Build();
+        var inner = new ChatClientBuilder(openAiClient.GetChatClient(settings.CharacterTimelineModel).AsIChatClient()).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build();
         return new CharacterTimelineChatClient(inner);
     })
     .AddScoped<CharacterTimelineService>()
@@ -107,11 +89,7 @@ builder
     .AddScoped<ArticleChunkingService>()
     .AddSingleton<JobToggleService>()
     .AddSingleton<PageDownloader>()
-    .AddSingleton<IEmbeddingGenerator<string, Embedding<float>>>(sp =>
-        sp.GetRequiredService<OpenAIClient>()
-            .GetEmbeddingClient("text-embedding-3-small")
-            .AsIEmbeddingGenerator()
-    );
+    .AddSingleton<IEmbeddingGenerator<string, Embedding<float>>>(sp => sp.GetRequiredService<OpenAIClient>().GetEmbeddingClient("text-embedding-3-small").AsIEmbeddingGenerator());
 
 builder.Services.AddHttpClient<PageDownloader>(
     (serviceProvider, client) =>
@@ -122,9 +100,7 @@ builder.Services.AddHttpClient<PageDownloader>(
     }
 );
 
-var hangfireEnabled = builder
-    .Configuration.GetSection("Settings")
-    .GetValue<bool>("HangfireEnabled", true);
+var hangfireEnabled = builder.Configuration.GetSection("Settings").GetValue<bool>("HangfireEnabled", true);
 
 builder.Services.AddHangfire(
     (provider, config) =>
@@ -136,11 +112,7 @@ builder.Services.AddHangfire(
             settings.HangfireDb,
             new MongoStorageOptions
             {
-                MigrationOptions = new MongoMigrationOptions
-                {
-                    MigrationStrategy = new DropMongoMigrationStrategy(),
-                    BackupStrategy = new NoneMongoBackupStrategy(),
-                },
+                MigrationOptions = new MongoMigrationOptions { MigrationStrategy = new DropMongoMigrationStrategy(), BackupStrategy = new NoneMongoBackupStrategy() },
                 CheckConnection = true,
                 CheckQueuedJobsStrategy = CheckQueuedJobsStrategy.TailNotificationsCollection,
             }
@@ -148,9 +120,7 @@ builder.Services.AddHangfire(
 
         // Toggle filter: disabled jobs are skipped silently
         var toggleSvc = provider.GetRequiredService<JobToggleService>();
-        var filterLogger = provider.GetRequiredService<
-            ILogger<StarWarsData.Admin.JobToggleFilter>
-        >();
+        var filterLogger = provider.GetRequiredService<ILogger<StarWarsData.Admin.JobToggleFilter>>();
         config.UseFilter(new StarWarsData.Admin.JobToggleFilter(toggleSvc, filterLogger));
     }
 );
@@ -165,14 +135,7 @@ var app = builder.Build();
 app.UseStaticFiles();
 app.UseAntiforgery();
 
-app.UseHangfireDashboard(
-    "/hangfire",
-    new DashboardOptions
-    {
-        Authorization = [new StarWarsData.Admin.AllowAllAuthorizationFilter()],
-        IsReadOnlyFunc = _ => !hangfireEnabled,
-    }
-);
+app.UseHangfireDashboard("/hangfire", new DashboardOptions { Authorization = [new StarWarsData.Admin.AllowAllAuthorizationFilter()], IsReadOnlyFunc = _ => !hangfireEnabled });
 
 if (hangfireEnabled)
 {
@@ -180,24 +143,9 @@ if (hangfireEnabled)
     var toggleService = app.Services.GetRequiredService<JobToggleService>();
     var defaultJobs = new (string Id, string Cron, string Desc, bool Enabled)[]
     {
-        (
-            "daily-incremental-sync",
-            "0 3 * * *",
-            "Daily incremental sync of changed wiki pages at 03:00 UTC",
-            true
-        ),
-        (
-            "daily-infobox-graph",
-            "0 4 * * *",
-            "Daily infobox knowledge graph rebuild at 04:00 UTC",
-            false
-        ),
-        (
-            "submit-graph-batch",
-            "*/30 * * * *",
-            "Submit one LLM batch every 30 min for relationship extraction",
-            false
-        ),
+        ("daily-incremental-sync", "0 3 * * *", "Daily incremental sync of changed wiki pages at 03:00 UTC", true),
+        ("daily-infobox-graph", "0 4 * * *", "Daily infobox knowledge graph rebuild at 04:00 UTC", false),
+        ("submit-graph-batch", "*/30 * * * *", "Submit one LLM batch every 30 min for relationship extraction", false),
         ("check-graph-batches", "*/5 * * * *", "Check OpenAI batch status every 5 min", false),
         ("daily-article-chunking", "0 5 * * *", "Daily article chunking at 05:00 UTC", true),
     };
@@ -222,35 +170,15 @@ if (hangfireEnabled)
     }
 
     // Register recurring jobs — each checks its toggle flag before executing
-    RecurringJob.AddOrUpdate<PageDownloader>(
-        "daily-incremental-sync",
-        s => s.IncrementalSyncAsync(CancellationToken.None),
-        Cron.Daily(3)
-    );
+    RecurringJob.AddOrUpdate<PageDownloader>("daily-incremental-sync", s => s.IncrementalSyncAsync(CancellationToken.None), Cron.Daily(3));
 
-    RecurringJob.AddOrUpdate<InfoboxGraphService>(
-        "daily-infobox-graph",
-        s => s.BuildGraphAsync(CancellationToken.None),
-        Cron.Daily(4)
-    );
+    RecurringJob.AddOrUpdate<InfoboxGraphService>("daily-infobox-graph", s => s.BuildGraphAsync(CancellationToken.None), Cron.Daily(4));
 
-    RecurringJob.AddOrUpdate<RelationshipGraphBuilderService>(
-        "submit-graph-batch",
-        s => s.SubmitBatchAsync(CancellationToken.None),
-        "*/30 * * * *"
-    );
+    RecurringJob.AddOrUpdate<RelationshipGraphBuilderService>("submit-graph-batch", s => s.SubmitBatchAsync(CancellationToken.None), "*/30 * * * *");
 
-    RecurringJob.AddOrUpdate<RelationshipGraphBuilderService>(
-        "check-graph-batches",
-        s => s.CheckBatchesAsync(CancellationToken.None),
-        "*/5 * * * *"
-    );
+    RecurringJob.AddOrUpdate<RelationshipGraphBuilderService>("check-graph-batches", s => s.CheckBatchesAsync(CancellationToken.None), "*/5 * * * *");
 
-    RecurringJob.AddOrUpdate<ArticleChunkingService>(
-        "daily-article-chunking",
-        s => s.ProcessAllAsync(CancellationToken.None),
-        Cron.Daily(5)
-    );
+    RecurringJob.AddOrUpdate<ArticleChunkingService>("daily-article-chunking", s => s.ProcessAllAsync(CancellationToken.None), Cron.Daily(5));
 }
 
 app.MapControllers();

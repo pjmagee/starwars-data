@@ -95,6 +95,14 @@ public class TerritoryEra
     public string? Description { get; set; }
     public List<string> Conflicts { get; set; } = [];
     public List<string> ImportantEvents { get; set; } = [];
+
+    /// <summary>
+    /// Continuity of the source Era node. Stored as a string ("Canon"/"Legends"/
+    /// "Both"/"Unknown") so it can be filtered at the DB level with a
+    /// <c>$filter</c> aggregation stage on the embedded Eras array.
+    /// </summary>
+    [BsonRepresentation(BsonType.String)]
+    public Continuity Continuity { get; set; } = Continuity.Unknown;
 }
 
 public class TerritoryKeyEvent

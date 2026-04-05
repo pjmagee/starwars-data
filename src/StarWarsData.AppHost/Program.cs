@@ -16,24 +16,14 @@ var apiService = builder
     .WithEnvironment("Settings__OpenAiKey", openApi)
     .WithEnvironment("Settings__HangfireEnabled", "true");
 
-var mongo = builder.AddConnectionString(
-    "mongodb",
-    ReferenceExpression.Create(
-        $"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true"
-    )
-);
+var mongo = builder.AddConnectionString("mongodb", ReferenceExpression.Create($"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true"));
 
 apiService.WithReference(mongo).WaitFor(mongo);
 
 // MongoDB MCP server as a sidecar container (HTTP transport)
 var mongoMcp = builder
     .AddContainer("mongodb-mcp", "mongodb/mongodb-mcp-server", "latest")
-    .WithEnvironment(
-        "MDB_MCP_CONNECTION_STRING",
-        ReferenceExpression.Create(
-            $"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true"
-        )
-    )
+    .WithEnvironment("MDB_MCP_CONNECTION_STRING", ReferenceExpression.Create($"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true"))
     .WithEnvironment("MDB_MCP_READ_ONLY", "true")
     .WithArgs("--transport", "http", "--httpHost", "0.0.0.0", "--httpPort", "3000")
     .WithHttpEndpoint(targetPort: 3000, name: "mcp");
@@ -66,8 +56,7 @@ var admin = builder
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Re-downloads only pages changed since last sync. Runs daily at 03:00 UTC automatically.",
+            Description = "Re-downloads only pages changed since last sync. Runs daily at 03:00 UTC automatically.",
             IconName = "ArrowSync",
             IsHighlighted = false,
         }
@@ -79,8 +68,7 @@ var admin = builder
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Creates MongoDB views per infobox template type (Character, Planet, etc.). Requires Phase 1.",
+            Description = "Creates MongoDB views per infobox template type (Character, Planet, etc.). Requires Phase 1.",
             IconName = "TableMultiple",
             IsHighlighted = false,
         }
@@ -88,14 +76,24 @@ var admin = builder
     // ── Phase 3: Timeline events + indexes ──
     .WithHttpCommand(
         path: "/api/admin/mongo/create-categorized-timeline-events",
-        displayName: "3a. Build Timeline Events",
+        displayName: "3a. Build Timeline Events (legacy)",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Creates categorized timeline events in timeline.* collections from raw.pages. Requires Phase 1.",
+            Description = "LEGACY: Text-regex parser over raw.pages infobox links. Superseded by the KG-backed rebuild (3a-KG) — kept for regression comparison only.",
             IconName = "Timeline",
             IsHighlighted = false,
+        }
+    )
+    .WithHttpCommand(
+        path: "/api/admin/mongo/create-timeline-events-from-kg",
+        displayName: "3a-KG. Build Timeline Events (from KG)",
+        commandOptions: new HttpCommandOptions
+        {
+            Method = HttpMethod.Post,
+            Description = "Rebuilds timeline.* collections from kg.nodes (galactic facets only) joined with raw.pages for info-panel properties. Requires the knowledge graph to be built.",
+            IconName = "Timeline",
+            IsHighlighted = true,
         }
     )
     .WithHttpCommand(
@@ -104,8 +102,7 @@ var admin = builder
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Creates indexes on Pages and timeline event collections for query performance.",
+            Description = "Creates indexes on Pages and timeline event collections for query performance.",
             IconName = "DatabaseSearch",
             IsHighlighted = false,
         }
@@ -117,8 +114,7 @@ var admin = builder
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Runs ALL index creation in sequence: pages → chunks → vector search → KG graph. Safe to re-run.",
+            Description = "Runs ALL index creation in sequence: pages → chunks → vector search → KG graph. Safe to re-run.",
             IconName = "DatabaseSearch",
             IsHighlighted = true,
         }
@@ -130,8 +126,7 @@ var admin = builder
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Chunks articles and generates OpenAI embeddings. Requires OpenAI key and Phase 1.",
+            Description = "Chunks articles and generates OpenAI embeddings. Requires OpenAI key and Phase 1.",
             IconName = "Sparkle",
             IsHighlighted = false,
         }
@@ -153,8 +148,7 @@ var admin = builder
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Creates MongoDB Atlas vector search indexes on embeddings. Run after 4a.",
+            Description = "Creates MongoDB Atlas vector search indexes on embeddings. Run after 4a.",
             IconName = "DatabaseSearch",
             IsHighlighted = false,
         }
@@ -166,8 +160,7 @@ var admin = builder
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Builds deterministic knowledge graph (kg.nodes + kg.edges) from infobox data. No LLM needed. Requires Phase 1.",
+            Description = "Builds deterministic knowledge graph (kg.nodes + kg.edges) from infobox data. No LLM needed. Requires Phase 1.",
             IconName = "AccountTree",
             IsHighlighted = false,
         }
@@ -190,8 +183,7 @@ var admin = builder
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Uses AI to generate rich timeline events for each character. Requires Phase 1 and OpenAI key.",
+            Description = "Uses AI to generate rich timeline events for each character. Requires Phase 1 and OpenAI key.",
             IconName = "PersonTimeline",
             IsHighlighted = false,
         }
@@ -203,8 +195,7 @@ var admin = builder
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Submits a batch to OpenAI Batch API for LLM relationship extraction. Drip-feeds to respect token quota.",
+            Description = "Submits a batch to OpenAI Batch API for LLM relationship extraction. Drip-feeds to respect token quota.",
             IconName = "CloudUpload",
             IsHighlighted = false,
         }
@@ -215,8 +206,7 @@ var admin = builder
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Checks status of in-flight OpenAI batches and processes completed results. Runs every 5 minutes.",
+            Description = "Checks status of in-flight OpenAI batches and processes completed results. Runs every 5 minutes.",
             IconName = "ArrowSync",
             IsHighlighted = false,
         }
@@ -227,8 +217,7 @@ var admin = builder
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Releases orphaned pages from failed/stale batches so they can be resubmitted.",
+            Description = "Releases orphaned pages from failed/stale batches so they can be resubmitted.",
             IconName = "BroomAll",
             IsHighlighted = false,
         }
@@ -240,8 +229,7 @@ var admin = builder
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description =
-                "Pre-computes galaxy.years with territory control, event heatmap, and trade routes from the knowledge graph. Requires Phase 1 + 5.",
+            Description = "Pre-computes galaxy.years with territory control, event heatmap, and trade routes from the knowledge graph. Requires Phase 1 + 5.",
             IconName = "GlobeSearch",
             IsHighlighted = false,
         }
@@ -267,11 +255,7 @@ builder
     .ConfigureEnvFile(static env =>
     {
         env["FRONTEND_HOST_PORT"] = new() { Name = "FRONTEND_HOST_PORT", DefaultValue = "9081" };
-        env["APISERVICE_HOST_PORT"] = new()
-        {
-            Name = "APISERVICE_HOST_PORT",
-            DefaultValue = "9080",
-        };
+        env["APISERVICE_HOST_PORT"] = new() { Name = "APISERVICE_HOST_PORT", DefaultValue = "9080" };
         env["ADMIN_HOST_PORT"] = new() { Name = "ADMIN_HOST_PORT", DefaultValue = "9082" };
         env["DASHBOARD_HOST_PORT"] = new() { Name = "DASHBOARD_HOST_PORT", DefaultValue = "18888" };
     })
@@ -289,28 +273,22 @@ builder
             {
                 case "apiservice":
                     service.Ports = ["${APISERVICE_HOST_PORT:-9080}:${APISERVICE_PORT}"];
-                    service.Labels["net.unraid.docker.icon"] =
-                        "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/api.png";
-                    service.Labels["net.unraid.docker.webui"] =
-                        "http://[IP]:[PORT:${APISERVICE_PORT}]/swagger";
+                    service.Labels["net.unraid.docker.icon"] = "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/api.png";
+                    service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:${APISERVICE_PORT}]/swagger";
                     break;
                 case "frontend":
                     service.Ports = ["${FRONTEND_HOST_PORT:-9081}:${FRONTEND_PORT}"];
-                    service.Labels["net.unraid.docker.icon"] =
-                        "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/frontend.png";
-                    service.Labels["net.unraid.docker.webui"] =
-                        "http://[IP]:[PORT:${FRONTEND_PORT}]";
+                    service.Labels["net.unraid.docker.icon"] = "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/frontend.png";
+                    service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:${FRONTEND_PORT}]";
                     break;
                 case "admin":
                     service.Ports = ["${ADMIN_HOST_PORT:-9082}:${ADMIN_PORT}"];
-                    service.Labels["net.unraid.docker.icon"] =
-                        "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/api.png";
+                    service.Labels["net.unraid.docker.icon"] = "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/api.png";
                     service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:${ADMIN_PORT}]";
                     break;
                 case "starwars-dashboard":
                     service.Ports = ["${DASHBOARD_HOST_PORT:-18888}:18888"];
-                    service.Labels["net.unraid.docker.icon"] =
-                        "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/dashboard.png";
+                    service.Labels["net.unraid.docker.icon"] = "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/dashboard.png";
                     service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:18888]";
                     break;
             }

@@ -18,6 +18,26 @@
                 OnClick="@(() => RunJob("api/admin/download/pages"))" Disabled="_isLoading" Size="Size.Medium">
                 1a. Download Pages
             </MudButton>
+            <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+                <MudSelect T="string" @bind-Value="_selectedTemplate" Label="Template" Variant="Variant.Outlined"
+                    Dense="true" Style="max-width: 300px;" AnchorOrigin="Origin.BottomCenter">
+                    @if (_templates is not null)
+                    {
+                        @foreach (var t in _templates)
+                        {
+                            <MudSelectItem Value="@t.Template">@t.Template (@t.Count pages)</MudSelectItem>
+                        }
+                    }
+                </MudSelect>
+                <MudButton Variant="Variant.Filled" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.Refresh"
+                    OnClick="RedownloadTemplate" Disabled="@(_isLoading || string.IsNullOrEmpty(_selectedTemplate))" Size="Size.Medium">
+                    1b. Redownload Template
+                </MudButton>
+                <MudButton Variant="Variant.Outlined" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.Transform"
+                    OnClick="ReparseInfoboxes" Disabled="@(_isLoading || string.IsNullOrEmpty(_selectedTemplate))" Size="Size.Medium">
+                    1c. Reparse Infoboxes (no download)
+                </MudButton>
+            </MudStack>
             <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete"
                 OnClick="@(() => RunJob("api/admin/mongo/delete-pages"))" Disabled="_isLoading" Size="Size.Medium">
                 Delete Pages
@@ -189,10 +209,35 @@
     bool _isLoading;
     HttpClient? _http;
     List<StarWarsData.Models.Entities.JobToggle>? _jobToggles;
+    List<TemplateInfo>? _templates;
+    string? _selectedTemplate;
 
     HttpClient Http => _http ??= new HttpClient { BaseAddress = new Uri(Navigation.BaseUri) };
 
-    protected override async Task OnInitializedAsync() => await LoadJobToggles();
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.WhenAll(LoadJobToggles(), LoadTemplates());
+    }
+
+    record TemplateInfo(string Template, int Count);
+
+    async Task LoadTemplates()
+    {
+        try { _templates = await Http.GetFromJsonAsync<List<TemplateInfo>>("api/admin/templates"); }
+        catch { _templates = []; }
+    }
+
+    async Task RedownloadTemplate()
+    {
+        if (string.IsNullOrEmpty(_selectedTemplate)) return;
+        await RunJob($"api/admin/download/pages/redownload-template?template={Uri.EscapeDataString(_selectedTemplate)}");
+    }
+
+    async Task ReparseInfoboxes()
+    {
+        if (string.IsNullOrEmpty(_selectedTemplate)) return;
+        await RunJob($"api/admin/download/pages/reparse-infoboxes?template={Uri.EscapeDataString(_selectedTemplate)}");
+    }
 
     async Task LoadJobToggles()
     {

@@ -51,7 +51,12 @@
         display: flex; flex-direction: column; gap: 4px; padding: 6px 16px 8px;
         background: rgba(15,15,35,0.95); border-top: 1px solid rgba(255,255,255,0.1);
     }
-    .timeline-eras { display: flex; gap: 4px; flex-wrap: wrap; }
+    .timeline-eras {
+        display: flex; gap: 4px; overflow-x: auto; overflow-y: hidden;
+        scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.2) transparent;
+    }
+    .timeline-eras::-webkit-scrollbar { height: 4px; }
+    .timeline-eras::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.25); border-radius: 2px; }
     .timeline-controls {
         display: flex; align-items: center; gap: 8px; width: 100%;
     }
@@ -626,9 +631,11 @@
     }
 
     @* ══════════ FACTION LEGEND (bottom-left overlay) ══════════ *@
+    @* bottom offset must clear the timeline bar below (era chips row + controls
+       row + density viewport + padding ≈ 130px). Using 140px gives a small gap. *@
     @if (_mode == "timeline" && _yearData is not null)
     {
-        <div style="position:absolute;bottom:80px;left:12px;z-index:100;">
+        <div style="position:absolute;bottom:140px;left:12px;z-index:100;">
             <MudPaper Elevation="8" Class="pa-2" Style="background:rgba(15,15,35,0.9);backdrop-filter:blur(8px);">
                 @foreach (var name in ActiveFactions)
                 {
@@ -666,11 +673,15 @@
             {
                 <div class="timeline-progress" style="--duration: @(_frameTimeMs)ms;"></div>
             }
+            @* Era chip bar — renders every era the backend returned for the current
+               continuity filter. The container is horizontally scrollable so the list
+               can grow without clipping or pushing the map content up. Era ordering
+               follows the aggregation pipeline: chronological by StartYear. *@
             <div class="timeline-eras">
-                @foreach (var era in _overview.Eras.Take(8))
+                @foreach (var era in _overview.Eras)
                 {
                     <button class="era-chip" @onclick="() => JumpToYear(era.StartYear)"
-                            title="@FormatYear(era.StartYear)">@era.Name</button>
+                            title="@($"{era.Name} ({FormatYear(era.StartYear)}{(era.EndYear != era.StartYear ? $" – {FormatYear(era.EndYear)}" : "")})")">@era.Name</button>
                 }
             </div>
             <div class="timeline-controls">
@@ -891,8 +902,9 @@
         {
             var cq = ContinuityQuery;
             var geoUrl = string.IsNullOrEmpty(cq) ? "api/galaxy-map/geography" : $"api/galaxy-map/geography?{cq}";
+            var overviewUrl = string.IsNullOrEmpty(cq) ? "api/galaxy-map/overview" : $"api/galaxy-map/overview?{cq}";
             var geoTask = Http.GetFromJsonAsync<GalaxyMapV2Overview>(geoUrl);
-            var overviewTask = Http.GetFromJsonAsync<GalaxyOverviewDocument>("api/galaxy-map/overview");
+            var overviewTask = Http.GetFromJsonAsync<GalaxyOverviewDocument>(overviewUrl);
             _geography = await geoTask;
             try { _overview = await overviewTask; } catch { }
 
@@ -1218,7 +1230,7 @@
                     var vp = document.getElementById('density-viewport');
                     if (!vp) return;
                     var active = vp.querySelector('.density-tick.active');
-                    if (active) active.scrollIntoView({{ inline: 'center', behavior: 'smooth' }});
+                    if (active) active.scrollIntoView({{ inline: 'center', block: 'nearest', behavior: 'smooth' }});
                 }})();");
         }
         catch { }

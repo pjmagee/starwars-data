@@ -26,36 +26,24 @@ public class ConversationCapture
     public bool HasToolCall(string toolName) => ToolCalls.Any(t => t.Name == toolName);
 
     /// <summary>Check if any tool starting with the given prefix was called.</summary>
-    public bool HasToolCallStartingWith(string prefix) =>
-        ToolCalls.Any(t => t.Name.StartsWith(prefix));
+    public bool HasToolCallStartingWith(string prefix) => ToolCalls.Any(t => t.Name.StartsWith(prefix));
 
     /// <summary>Get the first tool call matching the given name.</summary>
-    public ToolCallRecord? GetToolCall(string toolName) =>
-        ToolCalls.FirstOrDefault(t => t.Name == toolName);
+    public ToolCallRecord? GetToolCall(string toolName) => ToolCalls.FirstOrDefault(t => t.Name == toolName);
 
     /// <summary>Get all tool calls matching the given name.</summary>
-    public List<ToolCallRecord> GetToolCalls(string toolName) =>
-        ToolCalls.Where(t => t.Name == toolName).ToList();
+    public List<ToolCallRecord> GetToolCalls(string toolName) => ToolCalls.Where(t => t.Name == toolName).ToList();
 
     /// <summary>Check if a tool call's arguments contain a specific string.</summary>
-    public bool HasToolCallWithArg(string toolName, string argSubstring) =>
-        ToolCalls.Any(t =>
-            t.Name == toolName
-            && t.Arguments.Contains(argSubstring, StringComparison.OrdinalIgnoreCase)
-        );
+    public bool HasToolCallWithArg(string toolName, string argSubstring) => ToolCalls.Any(t => t.Name == toolName && t.Arguments.Contains(argSubstring, StringComparison.OrdinalIgnoreCase));
 }
 
 /// <summary>
 /// Delegating chat client that records function call/result messages.
 /// </summary>
-internal class CapturingChatClient(IChatClient inner, ConversationCapture capture)
-    : DelegatingChatClient(inner)
+internal class CapturingChatClient(IChatClient inner, ConversationCapture capture) : DelegatingChatClient(inner)
 {
-    public override async Task<ChatResponse> GetResponseAsync(
-        IEnumerable<ChatMessage> messages,
-        ChatOptions? options = null,
-        CancellationToken cancellationToken = default
-    )
+    public override async Task<ChatResponse> GetResponseAsync(IEnumerable<ChatMessage> messages, ChatOptions? options = null, CancellationToken cancellationToken = default)
     {
         var response = await base.GetResponseAsync(messages, options, cancellationToken);
 
@@ -66,12 +54,8 @@ internal class CapturingChatClient(IChatClient inner, ConversationCapture captur
             {
                 foreach (var content in message.Contents.OfType<FunctionCallContent>())
                 {
-                    var args = content.Arguments is not null
-                        ? System.Text.Json.JsonSerializer.Serialize(content.Arguments)
-                        : "{}";
-                    capture.ToolCalls.Add(
-                        new ConversationCapture.ToolCallRecord(content.Name, args, null)
-                    );
+                    var args = content.Arguments is not null ? System.Text.Json.JsonSerializer.Serialize(content.Arguments) : "{}";
+                    capture.ToolCalls.Add(new ConversationCapture.ToolCallRecord(content.Name, args, null));
                 }
 
                 // Capture final text response
@@ -85,9 +69,7 @@ internal class CapturingChatClient(IChatClient inner, ConversationCapture captur
                 foreach (var content in message.Contents.OfType<FunctionResultContent>())
                 {
                     // Match result back to the most recent call with same name
-                    var matching = capture.ToolCalls.LastOrDefault(t =>
-                        t.Name == content.CallId || t.Result is null
-                    );
+                    var matching = capture.ToolCalls.LastOrDefault(t => t.Name == content.CallId || t.Result is null);
                     if (matching is not null)
                     {
                         var resultText = content.Result?.ToString() ?? "";

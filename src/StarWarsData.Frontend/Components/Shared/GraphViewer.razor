@@ -53,21 +53,61 @@
             </div>
         }
 
-        @* Label chips *@
+        @* Label chips + bulk toggle buttons *@
         @if (Labels is { Count: > 0 })
         {
             <div style="display:flex; align-items:center; gap:4px; background:rgba(30,30,56,0.85); padding:4px 10px; border-radius:6px; flex-wrap:wrap;">
+                @{
+                    var enabledCount = Labels.Count(l => EnabledLabels?.Contains(l) ?? true);
+                }
+                @if (OnLabelsBulkSet.HasDelegate)
+                {
+                    <MudTooltip Text="Enable all labels (warning: noisy for entities with many relationships)">
+                        <MudButton Size="Size.Small" Variant="Variant.Text"
+                                   Color="@(enabledCount == Labels.Count ? Color.Success : Color.Default)"
+                                   Style="min-width:40px; color:#90caf9; font-size:11px; padding:2px 6px;"
+                                   OnClick="@(() => OnLabelsBulkSet.InvokeAsync([..Labels]))">
+                            All
+                        </MudButton>
+                    </MudTooltip>
+                    <MudTooltip Text="Disable all labels">
+                        <MudButton Size="Size.Small" Variant="Variant.Text"
+                                   Color="@(enabledCount == 0 ? Color.Error : Color.Default)"
+                                   Style="min-width:48px; color:#f48fb1; font-size:11px; padding:2px 6px;"
+                                   OnClick="@(() => OnLabelsBulkSet.InvokeAsync(new HashSet<string>()))">
+                            None
+                        </MudButton>
+                    </MudTooltip>
+                    @if (DefaultLabels is { Count: > 0 })
+                    {
+                        <MudTooltip Text="@($"Reset to type defaults ({DefaultLabels.Count} labels)")">
+                            <MudButton Size="Size.Small" Variant="Variant.Text"
+                                       StartIcon="@Icons.Material.Filled.RestartAlt"
+                                       Style="min-width:72px; color:#ffa726; font-size:11px; padding:2px 6px;"
+                                       OnClick="@(() => OnLabelsBulkSet.InvokeAsync([..DefaultLabels]))">
+                                Reset
+                            </MudButton>
+                        </MudTooltip>
+                    }
+                    <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.4); margin:0 4px;">
+                        @enabledCount/@Labels.Count
+                    </MudText>
+                    <span style="width:1px; height:16px; background:rgba(255,255,255,0.2); margin:0 4px;"></span>
+                }
                 @foreach (var label in Labels)
                 {
                     var l = label;
                     var enabled = EnabledLabels?.Contains(l) ?? true;
-                    <MudChip T="string" Size="Size.Small"
-                             Variant="@(enabled ? Variant.Filled : Variant.Outlined)"
-                             Color="Color.Info"
-                             Style="@(enabled ? "" : "opacity:0.4")"
-                             OnClick="@(() => OnLabelToggled.InvokeAsync(l))">
-                        @FormatLabel(l)
-                    </MudChip>
+                    var isDefault = DefaultLabels?.Contains(l) ?? false;
+                    <MudTooltip Text="@(isDefault ? $"{l} (default)" : l)">
+                        <MudChip T="string" Size="Size.Small"
+                                 Variant="@(enabled ? Variant.Filled : Variant.Outlined)"
+                                 Color="Color.Info"
+                                 Style="@(enabled ? (isDefault ? "border:1px solid #ffa726" : "") : "opacity:0.4")"
+                                 OnClick="@(() => OnLabelToggled.InvokeAsync(l))">
+                            @FormatLabel(l)
+                        </MudChip>
+                    </MudTooltip>
                 }
             </div>
         }
@@ -213,7 +253,9 @@
     // ── Label toggles (optional) ──
     [Parameter] public List<string>? Labels { get; set; }
     [Parameter] public HashSet<string>? EnabledLabels { get; set; }
+    [Parameter] public HashSet<string>? DefaultLabels { get; set; }
     [Parameter] public EventCallback<string> OnLabelToggled { get; set; }
+    [Parameter] public EventCallback<HashSet<string>> OnLabelsBulkSet { get; set; }
 
     // ── Depth control (optional) ──
     [Parameter] public int? MaxDepth { get; set; }
@@ -245,14 +287,27 @@
     private int _selectedTickIndex;
 
     private RelationshipGraphResult? _lastRenderedData;
+    private bool _pendingRender;
 
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
 
-    protected override async Task OnParametersSetAsync()
+    protected override void OnParametersSet()
     {
+        // Don't call JS interop here — prerendering runs OnParametersSet before the
+        // component is on the page, and JS isn't available yet. Mark dirty instead
+        // and let OnAfterRenderAsync perform the render after the circuit is live.
         if (GraphData?.Nodes is { Count: > 0 } && !ReferenceEquals(GraphData, _lastRenderedData))
         {
             _lastRenderedData = GraphData;
+            _pendingRender = true;
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_pendingRender)
+        {
+            _pendingRender = false;
             await RenderGraph();
         }
     }
@@ -292,6 +347,12 @@
 
         if (EnableKeyboardShortcuts)
             await _jsModule.InvokeVoidAsync("registerKeyboardShortcuts", _dotnetRef);
+
+        // RenderGraph runs from OnAfterRenderAsync, outside the normal parameter-driven
+        // render cycle. The temporal slider and other overlay controls depend on
+        // _hasTemporalData / _temporalTicks, which we only know after scanning the
+        // edges. Trigger a re-render so the overlay reflects the new temporal state.
+        StateHasChanged();
     }
 
     /// <summary>

@@ -71,10 +71,7 @@ public class AdminController(
     }
 
     [HttpPost("download/page")]
-    public async Task<ActionResult<string>> DownloadSinglePage(
-        [FromQuery] string title,
-        CancellationToken cancellationToken
-    )
+    public async Task<ActionResult<string>> DownloadSinglePage([FromQuery] string title, CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(title))
             return BadRequest(new { error = "title query parameter is required" });
@@ -95,16 +92,9 @@ public class AdminController(
     {
         try
         {
-            if (
-                IsJobAlreadyActive(
-                    typeof(PageDownloader),
-                    nameof(PageDownloader.SyncToMongoDbAsync)
-                )
-            )
+            if (IsJobAlreadyActive(typeof(PageDownloader), nameof(PageDownloader.SyncToMongoDbAsync)))
                 return Conflict(new { error = "Page download job already running" });
-            var jobId = BackgroundJob.Enqueue<PageDownloader>(s =>
-                s.SyncToMongoDbAsync(CancellationToken.None)
-            );
+            var jobId = BackgroundJob.Enqueue<PageDownloader>(s => s.SyncToMongoDbAsync(CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -113,21 +103,52 @@ public class AdminController(
         }
     }
 
+    [HttpGet("templates")]
+    public async Task<ActionResult<List<object>>> GetTemplates(CancellationToken cancellationToken)
+    {
+        var templates = await pageDownloader.GetTemplateCountsAsync(cancellationToken);
+        return Ok(templates.Select(t => new { template = t.template, count = t.count }));
+    }
+
+    [HttpPost("download/pages/redownload-template")]
+    public ActionResult<string> RedownloadByTemplate([FromQuery] string template)
+    {
+        if (string.IsNullOrWhiteSpace(template))
+            return BadRequest(new { error = "template query parameter is required (e.g. 'Battle', 'Duel', 'Mission')" });
+
+        var jobId = BackgroundJob.Enqueue<PageDownloader>(s => s.RedownloadByTemplateAsync(template, CancellationToken.None));
+        return Ok(
+            new
+            {
+                jobId,
+                template,
+                message = $"Redownload job started for template matching '{template}'",
+            }
+        );
+    }
+
+    [HttpPost("download/pages/reparse-infoboxes")]
+    public ActionResult<string> ReparseInfoboxes([FromQuery] string? template = null)
+    {
+        var jobId = BackgroundJob.Enqueue<PageDownloader>(s => s.ReparseInfoboxesAsync(template, CancellationToken.None));
+        return Ok(
+            new
+            {
+                jobId,
+                template = template ?? "(all)",
+                message = $"Reparse job started{(template is not null ? $" for template matching '{template}'" : " for all pages with rawInfobox")}",
+            }
+        );
+    }
+
     [HttpPost("download/pages/incremental")]
     public ActionResult<string> IncrementalSyncPages()
     {
         try
         {
-            if (
-                IsJobAlreadyActive(
-                    typeof(PageDownloader),
-                    nameof(PageDownloader.IncrementalSyncAsync)
-                )
-            )
+            if (IsJobAlreadyActive(typeof(PageDownloader), nameof(PageDownloader.IncrementalSyncAsync)))
                 return Conflict(new { error = "Incremental sync job already running" });
-            var jobId = BackgroundJob.Enqueue<PageDownloader>(s =>
-                s.IncrementalSyncAsync(CancellationToken.None)
-            );
+            var jobId = BackgroundJob.Enqueue<PageDownloader>(s => s.IncrementalSyncAsync(CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -143,9 +164,7 @@ public class AdminController(
         {
             if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.EnsureIndexesAsync)))
                 return Conflict(new { error = "Index creation already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s =>
-                s.EnsureIndexesAsync(CancellationToken.None)
-            );
+            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.EnsureIndexesAsync(CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -159,16 +178,9 @@ public class AdminController(
     {
         try
         {
-            if (
-                IsJobAlreadyActive(
-                    typeof(ArticleChunkingService),
-                    nameof(ArticleChunkingService.ProcessAllAsync)
-                )
-            )
+            if (IsJobAlreadyActive(typeof(ArticleChunkingService), nameof(ArticleChunkingService.ProcessAllAsync)))
                 return Conflict(new { error = "Article chunking already running" });
-            var jobId = BackgroundJob.Enqueue<ArticleChunkingService>(s =>
-                s.ProcessAllAsync(CancellationToken.None)
-            );
+            var jobId = BackgroundJob.Enqueue<ArticleChunkingService>(s => s.ProcessAllAsync(CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -182,16 +194,9 @@ public class AdminController(
     {
         try
         {
-            if (
-                IsJobAlreadyActive(
-                    typeof(RecordService),
-                    nameof(RecordService.DeleteOpenAiEmbeddingsAsync)
-                )
-            )
+            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.DeleteOpenAiEmbeddingsAsync)))
                 return Conflict(new { error = "Embeddings deletion already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s =>
-                s.DeleteOpenAiEmbeddingsAsync(CancellationToken.None)
-            );
+            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.DeleteOpenAiEmbeddingsAsync(CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -205,16 +210,9 @@ public class AdminController(
     {
         try
         {
-            if (
-                IsJobAlreadyActive(
-                    typeof(RecordService),
-                    nameof(RecordService.DeletePagesCollections)
-                )
-            )
+            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.DeletePagesCollections)))
                 return Conflict(new { error = "Pages deletion already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s =>
-                s.DeletePagesCollections(CancellationToken.None)
-            );
+            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.DeletePagesCollections(CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -228,16 +226,9 @@ public class AdminController(
     {
         try
         {
-            if (
-                IsJobAlreadyActive(
-                    typeof(RecordService),
-                    nameof(RecordService.DeleteTimelineCollections)
-                )
-            )
+            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.DeleteTimelineCollections)))
                 return Conflict(new { error = "Timeline events deletion already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s =>
-                s.DeleteTimelineCollections(CancellationToken.None)
-            );
+            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.DeleteTimelineCollections(CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -251,16 +242,9 @@ public class AdminController(
     {
         try
         {
-            if (
-                IsJobAlreadyActive(
-                    typeof(RecordService),
-                    nameof(RecordService.CreateTemplateViewsAsync)
-                )
-            )
+            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.CreateTemplateViewsAsync)))
                 return Conflict(new { error = "Template views creation already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s =>
-                s.CreateTemplateViewsAsync(CancellationToken.None)
-            );
+            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.CreateTemplateViewsAsync(CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -274,16 +258,31 @@ public class AdminController(
     {
         try
         {
-            if (
-                IsJobAlreadyActive(
-                    typeof(RecordService),
-                    nameof(RecordService.CreateCategorizedTimelineEvents)
-                )
-            )
+            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.CreateCategorizedTimelineEvents)))
                 return Conflict(new { error = "Categorized timeline events job already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s =>
-                s.CreateCategorizedTimelineEvents(CancellationToken.None)
-            );
+            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.CreateCategorizedTimelineEvents(CancellationToken.None));
+            return Ok(new { jobId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+    }
+
+    /// <summary>
+    /// KG-backed timeline rebuild: reads <c>kg.nodes</c> (galactic temporal facets only)
+    /// and joins <c>raw.pages</c> for the display-side infobox properties. Replaces the
+    /// legacy <see cref="RecordService.CreateCategorizedTimelineEvents"/> path — same
+    /// output collections and schema, but calendar-aware and semantically richer.
+    /// </summary>
+    [HttpPost("mongo/create-timeline-events-from-kg")]
+    public ActionResult<string> EnqueueCreateTimelineEventsFromKg()
+    {
+        try
+        {
+            if (IsJobAlreadyActive(typeof(KgTimelineBuilderService), nameof(KgTimelineBuilderService.BuildAsync)))
+                return Conflict(new { error = "KG timeline events job already running" });
+            var jobId = BackgroundJob.Enqueue<KgTimelineBuilderService>(s => s.BuildAsync(CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -297,16 +296,9 @@ public class AdminController(
     {
         try
         {
-            if (
-                IsJobAlreadyActive(
-                    typeof(ArticleChunkingService),
-                    nameof(ArticleChunkingService.CreateVectorIndexAsync)
-                )
-            )
+            if (IsJobAlreadyActive(typeof(ArticleChunkingService), nameof(ArticleChunkingService.CreateVectorIndexAsync)))
                 return Conflict(new { error = "Vector index creation already running" });
-            var jobId = BackgroundJob.Enqueue<ArticleChunkingService>(s =>
-                s.CreateVectorIndexAsync(CancellationToken.None)
-            );
+            var jobId = BackgroundJob.Enqueue<ArticleChunkingService>(s => s.CreateVectorIndexAsync(CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -320,16 +312,9 @@ public class AdminController(
     {
         try
         {
-            if (
-                IsJobAlreadyActive(
-                    typeof(ArticleChunkingService),
-                    nameof(ArticleChunkingService.EnsureIndexesAsync)
-                )
-            )
+            if (IsJobAlreadyActive(typeof(ArticleChunkingService), nameof(ArticleChunkingService.EnsureIndexesAsync)))
                 return Conflict(new { error = "Chunk index creation already running" });
-            var jobId = BackgroundJob.Enqueue<ArticleChunkingService>(s =>
-                s.EnsureIndexesAsync(CancellationToken.None)
-            );
+            var jobId = BackgroundJob.Enqueue<ArticleChunkingService>(s => s.EnsureIndexesAsync(CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -343,16 +328,9 @@ public class AdminController(
     {
         try
         {
-            if (
-                IsJobAlreadyActive(
-                    typeof(RecordService),
-                    nameof(RecordService.DeleteVectorIndexesAsync)
-                )
-            )
+            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.DeleteVectorIndexesAsync)))
                 return Conflict(new { error = "Vector index deletion already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s =>
-                s.DeleteVectorIndexesAsync(CancellationToken.None)
-            );
+            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.DeleteVectorIndexesAsync(CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -366,16 +344,9 @@ public class AdminController(
     {
         try
         {
-            if (
-                IsJobAlreadyActive(
-                    typeof(CharacterTimelineService),
-                    nameof(CharacterTimelineService.GenerateAllTimelinesAsync)
-                )
-            )
+            if (IsJobAlreadyActive(typeof(CharacterTimelineService), nameof(CharacterTimelineService.GenerateAllTimelinesAsync)))
                 return Conflict(new { error = "Character timeline generation already running" });
-            var jobId = BackgroundJob.Enqueue<CharacterTimelineService>(s =>
-                s.GenerateAllTimelinesAsync(CancellationToken.None)
-            );
+            var jobId = BackgroundJob.Enqueue<CharacterTimelineService>(s => s.GenerateAllTimelinesAsync(CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -391,16 +362,9 @@ public class AdminController(
             return BadRequest(new { error = "pageId query parameter is required" });
         try
         {
-            if (
-                IsJobAlreadyActive(
-                    typeof(CharacterTimelineService),
-                    nameof(CharacterTimelineService.RefreshTimelineAsync)
-                )
-            )
+            if (IsJobAlreadyActive(typeof(CharacterTimelineService), nameof(CharacterTimelineService.RefreshTimelineAsync)))
                 return Conflict(new { error = "Character timeline refresh already running" });
-            var jobId = BackgroundJob.Enqueue<CharacterTimelineService>(s =>
-                s.RefreshTimelineAsync(pageId, CancellationToken.None)
-            );
+            var jobId = BackgroundJob.Enqueue<CharacterTimelineService>(s => s.RefreshTimelineAsync(pageId, CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -414,16 +378,9 @@ public class AdminController(
     {
         try
         {
-            if (
-                IsJobAlreadyActive(
-                    typeof(RelationshipGraphBuilderService),
-                    nameof(RelationshipGraphBuilderService.SubmitBatchAsync)
-                )
-            )
+            if (IsJobAlreadyActive(typeof(RelationshipGraphBuilderService), nameof(RelationshipGraphBuilderService.SubmitBatchAsync)))
                 return Conflict(new { error = "Batch submission already running" });
-            var jobId = BackgroundJob.Enqueue<RelationshipGraphBuilderService>(s =>
-                s.SubmitBatchAsync(CancellationToken.None)
-            );
+            var jobId = BackgroundJob.Enqueue<RelationshipGraphBuilderService>(s => s.SubmitBatchAsync(CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -437,16 +394,9 @@ public class AdminController(
     {
         try
         {
-            if (
-                IsJobAlreadyActive(
-                    typeof(RelationshipGraphBuilderService),
-                    nameof(RelationshipGraphBuilderService.CheckBatchesAsync)
-                )
-            )
+            if (IsJobAlreadyActive(typeof(RelationshipGraphBuilderService), nameof(RelationshipGraphBuilderService.CheckBatchesAsync)))
                 return Conflict(new { error = "Batch check already running" });
-            var jobId = BackgroundJob.Enqueue<RelationshipGraphBuilderService>(s =>
-                s.CheckBatchesAsync(CancellationToken.None)
-            );
+            var jobId = BackgroundJob.Enqueue<RelationshipGraphBuilderService>(s => s.CheckBatchesAsync(CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -460,9 +410,7 @@ public class AdminController(
     {
         try
         {
-            var jobId = BackgroundJob.Enqueue<RelationshipGraphBuilderService>(s =>
-                s.CleanupFailedBatchesAsync(CancellationToken.None)
-            );
+            var jobId = BackgroundJob.Enqueue<RelationshipGraphBuilderService>(s => s.CleanupFailedBatchesAsync(CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -476,16 +424,9 @@ public class AdminController(
     {
         try
         {
-            if (
-                IsJobAlreadyActive(
-                    typeof(RelationshipGraphBuilderService),
-                    nameof(RelationshipGraphBuilderService.EnsureIndexesAsync)
-                )
-            )
+            if (IsJobAlreadyActive(typeof(RelationshipGraphBuilderService), nameof(RelationshipGraphBuilderService.EnsureIndexesAsync)))
                 return Conflict(new { error = "Graph index creation already running" });
-            var jobId = BackgroundJob.Enqueue<RelationshipGraphBuilderService>(s =>
-                s.EnsureIndexesAsync(CancellationToken.None)
-            );
+            var jobId = BackgroundJob.Enqueue<RelationshipGraphBuilderService>(s => s.EnsureIndexesAsync(CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -498,24 +439,13 @@ public class AdminController(
     public ActionResult<string> EnqueueEnsureAllIndexes()
     {
         // Chain all index jobs sequentially via Hangfire continuations
-        var pageIndexJob = BackgroundJob.Enqueue<RecordService>(s =>
-            s.EnsureIndexesAsync(CancellationToken.None)
-        );
+        var pageIndexJob = BackgroundJob.Enqueue<RecordService>(s => s.EnsureIndexesAsync(CancellationToken.None));
 
-        var chunkIndexJob = BackgroundJob.ContinueJobWith<ArticleChunkingService>(
-            pageIndexJob,
-            s => s.EnsureIndexesAsync(CancellationToken.None)
-        );
+        var chunkIndexJob = BackgroundJob.ContinueJobWith<ArticleChunkingService>(pageIndexJob, s => s.EnsureIndexesAsync(CancellationToken.None));
 
-        var vectorIndexJob = BackgroundJob.ContinueJobWith<ArticleChunkingService>(
-            chunkIndexJob,
-            s => s.CreateVectorIndexAsync(CancellationToken.None)
-        );
+        var vectorIndexJob = BackgroundJob.ContinueJobWith<ArticleChunkingService>(chunkIndexJob, s => s.CreateVectorIndexAsync(CancellationToken.None));
 
-        var graphIndexJob = BackgroundJob.ContinueJobWith<RelationshipGraphBuilderService>(
-            vectorIndexJob,
-            s => s.EnsureIndexesAsync(CancellationToken.None)
-        );
+        var graphIndexJob = BackgroundJob.ContinueJobWith<RelationshipGraphBuilderService>(vectorIndexJob, s => s.EnsureIndexesAsync(CancellationToken.None));
 
         return Ok(
             new
@@ -533,17 +463,13 @@ public class AdminController(
     }
 
     [HttpGet("graph/priority-categories")]
-    public ActionResult<string[]> GetPriorityCategories() =>
-        Ok(RelationshipGraphBuilderService.GetPriorityCategories());
+    public ActionResult<string[]> GetPriorityCategories() => Ok(RelationshipGraphBuilderService.GetPriorityCategories());
 
     [HttpPost("graph/priority-categories")]
     public ActionResult SetPriorityCategories([FromBody] string[] categories)
     {
         RelationshipGraphBuilderService.SetPriorityCategories(categories);
-        logger.LogInformation(
-            "Graph builder priority categories set: {Categories}",
-            string.Join(", ", categories)
-        );
+        logger.LogInformation("Graph builder priority categories set: {Categories}", string.Join(", ", categories));
         return Ok(new { message = $"Priority set: {string.Join(", ", categories)}" });
     }
 
@@ -589,16 +515,10 @@ public class AdminController(
     // === Job Toggles ===
 
     [HttpGet("jobs")]
-    public async Task<List<StarWarsData.Models.Entities.JobToggle>> GetJobToggles(
-        CancellationToken ct
-    ) => await jobToggleService.GetAllAsync(ct);
+    public async Task<List<StarWarsData.Models.Entities.JobToggle>> GetJobToggles(CancellationToken ct) => await jobToggleService.GetAllAsync(ct);
 
     [HttpPost("jobs/{jobId}/toggle")]
-    public async Task<ActionResult> ToggleJob(
-        string jobId,
-        [FromQuery] bool enabled,
-        CancellationToken ct
-    )
+    public async Task<ActionResult> ToggleJob(string jobId, [FromQuery] bool enabled, CancellationToken ct)
     {
         await jobToggleService.SetEnabledAsync(jobId, enabled, ct);
         logger.LogInformation("Job {JobId} {State}", jobId, enabled ? "enabled" : "disabled");

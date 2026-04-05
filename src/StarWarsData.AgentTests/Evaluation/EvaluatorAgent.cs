@@ -40,23 +40,12 @@ public class EvaluatorAgent(IChatClient client)
     static readonly ChatOptions EvalOptions = new()
     {
         Temperature = 0f,
-        ResponseFormat = ChatResponseFormat.ForJsonSchema<EvalSchema>(
-            schemaName: "evaluation_result",
-            schemaDescription: "QA evaluation of an AI agent conversation"
-        ),
+        ResponseFormat = ChatResponseFormat.ForJsonSchema<EvalSchema>(schemaName: "evaluation_result", schemaDescription: "QA evaluation of an AI agent conversation"),
     };
 
-    public async Task<EvaluationResult> EvaluateAsync(
-        string userPrompt,
-        List<ConversationCapture.ToolCallRecord> toolCalls,
-        string? finalResponse,
-        string rubric
-    )
+    public async Task<EvaluationResult> EvaluateAsync(string userPrompt, List<ConversationCapture.ToolCallRecord> toolCalls, string? finalResponse, string rubric)
     {
-        var toolCallSummary = string.Join(
-            "\n",
-            toolCalls.Select((t, i) => $"  {i + 1}. {t.Name}({TruncateArgs(t.Arguments, 200)})")
-        );
+        var toolCallSummary = string.Join("\n", toolCalls.Select((t, i) => $"  {i + 1}. {t.Name}({TruncateArgs(t.Arguments, 200)})"));
 
         var evalPrompt = $"""
             USER PROMPT: {userPrompt}
@@ -69,11 +58,7 @@ public class EvaluatorAgent(IChatClient client)
             RUBRIC: {rubric}
             """;
 
-        var messages = new List<ChatMessage>
-        {
-            new(ChatRole.System, EvaluatorPrompt),
-            new(ChatRole.User, evalPrompt),
-        };
+        var messages = new List<ChatMessage> { new(ChatRole.System, EvaluatorPrompt), new(ChatRole.User, evalPrompt) };
 
         var response = await client.GetResponseAsync(messages, EvalOptions);
         var text = response.Text ?? "{}";
@@ -81,21 +66,11 @@ public class EvaluatorAgent(IChatClient client)
         try
         {
             var result = JsonSerializer.Deserialize<EvalSchema>(text, JsonOpts);
-            return new EvaluationResult(
-                result?.Pass ?? false,
-                result?.Score ?? 1,
-                result?.Reasoning ?? "Failed to parse evaluation",
-                result?.Issues ?? []
-            );
+            return new EvaluationResult(result?.Pass ?? false, result?.Score ?? 1, result?.Reasoning ?? "Failed to parse evaluation", result?.Issues ?? []);
         }
         catch
         {
-            return new EvaluationResult(
-                false,
-                1,
-                $"Failed to parse evaluator response: {text}",
-                []
-            );
+            return new EvaluationResult(false, 1, $"Failed to parse evaluator response: {text}", []);
         }
     }
 
@@ -107,8 +82,7 @@ public class EvaluatorAgent(IChatClient client)
         [property: JsonPropertyName("issues")] List<string> Issues
     );
 
-    static string TruncateArgs(string args, int max) =>
-        args.Length > max ? args[..(max - 1)] + "..." : args;
+    static string TruncateArgs(string args, int max) => args.Length > max ? args[..(max - 1)] + "..." : args;
 
     static string Truncate(string s, int max) => s.Length > max ? s[..(max - 1)] + "..." : s;
 }

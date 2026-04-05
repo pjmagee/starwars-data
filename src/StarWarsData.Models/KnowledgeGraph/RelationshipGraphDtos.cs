@@ -71,6 +71,27 @@ public class RelationshipGraphEdge
 }
 
 /// <summary>
+/// The relationship labels available on a node plus a pre-computed set of
+/// "default enabled" labels (the subset the UI should turn on initially for
+/// that node's entity type to avoid noisy graphs).
+/// </summary>
+public class EntityLabelsResult
+{
+    /// <summary>Entity type (Character, Battle, Organization, ...). Empty if unknown.</summary>
+    public string Type { get; init; } = string.Empty;
+
+    /// <summary>All distinct relationship labels for the node (outgoing + reversed inbound).</summary>
+    public List<string> Labels { get; init; } = [];
+
+    /// <summary>
+    /// Subset of <see cref="Labels"/> that should be enabled by default when rendering
+    /// a graph for this node — typically the labels whose semantic category is
+    /// prioritized for the node's entity type.
+    /// </summary>
+    public List<string> DefaultEnabled { get; init; } = [];
+}
+
+/// <summary>
 /// Paginated browse result for processed entities in the relationship graph.
 /// </summary>
 public class BrowseEntitiesResult
@@ -122,4 +143,48 @@ public class ChunkingTypeProgress
     public int Pages { get; init; }
     public long Chunks { get; init; }
     public double AvgChunksPerPage { get; init; }
+}
+
+/// <summary>
+/// Aggregated stats for a single relationship label across kg.edges.
+/// One row = one directed label. Counts are directional (not pair-counts).
+/// </summary>
+public class EdgeLabelStatsDto
+{
+    public string Label { get; init; } = string.Empty;
+    public long Count { get; init; }
+    public long CanonCount { get; init; }
+    public long LegendsCount { get; init; }
+    public double AvgWeight { get; init; }
+
+    /// <summary>Top source entity types with counts (max 5).</summary>
+    public List<TypeCount> TopFromTypes { get; init; } = [];
+
+    /// <summary>Top target entity types with counts (max 5).</summary>
+    public List<TypeCount> TopToTypes { get; init; } = [];
+
+    /// <summary>One example edge for context.</summary>
+    public EdgeSample? Sample { get; init; }
+}
+
+public class TypeCount
+{
+    public string Type { get; init; } = string.Empty;
+    public long Count { get; init; }
+}
+
+public class EdgeSample
+{
+    public int FromId { get; init; }
+    public string FromName { get; init; } = string.Empty;
+    public int ToId { get; init; }
+    public string ToName { get; init; } = string.Empty;
+}
+
+public class BrowseEdgeLabelsResult
+{
+    public List<EdgeLabelStatsDto> Items { get; init; } = [];
+    public long Total { get; init; }
+    public int Page { get; init; }
+    public int PageSize { get; init; }
 }

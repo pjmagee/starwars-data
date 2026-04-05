@@ -20,6 +20,19 @@
         "chromium"
       ]
     },
+    "mudmcp": {
+      "type": "stdio",
+      "command": "dotnet",
+      "args": [
+       "run",
+				"--project",
+				"D:\\Projects\\MudMCP\\src\\MudBlazor.Mcp\\MudBlazor.Mcp.csproj",
+				"--",
+				"--stdio",
+				"--version",
+				"9.2.0"
+      ]
+    },  
     "mediawiki-mcp-server": {
       "command": "npx",
       "args": [

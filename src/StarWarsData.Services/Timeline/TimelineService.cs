@@ -17,12 +17,7 @@ public class TimelineService
     readonly IMongoDatabase _timelineEventsDb;
     readonly IMongoClient _mongoClient;
 
-    public TimelineService(
-        ILogger<TimelineService> logger,
-        IOptions<SettingsOptions> settingsOptions,
-        IMongoClient mongoClient,
-        TemplateHelper templateHelper
-    )
+    public TimelineService(ILogger<TimelineService> logger, IOptions<SettingsOptions> settingsOptions, IMongoClient mongoClient, TemplateHelper templateHelper)
     {
         _logger = logger;
         _templateHelper = templateHelper;
@@ -47,9 +42,7 @@ public class TimelineService
         var availableCollections = await GetTimelineCategories();
 
         // If templates are specified, filter collections; otherwise use all
-        var collectionsToQuery = templates.Any()
-            ? availableCollections.Where(c => templates.Contains(c)).ToList()
-            : availableCollections;
+        var collectionsToQuery = templates.Any() ? availableCollections.Where(c => templates.Contains(c)).ToList() : availableCollections;
 
         if (!collectionsToQuery.Any())
             return new GroupedTimelineResult
@@ -60,49 +53,27 @@ public class TimelineService
                 Items = [],
             };
 
-        // Build a BSON match filter
+        // Build a BSON match filter.
+        // Enums are stored as strings across this app via the global
+        // EnumRepresentationConvention(BsonType.String) registered in Program.cs
+        // — filter values must be the enum names ("Canon", "InUniverse", "Bby"),
+        // not the underlying ints.
         var matchConditions = new BsonArray();
 
-        // Continuity filter (stored as int in timeline events DB, no BsonRepresentation string override)
+        // Continuity filter
         if (continuity != null && continuity != Continuity.Both)
         {
-            matchConditions.Add(
-                new BsonDocument(
-                    "Continuity",
-                    new BsonDocument(
-                        "$in",
-                        new BsonArray
-                        {
-                            (int)continuity.Value,
-                            (int)Continuity.Both,
-                            (int)Continuity.Unknown,
-                        }
-                    )
-                )
-            );
+            matchConditions.Add(new BsonDocument("Continuity", new BsonDocument("$in", new BsonArray { continuity.Value.ToString(), Continuity.Both.ToString(), Continuity.Unknown.ToString() })));
         }
 
         // Universe filter
         if (universe != null)
         {
-            matchConditions.Add(
-                new BsonDocument(
-                    "Universe",
-                    new BsonDocument(
-                        "$in",
-                        new BsonArray { (int)universe.Value, (int)Universe.Unknown }
-                    )
-                )
-            );
+            matchConditions.Add(new BsonDocument("Universe", new BsonDocument("$in", new BsonArray { universe.Value.ToString(), Universe.Unknown.ToString() })));
         }
 
         // Year range filter
-        if (
-            yearFrom.HasValue
-            && yearFromDemarcation.HasValue
-            && yearTo.HasValue
-            && yearToDemarcation.HasValue
-        )
+        if (yearFrom.HasValue && yearFromDemarcation.HasValue && yearTo.HasValue && yearToDemarcation.HasValue)
         {
             var linearFrom = ToLinearYear(yearFrom.Value, yearFromDemarcation.Value);
             var linearTo = ToLinearYear(yearTo.Value, yearToDemarcation.Value);
@@ -111,12 +82,7 @@ public class TimelineService
 
             var linearYearExpr = new BsonDocument(
                 "$cond",
-                new BsonArray
-                {
-                    new BsonDocument("$eq", new BsonArray { "$Demarcation", "Bby" }),
-                    new BsonDocument("$multiply", new BsonArray { "$Year", -1 }),
-                    "$Year",
-                }
+                new BsonArray { new BsonDocument("$eq", new BsonArray { "$Demarcation", "Bby" }), new BsonDocument("$multiply", new BsonArray { "$Year", -1 }), "$Year" }
             );
 
             matchConditions.Add(
@@ -138,12 +104,7 @@ public class TimelineService
         // Search filter
         if (!string.IsNullOrWhiteSpace(search))
         {
-            matchConditions.Add(
-                new BsonDocument(
-                    "Title",
-                    new BsonDocument("$regex", new BsonRegularExpression(search, "i"))
-                )
-            );
+            matchConditions.Add(new BsonDocument("Title", new BsonDocument("$regex", new BsonRegularExpression(search, "i"))));
         }
 
         var matchFilter = matchConditions.Count switch
@@ -164,9 +125,7 @@ public class TimelineService
         // Union all other collections into the base
         for (int i = 1; i < collectionsToQuery.Count; i++)
         {
-            pipeline.Add(
-                new BsonDocument("$unionWith", Collections.TimelinePrefix + collectionsToQuery[i])
-            );
+            pipeline.Add(new BsonDocument("$unionWith", Collections.TimelinePrefix + collectionsToQuery[i]));
         }
 
         // Match (filter)
@@ -179,15 +138,7 @@ public class TimelineService
                 "$addFields",
                 new BsonDocument(
                     "_linearYear",
-                    new BsonDocument(
-                        "$cond",
-                        new BsonArray
-                        {
-                            new BsonDocument("$eq", new BsonArray { "$Demarcation", "Bby" }),
-                            new BsonDocument("$multiply", new BsonArray { "$Year", -1 }),
-                            "$Year",
-                        }
-                    )
+                    new BsonDocument("$cond", new BsonArray { new BsonDocument("$eq", new BsonArray { "$Demarcation", "Bby" }), new BsonDocument("$multiply", new BsonArray { "$Year", -1 }), "$Year" })
                 )
             )
         );
@@ -206,20 +157,13 @@ public class TimelineService
                     },
                     {
                         "data",
-                        new BsonArray
-                        {
-                            new BsonDocument("$skip", (page - 1) * pageSize),
-                            new BsonDocument("$limit", pageSize),
-                            new BsonDocument("$project", new BsonDocument("_linearYear", 0)),
-                        }
+                        new BsonArray { new BsonDocument("$skip", (page - 1) * pageSize), new BsonDocument("$limit", pageSize), new BsonDocument("$project", new BsonDocument("_linearYear", 0)) }
                     },
                 }
             )
         );
 
-        var result = await baseCollection
-            .Aggregate<BsonDocument>(pipeline.ToArray())
-            .FirstOrDefaultAsync();
+        var result = await baseCollection.Aggregate<BsonDocument>(pipeline.ToArray()).FirstOrDefaultAsync();
 
         if (result == null)
             return new GroupedTimelineResult
@@ -230,21 +174,12 @@ public class TimelineService
                 Items = [],
             };
 
-        var totalCount =
-            result["total"].AsBsonArray.Count > 0
-                ? result["total"].AsBsonArray[0].AsBsonDocument["count"].AsInt32
-                : 0;
+        var totalCount = result["total"].AsBsonArray.Count > 0 ? result["total"].AsBsonArray[0].AsBsonDocument["count"].AsInt32 : 0;
 
-        var pagedEvents = result["data"]
-            .AsBsonArray.Select(doc =>
-                BsonSerializer.Deserialize<TimelineEvent>(doc.AsBsonDocument)
-            )
-            .ToList();
+        var pagedEvents = result["data"].AsBsonArray.Select(doc => BsonSerializer.Deserialize<TimelineEvent>(doc.AsBsonDocument)).ToList();
 
         // Group by year
-        var groupedByYear = pagedEvents
-            .GroupBy(x => x.DisplayYear)
-            .Select(x => new GroupedTimelines { Events = x.ToList(), Year = x.Key });
+        var groupedByYear = pagedEvents.GroupBy(x => x.DisplayYear).Select(x => new GroupedTimelines { Events = x.ToList(), Year = x.Key });
 
         return new GroupedTimelineResult
         {
@@ -259,40 +194,21 @@ public class TimelineService
     {
         // Get all collection names from timeline-events db, these represent the templates/categories
         var collections = await GetTimelineCategories();
-        return collections
-            .Select(_templateHelper.GetTemplateFromUri)
-            .Distinct()
-            .OrderBy(x => x)
-            .ToList();
+        return collections.Select(_templateHelper.GetTemplateFromUri).Distinct().OrderBy(x => x).ToList();
     }
 
-    public async Task<GroupedTimelineResult> GetCategoryTimelineEvents(
-        string category,
-        Continuity? continuity = null,
-        Universe? universe = null,
-        int page = 1,
-        int pageSize = 20
-    )
+    public async Task<GroupedTimelineResult> GetCategoryTimelineEvents(string category, Continuity? continuity = null, Universe? universe = null, int page = 1, int pageSize = 20)
     {
-        var categoryCollection = _timelineEventsDb.GetCollection<TimelineEvent>(
-            Collections.TimelinePrefix + category
-        );
+        var categoryCollection = _timelineEventsDb.GetCollection<TimelineEvent>(Collections.TimelinePrefix + category);
 
         // Build combined filter
         var continuityFilter = BuildContinuityFilter(continuity);
         var universeFilter = BuildUniverseFilter(universe);
         var combinedFilter = Builders<TimelineEvent>.Filter.And(continuityFilter, universeFilter);
 
-        var sort = Builders<TimelineEvent>
-            .Sort.Ascending(x => x.Demarcation)
-            .Ascending(x => x.Year);
+        var sort = Builders<TimelineEvent>.Sort.Ascending(x => x.Demarcation).Ascending(x => x.Year);
 
-        var timelineEventDocuments = await categoryCollection
-            .Find(combinedFilter)
-            .Sort(sort)
-            .Skip((page - 1) * pageSize)
-            .Limit(pageSize)
-            .ToListAsync();
+        var timelineEventDocuments = await categoryCollection.Find(combinedFilter).Sort(sort).Skip((page - 1) * pageSize).Limit(pageSize).ToListAsync();
 
         var timelineEvents = timelineEventDocuments
             .Select(doc => new TimelineEvent
@@ -310,9 +226,7 @@ public class TimelineService
 
         timelineEvents.Sort();
 
-        var groupedByYear = timelineEvents
-            .GroupBy(x => x.DisplayYear)
-            .Select(x => new GroupedTimelines { Events = x.ToList(), Year = x.Key });
+        var groupedByYear = timelineEvents.GroupBy(x => x.DisplayYear).Select(x => new GroupedTimelines { Events = x.ToList(), Year = x.Key });
 
         var total = await categoryCollection.CountDocumentsAsync(combinedFilter);
 
@@ -330,10 +244,7 @@ public class TimelineService
         if (continuity == null || continuity == Continuity.Both)
         {
             // Show both Canon and Legends content
-            return Builders<TimelineEvent>.Filter.In(
-                x => x.Continuity,
-                [Continuity.Canon, Continuity.Legends, Continuity.Both]
-            );
+            return Builders<TimelineEvent>.Filter.In(x => x.Continuity, [Continuity.Canon, Continuity.Legends, Continuity.Both]);
         }
 
         // Filter by specific continuity
@@ -350,52 +261,46 @@ public class TimelineService
 
         // Include Unknown documents alongside the requested universe,
         // since most timeline events don't have Universe explicitly set.
-        return Builders<TimelineEvent>.Filter.In(
-            x => x.Universe,
-            [universe.Value, Universe.Unknown]
-        );
+        return Builders<TimelineEvent>.Filter.In(x => x.Universe, [universe.Value, Universe.Unknown]);
     }
 
     public async Task<List<string>> GetTimelineCategories()
     {
         var names = await _timelineEventsDb.ListCollectionNamesAsync();
         var allNames = await names.ToListAsync();
-        return allNames
-            .Where(n => n.StartsWith(Collections.TimelinePrefix))
-            .Select(n => n[Collections.TimelinePrefix.Length..])
-            .OrderBy(x => x)
-            .ToList();
+        return allNames.Where(n => n.StartsWith(Collections.TimelinePrefix)).Select(n => n[Collections.TimelinePrefix.Length..]).OrderBy(x => x).ToList();
     }
 
     /// <summary>
     /// Load eras from the Era collection in the timeline events database.
     /// Groups documents by title to build start/end year ranges.
+    /// When <paramref name="continuity"/> is set to Canon or Legends, only eras
+    /// matching that continuity (plus Both/Unknown as shared) are returned.
     /// </summary>
-    public async Task<List<Era>> GetErasAsync(CancellationToken ct = default)
+    public async Task<List<Era>> GetErasAsync(Continuity? continuity = null, CancellationToken ct = default)
     {
-        var collectionNames = await _timelineEventsDb.ListCollectionNamesAsync(
-            cancellationToken: ct
-        );
-        if (!collectionNames.ToList().Contains(Collections.TimelinePrefix + "Era"))
+        var collectionNames = await _timelineEventsDb.ListCollectionNamesAsync(cancellationToken: ct);
+        if (!collectionNames.ToList().Contains(Collections.TimelinePrefix + KgNodeTypes.Era))
             return [];
 
-        var eraCollection = _timelineEventsDb.GetCollection<TimelineEvent>(
-            Collections.TimelinePrefix + "Era"
-        );
-        var docs = await eraCollection
-            .Find(Builders<TimelineEvent>.Filter.Ne(e => e.Year, null))
-            .ToListAsync(ct);
+        var eraCollection = _timelineEventsDb.GetCollection<TimelineEvent>(Collections.TimelinePrefix + KgNodeTypes.Era);
 
-        var grouped = docs.GroupBy(e => StripLegendsSuffix(e.Title ?? ""))
-            .Where(g => !string.IsNullOrWhiteSpace(g.Key));
+        // Strongly-typed filter — routes through the serializer and correctly
+        // matches the string representation stored via EnumRepresentationConvention.
+        var filter = Builders<TimelineEvent>.Filter.Ne(e => e.Year, null);
+        if (continuity is not null && continuity != Continuity.Both)
+        {
+            filter &= Builders<TimelineEvent>.Filter.In(e => e.Continuity, [continuity.Value, Continuity.Both, Continuity.Unknown]);
+        }
+
+        var docs = await eraCollection.Find(filter).ToListAsync(ct);
+
+        var grouped = docs.GroupBy(e => StripLegendsSuffix(e.Title ?? "")).Where(g => !string.IsNullOrWhiteSpace(g.Key));
 
         var eras = new List<Era>();
         foreach (var group in grouped)
         {
-            var entries = group
-                .Select(e => (year: e.Year!.Value, dem: e.Demarcation))
-                .OrderBy(e => e.dem == Demarcation.Bby ? -e.year : e.year)
-                .ToList();
+            var entries = group.Select(e => (year: e.Year!.Value, dem: e.Demarcation)).OrderBy(e => e.dem == Demarcation.Bby ? -e.year : e.year).ToList();
 
             var start = entries.First();
             var end = entries.Last();
@@ -413,37 +318,24 @@ public class TimelineService
         }
 
         // Sort chronologically
-        eras.Sort(
-            (a, b) =>
-                ToLinearYear(a.StartYear, a.StartDemarcation)
-                    .CompareTo(ToLinearYear(b.StartYear, b.StartDemarcation))
-        );
+        eras.Sort((a, b) => ToLinearYear(a.StartYear, a.StartDemarcation).CompareTo(ToLinearYear(b.StartYear, b.StartDemarcation)));
 
         return eras;
     }
 
-    static string StripLegendsSuffix(string title) =>
-        title.EndsWith("/Legends", StringComparison.OrdinalIgnoreCase)
-            ? title[..^"/Legends".Length]
-            : title;
+    static string StripLegendsSuffix(string title) => title.EndsWith("/Legends", StringComparison.OrdinalIgnoreCase) ? title[..^"/Legends".Length] : title;
 
     /// <summary>
     /// Converts a year + demarcation into a linear value where BBY is negative and ABY is positive.
     /// e.g. 19 BBY = -19, 4 ABY = 4, 0 BBY = 0
     /// </summary>
-    static double ToLinearYear(float year, Demarcation demarcation) =>
-        demarcation == Demarcation.Bby ? -year : year;
+    static double ToLinearYear(float year, Demarcation demarcation) => demarcation == Demarcation.Bby ? -year : year;
 
     /// <summary>
     /// Builds a MongoDB filter that matches timeline events within a year range.
     /// Uses the $expr operator to compute a linear year from Demarcation and Year fields.
     /// </summary>
-    static FilterDefinition<TimelineEvent> BuildYearRangeFilter(
-        float fromYear,
-        Demarcation fromDemarcation,
-        float toYear,
-        Demarcation toDemarcation
-    )
+    static FilterDefinition<TimelineEvent> BuildYearRangeFilter(float fromYear, Demarcation fromDemarcation, float toYear, Demarcation toDemarcation)
     {
         var linearFrom = ToLinearYear(fromYear, fromDemarcation);
         var linearTo = ToLinearYear(toYear, toDemarcation);
@@ -457,12 +349,7 @@ public class TimelineService
         // then checks linearFrom <= linearYear <= linearTo
         var linearYearExpr = new BsonDocument(
             "$cond",
-            new BsonArray
-            {
-                new BsonDocument("$eq", new BsonArray { "$Demarcation", "Bby" }),
-                new BsonDocument("$multiply", new BsonArray { "$Year", -1 }),
-                "$Year",
-            }
+            new BsonArray { new BsonDocument("$eq", new BsonArray { "$Demarcation", "Bby" }), new BsonDocument("$multiply", new BsonArray { "$Year", -1 }), "$Year" }
         );
 
         var expr = new BsonDocument(

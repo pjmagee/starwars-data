@@ -1,9 +1,7 @@
 using System.ClientModel;
 using Microsoft.Agents.AI;
 using Microsoft.Agents.AI.Hosting.AGUI.AspNetCore;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.AI;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using ModelContextProtocol.Client;
 using MongoDB.Bson;
@@ -21,24 +19,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
 BsonSerializer.RegisterIdGenerator(typeof(Guid), GuidGenerator.Instance);
-ConventionRegistry.Register(
-    "EnumAsString",
-    new ConventionPack { new EnumRepresentationConvention(BsonType.String) },
-    _ => true
-);
+ConventionRegistry.Register("EnumAsString", new ConventionPack { new EnumRepresentationConvention(BsonType.String) }, _ => true);
 
 builder.AddServiceDefaults();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddAGUI();
 
+// Response caching — required by [ResponseCache(VaryByQueryKeys = ...)] on
+// GalaxyMapUnifiedController. The UseResponseCaching() call below must run
+// BEFORE MapControllers so the middleware can intercept controller responses.
+builder.Services.AddResponseCaching();
+
 builder
     .Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .AddJsonFile(
-        $"appsettings.{builder.Environment.EnvironmentName}.json",
-        optional: true,
-        reloadOnChange: true
-    )
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables(prefix: "ASPNETCORE_")
     .AddEnvironmentVariables();
 
@@ -89,9 +84,7 @@ builder
     {
         var settingsOptions = sp.GetRequiredService<IOptions<SettingsOptions>>();
         var openAiClient = sp.GetRequiredService<OpenAIClient>();
-        var inner = new ChatClientBuilder(
-            openAiClient.GetChatClient(settingsOptions.Value.CharacterTimelineModel).AsIChatClient()
-        ).Build();
+        var inner = new ChatClientBuilder(openAiClient.GetChatClient(settingsOptions.Value.CharacterTimelineModel).AsIChatClient()).Build();
         return new CharacterTimelineChatClient(inner);
     })
     .AddScoped<CharacterTimelineService>()
@@ -99,10 +92,7 @@ builder
     .AddSingleton<OpenAIClient>(serviceProvider =>
     {
         var settingsOptions = serviceProvider.GetRequiredService<IOptions<SettingsOptions>>();
-        return new OpenAIClient(
-            new ApiKeyCredential(settingsOptions.Value.OpenAiKey),
-            new OpenAIClientOptions { NetworkTimeout = TimeSpan.FromMinutes(5) }
-        );
+        return new OpenAIClient(new ApiKeyCredential(settingsOptions.Value.OpenAiKey), new OpenAIClientOptions { NetworkTimeout = TimeSpan.FromMinutes(5) });
     })
     .AddSingleton<CollectionFilters>()
     .AddSingleton<KnowledgeGraphQueryService>()
@@ -118,17 +108,9 @@ builder
         return new GraphRAGToolkit(kgService, search, mongoClient, settings.DatabaseName);
     })
     .AddSingleton<IChatClient>(sp =>
-        new ChatClientBuilder(
-            sp.GetRequiredService<OpenAIClient>().GetChatClient("gpt-4o-mini").AsIChatClient()
-        )
-            .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
-            .Build()
+        new ChatClientBuilder(sp.GetRequiredService<OpenAIClient>().GetChatClient("gpt-4o-mini").AsIChatClient()).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build()
     )
-    .AddSingleton<IEmbeddingGenerator<string, Embedding<float>>>(sp =>
-        sp.GetRequiredService<OpenAIClient>()
-            .GetEmbeddingClient("text-embedding-3-small")
-            .AsIEmbeddingGenerator()
-    )
+    .AddSingleton<IEmbeddingGenerator<string, Embedding<float>>>(sp => sp.GetRequiredService<OpenAIClient>().GetEmbeddingClient("text-embedding-3-small").AsIEmbeddingGenerator())
     .AddKeyedSingleton<McpClient?>(
         "mongodb-mcp",
         (sp, _) =>
@@ -145,26 +127,15 @@ builder
             try
             {
                 var endpoint = new Uri(new Uri(mcpUrl.TrimEnd('/')), "/mcp");
-                var transport = new HttpClientTransport(
-                    new HttpClientTransportOptions { Endpoint = endpoint }
-                );
+                var transport = new HttpClientTransport(new HttpClientTransportOptions { Endpoint = endpoint });
                 logger.LogInformation("Initializing MongoDB MCP client at {Endpoint}...", endpoint);
-                var client = McpClient
-                    .CreateAsync(
-                        transport,
-                        new McpClientOptions { InitializationTimeout = TimeSpan.FromMinutes(2) }
-                    )
-                    .GetAwaiter()
-                    .GetResult();
+                var client = McpClient.CreateAsync(transport, new McpClientOptions { InitializationTimeout = TimeSpan.FromMinutes(2) }).GetAwaiter().GetResult();
                 logger.LogInformation("MongoDB MCP client initialized.");
                 return client;
             }
             catch (Exception ex)
             {
-                logger.LogWarning(
-                    ex,
-                    "Failed to initialize MongoDB MCP client — MCP tools disabled."
-                );
+                logger.LogWarning(ex, "Failed to initialize MongoDB MCP client — MCP tools disabled.");
                 return null;
             }
         }
@@ -176,50 +147,33 @@ builder
         var mcpClient = sp.GetKeyedService<McpClient>("mongodb-mcp");
         var componentToolkit = new ComponentToolkit();
         var mongoClient = sp.GetRequiredService<IMongoClient>();
-        var dataExplorer = new DataExplorerToolkit(
-            mongoClient,
-            sp.GetRequiredService<IOptions<SettingsOptions>>()
-        );
+        var dataExplorer = new DataExplorerToolkit(mongoClient, sp.GetRequiredService<IOptions<SettingsOptions>>());
 
         // Wiki text search — registered directly as a tool so the model sees it
         // (UseAIContextProviders does not reliably surface tools via AGUI streaming)
-        var pagesCollection = mongoClient
-            .GetDatabase(settings.DatabaseName)
-            .GetCollection<BsonDocument>(Collections.Pages);
-        var wikiSearchProvider = new StarWarsWikiSearchProvider(
-            pagesCollection,
-            sp.GetRequiredService<ILoggerFactory>()
-        );
+        var pagesCollection = mongoClient.GetDatabase(settings.DatabaseName).GetCollection<BsonDocument>(Collections.Pages);
+        var wikiSearchProvider = new StarWarsWikiSearchProvider(pagesCollection, sp.GetRequiredService<ILoggerFactory>());
 
         var graphRAG = sp.GetRequiredService<GraphRAGToolkit>();
+        var kgAnalytics = new KGAnalyticsToolkit(sp.GetRequiredService<KnowledgeGraphQueryService>(), mongoClient, settings.DatabaseName);
 
         var tools = new List<AITool>();
         tools.AddRange(componentToolkit.AsAIFunctions());
         tools.AddRange(dataExplorer.AsAIFunctions());
         tools.AddRange(graphRAG.AsAIFunctions());
+        tools.AddRange(kgAnalytics.AsAIFunctions());
         tools.Add(
             AIFunctionFactory.Create(
                 (string query, CancellationToken ct) => wikiSearchProvider.SearchAsync(query, ct),
                 "keyword_search",
-                "Keyword search over wiki page titles and content. Fast, no AI cost. "
-                    + "Best for exact name lookups. For why/how/explain questions, use semantic_search instead."
+                "Keyword search over wiki page titles and content. Fast, no AI cost. " + "Best for exact name lookups. For why/how/explain questions, use semantic_search instead."
             )
         );
         if (mcpClient is not null)
         {
-            var allowedMcpTools = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-            {
-                "find",
-                "aggregate",
-                "count",
-            };
+            var allowedMcpTools = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "find", "aggregate", "count" };
             var mcpTools = mcpClient.ListToolsAsync().GetAwaiter().GetResult();
-            tools.AddRange(
-                mcpTools
-                    .Select(t => t.WithName(t.Name.Replace('-', '_')))
-                    .Where(t => allowedMcpTools.Contains(t.Name))
-                    .Cast<AITool>()
-            );
+            tools.AddRange(mcpTools.Select(t => t.WithName(t.Name.Replace('-', '_'))).Where(t => allowedMcpTools.Contains(t.Name)).Cast<AITool>());
         }
 
         var instructions = AgentPrompt.Instructions;
@@ -227,26 +181,15 @@ builder
         // BYOK chat client — wraps the server OpenAI client and swaps to user's key when available
         var byokClient = sp.GetRequiredService<ByokChatClient>();
 
-        var chatClient = new ChatClientBuilder(byokClient)
-            .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
-            .Build();
+        var chatClient = new ChatClientBuilder(byokClient).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build();
 
         // Lightweight classifier client for topic guardrail (always uses server key)
-        var classifierClient = new ChatClientBuilder(
-            openAiClient.GetChatClient("gpt-4o-mini").AsIChatClient()
-        )
-            .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
-            .Build();
+        var classifierClient = new ChatClientBuilder(openAiClient.GetChatClient("gpt-4o-mini").AsIChatClient()).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build();
 
         var aiStatus = sp.GetRequiredService<OpenAiStatusService>();
-        var guardrailLogger = sp.GetRequiredService<ILoggerFactory>()
-            .CreateLogger("StarWarsTopicGuardrail");
+        var guardrailLogger = sp.GetRequiredService<ILoggerFactory>().CreateLogger("StarWarsTopicGuardrail");
 
-        return chatClient
-            .AsAIAgent(instructions: instructions, tools: tools)
-            .AsBuilder()
-            .UseStarWarsTopicGuardrail(classifierClient, aiStatus, guardrailLogger)
-            .Build();
+        return chatClient.AsAIAgent(instructions: instructions, tools: tools).AsBuilder().UseStarWarsTopicGuardrail(classifierClient, aiStatus, guardrailLogger).Build();
     });
 
 builder.Services.AddCors(options =>
@@ -266,6 +209,12 @@ if (app.Environment.IsDevelopment())
 app.UseCors();
 
 app.UseHttpsRedirection();
+
+// Response caching must be wired before the endpoint executes so the controller's
+// [ResponseCache(VaryByQueryKeys = ...)] attribute can work. Without it, the
+// attribute throws InvalidOperationException at request time.
+app.UseResponseCaching();
+
 app.MapControllers();
 app.MapGet(
     "/api/ai/status",
@@ -280,10 +229,7 @@ app.MapGet(
 app.Use(
     async (context, next) =>
     {
-        if (
-            context.Request.Path.StartsWithSegments("/kernel/stream")
-            && context.Request.Method == "POST"
-        )
+        if (context.Request.Path.StartsWithSegments("/kernel/stream") && context.Request.Method == "POST")
         {
             var rateLimiter = context.RequestServices.GetRequiredService<AskRateLimiter>();
             var userSettings = context.RequestServices.GetRequiredService<UserSettingsService>();
@@ -298,32 +244,18 @@ app.Use(
             }
 
             // BYOK users and admins skip rate limiting entirely
-            var isAdmin =
-                context
-                    .Request.Headers["X-User-Roles"]
-                    .FirstOrDefault()
-                    ?.Split(',', StringSplitOptions.TrimEntries)
-                    .Contains("admin", StringComparer.OrdinalIgnoreCase) ?? false;
+            var isAdmin = context.Request.Headers["X-User-Roles"].FirstOrDefault()?.Split(',', StringSplitOptions.TrimEntries).Contains("admin", StringComparer.OrdinalIgnoreCase) ?? false;
 
             if (!hasByok && !isAdmin)
             {
-                var clientIp =
-                    context
-                        .Request.Headers["X-Forwarded-For"]
-                        .FirstOrDefault()
-                        ?.Split(',')[0]
-                        .Trim()
-                    ?? context.Connection.RemoteIpAddress?.ToString()
-                    ?? "unknown";
+                var clientIp = context.Request.Headers["X-Forwarded-For"].FirstOrDefault()?.Split(',')[0].Trim() ?? context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
                 var clientId = userId ?? $"anon:{clientIp}";
                 var result = rateLimiter.TryAcquire(clientId, isAuthenticated);
 
                 if (!result.Allowed)
                 {
                     context.Response.StatusCode = 429;
-                    context.Response.Headers["Retry-After"] = (
-                        (int)(result.RetryAfter?.TotalSeconds ?? 1800)
-                    ).ToString();
+                    context.Response.Headers["Retry-After"] = ((int)(result.RetryAfter?.TotalSeconds ?? 1800)).ToString();
                     await context.Response.WriteAsJsonAsync(
                         new
                         {

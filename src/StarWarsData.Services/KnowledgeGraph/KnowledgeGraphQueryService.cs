@@ -5,6 +5,7 @@ using MongoDB.Driver;
 using StarWarsData.Models;
 using StarWarsData.Models.Entities;
 using StarWarsData.Models.Queries;
+using StarWarsData.Services.KnowledgeGraph.Definitions;
 
 namespace StarWarsData.Services;
 
@@ -12,53 +13,25 @@ namespace StarWarsData.Services;
 /// Read-only query service for the knowledge graph (kg.nodes + kg.edges).
 /// Powers the Graph Explorer page, Knowledge Graph page, and render_graph tool.
 /// </summary>
-public class KnowledgeGraphQueryService(
-    IMongoClient mongoClient,
-    IOptions<SettingsOptions> settings
-)
+public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<SettingsOptions> settings)
 {
-    readonly IMongoCollection<GraphNode> _nodes = mongoClient
-        .GetDatabase(settings.Value.DatabaseName)
-        .GetCollection<GraphNode>(Collections.KgNodes);
+    readonly IMongoCollection<GraphNode> _nodes = mongoClient.GetDatabase(settings.Value.DatabaseName).GetCollection<GraphNode>(Collections.KgNodes);
 
-    readonly IMongoCollection<RelationshipEdge> _edges = mongoClient
-        .GetDatabase(settings.Value.DatabaseName)
-        .GetCollection<RelationshipEdge>(Collections.KgEdges);
+    readonly IMongoCollection<RelationshipEdge> _edges = mongoClient.GetDatabase(settings.Value.DatabaseName).GetCollection<RelationshipEdge>(Collections.KgEdges);
 
     public async Task<List<string>> GetEntityTypesAsync(CancellationToken ct)
     {
-        var types = await _nodes.DistinctAsync(
-            new StringFieldDefinition<GraphNode, string>("type"),
-            FilterDefinition<GraphNode>.Empty,
-            cancellationToken: ct
-        );
-        return (await types.ToListAsync(ct))
-            .Where(t => !string.IsNullOrEmpty(t))
-            .OrderBy(t => t)
-            .ToList();
+        var types = await _nodes.DistinctAsync(new StringFieldDefinition<GraphNode, string>(GraphNodeBsonFields.Type), FilterDefinition<GraphNode>.Empty, cancellationToken: ct);
+        return (await types.ToListAsync(ct)).Where(t => !string.IsNullOrEmpty(t)).OrderBy(t => t).ToList();
     }
 
     public async Task<List<string>> GetEdgeLabelsAsync(CancellationToken ct)
     {
-        var labels = await _edges.DistinctAsync(
-            new StringFieldDefinition<RelationshipEdge, string>("label"),
-            FilterDefinition<RelationshipEdge>.Empty,
-            cancellationToken: ct
-        );
-        return (await labels.ToListAsync(ct))
-            .Where(l => !string.IsNullOrEmpty(l))
-            .OrderBy(l => l)
-            .ToList();
+        var labels = await _edges.DistinctAsync(new StringFieldDefinition<RelationshipEdge, string>(RelationshipEdgeBsonFields.Label), FilterDefinition<RelationshipEdge>.Empty, cancellationToken: ct);
+        return (await labels.ToListAsync(ct)).Where(l => !string.IsNullOrEmpty(l)).OrderBy(l => l).ToList();
     }
 
-    public async Task<BrowseEntitiesResult> BrowseAsync(
-        string? type,
-        string? q,
-        int page,
-        int pageSize,
-        string? continuity,
-        CancellationToken ct
-    )
+    public async Task<BrowseEntitiesResult> BrowseAsync(string? type, string? q, int page, int pageSize, string? continuity, string? universe, CancellationToken ct)
     {
         if (pageSize > 100)
             pageSize = 100;
@@ -68,16 +41,13 @@ public class KnowledgeGraphQueryService(
         if (!string.IsNullOrWhiteSpace(type))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Type, type));
         if (!string.IsNullOrWhiteSpace(q))
-            filters.Add(
-                Builders<GraphNode>.Filter.Regex(n => n.Name, new BsonRegularExpression(q, "i"))
-            );
+            filters.Add(Builders<GraphNode>.Filter.Regex(n => n.Name, new BsonRegularExpression(q, "i")));
         if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
+        if (universe is not null && Enum.TryParse<Universe>(universe, true, out var uni))
+            filters.Add(Builders<GraphNode>.Filter.In(n => n.Universe, [uni, Universe.Unknown]));
 
-        var filter =
-            filters.Count > 0
-                ? Builders<GraphNode>.Filter.And(filters)
-                : FilterDefinition<GraphNode>.Empty;
+        var filter = filters.Count > 0 ? Builders<GraphNode>.Filter.And(filters) : FilterDefinition<GraphNode>.Empty;
 
         var total = await _nodes.CountDocumentsAsync(filter, cancellationToken: ct);
         var items = await _nodes
@@ -103,22 +73,16 @@ public class KnowledgeGraphQueryService(
         };
     }
 
-    public async Task<List<EntitySearchDto>> SearchAsync(
-        string q,
-        string? type,
-        string? continuity,
-        CancellationToken ct
-    )
+    public async Task<List<EntitySearchDto>> SearchAsync(string q, string? type, string? continuity, string? universe, CancellationToken ct)
     {
-        var filters = new List<FilterDefinition<GraphNode>>
-        {
-            Builders<GraphNode>.Filter.Regex(n => n.Name, new BsonRegularExpression(q, "i")),
-        };
+        var filters = new List<FilterDefinition<GraphNode>> { Builders<GraphNode>.Filter.Regex(n => n.Name, new BsonRegularExpression(q, "i")) };
 
         if (!string.IsNullOrWhiteSpace(type))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Type, type));
         if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
+        if (universe is not null && Enum.TryParse<Universe>(universe, true, out var uni))
+            filters.Add(Builders<GraphNode>.Filter.In(n => n.Universe, [uni, Universe.Unknown]));
 
         return await _nodes
             .Find(Builders<GraphNode>.Filter.And(filters))
@@ -134,21 +98,84 @@ public class KnowledgeGraphQueryService(
             .ToListAsync(ct);
     }
 
-    public async Task<List<string>> GetLabelsForEntityAsync(int pageId, CancellationToken ct)
+    /// <summary>
+    /// Returns distinct relationship labels for an entity plus the node's type
+    /// and a pre-computed "default enabled" subset for the UI. Includes both:
+    /// <list type="bullet">
+    ///   <item>Outgoing edges: the label as stored (entity is the source).</item>
+    ///   <item>Incoming edges: the edge label mapped to its reverse from
+    ///     <see cref="FieldSemantics"/>, so they read naturally from the entity's
+    ///     perspective. For example, a Battle → commanded_by → Character edge
+    ///     surfaces on the Character as <c>commanded</c>.</item>
+    /// </list>
+    /// Inbound edges whose label has no registered reverse in <see cref="FieldSemantics"/>
+    /// are intentionally dropped — without a known reverse we cannot present them from
+    /// this node's perspective coherently, and they remain visible on the source node's
+    /// outgoing edges.
+    /// </summary>
+    public async Task<EntityLabelsResult> GetLabelsForEntityAsync(int pageId, CancellationToken ct)
     {
-        var pipeline = new[]
-        {
-            new BsonDocument("$match", new BsonDocument("fromId", pageId)),
-            new BsonDocument("$group", new BsonDocument("_id", "$label")),
-            new BsonDocument("$sort", new BsonDocument("_id", 1)),
-        };
+        var edgesRaw = _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges);
 
-        var results = await _edges
-            .Database.GetCollection<BsonDocument>(Collections.KgEdges)
-            .Aggregate<BsonDocument>(pipeline)
+        // Fetch the node type in parallel with the edge aggregations — we need it
+        // to compute default-enabled labels via DefaultLabelSelector.
+        var typeTask = _nodes.Find(n => n.PageId == pageId).Project(n => n.Type).FirstOrDefaultAsync(ct);
+
+        // Distinct outgoing labels (entity as source)
+        var outgoingTask = edgesRaw
+            .Aggregate<BsonDocument>(
+                new[]
+                {
+                    new BsonDocument("$match", new BsonDocument(RelationshipEdgeBsonFields.FromId, pageId)),
+                    new BsonDocument("$group", new BsonDocument(MongoFields.Id, "$" + RelationshipEdgeBsonFields.Label)),
+                }
+            )
             .ToListAsync(ct);
 
-        return results.Select(d => d["_id"].AsString).ToList();
+        // Distinct incoming labels (entity as target)
+        var incomingTask = edgesRaw
+            .Aggregate<BsonDocument>(
+                new[]
+                {
+                    new BsonDocument("$match", new BsonDocument(RelationshipEdgeBsonFields.ToId, pageId)),
+                    new BsonDocument("$group", new BsonDocument(MongoFields.Id, "$" + RelationshipEdgeBsonFields.Label)),
+                }
+            )
+            .ToListAsync(ct);
+
+        await Task.WhenAll(typeTask, outgoingTask, incomingTask);
+        var entityType = typeTask.Result ?? string.Empty;
+        var outgoing = outgoingTask.Result;
+        var incoming = incomingTask.Result;
+
+        var labelSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var doc in outgoing)
+            labelSet.Add(doc[MongoFields.Id].AsString);
+
+        // Map inbound edge labels to their reverse form so they read from this node's
+        // perspective. FieldSemantics holds canonical reverses (commanded_by → commanded,
+        // apprentice_of → master_of, etc.). Inbound edges without a registered reverse
+        // are dropped to avoid presenting ambiguous/backwards relationships.
+        var reverseLookup = FieldSemantics.Relationships.Values.DistinctBy(d => d.Label).ToDictionary(d => d.Label, d => d.Reverse, StringComparer.OrdinalIgnoreCase);
+
+        foreach (var doc in incoming)
+        {
+            var inbound = doc[MongoFields.Id].AsString;
+            if (reverseLookup.TryGetValue(inbound, out var reverse) && !string.IsNullOrEmpty(reverse))
+                labelSet.Add(reverse);
+            // else: no registered reverse → skip; edge is still visible on the source node.
+        }
+
+        var labels = labelSet.OrderBy(s => s, StringComparer.OrdinalIgnoreCase).ToList();
+        var defaults = DefaultLabelSelector.GetDefaults(entityType, labels);
+
+        return new EntityLabelsResult
+        {
+            Type = entityType,
+            Labels = labels,
+            DefaultEnabled = defaults,
+        };
     }
 
     public async Task<BrowseTemporalNodesResult> BrowseTemporalNodesAsync(
@@ -162,6 +189,10 @@ public class KnowledgeGraphQueryService(
         int? yearTo,
         string? semantic,
         string? label,
+        string? calendar,
+        string? sortBy,
+        string? sortDirection,
+        string? universe,
         CancellationToken ct
     )
     {
@@ -172,13 +203,7 @@ public class KnowledgeGraphQueryService(
         if (!string.IsNullOrWhiteSpace(label))
         {
             var edgeFilter = Builders<RelationshipEdge>.Filter.Eq(e => e.Label, label);
-            var matchingFromIds = await _edges
-                .Distinct(
-                    new StringFieldDefinition<RelationshipEdge, int>("fromId"),
-                    edgeFilter,
-                    cancellationToken: ct
-                )
-                .ToListAsync(ct);
+            var matchingFromIds = await _edges.Distinct(new StringFieldDefinition<RelationshipEdge, int>(RelationshipEdgeBsonFields.FromId), edgeFilter, cancellationToken: ct).ToListAsync(ct);
             nodeIdsWithLabel = [.. matchingFromIds];
         }
 
@@ -189,42 +214,59 @@ public class KnowledgeGraphQueryService(
         if (!string.IsNullOrWhiteSpace(type))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Type, type));
         if (!string.IsNullOrWhiteSpace(q))
-            filters.Add(
-                Builders<GraphNode>.Filter.Regex(n => n.Name, new BsonRegularExpression(q, "i"))
-            );
+            filters.Add(Builders<GraphNode>.Filter.Regex(n => n.Name, new BsonRegularExpression(q, "i")));
         if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
+        if (universe is not null && Enum.TryParse<Universe>(universe, true, out var uni))
+            filters.Add(Builders<GraphNode>.Filter.In(n => n.Universe, [uni, Universe.Unknown]));
         if (temporalOnly)
             filters.Add(Builders<GraphNode>.Filter.SizeGt(n => n.TemporalFacets, 0));
-        if (!string.IsNullOrWhiteSpace(semantic))
-            filters.Add(
-                Builders<GraphNode>.Filter.Regex(
-                    "temporalFacets.semantic",
-                    new BsonRegularExpression($"^{Regex.Escape(semantic)}", "i")
-                )
-            );
-        if (yearFrom.HasValue)
-            filters.Add(
-                Builders<GraphNode>.Filter.Or(
-                    Builders<GraphNode>.Filter.Gte(n => n.EndYear, yearFrom.Value),
-                    Builders<GraphNode>.Filter.Eq(n => n.EndYear, null)
-                )
-            );
-        if (yearTo.HasValue)
-            filters.Add(Builders<GraphNode>.Filter.Lte(n => n.StartYear, yearTo.Value));
+        // Calendar-aware temporal filter: if a calendar (galactic/real) is specified,
+        // scope the year range to facets of that calendar (via $elemMatch). Otherwise
+        // fall back to the flat startYear/endYear envelope.
+        var hasCalendar = !string.IsNullOrWhiteSpace(calendar);
+        if (hasCalendar || !string.IsNullOrWhiteSpace(semantic))
+        {
+            var facetClauses = new List<FilterDefinition<TemporalFacet>>();
+            if (!string.IsNullOrWhiteSpace(semantic))
+                facetClauses.Add(Builders<TemporalFacet>.Filter.Regex(f => f.Semantic, new BsonRegularExpression($"^{Regex.Escape(semantic)}", "i")));
+            if (hasCalendar)
+                facetClauses.Add(Builders<TemporalFacet>.Filter.Eq(f => f.Calendar, calendar));
+            if (yearFrom.HasValue)
+                facetClauses.Add(Builders<TemporalFacet>.Filter.Gte(f => f.Year, yearFrom.Value));
+            if (yearTo.HasValue)
+                facetClauses.Add(Builders<TemporalFacet>.Filter.Lte(f => f.Year, yearTo.Value));
 
-        var filter =
-            filters.Count > 0
-                ? Builders<GraphNode>.Filter.And(filters)
-                : FilterDefinition<GraphNode>.Empty;
+            if (facetClauses.Count > 0)
+                filters.Add(Builders<GraphNode>.Filter.ElemMatch(n => n.TemporalFacets, Builders<TemporalFacet>.Filter.And(facetClauses)));
+        }
+        else
+        {
+            // No calendar/semantic filter — use the envelope for year range.
+            if (yearFrom.HasValue)
+                filters.Add(Builders<GraphNode>.Filter.Or(Builders<GraphNode>.Filter.Gte(n => n.EndYear, yearFrom.Value), Builders<GraphNode>.Filter.Eq(n => n.EndYear, null)));
+            if (yearTo.HasValue)
+                filters.Add(Builders<GraphNode>.Filter.Lte(n => n.StartYear, yearTo.Value));
+        }
+
+        var filter = filters.Count > 0 ? Builders<GraphNode>.Filter.And(filters) : FilterDefinition<GraphNode>.Empty;
 
         var total = await _nodes.CountDocumentsAsync(filter, cancellationToken: ct);
-        var items = await _nodes
-            .Find(filter)
-            .SortBy(n => n.Name)
-            .Skip((page - 1) * pageSize)
-            .Limit(pageSize)
-            .ToListAsync(ct);
+
+        // Apply sort — map client column names to MongoDB fields.
+        // "ascending" | "descending" (case-insensitive); anything else = ascending.
+        var ascending = !string.Equals(sortDirection, "descending", StringComparison.OrdinalIgnoreCase);
+        var sortField = (sortBy ?? "name").ToLowerInvariant() switch
+        {
+            GraphNodeBsonFields.Type => GraphNodeBsonFields.Type,
+            GraphNodeBsonFields.Continuity => GraphNodeBsonFields.Continuity,
+            "startyear" or "start_year" => GraphNodeBsonFields.StartYear,
+            "endyear" or "end_year" => GraphNodeBsonFields.EndYear,
+            _ => GraphNodeBsonFields.Name, // default
+        };
+        var sort = ascending ? Builders<GraphNode>.Sort.Ascending(sortField) : Builders<GraphNode>.Sort.Descending(sortField);
+
+        var items = await _nodes.Find(filter).Sort(sort).Skip((page - 1) * pageSize).Limit(pageSize).ToListAsync(ct);
 
         var dtos = items
             .Select(n => new TemporalNodeDto
@@ -258,59 +300,187 @@ public class KnowledgeGraphQueryService(
         string? labels,
         int maxDepth,
         string? continuity,
-        CancellationToken ct
+        bool onlyRoot = false,
+        string? universe = null,
+        CancellationToken ct = default
     )
     {
         maxDepth = Math.Clamp(maxDepth, 1, 4);
         var edgesRaw = _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges);
 
+        // Universe filter is applied lazily during traversal: edges don't carry the
+        // Universe field, so we look up the universe of each endpoint node we encounter
+        // and skip edges whose either endpoint fails the filter. Cached per request.
+        Universe? universeFilter = null;
+        if (!string.IsNullOrWhiteSpace(universe) && Enum.TryParse<Universe>(universe, true, out var uniParsed))
+            universeFilter = uniParsed;
+        var universeCache = new Dictionary<int, Universe>();
+
+        async Task<bool> NodePassesUniverseAsync(int nodeId)
+        {
+            if (universeFilter is null)
+                return true;
+            if (universeCache.TryGetValue(nodeId, out var cached))
+                return cached == universeFilter.Value || cached == Universe.Unknown;
+            var u = await _nodes.Find(n => n.PageId == nodeId).Project(n => (Universe?)n.Universe).FirstOrDefaultAsync(ct) ?? Universe.Unknown;
+            universeCache[nodeId] = u;
+            return u == universeFilter.Value || u == Universe.Unknown;
+        }
+
+        async Task PrefetchUniverseAsync(IEnumerable<int> ids)
+        {
+            if (universeFilter is null)
+                return;
+            var missing = ids.Where(i => !universeCache.ContainsKey(i)).Distinct().ToList();
+            if (missing.Count == 0)
+                return;
+            var docs = await _nodes.Find(Builders<GraphNode>.Filter.In(n => n.PageId, missing)).Project(n => new { n.PageId, n.Universe }).ToListAsync(ct);
+            foreach (var d in docs)
+                universeCache[d.PageId] = d.Universe;
+            // Any id not returned is treated as Unknown (edge dangling past node set).
+            foreach (var id in missing)
+                universeCache.TryAdd(id, Universe.Unknown);
+        }
+
+        // Fast-fail: if the root node itself doesn't match the universe filter, return empty.
+        if (universeFilter is not null && !await NodePassesUniverseAsync(pageId))
+        {
+            return new RelationshipGraphResult
+            {
+                RootId = pageId,
+                RootName = $"#{pageId}",
+                Nodes = [],
+                Edges = [],
+            };
+        }
+
+        // Early exit: client explicitly asked for just the root node and no edges.
+        // This is set by the frontend when the user toggles all labels off via the
+        // None button — they want to focus on a single entity without its relationships.
+        // Using a dedicated flag avoids ASP.NET Core's empty-string-to-null coercion
+        // that would otherwise make `labels=""` indistinguishable from no filter.
+        if (onlyRoot)
+        {
+            var rootOnly = await _nodes.Find(n => n.PageId == pageId).FirstOrDefaultAsync(ct);
+            if (rootOnly is null)
+            {
+                return new RelationshipGraphResult
+                {
+                    RootId = pageId,
+                    RootName = $"#{pageId}",
+                    Nodes = [],
+                    Edges = [],
+                };
+            }
+            return new RelationshipGraphResult
+            {
+                RootId = pageId,
+                RootName = rootOnly.Name,
+                Nodes =
+                [
+                    new RelationshipGraphNode
+                    {
+                        Id = rootOnly.PageId,
+                        Name = rootOnly.Name,
+                        Type = rootOnly.Type,
+                        ImageUrl = rootOnly.ImageUrl ?? string.Empty,
+                    },
+                ],
+                Edges = [],
+            };
+        }
+
+        // Label filter resolution:
+        // The client may pass labels that are either forward labels (commanded_by) or
+        // reverse labels that only exist from the target node's perspective (commanded).
+        // For the outgoing edge query we need forward labels as stored in the DB.
+        // For the inbound edge query we also need forward labels — but we include the
+        // forward form of any reverse label the client requested, so "Anakin commanded X"
+        // pulls in edges stored as "X commanded_by Anakin".
+        string[]? requestedLabels = null;
+        HashSet<string>? outgoingLabelFilter = null;
+        HashSet<string>? inboundLabelFilter = null;
+        // Map of forward-label → reverse-label, used to rewrite inbound edges so they
+        // render from the perspective of the currently-selected node.
+        var forwardToReverse = FieldSemantics.Relationships.Values.DistinctBy(d => d.Label).ToDictionary(d => d.Label, d => d.Reverse, StringComparer.OrdinalIgnoreCase);
+        // Reverse lookup: reverse-label → forward-label, so if the client asks for
+        // "commanded" we query the DB for "commanded_by".
+        var reverseToForward = FieldSemantics
+            .Relationships.Values.DistinctBy(d => d.Reverse)
+            .Where(d => !string.IsNullOrEmpty(d.Reverse))
+            .ToDictionary(d => d.Reverse, d => d.Label, StringComparer.OrdinalIgnoreCase);
+
+        if (!string.IsNullOrWhiteSpace(labels))
+        {
+            requestedLabels = labels.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+            outgoingLabelFilter = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            inboundLabelFilter = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var l in requestedLabels)
+            {
+                // Outgoing: the label is stored as-is on the edge.
+                outgoingLabelFilter.Add(l);
+                // Inbound: look up the forward form. If the requested label is already a
+                // forward label, it will also map (e.g. commanded_by stays as commanded_by).
+                if (reverseToForward.TryGetValue(l, out var fwd))
+                    inboundLabelFilter.Add(fwd);
+                else
+                    inboundLabelFilter.Add(l);
+            }
+        }
+
         var visited = new HashSet<int> { pageId };
-        var allEdges =
-            new List<(
-                int from,
-                string fromName,
-                int to,
-                string toName,
-                string label,
-                double weight,
-                int? fromYear,
-                int? toYear
-            )>();
+        var allEdges = new List<(int from, string fromName, int to, string toName, string label, double weight, int? fromYear, int? toYear)>();
         var frontier = new HashSet<int> { pageId };
 
         for (var depth = 0; depth < maxDepth && frontier.Count > 0; depth++)
         {
-            var filter = Builders<BsonDocument>.Filter.In("fromId", frontier);
-            if (!string.IsNullOrWhiteSpace(labels))
-            {
-                var labelList = labels.Split(
-                    ',',
-                    StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries
-                );
-                filter &= Builders<BsonDocument>.Filter.In("label", labelList);
-            }
+            // ── Outgoing edges (frontier node is the source) ──
+            var outFilter = Builders<BsonDocument>.Filter.In(RelationshipEdgeBsonFields.FromId, frontier);
+            if (outgoingLabelFilter is not null)
+                outFilter &= Builders<BsonDocument>.Filter.In(RelationshipEdgeBsonFields.Label, outgoingLabelFilter);
             if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
-                filter &= Builders<BsonDocument>.Filter.Eq("continuity", cont.ToString());
+                outFilter &= Builders<BsonDocument>.Filter.Eq(GraphNodeBsonFields.Continuity, cont.ToString());
 
-            var edges = await edgesRaw.Find(filter).Limit(500).ToListAsync(ct);
+            var outEdges = await edgesRaw.Find(outFilter).Limit(500).ToListAsync(ct);
+
+            // Prefetch universes for all "to" endpoints in a single query so the per-edge
+            // filter below doesn't fan out into N lookups.
+            if (universeFilter is not null)
+                await PrefetchUniverseAsync(outEdges.Select(e => e[RelationshipEdgeBsonFields.ToId].AsInt32));
+
+            // ── Inbound edges (frontier node is the target) ──
+            // Rewritten at read time: we flip from/to and map the label to its reverse,
+            // so the resulting edge reads naturally from the frontier node's perspective.
+            var inFilter = Builders<BsonDocument>.Filter.In(RelationshipEdgeBsonFields.ToId, frontier);
+            if (inboundLabelFilter is not null)
+                inFilter &= Builders<BsonDocument>.Filter.In(RelationshipEdgeBsonFields.Label, inboundLabelFilter);
+            if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont2))
+                inFilter &= Builders<BsonDocument>.Filter.Eq(GraphNodeBsonFields.Continuity, cont2.ToString());
+
+            var inEdges = await edgesRaw.Find(inFilter).Limit(500).ToListAsync(ct);
+
+            if (universeFilter is not null)
+                await PrefetchUniverseAsync(inEdges.Select(e => e[RelationshipEdgeBsonFields.FromId].AsInt32));
+
             var nextFrontier = new HashSet<int>();
 
-            foreach (var e in edges)
+            foreach (var e in outEdges)
             {
-                var toId = e["toId"].AsInt32;
-                var fromId = e["fromId"].AsInt32;
+                var toId = e[RelationshipEdgeBsonFields.ToId].AsInt32;
+                var fromId = e[RelationshipEdgeBsonFields.FromId].AsInt32;
+                if (universeFilter is not null && !await NodePassesUniverseAsync(toId))
+                    continue;
                 allEdges.Add(
                     (
                         fromId,
-                        e["fromName"].AsString,
+                        e[RelationshipEdgeBsonFields.FromName].AsString,
                         toId,
-                        e["toName"].AsString,
-                        e["label"].AsString,
-                        e.Contains("weight") ? e["weight"].ToDouble() : 0.8,
-                        e.Contains("fromYear") && !e["fromYear"].IsBsonNull
-                            ? e["fromYear"].AsInt32
-                            : null,
-                        e.Contains("toYear") && !e["toYear"].IsBsonNull ? e["toYear"].AsInt32 : null
+                        e[RelationshipEdgeBsonFields.ToName].AsString,
+                        e[RelationshipEdgeBsonFields.Label].AsString,
+                        e.Contains(RelationshipEdgeBsonFields.Weight) ? e[RelationshipEdgeBsonFields.Weight].ToDouble() : 0.8,
+                        e.Contains(RelationshipEdgeBsonFields.FromYear) && !e[RelationshipEdgeBsonFields.FromYear].IsBsonNull ? e[RelationshipEdgeBsonFields.FromYear].AsInt32 : null,
+                        e.Contains(RelationshipEdgeBsonFields.ToYear) && !e[RelationshipEdgeBsonFields.ToYear].IsBsonNull ? e[RelationshipEdgeBsonFields.ToYear].AsInt32 : null
                     )
                 );
 
@@ -318,14 +488,46 @@ public class KnowledgeGraphQueryService(
                     nextFrontier.Add(toId);
             }
 
+            foreach (var e in inEdges)
+            {
+                var origFromId = e[RelationshipEdgeBsonFields.FromId].AsInt32;
+                var origToId = e[RelationshipEdgeBsonFields.ToId].AsInt32;
+                var origLabel = e[RelationshipEdgeBsonFields.Label].AsString;
+
+                // Skip if we already captured this edge in the outgoing pass
+                // (possible when both endpoints are in the frontier).
+                if (frontier.Contains(origFromId))
+                    continue;
+                if (universeFilter is not null && !await NodePassesUniverseAsync(origFromId))
+                    continue;
+
+                // Flip the edge so the frontier node is the source, and rewrite
+                // the label to its reverse form so the graph reads correctly.
+                var displayLabel = forwardToReverse.TryGetValue(origLabel, out var rev) && !string.IsNullOrEmpty(rev) ? rev : origLabel;
+
+                allEdges.Add(
+                    (
+                        origToId, // flipped: was toId, now source
+                        e[RelationshipEdgeBsonFields.ToName].AsString,
+                        origFromId, // flipped: was fromId, now target
+                        e[RelationshipEdgeBsonFields.FromName].AsString,
+                        displayLabel,
+                        e.Contains(RelationshipEdgeBsonFields.Weight) ? e[RelationshipEdgeBsonFields.Weight].ToDouble() : 0.8,
+                        e.Contains(RelationshipEdgeBsonFields.FromYear) && !e[RelationshipEdgeBsonFields.FromYear].IsBsonNull ? e[RelationshipEdgeBsonFields.FromYear].AsInt32 : null,
+                        e.Contains(RelationshipEdgeBsonFields.ToYear) && !e[RelationshipEdgeBsonFields.ToYear].IsBsonNull ? e[RelationshipEdgeBsonFields.ToYear].AsInt32 : null
+                    )
+                );
+
+                if (visited.Add(origFromId))
+                    nextFrontier.Add(origFromId);
+            }
+
             frontier = nextFrontier;
         }
 
         var rootNode = await _nodes.Find(n => n.PageId == pageId).FirstOrDefaultAsync(ct);
         var nodeIds = allEdges.SelectMany(e => new[] { e.from, e.to }).Distinct().ToList();
-        var nodeDocs = await _nodes
-            .Find(Builders<GraphNode>.Filter.In(n => n.PageId, nodeIds))
-            .ToListAsync(ct);
+        var nodeDocs = await _nodes.Find(Builders<GraphNode>.Filter.In(n => n.PageId, nodeIds)).ToListAsync(ct);
         var nodeMap = nodeDocs.ToDictionary(n => n.PageId);
 
         var resultNodes = new List<RelationshipGraphNode>();
@@ -339,7 +541,7 @@ public class KnowledgeGraphQueryService(
                         Id = node.PageId,
                         Name = node.Name,
                         Type = node.Type,
-                        ImageUrl = node.ImageUrl,
+                        ImageUrl = node.ImageUrl ?? string.Empty,
                     }
                 );
             }
@@ -383,52 +585,27 @@ public class KnowledgeGraphQueryService(
     // ── Core query methods shared by GraphRAGToolkit and controller ──
 
     /// <summary>Search nodes by name with optional type/continuity filter.</summary>
-    public async Task<List<GraphNode>> SearchNodesAsync(
-        string query,
-        string? type,
-        string? continuity,
-        int limit,
-        CancellationToken ct = default
-    )
+    public async Task<List<GraphNode>> SearchNodesAsync(string query, string? type, string? continuity, int limit, CancellationToken ct = default)
     {
-        var filters = new List<FilterDefinition<GraphNode>>
-        {
-            Builders<GraphNode>.Filter.Regex(n => n.Name, new BsonRegularExpression(query, "i")),
-        };
+        var filters = new List<FilterDefinition<GraphNode>> { Builders<GraphNode>.Filter.Regex(n => n.Name, new BsonRegularExpression(query, "i")) };
         if (!string.IsNullOrWhiteSpace(type))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Type, type));
         if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
 
-        return await _nodes
-            .Find(Builders<GraphNode>.Filter.And(filters))
-            .SortBy(n => n.Name)
-            .Limit(Math.Min(limit, 50))
-            .ToListAsync(ct);
+        return await _nodes.Find(Builders<GraphNode>.Filter.And(filters)).SortBy(n => n.Name).Limit(Math.Min(limit, 50)).ToListAsync(ct);
     }
 
     /// <summary>Get a single node by PageId.</summary>
-    public Task<GraphNode?> GetNodeByIdAsync(int pageId, CancellationToken ct = default) =>
-        _nodes.Find(n => n.PageId == pageId).FirstOrDefaultAsync(ct)!;
+    public Task<GraphNode?> GetNodeByIdAsync(int pageId, CancellationToken ct = default) => _nodes.Find(n => n.PageId == pageId).FirstOrDefaultAsync(ct)!;
 
     /// <summary>Find nodes by temporal range with optional semantic dimension filter.</summary>
-    public async Task<List<GraphNode>> FindNodesByYearAsync(
-        int year,
-        string type,
-        int? yearEnd,
-        string? continuity,
-        string? semantic,
-        int limit,
-        CancellationToken ct = default
-    )
+    public async Task<List<GraphNode>> FindNodesByYearAsync(int year, string type, int? yearEnd, string? continuity, string? semantic, int limit, CancellationToken ct = default)
     {
         var rangeStart = Math.Min(year, yearEnd ?? year);
         var rangeEnd = Math.Max(year, yearEnd ?? year);
 
-        var filters = new List<FilterDefinition<GraphNode>>
-        {
-            Builders<GraphNode>.Filter.Eq(n => n.Type, type),
-        };
+        var filters = new List<FilterDefinition<GraphNode>> { Builders<GraphNode>.Filter.Eq(n => n.Type, type) };
 
         if (!string.IsNullOrWhiteSpace(semantic))
         {
@@ -436,10 +613,7 @@ public class KnowledgeGraphQueryService(
                 Builders<GraphNode>.Filter.ElemMatch(
                     n => n.TemporalFacets,
                     Builders<TemporalFacet>.Filter.And(
-                        Builders<TemporalFacet>.Filter.Regex(
-                            f => f.Semantic,
-                            new BsonRegularExpression($"^{semantic}", "i")
-                        ),
+                        Builders<TemporalFacet>.Filter.Regex(f => f.Semantic, new BsonRegularExpression($"^{semantic}", "i")),
                         Builders<TemporalFacet>.Filter.Lte(f => f.Year, rangeEnd),
                         Builders<TemporalFacet>.Filter.Gte(f => f.Year, rangeStart)
                     )
@@ -449,63 +623,122 @@ public class KnowledgeGraphQueryService(
         else
         {
             filters.Add(Builders<GraphNode>.Filter.Lte(n => n.StartYear, rangeEnd));
-            filters.Add(
-                Builders<GraphNode>.Filter.Or(
-                    Builders<GraphNode>.Filter.Eq(n => n.EndYear, (int?)null),
-                    Builders<GraphNode>.Filter.Gte(n => n.EndYear, rangeStart)
-                )
-            );
+            filters.Add(Builders<GraphNode>.Filter.Or(Builders<GraphNode>.Filter.Eq(n => n.EndYear, (int?)null), Builders<GraphNode>.Filter.Gte(n => n.EndYear, rangeStart)));
         }
 
         if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
 
-        return await _nodes
-            .Find(Builders<GraphNode>.Filter.And(filters))
-            .SortBy(n => n.Name)
-            .Limit(Math.Min(limit, 50))
-            .ToListAsync(ct);
+        return await _nodes.Find(Builders<GraphNode>.Filter.And(filters)).SortBy(n => n.Name).Limit(Math.Min(limit, 50)).ToListAsync(ct);
     }
 
     /// <summary>Get direct edges from an entity, optionally filtered by labels and continuity.</summary>
-    public async Task<List<RelationshipEdge>> GetEdgesFromEntityAsync(
-        int entityId,
-        string? labelFilter,
-        string? continuity,
-        int limit,
-        CancellationToken ct = default
-    )
+    public async Task<List<RelationshipEdge>> GetEdgesFromEntityAsync(int entityId, string? labelFilter, string? continuity, int limit, CancellationToken ct = default)
     {
         var filter = Builders<RelationshipEdge>.Filter.Eq(e => e.FromId, entityId);
 
         if (!string.IsNullOrWhiteSpace(labelFilter))
         {
-            var labels = labelFilter.Split(
-                ',',
-                StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries
-            );
+            var labels = labelFilter.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
             filter &= Builders<RelationshipEdge>.Filter.In(e => e.Label, labels);
         }
         if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
             filter &= Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, cont);
 
-        return await _edges
-            .Find(filter)
-            .SortByDescending(e => e.Weight)
-            .Limit(Math.Min(limit, 50))
-            .ToListAsync(ct);
+        return await _edges.Find(filter).SortByDescending(e => e.Weight).Limit(Math.Min(limit, 50)).ToListAsync(ct);
+    }
+
+    /// <summary>
+    /// Get all direct relationships for an entity — outgoing edges as stored plus
+    /// inbound edges rewritten with their reverse label (so "X commanded_by Anakin"
+    /// becomes "Anakin commanded X" on Anakin's results). Labels can be filtered by
+    /// forward name (e.g. "commanded_by") or reverse name (e.g. "commanded"); the
+    /// reverse form is resolved to the forward form automatically for the inbound query.
+    /// </summary>
+    public async Task<List<RelationshipEdge>> GetAllEdgesForEntityAsync(int entityId, string? labelFilter, string? continuity, int limit, CancellationToken ct = default)
+    {
+        // Build label filters for outgoing (forward labels) and inbound (forward labels
+        // mapped from any requested reverses). Same logic as QueryGraphAsync.
+        HashSet<string>? outgoingLabels = null;
+        HashSet<string>? inboundForwardLabels = null;
+        if (!string.IsNullOrWhiteSpace(labelFilter))
+        {
+            var reverseToForward = FieldSemantics
+                .Relationships.Values.DistinctBy(d => d.Reverse)
+                .Where(d => !string.IsNullOrEmpty(d.Reverse))
+                .ToDictionary(d => d.Reverse, d => d.Label, StringComparer.OrdinalIgnoreCase);
+
+            var labels = labelFilter.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            outgoingLabels = [.. labels];
+            inboundForwardLabels = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var l in labels)
+            {
+                inboundForwardLabels.Add(reverseToForward.TryGetValue(l, out var fwd) ? fwd : l);
+            }
+        }
+
+        var forwardToReverse = FieldSemantics.Relationships.Values.DistinctBy(d => d.Label).ToDictionary(d => d.Label, d => d.Reverse, StringComparer.OrdinalIgnoreCase);
+
+        var outFilter = Builders<RelationshipEdge>.Filter.Eq(e => e.FromId, entityId);
+        if (outgoingLabels is not null)
+            outFilter &= Builders<RelationshipEdge>.Filter.In(e => e.Label, outgoingLabels);
+
+        var inFilter = Builders<RelationshipEdge>.Filter.Eq(e => e.ToId, entityId);
+        if (inboundForwardLabels is not null)
+            inFilter &= Builders<RelationshipEdge>.Filter.In(e => e.Label, inboundForwardLabels);
+
+        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        {
+            var contFilter = Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, cont);
+            outFilter &= contFilter;
+            inFilter &= contFilter;
+        }
+
+        var halfLimit = Math.Max(1, Math.Min(limit, 100) / 2);
+        var outTask = _edges.Find(outFilter).SortByDescending(e => e.Weight).Limit(halfLimit).ToListAsync(ct);
+        var inTask = _edges.Find(inFilter).SortByDescending(e => e.Weight).Limit(halfLimit).ToListAsync(ct);
+        await Task.WhenAll(outTask, inTask);
+
+        var result = new List<RelationshipEdge>(outTask.Result);
+
+        // Rewrite inbound edges: flip source/target and relabel to the reverse form,
+        // so every returned edge reads naturally from the queried entity's perspective.
+        foreach (var e in inTask.Result)
+        {
+            var reverseLabel = forwardToReverse.TryGetValue(e.Label, out var rev) && !string.IsNullOrEmpty(rev) ? rev : e.Label;
+
+            result.Add(
+                new RelationshipEdge
+                {
+                    Id = e.Id,
+                    FromId = e.ToId,
+                    FromName = e.ToName,
+                    FromType = e.ToType,
+                    ToId = e.FromId,
+                    ToName = e.FromName,
+                    ToType = e.FromType,
+                    Label = reverseLabel,
+                    Weight = e.Weight,
+                    Evidence = e.Evidence,
+                    SourcePageId = e.SourcePageId,
+                    Continuity = e.Continuity,
+                    PairId = e.PairId,
+                    CreatedAt = e.CreatedAt,
+                    FromYear = e.FromYear,
+                    ToYear = e.ToYear,
+                }
+            );
+        }
+
+        return result.OrderByDescending(e => e.Weight).Take(Math.Min(limit, 100)).ToList();
     }
 
     /// <summary>Get relationship type summary (label + count + avgWeight) for an entity.</summary>
-    public async Task<List<(string label, int count, double avgWeight)>> GetRelationshipTypesAsync(
-        int entityId,
-        string? continuity,
-        CancellationToken ct = default
-    )
+    public async Task<List<(string label, int count, double avgWeight)>> GetRelationshipTypesAsync(int entityId, string? continuity, CancellationToken ct = default)
     {
-        var matchFilter = new BsonDocument("fromId", entityId);
+        var matchFilter = new BsonDocument(RelationshipEdgeBsonFields.FromId, entityId);
         if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
-            matchFilter["continuity"] = cont.ToString();
+            matchFilter[GraphNodeBsonFields.Continuity] = cont.ToString();
 
         var pipeline = new[]
         {
@@ -514,35 +747,21 @@ public class KnowledgeGraphQueryService(
                 "$group",
                 new BsonDocument
                 {
-                    { "_id", "$label" },
+                    { MongoFields.Id, "$" + RelationshipEdgeBsonFields.Label },
                     { "count", new BsonDocument("$sum", 1) },
-                    { "avgWeight", new BsonDocument("$avg", "$weight") },
+                    { "avgWeight", new BsonDocument("$avg", "$" + RelationshipEdgeBsonFields.Weight) },
                 }
             ),
             new BsonDocument("$sort", new BsonDocument("count", -1)),
         };
 
-        var results = await _edges
-            .Database.GetCollection<BsonDocument>(Collections.KgEdges)
-            .Aggregate<BsonDocument>(pipeline)
-            .ToListAsync(ct);
+        var results = await _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges).Aggregate<BsonDocument>(pipeline).ToListAsync(ct);
 
-        return results
-            .Select(d =>
-                (
-                    label: d["_id"].AsString,
-                    count: d["count"].AsInt32,
-                    avgWeight: d["avgWeight"].AsDouble
-                )
-            )
-            .ToList();
+        return results.Select(d => (label: d[MongoFields.Id].AsString, count: d["count"].AsInt32, avgWeight: d["avgWeight"].AsDouble)).ToList();
     }
 
     /// <summary>Bidirectional BFS to find the shortest path between two entities.</summary>
-    public async Task<(
-        bool connected,
-        List<(int from, int to, string label, string evidence, string fromName, string toName)> path
-    )> FindConnectionsAsync(
+    public async Task<(bool connected, List<(int from, int to, string label, string evidence, string fromName, string toName)> path)> FindConnectionsAsync(
         int entityId1,
         int entityId2,
         int maxHops,
@@ -561,16 +780,8 @@ public class KnowledgeGraphQueryService(
 
         var frontier1 = new HashSet<int> { entityId1 };
         var frontier2 = new HashSet<int> { entityId2 };
-        var visited1 =
-            new Dictionary<
-                int,
-                (int parent, string label, string evidence, string fromName, string toName)
-            >();
-        var visited2 =
-            new Dictionary<
-                int,
-                (int parent, string label, string evidence, string fromName, string toName)
-            >();
+        var visited1 = new Dictionary<int, (int parent, string label, string evidence, string fromName, string toName)>();
+        var visited2 = new Dictionary<int, (int parent, string label, string evidence, string fromName, string toName)>();
         visited1[entityId1] = (-1, "", "", "", "");
         visited2[entityId2] = (-1, "", "", "", "");
 
@@ -600,26 +811,10 @@ public class KnowledgeGraphQueryService(
         if (meetingPoint is null)
             return (false, []);
 
-        var path =
-            new List<(
-                int from,
-                int to,
-                string label,
-                string evidence,
-                string fromName,
-                string toName
-            )>();
+        var path = new List<(int from, int to, string label, string evidence, string fromName, string toName)>();
 
         var current = meetingPoint.Value;
-        var pathFromE1 =
-            new List<(
-                int from,
-                int to,
-                string label,
-                string evidence,
-                string fromName,
-                string toName
-            )>();
+        var pathFromE1 = new List<(int from, int to, string label, string evidence, string fromName, string toName)>();
         while (current != entityId1 && visited1.ContainsKey(current))
         {
             var (parent, label, evidence, fromName, toName) = visited1[current];
@@ -646,10 +841,7 @@ public class KnowledgeGraphQueryService(
 
     async Task<HashSet<int>> ExpandFrontierAsync(
         HashSet<int> frontier,
-        Dictionary<
-            int,
-            (int parent, string label, string evidence, string fromName, string toName)
-        > visited,
+        Dictionary<int, (int parent, string label, string evidence, string fromName, string toName)> visited,
         FilterDefinition<RelationshipEdge>? contFilter,
         CancellationToken ct
     )
@@ -664,16 +856,827 @@ public class KnowledgeGraphQueryService(
         {
             if (!visited.ContainsKey(edge.ToId))
             {
-                visited[edge.ToId] = (
-                    edge.FromId,
-                    edge.Label,
-                    edge.Evidence,
-                    edge.FromName,
-                    edge.ToName
-                );
+                visited[edge.ToId] = (edge.FromId, edge.Label, edge.Evidence, edge.FromName, edge.ToName);
                 newFrontier.Add(edge.ToId);
             }
         }
         return newFrontier;
+    }
+
+    // ── KG Analytics aggregation methods ──
+
+    /// <summary>
+    /// Count entities of <paramref name="relatedType"/> connected to each entity of
+    /// <paramref name="entityType"/> via <paramref name=RelationshipEdgeBsonFields.Label/> edges.
+    /// E.g. "How many Battle nodes connect to each War node via 'battle_in'?"
+    /// </summary>
+    public async Task<List<(string name, int id, int count)>> CountRelatedEntitiesAsync(
+        string entityType,
+        string relatedType,
+        string label,
+        bool groupBySource,
+        string? continuity,
+        int limit,
+        CancellationToken ct = default
+    )
+    {
+        limit = Math.Clamp(limit, 1, 50);
+
+        var match = new BsonDocument { { RelationshipEdgeBsonFields.Label, label } };
+        if (groupBySource)
+        {
+            match[RelationshipEdgeBsonFields.FromType] = entityType;
+            match[RelationshipEdgeBsonFields.ToType] = relatedType;
+        }
+        else
+        {
+            match[RelationshipEdgeBsonFields.FromType] = relatedType;
+            match[RelationshipEdgeBsonFields.ToType] = entityType;
+        }
+        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+            match[GraphNodeBsonFields.Continuity] = cont.ToString();
+
+        var groupField = groupBySource ? RelationshipEdgeBsonFields.FromName : RelationshipEdgeBsonFields.ToName;
+        var groupIdField = groupBySource ? RelationshipEdgeBsonFields.FromId : RelationshipEdgeBsonFields.ToId;
+
+        var pipeline = new[]
+        {
+            new BsonDocument("$match", match),
+            new BsonDocument(
+                "$group",
+                new BsonDocument
+                {
+                    {
+                        MongoFields.Id,
+                        new BsonDocument { { "name", $"${groupField}" }, { "id", $"${groupIdField}" } }
+                    },
+                    { "count", new BsonDocument("$sum", 1) },
+                }
+            ),
+            new BsonDocument("$sort", new BsonDocument("count", -1)),
+            new BsonDocument("$limit", limit),
+        };
+
+        var results = await _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges).Aggregate<BsonDocument>(pipeline).ToListAsync(ct);
+
+        return results.Select(d => (name: d[MongoFields.Id]["name"].AsString, id: d[MongoFields.Id]["id"].AsInt32, count: d["count"].AsInt32)).ToList();
+    }
+
+    /// <summary>
+    /// Count nodes grouped by a property value.
+    /// E.g. "Characters grouped by species" or "Starships grouped by manufacturer".
+    /// </summary>
+    public async Task<List<(string value, int count)>> CountNodesByPropertyAsync(string entityType, string property, string? continuity, int limit, CancellationToken ct = default)
+    {
+        limit = Math.Clamp(limit, 1, 50);
+
+        var match = new BsonDocument(GraphNodeBsonFields.Type, entityType);
+        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+            match[GraphNodeBsonFields.Continuity] = cont.ToString();
+
+        var pipeline = new[]
+        {
+            new BsonDocument("$match", match),
+            new BsonDocument("$unwind", $"$properties.{property}"),
+            new BsonDocument("$group", new BsonDocument { { MongoFields.Id, $"$properties.{property}" }, { "count", new BsonDocument("$sum", 1) } }),
+            new BsonDocument("$sort", new BsonDocument("count", -1)),
+            new BsonDocument("$limit", limit),
+        };
+
+        var results = await _nodes.Database.GetCollection<BsonDocument>(Collections.KgNodes).Aggregate<BsonDocument>(pipeline).ToListAsync(ct);
+
+        return results.Select(d => (value: d[MongoFields.Id].AsString, count: d["count"].AsInt32)).ToList();
+    }
+
+    /// <summary>
+    /// Count nodes bucketed by year ranges, optionally filtered by temporal facet semantic dimension.
+    /// Without semantic: uses flat startYear envelope (e.g. "Battles per year").
+    /// With semantic: unwinds temporalFacets and groups by the facet's year
+    /// (e.g. "Characters who died per year" → semantic="lifespan.end").
+    /// </summary>
+    public async Task<List<(int year, int count)>> CountByYearRangeAsync(
+        string entityType,
+        int startYear,
+        int endYear,
+        int bucket,
+        string? continuity,
+        string? semantic = null,
+        CancellationToken ct = default
+    )
+    {
+        bucket = Math.Max(bucket, 1);
+        var rangeStart = Math.Min(startYear, endYear);
+        var rangeEnd = Math.Max(startYear, endYear);
+
+        var pipeline = new List<BsonDocument>();
+
+        if (!string.IsNullOrWhiteSpace(semantic))
+        {
+            // Semantic path: unwind temporalFacets, match on semantic prefix + year range
+            var match = new BsonDocument(GraphNodeBsonFields.Type, entityType);
+            if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont1))
+                match[GraphNodeBsonFields.Continuity] = cont1.ToString();
+
+            pipeline.Add(new BsonDocument("$match", match));
+            pipeline.Add(new BsonDocument("$unwind", "$" + GraphNodeBsonFields.TemporalFacets));
+            pipeline.Add(
+                new BsonDocument(
+                    "$match",
+                    new BsonDocument
+                    {
+                        { GraphNodeBsonFields.TemporalFacetSemantic, new BsonDocument("$regex", $"^{semantic}").Add("$options", "i") },
+                        {
+                            GraphNodeBsonFields.TemporalFacetYear,
+                            new BsonDocument { { "$gte", rangeStart }, { "$lte", rangeEnd } }
+                        },
+                    }
+                )
+            );
+            pipeline.Add(
+                new BsonDocument(
+                    "$group",
+                    new BsonDocument
+                    {
+                        {
+                            MongoFields.Id,
+                            new BsonDocument("$multiply", new BsonArray { new BsonDocument("$floor", new BsonDocument("$divide", new BsonArray { "$temporalFacets.year", bucket })), bucket })
+                        },
+                        { "count", new BsonDocument("$sum", 1) },
+                    }
+                )
+            );
+        }
+        else
+        {
+            // Flat envelope path: use startYear directly
+            var match = new BsonDocument
+            {
+                { GraphNodeBsonFields.Type, entityType },
+                {
+                    GraphNodeBsonFields.StartYear,
+                    new BsonDocument { { "$gte", rangeStart }, { "$lte", rangeEnd } }
+                },
+            };
+            if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont2))
+                match[GraphNodeBsonFields.Continuity] = cont2.ToString();
+
+            pipeline.Add(new BsonDocument("$match", match));
+            pipeline.Add(
+                new BsonDocument(
+                    "$group",
+                    new BsonDocument
+                    {
+                        {
+                            MongoFields.Id,
+                            new BsonDocument(
+                                "$multiply",
+                                new BsonArray { new BsonDocument("$floor", new BsonDocument("$divide", new BsonArray { "$" + GraphNodeBsonFields.StartYear, bucket })), bucket }
+                            )
+                        },
+                        { "count", new BsonDocument("$sum", 1) },
+                    }
+                )
+            );
+        }
+
+        pipeline.Add(new BsonDocument("$sort", new BsonDocument(MongoFields.Id, 1)));
+
+        var results = await _nodes.Database.GetCollection<BsonDocument>(Collections.KgNodes).Aggregate<BsonDocument>(pipeline).ToListAsync(ct);
+
+        return results.Select(d => (year: d[MongoFields.Id].ToInt32(), count: d["count"].AsInt32)).ToList();
+    }
+
+    /// <summary>
+    /// Count edges between specific entity type pairs, grouped by label.
+    /// E.g. "How are Wars and Characters connected?" → label distribution.
+    /// </summary>
+    public async Task<List<(string label, int count)>> CountEdgesBetweenTypesAsync(string fromType, string toType, string? continuity, int limit, CancellationToken ct = default)
+    {
+        limit = Math.Clamp(limit, 1, 50);
+
+        var match = new BsonDocument { { RelationshipEdgeBsonFields.FromType, fromType }, { RelationshipEdgeBsonFields.ToType, toType } };
+        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+            match[GraphNodeBsonFields.Continuity] = cont.ToString();
+
+        var pipeline = new[]
+        {
+            new BsonDocument("$match", match),
+            new BsonDocument("$group", new BsonDocument { { MongoFields.Id, "$" + RelationshipEdgeBsonFields.Label }, { "count", new BsonDocument("$sum", 1) } }),
+            new BsonDocument("$sort", new BsonDocument("count", -1)),
+            new BsonDocument("$limit", limit),
+        };
+
+        var results = await _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges).Aggregate<BsonDocument>(pipeline).ToListAsync(ct);
+
+        return results.Select(d => (label: d[MongoFields.Id].AsString, count: d["count"].AsInt32)).ToList();
+    }
+
+    /// <summary>
+    /// Rank entities by total edge degree (outgoing edges).
+    /// E.g. "Most connected characters" or "Most referenced planets".
+    /// </summary>
+    public async Task<List<(string name, int id, int degree)>> TopConnectedEntitiesAsync(string? entityType, string? label, string? continuity, int limit, CancellationToken ct = default)
+    {
+        limit = Math.Clamp(limit, 1, 50);
+
+        var match = new BsonDocument();
+        if (!string.IsNullOrWhiteSpace(entityType))
+            match[RelationshipEdgeBsonFields.FromType] = entityType;
+        if (!string.IsNullOrWhiteSpace(label))
+            match[RelationshipEdgeBsonFields.Label] = label;
+        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+            match[GraphNodeBsonFields.Continuity] = cont.ToString();
+
+        var pipeline = new List<BsonDocument>();
+        if (match.ElementCount > 0)
+            pipeline.Add(new BsonDocument("$match", match));
+
+        pipeline.AddRange(
+            [
+                new BsonDocument(
+                    "$group",
+                    new BsonDocument
+                    {
+                        {
+                            MongoFields.Id,
+                            new BsonDocument { { "name", "$" + RelationshipEdgeBsonFields.FromName }, { "id", "$" + RelationshipEdgeBsonFields.FromId } }
+                        },
+                        { "degree", new BsonDocument("$sum", 1) },
+                    }
+                ),
+                new BsonDocument("$sort", new BsonDocument("degree", -1)),
+                new BsonDocument("$limit", limit),
+            ]
+        );
+
+        var results = await _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges).Aggregate<BsonDocument>(pipeline).ToListAsync(ct);
+
+        return results.Select(d => (name: d[MongoFields.Id]["name"].AsString, id: d[MongoFields.Id]["id"].AsInt32, degree: d["degree"].AsInt32)).ToList();
+    }
+
+    /// <summary>
+    /// Multi-dimension profile for an entity — counts edges by multiple labels.
+    /// Powers Radar charts: e.g. Clone Wars → battles: 47, combatants: 230, planets: 23.
+    /// </summary>
+    public async Task<List<(string dimension, int count)>> EntityProfileAsync(int entityId, List<string> labels, string? continuity, CancellationToken ct = default)
+    {
+        var match = new BsonDocument { { RelationshipEdgeBsonFields.FromId, entityId }, { RelationshipEdgeBsonFields.Label, new BsonDocument("$in", new BsonArray(labels)) } };
+        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+            match[GraphNodeBsonFields.Continuity] = cont.ToString();
+
+        var pipeline = new[]
+        {
+            new BsonDocument("$match", match),
+            new BsonDocument("$group", new BsonDocument { { MongoFields.Id, "$" + RelationshipEdgeBsonFields.Label }, { "count", new BsonDocument("$sum", 1) } }),
+            new BsonDocument("$sort", new BsonDocument(MongoFields.Id, 1)),
+        };
+
+        var results = await _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges).Aggregate<BsonDocument>(pipeline).ToListAsync(ct);
+
+        // Return in the order of the requested labels, with 0 for missing
+        var map = results.ToDictionary(d => d[MongoFields.Id].AsString, d => d["count"].AsInt32);
+        return labels.Select(l => (dimension: l, count: map.GetValueOrDefault(l, 0))).ToList();
+    }
+
+    /// <summary>
+    /// Count nodes grouped by entity type.
+    /// E.g. overall KG composition: Character: 8200, Planet: 1100, etc.
+    /// </summary>
+    public async Task<List<(string type, int count)>> CountNodesByTypeAsync(string? continuity, int limit, CancellationToken ct = default)
+    {
+        limit = Math.Clamp(limit, 1, 50);
+
+        var match = new BsonDocument();
+        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+            match[GraphNodeBsonFields.Continuity] = cont.ToString();
+
+        var pipeline = new[]
+        {
+            new BsonDocument("$match", match),
+            new BsonDocument("$group", new BsonDocument { { MongoFields.Id, "$" + GraphNodeBsonFields.Type }, { "count", new BsonDocument("$sum", 1) } }),
+            new BsonDocument("$sort", new BsonDocument("count", -1)),
+            new BsonDocument("$limit", limit),
+        };
+
+        var results = await _nodes.Database.GetCollection<BsonDocument>(Collections.KgNodes).Aggregate<BsonDocument>(pipeline).ToListAsync(ct);
+
+        return results.Select(d => (type: d[MongoFields.Id].AsString, count: d["count"].AsInt32)).ToList();
+    }
+
+    /// <summary>
+    /// For a specific entity, find its connected entities via a label, then group those
+    /// connected entities by a property value. E.g. "Species breakdown of Jedi Order members":
+    /// root=Jedi Order, label=member_of (edges FROM members TO Jedi Order), property=Species.
+    /// </summary>
+    public async Task<List<(string value, int count)>> CountPropertyForRelatedEntitiesAsync(
+        int rootEntityId,
+        string label,
+        string property,
+        bool rootIsTarget,
+        string? continuity,
+        int limit,
+        CancellationToken ct = default
+    )
+    {
+        limit = Math.Clamp(limit, 1, 50);
+
+        // Step 1: find connected entity IDs via the edge label
+        var edgeMatch = new BsonDocument(RelationshipEdgeBsonFields.Label, label);
+        if (rootIsTarget)
+            edgeMatch[RelationshipEdgeBsonFields.ToId] = rootEntityId;
+        else
+            edgeMatch[RelationshipEdgeBsonFields.FromId] = rootEntityId;
+        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+            edgeMatch[GraphNodeBsonFields.Continuity] = cont.ToString();
+
+        var connectedField = rootIsTarget ? RelationshipEdgeBsonFields.FromId : RelationshipEdgeBsonFields.ToId;
+
+        var edgePipeline = new[] { new BsonDocument("$match", edgeMatch), new BsonDocument("$group", new BsonDocument(MongoFields.Id, $"${connectedField}")) };
+
+        var edgeResults = await _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges).Aggregate<BsonDocument>(edgePipeline).ToListAsync(ct);
+
+        var connectedIds = edgeResults.Select(d => d[MongoFields.Id].AsInt32).ToList();
+        if (connectedIds.Count == 0)
+            return [];
+
+        // Step 2: aggregate connected nodes by the property value
+        var nodePipeline = new[]
+        {
+            new BsonDocument("$match", new BsonDocument(MongoFields.Id, new BsonDocument("$in", new BsonArray(connectedIds)))),
+            new BsonDocument("$unwind", $"$properties.{property}"),
+            new BsonDocument("$group", new BsonDocument { { MongoFields.Id, $"$properties.{property}" }, { "count", new BsonDocument("$sum", 1) } }),
+            new BsonDocument("$sort", new BsonDocument("count", -1)),
+            new BsonDocument("$limit", limit),
+        };
+
+        var results = await _nodes.Database.GetCollection<BsonDocument>(Collections.KgNodes).Aggregate<BsonDocument>(nodePipeline).ToListAsync(ct);
+
+        return results.Select(d => (value: d[MongoFields.Id].AsString, count: d["count"].AsInt32)).ToList();
+    }
+
+    /// <summary>
+    /// Group source entities by the target entity they connect to via a label.
+    /// E.g. "Characters grouped by faction" → label=member_of, sourceType=Character
+    /// → returns [{name: "Galactic Empire", count: 450}, {name: "Jedi Order", count: 230}, ...].
+    /// </summary>
+    public async Task<List<(string name, int id, int count)>> GroupEntitiesByConnectionAsync(
+        string sourceType,
+        string label,
+        string? targetType,
+        string? continuity,
+        int limit,
+        CancellationToken ct = default
+    )
+    {
+        limit = Math.Clamp(limit, 1, 50);
+
+        var match = new BsonDocument { { RelationshipEdgeBsonFields.FromType, sourceType }, { RelationshipEdgeBsonFields.Label, label } };
+        if (!string.IsNullOrWhiteSpace(targetType))
+            match[RelationshipEdgeBsonFields.ToType] = targetType;
+        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+            match[GraphNodeBsonFields.Continuity] = cont.ToString();
+
+        var pipeline = new[]
+        {
+            new BsonDocument("$match", match),
+            new BsonDocument(
+                "$group",
+                new BsonDocument
+                {
+                    {
+                        MongoFields.Id,
+                        new BsonDocument { { "name", "$" + RelationshipEdgeBsonFields.ToName }, { "id", "$" + RelationshipEdgeBsonFields.ToId } }
+                    },
+                    { "count", new BsonDocument("$sum", 1) },
+                }
+            ),
+            new BsonDocument("$sort", new BsonDocument("count", -1)),
+            new BsonDocument("$limit", limit),
+        };
+
+        var results = await _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges).Aggregate<BsonDocument>(pipeline).ToListAsync(ct);
+
+        return results.Select(d => (name: d[MongoFields.Id]["name"].AsString, id: d[MongoFields.Id]["id"].AsInt32, count: d["count"].AsInt32)).ToList();
+    }
+
+    /// <summary>
+    /// Batch entity_profile for multiple entities — returns counts per label per entity.
+    /// Powers side-by-side Radar/StackedBar: "Compare Yoda, Palpatine, Dooku across dimensions".
+    /// </summary>
+    public async Task<List<(int entityId, string entityName, List<(string label, int count)> dimensions)>> CompareEntitiesAsync(
+        List<int> entityIds,
+        List<string> labels,
+        string? continuity,
+        CancellationToken ct = default
+    )
+    {
+        if (entityIds.Count > 10)
+            entityIds = entityIds.Take(10).ToList();
+
+        var match = new BsonDocument
+        {
+            { RelationshipEdgeBsonFields.FromId, new BsonDocument("$in", new BsonArray(entityIds)) },
+            { RelationshipEdgeBsonFields.Label, new BsonDocument("$in", new BsonArray(labels)) },
+        };
+        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+            match[GraphNodeBsonFields.Continuity] = cont.ToString();
+
+        var pipeline = new[]
+        {
+            new BsonDocument("$match", match),
+            new BsonDocument(
+                "$group",
+                new BsonDocument
+                {
+                    {
+                        MongoFields.Id,
+                        new BsonDocument
+                        {
+                            { "entityId", "$" + RelationshipEdgeBsonFields.FromId },
+                            { "entityName", "$" + RelationshipEdgeBsonFields.FromName },
+                            { RelationshipEdgeBsonFields.Label, "$" + RelationshipEdgeBsonFields.Label },
+                        }
+                    },
+                    { "count", new BsonDocument("$sum", 1) },
+                }
+            ),
+        };
+
+        var results = await _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges).Aggregate<BsonDocument>(pipeline).ToListAsync(ct);
+
+        // Group by entity, fill in zeros for missing labels
+        var grouped = results
+            .GroupBy(d => d[MongoFields.Id]["entityId"].AsInt32)
+            .Select(g =>
+            {
+                var entityId = g.Key;
+                var entityName = g.First()[MongoFields.Id]["entityName"].AsString;
+                var counts = g.ToDictionary(d => d[MongoFields.Id][RelationshipEdgeBsonFields.Label].AsString, d => d["count"].AsInt32);
+                var dimensions = labels.Select(l => (label: l, count: counts.GetValueOrDefault(l, 0))).ToList();
+                return (entityId, entityName, dimensions);
+            })
+            .ToList();
+
+        // Include entities with zero edges (not in results at all)
+        var foundIds = grouped.Select(g => g.entityId).ToHashSet();
+        foreach (var id in entityIds.Where(id => !foundIds.Contains(id)))
+        {
+            var node = await GetNodeByIdAsync(id, ct);
+            grouped.Add((id, node?.Name ?? $"#{id}", labels.Select(l => (label: l, count: 0)).ToList()));
+        }
+
+        // Preserve the requested order
+        return entityIds.Select(id => grouped.First(g => g.entityId == id)).ToList();
+    }
+
+    /// <summary>
+    /// Find entities whose temporal facets match a specific semantic dimension.role (e.g.
+    /// "institutional.reorganized", "lifespan.end") within a year range. Uses $elemMatch so
+    /// each returned node comes with the exact facet that caused the match.
+    /// </summary>
+    public async Task<List<(int pageId, string name, string type, string semantic, int year, string text, string calendar)>> FindByLifecycleTransitionAsync(
+        string semantic,
+        int startYear,
+        int endYear,
+        string? entityType,
+        string? continuity,
+        int limit,
+        CancellationToken ct = default
+    )
+    {
+        var rangeStart = Math.Min(startYear, endYear);
+        var rangeEnd = Math.Max(startYear, endYear);
+        limit = Math.Clamp(limit, 1, 100);
+
+        var match = new BsonDocument();
+        if (!string.IsNullOrWhiteSpace(entityType))
+            match[GraphNodeBsonFields.Type] = entityType;
+        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+            match[GraphNodeBsonFields.Continuity] = cont.ToString();
+
+        // Pre-filter to nodes containing at least one matching facet to limit the $unwind fanout.
+        match[GraphNodeBsonFields.TemporalFacets] = new BsonDocument(
+            "$elemMatch",
+            new BsonDocument
+            {
+                { "semantic", new BsonDocument("$regex", $"^{Regex.Escape(semantic)}$").Add("$options", "i") },
+                {
+                    "year",
+                    new BsonDocument { { "$gte", rangeStart }, { "$lte", rangeEnd } }
+                },
+            }
+        );
+
+        var pipeline = new[]
+        {
+            new BsonDocument("$match", match),
+            new BsonDocument("$unwind", "$" + GraphNodeBsonFields.TemporalFacets),
+            new BsonDocument(
+                "$match",
+                new BsonDocument
+                {
+                    { GraphNodeBsonFields.TemporalFacetSemantic, new BsonDocument("$regex", $"^{Regex.Escape(semantic)}$").Add("$options", "i") },
+                    {
+                        GraphNodeBsonFields.TemporalFacetYear,
+                        new BsonDocument { { "$gte", rangeStart }, { "$lte", rangeEnd } }
+                    },
+                }
+            ),
+            new BsonDocument("$sort", new BsonDocument(GraphNodeBsonFields.TemporalFacetYear, 1)),
+            new BsonDocument("$limit", limit),
+            new BsonDocument(
+                "$project",
+                new BsonDocument
+                {
+                    // GraphNode.PageId is [BsonId] so the source field is _id — alias it as pageId in the output.
+                    { "pageId", "$" + MongoFields.Id },
+                    { GraphNodeBsonFields.Name, "$" + GraphNodeBsonFields.Name },
+                    { GraphNodeBsonFields.Type, "$" + GraphNodeBsonFields.Type },
+                    { "semantic", "$" + GraphNodeBsonFields.TemporalFacets + "." + TemporalFacetBsonFields.Semantic },
+                    { "year", "$" + GraphNodeBsonFields.TemporalFacets + "." + TemporalFacetBsonFields.Year },
+                    { "text", "$" + GraphNodeBsonFields.TemporalFacets + "." + TemporalFacetBsonFields.Text },
+                    { "calendar", "$" + GraphNodeBsonFields.TemporalFacets + "." + TemporalFacetBsonFields.Calendar },
+                    { MongoFields.Id, 0 },
+                }
+            ),
+        };
+
+        var results = await _nodes.Database.GetCollection<BsonDocument>(Collections.KgNodes).Aggregate<BsonDocument>(pipeline, cancellationToken: ct).ToListAsync(ct);
+
+        return results
+            .Select(d =>
+                (
+                    pageId: d.GetValue("pageId", 0).ToInt32(),
+                    name: d.GetValue(GraphNodeBsonFields.Name, "").AsString,
+                    type: d.GetValue(GraphNodeBsonFields.Type, "").AsString,
+                    semantic: d.GetValue("semantic", "").AsString,
+                    year: d.GetValue("year", 0).ToInt32(),
+                    text: d.GetValue("text", "").AsString,
+                    calendar: d.GetValue("calendar", "").AsString
+                )
+            )
+            .ToList();
+    }
+
+    /// <summary>
+    /// Count lifecycle transitions per year bucket by unwinding temporal facets and grouping
+    /// on year. More accurate than CountByYearRangeAsync for lifecycle events because it
+    /// counts facet hits directly rather than using the node's startYear envelope.
+    /// </summary>
+    public async Task<List<(int year, int count)>> CountLifecycleTransitionsAsync(
+        string semantic,
+        int startYear,
+        int endYear,
+        int bucket,
+        string? entityType,
+        string? continuity,
+        CancellationToken ct = default
+    )
+    {
+        bucket = Math.Max(bucket, 1);
+        var rangeStart = Math.Min(startYear, endYear);
+        var rangeEnd = Math.Max(startYear, endYear);
+
+        var match = new BsonDocument();
+        if (!string.IsNullOrWhiteSpace(entityType))
+            match[GraphNodeBsonFields.Type] = entityType;
+        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+            match[GraphNodeBsonFields.Continuity] = cont.ToString();
+
+        match[GraphNodeBsonFields.TemporalFacets] = new BsonDocument(
+            "$elemMatch",
+            new BsonDocument
+            {
+                { "semantic", new BsonDocument("$regex", $"^{Regex.Escape(semantic)}$").Add("$options", "i") },
+                {
+                    "year",
+                    new BsonDocument { { "$gte", rangeStart }, { "$lte", rangeEnd } }
+                },
+            }
+        );
+
+        var pipeline = new[]
+        {
+            new BsonDocument("$match", match),
+            new BsonDocument("$unwind", "$" + GraphNodeBsonFields.TemporalFacets),
+            new BsonDocument(
+                "$match",
+                new BsonDocument
+                {
+                    { GraphNodeBsonFields.TemporalFacetSemantic, new BsonDocument("$regex", $"^{Regex.Escape(semantic)}$").Add("$options", "i") },
+                    {
+                        GraphNodeBsonFields.TemporalFacetYear,
+                        new BsonDocument { { "$gte", rangeStart }, { "$lte", rangeEnd } }
+                    },
+                }
+            ),
+            new BsonDocument(
+                "$group",
+                new BsonDocument
+                {
+                    {
+                        MongoFields.Id,
+                        new BsonDocument("$multiply", new BsonArray { new BsonDocument("$floor", new BsonDocument("$divide", new BsonArray { "$temporalFacets.year", bucket })), bucket })
+                    },
+                    { "count", new BsonDocument("$sum", 1) },
+                }
+            ),
+            new BsonDocument("$sort", new BsonDocument(MongoFields.Id, 1)),
+        };
+
+        var results = await _nodes.Database.GetCollection<BsonDocument>(Collections.KgNodes).Aggregate<BsonDocument>(pipeline, cancellationToken: ct).ToListAsync(ct);
+
+        return results.Select(d => (year: d[MongoFields.Id].ToInt32(), count: d["count"].AsInt32)).ToList();
+    }
+
+    /// <summary>
+    /// Browse aggregated statistics per relationship label in kg.edges. Each row is one
+    /// directed label with overall count, Canon/Legends split, avg confidence, top source
+    /// and target entity types, and a sample edge. Used by the Knowledge Graph page's
+    /// "Edge Labels" tab for discovering which relationship kinds exist in the graph.
+    /// </summary>
+    public async Task<BrowseEdgeLabelsResult> BrowseEdgeLabelsAsync(
+        string? q,
+        string? continuity,
+        string? fromType,
+        string? toType,
+        long minCount,
+        int page,
+        int pageSize,
+        string? sortBy,
+        string? sortDirection,
+        string? universe,
+        CancellationToken ct
+    )
+    {
+        if (pageSize > 100)
+            pageSize = 100;
+        if (page < 1)
+            page = 1;
+
+        var match = new BsonDocument();
+        if (!string.IsNullOrWhiteSpace(q))
+            match[RelationshipEdgeBsonFields.Label] = new BsonDocument { { "$regex", q }, { "$options", "i" } };
+        if (!string.IsNullOrWhiteSpace(continuity) && Enum.TryParse<Continuity>(continuity, true, out var cont))
+            match[RelationshipEdgeBsonFields.Continuity] = cont.ToString();
+        if (!string.IsNullOrWhiteSpace(fromType))
+            match[RelationshipEdgeBsonFields.FromType] = fromType;
+        if (!string.IsNullOrWhiteSpace(toType))
+            match[RelationshipEdgeBsonFields.ToType] = toType;
+
+        var sortField = sortBy switch
+        {
+            "label" => MongoFields.Id,
+            "avgWeight" => "avgWeight",
+            _ => "count",
+        };
+        var sortDir = sortDirection == "ascending" ? 1 : -1;
+
+        var pipeline = new List<BsonDocument>();
+        if (match.ElementCount > 0)
+            pipeline.Add(new BsonDocument("$match", match));
+
+        // Universe filter: edges don't carry Universe directly, so $lookup the source
+        // node from kg.nodes and keep edges whose source node matches the selected
+        // universe (plus Unknown). Applied after the cheap $match so the join set is
+        // as small as possible.
+        if (!string.IsNullOrWhiteSpace(universe) && Enum.TryParse<Universe>(universe, true, out var uni))
+        {
+            pipeline.Add(
+                new BsonDocument(
+                    "$lookup",
+                    new BsonDocument
+                    {
+                        { "from", Collections.KgNodes },
+                        { "localField", RelationshipEdgeBsonFields.FromId },
+                        { "foreignField", MongoFields.Id },
+                        { "as", "_fromNode" },
+                        {
+                            "pipeline",
+                            new BsonArray { new BsonDocument("$project", new BsonDocument(GraphNodeBsonFields.Universe, 1)) }
+                        },
+                    }
+                )
+            );
+            pipeline.Add(
+                new BsonDocument("$match", new BsonDocument("_fromNode." + GraphNodeBsonFields.Universe, new BsonDocument("$in", new BsonArray { uni.ToString(), nameof(Universe.Unknown) })))
+            );
+        }
+
+        pipeline.Add(
+            new BsonDocument(
+                "$group",
+                new BsonDocument
+                {
+                    { MongoFields.Id, "$" + RelationshipEdgeBsonFields.Label },
+                    { "count", new BsonDocument("$sum", 1) },
+                    {
+                        "canonCount",
+                        new BsonDocument(
+                            "$sum",
+                            new BsonDocument("$cond", new BsonArray { new BsonDocument("$eq", new BsonArray { "$" + RelationshipEdgeBsonFields.Continuity, nameof(Continuity.Canon) }), 1, 0 })
+                        )
+                    },
+                    {
+                        "legendsCount",
+                        new BsonDocument(
+                            "$sum",
+                            new BsonDocument("$cond", new BsonArray { new BsonDocument("$eq", new BsonArray { "$" + RelationshipEdgeBsonFields.Continuity, nameof(Continuity.Legends) }), 1, 0 })
+                        )
+                    },
+                    { "avgWeight", new BsonDocument("$avg", "$" + RelationshipEdgeBsonFields.Weight) },
+                    { "fromTypes", new BsonDocument("$push", "$" + RelationshipEdgeBsonFields.FromType) },
+                    { "toTypes", new BsonDocument("$push", "$" + RelationshipEdgeBsonFields.ToType) },
+                    {
+                        "sample",
+                        new BsonDocument(
+                            "$first",
+                            new BsonDocument
+                            {
+                                { "fromId", "$" + RelationshipEdgeBsonFields.FromId },
+                                { "fromName", "$" + RelationshipEdgeBsonFields.FromName },
+                                { "toId", "$" + RelationshipEdgeBsonFields.ToId },
+                                { "toName", "$" + RelationshipEdgeBsonFields.ToName },
+                            }
+                        )
+                    },
+                }
+            )
+        );
+
+        if (minCount > 0)
+            pipeline.Add(new BsonDocument("$match", new BsonDocument("count", new BsonDocument("$gte", minCount))));
+
+        pipeline.Add(
+            new BsonDocument(
+                "$facet",
+                new BsonDocument
+                {
+                    {
+                        "total",
+                        new BsonArray { new BsonDocument("$count", "n") }
+                    },
+                    {
+                        "items",
+                        new BsonArray { new BsonDocument("$sort", new BsonDocument(sortField, sortDir)), new BsonDocument("$skip", (page - 1) * pageSize), new BsonDocument("$limit", pageSize) }
+                    },
+                }
+            )
+        );
+
+        var result = await _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges).Aggregate<BsonDocument>(pipeline, cancellationToken: ct).FirstOrDefaultAsync(ct);
+
+        if (result is null)
+            return new BrowseEdgeLabelsResult { Page = page, PageSize = pageSize };
+
+        var totalArr = result["total"].AsBsonArray;
+        var total = totalArr.Count > 0 ? totalArr[0]["n"].ToInt64() : 0;
+
+        static List<TypeCount> TopTypes(BsonValue arr) =>
+            arr
+                .AsBsonArray.Select(x => x.IsBsonNull ? string.Empty : x.AsString)
+                .Where(s => !string.IsNullOrEmpty(s))
+                .GroupBy(s => s)
+                .Select(g => new TypeCount { Type = g.Key, Count = g.LongCount() })
+                .OrderByDescending(t => t.Count)
+                .Take(5)
+                .ToList();
+
+        var items = result["items"]
+            .AsBsonArray.Select(d =>
+            {
+                var doc = d.AsBsonDocument;
+                var sampleVal = doc.GetValue("sample", BsonNull.Value);
+                EdgeSample? sample = sampleVal.IsBsonDocument
+                    ? new EdgeSample
+                    {
+                        FromId = sampleVal["fromId"].ToInt32(),
+                        FromName = sampleVal.AsBsonDocument.GetValue("fromName", "").AsString,
+                        ToId = sampleVal["toId"].ToInt32(),
+                        ToName = sampleVal.AsBsonDocument.GetValue("toName", "").AsString,
+                    }
+                    : null;
+
+                return new EdgeLabelStatsDto
+                {
+                    Label = doc[MongoFields.Id].AsString,
+                    Count = doc["count"].ToInt64(),
+                    CanonCount = doc["canonCount"].ToInt64(),
+                    LegendsCount = doc["legendsCount"].ToInt64(),
+                    AvgWeight = doc.GetValue("avgWeight", 0.0).IsBsonNull ? 0.0 : doc["avgWeight"].ToDouble(),
+                    TopFromTypes = TopTypes(doc["fromTypes"]),
+                    TopToTypes = TopTypes(doc["toTypes"]),
+                    Sample = sample,
+                };
+            })
+            .ToList();
+
+        return new BrowseEdgeLabelsResult
+        {
+            Items = items,
+            Total = total,
+            Page = page,
+            PageSize = pageSize,
+        };
     }
 }

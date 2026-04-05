@@ -5,6 +5,7 @@ using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using StarWarsData.Models.Entities;
 
 namespace StarWarsData.Services;
 
@@ -20,10 +21,7 @@ public sealed class StarWarsWikiSearchProvider : MessageAIContextProvider
     private readonly ILogger? _logger;
     private readonly AITool[] _tools;
 
-    public StarWarsWikiSearchProvider(
-        IMongoCollection<BsonDocument> pagesCollection,
-        ILoggerFactory? loggerFactory = null
-    )
+    public StarWarsWikiSearchProvider(IMongoCollection<BsonDocument> pagesCollection, ILoggerFactory? loggerFactory = null)
     {
         _pages = pagesCollection;
         _logger = loggerFactory?.CreateLogger<StarWarsWikiSearchProvider>();
@@ -40,19 +38,13 @@ public sealed class StarWarsWikiSearchProvider : MessageAIContextProvider
         ];
     }
 
-    protected override ValueTask<IEnumerable<ChatMessage>> InvokingCoreAsync(
-        InvokingContext context,
-        CancellationToken cancellationToken = default
-    )
+    protected override ValueTask<IEnumerable<ChatMessage>> InvokingCoreAsync(InvokingContext context, CancellationToken cancellationToken = default)
     {
         // OnDemand mode: return no extra messages, just expose the tool
         return new(Enumerable.Empty<ChatMessage>());
     }
 
-    protected override ValueTask<AIContext> ProvideAIContextAsync(
-        AIContextProvider.InvokingContext context,
-        CancellationToken cancellationToken = default
-    )
+    protected override ValueTask<AIContext> ProvideAIContextAsync(AIContextProvider.InvokingContext context, CancellationToken cancellationToken = default)
     {
         return new(new AIContext { Tools = _tools });
     }
@@ -61,35 +53,19 @@ public sealed class StarWarsWikiSearchProvider : MessageAIContextProvider
     {
         _logger?.LogInformation("Wiki search: {Query}", query);
 
-        var projection = Builders<BsonDocument>
-            .Projection.Include("title")
-            .Include("wikiUrl")
-            .Include("content")
-            .Include("infobox.Template")
-            .Include("infobox.Data");
+        var projection = Builders<BsonDocument>.Projection.Include(PageBsonFields.Title).Include(PageBsonFields.WikiUrl).Include("content").Include("infobox.Template").Include("infobox.Data");
 
         // Use $text search (searches title + content via text index, ranked by relevance)
         var textFilter = Builders<BsonDocument>.Filter.Text(query);
         var textProjection = projection.MetaTextScore("score");
-        var docs = await _pages
-            .Find(textFilter)
-            .Project(textProjection)
-            .Sort(Builders<BsonDocument>.Sort.MetaTextScore("score"))
-            .Limit(5)
-            .ToListAsync(ct);
+        var docs = await _pages.Find(textFilter).Project(textProjection).Sort(Builders<BsonDocument>.Sort.MetaTextScore("score")).Limit(5).ToListAsync(ct);
 
         // Fallback to regex on title if text search returns nothing
         // (handles exact phrase matches the text index may tokenize differently)
         if (docs.Count == 0)
         {
-            _logger?.LogInformation(
-                "Text search returned no results, falling back to regex for: {Query}",
-                query
-            );
-            var regexFilter = Builders<BsonDocument>.Filter.Regex(
-                "title",
-                new BsonRegularExpression(Regex.Escape(query), "i")
-            );
+            _logger?.LogInformation("Text search returned no results, falling back to regex for: {Query}", query);
+            var regexFilter = Builders<BsonDocument>.Filter.Regex(PageBsonFields.Title, new BsonRegularExpression(Regex.Escape(query), "i"));
             docs = await _pages.Find(regexFilter).Project(projection).Limit(5).ToListAsync(ct);
         }
 
@@ -106,8 +82,8 @@ public sealed class StarWarsWikiSearchProvider : MessageAIContextProvider
 
         foreach (var doc in docs)
         {
-            var title = doc.GetValue("title", "").AsString;
-            var wikiUrl = doc.GetValue("wikiUrl", "").AsString;
+            var title = doc.GetValue(PageBsonFields.Title, "").AsString;
+            var wikiUrl = doc.GetValue(PageBsonFields.WikiUrl, "").AsString;
             var content = doc.Contains("content") ? doc["content"].AsString : "";
 
             sb.AppendLine($"### {title}");
@@ -115,34 +91,27 @@ public sealed class StarWarsWikiSearchProvider : MessageAIContextProvider
                 sb.AppendLine($"Source: {wikiUrl}");
 
             // Include infobox summary if present
-            if (doc.Contains("infobox") && doc["infobox"].IsBsonDocument)
+            if (doc.Contains(PageBsonFields.Infobox) && doc[PageBsonFields.Infobox].IsBsonDocument)
             {
-                var infobox = doc["infobox"].AsBsonDocument;
-                if (infobox.Contains("Data") && infobox["Data"].IsBsonArray)
+                var infobox = doc[PageBsonFields.Infobox].AsBsonDocument;
+                if (infobox.Contains(InfoboxBsonFields.Data) && infobox[InfoboxBsonFields.Data].IsBsonArray)
                 {
-                    var data = infobox["Data"].AsBsonArray;
+                    var data = infobox[InfoboxBsonFields.Data].AsBsonArray;
                     var props = new List<string>();
                     foreach (var item in data.Take(10))
                     {
                         if (!item.IsBsonDocument)
                             continue;
-                        var label = item.AsBsonDocument.GetValue("Label", "").AsString;
+                        var label = item.AsBsonDocument.GetValue(InfoboxBsonFields.Label, "").AsString;
                         var values =
-                            item.AsBsonDocument.Contains("Values") && item["Values"].IsBsonArray
-                                ? string.Join(
-                                    ", ",
-                                    item["Values"].AsBsonArray.Select(v => v.AsString)
-                                )
+                            item.AsBsonDocument.Contains(InfoboxBsonFields.Values) && item[InfoboxBsonFields.Values].IsBsonArray
+                                ? string.Join(", ", item[InfoboxBsonFields.Values].AsBsonArray.Select(v => v.AsString))
                                 : "";
                         var links =
-                            item.AsBsonDocument.Contains("Links") && item["Links"].IsBsonArray
+                            item.AsBsonDocument.Contains(InfoboxBsonFields.Links) && item[InfoboxBsonFields.Links].IsBsonArray
                                 ? string.Join(
                                     ", ",
-                                    item["Links"]
-                                        .AsBsonArray.Where(l => l.IsBsonDocument)
-                                        .Select(l =>
-                                            l.AsBsonDocument.GetValue("Content", "").AsString
-                                        )
+                                    item[InfoboxBsonFields.Links].AsBsonArray.Where(l => l.IsBsonDocument).Select(l => l.AsBsonDocument.GetValue(InfoboxBsonFields.Content, "").AsString)
                                 )
                                 : "";
                         var value =
@@ -172,11 +141,7 @@ public sealed class StarWarsWikiSearchProvider : MessageAIContextProvider
             sb.AppendLine();
         }
 
-        _logger?.LogInformation(
-            "Wiki search returned {Count} results for: {Query}",
-            docs.Count,
-            query
-        );
+        _logger?.LogInformation("Wiki search returned {Count} results for: {Query}", docs.Count, query);
         return sb.ToString();
     }
 }

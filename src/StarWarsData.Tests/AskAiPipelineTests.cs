@@ -22,65 +22,36 @@ public class AskAiPipelineTests(ITestOutputHelper output)
 {
     private const string Model = "gpt-5-mini";
 
-    private static readonly HashSet<string> AllowedMcpTools = new(StringComparer.OrdinalIgnoreCase)
-    {
-        "find",
-        "aggregate",
-        "count",
-        "list_collections",
-        "list_databases",
-        "collection_schema",
-    };
+    private static readonly HashSet<string> AllowedMcpTools = new(StringComparer.OrdinalIgnoreCase) { "find", "aggregate", "count", "list_collections", "list_databases", "collection_schema" };
 
     private static McpClient CreateMcpClient()
     {
-        var connectionString =
-            Environment.GetEnvironmentVariable("MDB_MCP_CONNECTION_STRING")
-            ?? throw new InvalidOperationException("MDB_MCP_CONNECTION_STRING env var not set");
+        var connectionString = Environment.GetEnvironmentVariable("MDB_MCP_CONNECTION_STRING") ?? throw new InvalidOperationException("MDB_MCP_CONNECTION_STRING env var not set");
 
         var transport = new StdioClientTransport(
             new StdioClientTransportOptions
             {
                 Name = "MongoDB",
                 Command = "npx",
-                Arguments =
-                [
-                    "-y",
-                    "@mongodb-js/mongodb-mcp-server",
-                    "--connectionString",
-                    connectionString,
-                    "--readOnly",
-                ],
+                Arguments = ["-y", "@mongodb-js/mongodb-mcp-server", "--connectionString", connectionString, "--readOnly"],
             }
         );
 
-        return McpClient
-            .CreateAsync(
-                transport,
-                new McpClientOptions { InitializationTimeout = TimeSpan.FromMinutes(2) }
-            )
-            .GetAwaiter()
-            .GetResult();
+        return McpClient.CreateAsync(transport, new McpClientOptions { InitializationTimeout = TimeSpan.FromMinutes(2) }).GetAwaiter().GetResult();
     }
 
     private static OpenAIClient CreateOpenAiClient()
     {
-        var apiKey =
-            Environment.GetEnvironmentVariable("STARWARS_OPENAI_KEY")
-            ?? throw new InvalidOperationException("STARWARS_OPENAI_KEY env var not set");
+        var apiKey = Environment.GetEnvironmentVariable("STARWARS_OPENAI_KEY") ?? throw new InvalidOperationException("STARWARS_OPENAI_KEY env var not set");
 
-        return new OpenAIClient(
-            new ApiKeyCredential(apiKey),
-            new OpenAIClientOptions { NetworkTimeout = TimeSpan.FromMinutes(5) }
-        );
+        return new OpenAIClient(new ApiKeyCredential(apiKey), new OpenAIClientOptions { NetworkTimeout = TimeSpan.FromMinutes(5) });
     }
 
     [Fact]
     [Trait("Category", "Integration")]
     public async Task Ask_ForcePowersByAlignment_ReturnsChart()
     {
-        const string question =
-            "How many Force powers are light side vs dark side vs universal? Show as a bar chart.";
+        const string question = "How many Force powers are light side vs dark side vs universal? Show as a bar chart.";
         var toolkit = await RunPipeline(question);
 
         Assert.NotNull(toolkit.ChartResult);
@@ -99,9 +70,7 @@ public class AskAiPipelineTests(ITestOutputHelper output)
         Assert.NotNull(toolkit.GraphResult);
         Assert.True(toolkit.GraphResult.RootEntityId > 0);
         Assert.NotEmpty(toolkit.GraphResult.RootEntityName);
-        output.WriteLine(
-            $"Relationship graph for: {toolkit.GraphResult.RootEntityName} (PageId={toolkit.GraphResult.RootEntityId})"
-        );
+        output.WriteLine($"Relationship graph for: {toolkit.GraphResult.RootEntityName} (PageId={toolkit.GraphResult.RootEntityId})");
     }
 
     [Fact]
@@ -127,19 +96,12 @@ public class AskAiPipelineTests(ITestOutputHelper output)
         var openAiClient = CreateOpenAiClient();
 
         var mcpTools = await mcpClient.ListToolsAsync(cancellationToken: cts.Token);
-        output.WriteLine(
-            $"MCP tools available ({mcpTools.Count}): {string.Join(", ", mcpTools.Select(t => t.Name))}"
-        );
+        output.WriteLine($"MCP tools available ({mcpTools.Count}): {string.Join(", ", mcpTools.Select(t => t.Name))}");
 
         var componentToolkit = new ComponentToolkit();
         var tools = new List<AITool>();
         tools.AddRange(componentToolkit.AsAIFunctions());
-        tools.AddRange(
-            mcpTools
-                .Select(t => t.WithName(t.Name.Replace('-', '_')))
-                .Where(t => AllowedMcpTools.Contains(t.Name))
-                .Cast<AITool>()
-        );
+        tools.AddRange(mcpTools.Select(t => t.WithName(t.Name.Replace('-', '_'))).Where(t => AllowedMcpTools.Contains(t.Name)).Cast<AITool>());
         output.WriteLine($"Total tools registered: {tools.Count}");
 
         IChatClient chatClient = openAiClient.GetChatClient(Model).AsIChatClient();
@@ -152,8 +114,8 @@ public class AskAiPipelineTests(ITestOutputHelper output)
             GOAL:
             Answer the user's question by choosing the right visualization. Never ask for clarification.
 
-            DATABASE: starwars-raw-pages
-            Single "Pages" collection. Infobox type (Character, Battle, War, etc.) is in infobox.Template.
+            DATABASE: starwars
+            Single "raw.pages" collection. Infobox type (Character, Battle, War, etc.) is in infobox.Template.
             Data exploration tools handle template filtering — just pass the type name.
 
             DOCUMENT SHAPE (Pages):
@@ -189,35 +151,20 @@ public class AskAiPipelineTests(ITestOutputHelper output)
         );
 
         AgentSession session = await agent.CreateSessionAsync(cts.Token);
-        AgentResponse response = await agent.RunAsync(
-            question,
-            session,
-            cancellationToken: cts.Token
-        );
+        AgentResponse response = await agent.RunAsync(question, session, cancellationToken: cts.Token);
 
-        output.WriteLine(
-            $"Response.Text: {response.Text?[..Math.Min(500, response.Text?.Length ?? 0)]}"
-        );
+        output.WriteLine($"Response.Text: {response.Text?[..Math.Min(500, response.Text?.Length ?? 0)]}");
 
-        var hasResult =
-            componentToolkit.TableResult is not null
-            || componentToolkit.ChartResult is not null
-            || componentToolkit.GraphResult is not null;
+        var hasResult = componentToolkit.TableResult is not null || componentToolkit.ChartResult is not null || componentToolkit.GraphResult is not null;
 
         Assert.True(hasResult, "Expected at least one render tool to be called");
 
         if (componentToolkit.ChartResult is not null)
-            output.WriteLine(
-                $"render_chart called with chartType: {componentToolkit.ChartResult.ChartType}"
-            );
+            output.WriteLine($"render_chart called with chartType: {componentToolkit.ChartResult.ChartType}");
         if (componentToolkit.GraphResult is not null)
-            output.WriteLine(
-                $"render_graph called for: {componentToolkit.GraphResult.RootEntityName}"
-            );
+            output.WriteLine($"render_graph called for: {componentToolkit.GraphResult.RootEntityName}");
         if (componentToolkit.TableResult is not null)
-            output.WriteLine(
-                $"render_table called for collection: {componentToolkit.TableResult.Collection}"
-            );
+            output.WriteLine($"render_table called for collection: {componentToolkit.TableResult.Collection}");
 
         return componentToolkit;
     }

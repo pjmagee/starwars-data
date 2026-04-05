@@ -1,6 +1,8 @@
 @page "/tables"
 @rendermode InteractiveAuto
 @inject IHttpClientFactory HttpClientFactory
+@inject GlobalFilterService GlobalFilterService
+@implements IDisposable
 
 <PageTitle>Data Tables — Star Wars Data</PageTitle>
 <HeadContent>
@@ -121,8 +123,23 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        GlobalFilterService.OnChange += OnGlobalFilterChanged;
         string[]? categories = (await Http.GetFromJsonAsync<string[]>("Categories"))!;
         _categories = categories.OrderBy(x => x).ToArray();
+    }
+
+    private async void OnGlobalFilterChanged()
+    {
+        await InvokeAsync(async () =>
+        {
+            if (_grid is not null)
+                await _grid.ReloadServerData();
+        });
+    }
+
+    public void Dispose()
+    {
+        GlobalFilterService.OnChange -= OnGlobalFilterChanged;
     }
 
     private async Task<GridData<Infobox>> ServerReload(GridState<Infobox> state, CancellationToken ct)
@@ -133,11 +150,19 @@ else
         try
         {
             var encoded = Uri.EscapeDataString(_category);
-            var url = $"Categories/{encoded}?Page={(state.Page + 1)}&PageSize={state.PageSize}";
-
+            var qs = System.Web.HttpUtility.ParseQueryString(string.Empty);
+            qs["Page"] = (state.Page + 1).ToString();
+            qs["PageSize"] = state.PageSize.ToString();
             if (!string.IsNullOrWhiteSpace(_searchText))
-                url += $"&Search={Uri.EscapeDataString(_searchText)}";
+                qs["Search"] = _searchText;
+            var cont = GlobalFilterService.GetContinuityQueryParam();
+            if (!string.IsNullOrEmpty(cont))
+                qs["continuity"] = cont;
+            var uni = GlobalFilterService.GetUniverseQueryParam();
+            if (!string.IsNullOrEmpty(uni))
+                qs["universe"] = uni;
 
+            var url = $"Categories/{encoded}?{qs}";
             var result = await Http.GetFromJsonAsync<PagedResult>(url, ct);
 
             _dynamicHeaders = result!.Items

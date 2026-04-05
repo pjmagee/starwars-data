@@ -93,10 +93,7 @@ public class RelationshipGraphBuilderService
     /// </summary>
     public async Task ProcessAllAsync(int batchSize = 100, CancellationToken ct = default)
     {
-        _logger.LogInformation(
-            "Relationship graph builder: processing all unprocessed pages in batches of {BatchSize}",
-            batchSize
-        );
+        _logger.LogInformation("Relationship graph builder: processing all unprocessed pages in batches of {BatchSize}", batchSize);
 
         await EnsureIndexesAsync(ct);
 
@@ -125,11 +122,7 @@ public class RelationshipGraphBuilderService
                 break; // Nothing left to process
         }
 
-        _logger.LogInformation(
-            "Relationship graph builder: all batches complete. TotalProcessed={TotalProcessed}, TotalFailed={TotalFailed}",
-            totalProcessed,
-            totalFailed
-        );
+        _logger.LogInformation("Relationship graph builder: all batches complete. TotalProcessed={TotalProcessed}, TotalFailed={TotalFailed}", totalProcessed, totalFailed);
     }
 
     /// <summary>
@@ -141,16 +134,9 @@ public class RelationshipGraphBuilderService
     /// </summary>
     const int MaxConcurrency = 5;
 
-    public async Task<(int processed, int failed, int remaining)> ProcessBatchAsync(
-        int batchSize = 100,
-        CancellationToken ct = default
-    )
+    public async Task<(int processed, int failed, int remaining)> ProcessBatchAsync(int batchSize = 100, CancellationToken ct = default)
     {
-        _logger.LogInformation(
-            "Relationship graph builder: starting batch of {BatchSize} (concurrency={Concurrency})",
-            batchSize,
-            MaxConcurrency
-        );
+        _logger.LogInformation("Relationship graph builder: starting batch of {BatchSize} (concurrency={Concurrency})", batchSize, MaxConcurrency);
 
         // Reset pages stuck in "Processing" for more than 10 minutes (orphaned from previous runs)
         var staleThreshold = DateTime.UtcNow.AddMinutes(-10);
@@ -163,30 +149,17 @@ public class RelationshipGraphBuilderService
         );
         var staleReset = await _crawlState.DeleteManyAsync(staleFilter, ct);
         if (staleReset.DeletedCount > 0)
-            _logger.LogWarning(
-                "Reset {Count} stale 'Processing' pages from previous run",
-                staleReset.DeletedCount
-            );
+            _logger.LogWarning("Reset {Count} stale 'Processing' pages from previous run", staleReset.DeletedCount);
 
         // Find pages that haven't been processed yet
-        var processedIds = await _crawlState
-            .Find(Builders<RelationshipCrawlState>.Filter.Empty)
-            .Project(s => s.PageId)
-            .ToListAsync(ct);
+        var processedIds = await _crawlState.Find(Builders<RelationshipCrawlState>.Filter.Empty).Project(s => s.PageId).ToListAsync(ct);
 
         var processedSet = new HashSet<int>(processedIds);
 
         // Get pages with infoboxes that haven't been processed, prioritizing high-link pages
         var pipeline = new[]
         {
-            new BsonDocument(
-                "$match",
-                new BsonDocument
-                {
-                    { "infobox", new BsonDocument("$ne", BsonNull.Value) },
-                    { "infobox.Template", new BsonDocument("$ne", BsonNull.Value) },
-                }
-            ),
+            new BsonDocument("$match", new BsonDocument { { PageBsonFields.Infobox, new BsonDocument("$ne", BsonNull.Value) }, { "infobox.Template", new BsonDocument("$ne", BsonNull.Value) } }),
             new BsonDocument(
                 "$addFields",
                 new BsonDocument(
@@ -199,16 +172,7 @@ public class RelationshipGraphBuilderService
                             {
                                 { "input", "$infobox.Data" },
                                 { "as", "d" },
-                                {
-                                    "in",
-                                    new BsonDocument(
-                                        "$size",
-                                        new BsonDocument(
-                                            "$ifNull",
-                                            new BsonArray { "$$d.Links", new BsonArray() }
-                                        )
-                                    )
-                                },
+                                { "in", new BsonDocument("$size", new BsonDocument("$ifNull", new BsonArray { "$$d.Links", new BsonArray() })) },
                             }
                         )
                     )
@@ -220,22 +184,17 @@ public class RelationshipGraphBuilderService
                 "$project",
                 new BsonDocument
                 {
-                    { "_id", 1 },
-                    { "title", 1 },
+                    { MongoFields.Id, 1 },
+                    { PageBsonFields.Title, 1 },
                     { "infobox.Template", 1 },
                     { "linkCount", 1 },
                 }
             ),
         };
 
-        var candidates = await _pages
-            .Aggregate<BsonDocument>(pipeline, cancellationToken: ct)
-            .ToListAsync(ct);
+        var candidates = await _pages.Aggregate<BsonDocument>(pipeline, cancellationToken: ct).ToListAsync(ct);
 
-        var batch = candidates
-            .Where(d => !processedSet.Contains(d["_id"].AsInt32))
-            .Take(batchSize)
-            .ToList();
+        var batch = candidates.Where(d => !processedSet.Contains(d[MongoFields.Id].AsInt32)).Take(batchSize).ToList();
 
         _logger.LogInformation("Relationship graph builder: {Count} pages to process", batch.Count);
 
@@ -274,24 +233,14 @@ public class RelationshipGraphBuilderService
 
         await Task.WhenAll(tasks);
 
-        _logger.LogInformation(
-            "Relationship graph builder: batch complete. Processed={Processed}, Failed={Failed}",
-            processed,
-            failed
-        );
+        _logger.LogInformation("Relationship graph builder: batch complete. Processed={Processed}, Failed={Failed}", processed, failed);
 
         // Estimate remaining unprocessed pages (don't fail on cancellation — these are just stats)
         try
         {
-            var totalProcessedIds = await _crawlState.CountDocumentsAsync(
-                Builders<RelationshipCrawlState>.Filter.Empty
-            );
+            var totalProcessedIds = await _crawlState.CountDocumentsAsync(Builders<RelationshipCrawlState>.Filter.Empty);
             var totalEligible = await _pages.CountDocumentsAsync(
-                new BsonDocument
-                {
-                    { "infobox", new BsonDocument("$ne", BsonNull.Value) },
-                    { "infobox.Template", new BsonDocument("$ne", BsonNull.Value) },
-                }
+                new BsonDocument { { PageBsonFields.Infobox, new BsonDocument("$ne", BsonNull.Value) }, { "infobox.Template", new BsonDocument("$ne", BsonNull.Value) } }
             );
             return (processed, failed, (int)(totalEligible - totalProcessedIds));
         }
@@ -305,23 +254,15 @@ public class RelationshipGraphBuilderService
     /// Process a single page: fetch context, call LLM, store edges.
     /// Returns true on success, false on failure.
     /// </summary>
-    async Task<bool> ProcessSinglePageAsync(
-        BsonDocument doc,
-        string existingLabels,
-        CancellationToken ct
-    )
+    async Task<bool> ProcessSinglePageAsync(BsonDocument doc, string existingLabels, CancellationToken ct)
     {
-        var pageId = doc["_id"].AsInt32;
-        var title = doc.Contains("title") ? doc["title"].AsString : $"Page {pageId}";
+        var pageId = doc[MongoFields.Id].AsInt32;
+        var title = doc.Contains(PageBsonFields.Title) ? doc[PageBsonFields.Title].AsString : $"Page {pageId}";
         var template =
-            doc.Contains("infobox") && doc["infobox"].AsBsonDocument.Contains("Template")
-                ? RecordService.SanitizeTemplateName(doc["infobox"]["Template"].AsString)
+            doc.Contains(PageBsonFields.Infobox) && doc[PageBsonFields.Infobox].AsBsonDocument.Contains(InfoboxBsonFields.Template)
+                ? RecordService.SanitizeTemplateName(doc[PageBsonFields.Infobox][InfoboxBsonFields.Template].AsString)
                 : "Unknown";
-        var pageContinuity =
-            doc.Contains("continuity")
-            && Enum.TryParse<Continuity>(doc["continuity"].AsString, true, out var pc)
-                ? pc
-                : Continuity.Unknown;
+        var pageContinuity = doc.Contains(PageBsonFields.Continuity) && Enum.TryParse<Continuity>(doc[PageBsonFields.Continuity].AsString, true, out var pc) ? pc : Continuity.Unknown;
 
         try
         {
@@ -357,14 +298,7 @@ public class RelationshipGraphBuilderService
             ChatResponse response;
             try
             {
-                response = await _chatClient.GetResponseAsync(
-                    [
-                        new ChatMessage(ChatRole.System, ExtractionSystemPrompt),
-                        new ChatMessage(ChatRole.User, prompt),
-                    ],
-                    chatOptions,
-                    ct
-                );
+                response = await _chatClient.GetResponseAsync([new ChatMessage(ChatRole.System, ExtractionSystemPrompt), new ChatMessage(ChatRole.User, prompt)], chatOptions, ct);
                 _aiStatus.RecordSuccess("RelationshipGraph");
             }
             catch (Exception ex)
@@ -393,12 +327,7 @@ public class RelationshipGraphBuilderService
 
             if (result is null || result.ShouldSkip)
             {
-                await _toolkit.SkipPage(
-                    pageId,
-                    result?.SkipReason ?? "No relationships",
-                    title,
-                    template
-                );
+                await _toolkit.SkipPage(pageId, result?.SkipReason ?? "No relationships", title, template);
             }
             else if (result.Edges is { Count: > 0 })
             {
@@ -420,19 +349,9 @@ public class RelationshipGraphBuilderService
                     .ToList();
 
                 var storeResult = await _toolkit.StoreEdges(pageId, edgeDtos);
-                _logger.LogInformation(
-                    "Page {PageId}: stored edges. Result: {Result}",
-                    pageId,
-                    storeResult
-                );
+                _logger.LogInformation("Page {PageId}: stored edges. Result: {Result}", pageId, storeResult);
 
-                await _toolkit.MarkProcessed(
-                    pageId,
-                    edgeDtos.Count,
-                    title,
-                    template,
-                    pageContinuity.ToString()
-                );
+                await _toolkit.MarkProcessed(pageId, edgeDtos.Count, title, template, pageContinuity.ToString());
             }
             else
             {
@@ -443,11 +362,7 @@ public class RelationshipGraphBuilderService
         }
         catch (OperationCanceledException)
         {
-            _logger.LogInformation(
-                "Processing cancelled for page {PageId}: {Title}",
-                pageId,
-                title
-            );
+            _logger.LogInformation("Processing cancelled for page {PageId}: {Title}", pageId, title);
             return true; // Not a failure — just cancelled
         }
         catch (Exception ex)
@@ -546,8 +461,7 @@ public class RelationshipGraphBuilderService
     /// Set which infobox categories should be prioritised in batch submissions.
     /// Pages matching these template types are processed before others.
     /// </summary>
-    public static void SetPriorityCategories(IEnumerable<string> categories) =>
-        _priorityCategories = categories.ToArray();
+    public static void SetPriorityCategories(IEnumerable<string> categories) => _priorityCategories = categories.ToArray();
 
     /// <summary>
     /// Get the current priority categories.
@@ -564,9 +478,7 @@ public class RelationshipGraphBuilderService
         if (categories.Length == 0)
             return 0;
 
-        var template = doc.GetValue("infobox", BsonNull.Value)
-            .AsBsonDocument?.GetValue("Template", BsonNull.Value)
-            .AsString;
+        var template = doc.GetValue(PageBsonFields.Infobox, BsonNull.Value).AsBsonDocument?.GetValue(InfoboxBsonFields.Template, BsonNull.Value).AsString;
         if (template is null)
             return 0;
 
@@ -597,51 +509,29 @@ public class RelationshipGraphBuilderService
         await CleanupFailedBatchesAsync(ct);
 
         // Find unprocessed pages
-        var processedIds = await _crawlState
-            .Find(Builders<RelationshipCrawlState>.Filter.Empty)
-            .Project(s => s.PageId)
-            .ToListAsync(ct);
+        var processedIds = await _crawlState.Find(Builders<RelationshipCrawlState>.Filter.Empty).Project(s => s.PageId).ToListAsync(ct);
         var processedSet = new HashSet<int>(processedIds);
 
         // Also exclude pages already in a pending/in-progress batch
         var pendingBatches = await _batchJobs
-            .Find(
-                Builders<GraphBatchJob>.Filter.In(
-                    b => b.Status,
-                    [
-                        GraphBatchStatus.Preparing,
-                        GraphBatchStatus.Submitted,
-                        GraphBatchStatus.InProgress,
-                    ]
-                )
-            )
+            .Find(Builders<GraphBatchJob>.Filter.In(b => b.Status, [GraphBatchStatus.Preparing, GraphBatchStatus.Submitted, GraphBatchStatus.InProgress]))
             .ToListAsync(ct);
         var batchedPageIds = new HashSet<int>(pendingBatches.SelectMany(b => b.PageIds));
 
         // If there are already too many in-flight batches, don't submit more
         if (pendingBatches.Count >= MaxConcurrentBatches)
         {
-            _logger.LogInformation(
-                "Batch API: {Count} batches already in-flight (max {Max}), skipping submission",
-                pendingBatches.Count,
-                MaxConcurrentBatches
-            );
+            _logger.LogInformation("Batch API: {Count} batches already in-flight (max {Max}), skipping submission", pendingBatches.Count, MaxConcurrentBatches);
             return [];
         }
 
         var candidates = await _pages
-            .Find(
-                new BsonDocument
-                {
-                    { "infobox", new BsonDocument("$ne", BsonNull.Value) },
-                    { "infobox.Template", new BsonDocument("$ne", BsonNull.Value) },
-                }
-            )
+            .Find(new BsonDocument { { PageBsonFields.Infobox, new BsonDocument("$ne", BsonNull.Value) }, { "infobox.Template", new BsonDocument("$ne", BsonNull.Value) } })
             .Project(
                 new BsonDocument
                 {
-                    { "_id", 1 },
-                    { "title", 1 },
+                    { MongoFields.Id, 1 },
+                    { PageBsonFields.Title, 1 },
                     { "infobox.Template", 1 },
                 }
             )
@@ -650,7 +540,7 @@ public class RelationshipGraphBuilderService
         var unprocessed = candidates
             .Where(d =>
             {
-                var id = d["_id"].AsInt32;
+                var id = d[MongoFields.Id].AsInt32;
                 return !processedSet.Contains(id) && !batchedPageIds.Contains(id);
             })
             .OrderByDescending(d => GetTemplatePriority(d))
@@ -677,17 +567,13 @@ public class RelationshipGraphBuilderService
             Status = GraphBatchStatus.Preparing,
             Model = _model,
             TotalRequests = pages.Count,
-            PageIds = pages.Select(d => d["_id"].AsInt32).ToList(),
+            PageIds = pages.Select(d => d[MongoFields.Id].AsInt32).ToList(),
         };
         await _batchJobs.InsertOneAsync(batchJob, cancellationToken: ct);
 
         try
         {
-            _logger.LogInformation(
-                "Batch {BatchId}: preparing {Count} requests",
-                batchJob.Id,
-                pages.Count
-            );
+            _logger.LogInformation("Batch {BatchId}: preparing {Count} requests", batchJob.Id, pages.Count);
 
             // Pre-fetch existing labels once for the whole batch
             var existingLabels = await _toolkit.GetExistingLabels();
@@ -702,21 +588,8 @@ public class RelationshipGraphBuilderService
             {
                 var semaphore = new SemaphoreSlim(PrepConcurrency);
 
-                await using (
-                    var fileStream = new FileStream(
-                        tempPath,
-                        FileMode.Create,
-                        FileAccess.Write,
-                        FileShare.None,
-                        bufferSize: 64 * 1024
-                    )
-                )
-                await using (
-                    var writer = new StreamWriter(fileStream, new UTF8Encoding(false))
-                    {
-                        NewLine = "\n",
-                    }
-                )
+                await using (var fileStream = new FileStream(tempPath, FileMode.Create, FileAccess.Write, FileShare.None, bufferSize: 64 * 1024))
+                await using (var writer = new StreamWriter(fileStream, new UTF8Encoding(false)) { NewLine = "\n" })
                 {
                     // Process pages sequentially for writes, but prep prompts in small parallel batches.
                     // Stop early if the file exceeds the size limit.
@@ -733,7 +606,7 @@ public class RelationshipGraphBuilderService
                             await semaphore.WaitAsync(ct);
                             try
                             {
-                                var pageId = doc["_id"].AsInt32;
+                                var pageId = doc[MongoFields.Id].AsInt32;
                                 var prompt = await BuildPromptForPageAsync(pageId, existingLabels);
                                 return BuildBatchRequestLine($"page-{pageId}", prompt, jsonSchema);
                             }
@@ -757,12 +630,7 @@ public class RelationshipGraphBuilderService
                         await writer.FlushAsync();
                         if (fileStream.Length >= MaxBatchFileSize)
                         {
-                            _logger.LogWarning(
-                                "Batch {BatchId}: file size {Size:N0} bytes reached limit after {Count} pages, stopping early",
-                                batchJob.Id,
-                                fileStream.Length,
-                                writtenCount
-                            );
+                            _logger.LogWarning("Batch {BatchId}: file size {Size:N0} bytes reached limit after {Count} pages, stopping early", batchJob.Id, fileStream.Length, writtenCount);
                             fileSizeLimitHit = true;
                         }
                     }
@@ -779,26 +647,12 @@ public class RelationshipGraphBuilderService
 
                 // Upload temp file to OpenAI Files API
                 var fileClient = _openAiClient.GetOpenAIFileClient();
-                await using var uploadStream = new FileStream(
-                    tempPath,
-                    FileMode.Open,
-                    FileAccess.Read
-                );
-                var uploadResult = await fileClient.UploadFileAsync(
-                    uploadStream,
-                    $"kg_batch_{batchJob.Id}.jsonl",
-                    FileUploadPurpose.Batch,
-                    ct
-                );
+                await using var uploadStream = new FileStream(tempPath, FileMode.Open, FileAccess.Read);
+                var uploadResult = await fileClient.UploadFileAsync(uploadStream, $"kg_batch_{batchJob.Id}.jsonl", FileUploadPurpose.Batch, ct);
 
                 batchJob.InputFileId = uploadResult.Value.Id;
 
-                _logger.LogInformation(
-                    "Batch {BatchId}: uploaded {Size:N0} bytes as file {FileId}",
-                    batchJob.Id,
-                    fileSize,
-                    batchJob.InputFileId
-                );
+                _logger.LogInformation("Batch {BatchId}: uploaded {Size:N0} bytes as file {FileId}", batchJob.Id, fileSize, batchJob.InputFileId);
             }
             finally
             {
@@ -822,18 +676,9 @@ public class RelationshipGraphBuilderService
             batchJob.Status = GraphBatchStatus.Submitted;
             batchJob.SubmittedAt = DateTime.UtcNow;
 
-            await _batchJobs.ReplaceOneAsync(
-                Builders<GraphBatchJob>.Filter.Eq(b => b.Id, batchJob.Id),
-                batchJob,
-                cancellationToken: ct
-            );
+            await _batchJobs.ReplaceOneAsync(Builders<GraphBatchJob>.Filter.Eq(b => b.Id, batchJob.Id), batchJob, cancellationToken: ct);
 
-            _logger.LogInformation(
-                "Batch {BatchId}: submitted as OpenAI batch {OpenAiBatchId} with {Count} requests",
-                batchJob.Id,
-                batchJob.OpenAiBatchId,
-                batchJob.TotalRequests
-            );
+            _logger.LogInformation("Batch {BatchId}: submitted as OpenAI batch {OpenAiBatchId} with {Count} requests", batchJob.Id, batchJob.OpenAiBatchId, batchJob.TotalRequests);
 
             // Mark all pages as Processing only AFTER successful submission,
             // so failed submissions don't orphan pages in Processing status.
@@ -862,20 +707,14 @@ public class RelationshipGraphBuilderService
             _logger.LogError(ex, "Batch {BatchId}: failed to submit", batchJob.Id);
             batchJob.Status = GraphBatchStatus.Failed;
             batchJob.Error = ex.Message[..Math.Min(ex.Message.Length, 500)];
-            await _batchJobs.ReplaceOneAsync(
-                Builders<GraphBatchJob>.Filter.Eq(b => b.Id, batchJob.Id),
-                batchJob
-            );
+            await _batchJobs.ReplaceOneAsync(Builders<GraphBatchJob>.Filter.Eq(b => b.Id, batchJob.Id), batchJob);
 
             // Clean up any crawl_state entries that were created for this failed batch
             // so those pages become eligible for future batches.
             await _crawlState.DeleteManyAsync(
                 Builders<RelationshipCrawlState>.Filter.And(
                     Builders<RelationshipCrawlState>.Filter.In(s => s.PageId, batchJob.PageIds),
-                    Builders<RelationshipCrawlState>.Filter.Eq(
-                        s => s.Status,
-                        CrawlStatus.Processing
-                    )
+                    Builders<RelationshipCrawlState>.Filter.Eq(s => s.Status, CrawlStatus.Processing)
                 ),
                 ct
             );
@@ -890,10 +729,7 @@ public class RelationshipGraphBuilderService
     /// </summary>
     public async Task CheckBatchesAsync(CancellationToken ct = default)
     {
-        var pendingFilter = Builders<GraphBatchJob>.Filter.In(
-            b => b.Status,
-            [GraphBatchStatus.Submitted, GraphBatchStatus.InProgress]
-        );
+        var pendingFilter = Builders<GraphBatchJob>.Filter.In(b => b.Status, [GraphBatchStatus.Submitted, GraphBatchStatus.InProgress]);
 
         var pendingBatches = await _batchJobs.Find(pendingFilter).ToListAsync(ct);
 
@@ -915,27 +751,14 @@ public class RelationshipGraphBuilderService
             try
             {
                 // Use protocol-level API since Status/RequestCounts are internal in the SDK
-                var result = await batchClient.GetBatchAsync(
-                    job.OpenAiBatchId,
-                    (RequestOptions?)null
-                );
-                var batch = JsonSerializer.Deserialize<OpenAiBatchResponse>(
-                    result.GetRawResponse().Content,
-                    JsonOpts
-                )!;
+                var result = await batchClient.GetBatchAsync(job.OpenAiBatchId, (RequestOptions?)null);
+                var batch = JsonSerializer.Deserialize<OpenAiBatchResponse>(result.GetRawResponse().Content, JsonOpts)!;
 
                 var status = batch.Status;
                 var completedCount = batch.RequestCounts?.Completed ?? 0;
                 var totalCount = batch.RequestCounts?.Total ?? 0;
 
-                _logger.LogInformation(
-                    "Batch {BatchId} ({OpenAiId}): status={Status}, completed={Completed}/{Total}",
-                    job.Id,
-                    job.OpenAiBatchId,
-                    status,
-                    completedCount,
-                    totalCount
-                );
+                _logger.LogInformation("Batch {BatchId} ({OpenAiId}): status={Status}, completed={Completed}/{Total}", job.Id, job.OpenAiBatchId, status, completedCount, totalCount);
 
                 if (status is "completed" or "expired" or "cancelled")
                 {
@@ -946,11 +769,7 @@ public class RelationshipGraphBuilderService
                     if (status == "completed")
                     {
                         job.Status = GraphBatchStatus.Completed;
-                        await _batchJobs.ReplaceOneAsync(
-                            Builders<GraphBatchJob>.Filter.Eq(b => b.Id, job.Id),
-                            job,
-                            cancellationToken: ct
-                        );
+                        await _batchJobs.ReplaceOneAsync(Builders<GraphBatchJob>.Filter.Eq(b => b.Id, job.Id), job, cancellationToken: ct);
 
                         // Process results immediately
                         await ProcessBatchResultsAsync(job, ct);
@@ -959,19 +778,10 @@ public class RelationshipGraphBuilderService
                     {
                         // Expired/cancelled batches may still have partial results
                         // in the output file — process what completed, then release the rest.
-                        _logger.LogWarning(
-                            "Batch {BatchId}: ended with status {Status}, processing partial results",
-                            job.Id,
-                            status
-                        );
+                        _logger.LogWarning("Batch {BatchId}: ended with status {Status}, processing partial results", job.Id, status);
                         job.Status = GraphBatchStatus.Completed;
-                        job.Error =
-                            $"Batch ended with status: {status} (partial results recovered)";
-                        await _batchJobs.ReplaceOneAsync(
-                            Builders<GraphBatchJob>.Filter.Eq(b => b.Id, job.Id),
-                            job,
-                            cancellationToken: ct
-                        );
+                        job.Error = $"Batch ended with status: {status} (partial results recovered)";
+                        await _batchJobs.ReplaceOneAsync(Builders<GraphBatchJob>.Filter.Eq(b => b.Id, job.Id), job, cancellationToken: ct);
 
                         await ProcessBatchResultsAsync(job, ct);
 
@@ -982,11 +792,7 @@ public class RelationshipGraphBuilderService
                     {
                         job.Status = GraphBatchStatus.Failed;
                         job.Error = $"Batch ended with status: {status}";
-                        await _batchJobs.ReplaceOneAsync(
-                            Builders<GraphBatchJob>.Filter.Eq(b => b.Id, job.Id),
-                            job,
-                            cancellationToken: ct
-                        );
+                        await _batchJobs.ReplaceOneAsync(Builders<GraphBatchJob>.Filter.Eq(b => b.Id, job.Id), job, cancellationToken: ct);
                         await ReleaseFailedBatchPagesAsync(job, ct);
                     }
                 }
@@ -995,32 +801,19 @@ public class RelationshipGraphBuilderService
                     job.Status = GraphBatchStatus.Failed;
                     job.Error = "OpenAI batch failed";
                     job.CompletedAt = DateTime.UtcNow;
-                    await _batchJobs.ReplaceOneAsync(
-                        Builders<GraphBatchJob>.Filter.Eq(b => b.Id, job.Id),
-                        job,
-                        cancellationToken: ct
-                    );
+                    await _batchJobs.ReplaceOneAsync(Builders<GraphBatchJob>.Filter.Eq(b => b.Id, job.Id), job, cancellationToken: ct);
                     await ReleaseFailedBatchPagesAsync(job, ct);
                 }
                 else if (job.Status != GraphBatchStatus.InProgress)
                 {
                     // Update to InProgress if it's now running
                     job.Status = GraphBatchStatus.InProgress;
-                    await _batchJobs.ReplaceOneAsync(
-                        Builders<GraphBatchJob>.Filter.Eq(b => b.Id, job.Id),
-                        job,
-                        cancellationToken: ct
-                    );
+                    await _batchJobs.ReplaceOneAsync(Builders<GraphBatchJob>.Filter.Eq(b => b.Id, job.Id), job, cancellationToken: ct);
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(
-                    ex,
-                    "Failed to check batch {BatchId} ({OpenAiId})",
-                    job.Id,
-                    job.OpenAiBatchId
-                );
+                _logger.LogError(ex, "Failed to check batch {BatchId} ({OpenAiId})", job.Id, job.OpenAiBatchId);
             }
         }
     }
@@ -1033,10 +826,7 @@ public class RelationshipGraphBuilderService
     public async Task CleanupFailedBatchesAsync(CancellationToken ct = default)
     {
         // Find batches that are Failed or stuck in Preparing for over an hour
-        var failedFilter = Builders<GraphBatchJob>.Filter.Eq(
-            b => b.Status,
-            GraphBatchStatus.Failed
-        );
+        var failedFilter = Builders<GraphBatchJob>.Filter.Eq(b => b.Status, GraphBatchStatus.Failed);
         var stalePreparingFilter = Builders<GraphBatchJob>.Filter.And(
             Builders<GraphBatchJob>.Filter.Eq(b => b.Status, GraphBatchStatus.Preparing),
             Builders<GraphBatchJob>.Filter.Lt(b => b.CreatedAt, DateTime.UtcNow.AddHours(-1))
@@ -1062,23 +852,13 @@ public class RelationshipGraphBuilderService
         );
 
         if (released.DeletedCount > 0)
-            _logger.LogInformation(
-                "Cleanup: released {Count} orphaned pages from {BatchCount} failed/stale batches",
-                released.DeletedCount,
-                stuckBatches.Count
-            );
+            _logger.LogInformation("Cleanup: released {Count} orphaned pages from {BatchCount} failed/stale batches", released.DeletedCount, stuckBatches.Count);
 
         // Delete all failed/stale batch job records so they no longer clutter the dashboard
         var batchIds = stuckBatches.Select(b => b.Id).ToList();
-        var deleted = await _batchJobs.DeleteManyAsync(
-            Builders<GraphBatchJob>.Filter.In(b => b.Id, batchIds),
-            ct
-        );
+        var deleted = await _batchJobs.DeleteManyAsync(Builders<GraphBatchJob>.Filter.In(b => b.Id, batchIds), ct);
 
-        _logger.LogInformation(
-            "Cleanup: removed {Count} failed/stale batch records",
-            deleted.DeletedCount
-        );
+        _logger.LogInformation("Cleanup: removed {Count} failed/stale batch records", deleted.DeletedCount);
     }
 
     /// <summary>
@@ -1097,11 +877,7 @@ public class RelationshipGraphBuilderService
         );
 
         if (result.DeletedCount > 0)
-            _logger.LogInformation(
-                "Batch {BatchId}: released {Count} pages back to unprocessed pool",
-                job.Id,
-                result.DeletedCount
-            );
+            _logger.LogInformation("Batch {BatchId}: released {Count} pages back to unprocessed pool", job.Id, result.DeletedCount);
     }
 
     /// <summary>
@@ -1116,11 +892,7 @@ public class RelationshipGraphBuilderService
         }
 
         job.Status = GraphBatchStatus.Processing;
-        await _batchJobs.ReplaceOneAsync(
-            Builders<GraphBatchJob>.Filter.Eq(b => b.Id, job.Id),
-            job,
-            cancellationToken: ct
-        );
+        await _batchJobs.ReplaceOneAsync(Builders<GraphBatchJob>.Filter.Eq(b => b.Id, job.Id), job, cancellationToken: ct);
 
         try
         {
@@ -1130,11 +902,7 @@ public class RelationshipGraphBuilderService
             var outputText = Encoding.UTF8.GetString(outputContent.Span);
             var outputLines = outputText.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 
-            _logger.LogInformation(
-                "Batch {BatchId}: processing {Count} result lines",
-                job.Id,
-                outputLines.Length
-            );
+            _logger.LogInformation("Batch {BatchId}: processing {Count} result lines", job.Id, outputLines.Length);
 
             int completed = 0,
                 failed = 0,
@@ -1159,37 +927,24 @@ public class RelationshipGraphBuilderService
 
                     // Get page metadata for crawl state
                     var pageDoc = await _pages
-                        .Find(new BsonDocument("_id", pageId))
+                        .Find(new BsonDocument(MongoFields.Id, pageId))
                         .Project(
                             new BsonDocument
                             {
-                                { "title", 1 },
+                                { PageBsonFields.Title, 1 },
                                 { "infobox.Template", 1 },
-                                { "continuity", 1 },
+                                { PageBsonFields.Continuity, 1 },
                             }
                         )
                         .FirstOrDefaultAsync(ct);
 
-                    var title =
-                        pageDoc?.Contains("title") == true
-                            ? pageDoc["title"].AsString
-                            : $"Page {pageId}";
+                    var title = pageDoc?.Contains(PageBsonFields.Title) == true ? pageDoc[PageBsonFields.Title].AsString : $"Page {pageId}";
                     var template =
-                        pageDoc?.Contains("infobox") == true
-                        && pageDoc["infobox"].AsBsonDocument.Contains("Template")
-                            ? RecordService.SanitizeTemplateName(
-                                pageDoc["infobox"]["Template"].AsString
-                            )
+                        pageDoc?.Contains(PageBsonFields.Infobox) == true && pageDoc[PageBsonFields.Infobox].AsBsonDocument.Contains(InfoboxBsonFields.Template)
+                            ? RecordService.SanitizeTemplateName(pageDoc[PageBsonFields.Infobox][InfoboxBsonFields.Template].AsString)
                             : "Unknown";
                     var batchContinuity =
-                        pageDoc?.Contains("continuity") == true
-                        && Enum.TryParse<Continuity>(
-                            pageDoc["continuity"].AsString,
-                            true,
-                            out var bpc
-                        )
-                            ? bpc
-                            : Continuity.Unknown;
+                        pageDoc?.Contains(PageBsonFields.Continuity) == true && Enum.TryParse<Continuity>(pageDoc[PageBsonFields.Continuity].AsString, true, out var bpc) ? bpc : Continuity.Unknown;
 
                     // Check for errors in the response
                     if (outputLine.Error is { } batchError)
@@ -1217,9 +972,7 @@ public class RelationshipGraphBuilderService
                     }
 
                     // Extract the response text
-                    var text = outputLine
-                        .Response?.Body?.Choices?.FirstOrDefault()
-                        ?.Message?.Content?.Trim();
+                    var text = outputLine.Response?.Body?.Choices?.FirstOrDefault()?.Message?.Content?.Trim();
 
                     if (string.IsNullOrWhiteSpace(text))
                     {
@@ -1237,19 +990,11 @@ public class RelationshipGraphBuilderService
                             text = text[(firstNewline + 1)..lastFence].Trim();
                     }
 
-                    var result = JsonSerializer.Deserialize<RelationshipExtractionResponse>(
-                        text,
-                        JsonOpts
-                    );
+                    var result = JsonSerializer.Deserialize<RelationshipExtractionResponse>(text, JsonOpts);
 
                     if (result is null || result.ShouldSkip)
                     {
-                        await _toolkit.SkipPage(
-                            pageId,
-                            result?.SkipReason ?? "No relationships",
-                            title,
-                            template
-                        );
+                        await _toolkit.SkipPage(pageId, result?.SkipReason ?? "No relationships", title, template);
                         skipped++;
                     }
                     else if (result.Edges is { Count: > 0 })
@@ -1272,13 +1017,7 @@ public class RelationshipGraphBuilderService
                             .ToList();
 
                         await _toolkit.StoreEdges(pageId, edgeDtos);
-                        await _toolkit.MarkProcessed(
-                            pageId,
-                            edgeDtos.Count,
-                            title,
-                            template,
-                            batchContinuity.ToString()
-                        );
+                        await _toolkit.MarkProcessed(pageId, edgeDtos.Count, title, template, batchContinuity.ToString());
                         edgesStored += edgeDtos.Count;
                         completed++;
                     }
@@ -1302,30 +1041,16 @@ public class RelationshipGraphBuilderService
             job.TotalEdgesStored = edgesStored;
             job.ProcessedAt = DateTime.UtcNow;
 
-            await _batchJobs.ReplaceOneAsync(
-                Builders<GraphBatchJob>.Filter.Eq(b => b.Id, job.Id),
-                job,
-                cancellationToken: ct
-            );
+            await _batchJobs.ReplaceOneAsync(Builders<GraphBatchJob>.Filter.Eq(b => b.Id, job.Id), job, cancellationToken: ct);
 
-            _logger.LogInformation(
-                "Batch {BatchId}: processed. Completed={Completed}, Skipped={Skipped}, Failed={Failed}, Edges={Edges}",
-                job.Id,
-                completed,
-                skipped,
-                failed,
-                edgesStored
-            );
+            _logger.LogInformation("Batch {BatchId}: processed. Completed={Completed}, Skipped={Skipped}, Failed={Failed}, Edges={Edges}", job.Id, completed, skipped, failed, edgesStored);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Batch {BatchId}: failed to process results", job.Id);
             job.Status = GraphBatchStatus.Failed;
             job.Error = ex.Message[..Math.Min(ex.Message.Length, 500)];
-            await _batchJobs.ReplaceOneAsync(
-                Builders<GraphBatchJob>.Filter.Eq(b => b.Id, job.Id),
-                job
-            );
+            await _batchJobs.ReplaceOneAsync(Builders<GraphBatchJob>.Filter.Eq(b => b.Id, job.Id), job);
         }
     }
 
@@ -1334,11 +1059,7 @@ public class RelationshipGraphBuilderService
     /// </summary>
     public async Task<List<GraphBatchSummary>> GetBatchJobsAsync(CancellationToken ct = default)
     {
-        var jobs = await _batchJobs
-            .Find(Builders<GraphBatchJob>.Filter.Empty)
-            .SortByDescending(b => b.CreatedAt)
-            .Limit(20)
-            .ToListAsync(ct);
+        var jobs = await _batchJobs.Find(Builders<GraphBatchJob>.Filter.Empty).SortByDescending(b => b.CreatedAt).Limit(20).ToListAsync(ct);
 
         return jobs.Select(j => new GraphBatchSummary
             {
@@ -1362,11 +1083,7 @@ public class RelationshipGraphBuilderService
     /// <summary>
     /// Build a single JSONL line for the OpenAI Batch API.
     /// </summary>
-    internal string BuildBatchRequestLine(
-        string customId,
-        string userPrompt,
-        JsonElement jsonSchema
-    )
+    internal string BuildBatchRequestLine(string customId, string userPrompt, JsonElement jsonSchema)
     {
         var request = new BatchRequestLine
         {
@@ -1374,11 +1091,7 @@ public class RelationshipGraphBuilderService
             Body = new BatchRequestBody
             {
                 Model = _model,
-                Messages =
-                [
-                    new BatchChatMessage { Role = "system", Content = ExtractionSystemPrompt },
-                    new BatchChatMessage { Role = "user", Content = userPrompt },
-                ],
+                Messages = [new BatchChatMessage { Role = "system", Content = ExtractionSystemPrompt }, new BatchChatMessage { Role = "user", Content = userPrompt }],
                 ResponseFormat = new BatchResponseFormat
                 {
                     JsonSchema = new BatchJsonSchemaRef
@@ -1441,11 +1154,7 @@ public class RelationshipGraphBuilderService
     public async Task<GraphBuilderProgress> GetProgressAsync(CancellationToken ct = default)
     {
         // Total pages with infoboxes
-        var totalPages = (int)
-            await _pages.CountDocumentsAsync(
-                new BsonDocument("infobox", new BsonDocument("$ne", BsonNull.Value)),
-                cancellationToken: ct
-            );
+        var totalPages = (int)await _pages.CountDocumentsAsync(new BsonDocument(PageBsonFields.Infobox, new BsonDocument("$ne", BsonNull.Value)), cancellationToken: ct);
 
         // Crawl state aggregation by status
         var statePipeline = new[]
@@ -1463,9 +1172,7 @@ public class RelationshipGraphBuilderService
             ),
         };
 
-        var stateResults = await _crawlState
-            .Aggregate<BsonDocument>(statePipeline, cancellationToken: ct)
-            .ToListAsync(ct);
+        var stateResults = await _crawlState.Aggregate<BsonDocument>(statePipeline, cancellationToken: ct).ToListAsync(ct);
 
         int processedPages = 0,
             skippedPages = 0,
@@ -1474,10 +1181,9 @@ public class RelationshipGraphBuilderService
 
         foreach (var doc in stateResults)
         {
-            var id = doc["_id"].AsBsonDocument;
+            var id = doc[MongoFields.Id].AsBsonDocument;
             var status = id["status"].AsString;
-            var type =
-                id.Contains("type") && !id["type"].IsBsonNull ? id["type"].AsString : "Unknown";
+            var type = id.Contains("type") && !id["type"].IsBsonNull ? id["type"].AsString : "Unknown";
             var count = doc["count"].AsInt32;
 
             if (!byType.ContainsKey(type))
@@ -1488,38 +1194,18 @@ public class RelationshipGraphBuilderService
             {
                 case "Completed":
                     processedPages += count;
-                    byType[type] = (
-                        current.total + count,
-                        current.processed + count,
-                        current.skipped,
-                        current.failed
-                    );
+                    byType[type] = (current.total + count, current.processed + count, current.skipped, current.failed);
                     break;
                 case "Skipped":
                     skippedPages += count;
-                    byType[type] = (
-                        current.total + count,
-                        current.processed,
-                        current.skipped + count,
-                        current.failed
-                    );
+                    byType[type] = (current.total + count, current.processed, current.skipped + count, current.failed);
                     break;
                 case "Failed":
                     failedPages += count;
-                    byType[type] = (
-                        current.total + count,
-                        current.processed,
-                        current.skipped,
-                        current.failed + count
-                    );
+                    byType[type] = (current.total + count, current.processed, current.skipped, current.failed + count);
                     break;
                 default:
-                    byType[type] = (
-                        current.total + count,
-                        current.processed,
-                        current.skipped,
-                        current.failed
-                    );
+                    byType[type] = (current.total + count, current.processed, current.skipped, current.failed);
                     break;
             }
         }
@@ -1527,38 +1213,17 @@ public class RelationshipGraphBuilderService
         // True total pages per infobox type (from Pages collection, not crawl_state)
         var typeTotalPipeline = new[]
         {
-            new BsonDocument(
-                "$match",
-                new BsonDocument("infobox.Template", new BsonDocument("$ne", BsonNull.Value))
-            ),
-            new BsonDocument(
-                "$project",
-                new BsonDocument(
-                    "type",
-                    new BsonDocument(
-                        "$arrayElemAt",
-                        new BsonArray
-                        {
-                            new BsonDocument("$split", new BsonArray { "$infobox.Template", ":" }),
-                            -1,
-                        }
-                    )
-                )
-            ),
-            new BsonDocument(
-                "$group",
-                new BsonDocument { { "_id", "$type" }, { "count", new BsonDocument("$sum", 1) } }
-            ),
+            new BsonDocument("$match", new BsonDocument("infobox.Template", new BsonDocument("$ne", BsonNull.Value))),
+            new BsonDocument("$project", new BsonDocument("type", new BsonDocument("$arrayElemAt", new BsonArray { new BsonDocument("$split", new BsonArray { "$infobox.Template", ":" }), -1 }))),
+            new BsonDocument("$group", new BsonDocument { { "_id", "$type" }, { "count", new BsonDocument("$sum", 1) } }),
         };
 
-        var typeTotals = await _pages
-            .Aggregate<BsonDocument>(typeTotalPipeline, cancellationToken: ct)
-            .ToListAsync(ct);
+        var typeTotals = await _pages.Aggregate<BsonDocument>(typeTotalPipeline, cancellationToken: ct).ToListAsync(ct);
 
         var trueTotalByType = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
         foreach (var doc in typeTotals)
         {
-            var type = doc["_id"].AsString;
+            var type = doc[MongoFields.Id].AsString;
             trueTotalByType[type] = doc["count"].AsInt32;
         }
 
@@ -1575,26 +1240,14 @@ public class RelationshipGraphBuilderService
         }
 
         // Total edges
-        var totalEdges = await _edges.CountDocumentsAsync(
-            Builders<RelationshipEdge>.Filter.Empty,
-            cancellationToken: ct
-        );
+        var totalEdges = await _edges.CountDocumentsAsync(Builders<RelationshipEdge>.Filter.Empty, cancellationToken: ct);
 
         // Total labels
-        var totalLabels = (int)
-            await _labels.CountDocumentsAsync(
-                Builders<RelationshipLabel>.Filter.Empty,
-                cancellationToken: ct
-            );
+        var totalLabels = (int)await _labels.CountDocumentsAsync(Builders<RelationshipLabel>.Filter.Empty, cancellationToken: ct);
 
         // All labels sorted by usage (filter out empty labels)
         var allLabels = await _labels
-            .Find(
-                Builders<RelationshipLabel>.Filter.And(
-                    Builders<RelationshipLabel>.Filter.Ne(l => l.Label, ""),
-                    Builders<RelationshipLabel>.Filter.Ne(l => l.Label, null)
-                )
-            )
+            .Find(Builders<RelationshipLabel>.Filter.And(Builders<RelationshipLabel>.Filter.Ne(l => l.Label, ""), Builders<RelationshipLabel>.Filter.Ne(l => l.Label, null)))
             .SortByDescending(l => l.UsageCount)
             .ToListAsync(ct);
 
@@ -1603,20 +1256,13 @@ public class RelationshipGraphBuilderService
         // useful because 1,000 pages flip from Processing→Completed at the same instant.
         var oneDayAgo = DateTime.UtcNow.AddHours(-24);
         var recentBatches = await _batchJobs
-            .Find(
-                Builders<GraphBatchJob>.Filter.And(
-                    Builders<GraphBatchJob>.Filter.Eq(b => b.Status, GraphBatchStatus.Processed),
-                    Builders<GraphBatchJob>.Filter.Gte(b => b.ProcessedAt, oneDayAgo)
-                )
-            )
+            .Find(Builders<GraphBatchJob>.Filter.And(Builders<GraphBatchJob>.Filter.Eq(b => b.Status, GraphBatchStatus.Processed), Builders<GraphBatchJob>.Filter.Gte(b => b.ProcessedAt, oneDayAgo)))
             .ToListAsync(ct);
 
         double pagesPerHour = 0;
         if (recentBatches.Count > 0)
         {
-            var totalPagesInBatches = recentBatches.Sum(b =>
-                b.CompletedRequests + b.SkippedRequests
-            );
+            var totalPagesInBatches = recentBatches.Sum(b => b.CompletedRequests + b.SkippedRequests);
             var oldestBatch = recentBatches.Min(b => b.CreatedAt);
             var hoursSpan = (DateTime.UtcNow - oldestBatch).TotalHours;
             if (hoursSpan > 0)
@@ -1624,8 +1270,7 @@ public class RelationshipGraphBuilderService
         }
 
         var pending = totalPages - processedPages - skippedPages - failedPages;
-        double? estimatedHoursRemaining =
-            pagesPerHour > 0 ? Math.Round(pending / pagesPerHour, 1) : null;
+        double? estimatedHoursRemaining = pagesPerHour > 0 ? Math.Round(pending / pagesPerHour, 1) : null;
 
         return new GraphBuilderProgress
         {
@@ -1665,13 +1310,7 @@ public class RelationshipGraphBuilderService
     /// <summary>
     /// Query the relationship graph using $graphLookup.
     /// </summary>
-    public async Task<RelationshipGraphResult> QueryGraphAsync(
-        int rootId,
-        IReadOnlyList<string> labels,
-        int maxDepth = 2,
-        Continuity? continuity = null,
-        CancellationToken ct = default
-    )
+    public async Task<RelationshipGraphResult> QueryGraphAsync(int rootId, IReadOnlyList<string> labels, int maxDepth = 2, Continuity? continuity = null, CancellationToken ct = default)
     {
         var edgesCollection = _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges);
 
@@ -1680,21 +1319,15 @@ public class RelationshipGraphBuilderService
         var rootName = "";
         if (rootPage != null)
         {
-            var ib =
-                rootPage.Contains("infobox") && !rootPage["infobox"].IsBsonNull
-                    ? rootPage["infobox"].AsBsonDocument
-                    : null;
+            var ib = rootPage.Contains(PageBsonFields.Infobox) && !rootPage[PageBsonFields.Infobox].IsBsonNull ? rootPage[PageBsonFields.Infobox].AsBsonDocument : null;
             rootName =
-                ib?["Data"].AsBsonArray.OfType<BsonDocument>()
-                    .FirstOrDefault(d => d["Label"].AsString == "Titles")
-                    ?["Values"].AsBsonArray.FirstOrDefault()
+                ib?[InfoboxBsonFields.Data].AsBsonArray.OfType<BsonDocument>()
+                    .FirstOrDefault(d => d[InfoboxBsonFields.Label].AsString == InfoboxFieldLabels.Titles)
+                    ?[InfoboxBsonFields.Values].AsBsonArray.FirstOrDefault()
                     ?.AsString ?? (rootPage.Contains("title") ? rootPage["title"].AsString : "");
         }
 
-        var labelFilter =
-            labels.Count > 0
-                ? new BsonDocument("label", new BsonDocument("$in", new BsonArray(labels)))
-                : new BsonDocument();
+        var labelFilter = labels.Count > 0 ? new BsonDocument("label", new BsonDocument("$in", new BsonArray(labels))) : new BsonDocument();
 
         var restrictMatch = new BsonDocument();
         if (labels.Count > 0)
@@ -1713,19 +1346,10 @@ public class RelationshipGraphBuilderService
         // When maxDepth <= 1, skip $graphLookup entirely (direct edges only).
         BsonDocument[] pipeline =
             maxDepth <= 1
-                ?
-                [
-                    new BsonDocument(
-                        "$match",
-                        new BsonDocument { { "fromId", rootId } }.AddRange(labelFilter)
-                    ),
-                ]
+                ? [new BsonDocument("$match", new BsonDocument { { "fromId", rootId } }.AddRange(labelFilter))]
                 :
                 [
-                    new BsonDocument(
-                        "$match",
-                        new BsonDocument { { "fromId", rootId } }.AddRange(labelFilter)
-                    ),
+                    new BsonDocument("$match", new BsonDocument { { "fromId", rootId } }.AddRange(labelFilter)),
                     new BsonDocument(
                         "$graphLookup",
                         new BsonDocument
@@ -1741,9 +1365,7 @@ public class RelationshipGraphBuilderService
                     ),
                 ];
 
-        var results = await edgesCollection
-            .Aggregate<BsonDocument>(pipeline, cancellationToken: ct)
-            .ToListAsync(ct);
+        var results = await edgesCollection.Aggregate<BsonDocument>(pipeline, cancellationToken: ct).ToListAsync(ct);
 
         // Collect unique nodes and edges
         var nodes = new Dictionary<int, RelationshipGraphNode>();
@@ -1752,22 +1374,16 @@ public class RelationshipGraphBuilderService
         // Add root
         if (rootPage != null)
         {
-            var ib =
-                rootPage.Contains("infobox") && !rootPage["infobox"].IsBsonNull
-                    ? rootPage["infobox"].AsBsonDocument
-                    : null;
+            var ib = rootPage.Contains(PageBsonFields.Infobox) && !rootPage[PageBsonFields.Infobox].IsBsonNull ? rootPage[PageBsonFields.Infobox].AsBsonDocument : null;
             nodes[rootId] = new RelationshipGraphNode
             {
                 Id = rootId,
                 Name = rootName,
                 Type =
-                    ib != null && ib.Contains("Template") && !ib["Template"].IsBsonNull
-                        ? RecordService.SanitizeTemplateName(ib["Template"].AsString)
+                    ib != null && ib.Contains(InfoboxBsonFields.Template) && !ib[InfoboxBsonFields.Template].IsBsonNull
+                        ? RecordService.SanitizeTemplateName(ib[InfoboxBsonFields.Template].AsString)
                         : "Unknown",
-                ImageUrl =
-                    ib != null && ib.Contains("ImageUrl") && !ib["ImageUrl"].IsBsonNull
-                        ? ib["ImageUrl"].AsString
-                        : "",
+                ImageUrl = ib != null && ib.Contains(InfoboxBsonFields.ImageUrl) && !ib[InfoboxBsonFields.ImageUrl].IsBsonNull ? ib[InfoboxBsonFields.ImageUrl].AsString : "",
             };
         }
 
@@ -1840,27 +1456,16 @@ public class RelationshipGraphBuilderService
     /// <summary>
     /// Get distinct labels stored for a specific entity (for query-time LLM to pick relevant ones).
     /// </summary>
-    public async Task<List<string>> GetEntityLabelsAsync(
-        int pageId,
-        Continuity? continuity = null,
-        CancellationToken ct = default
-    )
+    public async Task<List<string>> GetEntityLabelsAsync(int pageId, Continuity? continuity = null, CancellationToken ct = default)
     {
         var edgesCollection = _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges);
         var matchFilter = new BsonDocument("fromId", pageId);
         if (continuity.HasValue)
             matchFilter["continuity"] = continuity.Value.ToString();
 
-        var pipeline = new[]
-        {
-            new BsonDocument("$match", matchFilter),
-            new BsonDocument("$group", new BsonDocument("_id", "$label")),
-            new BsonDocument("$sort", new BsonDocument("_id", 1)),
-        };
+        var pipeline = new[] { new BsonDocument("$match", matchFilter), new BsonDocument("$group", new BsonDocument("_id", "$label")), new BsonDocument("$sort", new BsonDocument("_id", 1)) };
 
-        var results = await edgesCollection
-            .Aggregate<BsonDocument>(pipeline, cancellationToken: ct)
-            .ToListAsync(ct);
+        var results = await edgesCollection.Aggregate<BsonDocument>(pipeline, cancellationToken: ct).ToListAsync(ct);
 
         return results.Select(d => d["_id"].AsString).ToList();
     }
@@ -1873,20 +1478,12 @@ public class RelationshipGraphBuilderService
     {
         var pipeline = new[]
         {
-            new BsonDocument(
-                "$match",
-                new BsonDocument(
-                    "type",
-                    new BsonDocument("$nin", new BsonArray { BsonNull.Value, "" })
-                )
-            ),
+            new BsonDocument("$match", new BsonDocument("type", new BsonDocument("$nin", new BsonArray { BsonNull.Value, "" }))),
             new BsonDocument("$group", new BsonDocument("_id", "$type")),
             new BsonDocument("$sort", new BsonDocument("_id", 1)),
         };
 
-        var results = await _crawlState
-            .Aggregate<BsonDocument>(pipeline, cancellationToken: ct)
-            .ToListAsync(ct);
+        var results = await _crawlState.Aggregate<BsonDocument>(pipeline, cancellationToken: ct).ToListAsync(ct);
 
         return results.Select(d => d["_id"].AsString).ToList();
     }
@@ -1914,37 +1511,21 @@ public class RelationshipGraphBuilderService
         // since crawl_state.Continuity is not reliably populated for older documents.
         if (continuity.HasValue)
         {
-            var matchingPageIds = await _pages
-                .Find(new BsonDocument("continuity", continuity.Value.ToString()))
-                .Project(new BsonDocument("_id", 1))
-                .ToListAsync(ct);
-            var ids = matchingPageIds.Select(d => d["_id"].AsInt32).ToList();
+            var matchingPageIds = await _pages.Find(new BsonDocument("continuity", continuity.Value.ToString())).Project(new BsonDocument("_id", 1)).ToListAsync(ct);
+            var ids = matchingPageIds.Select(d => d[MongoFields.Id].AsInt32).ToList();
             filters.Add(Builders<RelationshipCrawlState>.Filter.In(s => s.PageId, ids));
         }
 
         if (!string.IsNullOrWhiteSpace(search))
-            filters.Add(
-                Builders<RelationshipCrawlState>.Filter.Regex(
-                    s => s.Name,
-                    new BsonRegularExpression(search, "i")
-                )
-            );
+            filters.Add(Builders<RelationshipCrawlState>.Filter.Regex(s => s.Name, new BsonRegularExpression(search, "i")));
 
         var filter = Builders<RelationshipCrawlState>.Filter.And(filters);
 
         var total = await _crawlState.CountDocumentsAsync(filter, cancellationToken: ct);
 
-        var items = await _crawlState
-            .Find(filter)
-            .SortBy(s => s.Name)
-            .Skip((page - 1) * pageSize)
-            .Limit(pageSize)
-            .ToListAsync(ct);
+        var items = await _crawlState.Find(filter).SortBy(s => s.Name).Skip((page - 1) * pageSize).Limit(pageSize).ToListAsync(ct);
 
-        return (
-            items.Select(s => new EntitySearchDto { Id = s.PageId, Name = s.Name }).ToList(),
-            total
-        );
+        return (items.Select(s => new EntitySearchDto { Id = s.PageId, Name = s.Name }).ToList(), total);
     }
 
     /// <summary>
@@ -1955,25 +1536,13 @@ public class RelationshipGraphBuilderService
         // edges: $graphLookup traversal
         await _edges.Indexes.CreateManyAsync(
             [
+                new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.FromId), new CreateIndexOptions { Name = "ix_fromId" }),
                 new CreateIndexModel<RelationshipEdge>(
-                    Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.FromId),
-                    new CreateIndexOptions { Name = "ix_fromId" }
-                ),
-                new CreateIndexModel<RelationshipEdge>(
-                    Builders<RelationshipEdge>
-                        .IndexKeys.Ascending(e => e.FromId)
-                        .Ascending(e => e.ToId)
-                        .Ascending(e => e.Label),
+                    Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.FromId).Ascending(e => e.ToId).Ascending(e => e.Label),
                     new CreateIndexOptions { Name = "ix_fromId_toId_label", Unique = true }
                 ),
-                new CreateIndexModel<RelationshipEdge>(
-                    Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.SourcePageId),
-                    new CreateIndexOptions { Name = "ix_sourcePageId" }
-                ),
-                new CreateIndexModel<RelationshipEdge>(
-                    Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.PairId),
-                    new CreateIndexOptions { Name = "ix_pairId" }
-                ),
+                new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.SourcePageId), new CreateIndexOptions { Name = "ix_sourcePageId" }),
+                new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.PairId), new CreateIndexOptions { Name = "ix_pairId" }),
             ],
             ct
         );
@@ -1982,9 +1551,7 @@ public class RelationshipGraphBuilderService
         await _crawlState.Indexes.CreateManyAsync(
             [
                 new CreateIndexModel<RelationshipCrawlState>(
-                    Builders<RelationshipCrawlState>
-                        .IndexKeys.Ascending(s => s.Status)
-                        .Ascending(s => s.Type),
+                    Builders<RelationshipCrawlState>.IndexKeys.Ascending(s => s.Status).Ascending(s => s.Type),
                     new CreateIndexOptions { Name = "ix_status_type" }
                 ),
             ],

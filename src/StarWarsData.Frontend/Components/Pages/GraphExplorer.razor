@@ -109,7 +109,9 @@
                      EnableKeyboardShortcuts="true"
                      Labels="_availableLabels"
                      EnabledLabels="_selectedLabels"
+                     DefaultLabels="_defaultLabels"
                      OnLabelToggled="OnLabelToggled"
+                     OnLabelsBulkSet="OnLabelsBulkSet"
                      MaxDepth="_maxDepth"
                      OnDepthChanged="OnDepthChanged"
                      History="_history"
@@ -138,6 +140,7 @@
     private string _selectedEntityName = "";
     private List<string>? _availableLabels;
     private HashSet<string> _selectedLabels = new();
+    private HashSet<string> _defaultLabels = new();
     private bool _loadingLabels;
     private int _maxDepth = 2;
 
@@ -158,6 +161,9 @@
         var c = GlobalFilterService.GetContinuityQueryParam();
         if (!string.IsNullOrEmpty(c))
             query["continuity"] = c;
+        var u = GlobalFilterService.GetUniverseQueryParam();
+        if (!string.IsNullOrEmpty(u))
+            query["universe"] = u;
     }
 
     private string BuildQueryString(params (string key, string value)[] parameters)
@@ -306,8 +312,14 @@
             var labelsUrl = $"api/RelationshipGraph/labels/{_selectedEntityId}";
             if (!string.IsNullOrEmpty(labelsQs))
                 labelsUrl += $"?{labelsQs}";
-            _availableLabels = await Api.GetFromJsonAsync<List<string>>(labelsUrl);
-            _selectedLabels = new HashSet<string>(_availableLabels ?? []);
+            var result = await Api.GetFromJsonAsync<EntityLabelsResult>(labelsUrl);
+            _availableLabels = result?.Labels ?? [];
+            // Use the per-type "default enabled" subset from the API instead of
+            // blindly turning everything on. This keeps the initial graph focused
+            // on the primary relationship categories for the node's entity type
+            // (e.g. family/mentorship for Characters, military for Battles).
+            _defaultLabels = new HashSet<string>(result?.DefaultEnabled ?? _availableLabels);
+            _selectedLabels = new HashSet<string>(_defaultLabels);
         }
         catch (Exception ex)
         {
@@ -336,15 +348,32 @@
 
         try
         {
-            var labelsParam = string.Join(",", _selectedLabels);
             var queryParams = new List<(string, string)> { ("maxDepth", _maxDepth.ToString()) };
-            if (!string.IsNullOrEmpty(labelsParam))
-                queryParams.Add(("labels", labelsParam));
+            if (_selectedLabels.Count == 0)
+            {
+                // User explicitly toggled all labels off — ask the server for just the root
+                // node. Using a dedicated `onlyRoot` flag instead of an empty `labels` param
+                // avoids ASP.NET Core's empty-string-to-null model-binding coercion, which
+                // would otherwise make the request look indistinguishable from "no filter".
+                queryParams.Add(("onlyRoot", "true"));
+            }
+            else
+            {
+                queryParams.Add(("labels", string.Join(",", _selectedLabels)));
+            }
             var url = $"api/RelationshipGraph/query/{_selectedEntityId}?{BuildQueryString([.. queryParams])}";
 
             var result = await Api.GetFromJsonAsync<RelationshipGraphResult>(url);
 
-            if (result is null || result.Nodes.Count == 0)
+            if (result is null)
+            {
+                _graphError = "No graph data found. The crawler may not have processed this entity yet.";
+                return;
+            }
+
+            // Empty edges is a valid state when the user has toggled all labels off —
+            // we still want to render the root node. Only treat "no nodes at all" as an error.
+            if (result.Nodes.Count == 0)
             {
                 _graphError = "No graph data found. The crawler may not have processed this entity yet.";
                 return;
@@ -369,6 +398,14 @@
     {
         if (!_selectedLabels.Remove(label))
             _selectedLabels.Add(label);
+        await LoadGraph();
+    }
+
+    private async Task OnLabelsBulkSet(HashSet<string> labels)
+    {
+        // Replace the entire enabled set in one go (All / None / Reset to defaults).
+        // Using a single reload instead of toggling N times avoids thrashing the graph.
+        _selectedLabels = new HashSet<string>(labels);
         await LoadGraph();
     }
 

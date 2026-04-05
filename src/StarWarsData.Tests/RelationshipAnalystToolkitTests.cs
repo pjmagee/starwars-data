@@ -1,5 +1,6 @@
 using System.Text.Json;
 using StarWarsData.Models;
+using StarWarsData.Models.Entities;
 using StarWarsData.Services;
 
 namespace StarWarsData.Tests;
@@ -69,9 +70,7 @@ public class RelationshipAnalystToolkitTests(ApiFixture fixture)
     {
         // Insert a page with very long content for this test
         var longContent = new string('X', 10000);
-        var coll = fixture
-            .MongoClient.GetDatabase(ApiFixture.DatabaseName)
-            .GetCollection<Models.Entities.Page>(Collections.Pages);
+        var coll = fixture.MongoClient.GetDatabase(ApiFixture.DatabaseName).GetCollection<Models.Entities.Page>(Collections.Pages);
 
         var page = new Models.Entities.Page
         {
@@ -98,11 +97,7 @@ public class RelationshipAnalystToolkitTests(ApiFixture fixture)
         };
 
         // Upsert to avoid duplicate key errors on re-runs
-        await coll.ReplaceOneAsync(
-            MongoDB.Driver.Builders<Models.Entities.Page>.Filter.Eq(p => p.PageId, 9001),
-            page,
-            new MongoDB.Driver.ReplaceOptions { IsUpsert = true }
-        );
+        await coll.ReplaceOneAsync(MongoDB.Driver.Builders<Models.Entities.Page>.Filter.Eq(p => p.PageId, 9001), page, new MongoDB.Driver.ReplaceOptions { IsUpsert = true });
 
         var json = await Toolkit.GetPageContent(9001);
         using var doc = JsonDocument.Parse(json);

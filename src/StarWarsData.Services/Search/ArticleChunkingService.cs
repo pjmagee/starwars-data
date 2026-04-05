@@ -57,9 +57,7 @@ public partial class ArticleChunkingService
         _logger.LogInformation("Article chunking: starting full processing run");
 
         // Find pageIds that already have chunks
-        var existingPageIds = await _chunks
-            .Distinct(c => c.PageId, FilterDefinition<ArticleChunk>.Empty, cancellationToken: ct)
-            .ToListAsync(ct);
+        var existingPageIds = await _chunks.Distinct(c => c.PageId, FilterDefinition<ArticleChunk>.Empty, cancellationToken: ct).ToListAsync(ct);
 
         var existingSet = new HashSet<int>(existingPageIds);
 
@@ -69,25 +67,25 @@ public partial class ArticleChunkingService
                 new BsonDocument
                 {
                     { "content", new BsonDocument("$nin", new BsonArray { BsonNull.Value, "" }) },
-                    { "infobox", new BsonDocument("$ne", BsonNull.Value) },
+                    { PageBsonFields.Infobox, new BsonDocument("$ne", BsonNull.Value) },
                     { "infobox.Template", new BsonDocument("$ne", BsonNull.Value) },
                 }
             )
             .Project(
                 new BsonDocument
                 {
-                    { "_id", 1 },
-                    { "title", 1 },
-                    { "wikiUrl", 1 },
+                    { MongoFields.Id, 1 },
+                    { PageBsonFields.Title, 1 },
+                    { PageBsonFields.WikiUrl, 1 },
                     { "content", 1 },
-                    { "continuity", 1 },
-                    { "universe", 1 },
+                    { PageBsonFields.Continuity, 1 },
+                    { PageBsonFields.Universe, 1 },
                     { "infobox.Template", 1 },
                 }
             )
             .ToListAsync(ct);
 
-        var batch = candidates.Where(d => !existingSet.Contains(d["_id"].AsInt32)).ToList();
+        var batch = candidates.Where(d => !existingSet.Contains(d[MongoFields.Id].AsInt32)).ToList();
 
         _logger.LogInformation("Article chunking: {Count} pages to process", batch.Count);
 
@@ -101,12 +99,9 @@ public partial class ArticleChunkingService
             if (ct.IsCancellationRequested)
                 break;
 
-            var pageId = doc["_id"].AsInt32;
-            var title = doc.Contains("title") ? doc["title"].AsString : $"Page {pageId}";
-            var wikiUrl =
-                doc.Contains("wikiUrl") && !doc["wikiUrl"].IsBsonNull
-                    ? doc["wikiUrl"].AsString
-                    : "";
+            var pageId = doc[MongoFields.Id].AsInt32;
+            var title = doc.Contains(PageBsonFields.Title) ? doc[PageBsonFields.Title].AsString : $"Page {pageId}";
+            var wikiUrl = doc.Contains(PageBsonFields.WikiUrl) && !doc[PageBsonFields.WikiUrl].IsBsonNull ? doc[PageBsonFields.WikiUrl].AsString : "";
 
             try
             {
@@ -118,20 +113,20 @@ public partial class ArticleChunkingService
                 }
 
                 var template =
-                    doc.Contains("infobox") && doc["infobox"].AsBsonDocument.Contains("Template")
-                        ? RecordService.SanitizeTemplateName(doc["infobox"]["Template"].AsString)
-                        : "Unknown";
+                    doc.Contains(PageBsonFields.Infobox) && doc[PageBsonFields.Infobox].AsBsonDocument.Contains(InfoboxBsonFields.Template)
+                        ? RecordService.SanitizeTemplateName(doc[PageBsonFields.Infobox][InfoboxBsonFields.Template].AsString)
+                        : KgNodeTypes.Unknown;
 
                 var continuity =
-                    doc.Contains("continuity") && !doc["continuity"].IsBsonNull
-                        ? Enum.TryParse<Continuity>(doc["continuity"].AsString, true, out var c)
+                    doc.Contains(PageBsonFields.Continuity) && !doc[PageBsonFields.Continuity].IsBsonNull
+                        ? Enum.TryParse<Continuity>(doc[PageBsonFields.Continuity].AsString, true, out var c)
                             ? c
                             : Continuity.Unknown
                         : Continuity.Unknown;
 
                 var universe =
-                    doc.Contains("universe") && !doc["universe"].IsBsonNull
-                        ? Enum.TryParse<Universe>(doc["universe"].AsString, true, out var u)
+                    doc.Contains(PageBsonFields.Universe) && !doc[PageBsonFields.Universe].IsBsonNull
+                        ? Enum.TryParse<Universe>(doc[PageBsonFields.Universe].AsString, true, out var u)
                             ? u
                             : Universe.Unknown
                         : Universe.Unknown;
@@ -175,13 +170,7 @@ public partial class ArticleChunkingService
                 }
 
                 // Prepare texts for embedding (prepend title + heading for context)
-                var embeddingTexts = chunks
-                    .Select(ch =>
-                        string.IsNullOrWhiteSpace(ch.heading)
-                            ? $"{title}: {ch.text}"
-                            : $"{title} — {ch.heading}: {ch.text}"
-                    )
-                    .ToList();
+                var embeddingTexts = chunks.Select(ch => string.IsNullOrWhiteSpace(ch.heading) ? $"{title}: {ch.text}" : $"{title} — {ch.heading}: {ch.text}").ToList();
 
                 // Embed one at a time — retry with progressive truncation on token limit errors
                 var allEmbeddings = new List<Embedding<float>>();
@@ -194,37 +183,21 @@ public partial class ArticleChunkingService
                     {
                         try
                         {
-                            var result = await _embedder.GenerateAsync(
-                                [text],
-                                cancellationToken: ct
-                            );
+                            var result = await _embedder.GenerateAsync([text], cancellationToken: ct);
                             embedding = result[0];
                             _aiStatus.RecordSuccess("Embeddings");
                         }
-                        catch (Exception ex)
-                            when (ex.Message.Contains("maximum context length")
-                                || ex.Message.Contains("maximum input length")
-                            )
+                        catch (Exception ex) when (ex.Message.Contains("maximum context length") || ex.Message.Contains("maximum input length"))
                         {
                             // Truncate by 40% each retry to get under the token limit
                             text = text[..(int)(text.Length * 0.6)];
-                            _logger.LogWarning(
-                                "Chunk {Index} for page {PageId} exceeded token limit, truncating to {Len} chars (attempt {Attempt})",
-                                i,
-                                pageId,
-                                text.Length,
-                                attempt + 1
-                            );
+                            _logger.LogWarning("Chunk {Index} for page {PageId} exceeded token limit, truncating to {Len} chars (attempt {Attempt})", i, pageId, text.Length, attempt + 1);
                         }
                     }
 
                     if (embedding is null)
                     {
-                        _logger.LogWarning(
-                            "Skipping chunk {Index} for page {PageId} — could not embed after truncation",
-                            i,
-                            pageId
-                        );
+                        _logger.LogWarning("Skipping chunk {Index} for page {PageId} — could not embed after truncation", i, pageId);
                         // Use zero vector as placeholder so chunk indexes stay aligned
                         allEmbeddings.Add(new Embedding<float>(new float[1536]));
                     }
@@ -267,23 +240,13 @@ public partial class ArticleChunkingService
                 consecutiveApiErrors = 0; // Reset on success
 
                 if (processed % 50 == 0)
-                    _logger.LogInformation(
-                        "Article chunking progress: {Processed}/{Total} pages, {Chunks} chunks created",
-                        processed,
-                        batch.Count,
-                        totalChunks
-                    );
+                    _logger.LogInformation("Article chunking progress: {Processed}/{Total} pages, {Chunks} chunks created", processed, batch.Count, totalChunks);
             }
             catch (Exception ex) when (IsQuotaOrRateLimit(ex))
             {
                 consecutiveApiErrors++;
                 _aiStatus.RecordError("Embeddings", ex);
-                _logger.LogWarning(
-                    ex,
-                    "API quota/rate limit hit on page {PageId} ({ConsecutiveErrors} consecutive). Stopping run to avoid wasting requests.",
-                    pageId,
-                    consecutiveApiErrors
-                );
+                _logger.LogWarning(ex, "API quota/rate limit hit on page {PageId} ({ConsecutiveErrors} consecutive). Stopping run to avoid wasting requests.", pageId, consecutiveApiErrors);
                 break;
             }
             catch (Exception ex)
@@ -295,10 +258,7 @@ public partial class ArticleChunkingService
                     consecutiveApiErrors++;
                     if (consecutiveApiErrors >= 5)
                     {
-                        _logger.LogWarning(
-                            "Stopping chunking run after {Count} consecutive API errors",
-                            consecutiveApiErrors
-                        );
+                        _logger.LogWarning("Stopping chunking run after {Count} consecutive API errors", consecutiveApiErrors);
                         break;
                     }
                 }
@@ -309,12 +269,7 @@ public partial class ArticleChunkingService
             }
         }
 
-        _logger.LogInformation(
-            "Article chunking complete: {Processed} pages processed, {Failed} failed, {Chunks} chunks created",
-            processed,
-            failed,
-            totalChunks
-        );
+        _logger.LogInformation("Article chunking complete: {Processed} pages processed, {Failed} failed, {Chunks} chunks created", processed, failed, totalChunks);
     }
 
     /// <summary>
@@ -325,23 +280,17 @@ public partial class ArticleChunkingService
         // Total eligible pages (content + infobox)
         var eligibleFilter = new BsonDocument
         {
-            { "content", new BsonDocument("$nin", new BsonArray { BsonNull.Value, "" }) },
-            { "infobox", new BsonDocument("$ne", BsonNull.Value) },
-            { "infobox.Template", new BsonDocument("$ne", BsonNull.Value) },
+            { PageBsonFields.Content, new BsonDocument("$nin", new BsonArray { BsonNull.Value, "" }) },
+            { PageBsonFields.Infobox, new BsonDocument("$ne", BsonNull.Value) },
+            { PageBsonFields.InfoboxTemplate, new BsonDocument("$ne", BsonNull.Value) },
         };
-        var totalEligible = (int)
-            await _pages.CountDocumentsAsync(eligibleFilter, cancellationToken: ct);
+        var totalEligible = (int)await _pages.CountDocumentsAsync(eligibleFilter, cancellationToken: ct);
 
         // Total chunks
-        var totalChunks = await _chunks.CountDocumentsAsync(
-            FilterDefinition<ArticleChunk>.Empty,
-            cancellationToken: ct
-        );
+        var totalChunks = await _chunks.CountDocumentsAsync(FilterDefinition<ArticleChunk>.Empty, cancellationToken: ct);
 
         // Distinct chunked pages
-        var chunkedPageIds = await _chunks
-            .Distinct(c => c.PageId, FilterDefinition<ArticleChunk>.Empty, cancellationToken: ct)
-            .ToListAsync(ct);
+        var chunkedPageIds = await _chunks.Distinct(c => c.PageId, FilterDefinition<ArticleChunk>.Empty, cancellationToken: ct).ToListAsync(ct);
         var chunkedPages = chunkedPageIds.Count;
 
         // Breakdown by type
@@ -352,8 +301,8 @@ public partial class ArticleChunkingService
                 new BsonDocument
                 {
                     {
-                        "_id",
-                        new BsonDocument { { "type", "$type" }, { "pageId", "$pageId" } }
+                        MongoFields.Id,
+                        new BsonDocument { { ArticleChunkBsonFields.Type, "$" + ArticleChunkBsonFields.Type }, { ArticleChunkBsonFields.PageId, "$" + ArticleChunkBsonFields.PageId } }
                     },
                     { "chunks", new BsonDocument("$sum", 1) },
                 }
@@ -362,7 +311,7 @@ public partial class ArticleChunkingService
                 "$group",
                 new BsonDocument
                 {
-                    { "_id", "$_id.type" },
+                    { MongoFields.Id, "$_id." + ArticleChunkBsonFields.Type },
                     { "pages", new BsonDocument("$sum", 1) },
                     { "chunks", new BsonDocument("$sum", "$chunks") },
                 }
@@ -371,9 +320,7 @@ public partial class ArticleChunkingService
         };
 
         var chunksRaw = _chunks.Database.GetCollection<BsonDocument>(Collections.SearchChunks);
-        var typeResults = await chunksRaw
-            .Aggregate<BsonDocument>(typePipeline, cancellationToken: ct)
-            .ToListAsync(ct);
+        var typeResults = await chunksRaw.Aggregate<BsonDocument>(typePipeline, cancellationToken: ct).ToListAsync(ct);
 
         var byType = typeResults
             .Select(d =>
@@ -382,7 +329,7 @@ public partial class ArticleChunkingService
                 var chunks = d["chunks"].ToInt64();
                 return new ChunkingTypeProgress
                 {
-                    Type = d["_id"].AsString,
+                    Type = d[MongoFields.Id].AsString,
                     Pages = pages,
                     Chunks = chunks,
                     AvgChunksPerPage = pages > 0 ? Math.Round((double)chunks / pages, 1) : 0,
@@ -392,17 +339,10 @@ public partial class ArticleChunkingService
 
         // Throughput: count distinct pages chunked in the last hour
         var oneHourAgo = DateTime.UtcNow.AddHours(-1);
-        var recentChunkedPages = await _chunks
-            .Distinct(
-                c => c.PageId,
-                Builders<ArticleChunk>.Filter.Gte(c => c.CreatedAt, oneHourAgo),
-                cancellationToken: ct
-            )
-            .ToListAsync(ct);
+        var recentChunkedPages = await _chunks.Distinct(c => c.PageId, Builders<ArticleChunk>.Filter.Gte(c => c.CreatedAt, oneHourAgo), cancellationToken: ct).ToListAsync(ct);
         var pagesPerHour = (double)recentChunkedPages.Count;
         var pendingPages = totalEligible - chunkedPages;
-        double? estimatedHoursRemaining =
-            pagesPerHour > 0 ? Math.Round(pendingPages / pagesPerHour, 1) : null;
+        double? estimatedHoursRemaining = pagesPerHour > 0 ? Math.Round(pendingPages / pagesPerHour, 1) : null;
 
         return new ChunkingProgress
         {
@@ -410,8 +350,7 @@ public partial class ArticleChunkingService
             ChunkedPages = chunkedPages,
             PendingPages = pendingPages,
             TotalChunks = totalChunks,
-            AvgChunksPerPage =
-                chunkedPages > 0 ? Math.Round((double)totalChunks / chunkedPages, 1) : 0,
+            AvgChunksPerPage = chunkedPages > 0 ? Math.Round((double)totalChunks / chunkedPages, 1) : 0,
             PagesPerHour = pagesPerHour,
             EstimatedHoursRemaining = estimatedHoursRemaining,
             ByType = byType,
@@ -453,8 +392,7 @@ public partial class ArticleChunkingService
             else
                 headingLine++;
 
-            var end =
-                i + 1 < headingPositions.Count ? headingPositions[i + 1].index : content.Length;
+            var end = i + 1 < headingPositions.Count ? headingPositions[i + 1].index : content.Length;
 
             var sectionText = content[headingLine..end].Trim();
             if (!string.IsNullOrWhiteSpace(sectionText))
@@ -484,17 +422,11 @@ public partial class ArticleChunkingService
             if (string.IsNullOrWhiteSpace(trimmed))
                 continue;
 
-            if (
-                current.Length + trimmed.Length + 2 > MaxChunkChars
-                && current.Length > MinChunkChars
-            )
+            if (current.Length + trimmed.Length + 2 > MaxChunkChars && current.Length > MinChunkChars)
             {
                 chunks.Add(current.Trim());
                 // Keep overlap from end of previous chunk
-                current =
-                    current.Length > OverlapChars
-                        ? current[^OverlapChars..] + "\n\n" + trimmed
-                        : trimmed;
+                current = current.Length > OverlapChars ? current[^OverlapChars..] + "\n\n" + trimmed : trimmed;
             }
             else
             {
@@ -529,16 +461,8 @@ public partial class ArticleChunkingService
     {
         await _chunks.Indexes.CreateManyAsync(
             [
-                new CreateIndexModel<ArticleChunk>(
-                    Builders<ArticleChunk>.IndexKeys.Ascending(c => c.PageId),
-                    new CreateIndexOptions { Name = "ix_pageId" }
-                ),
-                new CreateIndexModel<ArticleChunk>(
-                    Builders<ArticleChunk>
-                        .IndexKeys.Ascending(c => c.Type)
-                        .Ascending(c => c.Continuity),
-                    new CreateIndexOptions { Name = "ix_type_continuity" }
-                ),
+                new CreateIndexModel<ArticleChunk>(Builders<ArticleChunk>.IndexKeys.Ascending(c => c.PageId), new CreateIndexOptions { Name = "ix_pageId" }),
+                new CreateIndexModel<ArticleChunk>(Builders<ArticleChunk>.IndexKeys.Ascending(c => c.Type).Ascending(c => c.Continuity), new CreateIndexOptions { Name = "ix_type_continuity" }),
             ],
             ct
         );
@@ -560,22 +484,18 @@ public partial class ArticleChunkingService
                     new BsonDocument
                     {
                         { "type", "vector" },
-                        { "path", "embedding" },
+                        { "path", ArticleChunkBsonFields.Embedding },
                         { "numDimensions", 1536 },
                         { "similarity", "cosine" },
                     },
-                    new BsonDocument { { "type", "filter" }, { "path", "type" } },
-                    new BsonDocument { { "type", "filter" }, { "path", "continuity" } },
-                    new BsonDocument { { "type", "filter" }, { "path", "universe" } },
+                    new BsonDocument { { "type", "filter" }, { "path", ArticleChunkBsonFields.Type } },
+                    new BsonDocument { { "type", "filter" }, { "path", ArticleChunkBsonFields.Continuity } },
+                    new BsonDocument { { "type", "filter" }, { "path", ArticleChunkBsonFields.Universe } },
                 }
             },
         };
 
-        var model = new CreateSearchIndexModel(
-            name: "chunks_vector_index",
-            type: SearchIndexType.VectorSearch,
-            definition: vectorDef
-        );
+        var model = new CreateSearchIndexModel(name: "chunks_vector_index", type: SearchIndexType.VectorSearch, definition: vectorDef);
 
         await _chunks.SearchIndexes.CreateOneAsync(model, ct);
         _logger.LogInformation("Vector search index created on chunks collection");

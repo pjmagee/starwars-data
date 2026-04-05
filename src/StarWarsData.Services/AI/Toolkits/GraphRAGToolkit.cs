@@ -20,12 +20,7 @@ public class GraphRAGToolkit
     readonly IMongoCollection<GalaxyYearDocument> _galaxyYears;
     readonly IMongoCollection<BsonDocument> _galaxyYearsRaw;
 
-    public GraphRAGToolkit(
-        KnowledgeGraphQueryService kg,
-        SemanticSearchService search,
-        IMongoClient mongoClient,
-        string databaseName
-    )
+    public GraphRAGToolkit(KnowledgeGraphQueryService kg, SemanticSearchService search, IMongoClient mongoClient, string databaseName)
     {
         _kg = kg;
         _search = search;
@@ -41,10 +36,8 @@ public class GraphRAGToolkit
     )]
     public async Task<string> SearchEntities(
         [Description("Entity name to search for (case-insensitive partial match)")] string query,
-        [Description("Optional entity type filter (e.g. Character, Organization, CelestialBody)")]
-            string? type = null,
-        [Description("Optional continuity filter: Canon, Legends, or omit for all")]
-            string? continuity = null,
+        [Description("Optional entity type filter (e.g. Character, Organization, CelestialBody)")] string? type = null,
+        [Description("Optional continuity filter: Canon, Legends, or omit for all")] string? continuity = null,
         [Description("Max results to return (default 10)")] int limit = 10
     )
     {
@@ -86,18 +79,10 @@ public class GraphRAGToolkit
             + "or CE year (e.g. 2015) for publication dates."
     )]
     public async Task<string> FindEntitiesByYear(
-        [Description(
-            "Start year or single year (sort-key: -19 = 19 BBY, 4 = 4 ABY, or CE year like 2015 for publications)"
-        )]
-            int year,
-        [Description(
-            "Entity type filter (e.g. Character, Government, Organization, Battle, War, Book)"
-        )]
-            string type,
-        [Description("Optional end year for range queries. Omit to query a single year.")]
-            int? yearEnd = null,
-        [Description("Optional continuity filter: Canon, Legends, or omit for all")]
-            string? continuity = null,
+        [Description("Start year or single year (sort-key: -19 = 19 BBY, 4 = 4 ABY, or CE year like 2015 for publications)")] int year,
+        [Description("Entity type filter (e.g. Character, Government, Organization, Battle, War, Book)")] string type,
+        [Description("Optional end year for range queries. Omit to query a single year.")] int? yearEnd = null,
+        [Description("Optional continuity filter: Canon, Legends, or omit for all")] string? continuity = null,
         [Description(
             "Optional temporal dimension: lifespan, conflict, institutional, construction, creation, publication. "
                 + "Filters on temporalFacets.semantic prefix. Omit to use the flat startYear/endYear envelope."
@@ -106,14 +91,7 @@ public class GraphRAGToolkit
         [Description("Max results (default 20)")] int limit = 20
     )
     {
-        var results = await _kg.FindNodesByYearAsync(
-            year,
-            type,
-            yearEnd,
-            continuity,
-            semantic,
-            limit
-        );
+        var results = await _kg.FindNodesByYearAsync(year, type, yearEnd, continuity, semantic, limit);
         return JsonSerializer.Serialize(
             results.Select(n => new
             {
@@ -141,9 +119,7 @@ public class GraphRAGToolkit
         "Get properties (attributes) of a knowledge graph entity — height, eye color, classification, etc. "
             + "Use for factual questions about an entity's characteristics. Call search_entities first to get the PageId."
     )]
-    public async Task<string> GetEntityProperties(
-        [Description("The PageId of the entity (from search_entities)")] int entityId
-    )
+    public async Task<string> GetEntityProperties([Description("The PageId of the entity (from search_entities)")] int entityId)
     {
         var node = await _kg.GetNodeByIdAsync(entityId);
         if (node is null)
@@ -176,22 +152,26 @@ public class GraphRAGToolkit
 
     [Description(
         "Get all direct relationships for an entity, grouped by relationship label. "
-            + "Returns relationship types with their connected entities and supporting evidence. "
-            + "Use this to answer questions like 'Who trained X?', 'What are X's relationships?', "
-            + "'Who are X's allies?'. Call search_entities first to get the entity's PageId."
+            + "BIDIRECTIONAL: returns BOTH outgoing edges AND inbound edges rewritten with their "
+            + "reverse label so they read from the entity's perspective. "
+            + "For example, battles commanded by Anakin (stored as Battle → commanded_by → Anakin) "
+            + "appear on Anakin as 'commanded → Battle'. "
+            + "Label filter accepts either forward (commanded_by) or reverse (commanded) names. "
+            + "Use this to answer questions like 'Who trained X?', 'What battles did X command?', "
+            + "'What ships were built by X?'. Call search_entities first to get the entity's PageId."
     )]
     public async Task<string> GetEntityRelationships(
         [Description("The PageId of the entity (from search_entities)")] int entityId,
         [Description(
-            "Optional comma-separated labels to filter (e.g. 'parent_of,trained_by'). Omit for all."
+            "Optional comma-separated labels to filter (e.g. 'parent_of,commanded,trained_by'). "
+                + "Reverse labels like 'commanded' are resolved to their forward form for inbound edges. Omit for all."
         )]
             string? labelFilter = null,
-        [Description("Optional continuity filter: Canon, Legends, or omit for all")]
-            string? continuity = null,
-        [Description("Max edges to return (default 30)")] int limit = 30
+        [Description("Optional continuity filter: Canon, Legends, or omit for all")] string? continuity = null,
+        [Description("Max edges to return (default 40, max 100)")] int limit = 40
     )
     {
-        var edges = await _kg.GetEdgesFromEntityAsync(entityId, labelFilter, continuity, limit);
+        var edges = await _kg.GetAllEdgesForEntityAsync(entityId, labelFilter, continuity, limit);
 
         if (edges.Count == 0)
             return JsonSerializer.Serialize(
@@ -200,7 +180,7 @@ public class GraphRAGToolkit
                     entityId,
                     relationships = new { },
                     totalEdges = 0,
-                    note = "No relationships found. The entity may not have been processed yet.",
+                    note = "No relationships found (outgoing or inbound). " + "The entity may not have been processed, or the label filter excluded everything.",
                 }
             );
 
@@ -238,8 +218,7 @@ public class GraphRAGToolkit
     )]
     public async Task<string> GetRelationshipTypes(
         [Description("The PageId of the entity (from search_entities)")] int entityId,
-        [Description("Optional continuity filter: Canon, Legends, or omit for all")]
-            string? continuity = null
+        [Description("Optional continuity filter: Canon, Legends, or omit for all")] string? continuity = null
     )
     {
         var results = await _kg.GetRelationshipTypesAsync(entityId, continuity);
@@ -261,18 +240,13 @@ public class GraphRAGToolkit
     )]
     public async Task<string> TraverseGraph(
         [Description("The PageId of the starting entity (from search_entities)")] int entityId,
-        [Description(
-            "Optional comma-separated labels to follow (e.g. 'trained_by,trained'). Omit for all."
-        )]
-            string? labels = null,
-        [Description("Max traversal depth, 1-3 (default 2). Higher values return more data.")]
-            int maxDepth = 2,
-        [Description("Optional continuity filter: Canon, Legends, or omit for all")]
-            string? continuity = null
+        [Description("Optional comma-separated labels to follow (e.g. 'trained_by,trained'). Omit for all.")] string? labels = null,
+        [Description("Max traversal depth, 1-3 (default 2). Higher values return more data.")] int maxDepth = 2,
+        [Description("Optional continuity filter: Canon, Legends, or omit for all")] string? continuity = null
     )
     {
         // Delegate to the service's BFS traversal (same as render_graph uses)
-        var result = await _kg.QueryGraphAsync(entityId, labels, maxDepth, continuity, default);
+        var result = await _kg.QueryGraphAsync(entityId, labels, maxDepth, continuity, ct: default);
 
         return JsonSerializer.Serialize(
             new
@@ -307,8 +281,7 @@ public class GraphRAGToolkit
         [Description("PageId of the first entity")] int entityId1,
         [Description("PageId of the second entity")] int entityId2,
         [Description("Maximum path length to search (default 3, max 4)")] int maxHops = 3,
-        [Description("Optional continuity filter: Canon, Legends, or omit for all")]
-            string? continuity = null
+        [Description("Optional continuity filter: Canon, Legends, or omit for all")] string? continuity = null
     )
     {
         if (entityId1 == entityId2)
@@ -322,12 +295,7 @@ public class GraphRAGToolkit
                 }
             );
 
-        var (connected, path) = await _kg.FindConnectionsAsync(
-            entityId1,
-            entityId2,
-            maxHops,
-            continuity
-        );
+        var (connected, path) = await _kg.FindConnectionsAsync(entityId1, entityId2, maxHops, continuity);
 
         if (!connected)
             return JsonSerializer.Serialize(
@@ -363,26 +331,16 @@ public class GraphRAGToolkit
             + "Combine with KG tools for comprehensive answers: KG for structured facts + semantic_search for narrative depth."
     )]
     public async Task<string> SemanticSearch(
-        [Description(
-            "Natural language search query (e.g. 'Battle of Endor aftermath', 'Darth Vader's redemption')"
-        )]
-            string query,
-        [Description(
-            "Optional entity type filter (e.g. Character, Planet, Battle). Omit for all types."
-        )]
-            string? type = null,
-        [Description("Optional continuity filter: Canon, Legends, or omit for all")]
-            string? continuity = null,
+        [Description("Natural language search query (e.g. 'Battle of Endor aftermath', 'Darth Vader's redemption')")] string query,
+        [Description("Optional entity type filter (e.g. Character, Planet, Battle). Omit for all types.")] string? type = null,
+        [Description("Optional continuity filter: Canon, Legends, or omit for all")] string? continuity = null,
         [Description("Max results to return (default 5, max 10)")] int limit = 5
     )
     {
         limit = Math.Clamp(limit, 1, 10);
 
         var types = !string.IsNullOrWhiteSpace(type) ? new[] { type } : null;
-        Continuity? cont =
-            continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var c)
-                ? c
-                : null;
+        Continuity? cont = continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var c) ? c : null;
 
         var results = await _search.SearchAsync(query, types, cont, limit: limit);
 
@@ -422,24 +380,14 @@ public class GraphRAGToolkit
             + "Pre-computed data — instant response. Use for questions like 'What was happening in 19 BBY?'. "
             + "Years use sort-key: negative = BBY, positive = ABY."
     )]
-    public async Task<string> GetGalaxyYear(
-        [Description("Year in sort-key format (-19 = 19 BBY, 4 = 4 ABY)")] int year
-    )
+    public async Task<string> GetGalaxyYear([Description("Year in sort-key format (-19 = 19 BBY, 4 = 4 ABY)")] int year)
     {
         var doc = await _galaxyYears.Find(d => d.Year == year).FirstOrDefaultAsync();
         if (doc is null)
         {
-            var nearest = await _galaxyYearsRaw
-                .Find(Builders<BsonDocument>.Filter.Ne("_id", "overview"))
-                .SortBy(d => d["_id"])
-                .ToListAsync();
-            var available = nearest
-                .Select(d => d["_id"].AsInt32)
-                .OrderBy(y => Math.Abs(y - year))
-                .Take(5);
-            return JsonSerializer.Serialize(
-                new { error = $"No data for year {year}.", nearestYears = available }
-            );
+            var nearest = await _galaxyYearsRaw.Find(Builders<BsonDocument>.Filter.Ne(MongoFields.Id, "overview")).SortBy(d => d[MongoFields.Id]).ToListAsync();
+            var available = nearest.Select(d => d[MongoFields.Id].AsInt32).OrderBy(y => Math.Abs(y - year)).Take(5);
+            return JsonSerializer.Serialize(new { error = $"No data for year {year}.", nearestYears = available });
         }
 
         return JsonSerializer.Serialize(
@@ -484,9 +432,7 @@ public class GraphRAGToolkit
             + "Use for questions like 'When was the Galactic Republic reorganized?', 'When did Yoda die?'. "
             + "Call search_entities first to get the PageId."
     )]
-    public async Task<string> GetEntityTimeline(
-        [Description("The PageId of the entity")] int entityId
-    )
+    public async Task<string> GetEntityTimeline([Description("The PageId of the entity")] int entityId)
     {
         var node = await _kg.GetNodeByIdAsync(entityId);
         if (node is null)
@@ -502,9 +448,7 @@ public class GraphRAGToolkit
                 universe = node.Universe.ToString(),
                 startYear = node.StartYear,
                 endYear = node.EndYear,
-                duration = node.StartYear.HasValue && node.EndYear.HasValue
-                    ? $"{Math.Abs(node.EndYear.Value - node.StartYear.Value)} years"
-                    : null,
+                duration = node.StartYear.HasValue && node.EndYear.HasValue ? $"{Math.Abs(node.EndYear.Value - node.StartYear.Value)} years" : null,
                 wikiUrl = node.WikiUrl,
                 temporalFacets = node
                     .TemporalFacets.OrderBy(f => f.Order)
@@ -525,65 +469,41 @@ public class GraphRAGToolkit
         "List all entity types available in the knowledge graph with counts. Use this to discover valid type values "
             + "for find_entities_by_year and search_entities. Returns types sorted by count descending."
     )]
-    public async Task<string> ListEntityTypes(
-        [Description("Only include types that have temporal facets. Default true.")]
-            bool temporalOnly = true
-    )
+    public async Task<string> ListEntityTypes([Description("Only include types that have temporal facets. Default true.")] bool temporalOnly = true)
     {
         // This uses a specific aggregation not in the service — keep inline
-        var matchStage = temporalOnly
-            ? new BsonDocument(
-                "$match",
-                new BsonDocument("temporalFacets.0", new BsonDocument("$exists", true))
-            )
-            : new BsonDocument("$match", new BsonDocument());
+        var matchStage = temporalOnly ? new BsonDocument("$match", new BsonDocument("temporalFacets.0", new BsonDocument("$exists", true))) : new BsonDocument("$match", new BsonDocument());
 
         var pipeline = new[]
         {
             matchStage,
-            new BsonDocument(
-                "$group",
-                new BsonDocument { { "_id", "$type" }, { "count", new BsonDocument("$sum", 1) } }
-            ),
+            new BsonDocument("$group", new BsonDocument { { MongoFields.Id, "$" + GraphNodeBsonFields.Type }, { "count", new BsonDocument("$sum", 1) } }),
             new BsonDocument("$sort", new BsonDocument("count", -1)),
         };
 
-        var results = await _galaxyYearsRaw
-            .Database.GetCollection<BsonDocument>(Collections.KgNodes)
-            .AggregateAsync<BsonDocument>(pipeline);
+        var results = await _galaxyYearsRaw.Database.GetCollection<BsonDocument>(Collections.KgNodes).AggregateAsync<BsonDocument>(pipeline);
         var docs = await results.ToListAsync();
 
-        return JsonSerializer.Serialize(
-            docs.Select(d => new { type = d["_id"].AsString, count = d["count"].AsInt32 })
-        );
+        return JsonSerializer.Serialize(docs.Select(d => new { type = d[MongoFields.Id].AsString, count = d["count"].AsInt32 }));
     }
 
     [Description(
         "List all relationship labels in the knowledge graph with usage counts. Use this to discover what kinds of "
             + "relationships exist. Helps choose label filters for get_entity_relationships and traverse_graph."
     )]
-    public async Task<string> ListRelationshipLabels(
-        [Description("Max results (default 50)")] int limit = 50
-    )
+    public async Task<string> ListRelationshipLabels([Description("Max results (default 50)")] int limit = 50)
     {
         var pipeline = new[]
         {
-            new BsonDocument(
-                "$group",
-                new BsonDocument { { "_id", "$label" }, { "count", new BsonDocument("$sum", 1) } }
-            ),
+            new BsonDocument("$group", new BsonDocument { { MongoFields.Id, "$" + RelationshipEdgeBsonFields.Label }, { "count", new BsonDocument("$sum", 1) } }),
             new BsonDocument("$sort", new BsonDocument("count", -1)),
             new BsonDocument("$limit", limit),
         };
 
-        var results = await _galaxyYearsRaw
-            .Database.GetCollection<BsonDocument>(Collections.KgEdges)
-            .AggregateAsync<BsonDocument>(pipeline);
+        var results = await _galaxyYearsRaw.Database.GetCollection<BsonDocument>(Collections.KgEdges).AggregateAsync<BsonDocument>(pipeline);
         var docs = await results.ToListAsync();
 
-        return JsonSerializer.Serialize(
-            docs.Select(d => new { label = d["_id"].AsString, count = d["count"].AsInt32 })
-        );
+        return JsonSerializer.Serialize(docs.Select(d => new { label = d[MongoFields.Id].AsString, count = d["count"].AsInt32 }));
     }
 
     public IReadOnlyList<AITool> AsAIFunctions() =>

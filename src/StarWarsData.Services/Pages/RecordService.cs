@@ -37,10 +37,7 @@ public class RecordService
         _recordToEventsTransformer = recordToEventsTransformer;
     }
 
-    IMongoCollection<Page> PagesCollection =>
-        _mongoClient
-            .GetDatabase(_settingsOptions.DatabaseName)
-            .GetCollection<Page>(Collections.Pages);
+    IMongoCollection<Page> PagesCollection => _mongoClient.GetDatabase(_settingsOptions.DatabaseName).GetCollection<Page>(Collections.Pages);
 
     /// <summary>
     /// Returns distinct sanitized template names from Pages that have infoboxes.
@@ -50,15 +47,12 @@ public class RecordService
         var pages = PagesCollection;
         var pipeline = new[]
         {
-            new BsonDocument(
-                "$match",
-                new BsonDocument("infobox", new BsonDocument("$ne", BsonNull.Value))
-            ),
-            new BsonDocument("$group", new BsonDocument("_id", "$infobox.Template")),
+            new BsonDocument("$match", new BsonDocument(PageBsonFields.Infobox, new BsonDocument("$ne", BsonNull.Value))),
+            new BsonDocument("$group", new BsonDocument(MongoFields.Id, "$" + PageBsonFields.InfoboxTemplate)),
         };
         var cursor = await pages.Aggregate<BsonDocument>(pipeline).ToListAsync(cancellationToken);
         var names = cursor
-            .Select(d => d["_id"].IsBsonNull ? null : d["_id"].AsString)
+            .Select(d => d[MongoFields.Id].IsBsonNull ? null : d[MongoFields.Id].AsString)
             .Where(n => !string.IsNullOrWhiteSpace(n))
             .Select(n => SanitizeTemplateName(n!))
             .Where(n => n != "Unknown")
@@ -70,71 +64,41 @@ public class RecordService
 
     public async Task<Page?> GetPageById(int pageId, CancellationToken cancellationToken)
     {
-        return await PagesCollection
-            .Find(Builders<Page>.Filter.Eq(p => p.PageId, pageId))
-            .FirstOrDefaultAsync(cancellationToken);
+        return await PagesCollection.Find(Builders<Page>.Filter.Eq(p => p.PageId, pageId)).FirstOrDefaultAsync(cancellationToken);
     }
 
-    public async Task<List<Page>> GetPagesByIds(
-        IEnumerable<int> pageIds,
-        CancellationToken cancellationToken
-    )
+    public async Task<List<Page>> GetPagesByIds(IEnumerable<int> pageIds, CancellationToken cancellationToken)
     {
         var filter = Builders<Page>.Filter.In(p => p.PageId, pageIds);
         return await PagesCollection.Find(filter).ToListAsync(cancellationToken);
     }
 
-    public async Task<List<string>> GetFilteredCollectionNames(
-        Continuity? continuity,
-        Universe? universe,
-        CancellationToken cancellationToken
-    )
+    public async Task<List<string>> GetFilteredCollectionNames(Continuity? continuity, Universe? universe, CancellationToken cancellationToken)
     {
-        var matchConditions = new BsonDocument("infobox", new BsonDocument("$ne", BsonNull.Value));
+        var matchConditions = new BsonDocument(PageBsonFields.Infobox, new BsonDocument("$ne", BsonNull.Value));
 
         if (continuity != null && continuity != Continuity.Both)
         {
             // Include pages that match the specific continuity OR are marked as Both
-            matchConditions.Add(
-                "continuity",
-                new BsonDocument(
-                    "$in",
-                    new BsonArray { continuity.Value.ToString(), Continuity.Both.ToString() }
-                )
-            );
+            matchConditions.Add(PageBsonFields.Continuity, new BsonDocument("$in", new BsonArray { continuity.Value.ToString(), Continuity.Both.ToString() }));
         }
 
         if (universe == Universe.InUniverse)
         {
             // Exclude out-of-universe pages; include InUniverse and Unknown
-            matchConditions.Add(
-                "universe",
-                new BsonDocument("$ne", Universe.OutOfUniverse.ToString())
-            );
+            matchConditions.Add(PageBsonFields.Universe, new BsonDocument("$ne", Universe.OutOfUniverse.ToString()));
         }
         else if (universe == Universe.OutOfUniverse)
         {
             // Include out-of-universe and Unknown
-            matchConditions.Add(
-                "universe",
-                new BsonDocument(
-                    "$in",
-                    new BsonArray { Universe.OutOfUniverse.ToString(), Universe.Unknown.ToString() }
-                )
-            );
+            matchConditions.Add(PageBsonFields.Universe, new BsonDocument("$in", new BsonArray { Universe.OutOfUniverse.ToString(), Universe.Unknown.ToString() }));
         }
 
-        var pipeline = new[]
-        {
-            new BsonDocument("$match", matchConditions),
-            new BsonDocument("$group", new BsonDocument("_id", "$infobox.Template")),
-        };
+        var pipeline = new[] { new BsonDocument("$match", matchConditions), new BsonDocument("$group", new BsonDocument(MongoFields.Id, "$" + PageBsonFields.InfoboxTemplate)) };
 
-        var cursor = await PagesCollection
-            .Aggregate<BsonDocument>(pipeline)
-            .ToListAsync(cancellationToken);
+        var cursor = await PagesCollection.Aggregate<BsonDocument>(pipeline).ToListAsync(cancellationToken);
         return cursor
-            .Select(d => d["_id"].IsBsonNull ? null : d["_id"].AsString)
+            .Select(d => d[MongoFields.Id].IsBsonNull ? null : d[MongoFields.Id].AsString)
             .Where(n => !string.IsNullOrWhiteSpace(n))
             .Select(n => SanitizeTemplateName(n!))
             .Where(n => n != "Unknown")
@@ -146,9 +110,7 @@ public class RecordService
     public async Task DeletePagesCollections(CancellationToken cancellationToken)
     {
         var pagesDb = _mongoClient.GetDatabase(_settingsOptions.DatabaseName);
-        var collections = await pagesDb.ListCollectionNamesAsync(
-            cancellationToken: cancellationToken
-        );
+        var collections = await pagesDb.ListCollectionNamesAsync(cancellationToken: cancellationToken);
         var collectionList = await collections.ToListAsync(cancellationToken);
         foreach (var collection in collectionList)
         {
@@ -160,51 +122,29 @@ public class RecordService
     {
         var db = _mongoClient.GetDatabase(_settingsOptions.DatabaseName);
         var collections = await db.ListCollectionNamesAsync(cancellationToken: cancellationToken);
-        var collectionList = (await collections.ToListAsync(cancellationToken))
-            .Where(n => n.StartsWith(Collections.TimelinePrefix))
-            .ToList();
+        var collectionList = (await collections.ToListAsync(cancellationToken)).Where(n => n.StartsWith(Collections.TimelinePrefix)).ToList();
         foreach (var collection in collectionList)
         {
             await db.DropCollectionAsync(collection, cancellationToken);
         }
     }
 
-    public async Task<PagedResult> GetSearchResult(
-        string query,
-        int page = 1,
-        int pageSize = 50,
-        CancellationToken token = default
-    )
+    public async Task<PagedResult> GetSearchResult(string query, int page = 1, int pageSize = 50, CancellationToken token = default)
     {
         var pages = PagesCollection;
 
         // Use $text search on title + content, filtered to pages with infoboxes
-        var textFilter = Builders<Page>.Filter.And(
-            Builders<Page>.Filter.Ne(p => p.Infobox, null),
-            Builders<Page>.Filter.Text(query)
-        );
+        var textFilter = Builders<Page>.Filter.And(Builders<Page>.Filter.Ne(p => p.Infobox, null), Builders<Page>.Filter.Text(query));
 
         var total = await pages.CountDocumentsAsync(textFilter, cancellationToken: token);
-        var data = await pages
-            .Find(textFilter)
-            .Sort(Builders<Page>.Sort.MetaTextScore("score"))
-            .Skip((page - 1) * pageSize)
-            .Limit(pageSize)
-            .ToListAsync(token);
+        var data = await pages.Find(textFilter).Sort(Builders<Page>.Sort.MetaTextScore("score")).Skip((page - 1) * pageSize).Limit(pageSize).ToListAsync(token);
 
         // Fallback to regex if text search returns nothing
         if (total == 0)
         {
-            var regexFilter = Builders<Page>.Filter.And(
-                Builders<Page>.Filter.Ne(p => p.Infobox, null),
-                Builders<Page>.Filter.Regex("title", new BsonRegularExpression(query, "i"))
-            );
+            var regexFilter = Builders<Page>.Filter.And(Builders<Page>.Filter.Ne(p => p.Infobox, null), Builders<Page>.Filter.Regex(PageBsonFields.Title, new BsonRegularExpression(query, "i")));
             total = await pages.CountDocumentsAsync(regexFilter, cancellationToken: token);
-            data = await pages
-                .Find(regexFilter)
-                .Skip((page - 1) * pageSize)
-                .Limit(pageSize)
-                .ToListAsync(token);
+            data = await pages.Find(regexFilter).Skip((page - 1) * pageSize).Limit(pageSize).ToListAsync(token);
         }
 
         return new PagedResult
@@ -221,6 +161,8 @@ public class RecordService
         string? searchText = null,
         int page = 1,
         int pageSize = 50,
+        Continuity? continuity = null,
+        Universe? universe = null,
         CancellationToken token = default
     )
     {
@@ -229,14 +171,14 @@ public class RecordService
         // Match pages whose sanitized template matches the collection name
         var templateFilter = BuildTemplateFilter(collectionName);
 
+        // Apply global filters (continuity/universe) at the DB level on the Page documents.
+        var globalFilter = BuildPageGlobalFilter(continuity, universe);
+        var baseFilter = Builders<Page>.Filter.And(templateFilter, globalFilter);
+
         if (searchText is null)
         {
-            var total = await pages.CountDocumentsAsync(templateFilter, cancellationToken: token);
-            var data = await pages
-                .Find(templateFilter)
-                .Skip((page - 1) * pageSize)
-                .Limit(pageSize)
-                .ToListAsync(token);
+            var total = await pages.CountDocumentsAsync(baseFilter, cancellationToken: token);
+            var data = await pages.Find(baseFilter).Skip((page - 1) * pageSize).Limit(pageSize).ToListAsync(token);
 
             return new PagedResult
             {
@@ -247,33 +189,18 @@ public class RecordService
             };
         }
 
-        // Use $text search combined with template filter
-        var textFilter = Builders<Page>.Filter.And(
-            templateFilter,
-            Builders<Page>.Filter.Text(searchText)
-        );
+        // Use $text search combined with template + global filters
+        var textFilter = Builders<Page>.Filter.And(baseFilter, Builders<Page>.Filter.Text(searchText));
 
         var textTotal = await pages.CountDocumentsAsync(textFilter, cancellationToken: token);
-        var textData = await pages
-            .Find(textFilter)
-            .Sort(Builders<Page>.Sort.MetaTextScore("score"))
-            .Skip((page - 1) * pageSize)
-            .Limit(pageSize)
-            .ToListAsync(token);
+        var textData = await pages.Find(textFilter).Sort(Builders<Page>.Sort.MetaTextScore("score")).Skip((page - 1) * pageSize).Limit(pageSize).ToListAsync(token);
 
         // Fallback to regex if text search returns nothing
         if (textTotal == 0)
         {
-            var regexFilter = Builders<Page>.Filter.And(
-                templateFilter,
-                Builders<Page>.Filter.Regex("title", new BsonRegularExpression(searchText, "i"))
-            );
+            var regexFilter = Builders<Page>.Filter.And(baseFilter, Builders<Page>.Filter.Regex(PageBsonFields.Title, new BsonRegularExpression(searchText, "i")));
             textTotal = await pages.CountDocumentsAsync(regexFilter, cancellationToken: token);
-            textData = await pages
-                .Find(regexFilter)
-                .Skip((page - 1) * pageSize)
-                .Limit(pageSize)
-                .ToListAsync(token);
+            textData = await pages.Find(regexFilter).Skip((page - 1) * pageSize).Limit(pageSize).ToListAsync(token);
         }
 
         return new PagedResult
@@ -283,6 +210,28 @@ public class RecordService
             Page = page,
             Items = textData.Select(PageToInfobox).ToList(),
         };
+    }
+
+    /// <summary>
+    /// Builds a DB-level filter on <see cref="Page"/> for the app's global continuity /
+    /// universe filters. Matches the selected value plus Both/Unknown so "shared" and
+    /// unclassified documents remain visible.
+    /// </summary>
+    private static FilterDefinition<Page> BuildPageGlobalFilter(Continuity? continuity, Universe? universe)
+    {
+        var filters = new List<FilterDefinition<Page>>();
+
+        if (continuity is not null && continuity != Continuity.Both)
+        {
+            filters.Add(Builders<Page>.Filter.In(p => p.Continuity, [continuity.Value, Continuity.Both, Continuity.Unknown]));
+        }
+
+        if (universe is not null)
+        {
+            filters.Add(Builders<Page>.Filter.In(p => p.Universe, [universe.Value, Universe.Unknown]));
+        }
+
+        return filters.Count > 0 ? Builders<Page>.Filter.And(filters) : Builders<Page>.Filter.Empty;
     }
 
     public async Task CreateCategorizedTimelineEvents(CancellationToken token)
@@ -303,44 +252,22 @@ public class RecordService
             {
                 try
                 {
-                    _logger.LogInformation(
-                        "Processing timeline events for template: {TemplateName}",
-                        templateName
-                    );
+                    _logger.LogInformation("Processing timeline events for template: {TemplateName}", templateName);
 
-                    var timelineCollection = timelineEventsDb.GetCollection<TimelineEvent>(
-                        Collections.TimelinePrefix + templateName
-                    );
+                    var timelineCollection = timelineEventsDb.GetCollection<TimelineEvent>(Collections.TimelinePrefix + templateName);
 
                     // Clear existing data
-                    await timelineCollection.DeleteManyAsync(
-                        FilterDefinition<TimelineEvent>.Empty,
-                        ct
-                    );
+                    await timelineCollection.DeleteManyAsync(FilterDefinition<TimelineEvent>.Empty, ct);
 
                     // Create indexes
-                    var indexKeysDefinition = Builders<TimelineEvent>
-                        .IndexKeys.Ascending(x => x.Demarcation)
-                        .Ascending(x => x.Year);
-                    await timelineCollection.Indexes.CreateOneAsync(
-                        new CreateIndexModel<TimelineEvent>(indexKeysDefinition),
-                        cancellationToken: ct
-                    );
+                    var indexKeysDefinition = Builders<TimelineEvent>.IndexKeys.Ascending(x => x.Demarcation).Ascending(x => x.Year);
+                    await timelineCollection.Indexes.CreateOneAsync(new CreateIndexModel<TimelineEvent>(indexKeysDefinition), cancellationToken: ct);
 
-                    var templateIndexKeysDefinition = Builders<TimelineEvent>.IndexKeys.Ascending(
-                        x => x.TemplateUri
-                    );
-                    await timelineCollection.Indexes.CreateOneAsync(
-                        new CreateIndexModel<TimelineEvent>(templateIndexKeysDefinition),
-                        cancellationToken: ct
-                    );
+                    var templateIndexKeysDefinition = Builders<TimelineEvent>.IndexKeys.Ascending(x => x.TemplateUri);
+                    await timelineCollection.Indexes.CreateOneAsync(new CreateIndexModel<TimelineEvent>(templateIndexKeysDefinition), cancellationToken: ct);
 
-                    var cleanedTemplateIndexKeysDefinition =
-                        Builders<TimelineEvent>.IndexKeys.Ascending(x => x.Template);
-                    await timelineCollection.Indexes.CreateOneAsync(
-                        new CreateIndexModel<TimelineEvent>(cleanedTemplateIndexKeysDefinition),
-                        cancellationToken: ct
-                    );
+                    var cleanedTemplateIndexKeysDefinition = Builders<TimelineEvent>.IndexKeys.Ascending(x => x.Template);
+                    await timelineCollection.Indexes.CreateOneAsync(new CreateIndexModel<TimelineEvent>(cleanedTemplateIndexKeysDefinition), cancellationToken: ct);
 
                     // Query pages matching this template
                     var templateFilter = BuildTemplateFilter(templateName);
@@ -360,10 +287,7 @@ public class RecordService
                             {
                                 if (batch.Count > 0)
                                 {
-                                    await timelineCollection.InsertManyAsync(
-                                        batch,
-                                        cancellationToken: ct
-                                    );
+                                    await timelineCollection.InsertManyAsync(batch, cancellationToken: ct);
                                     totalAdded += batch.Count;
                                     batch.Clear();
                                 }
@@ -379,27 +303,16 @@ public class RecordService
 
                     if (totalAdded == 0)
                     {
-                        _logger.LogInformation(
-                            "No timeline events generated for template: {TemplateName}",
-                            templateName
-                        );
+                        _logger.LogInformation("No timeline events generated for template: {TemplateName}", templateName);
                     }
                     else
                     {
-                        _logger.LogInformation(
-                            "Added {Count} timeline events for template: {TemplateName}",
-                            totalAdded,
-                            templateName
-                        );
+                        _logger.LogInformation("Added {Count} timeline events for template: {TemplateName}", totalAdded, templateName);
                     }
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(
-                        ex,
-                        "Error processing timeline events for template: {TemplateName}",
-                        templateName
-                    );
+                    _logger.LogError(ex, "Error processing timeline events for template: {TemplateName}", templateName);
                 }
             }
         );
@@ -418,10 +331,7 @@ public class RecordService
 
         // Drop existing views (only views, not real collections like Pages/JobState)
         var viewFilter = new BsonDocument("type", "view");
-        using var viewCursor = await database.ListCollectionsAsync(
-            new ListCollectionsOptions { Filter = viewFilter },
-            cancellationToken
-        );
+        using var viewCursor = await database.ListCollectionsAsync(new ListCollectionsOptions { Filter = viewFilter }, cancellationToken);
         var existingViews = await viewCursor.ToListAsync(cancellationToken);
 
         foreach (var view in existingViews)
@@ -436,17 +346,7 @@ public class RecordService
 
         foreach (var templateName in templateNames)
         {
-            var pattern = templateName.Replace(" ", "[_ ]");
-            var pipeline = new BsonArray
-            {
-                new BsonDocument(
-                    "$match",
-                    new BsonDocument(
-                        "infobox.Template",
-                        new BsonDocument("$regex", new BsonRegularExpression($":{pattern}$", "i"))
-                    )
-                ),
-            };
+            var pipeline = new BsonArray { new BsonDocument("$match", new BsonDocument("infobox.Template", $"{Collections.TemplateUrlPrefix}{templateName}")) };
 
             var command = new BsonDocument
             {
@@ -457,10 +357,7 @@ public class RecordService
 
             try
             {
-                await database.RunCommandAsync<BsonDocument>(
-                    command,
-                    cancellationToken: cancellationToken
-                );
+                await database.RunCommandAsync<BsonDocument>(command, cancellationToken: cancellationToken);
                 _logger.LogInformation("Created view: {ViewName}", templateName);
             }
             catch (Exception ex)
@@ -469,10 +366,7 @@ public class RecordService
             }
         }
 
-        _logger.LogInformation(
-            "Template views creation complete. Created {Count} views.",
-            templateNames.Count
-        );
+        _logger.LogInformation("Template views creation complete. Created {Count} views.", templateNames.Count);
     }
 
     /// <summary>
@@ -488,28 +382,19 @@ public class RecordService
 
         // infobox.Template — template-based filtering (most common query pattern)
         await pages.Indexes.CreateOneAsync(
-            new CreateIndexModel<Page>(
-                Builders<Page>.IndexKeys.Ascending("infobox.Template"),
-                new CreateIndexOptions { Name = "idx_infobox_template", Background = true }
-            ),
+            new CreateIndexModel<Page>(Builders<Page>.IndexKeys.Ascending("infobox.Template"), new CreateIndexOptions { Name = "idx_infobox_template", Background = true }),
             cancellationToken: cancellationToken
         );
 
         // wikiUrl — relationship graph BFS lookups via $in
         await pages.Indexes.CreateOneAsync(
-            new CreateIndexModel<Page>(
-                Builders<Page>.IndexKeys.Ascending(p => p.WikiUrl),
-                new CreateIndexOptions { Name = "idx_wikiUrl", Background = true }
-            ),
+            new CreateIndexModel<Page>(Builders<Page>.IndexKeys.Ascending(p => p.WikiUrl), new CreateIndexOptions { Name = "idx_wikiUrl", Background = true }),
             cancellationToken: cancellationToken
         );
 
         // title — ascending index for exact/prefix lookups
         await pages.Indexes.CreateOneAsync(
-            new CreateIndexModel<Page>(
-                Builders<Page>.IndexKeys.Ascending(p => p.Title),
-                new CreateIndexOptions { Name = "idx_title", Background = true }
-            ),
+            new CreateIndexModel<Page>(Builders<Page>.IndexKeys.Ascending(p => p.Title), new CreateIndexOptions { Name = "idx_title", Background = true }),
             cancellationToken: cancellationToken
         );
 
@@ -521,7 +406,7 @@ public class RecordService
                 {
                     Name = "idx_text_search",
                     Background = true,
-                    Weights = new BsonDocument { { "title", 10 }, { "content", 1 } },
+                    Weights = new BsonDocument { { PageBsonFields.Title, 10 }, { PageBsonFields.Content, 1 } },
                 }
             ),
             cancellationToken: cancellationToken
@@ -529,19 +414,13 @@ public class RecordService
 
         // continuity — global filtering
         await pages.Indexes.CreateOneAsync(
-            new CreateIndexModel<Page>(
-                Builders<Page>.IndexKeys.Ascending(p => p.Continuity),
-                new CreateIndexOptions { Name = "idx_continuity", Background = true }
-            ),
+            new CreateIndexModel<Page>(Builders<Page>.IndexKeys.Ascending(p => p.Continuity), new CreateIndexOptions { Name = "idx_continuity", Background = true }),
             cancellationToken: cancellationToken
         );
 
         // infobox.Data.Label — AI toolkit label-based searches
         await pages.Indexes.CreateOneAsync(
-            new CreateIndexModel<Page>(
-                Builders<Page>.IndexKeys.Ascending("infobox.Data.Label"),
-                new CreateIndexOptions { Name = "idx_infobox_data_label", Background = true }
-            ),
+            new CreateIndexModel<Page>(Builders<Page>.IndexKeys.Ascending("infobox.Data.Label"), new CreateIndexOptions { Name = "idx_infobox_data_label", Background = true }),
             cancellationToken: cancellationToken
         );
 
@@ -558,59 +437,37 @@ public class RecordService
 
         // Timeline event collections — add Continuity and Universe indexes
         var timelineDb = _mongoClient.GetDatabase(_settingsOptions.DatabaseName);
-        var collectionNames = await timelineDb.ListCollectionNamesAsync(
-            cancellationToken: cancellationToken
-        );
-        var collections = (await collectionNames.ToListAsync(cancellationToken))
-            .Where(n => n.StartsWith(Collections.TimelinePrefix))
-            .ToList();
+        var collectionNames = await timelineDb.ListCollectionNamesAsync(cancellationToken: cancellationToken);
+        var collections = (await collectionNames.ToListAsync(cancellationToken)).Where(n => n.StartsWith(Collections.TimelinePrefix)).ToList();
 
         foreach (var collName in collections)
         {
             var coll = timelineDb.GetCollection<TimelineEvent>(collName);
 
             await coll.Indexes.CreateOneAsync(
-                new CreateIndexModel<TimelineEvent>(
-                    Builders<TimelineEvent>.IndexKeys.Ascending(x => x.Continuity),
-                    new CreateIndexOptions { Name = "idx_continuity", Background = true }
-                ),
+                new CreateIndexModel<TimelineEvent>(Builders<TimelineEvent>.IndexKeys.Ascending(x => x.Continuity), new CreateIndexOptions { Name = "idx_continuity", Background = true }),
+                cancellationToken: cancellationToken
+            );
+
+            await coll.Indexes.CreateOneAsync(
+                new CreateIndexModel<TimelineEvent>(Builders<TimelineEvent>.IndexKeys.Ascending(x => x.Universe), new CreateIndexOptions { Name = "idx_universe", Background = true }),
                 cancellationToken: cancellationToken
             );
 
             await coll.Indexes.CreateOneAsync(
                 new CreateIndexModel<TimelineEvent>(
-                    Builders<TimelineEvent>.IndexKeys.Ascending(x => x.Universe),
-                    new CreateIndexOptions { Name = "idx_universe", Background = true }
+                    Builders<TimelineEvent>.IndexKeys.Ascending(x => x.Continuity).Ascending(x => x.Demarcation).Ascending(x => x.Year),
+                    new CreateIndexOptions { Name = "idx_continuity_demarcation_year", Background = true }
                 ),
                 cancellationToken: cancellationToken
             );
 
-            await coll.Indexes.CreateOneAsync(
-                new CreateIndexModel<TimelineEvent>(
-                    Builders<TimelineEvent>
-                        .IndexKeys.Ascending(x => x.Continuity)
-                        .Ascending(x => x.Demarcation)
-                        .Ascending(x => x.Year),
-                    new CreateIndexOptions
-                    {
-                        Name = "idx_continuity_demarcation_year",
-                        Background = true,
-                    }
-                ),
-                cancellationToken: cancellationToken
-            );
-
-            _logger.LogInformation(
-                "Created indexes for timeline collection: {Collection}",
-                collName
-            );
+            _logger.LogInformation("Created indexes for timeline collection: {Collection}", collName);
         }
 
         // Character timelines collection indexes
         {
-            var timelines = timelineDb.GetCollection<CharacterTimeline>(
-                Collections.GenaiCharacterTimelines
-            );
+            var timelines = timelineDb.GetCollection<CharacterTimeline>(Collections.GenaiCharacterTimelines);
 
             await timelines.Indexes.CreateOneAsync(
                 new CreateIndexModel<CharacterTimeline>(
@@ -634,10 +491,7 @@ public class RecordService
             );
 
             await timelines.Indexes.CreateOneAsync(
-                new CreateIndexModel<CharacterTimeline>(
-                    Builders<CharacterTimeline>.IndexKeys.Ascending(t => t.Continuity),
-                    new CreateIndexOptions { Name = "idx_continuity", Background = true }
-                ),
+                new CreateIndexModel<CharacterTimeline>(Builders<CharacterTimeline>.IndexKeys.Ascending(t => t.Continuity), new CreateIndexOptions { Name = "idx_continuity", Background = true }),
                 cancellationToken: cancellationToken
             );
 
@@ -652,12 +506,7 @@ public class RecordService
         await CreateCosineVectorIndexAsync(Collections.Pages);
     }
 
-    async Task CreateCosineVectorIndexAsync(
-        string collectionName,
-        string field = "embedding",
-        string indexName = "vector_index",
-        int dims = 3072
-    )
+    async Task CreateCosineVectorIndexAsync(string collectionName, string field = "embedding", string indexName = "vector_index", int dims = 3072)
     {
         var vectorDef = new BsonDocument
         {
@@ -678,41 +527,27 @@ public class RecordService
 
         var model = new CreateSearchIndexModel(name: indexName, definition: vectorDef);
 
-        var collection = _mongoClient
-            .GetDatabase(_settingsOptions.DatabaseName)
-            .GetCollection<BsonDocument>(collectionName);
+        var collection = _mongoClient.GetDatabase(_settingsOptions.DatabaseName).GetCollection<BsonDocument>(collectionName);
         await collection.SearchIndexes.CreateOneAsync(model);
 
-        Console.WriteLine(
-            $"Created cosine vector index for '{collection.CollectionNamespace.CollectionName}.{field}'"
-        );
+        Console.WriteLine($"Created cosine vector index for '{collection.CollectionNamespace.CollectionName}.{field}'");
     }
 
     public async Task DeleteVectorIndexesAsync(CancellationToken cancellationToken)
     {
-        var collection = _mongoClient
-            .GetDatabase(_settingsOptions.DatabaseName)
-            .GetCollection<BsonDocument>(Collections.Pages);
+        var collection = _mongoClient.GetDatabase(_settingsOptions.DatabaseName).GetCollection<BsonDocument>(Collections.Pages);
         await collection.SearchIndexes.DropOneAsync("vector_index", cancellationToken);
     }
 
     public async Task DeleteOpenAiEmbeddingsAsync(CancellationToken token)
     {
-        var collection = _mongoClient
-            .GetDatabase(_settingsOptions.DatabaseName)
-            .GetCollection<Page>(Collections.Pages);
+        var collection = _mongoClient.GetDatabase(_settingsOptions.DatabaseName).GetCollection<Page>(Collections.Pages);
         var update = Builders<Page>.Update.Unset(new StringFieldDefinition<Page>("embedding"));
-        await collection.UpdateManyAsync(
-            FilterDefinition<Page>.Empty,
-            update,
-            cancellationToken: token
-        );
+        await collection.UpdateManyAsync(FilterDefinition<Page>.Empty, update, cancellationToken: token);
         _logger.LogInformation("Embeddings removed from Pages collection");
     }
 
-    public async Task<List<string>> GetTimelineCategories(
-        CancellationToken cancellationToken = default
-    )
+    public async Task<List<string>> GetTimelineCategories(CancellationToken cancellationToken = default)
     {
         var db = _mongoClient.GetDatabase(_settingsOptions.DatabaseName);
         var names = await db.ListCollectionNamesAsync(cancellationToken: cancellationToken);
@@ -730,17 +565,11 @@ public class RecordService
     }
 
     /// <summary>
-    /// Build a filter that matches Pages whose infobox.Template, when sanitized, equals the given name.
-    /// Uses regex to match the template URL pattern ending with the collection name.
+    /// Build a filter that matches Pages whose infobox.Template equals the full template URL.
     /// </summary>
     static FilterDefinition<Page> BuildTemplateFilter(string sanitizedName)
     {
-        // Templates are stored as URLs like "https://starwars.fandom.com/wiki/Template:Character"
-        // We match the end of the template string after the last colon
-        return Builders<Page>.Filter.Regex(
-            "infobox.Template",
-            new BsonRegularExpression($":{sanitizedName.Replace(" ", "[_ ]")}$", "i")
-        );
+        return Builders<Page>.Filter.Eq("infobox.Template", $"{Collections.TemplateUrlPrefix}{sanitizedName}");
     }
 
     /// <summary>

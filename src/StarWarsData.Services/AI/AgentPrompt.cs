@@ -68,7 +68,8 @@ public static class AgentPrompt
         KNOWLEDGE GRAPH (structured entities & relationships from kg.nodes + kg.edges):
         - search_entities(query): resolve names → PageIds. Returns temporal facets with each result. Start here for named entity questions.
         - get_entity_properties(entityId): attributes (height, species, classification, etc.) plus temporal facets.
-        - get_entity_relationships(entityId, labelFilter): direct relationships grouped by label with evidence.
+        - get_entity_relationships(entityId, labelFilter): BIDIRECTIONAL — returns both outgoing edges (entity → targets) and incoming edges (sources → entity, flipped and relabeled via reverse form). E.g. querying Anakin returns both "apprentice_of Obi-Wan" (outgoing) and "commanded battles" (incoming, originally "commanded_by Anakin"). One call covers both directions.
+        - get_relationships_by_category(entityId, category): same as get_entity_relationships but scoped to one FieldSemantics category (family, mentorship, military, political, location, etc.). Use this when you only want one topical lens — avoids noise from unrelated categories. E.g. "Yoda's mentorship ties" → category="mentorship".
         - get_entity_timeline(entityId): full temporal lifecycle with rich facets — ordered chain of all temporal events (born, established, reorganized, dissolved, restored, etc.) with semantic dimension, calendar type, and original text. Use for lifecycle questions.
         - get_relationship_types(entityId): discover what relationship labels exist for an entity.
         - traverse_graph(entityId, labels, maxDepth): multi-hop network exploration (depth 1-3).
@@ -85,6 +86,8 @@ public static class AgentPrompt
         - get_galaxy_year(year): pre-computed galaxy snapshot — territory control + events + era. Instant.
         - list_entity_types: discover valid type values. Call only if unsure.
         - list_relationship_labels: discover relationship label names. Call only if unsure.
+        - describe_entity_schema(type): introspect a template's shape — returns its properties, temporal fields (with semantic+calendar), and relationships (label, reverse, target types, category, and which are marked "primary" for that type). Use BEFORE render_table/render_infobox when you need to know which fields/labels exist for a type without a sample entity.
+        - list_labels_by_category(category): list all KG edge labels in one FieldSemantics category (family, mentorship, military, political, location, astronomy, biological, cultural, religion, economic, publication, creator, possession, usage, sports, music, food, temporal, sequence, composition, medical, honors). Use to discover related labels in bulk — e.g. list_labels_by_category("family") returns child_of, parent_of, sibling_of, partner_of, has_relative, etc.
 
         PAGE EXPLORATION (raw infobox data from wiki Pages collection):
         - search_pages_by_name(infoboxType, name): find pages by name within type. Returns PageIds for render_infobox.
@@ -97,6 +100,31 @@ public static class AgentPrompt
         - sample_link_labels(infoboxType, pageId): discover which infobox labels have links for render_table column selection.
         - list_infobox_types: list all infobox types. Call only if unsure.
         - list_timeline_categories: list timeline event categories. Call only if unsure.
+
+        KG ANALYTICS (aggregation-backed — real counts from MongoDB pipelines, not estimates):
+        Discovery tools — call these FIRST to plan analytics queries:
+        - describe_relationship_labels(labels?): shows which entity types each label connects (fromTypes→toTypes), reverse label, description. ESSENTIAL for knowing edge direction and valid type pairs.
+        - list_entity_types, list_relationship_labels: discover valid types and labels (already listed above).
+
+        Counting & ranking:
+        - count_related_entities(entityType, relatedType, label): count entities connected via a label, grouped by entity name. E.g. "Wars by battle count", "Orgs by member count".
+        - count_nodes_by_property(entityType, property): group nodes by property value. E.g. "Characters by species", "Ships by manufacturer".
+        - count_nodes_by_type(): entity type distribution across the KG.
+        - count_edges_between_types(fromType, toType): discover how two types are connected (label distribution).
+        - top_connected_entities(entityType?, label?): rank entities by relationship degree. E.g. "Most connected characters".
+
+        Named entity analytics — charts with character/faction/org names as labels:
+        - group_entities_by_connection(sourceType, label): group source entities by target name. E.g. "Characters by faction" (member_of), "Battles by war" (battle_in).
+        - count_property_for_related_entities(rootEntityId, label, property): property distribution of entities connected to a specific entity. E.g. "Species of Jedi Order members", "Homeworlds of Imperial officers".
+
+        Temporal analytics — uses temporalFacets for precise lifecycle queries:
+        - count_by_year_range(entityType, startYear, endYear, bucket, semantic?): count entities bucketed by year. Without semantic: uses startYear. With semantic (e.g. "lifespan.end", "conflict.start", "construction.start"): counts by that temporal facet.
+        - count_lifecycle_transitions(semantic, startYear, endYear, bucket, entityType?): same bucketed time-series as count_by_year_range BUT requires an exact semantic.role (e.g. "institutional.reorganized") and counts facet hits directly rather than node startYear. More accurate for lifecycle transitions because it uses $unwind on temporalFacets. Prefer this when the question is about transitions, not entity existence.
+        - find_by_lifecycle_transition(semantic, startYear, endYear, entityType?): list entities whose temporal facets match an exact semantic.role in a year range. Returns the facet text with each result so you can see the transition reason. E.g. "Governments reorganized 20-4 BBY" → semantic="institutional.reorganized", startYear=-20, endYear=-4. Semantic format: dimension.role — lifespan.start/end, conflict.start/end/point, institutional.start/end/reorganized/restored/fragmented/suspended, construction.start/end/rebuilt, creation.start/end/discovered, publication.release, usage.start/end.
+
+        Comparison:
+        - entity_profile(entityId, labels): multi-dimensional counts for one entity (Radar axes).
+        - compare_entities(entityIds, labels): batch profile for side-by-side comparison of multiple named entities. E.g. "Yoda vs Palpatine vs Dooku".
 
         SEMANTIC & KEYWORD SEARCH (over 800K+ article passages):
         - semantic_search(query, type): AI-powered vector search — finds content by MEANING. Use for why/how/explain questions, lore, philosophy, motivations, consequences. Returns wikiUrl and sectionUrl for citations. PREFER THIS for any natural language question.
@@ -121,6 +149,7 @@ public static class AgentPrompt
         - "Master-apprentice lineage of X" → search_entities → get_relationship_types → render_graph(labels=["apprentice_of","master_of"], layoutMode="tree", maxDepth=3)
         - "Political hierarchy of X" → search_entities → get_relationship_types → render_graph(labels=["head_of_state","has_military_branch","has_executive_branch","has_legislative_branch","has_judicial_branch","commander_in_chief"], maxDepth=3, layoutMode="tree"). Use enabledLabels to pre-select only the most relevant structural labels — omit ancillary labels like has_capital, uses_currency, has_anthem.
         - "Who trained X?" → search_entities → get_entity_relationships(label="apprentice_of") → render_markdown or render_data_table
+        - "All of X's mentorship ties" / "X's military associations" → search_entities → get_relationships_by_category(entityId, category="mentorship"|"military"|"family"|...) → render_markdown or render_graph. Scopes to one topical lens without needing to enumerate label names.
         - "How is X related to Y?" → search_entities for both → find_connections → render_markdown
         - "X's connections" → search_entities → get_relationship_types → render_graph(labels=[relevant labels], layoutMode="force")
 
@@ -130,6 +159,8 @@ public static class AgentPrompt
         - "Timeline of the Clone Wars" → render_timeline(["Battle","War","Mission"], yearFrom=22, yearFromDemarcation="BBY", yearTo=19, yearToDemarcation="BBY")
         - "Rise and fall of X government" → search_entities → get_entity_timeline → render_markdown. The timeline returns the full lifecycle chain (established → fragmented → reorganized → dissolved → restored) with dates — present each step.
         - "When was X reorganized/restored/fragmented?" → search_entities → get_entity_timeline → read the facet with the matching semantic role → render_markdown
+        - "Which governments were reorganized between 20 and 4 BBY?" → find_by_lifecycle_transition(semantic="institutional.reorganized", startYear=-20, endYear=-4, entityType="Government") → render_data_table
+        - "Characters who died in 19 BBY" → find_by_lifecycle_transition(semantic="lifespan.end", startYear=-19, endYear=-19, entityType="Character") → render_data_table
         - "What Star Wars books came out in 2015?" → find_entities_by_year(year=2015, type="Book", semantic="publication") → render_data_table. Note: use CE year directly, not sort-key.
         - "When was this movie released?" → search_entities → get_entity_timeline → read the publication.release facet → render_markdown
 
@@ -140,9 +171,35 @@ public static class AgentPrompt
         - "What battles happened while the Galactic Republic existed?" → get_entity_timeline(Republic) → read institutional envelope → find_entities_by_year(type="Battle", semantic="conflict") → render_data_table
         - "Which organizations were reorganized during the Empire?" → get_entity_timeline(Empire) → find_entities_by_year(type="Organization", semantic="institutional") → filter results for facets with semantic="institutional.reorganized" in the year range
 
-        STATS & AGGREGATION (agent-provided):
-        - "Top 10 species by..." → use KG/page tools to gather data → render_chart
-        - "How many X exist?" → list_entity_types or search tools → render_chart or render_markdown
+        STATS, CHARTS & AGGREGATION (agent-provided — use KG Analytics tools for real data):
+        WORKFLOW: 1) describe_relationship_labels to learn edge directions + type pairs → 2) run the right analytics tool → 3) render_chart with real results.
+        NEVER fabricate chart values. Every number MUST come from an analytics tool result.
+
+        Counts & rankings (Bar, Pie, Donut):
+        - "Deadliest wars by battles" → describe_relationship_labels(["battle_in"]) → count_related_entities(entityType="War", relatedType="Battle", label="battle_in") → render_chart(Bar)
+        - "Factions with the most members" → group_entities_by_connection(sourceType="Character", label="member_of") → render_chart(Bar)
+        - "Most connected characters" → top_connected_entities(entityType="Character") → render_chart(Bar)
+        - "Characters by species" → count_nodes_by_property(entityType="Character", property="Species") → render_chart(Pie)
+        - "Entity type distribution" → count_nodes_by_type() → render_chart(Donut)
+
+        Named entity breakdowns (Pie, Donut, Rose):
+        - "Species of Jedi members" → search_entities("Jedi Order") → count_property_for_related_entities(rootEntityId, label="member_of", property="Species", rootIsTarget=true) → render_chart(Pie)
+        - "Homeworlds of Imperial officers" → search_entities("Galactic Empire") → count_property_for_related_entities(rootEntityId, label="member_of", property="Homeworld", rootIsTarget=true) → render_chart(Donut)
+        - "Battles by war" → group_entities_by_connection(sourceType="Battle", label="battle_in") → render_chart(Rose)
+
+        Temporal (TimeSeries, Line):
+        - "Battles per year in Clone Wars" → count_by_year_range(entityType="Battle", startYear=-22, endYear=-19, bucket=1, semantic="conflict.start") → render_chart(TimeSeries)
+        - "Characters who died per year in 19 BBY" → count_by_year_range(entityType="Character", startYear=-19, endYear=-19, bucket=1, semantic="lifespan.end") → render_chart(Line)
+        - "Ships built per decade" → count_by_year_range(entityType="Starship", bucket=10, semantic="construction.start") → render_chart(Line)
+        - "Governments reorganized per decade across the saga" → count_lifecycle_transitions(semantic="institutional.reorganized", startYear=-1000, endYear=100, bucket=10, entityType="Government") → render_chart(Line). Prefer count_lifecycle_transitions over count_by_year_range when the question is specifically about transitions (reorganized/restored/fragmented) rather than nodes existing.
+
+        Comparisons (Radar, StackedBar):
+        - "Compare Yoda vs Palpatine" → search_entities for both → compare_entities(entityIds=[...], labels=["trained","member_of","fought_in"]) → render_chart(Radar)
+        - "Compare Clone Wars vs Galactic Civil War" → search_entities for both → compare_entities → render_chart(Radar)
+        - "Wars by battles + factions + planets" → count_related_entities for each dimension → render_chart(StackedBar)
+
+        Structure discovery (Bar):
+        - "How are Wars and Characters connected?" → count_edges_between_types(fromType="War", toType="Character") → render_chart(Bar)
 
         LORE & EXPLANATIONS (agent-provided — ALWAYS use semantic_search here):
         - "Explain X" / "Why did X happen?" / "What was the philosophy of..." → semantic_search → render_markdown (with sectionUrl references)
