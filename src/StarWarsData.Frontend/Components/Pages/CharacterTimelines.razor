@@ -83,6 +83,52 @@
     }
     else
     {
+        @* ── Active generation banner ── *@
+        @if (_activeGenerations is { Count: > 0 })
+        {
+            <MudPaper Outlined="true" Class="pa-4 mb-4" Style="border-color: var(--mud-palette-warning)">
+                <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center" Class="mb-3">
+                    <MudIcon Icon="@Icons.Material.Filled.AutoAwesome" Color="Color.Warning" />
+                    <MudText Typo="Typo.h6">Generating Timelines (@_activeGenerations.Count)</MudText>
+                </MudStack>
+                <MudStack Spacing="2">
+                    @foreach (var gen in _activeGenerations)
+                    {
+                        <MudCard Outlined="true" Style="cursor:pointer" @onclick="() => NavigateToTimeline(gen.PageId)">
+                            <MudCardContent>
+                                <MudStack Spacing="1">
+                                    <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+                                        <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+                                            <MudChip T="string" Size="Size.Small" Color="Color.Warning" Variant="Variant.Filled">
+                                                @gen.Stage
+                                            </MudChip>
+                                            <MudText Typo="Typo.subtitle2">Page @gen.PageId</MudText>
+                                        </MudStack>
+                                        @if (gen.EventsExtracted > 0)
+                                        {
+                                            <MudText Typo="Typo.caption" Color="Color.Secondary">
+                                                @gen.EventsExtracted events extracted
+                                            </MudText>
+                                        }
+                                    </MudStack>
+                                    <MudText Typo="Typo.body2" Color="Color.Secondary">@gen.Message</MudText>
+                                    @if (gen.TotalSteps > 0)
+                                    {
+                                        <MudProgressLinear Value="@gen.CurrentStep" Max="@gen.TotalSteps"
+                                                           Color="Color.Warning" Rounded="true" Size="Size.Small" />
+                                    }
+                                    else
+                                    {
+                                        <MudProgressLinear Indeterminate="true" Color="Color.Warning" Rounded="true" Size="Size.Small" />
+                                    }
+                                </MudStack>
+                            </MudCardContent>
+                        </MudCard>
+                    }
+                </MudStack>
+            </MudPaper>
+        }
+
         @* ── Existing timelines listing (no active search) ── *@
         @if (_timelineList is not null)
         {
@@ -440,9 +486,35 @@ else
                                     </CardHeaderContent>
                                 </MudCardHeader>
                                 <MudCardContent>
-                                    <MudText Typo="Typo.body2" Style="@($"text-align:{contentAlign}")">
+                                    <MudText Typo="Typo.body2" Style="@($"text-align:{contentAlign}; font-weight:500")">
                                         @evt.Description
                                     </MudText>
+
+                                    @if (!string.IsNullOrWhiteSpace(evt.Narrative))
+                                    {
+                                        <MudText Typo="Typo.body2" Color="Color.Default" Class="mt-2" Style="@($"text-align:{contentAlign}")">
+                                            @evt.Narrative
+                                        </MudText>
+                                    }
+
+                                    @if (!string.IsNullOrWhiteSpace(evt.Significance))
+                                    {
+                                        <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mt-2" Style="@($"text-align:{contentAlign}; font-style:italic")">
+                                            @evt.Significance
+                                        </MudText>
+                                    }
+
+                                    @if (evt.Consequences.Count > 0)
+                                    {
+                                        <MudList T="string" Dense="true" Class="mt-1" ReadOnly="true">
+                                            @foreach (var c in evt.Consequences)
+                                            {
+                                                <MudListItem T="string" Icon="@Icons.Material.Filled.ArrowRight" IconSize="Size.Small" IconColor="Color.Tertiary">
+                                                    <MudText Typo="Typo.caption">@c</MudText>
+                                                </MudListItem>
+                                            }
+                                        </MudList>
+                                    }
 
                                     @if (evt.RelatedCharacters.Count > 0)
                                     {
@@ -485,26 +557,35 @@ else
             @* ── Sources ── *@
             @if (_timeline.Sources.Count > 0)
             {
-                <MudPaper Outlined="true" Class="pa-4 mt-4">
-                    <MudText Typo="Typo.h6" Class="mb-2">Source Pages (@_timeline.Sources.Count)</MudText>
-                    <MudSimpleTable Dense="true" Hover="true">
-                        <thead>
-                            <tr>
-                                <th>Page</th>
-                                <th>Link</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var source in _timeline.Sources)
-                            {
-                                <tr>
-                                    <td>@source.Title</td>
-                                    <td><MudLink Href="@source.WikiUrl" Target="_blank" Underline="Underline.Always">Wookieepedia</MudLink></td>
-                                </tr>
-                            }
-                        </tbody>
-                    </MudSimpleTable>
-                </MudPaper>
+                <MudExpansionPanels Class="mt-4" Outlined="true">
+                    <MudExpansionPanel>
+                        <TitleContent>
+                            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                                <MudIcon Icon="@Icons.Material.Filled.Source" Size="Size.Small" />
+                                <MudText Typo="Typo.subtitle1">Source Pages (@_timeline.Sources.Count)</MudText>
+                            </MudStack>
+                        </TitleContent>
+                        <ChildContent>
+                            <MudSimpleTable Dense="true" Hover="true">
+                                <thead>
+                                    <tr>
+                                        <th>Page</th>
+                                        <th>Link</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var source in _timeline.Sources)
+                                    {
+                                        <tr>
+                                            <td>@source.Title</td>
+                                            <td><MudLink Href="@source.WikiUrl" Target="_blank" Underline="Underline.Always">Wookieepedia</MudLink></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </MudSimpleTable>
+                        </ChildContent>
+                    </MudExpansionPanel>
+                </MudExpansionPanels>
             }
 
             <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mt-4">
@@ -540,6 +621,10 @@ else
     private int _timelineListTotalPages;
     private const int TimelineListPageSize = 12;
 
+    // ── Active generations (landing page banner) ──
+    private List<ActiveGenerationDto>? _activeGenerations;
+    private Timer? _activeGenPollTimer;
+
     // ── Detail state ──
     private CharacterSearchResult? _characterInfo;
     private CharacterTimeline? _timeline;
@@ -551,6 +636,18 @@ else
 
     // ── Workflow steps (shown on detail page during generation) ──
     private record WorkflowStep(GenerationStage Stage, string Label);
+
+    private class ActiveGenerationDto
+    {
+        public int PageId { get; set; }
+        public GenerationStage Stage { get; set; }
+        public string Message { get; set; } = string.Empty;
+        public string? CurrentItem { get; set; }
+        public int CurrentStep { get; set; }
+        public int TotalSteps { get; set; }
+        public int EventsExtracted { get; set; }
+        public DateTime StartedAt { get; set; }
+    }
 
     private static readonly WorkflowStep[] _workflowSteps =
     [
@@ -598,6 +695,7 @@ else
     {
         if (PageId is not null)
         {
+            StopActiveGenPolling();
             await LoadDetailPage();
         }
         else
@@ -608,7 +706,11 @@ else
             StopPolling();
 
             if (string.IsNullOrWhiteSpace(_search))
+            {
                 await LoadTimelineList();
+                await LoadActiveGenerations();
+                StartActiveGenPolling();
+            }
         }
     }
 
@@ -616,6 +718,7 @@ else
     {
         GlobalFilterService.OnChange -= OnGlobalFilterChanged;
         _pollTimer?.Dispose();
+        _activeGenPollTimer?.Dispose();
     }
 
     private async void OnGlobalFilterChanged()
@@ -708,6 +811,39 @@ else
     {
         _timelineListPage = page;
         await LoadTimelineList();
+    }
+
+    // ── Active generations (landing page) ──
+
+    private async Task LoadActiveGenerations()
+    {
+        try
+        {
+            _activeGenerations = await Http.GetFromJsonAsync<List<ActiveGenerationDto>>("CharacterTimelines/active");
+        }
+        catch
+        {
+            _activeGenerations = null;
+        }
+    }
+
+    private void StartActiveGenPolling()
+    {
+        StopActiveGenPolling();
+        _activeGenPollTimer = new Timer(async _ =>
+        {
+            await InvokeAsync(async () =>
+            {
+                await LoadActiveGenerations();
+                StateHasChanged();
+            });
+        }, null, TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(3));
+    }
+
+    private void StopActiveGenPolling()
+    {
+        _activeGenPollTimer?.Dispose();
+        _activeGenPollTimer = null;
     }
 
     // ── Detail page loading ──

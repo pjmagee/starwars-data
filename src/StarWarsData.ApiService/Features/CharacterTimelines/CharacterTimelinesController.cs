@@ -22,6 +22,27 @@ public class CharacterTimelinesController : ControllerBase
         _logger = logger;
     }
 
+    [HttpGet("active")]
+    public ActionResult<List<ActiveGenerationDto>> GetActiveGenerations()
+    {
+        var active = _tracker.GetActiveStatuses();
+        return Ok(
+            active
+                .Select(a => new ActiveGenerationDto
+                {
+                    PageId = a.PageId,
+                    Stage = a.Status.Stage,
+                    Message = a.Status.Message,
+                    CurrentItem = a.Status.CurrentItem,
+                    CurrentStep = a.Status.CurrentStep,
+                    TotalSteps = a.Status.TotalSteps,
+                    EventsExtracted = a.Status.EventsExtracted,
+                    StartedAt = a.Status.StartedAt,
+                })
+                .ToList()
+        );
+    }
+
     [HttpGet("list")]
     public async Task<CharacterTimelineListResult> List(
         [FromQuery] int page = 1,
@@ -113,4 +134,16 @@ public class CharacterTimelinesController : ControllerBase
 
         return Accepted();
     }
+}
+
+public class ActiveGenerationDto
+{
+    public int PageId { get; set; }
+    public GenerationStage Stage { get; set; }
+    public string Message { get; set; } = string.Empty;
+    public string? CurrentItem { get; set; }
+    public int CurrentStep { get; set; }
+    public int TotalSteps { get; set; }
+    public int EventsExtracted { get; set; }
+    public DateTime StartedAt { get; set; }
 }

@@ -409,9 +409,10 @@ public class MapService
 
         var nameToGrid = new Dictionary<string, (int col, int row)>(StringComparer.OrdinalIgnoreCase);
         var regionCells = new Dictionary<string, HashSet<(int col, int row)>>(StringComparer.OrdinalIgnoreCase);
-        // Track per-cell system count and dominant region
+        // Track per-cell system count, dominant region, and sector breakdown
         var cellCounts = new Dictionary<(int col, int row), int>();
         var cellRegion = new Dictionary<(int col, int row), Dictionary<string, int>>();
+        var cellSectors = new Dictionary<(int col, int row), Dictionary<string, int>>();
 
         foreach (var rec in sysRecs)
         {
@@ -440,6 +441,17 @@ public class MapService
                     cellRegion[key] = regionCount;
                 }
                 regionCount[region] = regionCount.GetValueOrDefault(region) + 1;
+            }
+
+            var sectorRaw = GetFirstDataValue(rec, InfoboxFieldLabels.Sector);
+            if (!string.IsNullOrEmpty(sectorRaw))
+            {
+                if (!cellSectors.TryGetValue(key, out var sectorCount))
+                {
+                    sectorCount = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+                    cellSectors[key] = sectorCount;
+                }
+                sectorCount[sectorRaw] = sectorCount.GetValueOrDefault(sectorRaw) + 1;
             }
         }
 
@@ -481,6 +493,13 @@ public class MapService
             string? dominantRegion = null;
             if (cellRegion.TryGetValue(key, out var regionCount))
                 dominantRegion = regionCount.MaxBy(kv => kv.Value).Key;
+
+            List<GeoCellSector>? sectors = null;
+            if (cellSectors.TryGetValue(key, out var sectorCounts) && sectorCounts.Count > 0)
+            {
+                sectors = sectorCounts.OrderByDescending(kv => kv.Value).Select(kv => new GeoCellSector { Name = kv.Key, Count = kv.Value }).ToList();
+            }
+
             result.Cells.Add(
                 new GeoCellSummary
                 {
@@ -488,6 +507,7 @@ public class MapService
                     Row = key.row,
                     SystemCount = count,
                     Region = dominantRegion,
+                    Sectors = sectors,
                 }
             );
         }
@@ -599,16 +619,16 @@ public class MapService
             sysFilter = Builders<Page>.Filter.And(sysFilter, Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value));
         var sysRecs = await _pages.Find(sysFilter).ToListAsync();
 
-        // Build a name→(id, class) lookup for all celestial bodies to resolve planet IDs
-        var cbLookup = new Dictionary<string, (int id, string? cls)>(StringComparer.OrdinalIgnoreCase);
+        // Build a name→(id, class, continuity) lookup for all celestial bodies to resolve planet IDs
+        var cbLookup = new Dictionary<string, (int id, string? cls, Continuity continuity)>(StringComparer.OrdinalIgnoreCase);
         var cbRecs = await _pages
             .Find(TemplateFilter(KgNodeTypes.CelestialBody))
-            .Project<Page>(Builders<Page>.Projection.Include(p => p.PageId).Include(p => p.Title).Include("infobox.Data"))
+            .Project<Page>(Builders<Page>.Projection.Include(p => p.PageId).Include(p => p.Title).Include(p => p.Continuity).Include("infobox.Data"))
             .ToListAsync();
         foreach (var cb in cbRecs)
         {
             var cls = GetFirstDataValue(cb, InfoboxFieldLabels.Class);
-            cbLookup.TryAdd(cb.Title, (cb.PageId, cls));
+            cbLookup.TryAdd(cb.Title, (cb.PageId, cls, cb.Continuity));
         }
 
         var systems = new List<GeoSystem>();
@@ -638,6 +658,7 @@ public class MapService
                         Id = info.id,
                         Name = n,
                         Class = info.cls,
+                        Continuity = info.continuity.ToString(),
                     };
                 })
                 .ToList();
@@ -649,6 +670,7 @@ public class MapService
                     Name = rec.Title,
                     Col = col,
                     Row = row,
+                    Continuity = rec.Continuity.ToString(),
                     Region = GetFirstDataValue(rec, InfoboxFieldLabels.Region) is { } rn ? NormalizeRegionName(rn) : null,
                     Sector = GetFirstDataValue(rec, InfoboxFieldLabels.Sector),
                     CelestialBodies = celestialBodies,

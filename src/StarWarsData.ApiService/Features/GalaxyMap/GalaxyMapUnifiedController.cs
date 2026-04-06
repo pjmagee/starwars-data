@@ -72,7 +72,7 @@ public class GalaxyMapUnifiedController(GalaxyMapReadService readService, MapSer
 
     /// <summary>Static galaxy geography: regions, sectors, trade routes, nebulas, grid bounds.</summary>
     [HttpGet("geography")]
-    [ResponseCache(Duration = 300)]
+    [ResponseCache(Duration = 300, VaryByQueryKeys = ["continuity"])]
     public async Task<ActionResult<GalaxyGeography>> GetGeography([FromQuery] Continuity? continuity = null, CancellationToken ct = default)
     {
         var data = await mapService.GetGeographyAsync(continuity);
@@ -81,7 +81,7 @@ public class GalaxyMapUnifiedController(GalaxyMapReadService readService, MapSer
 
     /// <summary>Systems within a viewport bounding box, lazy-loaded as the user pans/zooms.</summary>
     [HttpGet("systems")]
-    [ResponseCache(Duration = 120)]
+    [ResponseCache(Duration = 120, VaryByQueryKeys = ["continuity"])]
     public async Task<ActionResult<GalaxyGeographySystems>> GetSystems(
         [FromQuery] int minCol,
         [FromQuery] int maxCol,

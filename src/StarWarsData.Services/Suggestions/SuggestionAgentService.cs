@@ -159,33 +159,81 @@ public sealed class SuggestionAgentService(
         return ParseResponse(formattingResponse, continuity, realm);
     }
 
-    static string BuildExplorationPrompt(Continuity continuity, Realm realm, string bucketLabel) =>
-        $$"""
+    static string BuildExplorationPrompt(Continuity continuity, Realm realm, string bucketLabel)
+    {
+        var continuityInstruction = continuity == Continuity.Canon ? "use the continuity filter 'Canon' when calling tools" : "use the continuity filter 'Legends' when calling tools";
+
+        var realmExploration =
+            realm == Realm.Real
+                ? """
+                    IMPORTANT: You are generating REAL-WORLD questions — about the Star Wars franchise as it exists
+                    in our world. This means questions about:
+                    - Books, novels, comics, audiobooks, video games as PUBLISHED WORKS (who wrote them, when they
+                      were released, which publisher, what series they belong to)
+                    - Authors, illustrators, editors — real people who created Star Wars media
+                    - Publication timelines — when novels were released, release order vs in-universe chronology
+                    - Behind-the-scenes — production history, how stories were developed, reception and impact
+                    - Franchise history — how the Expanded Universe / Legends grew over decades
+
+                    Do NOT ask about in-universe events (battles, character motivations, politics, lightsabers).
+                    Every question must be about the real-world publishing, production, or creative side of Star Wars.
+
+                    When exploring, search for entity types like Book, ComicBook, Audiobook, Game, and look at their
+                    real-world properties: authors (authored_by, written_by), publishers (published_by), release dates
+                    (publication temporal facets), series relationships (part_of_series, followed_by, preceded_by).
+                    """
+                : """
+                    You are generating IN-UNIVERSE questions — about the fictional Star Wars galaxy.
+                    Questions about characters, battles, planets, ships, organizations, species, eras, political
+                    events, wars, and all other fictional content.
+
+                    Explore broadly across many entity types. Don't just focus on characters. Discover planets,
+                    battles, organizations, ships, species, eras, and relationships. Look for entities with deep
+                    connections and rich temporal data.
+                    """;
+
+        return $$"""
             You are exploring a Star Wars knowledge graph to gather material for writing example questions.
             Your goal is to discover interesting entities, relationships, temporal patterns, and properties
             that can be turned into compelling questions for a Star Wars fan audience.
 
             Scope: **{{bucketLabel}}**
-            - Continuity: **{{continuity}}** — {{(continuity == Continuity.Canon ? "use the continuity filter 'Canon' when calling tools" : "use the continuity filter 'Legends' when calling tools")}}
-            - Realm: **{{realm}}** — {{(
-                realm == Realm.Starwars
-                    ? "in-universe content (characters, battles, planets, ships, organizations, species, etc.)"
-                    : "real-world content (publications like novels, comics, audiobooks, games — their authors, release dates, production context)"
-            )}}
+            - Continuity: **{{continuity}}** — {{continuityInstruction}}
 
-            Explore broadly across many entity types. Don't just focus on characters. Discover:
+            {{realmExploration}}
+
+            Discover:
             - What entity types exist and which have the most entries
             - Notable, highly-connected entities across different types
             - Interesting multi-hop relationship paths (A connected to B connected to C)
-            - Properties and their common values (e.g. which species are most common)
-            - Temporal data — eras, lifecycles, date ranges
-            - Cross-type connections (characters to battles, organizations to planets, etc.)
+            - Properties and their common values
+            - Temporal data — eras, lifecycles, date ranges, publication dates
 
             Summarize your findings when done — list the most interesting entities, paths, and patterns you found.
             """;
+    }
 
-    static string BuildFormattingPrompt(string bucketLabel) =>
-        $$"""
+    static string BuildFormattingPrompt(string bucketLabel)
+    {
+        var isReal = bucketLabel.Contains("real-world", StringComparison.OrdinalIgnoreCase);
+
+        var realmReminder = isReal
+            ? """
+
+                REALM REMINDER: This is the REAL-WORLD bucket. Every single question must be about the
+                real-world side of Star Wars: publications, authors, release dates, publishing history,
+                production, behind-the-scenes, franchise growth. Do NOT write questions about in-universe
+                events like battles, character arcs, or political intrigue — those belong in the Starwars bucket.
+
+                Good real-world examples:
+                - "Which author wrote the most Star Wars Legends novels?"
+                - "Timeline of all Thrawn novels in real-world publication order"
+                - "Compare the page counts and publishers of the original Thrawn trilogy"
+                - "Which decade saw the most Star Wars comic book releases?"
+                """
+            : "";
+
+        return $$"""
             Based on everything you discovered above, write exactly {{SuggestionsPerBucket}} example questions
             for EACH of these 7 modes ({{SuggestionsPerBucket * Modes.Length}} total):
 
@@ -196,7 +244,7 @@ public sealed class SuggestionAgentService(
             5. timeline — chronological events, lifecycles, temporal sequences
             6. infobox — entity profiles and side-by-side comparisons
             7. text — deep analysis, motivations, causes, lore research
-
+            {{realmReminder}}
             CRITICAL: Each prompt will be shown directly to users on a website. Write them as a curious
             Star Wars fan would naturally ask. No technical jargon, no IDs, no field names, no tool names,
             no implementation details. Just plain, natural questions that reference real entities you found.
@@ -209,6 +257,7 @@ public sealed class SuggestionAgentService(
 
             Put PageIds only in the entityIds array, never in the prompt text.
             """;
+    }
 
     List<GeneratedSuggestion> ParseResponse(ChatResponse response, Continuity continuity, Realm realm)
     {

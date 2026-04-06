@@ -109,4 +109,13 @@ public class CharacterTimelineTracker
     }
 
     public bool IsRunning(int pageId) => _statuses.TryGetValue(pageId, out var s) && s.Stage is not (GenerationStage.Complete or GenerationStage.Failed);
+
+    /// <summary>
+    /// Return all entries that are currently in-progress (not complete/failed).
+    /// Used by the landing page to show active generation activity.
+    /// </summary>
+    public List<(int PageId, GenerationStatus Status)> GetActiveStatuses()
+    {
+        return _statuses.Where(kvp => kvp.Value.Stage is not (GenerationStage.Complete or GenerationStage.Failed)).Select(kvp => (kvp.Key, kvp.Value)).ToList();
+    }
 }

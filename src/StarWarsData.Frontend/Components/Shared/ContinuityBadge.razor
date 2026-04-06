@@ -1,0 +1,26 @@
+@using StarWarsData.Models.Entities
+
+@if (Continuity is Continuity.Canon or Continuity.Legends)
+{
+    <MudChip T="string" Size="@Size" Variant="@Variant" Color="@BadgeColor"
+             Style="@Style" title="@Continuity.ToString()">@Label</MudChip>
+}
+
+@code {
+    [Parameter] public Continuity Continuity { get; set; }
+    [Parameter] public Size Size { get; set; } = Size.Small;
+    [Parameter] public Variant Variant { get; set; } = Variant.Filled;
+    [Parameter] public bool Short { get; set; }
+    [Parameter] public string? Style { get; set; }
+
+    Color BadgeColor => Continuity switch
+    {
+        Continuity.Canon => Color.Primary,
+        Continuity.Legends => Color.Secondary,
+        _ => Color.Default,
+    };
+
+    string Label => Short
+        ? Continuity == Continuity.Canon ? "C" : "L"
+        : Continuity.ToString();
+}

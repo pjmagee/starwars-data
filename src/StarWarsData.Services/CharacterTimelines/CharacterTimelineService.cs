@@ -228,6 +228,13 @@ public class CharacterTimelineService
                 BridgeEventToTracker(tracker, characterPageId, evt);
         }
 
+        // ── Once the workflow stream is consumed, always clear checkpoints. ──
+        // If post-workflow processing (parsing, saving) fails, the next attempt must start
+        // fresh — resuming from the final checkpoint would replay the same broken LLM output
+        // in an infinite loop. Checkpoints are only useful for mid-workflow recovery (e.g.
+        // crash during batch extraction), not for retrying post-workflow logic.
+        await checkpointStore.ClearSessionAsync(sessionId);
+
         if (string.IsNullOrWhiteSpace(responseText))
         {
             _logger.LogWarning("Workflow returned empty response for PageId={PageId}", characterPageId);
@@ -275,9 +282,6 @@ public class CharacterTimelineService
         };
 
         await Timelines.ReplaceOneAsync(Builders<CharacterTimeline>.Filter.Eq(t => t.CharacterPageId, character.PageId), timeline, new ReplaceOptions { IsUpsert = true }, ct);
-
-        // Clean up checkpoints — workflow completed successfully
-        await checkpointStore.ClearSessionAsync(sessionId);
 
         tracker?.Complete(characterPageId, $"Done! {events.Count} events from {sources.Count} sources");
 

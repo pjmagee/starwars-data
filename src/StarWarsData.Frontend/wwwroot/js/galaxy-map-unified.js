@@ -19,6 +19,48 @@ function getLensColor(lens) {
     return `hsl(${hue}, 75%, 55%)`;
 }
 
+function continuityBadge(continuity) {
+    if (!continuity || continuity === 'Unknown') return '';
+    const theme = getThemeColors();
+    const isCanon = continuity === 'Canon';
+    const label = isCanon ? 'C' : 'L';
+    const bg = isCanon ? theme.primary : theme.secondary;
+    return ` <span style="display:inline-block;background:${bg};color:#fff;font-size:8px;font-weight:bold;padding:0 3px;border-radius:3px;line-height:14px;vertical-align:middle;" title="${continuity}">${label}</span>`;
+}
+
+// Read MudBlazor theme colors from CSS variables (set by MudThemeProvider)
+function getThemeColors() {
+    const style = getComputedStyle(document.documentElement);
+    return {
+        primary: style.getPropertyValue('--mud-palette-primary').trim() || '#7e6fff',
+        secondary: style.getPropertyValue('--mud-palette-secondary').trim() || '#ff4081',
+    };
+}
+
+// Renders a small filled pill badge (C/L) centered inside a system dot — matches the MudChip style
+// used in Timeline event cards (Color.Primary for Canon, Color.Secondary for Legends).
+function appendContinuityDot(selection, radius) {
+    const theme = getThemeColors();
+    selection.each(function (d) {
+        if (!d.continuity || d.continuity === 'Unknown') return;
+        const isCanon = d.continuity === 'Canon';
+        const bg = isCanon ? theme.primary : theme.secondary;
+        const label = isCanon ? 'C' : 'L';
+        const fontSize = radius * 0.9;
+        const g = d3.select(this);
+        // No rect — just render the letter inside the existing circle
+        g.append('text')
+            .attr('text-anchor', 'middle').attr('dy', fontSize * 0.35)
+            .attr('fill', '#fff').attr('font-size', `${fontSize}px`)
+            .attr('font-weight', 'bold')
+            .style('pointer-events', 'none')
+            .text(label);
+        // Tint the existing circle with the continuity color
+        g.select('circle')
+            .attr('fill', bg).attr('stroke', bg);
+    });
+}
+
 const REGION_PALETTE = [
     '#4ecdc4', '#ff6f91', '#7e6fff', '#ffd93d', '#6bcb77',
     '#ff6b6b', '#a29bfe', '#fd79a8', '#fdcb6e', '#00cec9',
@@ -174,29 +216,13 @@ export function initialize(containerId, overview, dotNetRef) {
             .style('pointer-events', 'none')
             .text(region.name);
 
-        // Hover: pulse all cells in the region
         rg.on('mouseover', function () {
             if (currentLevel !== 'overview') return;
-            const cells = d3.select(this).selectAll('.region-cell');
-            const label = d3.select(this).select('.region-label');
-            (function pulse() {
-                cells.transition('pulse').duration(1000)
-                    .attr('fill-opacity', 0.18).attr('stroke-opacity', 0.4)
-                    .transition('pulse').duration(1000)
-                    .attr('fill-opacity', 0.07).attr('stroke-opacity', 0.12)
-                    .on('end', pulse);
-            })();
-            label.transition().duration(200).attr('fill-opacity', 0.9);
-            dotNetRef.invokeMethodAsync('OnRegionHovered', region.name, region.cells.length, color);
+            highlightRegion(region.name, region.cells.length, color);
         })
         .on('mouseout', function () {
             if (currentLevel !== 'overview') return;
-            const cells = d3.select(this).selectAll('.region-cell');
-            const label = d3.select(this).select('.region-label');
-            cells.interrupt('pulse').transition().duration(300)
-                .attr('fill-opacity', 0.07).attr('stroke-opacity', 0.12);
-            label.transition().duration(300).attr('fill-opacity', 0.5);
-            dotNetRef.invokeMethodAsync('OnRegionUnhovered');
+            unhighlightRegion();
         })
         .on('click', function (event) {
             if (currentLevel !== 'overview') return;
@@ -204,6 +230,37 @@ export function initialize(containerId, overview, dotNetRef) {
             drillIntoRegion(region.name);
         });
     });
+
+    // Shared region highlight/unhighlight with pulse animation
+    function highlightRegion(regionName, cellCount, color) {
+        regionLayer.selectAll('.region-group').each(function () {
+            const rg = d3.select(this);
+            if (rg.attr('data-region') === regionName) {
+                const cells = rg.selectAll('.region-cell');
+                const label = rg.select('.region-label');
+                (function pulse() {
+                    cells.transition('pulse').duration(1000)
+                        .attr('fill-opacity', 0.18).attr('stroke-opacity', 0.4)
+                        .transition('pulse').duration(1000)
+                        .attr('fill-opacity', 0.07).attr('stroke-opacity', 0.12)
+                        .on('end', pulse);
+                })();
+                label.transition().duration(200)
+                    .attr('fill-opacity', 0.9).attr('font-size', `${cellW * 0.04}px`);
+            }
+        });
+        dotNetRef.invokeMethodAsync('OnRegionHovered', regionName, cellCount, color);
+    }
+
+    function unhighlightRegion() {
+        regionLayer.selectAll('.region-cell')
+            .interrupt('pulse').transition().duration(300)
+            .attr('fill-opacity', 0.07).attr('stroke-opacity', 0.12);
+        regionLayer.selectAll('.region-label')
+            .transition().duration(300)
+            .attr('fill-opacity', 0).attr('font-size', '0');
+        dotNetRef.invokeMethodAsync('OnRegionUnhovered');
+    }
 
     // Trade routes — with wide invisible hit area for easy hovering/clicking
     const routeLine = d3.line()
@@ -362,13 +419,24 @@ export function initialize(containerId, overview, dotNetRef) {
                 .style('cursor', 'pointer')
                 .datum({ col: c, row: r })
                 .on('mouseover', function (event, d) {
-                    tooltip.html(
-                        `<strong>Grid ${String.fromCharCode(65 + d.col)}-${d.row + 1}</strong>` +
+                    let html = `<strong>Grid ${String.fromCharCode(65 + d.col)}-${d.row + 1}</strong>` +
                         `<br>${info.systemCount} system${info.systemCount !== 1 ? 's' : ''}` +
-                        (region ? `<br><span style="color:${color}">${region}</span>` : '') +
-                        `<br><span style="color:#888">Click to explore</span>`
-                    ).style('visibility', 'visible');
+                        (region ? `<br><span style="color:${color}">${region}</span>` : '');
+                    if (info.sectors && info.sectors.length > 0) {
+                        const shown = info.sectors.slice(0, 5);
+                        html += `<br><span style="color:#aaa">${info.sectors.length} sector${info.sectors.length !== 1 ? 's' : ''}:</span>`;
+                        shown.forEach(s => {
+                            html += `<br><span style="color:#ccc;margin-left:4px">${s.name}</span> <span style="color:#888">(${s.count})</span>`;
+                        });
+                        if (info.sectors.length > 5) html += `<br><span style="color:#666">+${info.sectors.length - 5} more</span>`;
+                    }
+                    html += `<br><span style="color:#888">Click to explore</span>`;
+                    tooltip.html(html).style('visibility', 'visible');
                     d3.select(this).attr('stroke', 'rgba(255,255,255,0.25)').attr('stroke-width', 1);
+                    // Highlight the parent region with pulse
+                    if (region) {
+                        highlightRegion(region, overview.regions.find(r => r.name === region)?.cells?.length ?? 0, color);
+                    }
                 })
                 .on('mousemove', (event) => {
                     tooltip.style('top', (event.offsetY - 10) + 'px').style('left', (event.offsetX + 15) + 'px');
@@ -376,6 +444,7 @@ export function initialize(containerId, overview, dotNetRef) {
                 .on('mouseout', function () {
                     tooltip.style('visibility', 'hidden');
                     d3.select(this).attr('stroke', 'none');
+                    unhighlightRegion();
                 })
                 .on('click', (event, d) => {
                     event.stopPropagation();
@@ -433,9 +502,10 @@ export function initialize(containerId, overview, dotNetRef) {
     svg.call(zoom.transform, overviewTransform);
 
     // Navigation state
-    let currentLevel = 'overview'; // 'overview' | 'region' | 'cell' | 'system'
+    let currentLevel = 'overview'; // 'overview' | 'region' | 'sector' | 'cell' | 'system'
     let currentCell = null;
     let currentRegion = null;
+    let currentSector = null;       // { name, systems, cells }
     let currentSystemData = null;
     let onlyWithBodies = false;
     let lastCellSystems = null;
@@ -518,7 +588,6 @@ export function initialize(containerId, overview, dotNetRef) {
     function renderRegionSystems(systems, region) {
         contentLayer.selectAll('*').remove();
 
-        // Ensure only systems within this region's cells are rendered
         const cellSet = new Set(region.cells.map(([c, r]) => `${c},${r}`));
         const inRegion = systems.filter(s => cellSet.has(`${s.col},${s.row}`));
 
@@ -534,7 +603,7 @@ export function initialize(containerId, overview, dotNetRef) {
                 .attr('x', cx).attr('y', cy)
                 .attr('text-anchor', 'middle').attr('fill', 'rgba(255,255,255,0.4)')
                 .attr('font-size', '14px')
-                .text(onlyWithBodies ? 'No systems with celestial bodies in this region' : 'No systems in this region');
+                .text(onlyWithBodies ? 'No systems with planets here' : 'No systems in this region');
             return;
         }
 
@@ -551,16 +620,12 @@ export function initialize(containerId, overview, dotNetRef) {
                 bucket.overflow++;
             }
         });
-        // Sort each bucket: systems with bodies first
         Object.values(cellBuckets).forEach(b => {
             b.shown.sort((a, c) => (c.celestialBodies?.length || 0) - (a.celestialBodies?.length || 0));
         });
         const filtered = Object.values(cellBuckets).flatMap(b => b.shown);
 
         // Spread systems within their cells via force layout
-        const cellCounts = {};
-        filtered.forEach(s => { const k = `${s.col},${s.row}`; cellCounts[k] = (cellCounts[k] || 0) + 1; });
-
         const nodes = filtered.map(sys => ({
             ...sys,
             x: colX(sys.col) + cellW / 2 + (Math.random() - 0.5) * cellW * 0.6,
@@ -630,8 +695,9 @@ export function initialize(containerId, overview, dotNetRef) {
 
         const sysColor = d => d.region ? getRegionColor(d.region, overview.regions) : '#ffffff';
 
+        const dotR = cellW * 0.015;
         sysG.append('circle')
-            .attr('r', cellW * 0.015)
+            .attr('r', dotR)
             .attr('fill', sysColor).attr('fill-opacity', 0.7)
             .attr('stroke', sysColor).attr('stroke-opacity', 0.9).attr('stroke-width', 0.5)
             .attr('filter', 'url(#glow)');
@@ -641,6 +707,8 @@ export function initialize(containerId, overview, dotNetRef) {
             .attr('fill', '#e0e0f0').attr('font-size', `${cellW * 0.012}px`)
             .style('pointer-events', 'none')
             .text(d => d.name.replace(/ system$/i, '').replace(/\/Legends$/i, ''));
+
+        appendContinuityDot(sysG, dotR);
 
         sysG.each(function (d) {
             if (d.celestialBodies && d.celestialBodies.length > 0) {
@@ -654,7 +722,7 @@ export function initialize(containerId, overview, dotNetRef) {
 
         // Interactions
         sysG.on('mouseover', function (event, d) {
-            let html = `<strong>${d.name}</strong>`;
+            let html = `<strong>${d.name}</strong>` + continuityBadge(d.continuity);
             if (d.region) html += `<br><span style="color:#aaa">Region:</span> ${d.region}`;
             if (d.sector) html += `<br><span style="color:#aaa">Sector:</span> ${d.sector}`;
             if (d.celestialBodies && d.celestialBodies.length > 0) {
@@ -684,7 +752,7 @@ export function initialize(containerId, overview, dotNetRef) {
         if (!dotNetRef) return;
         currentLevel = 'cell';
         currentCell = { col, row };
-        currentRegion = null;
+        // Keep currentRegion and currentSector so back navigation works
         dotNetRef.invokeMethodAsync('OnLevelChanged', 'cell', `${String.fromCharCode(65 + col)}-${row + 1}`);
 
         // Animate zoom to cell
@@ -712,6 +780,11 @@ export function initialize(containerId, overview, dotNetRef) {
         }
     }
 
+    const SECTOR_PALETTE = [
+        '#4ecdc4', '#ff6f91', '#7e6fff', '#ffd93d', '#6bcb77',
+        '#ff6b6b', '#a29bfe', '#fd79a8', '#fdcb6e', '#00cec9',
+    ];
+
     function renderCellSystems(systems, col, row) {
         contentLayer.selectAll('*').remove();
 
@@ -727,7 +800,177 @@ export function initialize(containerId, overview, dotNetRef) {
                 .attr('x', cx).attr('y', cy)
                 .attr('text-anchor', 'middle').attr('fill', 'rgba(255,255,255,0.4)')
                 .attr('font-size', '14px')
-                .text('No systems with celestial bodies in this cell');
+                .text('No systems with planets here');
+            return;
+        }
+
+        // Group by sector to check if we need a sector picker
+        const sectorMap = {};
+        filtered.forEach(s => {
+            const sec = s.sector || 'Unknown sector';
+            if (!sectorMap[sec]) sectorMap[sec] = [];
+            sectorMap[sec].push(s);
+        });
+        const sectorNames = Object.keys(sectorMap);
+
+        // If multiple sectors share this cell, show sector picker instead of all systems
+        if (sectorNames.length > 1) {
+            renderCellSectorPicker(sectorMap, col, row);
+            return;
+        }
+
+        // Single sector (or all unknown) — render systems directly
+        renderCellSystemsDirect(filtered, col, row);
+    }
+
+    function renderCellSectorPicker(sectorMap, col, row) {
+        contentLayer.selectAll('*').remove();
+
+        const cx = colX(col) + cellW / 2;
+        const cy = rowY(row) + cellH / 2;
+
+        // Cell background
+        contentLayer.append('rect')
+            .attr('x', colX(col) + 1).attr('y', rowY(row) + 1)
+            .attr('width', cellW - 2).attr('height', cellH - 2)
+            .attr('fill', 'rgba(255,255,255,0.03)')
+            .attr('stroke', 'rgba(255,255,255,0.15)').attr('stroke-width', 0.5)
+            .attr('rx', 2);
+
+        // Sort sectors: largest first, Unknown last
+        const sectorNames = Object.keys(sectorMap).sort((a, b) => {
+            if (a === 'Unknown sector') return 1;
+            if (b === 'Unknown sector') return -1;
+            return sectorMap[b].length - sectorMap[a].length;
+        });
+
+        // Title
+        contentLayer.append('text')
+            .attr('x', cx).attr('y', rowY(row) + cellH * 0.08)
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'rgba(255,255,255,0.6)').attr('font-size', `${cellW * 0.016}px`)
+            .style('pointer-events', 'none')
+            .text(`Grid ${String.fromCharCode(65 + col)}-${row + 1} \u00b7 ${sectorNames.length} sectors`);
+
+        // Layout sectors in a grid
+        const count = sectorNames.length;
+        const cols = Math.ceil(Math.sqrt(count * (cellW / cellH)));
+        const rows = Math.ceil(count / cols);
+        const padX = cellW * 0.06, padY = cellH * 0.12;
+        const slotW = (cellW - padX * 2) / cols;
+        const slotH = (cellH - padY * 2) / rows;
+        const startX = colX(col) + padX + slotW / 2;
+        const startY = rowY(row) + padY + slotH / 2;
+
+        const theme = getThemeColors();
+
+        sectorNames.forEach((name, i) => {
+            const sysList = sectorMap[name];
+            const sx = startX + (i % cols) * slotW;
+            const sy = startY + Math.floor(i / cols) * slotH;
+            const color = name === 'Unknown sector'
+                ? 'rgba(255,255,255,0.3)'
+                : SECTOR_PALETTE[i % SECTOR_PALETTE.length];
+
+            const bodyCount = sysList.reduce((sum, s) => sum + (s.celestialBodies?.length || 0), 0);
+            const canonCount = sysList.filter(s => s.continuity === 'Canon').length;
+            const legendsCount = sysList.filter(s => s.continuity === 'Legends').length;
+
+            const g = contentLayer.append('g')
+                .attr('transform', `translate(${sx},${sy})`)
+                .style('cursor', 'pointer')
+                .style('opacity', 0);
+
+            g.transition().delay(i * 40).duration(300).style('opacity', 1);
+
+            // Sector dot
+            const dotR = cellW * 0.02;
+            g.append('circle')
+                .attr('r', dotR)
+                .attr('fill', color).attr('fill-opacity', 0.6)
+                .attr('stroke', color).attr('stroke-opacity', 0.9).attr('stroke-width', 0.5)
+                .attr('filter', 'url(#glow)');
+
+            // Sector name
+            g.append('text')
+                .attr('dy', cellW * -0.03).attr('text-anchor', 'middle')
+                .attr('fill', color).attr('font-size', `${cellW * 0.013}px`)
+                .attr('font-weight', 'bold')
+                .style('pointer-events', 'none')
+                .text(name.replace(/ sector$/i, ''));
+
+            // Continuity badges next to sector name
+            const badgeFs = cellW * 0.008;
+            const badgeY = cellW * 0.04;
+            if (canonCount > 0 && legendsCount > 0) {
+                // Both — show two small badges
+                g.append('text')
+                    .attr('dx', -badgeFs).attr('dy', badgeY)
+                    .attr('text-anchor', 'end')
+                    .attr('fill', theme.primary).attr('font-size', `${badgeFs}px`).attr('font-weight', 'bold')
+                    .style('pointer-events', 'none')
+                    .text(`C:${canonCount}`);
+                g.append('text')
+                    .attr('dx', badgeFs).attr('dy', badgeY)
+                    .attr('text-anchor', 'start')
+                    .attr('fill', theme.secondary).attr('font-size', `${badgeFs}px`).attr('font-weight', 'bold')
+                    .style('pointer-events', 'none')
+                    .text(`L:${legendsCount}`);
+            } else if (canonCount > 0) {
+                g.append('text')
+                    .attr('dy', badgeY).attr('text-anchor', 'middle')
+                    .attr('fill', theme.primary).attr('font-size', `${badgeFs}px`).attr('font-weight', 'bold')
+                    .style('pointer-events', 'none')
+                    .text(`Canon \u00b7 ${canonCount}`);
+            } else if (legendsCount > 0) {
+                g.append('text')
+                    .attr('dy', badgeY).attr('text-anchor', 'middle')
+                    .attr('fill', theme.secondary).attr('font-size', `${badgeFs}px`).attr('font-weight', 'bold')
+                    .style('pointer-events', 'none')
+                    .text(`Legends \u00b7 ${legendsCount}`);
+            }
+
+            g.on('mouseover', function () {
+                d3.select(this).select('circle').transition().duration(150)
+                    .attr('r', cellW * 0.03).attr('fill-opacity', 1);
+                let ttHtml = `<strong>${name}</strong>` +
+                    `<br><span style="color:#aaa">Systems:</span> ${sysList.length}` +
+                    `<br><span style="color:#aaa">Planets:</span> ${bodyCount}`;
+                if (canonCount > 0) ttHtml += `<br>${continuityBadge('Canon')} ${canonCount}`;
+                if (legendsCount > 0) ttHtml += `<br>${continuityBadge('Legends')} ${legendsCount}`;
+                ttHtml += `<br><span style="color:#888">Click to explore sector</span>`;
+                tooltip.html(ttHtml).style('visibility', 'visible');
+            })
+            .on('mousemove', (event) => {
+                tooltip.style('top', (event.offsetY - 10) + 'px').style('left', (event.offsetX + 15) + 'px');
+            })
+            .on('mouseout', function () {
+                d3.select(this).select('circle').transition().duration(150)
+                    .attr('r', cellW * 0.02).attr('fill-opacity', 0.6);
+                tooltip.style('visibility', 'hidden');
+            })
+            .on('click', (event) => {
+                event.stopPropagation();
+                currentLevel = 'sector';
+                currentSector = { name, systems: sysList, col, row };
+                dotNetRef.invokeMethodAsync('OnLevelChanged', 'sector', name);
+                renderCellSystemsDirect(sysList, col, row);
+            });
+        });
+    }
+
+    function renderCellSystemsDirect(filtered, col, row) {
+        contentLayer.selectAll('*').remove();
+
+        const cx = colX(col) + cellW / 2;
+        const cy = rowY(row) + cellH / 2;
+
+        if (filtered.length === 0) {
+            contentLayer.append('text')
+                .attr('x', cx).attr('y', cy)
+                .attr('text-anchor', 'middle').attr('fill', 'rgba(255,255,255,0.4)')
+                .attr('font-size', '14px')
+                .text('No systems with planets here');
             return;
         }
 
@@ -770,8 +1013,9 @@ export function initialize(containerId, overview, dotNetRef) {
             return getRegionColor(d.region, overview.regions);
         };
 
+        const dotR2 = cellW * 0.02;
         sysG.append('circle')
-            .attr('r', cellW * 0.02)
+            .attr('r', dotR2)
             .attr('fill', color).attr('fill-opacity', 0.7)
             .attr('stroke', color).attr('stroke-opacity', 0.9).attr('stroke-width', 0.5)
             .attr('filter', 'url(#glow)');
@@ -781,6 +1025,8 @@ export function initialize(containerId, overview, dotNetRef) {
             .attr('fill', '#e0e0f0').attr('font-size', `${cellW * 0.015}px`)
             .style('pointer-events', 'none')
             .text(d => d.name.replace(/ system$/i, '').replace(/\/Legends$/i, ''));
+
+        appendContinuityDot(sysG, dotR2);
 
         // Planet count badge
         sysG.each(function (d) {
@@ -795,7 +1041,7 @@ export function initialize(containerId, overview, dotNetRef) {
 
         // Interactions
         sysG.on('mouseover', function (event, d) {
-            let html = `<strong>${d.name}</strong>`;
+            let html = `<strong>${d.name}</strong>` + continuityBadge(d.continuity);
             if (d.region) html += `<br><span style="color:#aaa">Region:</span> ${d.region}`;
             if (d.sector) html += `<br><span style="color:#aaa">Sector:</span> ${d.sector}`;
             if (d.celestialBodies && d.celestialBodies.length > 0) {
@@ -860,6 +1106,22 @@ export function initialize(containerId, overview, dotNetRef) {
             .attr('font-size', `${unit * 5}px`).attr('font-weight', '600')
             .text(sys.name.replace(/ system$/i, '').replace(/\/Legends$/i, ''));
 
+        // System continuity badge — letter inside the central star circle
+        if (sys.continuity && sys.continuity !== 'Unknown') {
+            const theme = getThemeColors();
+            const isCanon = sys.continuity === 'Canon';
+            const label = isCanon ? 'C' : 'L';
+            const bfs = unit * 4;
+            contentLayer.select('circle')
+                .attr('fill', isCanon ? theme.primary : theme.secondary);
+            contentLayer.append('text')
+                .attr('x', cx).attr('y', cy + bfs * 0.35)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#fff').attr('font-size', `${bfs}px`).attr('font-weight', 'bold')
+                .style('pointer-events', 'none')
+                .text(label);
+        }
+
         if (bodies.length === 0) {
             contentLayer.append('text')
                 .attr('x', cx).attr('y', cy + unit * 15)
@@ -902,6 +1164,20 @@ export function initialize(containerId, overview, dotNetRef) {
                 .attr('fill', '#e0e0f0').attr('font-size', `${unit * 3}px`)
                 .style('pointer-events', 'none')
                 .text(body.name);
+
+            // Celestial body continuity badge — letter inside the planet circle
+            if (body.continuity && body.continuity !== 'Unknown') {
+                const theme = getThemeColors();
+                const isCanonBody = body.continuity === 'Canon';
+                const cbFs = unit * 2.5;
+                pg.select('circle')
+                    .attr('fill', isCanonBody ? theme.primary : theme.secondary);
+                pg.append('text')
+                    .attr('text-anchor', 'middle').attr('dy', cbFs * 0.35)
+                    .attr('fill', '#fff').attr('font-size', `${cbFs}px`).attr('font-weight', 'bold')
+                    .style('pointer-events', 'none')
+                    .text(isCanonBody ? 'C' : 'L');
+            }
 
             if (body.class) {
                 pg.append('text')
@@ -959,6 +1235,23 @@ export function initialize(containerId, overview, dotNetRef) {
                             renderCellSystems(result.systems, currentCell.col, currentCell.row);
                         }
                     });
+            } else if (currentSector && currentCell) {
+                // Back to sector view (systems within a sector in a cell)
+                currentLevel = 'sector';
+                currentSystemData = null;
+                dotNetRef.invokeMethodAsync('OnLevelChanged', 'sector', currentSector.name);
+                dotNetRef.invokeMethodAsync('OnSystemDeselected');
+
+                const sc = currentCell;
+                const cs = Math.min(width / cellW, height / cellH) * 0.85;
+                svg.transition().duration(600).ease(d3.easeCubicInOut)
+                    .call(zoom.transform, d3.zoomIdentity.translate(
+                        width / 2 - (colX(sc.col) + cellW / 2) * cs,
+                        height / 2 - (rowY(sc.row) + cellH / 2) * cs
+                    ).scale(cs));
+
+                contentLayer.selectAll('*').remove();
+                renderCellSystemsDirect(currentSector.systems, sc.col, sc.row);
             } else if (currentRegion) {
                 // Back to region view
                 currentLevel = 'region';
@@ -990,10 +1283,56 @@ export function initialize(containerId, overview, dotNetRef) {
                     renderRegionSystems(lastRegionSystems, currentRegion);
                 }
             } else {
-                // Fallback: back to overview
                 resetToOverview();
             }
-        } else if (currentLevel === 'region' || currentLevel === 'cell') {
+        } else if (currentLevel === 'sector') {
+            // Back from sector to cell sector picker
+            if (currentSector && currentCell) {
+                currentLevel = 'cell';
+                const savedSector = currentSector;
+                currentSector = null;
+                dotNetRef.invokeMethodAsync('OnLevelChanged', 'cell',
+                    `${String.fromCharCode(65 + currentCell.col)}-${currentCell.row + 1}`);
+
+                contentLayer.selectAll('*').remove();
+                if (lastCellSystems) {
+                    renderCellSystems(lastCellSystems, currentCell.col, currentCell.row);
+                }
+            } else {
+                resetToOverview();
+            }
+        } else if (currentLevel === 'cell') {
+            if (currentRegion) {
+                // Back to region view from cell
+                currentLevel = 'region';
+                currentCell = null;
+                currentSector = null;
+                dotNetRef.invokeMethodAsync('OnLevelChanged', 'region', currentRegion.name);
+
+                let minCol = Infinity, maxCol = -Infinity, minRow = Infinity, maxRow = -Infinity;
+                for (const [col, row] of currentRegion.cells) {
+                    minCol = Math.min(minCol, col); maxCol = Math.max(maxCol, col);
+                    minRow = Math.min(minRow, row); maxRow = Math.max(maxRow, row);
+                }
+                const rw = (maxCol - minCol + 1) * cellW;
+                const rh = (maxRow - minRow + 1) * cellH;
+                const rs = Math.min(width / rw, height / rh) * 0.8;
+                const rcx = colX(minCol) + rw / 2;
+                const rcy = rowY(minRow) + rh / 2;
+                svg.transition().duration(600).ease(d3.easeCubicInOut)
+                    .call(zoom.transform, d3.zoomIdentity.translate(
+                        width / 2 - rcx * rs,
+                        height / 2 - rcy * rs
+                    ).scale(rs));
+
+                contentLayer.selectAll('*').remove();
+                if (lastRegionSystems) {
+                    renderRegionSystems(lastRegionSystems, currentRegion);
+                }
+            } else {
+                resetToOverview();
+            }
+        } else if (currentLevel === 'region') {
             resetToOverview();
         }
     }
@@ -1002,6 +1341,7 @@ export function initialize(containerId, overview, dotNetRef) {
         currentLevel = 'overview';
         currentCell = null;
         currentRegion = null;
+        currentSector = null;
         currentSystemData = null;
         dotNetRef.invokeMethodAsync('OnLevelChanged', 'overview', '');
         dotNetRef.invokeMethodAsync('OnSystemDeselected');
@@ -1075,7 +1415,13 @@ export function initialize(containerId, overview, dotNetRef) {
 
     function setSystemFilter(value) {
         onlyWithBodies = value;
-        if (currentLevel === 'cell' && currentCell && lastCellSystems) {
+        if (currentLevel === 'sector' && currentSector && currentCell) {
+            // Re-filter the sector's systems with the new filter
+            const sysList = onlyWithBodies
+                ? currentSector.systems.filter(s => s.celestialBodies && s.celestialBodies.length > 0)
+                : currentSector.systems;
+            renderCellSystemsDirect(sysList, currentCell.col, currentCell.row);
+        } else if (currentLevel === 'cell' && currentCell && lastCellSystems) {
             renderCellSystems(lastCellSystems, currentCell.col, currentCell.row);
         } else if (currentLevel === 'region' && currentRegion && lastRegionSystems) {
             renderRegionSystems(lastRegionSystems, currentRegion);
@@ -1091,8 +1437,8 @@ export function initialize(containerId, overview, dotNetRef) {
         svg, container, goBack, drillIntoCell, drillIntoRegion,
         getCurrentLevel: () => currentLevel,
         setSystemFilter, setRegionVisibility,
-        // Temporal layer state
-        territoryLayer, heatmapLayer, markerLayer, tooltip, dotNetRef,
+        // Layers
+        contentLayer, territoryLayer, heatmapLayer, markerLayer, tooltip, dotNetRef,
         cellW, cellH, cols, rows, startCol, startRow, colX, rowY, regionCellMap, overview,
         currentYearData: null, selectedLens: 'All',
     };
@@ -1367,4 +1713,54 @@ export function toggleTradeRoutes(visible) {
 export function toggleNebulae(visible) {
     if (!_state) return;
     _state.svg.select('.layer-nebulae').style('display', visible ? null : 'none');
+}
+
+export function highlightCells(label, cells) {
+    if (!_state) return;
+    const { contentLayer, cellW, cellH, colX, rowY, tooltip } = _state;
+
+    // Clear any previous sector highlight
+    contentLayer.selectAll('.sector-highlight').remove();
+
+    if (!cells || cells.length === 0) return;
+
+    // Highlight each cell
+    const color = '#ffd700';
+    cells.forEach(([col, row]) => {
+        contentLayer.append('rect')
+            .attr('class', 'sector-highlight')
+            .attr('x', colX(col) + 1).attr('y', rowY(row) + 1)
+            .attr('width', cellW - 2).attr('height', cellH - 2)
+            .attr('fill', color).attr('fill-opacity', 0)
+            .attr('stroke', color).attr('stroke-opacity', 0)
+            .attr('stroke-width', 1.5).attr('rx', 2)
+            .style('pointer-events', 'none')
+            .transition().duration(400)
+            .attr('fill-opacity', 0.08).attr('stroke-opacity', 0.5);
+    });
+
+    // Place label at centroid
+    const cx = cells.reduce((s, [c]) => s + colX(c) + cellW / 2, 0) / cells.length;
+    const cy = cells.reduce((s, [, r]) => s + rowY(r) + cellH / 2, 0) / cells.length;
+    contentLayer.append('text')
+        .attr('class', 'sector-highlight')
+        .attr('x', cx).attr('y', cy)
+        .attr('text-anchor', 'middle')
+        .attr('fill', color).attr('fill-opacity', 0)
+        .attr('font-size', `${cellW * 0.025}px`)
+        .attr('font-weight', 'bold')
+        .style('pointer-events', 'none')
+        .transition().duration(400)
+        .attr('fill-opacity', 0.9);
+    contentLayer.select('.sector-highlight text').text(label);
+    // Fix: text was appended before setting text — set it directly
+    contentLayer.selectAll('.sector-highlight').filter('text').text(label);
+
+    // Auto-clear after 4 seconds
+    setTimeout(() => {
+        contentLayer.selectAll('.sector-highlight')
+            .transition().duration(600)
+            .attr('fill-opacity', 0).attr('stroke-opacity', 0)
+            .remove();
+    }, 4000);
 }

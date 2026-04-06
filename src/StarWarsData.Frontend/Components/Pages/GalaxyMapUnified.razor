@@ -200,7 +200,7 @@
                                 @if (_mode == "explore")
                                 {
                                     <MudSwitch Value="_onlyWithBodies" Color="Color.Success" Size="Size.Small"
-                                               Label="Only systems with celestial bodies"
+                                               Label="Hide empty systems"
                                                Style="color:rgba(255,255,255,0.5);margin:0;"
                                                ValueChanged="OnCelestialBodyFilterChanged" T="bool" />
                                 }
@@ -237,6 +237,39 @@
                                 </MudStack>
                             </ChildContent>
                         </MudExpansionPanel>
+
+                        <!-- Sector browser -->
+                        @if (_mode == "explore" && _geography?.Cells is not null)
+                        {
+                            <MudExpansionPanel Dense="true" IsInitiallyExpanded="false"
+                                               Style="background:rgba(255,255,255,0.03);border-radius:6px;margin-bottom:4px;">
+                                <TitleContent>
+                                    <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
+                                        <MudText Typo="Typo.body2" Style="font-weight:600;">Sectors</MudText>
+                                        <MudSpacer />
+                                        <MudChip T="string" Size="Size.Small" Variant="Variant.Text" Color="Color.Secondary"
+                                                 Style="margin:0;pointer-events:none;">@AllSectors.Count</MudChip>
+                                    </MudStack>
+                                </TitleContent>
+                                <ChildContent>
+                                    <MudTextField @bind-Value="_sectorSearch" Placeholder="Filter sectors..."
+                                                  Variant="Variant.Outlined" Margin="Margin.Dense"
+                                                  Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                                                  Immediate="true" Style="color:#e0e0f0;margin-bottom:6px;" />
+                                    <MudStack Row="true" Spacing="1" Class="flex-wrap" Style="max-height:200px;overflow-y:auto;">
+                                        @foreach (var sec in FilteredSectors)
+                                        {
+                                            var s = sec;
+                                            <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined"
+                                                     OnClick="() => HighlightSector(s.Name)"
+                                                     Style="border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);">
+                                                @s.Name <span style="color:rgba(255,255,255,0.4);margin-left:2px;">@s.Count</span>
+                                            </MudChip>
+                                        }
+                                    </MudStack>
+                                </ChildContent>
+                            </MudExpansionPanel>
+                        }
 
                         @if (_mode == "timeline" && _overview?.Lenses is not null)
                         {
@@ -424,7 +457,14 @@
                     else if (_selectedSystem is not null)
                     {
                         <div class="pa-3">
-                            <MudText Typo="Typo.h6" Style="color:#e0e0f0;">@_selectedSystem.Name</MudText>
+                            <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
+                                <MudText Typo="Typo.h6" Style="color:#e0e0f0;">@_selectedSystem.Name</MudText>
+                                @if (ShowContinuityBadges && _selectedSystem.Continuity is not null)
+                                {
+                                    <ContinuityBadge Continuity="@ParseContinuity(_selectedSystem.Continuity)" Short="true"
+                                                     Style="font-size:8px;height:16px;min-width:16px;padding:0 3px;" />
+                                }
+                            </MudStack>
                             @if (_selectedSystem.Region is not null)
                             {
                                 <MudText Typo="Typo.body2" Style="color:#aaa;">Region: <span style="color:#e0e0f0;">@_selectedSystem.Region</span></MudText>
@@ -437,9 +477,16 @@
                                 <MudStack Row="true" Class="flex-wrap gap-1 mt-1">
                                     @foreach (var body in _selectedSystem.CelestialBodies)
                                     {
-                                        <MudChip T="string" Size="Size.Small" Variant="Variant.Filled"
-                                                 Style="background:rgba(107,203,119,0.2);color:#6bcb77;"
-                                                 OnClick="() => LoadPageDetail(body.Id)">@body.Name</MudChip>
+                                        <MudStack Row="true" Spacing="0" AlignItems="AlignItems.Center">
+                                            <MudChip T="string" Size="Size.Small" Variant="Variant.Filled"
+                                                     Style="background:rgba(107,203,119,0.2);color:#6bcb77;"
+                                                     OnClick="() => LoadPageDetail(body.Id)">@body.Name</MudChip>
+                                            @if (ShowContinuityBadges && body.Continuity is not null)
+                                            {
+                                                <ContinuityBadge Continuity="@ParseContinuity(body.Continuity)" Short="true"
+                                                                 Style="font-size:7px;height:14px;min-width:14px;padding:0 2px;margin-left:-4px;" />
+                                            }
+                                        </MudStack>
                                     }
                                 </MudStack>
                             }
@@ -767,6 +814,7 @@
     string _currentLabel = "";
     string _cellLabel = "";
     string _regionLabel = "";
+    string _sectorLabel = "";
     List<MudBlazor.BreadcrumbItem> _breadcrumbs = [new("", null, disabled: false, icon: Icons.Material.Filled.Explore)];
     bool _onlyWithBodies;
     bool _semanticSearch;
@@ -776,6 +824,7 @@
     bool _showTradeRoutes = true;
     bool _showNebulae = true;
     readonly HashSet<string> _hiddenRegions = new();
+    string? _sectorSearch;
     string? _hoveredRegionName;
     int _hoveredRegionCellCount;
     string? _hoveredRegionColor;
@@ -868,6 +917,19 @@
         }
     }
 
+    List<GeoCellSector> AllSectors => _geography?.Cells
+        .Where(c => c.Sectors is not null)
+        .SelectMany(c => c.Sectors!)
+        .GroupBy(s => s.Name, StringComparer.OrdinalIgnoreCase)
+        .Select(g => new GeoCellSector { Name = g.Key, Count = g.Sum(s => s.Count) })
+        .OrderByDescending(s => s.Count)
+        .ToList() ?? [];
+
+    IEnumerable<GeoCellSector> FilteredSectors =>
+        string.IsNullOrWhiteSpace(_sectorSearch)
+            ? AllSectors.Take(50)
+            : AllSectors.Where(s => s.Name.Contains(_sectorSearch, StringComparison.OrdinalIgnoreCase)).Take(50);
+
     IEnumerable<string> ActiveFactions =>
         _yearData?.Regions.SelectMany(r => r.Factions).Select(f => f.Faction).Distinct().OrderBy(f => f)
         ?? Enumerable.Empty<string>();
@@ -898,6 +960,8 @@
             _module = await JS.InvokeAsync<IJSObjectReference>("import", "./js/galaxy-map-unified.js");
             await _module.InvokeVoidAsync("initialize", "galaxy-map-root", _geography, _dotNetRef);
             await _module.InvokeVoidAsync("setupPanelHoverListeners", "galaxy-map-panel");
+            if (_onlyWithBodies)
+                await _module.InvokeVoidAsync("setSystemFilter", true);
         }
     }
 
@@ -975,12 +1039,17 @@
         _currentLabel = label;
         switch (level)
         {
-            case "overview": _cellLabel = ""; _regionLabel = ""; _selectedRegion = null; break;
+            case "overview": _cellLabel = ""; _regionLabel = ""; _sectorLabel = ""; _selectedRegion = null; break;
             case "region":
-                _regionLabel = label; _cellLabel = "";
+                _regionLabel = label; _cellLabel = ""; _sectorLabel = "";
                 _selectedRegion = _geography?.Regions.FirstOrDefault(r => r.Name == label);
                 break;
-            case "cell": _cellLabel = label; _regionLabel = ""; _selectedRegion = null; break;
+            case "cell":
+                _cellLabel = label; _sectorLabel = "";
+                break;
+            case "sector":
+                _sectorLabel = label;
+                break;
         }
         _hoveredRegionName = null;
         UpdateBreadcrumbs();
@@ -1023,9 +1092,11 @@
     {
         _breadcrumbs = [new("", null, disabled: _currentLevel == "overview", icon: Icons.Material.Filled.Explore)];
         if (!string.IsNullOrEmpty(_regionLabel))
-            _breadcrumbs.Add(new(_regionLabel, null, disabled: _currentLevel != "system", icon: Icons.Material.Filled.Map));
+            _breadcrumbs.Add(new(_regionLabel, null, disabled: _currentLevel is not "region", icon: Icons.Material.Filled.Map));
         if (!string.IsNullOrEmpty(_cellLabel))
-            _breadcrumbs.Add(new($"Grid {_cellLabel}", null, disabled: _currentLevel != "system", icon: Icons.Material.Filled.GridOn));
+            _breadcrumbs.Add(new($"Grid {_cellLabel}", null, disabled: _currentLevel is not "cell", icon: Icons.Material.Filled.GridOn));
+        if (!string.IsNullOrEmpty(_sectorLabel))
+            _breadcrumbs.Add(new(_sectorLabel, null, disabled: _currentLevel is not "sector", icon: Icons.Material.Filled.Grain));
         if (_currentLevel == "system")
             _breadcrumbs.Add(new(_currentLabel, null, disabled: true, icon: Icons.Material.Filled.Star));
     }
@@ -1111,6 +1182,18 @@
     {
         if (_geography is not null) foreach (var r in _geography.Regions) _hiddenRegions.Add(r.Name);
         if (_module is not null) await _module.InvokeVoidAsync("setRegionVisibility", (object)_hiddenRegions.ToArray());
+    }
+
+    async Task HighlightSector(string sectorName)
+    {
+        if (_geography is null || _module is null) return;
+        // Find all cells that contain this sector
+        var cells = _geography.Cells
+            .Where(c => c.Sectors?.Any(s => s.Name.Equals(sectorName, StringComparison.OrdinalIgnoreCase)) == true)
+            .Select(c => new[] { c.Col, c.Row })
+            .ToArray();
+        if (cells.Length > 0)
+            await _module.InvokeVoidAsync("highlightCells", sectorName, (object)cells);
     }
 
     // ══════════ EXPLORE: Detail panel ══════════
@@ -1247,6 +1330,12 @@
         return int.TryParse(parts[1], out var num) && (row = num - 1) >= 0;
     }
 
+    /// <summary>Show C/L badges only when both continuities are active (no filter).</summary>
+    bool ShowContinuityBadges => GlobalFilterService.SelectedContinuity is null;
+
+    static Continuity ParseContinuity(string? value) =>
+        Enum.TryParse<Continuity>(value, true, out var c) ? c : Continuity.Unknown;
+
     static readonly string[] RegionPalette =
         ["#4ecdc4","#ff6f91","#7e6fff","#ffd93d","#6bcb77","#ff6b6b","#a29bfe","#fd79a8","#fdcb6e","#00cec9",
          "#e17055","#0984e3","#6c5ce7","#00b894","#e84393","#fab1a0","#74b9ff","#55efc4","#ff7675","#dfe6e9"];
@@ -1293,15 +1382,8 @@
                     <span style="font-size:13px;font-weight:500;">@evt.Title</span>
                 }
                 <div style="display:flex;gap:3px;flex-shrink:0;margin-left:4px;">
-                    @{
-                        var contChipColor = evt.Continuity == Continuity.Canon ? Color.Primary
-                            : evt.Continuity == Continuity.Legends ? Color.Secondary : Color.Default;
-                        var contLabel = evt.Continuity == Continuity.Canon ? "C"
-                            : evt.Continuity == Continuity.Legends ? "L" : "?";
-                    }
-                    <MudChip T="string" Size="Size.Small" Variant="Variant.Filled" Color="contChipColor"
-                             Style="font-size:8px;height:16px;min-width:16px;padding:0 3px;"
-                             title="@evt.Continuity.ToString()">@contLabel</MudChip>
+                    <ContinuityBadge Continuity="evt.Continuity" Short="true"
+                                     Style="font-size:8px;height:16px;min-width:16px;padding:0 3px;" />
                     <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined"
                              Style="@($"border-color:{catColor};color:{catColor};font-size:9px;height:18px;")">
                         @evt.Lens
@@ -1339,7 +1421,7 @@
     {
         _systemCache.Clear(); _selectedSystem = null; _selectedRegion = null;
         _detailPage = null; _searchResults = null; _currentLevel = "overview";
-        _cellLabel = ""; _regionLabel = ""; _hoveredRegionName = null; _hiddenRegions.Clear();
+        _cellLabel = ""; _regionLabel = ""; _sectorLabel = ""; _hoveredRegionName = null; _hiddenRegions.Clear();
         UpdateBreadcrumbs(); _d3Initialized = false;
         if (_module is not null) { try { await _module.InvokeVoidAsync("dispose"); } catch { } }
         await LoadData(); StateHasChanged();

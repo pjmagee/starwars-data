@@ -26,6 +26,18 @@ public class GeoCellSummary
     public int Row { get; set; }
     public int SystemCount { get; set; }
     public string? Region { get; set; }
+
+    /// <summary>
+    /// Top sectors in this cell with their system counts, sorted by count descending.
+    /// Only populated for cells with sector data. Used for overview tooltip.
+    /// </summary>
+    public List<GeoCellSector>? Sectors { get; set; }
+}
+
+public class GeoCellSector
+{
+    public string Name { get; set; } = "";
+    public int Count { get; set; }
 }
 
 /// <summary>
@@ -46,6 +58,7 @@ public class GeoSystem
     public string Name { get; set; } = "";
     public int Col { get; set; } // 0-25 (A=0, Z=25)
     public int Row { get; set; } // 0-19 (grid 1=row 0, grid 20=row 19)
+    public string? Continuity { get; set; }
     public string? Region { get; set; }
     public string? Sector { get; set; }
     public List<GeoCelestialBody> CelestialBodies { get; set; } = [];
@@ -56,6 +69,7 @@ public class GeoCelestialBody
     public int Id { get; set; }
     public string Name { get; set; } = "";
     public string? Class { get; set; }
+    public string? Continuity { get; set; }
 }
 
 public class GeoRegion
