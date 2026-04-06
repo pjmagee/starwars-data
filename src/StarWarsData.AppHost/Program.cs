@@ -18,24 +18,23 @@ var apiService = builder
     .WithEnvironment("Settings__OpenAiKey", openApi)
     .WithEnvironment("Settings__HangfireEnabled", "true");
 
-var mongo = builder.AddConnectionString("mongodb", ReferenceExpression.Create($"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true"));
+var connString = ReferenceExpression.Create($"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true");
+var mongo = builder.AddConnectionString("mongodb", connString);
 
 // MongoDB migrations: runs mongosh migrate.js inside mongo:latest, then exits.
 // Tracked in the `migrations` collection — re-runs are safe (idempotent).
+// Built from src/StarWarsData.MongoDbMigrations/Dockerfile — scripts baked into the image.
 var mongoDbMigrations = builder
-    .AddContainer("mongodb-migrations", "mongo", "latest")
-    .WithBindMount("../StarWarsData.MongoDbMigrations", "/migrations", isReadOnly: true)
-    .WithEnvironment("MDB_MCP_CONNECTION_STRING", ReferenceExpression.Create($"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true"))
-    .WithEnvironment("STARWARS_DB", starwarsDb)
-    .WithEntrypoint("/bin/sh")
-    .WithArgs("-c", "mongosh \"$MDB_MCP_CONNECTION_STRING\" --quiet --eval \"STARWARS_DB='$STARWARS_DB'\" --file /migrations/migrate.js");
+    .AddDockerfile("mongodb-migrations", "../StarWarsData.MongoDbMigrations")
+    .WithEnvironment("MDB_MCP_CONNECTION_STRING", connString)
+    .WithEnvironment("STARWARS_DB", starwarsDb);
 
 apiService.WithReference(mongo).WaitFor(mongo);
 
 // MongoDB MCP server as a sidecar container (HTTP transport)
 var mongoMcp = builder
     .AddContainer("mongodb-mcp", "mongodb/mongodb-mcp-server", "latest")
-    .WithEnvironment("MDB_MCP_CONNECTION_STRING", ReferenceExpression.Create($"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true"))
+    .WithEnvironment("MDB_MCP_CONNECTION_STRING", connString)
     .WithEnvironment("MDB_MCP_READ_ONLY", "true")
     .WithArgs("--transport", "http", "--httpHost", "0.0.0.0", "--httpPort", "3000")
     .WithHttpEndpoint(targetPort: 3000, name: "mcp");
@@ -257,11 +256,12 @@ var frontend = builder
     .WaitFor(apiService);
 
 #pragma warning disable ASPIREPIPELINES003
-var registry = builder.AddContainerRegistry("ghcr", "ghcr.io", "pjmagee");
+var registry = builder.AddContainerRegistry("ghcr", "ghcr.io", "pjmagee/starwars-data");
 var imageTag = Environment.GetEnvironmentVariable("CONTAINER_IMAGE_TAG") ?? "latest";
 apiService.WithContainerRegistry(registry).WithRemoteImageTag(imageTag);
 admin.WithContainerRegistry(registry).WithRemoteImageTag(imageTag);
 frontend.WithContainerRegistry(registry).WithRemoteImageTag(imageTag);
+mongoDbMigrations.WithContainerRegistry(registry).WithRemoteImageTag(imageTag);
 #pragma warning restore ASPIREPIPELINES003
 
 builder
@@ -310,12 +310,15 @@ builder
                     service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:${ADMIN_PORT}]";
                     break;
                 case "starwars-dashboard":
-                    service.Ports = ["${DASHBOARD_HOST_PORT:-18888}:18888"];
                     service.Labels["net.unraid.docker.icon"] = "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/dashboard.png";
                     service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:18888]";
                     break;
             }
         }
+    })
+    .WithDashboard(dashboard =>
+    {
+        dashboard.WithHostPort(18888);
     });
 
 builder.Build().Run();
