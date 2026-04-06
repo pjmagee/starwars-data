@@ -158,9 +158,9 @@ else
             var cont = GlobalFilterService.GetContinuityQueryParam();
             if (!string.IsNullOrEmpty(cont))
                 qs["continuity"] = cont;
-            var uni = GlobalFilterService.GetUniverseQueryParam();
-            if (!string.IsNullOrEmpty(uni))
-                qs["universe"] = uni;
+            var realm = GlobalFilterService.GetRealmQueryParam();
+            if (!string.IsNullOrEmpty(realm))
+                qs["realm"] = realm;
 
             var url = $"Categories/{encoded}?{qs}";
             var result = await Http.GetFromJsonAsync<PagedResult>(url, ct);

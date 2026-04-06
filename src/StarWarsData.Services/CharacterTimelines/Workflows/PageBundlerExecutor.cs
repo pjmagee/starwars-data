@@ -24,11 +24,7 @@ internal sealed class PageBundlerExecutor : Executor<string, string>
     /// </summary>
     private const int MaxBatchChars = 40_000;
 
-    public PageBundlerExecutor(
-        ILogger logger,
-        CharacterTimelineTracker? tracker,
-        int characterPageId
-    )
+    public PageBundlerExecutor(ILogger logger, CharacterTimelineTracker? tracker, int characterPageId)
         : base("PageBundler")
     {
         _logger = logger;
@@ -36,23 +32,11 @@ internal sealed class PageBundlerExecutor : Executor<string, string>
         _characterPageId = characterPageId;
     }
 
-    public override async ValueTask<string> HandleAsync(
-        string message,
-        IWorkflowContext context,
-        CancellationToken ct = default
-    )
+    public override async ValueTask<string> HandleAsync(string message, IWorkflowContext context, CancellationToken ct = default)
     {
-        var pages =
-            await context.ReadStateAsync<List<PageContent>>("pages", "Discovery", ct)
-            ?? throw new InvalidOperationException("No pages found in Discovery state");
+        var pages = await context.ReadStateAsync<List<PageContent>>("pages", "Discovery", ct) ?? throw new InvalidOperationException("No pages found in Discovery state");
 
-        _tracker?.UpdateProgress(
-            _characterPageId,
-            GenerationStage.Bundling,
-            $"Bundling {pages.Count} pages into extraction batches...",
-            currentStep: 0,
-            totalSteps: pages.Count
-        );
+        _tracker?.UpdateProgress(_characterPageId, GenerationStage.Bundling, $"Bundling {pages.Count} pages into extraction batches...", currentStep: 0, totalSteps: pages.Count);
 
         var batches = new List<PageBatch>();
         var currentBatchPages = new List<PageContent>();
@@ -82,31 +66,11 @@ internal sealed class PageBundlerExecutor : Executor<string, string>
 
         await context.QueueStateUpdateAsync("batches", batches, "Bundler", ct);
 
-        await context.AddEventAsync(
-            new BundlingCompleteEvent(
-                new BundlingCompleteData(
-                    pages.Count,
-                    batches.Count,
-                    batches.Select(b => b.Pages.Count).ToList()
-                )
-            ),
-            ct
-        );
+        await context.AddEventAsync(new BundlingCompleteEvent(new BundlingCompleteData(pages.Count, batches.Count, batches.Select(b => b.Pages.Count).ToList())), ct);
 
-        _logger.LogInformation(
-            "Bundled {PageCount} pages into {BatchCount} batches: [{BatchSizes}]",
-            pages.Count,
-            batches.Count,
-            string.Join(", ", batches.Select(b => b.Pages.Count))
-        );
+        _logger.LogInformation("Bundled {PageCount} pages into {BatchCount} batches: [{BatchSizes}]", pages.Count, batches.Count, string.Join(", ", batches.Select(b => b.Pages.Count)));
 
-        _tracker?.UpdateProgress(
-            _characterPageId,
-            GenerationStage.Bundling,
-            $"Bundled {pages.Count} pages into {batches.Count} batches",
-            currentStep: pages.Count,
-            totalSteps: pages.Count
-        );
+        _tracker?.UpdateProgress(_characterPageId, GenerationStage.Bundling, $"Bundled {pages.Count} pages into {batches.Count} batches", currentStep: pages.Count, totalSteps: pages.Count);
 
         return $"Bundled {pages.Count} pages into {batches.Count} batches";
     }

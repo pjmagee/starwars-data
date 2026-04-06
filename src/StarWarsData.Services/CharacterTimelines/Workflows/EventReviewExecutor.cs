@@ -18,17 +18,9 @@ internal sealed class EventReviewExecutor : Executor<string, string>
     private readonly CharacterTimelineTracker? _tracker;
     private readonly int _characterPageId;
 
-    private static readonly JsonSerializerOptions JsonOptions = new()
-    {
-        PropertyNameCaseInsensitive = true,
-    };
+    private static readonly JsonSerializerOptions JsonOptions = new() { PropertyNameCaseInsensitive = true };
 
-    public EventReviewExecutor(
-        IChatClient chatClient,
-        ILogger logger,
-        CharacterTimelineTracker? tracker,
-        int characterPageId
-    )
+    public EventReviewExecutor(IChatClient chatClient, ILogger logger, CharacterTimelineTracker? tracker, int characterPageId)
         : base("EventReview")
     {
         _chatClient = chatClient;
@@ -37,25 +29,13 @@ internal sealed class EventReviewExecutor : Executor<string, string>
         _characterPageId = characterPageId;
     }
 
-    public override async ValueTask<string> HandleAsync(
-        string message,
-        IWorkflowContext context,
-        CancellationToken ct = default
-    )
+    public override async ValueTask<string> HandleAsync(string message, IWorkflowContext context, CancellationToken ct = default)
     {
-        // Try Consolidation state first (5-executor workflow), fall back to Extraction (legacy 3-executor)
-        var events =
-            await context.ReadStateAsync<List<ExtractedEvent>>("events", "Consolidation", ct)
-            ?? await context.ReadStateAsync<List<ExtractedEvent>>("events", "BatchExtraction", ct)
-            ?? await context.ReadStateAsync<List<ExtractedEvent>>("events", "Extraction", ct)
-            ?? throw new InvalidOperationException("No events found in workflow state");
+        var events = await context.ReadStateAsync<List<ExtractedEvent>>("events", "Consolidation", ct) ?? throw new InvalidOperationException("No events found in Consolidation state");
 
-        var characterTitle =
-            await context.ReadStateAsync<string>("characterTitle", "Discovery", ct) ?? "Unknown";
+        var characterTitle = await context.ReadStateAsync<string>("characterTitle", "Discovery", ct) ?? "Unknown";
 
-        var characterContinuity =
-            await context.ReadStateAsync<string>("characterContinuity", "Discovery", ct)
-            ?? "Unknown";
+        var characterContinuity = await context.ReadStateAsync<string>("characterContinuity", "Discovery", ct) ?? "Unknown";
 
         _tracker?.UpdateProgress(
             _characterPageId,
@@ -67,11 +47,7 @@ internal sealed class EventReviewExecutor : Executor<string, string>
             eventsExtracted: events.Count
         );
 
-        _logger.LogInformation(
-            "Reviewing {EventCount} events for {Title}",
-            events.Count,
-            characterTitle
-        );
+        _logger.LogInformation("Reviewing {EventCount} events for {Title}", events.Count, characterTitle);
 
         if (events.Count == 0)
             return "{}";
@@ -84,13 +60,21 @@ internal sealed class EventReviewExecutor : Executor<string, string>
             This character belongs to the {characterContinuity} continuity of Star Wars.
 
             TASKS:
-            1. Remove duplicate events (same event described from multiple source pages — keep the most detailed version)
-            2. Fix chronological inconsistencies in years/demarcation (BBY/ABY)
-            3. Validate dates against known Star Wars timeline anchors (Battle of Yavin = 0 BBY/ABY)
-            4. Merge events that describe the same occurrence but from different sources
-            5. Ensure every event has a sourcePageTitle and sourceWikiUrl from the original extraction
-            6. Keep all unique events — do not discard events just to shorten the list
-            7. Remove any events that reference content exclusive to a different continuity (e.g. remove Legends-only events for a Canon character and vice versa)
+            1. Remove duplicate events (same event described from multiple source pages — keep the one with the
+               richest narrative, significance and consequences).
+            2. Fix chronological inconsistencies in year/demarcation (BBY/ABY). Use the Battle of Yavin anchor
+               (0 BBY/ABY). Do NOT change dates that came from the knowledge graph anchors.
+            3. Merge events that describe the same occurrence — combine their narratives so the result is
+               MORE detailed, not less.
+            4. Preserve every non-empty narrative, significance, precedingContext, and consequences field. Do
+               NOT drop these fields; if you find an event with a thin narrative, extend it using any other
+               source events that describe the same occurrence.
+            5. Ensure every event has a sourcePageTitle and sourceWikiUrl.
+            6. Keep all unique events — do not discard events just to shorten the list.
+            7. Remove any events that reference content exclusive to a different continuity.
+            8. If an event's description is a single short sentence but its narrative is empty, try to
+               synthesise a narrative from the description + relatedCharacters + location. Thin output is
+               the single biggest quality problem — fix it here.
 
             EVENTS:
             {eventsJson}
@@ -104,11 +88,7 @@ internal sealed class EventReviewExecutor : Executor<string, string>
             ),
         };
 
-        var response = await _chatClient.GetResponseAsync(
-            [new ChatMessage(ChatRole.User, prompt)],
-            chatOptions,
-            ct
-        );
+        var response = await _chatClient.GetResponseAsync([new ChatMessage(ChatRole.User, prompt)], chatOptions, ct);
 
         var text = response.Text?.Trim() ?? "";
 
@@ -116,28 +96,16 @@ internal sealed class EventReviewExecutor : Executor<string, string>
         int outputCount = 0;
         try
         {
-            var parsed = JsonSerializer.Deserialize<TimelineResponseSchema>(
-                text.StartsWith("```") ? StripMarkdownFences(text) : text,
-                JsonOptions
-            );
+            var parsed = JsonSerializer.Deserialize<TimelineResponseSchema>(text.StartsWith("```") ? StripMarkdownFences(text) : text, JsonOptions);
             outputCount = parsed?.Events?.Count ?? 0;
         }
         catch
         { /* best-effort count */
         }
 
-        await context.AddEventAsync(
-            new ReviewCompleteEvent(
-                new ReviewCompleteData(events.Count, outputCount, events.Count - outputCount)
-            ),
-            ct
-        );
+        await context.AddEventAsync(new ReviewCompleteEvent(new ReviewCompleteData(events.Count, outputCount, events.Count - outputCount)), ct);
 
-        _logger.LogInformation(
-            "Review complete for {Title}: response length {Length}",
-            characterTitle,
-            text.Length
-        );
+        _logger.LogInformation("Review complete for {Title}: response length {Length}", characterTitle, text.Length);
 
         return text;
     }

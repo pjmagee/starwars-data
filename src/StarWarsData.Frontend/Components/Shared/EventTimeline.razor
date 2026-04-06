@@ -44,7 +44,7 @@
     @* ── Collapsible filters ── *@
     @if (!_filtersCollapsed)
     {
-        @if (_eras is not null)
+        @if (_eras is not null && CurrentCalendar == Calendar.Galactic)
         {
             <MudPaper Elevation="0" Class="pa-2">
                 <MudText Typo="Typo.subtitle2" Class="mb-2">Filter by Era</MudText>
@@ -273,15 +273,35 @@
     [Parameter] public string? Category { get; set; }
     [Parameter] public bool ShowCategoryFilter { get; set; } = true;
 
-    private readonly List<string> _colorPalette =
-    [
-        Colors.Red.Darken1, Colors.Blue.Darken1, Colors.Green.Darken1, Colors.Purple.Darken1,
-        Colors.Amber.Darken1, Colors.Brown.Default, Colors.Cyan.Default, Colors.Orange.Darken1,
-        Colors.Indigo.Darken1, Colors.Teal.Darken1, Colors.DeepPurple.Darken1, Colors.LightGreen.Darken1,
-        Colors.Pink.Darken1, Colors.BlueGray.Darken1, Colors.DeepOrange.Darken1, Colors.Lime.Darken1,
-        Colors.Red.Darken3, Colors.Blue.Darken3, Colors.Green.Darken3, Colors.Purple.Darken3,
-        Colors.Gray.Darken2, Colors.Red.Lighten1, Colors.Blue.Lighten1, Colors.Green.Lighten1
-    ];
+    // Derive the calendar mode from the global Realm filter so the page behaviour tracks
+    // the existing realm toggle (Star Wars → Galactic BBY/ABY, Real → real-world CE).
+    // When the user has no explicit realm selection (null = both), we default to galactic
+    // to keep the historical experience unchanged.
+    private Calendar CurrentCalendar => GlobalFilterService.SelectedRealm == Realm.Real ? Calendar.Real : Calendar.Galactic;
+
+    // Color map is rebuilt from the currently visible categories whenever the filter
+    // set changes. We use HSL hues evenly spaced around the wheel (with a golden-ratio
+    // stagger) so every visible template gets a visually distinct color regardless of
+    // how many there are — avoiding collisions from a fixed small palette.
+    private void RebuildColorMap(IEnumerable<string>? categories)
+    {
+        _templateColorMap.Clear();
+        if (categories is null) return;
+
+        var sorted = categories.OrderBy(c => c, StringComparer.OrdinalIgnoreCase).ToList();
+        var n = sorted.Count;
+        if (n == 0) return;
+
+        // Golden-ratio hue stepping — gives maximum perceptual separation between
+        // adjacent indices even for small n, while still covering the full wheel.
+        const double goldenAngle = 137.50776405;
+        for (int i = 0; i < n; i++)
+        {
+            var cleaned = CleanTemplateName(sorted[i]);
+            var hue = (i * goldenAngle) % 360;
+            _templateColorMap[cleaned] = $"hsl({hue:F0}, 65%, 60%)";
+        }
+    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -406,10 +426,18 @@
 
     /// <summary>
     /// Load the era list from the API, scoped to the currently selected continuity.
-    /// Called on mount and whenever the global continuity filter changes.
+    /// Called on mount and whenever the global continuity filter changes. Eras are a
+    /// galactic-calendar concept only, so the list is cleared in real-world mode.
     /// </summary>
     private async Task LoadEras()
     {
+        if (CurrentCalendar != Calendar.Galactic)
+        {
+            _eras = null;
+            _selectedEraNames = new List<string>();
+            return;
+        }
+
         var query = System.Web.HttpUtility.ParseQueryString(string.Empty);
         var continuityParam = GlobalFilterService.GetContinuityQueryParam();
         if (!string.IsNullOrEmpty(continuityParam))
@@ -424,15 +452,7 @@
         try
         {
             var allCategories = await Http.GetFromJsonAsync<string[]>("Timeline/available-categories");
-            if (allCategories != null)
-            {
-                var sorted = allCategories.OrderBy(x => x).ToList();
-                for (int i = 0; i < sorted.Count; i++)
-                {
-                    var cleaned = CleanTemplateName(sorted[i]);
-                    _templateColorMap[cleaned] = _colorPalette[i % _colorPalette.Count];
-                }
-            }
+            RebuildColorMap(allCategories);
         }
         catch { }
     }
@@ -451,6 +471,10 @@
         var query = HttpUtility.ParseQueryString(string.Empty);
         AddGlobalFilters(query);
         _categories = await Http.GetFromJsonAsync<string[]>($"Timeline/categories?{query}");
+        // Rebuild the color map against the currently visible subset so every
+        // visible template gets a distinct hue — prevents collisions when the
+        // realm / continuity filter flips and the subset shrinks.
+        RebuildColorMap(_categories);
     }
 
     private async Task ApplyFilters()
@@ -590,9 +614,14 @@
         if (!string.IsNullOrEmpty(continuityParam))
             query.Add("continuity", continuityParam);
 
-        var universeParam = GlobalFilterService.GetUniverseQueryParam();
-        if (!string.IsNullOrEmpty(universeParam))
-            query.Add("universe", universeParam);
+        var realmParam = GlobalFilterService.GetRealmQueryParam();
+        if (!string.IsNullOrEmpty(realmParam))
+            query.Add("realm", realmParam);
+
+        // Map realm → calendar: Real realm uses the CE calendar, everything else stays
+        // galactic. Sent as an explicit query parameter so the API filters timeline rows
+        // by calendar and returns a chronologically coherent page.
+        query.Add("calendar", CurrentCalendar.ToString());
     }
 
     private static string CleanTemplateName(string template)

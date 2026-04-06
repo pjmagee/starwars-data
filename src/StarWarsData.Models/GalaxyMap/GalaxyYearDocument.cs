@@ -150,9 +150,9 @@ public class GalaxyYearEvent
     [BsonRepresentation(BsonType.String)]
     public Continuity Continuity { get; set; } = Continuity.Unknown;
 
-    [BsonElement("universe")]
+    [BsonElement("realm")]
     [BsonRepresentation(BsonType.String)]
-    public Universe Universe { get; set; } = Universe.Unknown;
+    public Realm Realm { get; set; } = Realm.Unknown;
 }
 
 /// <summary>
@@ -170,11 +170,11 @@ public class GalaxyLensSummary
     public int WithLocationCount { get; set; }
 
     /// <summary>
-    /// Whether this lens is primarily out-of-universe content (books, comics, TV episodes, etc.)
-    /// Used by the frontend to hide these when the global "Out of Universe" filter is off.
+    /// Whether this lens is primarily real-world content (books, comics, TV episodes, etc.)
+    /// Used by the frontend to hide these when the global "Real" realm filter is off.
     /// </summary>
-    [BsonElement("outOfUniverse")]
-    public bool OutOfUniverse { get; set; }
+    [BsonElement("isReal")]
+    public bool IsReal { get; set; }
 }
 
 /// <summary>

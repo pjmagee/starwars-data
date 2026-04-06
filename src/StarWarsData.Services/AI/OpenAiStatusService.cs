@@ -111,17 +111,11 @@ public class OpenAiStatusService
 
     static bool IsQuotaError(Exception ex) =>
         ex.Message.Contains("insufficient_quota", StringComparison.OrdinalIgnoreCase)
-        || (
-            ex.Message.Contains("429", StringComparison.Ordinal)
-            && ex.Message.Contains("quota", StringComparison.OrdinalIgnoreCase)
-        )
+        || (ex.Message.Contains("429", StringComparison.Ordinal) && ex.Message.Contains("quota", StringComparison.OrdinalIgnoreCase))
         || (ex.InnerException != null && IsQuotaError(ex.InnerException));
 
     static bool IsRateLimitError(Exception ex) =>
-        (
-            ex.Message.Contains("429", StringComparison.Ordinal)
-            && !ex.Message.Contains("quota", StringComparison.OrdinalIgnoreCase)
-        )
+        (ex.Message.Contains("429", StringComparison.Ordinal) && !ex.Message.Contains("quota", StringComparison.OrdinalIgnoreCase))
         || ex.Message.Contains("rate_limit", StringComparison.OrdinalIgnoreCase)
         || (ex.InnerException != null && IsRateLimitError(ex.InnerException));
 

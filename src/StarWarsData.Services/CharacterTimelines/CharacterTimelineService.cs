@@ -1,4 +1,3 @@
-using System.Collections.Concurrent;
 using System.Text.Json;
 using Microsoft.Agents.AI.Workflows;
 using Microsoft.Agents.AI.Workflows.Checkpointing;
@@ -13,119 +12,6 @@ using StarWarsData.Models.Queries;
 using StarWarsData.Services.Executors;
 
 namespace StarWarsData.Services;
-
-/// <summary>
-/// Wrapper to distinguish the character timeline chat client from the default one in DI.
-/// </summary>
-public sealed class CharacterTimelineChatClient(IChatClient inner) : DelegatingChatClient(inner);
-
-/// <summary>
-/// Singleton tracker for character timeline generation progress.
-/// Allows the frontend to poll for stage updates during background generation.
-/// </summary>
-public class CharacterTimelineTracker
-{
-    private readonly ConcurrentDictionary<int, GenerationStatus> _statuses = new();
-
-    public GenerationStatus? GetStatus(int pageId) => _statuses.GetValueOrDefault(pageId);
-
-    public bool TryStart(int pageId)
-    {
-        var status = new GenerationStatus
-        {
-            Stage = GenerationStage.Queued,
-            Message = "Queued for generation...",
-            StartedAt = DateTime.UtcNow,
-        };
-        return _statuses.TryAdd(pageId, status);
-    }
-
-    public void Update(int pageId, GenerationStage stage, string message)
-    {
-        _statuses.AddOrUpdate(
-            pageId,
-            _ => new GenerationStatus
-            {
-                Stage = stage,
-                Message = message,
-                StartedAt = DateTime.UtcNow,
-            },
-            (_, existing) =>
-            {
-                existing.Stage = stage;
-                existing.Message = message;
-                return existing;
-            }
-        );
-    }
-
-    public void UpdateProgress(int pageId, GenerationStage stage, string message, int currentStep, int totalSteps, string? currentItem = null, int eventsExtracted = 0)
-    {
-        _statuses.AddOrUpdate(
-            pageId,
-            _ => new GenerationStatus
-            {
-                Stage = stage,
-                Message = message,
-                StartedAt = DateTime.UtcNow,
-                CurrentStep = currentStep,
-                TotalSteps = totalSteps,
-                CurrentItem = currentItem,
-                EventsExtracted = eventsExtracted,
-            },
-            (_, existing) =>
-            {
-                existing.Stage = stage;
-                existing.Message = message;
-                existing.CurrentStep = currentStep;
-                existing.TotalSteps = totalSteps;
-                existing.CurrentItem = currentItem;
-                existing.EventsExtracted = eventsExtracted;
-                return existing;
-            }
-        );
-    }
-
-    public void Complete(int pageId, string message) => Update(pageId, GenerationStage.Complete, message);
-
-    public void Fail(int pageId, string error)
-    {
-        _statuses.AddOrUpdate(
-            pageId,
-            _ => new GenerationStatus
-            {
-                Stage = GenerationStage.Failed,
-                Message = "Generation failed",
-                Error = error,
-                StartedAt = DateTime.UtcNow,
-            },
-            (_, existing) =>
-            {
-                existing.Stage = GenerationStage.Failed;
-                existing.Message = "Generation failed";
-                existing.Error = error;
-                return existing;
-            }
-        );
-    }
-
-    public void Clear(int pageId) => _statuses.TryRemove(pageId, out _);
-
-    public void AddActivityLog(int pageId, ActivityLogEntry entry)
-    {
-        _statuses.AddOrUpdate(
-            pageId,
-            _ => new GenerationStatus { ActivityLog = [entry] },
-            (_, existing) =>
-            {
-                existing.ActivityLog.Add(entry);
-                return existing;
-            }
-        );
-    }
-
-    public bool IsRunning(int pageId) => _statuses.TryGetValue(pageId, out var s) && s.Stage is not (GenerationStage.Complete or GenerationStage.Failed);
-}
 
 /// <summary>
 /// ETL service that uses a Microsoft Agent Framework sequential workflow to build
@@ -156,6 +42,10 @@ public class CharacterTimelineService
     private IMongoCollection<Page> Pages => _mongoClient.GetDatabase(_settings.DatabaseName).GetCollection<Page>(Collections.Pages);
 
     private IMongoCollection<CharacterTimeline> Timelines => _mongoClient.GetDatabase(_settings.DatabaseName).GetCollection<CharacterTimeline>(Collections.GenaiCharacterTimelines);
+
+    private IMongoCollection<RelationshipEdge> KgEdges => _mongoClient.GetDatabase(_settings.DatabaseName).GetCollection<RelationshipEdge>(Collections.KgEdges);
+
+    private IMongoCollection<GraphNode> KgNodes => _mongoClient.GetDatabase(_settings.DatabaseName).GetCollection<GraphNode>(Collections.KgNodes);
 
     /// <summary>
     /// Get basic character info from Pages by pageId, annotated with timeline/generation status.
@@ -292,17 +182,37 @@ public class CharacterTimelineService
             .WithName($"CharacterTimeline-{characterPageId}")
             .Build(validateOrphans: true);
 
-        // ── Execute workflow (always fresh — checkpoint resume was unreliable) ─
         var checkpointStore = new MongoCheckpointStore(_mongoClient, _settings.DatabaseName);
         var sessionId = $"character-timeline-v2-{characterPageId}";
-
-        // Clear any stale checkpoints from previous runs
-        await checkpointStore.ClearSessionAsync(sessionId);
-        await checkpointStore.ClearSessionAsync($"character-timeline-{characterPageId}");
-
         var checkpointManager = CheckpointManager.CreateJson(checkpointStore);
 
-        var streamingRun = await InProcessExecution.RunStreamingAsync(workflow, characterPageId.ToString(), checkpointManager, sessionId, ct);
+        // ── Resume-if-possible: list existing checkpoints for this session and resume
+        //    from the latest, otherwise start a fresh run. The MongoCheckpointStore returns
+        //    checkpoints sorted by createdAt ascending, so the last entry is the newest.
+        //    Framework APIs used:
+        //      InProcessExecution.RunStreamingAsync(workflow, input, checkpointManager, sessionId, ct)
+        //      InProcessExecution.ResumeStreamingAsync(workflow, checkpointInfo, checkpointManager, ct)
+        //    See Microsoft.Agents.AI.Workflows 1.0.0-rc5 checkpointing guide.
+        var existingCheckpoints = (await checkpointStore.RetrieveIndexAsync(sessionId)).ToList();
+
+        StreamingRun streamingRun;
+        if (existingCheckpoints.Count > 0)
+        {
+            var latest = existingCheckpoints[^1];
+            _logger.LogInformation(
+                "Resuming timeline workflow for PageId={PageId} from checkpoint {CheckpointId} ({CheckpointCount} total)",
+                characterPageId,
+                latest.CheckpointId,
+                existingCheckpoints.Count
+            );
+            tracker?.Update(characterPageId, GenerationStage.Discovering, $"Resuming from checkpoint ({existingCheckpoints.Count} saved)...");
+            streamingRun = await InProcessExecution.ResumeStreamingAsync(workflow, latest, checkpointManager, ct);
+        }
+        else
+        {
+            _logger.LogInformation("Starting fresh timeline workflow for PageId={PageId}", characterPageId);
+            streamingRun = await InProcessExecution.RunStreamingAsync(workflow, characterPageId.ToString(), checkpointManager, sessionId, ct);
+        }
 
         // ── Consume streaming events and bridge to tracker ──────────────────
         string? responseText = null;
@@ -326,14 +236,13 @@ public class CharacterTimelineService
         }
 
         // ── Parse and save ──────────────────────────────────────────────────
-        // On resume, the discovery executor's HandleAsync was skipped (superstep already completed),
-        // so its public properties (Character, DiscoveredSources) are empty.
-        // Fall back to loading from MongoDB directly.
-        var character = discoveryExecutor.Character ?? await Pages.Find(Builders<Page>.Filter.Eq(p => p.PageId, characterPageId)).FirstOrDefaultAsync(ct);
+        // Character + DiscoveredSources are rehydrated by PageDiscoveryExecutor.OnCheckpointRestoredAsync
+        // when the run was resumed, so these instance fields are populated in both paths.
+        var character = discoveryExecutor.Character;
 
         if (character is null)
         {
-            tracker?.Fail(characterPageId, "Character page not found");
+            tracker?.Fail(characterPageId, "Character snapshot missing from workflow state");
             return;
         }
 
@@ -347,20 +256,17 @@ public class CharacterTimelineService
             return;
         }
 
-        events.Sort();
+        // ── Sort events using KG-backed fallback for null-year entries ──
+        await SortEventsWithKgFallbackAsync(events, characterPageId, ct);
 
-        // On resume, DiscoveredSources is empty — rebuild from the events' source attributions
-        var sources =
-            discoveryExecutor.DiscoveredSources.Count > 0
-                ? discoveryExecutor.DiscoveredSources
-                : events.Where(e => e.SourcePageTitle is not null).Select(e => new SourcePage { Title = e.SourcePageTitle!, WikiUrl = e.SourceWikiUrl ?? "" }).DistinctBy(s => s.Title).ToList();
+        var sources = discoveryExecutor.DiscoveredSources;
 
         var timeline = new CharacterTimeline
         {
             CharacterPageId = character.PageId,
             CharacterTitle = character.Title,
             CharacterWikiUrl = character.WikiUrl,
-            ImageUrl = character.Infobox?.ImageUrl,
+            ImageUrl = character.ImageUrl,
             Continuity = character.Continuity,
             Events = events,
             Sources = sources,
@@ -480,13 +386,6 @@ public class CharacterTimelineService
                 Summary = $"Discovery complete: {d.TotalPages} pages ({d.IncomingLinks} incoming, {d.OutgoingLinks} outgoing, {d.KgLinks} knowledge graph)",
                 Detail = d,
             },
-            ExtractionPageStartedEvent e when e.Data is ExtractionPageStartedData d => new ActivityLogEntry
-            {
-                Timestamp = DateTime.UtcNow,
-                Category = "Extraction",
-                EntryType = "extraction_started",
-                Summary = $"Extracting from \"{d.PageTitle}\" ({d.PageIndex}/{d.TotalPages})",
-            },
             EventExtractedEvent e when e.Data is EventExtractedData d => new ActivityLogEntry
             {
                 Timestamp = DateTime.UtcNow,
@@ -531,20 +430,6 @@ public class CharacterTimelineService
                 EntryType = "batch_failed",
                 Summary = $"Batch {d.BatchIndex} failed ({d.PageCount} pages): {d.Error}",
             },
-            ExtractionPageEmptyEvent e => new ActivityLogEntry
-            {
-                Timestamp = DateTime.UtcNow,
-                Category = "Extraction",
-                EntryType = "extraction_empty",
-                Summary = $"No events found in \"{e.Data}\"",
-            },
-            ExtractionPageFailedEvent e when e.Data is ExtractionPageFailedData d => new ActivityLogEntry
-            {
-                Timestamp = DateTime.UtcNow,
-                Category = "Extraction",
-                EntryType = "extraction_failed",
-                Summary = $"Failed to extract from \"{d.PageTitle}\": {d.Error}",
-            },
             ConsolidationCompleteEvent e when e.Data is ConsolidationCompleteData d => new ActivityLogEntry
             {
                 Timestamp = DateTime.UtcNow,
@@ -587,6 +472,92 @@ public class CharacterTimelineService
         return checkpoints.Count > 0;
     }
 
+    // ── KG-backed event sorting ─────────────────────────────────────────────
+
+    /// <summary>
+    /// Sort events chronologically, using the KG as a fallback for events the LLM couldn't date.
+    /// For each null-year event we look for a KG edge or related entity's GraphNode whose temporal
+    /// bounds overlap the event's related characters or location, and use that as a sort hint only
+    /// (we populate <see cref="CharacterEvent.InferredYear"/> rather than overwriting Year).
+    /// </summary>
+    private async Task SortEventsWithKgFallbackAsync(List<CharacterEvent> events, int characterPageId, CancellationToken ct)
+    {
+        // Fast path: if every event already has a Year, no KG lookup needed.
+        if (events.All(e => e.Year.HasValue))
+        {
+            events.Sort();
+            return;
+        }
+
+        // Load the character's edges once (both directions, so we can match on FromName OR ToName).
+        var edges = await KgEdges
+            .Find(Builders<RelationshipEdge>.Filter.Or(Builders<RelationshipEdge>.Filter.Eq(e => e.FromId, characterPageId), Builders<RelationshipEdge>.Filter.Eq(e => e.ToId, characterPageId)))
+            .ToListAsync(ct);
+
+        // Index edges by the "other side" name, lowercased, for cheap lookup.
+        var edgesByCounterpart = edges
+            .Where(e => e.FromYear.HasValue || e.ToYear.HasValue)
+            .GroupBy(e => (e.FromId == characterPageId ? e.ToName : e.FromName).Trim().ToLowerInvariant())
+            .ToDictionary(g => g.Key, g => g.ToList());
+
+        // Also grab target-node lifespans for any related characters that edges touched — useful when the
+        // edge itself has no years but the target entity (a Battle, Organization) does.
+        var targetIds = edges.Select(e => e.FromId == characterPageId ? e.ToId : e.FromId).Distinct().ToList();
+        var nodesByLowerName = new Dictionary<string, GraphNode>(StringComparer.OrdinalIgnoreCase);
+        if (targetIds.Count > 0)
+        {
+            var nodes = await KgNodes.Find(Builders<GraphNode>.Filter.In(n => n.PageId, targetIds)).ToListAsync(ct);
+            foreach (var node in nodes.Where(n => n.StartYear.HasValue || n.EndYear.HasValue))
+            {
+                nodesByLowerName[node.Name.Trim()] = node;
+            }
+        }
+
+        foreach (var evt in events.Where(e => !e.Year.HasValue))
+        {
+            var candidates = new List<string>();
+            if (!string.IsNullOrWhiteSpace(evt.Location))
+                candidates.Add(evt.Location!);
+            candidates.AddRange(evt.RelatedCharacters);
+
+            foreach (var candidate in candidates)
+            {
+                var key = candidate.Trim().ToLowerInvariant();
+
+                if (edgesByCounterpart.TryGetValue(key, out var edgeList))
+                {
+                    var edge = edgeList.FirstOrDefault(e => e.FromYear.HasValue) ?? edgeList[0];
+                    var sortKey = edge.FromYear ?? edge.ToYear;
+                    if (sortKey.HasValue)
+                    {
+                        var (year, dem) = SplitGalactic(sortKey.Value);
+                        evt.InferredYear = year;
+                        evt.InferredDemarcation = dem;
+                        evt.YearSource = $"kg-edge:{edge.Label}→{(edge.FromId == characterPageId ? edge.ToName : edge.FromName)}";
+                        break;
+                    }
+                }
+
+                if (nodesByLowerName.TryGetValue(candidate.Trim(), out var node))
+                {
+                    var sortKey = node.StartYear ?? node.EndYear;
+                    if (sortKey.HasValue)
+                    {
+                        var (year, dem) = SplitGalactic(sortKey.Value);
+                        evt.InferredYear = year;
+                        evt.InferredDemarcation = dem;
+                        evt.YearSource = $"kg-node:{node.Name}";
+                        break;
+                    }
+                }
+            }
+        }
+
+        events.Sort();
+    }
+
+    private static (int Year, Demarcation Demarcation) SplitGalactic(int sortKey) => sortKey < 0 ? (-sortKey, Demarcation.Bby) : (sortKey, Demarcation.Aby);
+
     // ── Response parsing ────────────────────────────────────────────────────
 
     private List<CharacterEvent> ParseTimelineResponse(string responseText, string characterTitle)
@@ -618,6 +589,10 @@ public class CharacterTimelineService
         {
             EventType = e.EventType ?? "Other",
             Description = e.Description ?? string.Empty,
+            Narrative = string.IsNullOrWhiteSpace(e.Narrative) ? null : e.Narrative,
+            Significance = string.IsNullOrWhiteSpace(e.Significance) ? null : e.Significance,
+            PrecedingContext = string.IsNullOrWhiteSpace(e.PrecedingContext) ? null : e.PrecedingContext,
+            Consequences = e.Consequences ?? [],
             Year = e.Year,
             Demarcation = e.Demarcation?.ToUpperInvariant() switch
             {

@@ -3,12 +3,12 @@ using StarWarsData.Models.Entities;
 namespace StarWarsData.Frontend.Services;
 
 /// <summary>
-/// Service for managing application-wide content filters: continuity (Canon/Legends) and universe (In/Out of universe)
+/// Service for managing application-wide content filters: continuity (Canon/Legends) and realm (Star Wars/Real world)
 /// </summary>
 public class GlobalFilterService
 {
     private Continuity? _selectedContinuity = null; // null = both
-    private Universe? _selectedUniverse = Universe.InUniverse; // default to in-universe only
+    private Realm? _selectedRealm = Realm.Starwars; // default to in-universe Star Wars content
 
     /// <summary>
     /// The currently selected continuity filter. Null means both Canon and Legends.
@@ -16,9 +16,9 @@ public class GlobalFilterService
     public Continuity? SelectedContinuity => _selectedContinuity;
 
     /// <summary>
-    /// The currently selected universe filter. Null means both in-universe and out-of-universe.
+    /// The currently selected realm filter. Null means both Star Wars and Real.
     /// </summary>
-    public Universe? SelectedUniverse => _selectedUniverse;
+    public Realm? SelectedRealm => _selectedRealm;
 
     public event Action? OnChange;
 
@@ -31,11 +31,11 @@ public class GlobalFilterService
         }
     }
 
-    public void SetUniverse(Universe? universe)
+    public void SetRealm(Realm? realm)
     {
-        if (_selectedUniverse != universe)
+        if (_selectedRealm != realm)
         {
-            _selectedUniverse = universe;
+            _selectedRealm = realm;
             OnChange?.Invoke();
         }
     }
@@ -46,7 +46,7 @@ public class GlobalFilterService
     public string? GetContinuityQueryParam() => _selectedContinuity?.ToString();
 
     /// <summary>
-    /// Gets the universe as a query parameter string for API calls, or null if no filtering.
+    /// Gets the realm as a query parameter string for API calls, or null if no filtering.
     /// </summary>
-    public string? GetUniverseQueryParam() => _selectedUniverse?.ToString();
+    public string? GetRealmQueryParam() => _selectedRealm?.ToString();
 }

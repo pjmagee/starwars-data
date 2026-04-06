@@ -19,7 +19,7 @@ public static class PageBsonFields
     public const string WikiUrl = "wikiUrl";
     public const string LastModified = "lastModified";
     public const string Continuity = "continuity";
-    public const string Universe = "universe";
+    public const string Realm = "realm";
     public const string DownloadedAt = "downloadedAt";
     public const string ContentHash = "contentHash";
 

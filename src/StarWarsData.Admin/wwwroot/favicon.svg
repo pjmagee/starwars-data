@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <!-- Core bright center -->
+    <radialGradient id="core" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffe8a0"/>
+      <stop offset="40%" stop-color="#f0c050"/>
+      <stop offset="100%" stop-color="#c08030" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Disc body - warm stellar haze -->
+    <radialGradient id="disc" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#e0d0ff" stop-opacity="0.8"/>
+      <stop offset="30%" stop-color="#9080d0" stop-opacity="0.5"/>
+      <stop offset="60%" stop-color="#6050a0" stop-opacity="0.3"/>
+      <stop offset="85%" stop-color="#403070" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#201840" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Outer halo -->
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7e6fff" stop-opacity="0.15"/>
+      <stop offset="70%" stop-color="#5040a0" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#302060" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Spiral arm dust lanes -->
+    <radialGradient id="arm" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c0b0ff"/>
+      <stop offset="50%" stop-color="#8070c0"/>
+      <stop offset="100%" stop-color="#5040a0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Faint outer halo -->
+  <ellipse cx="32" cy="32" rx="30" ry="16" fill="url(#halo)" transform="rotate(-25 32 32)"/>
+
+  <!-- Main disc body - tilted ellipse to give 3D disc perspective -->
+  <ellipse cx="32" cy="32" rx="26" ry="13" fill="url(#disc)" transform="rotate(-25 32 32)"/>
+
+  <!-- Spiral arm hints - curved strokes within the disc -->
+  <g opacity="0.55" transform="rotate(-25 32 32)">
+    <!-- Arm 1 - upper right -->
+    <path d="M34 32 C36 28, 42 25, 48 24 C52 23.5, 55 25, 54 28"
+          stroke="#b0a0e0" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+    <!-- Arm 2 - lower left -->
+    <path d="M30 32 C28 36, 22 39, 16 40 C12 40.5, 9 39, 10 36"
+          stroke="#b0a0e0" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+    <!-- Arm 3 - upper left -->
+    <path d="M31 31 C28 28, 22 26, 17 27 C13 28, 11 31, 13 33"
+          stroke="#9080c0" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+    <!-- Arm 4 - lower right -->
+    <path d="M33 33 C36 36, 42 38, 47 37 C51 36, 53 33, 51 31"
+          stroke="#9080c0" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+  </g>
+
+  <!-- Inner disc brightness -->
+  <ellipse cx="32" cy="32" rx="12" ry="6" fill="url(#disc)" transform="rotate(-25 32 32)" opacity="0.6"/>
+
+  <!-- Bright galactic core -->
+  <ellipse cx="32" cy="32" rx="5" ry="3" fill="url(#core)" transform="rotate(-25 32 32)"/>
+  <!-- Core hot spot -->
+  <ellipse cx="32" cy="32" rx="2" ry="1.2" fill="#fff8e0" transform="rotate(-25 32 32)" opacity="0.9"/>
+
+  <!-- Scattered foreground stars -->
+  <g fill="#d0c8ff" opacity="0.6">
+    <circle cx="10" cy="12" r="0.7"/>
+    <circle cx="54" cy="10" r="0.9"/>
+    <circle cx="7" cy="50" r="0.6"/>
+    <circle cx="56" cy="52" r="0.8"/>
+    <circle cx="22" cy="6" r="0.5"/>
+    <circle cx="50" cy="58" r="0.6"/>
+    <circle cx="4" cy="30" r="0.5"/>
+    <circle cx="60" cy="34" r="0.5"/>
+  </g>
+</svg>

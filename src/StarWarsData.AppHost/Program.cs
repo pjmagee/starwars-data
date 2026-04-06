@@ -75,23 +75,13 @@ var admin = builder
     )
     // ── Phase 3: Timeline events + indexes ──
     .WithHttpCommand(
-        path: "/api/admin/mongo/create-categorized-timeline-events",
-        displayName: "3a. Build Timeline Events (legacy)",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "LEGACY: Text-regex parser over raw.pages infobox links. Superseded by the KG-backed rebuild (3a-KG) — kept for regression comparison only.",
-            IconName = "Timeline",
-            IsHighlighted = false,
-        }
-    )
-    .WithHttpCommand(
         path: "/api/admin/mongo/create-timeline-events-from-kg",
-        displayName: "3a-KG. Build Timeline Events (from KG)",
+        displayName: "3a. Build Timeline Events (from KG)",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description = "Rebuilds timeline.* collections from kg.nodes (galactic facets only) joined with raw.pages for info-panel properties. Requires the knowledge graph to be built.",
+            Description =
+                "Rebuilds timeline.* collections from kg.nodes — both galactic (BBY/ABY) and real-world (CE publication) facets — joined with raw.pages for info-panel properties. Requires the knowledge graph to be built.",
             IconName = "Timeline",
             IsHighlighted = true,
         }
@@ -231,6 +221,18 @@ var admin = builder
             Method = HttpMethod.Post,
             Description = "Pre-computes galaxy.years with territory control, event heatmap, and trade routes from the knowledge graph. Requires Phase 1 + 5.",
             IconName = "GlobeSearch",
+            IsHighlighted = false,
+        }
+    )
+    // ── Phase 9: Ask page suggestions (KG-backed dynamic prompts) ──
+    .WithHttpCommand(
+        path: "/api/admin/mongo/refresh-ask-suggestions",
+        displayName: "9. Refresh Ask Suggestions",
+        commandOptions: new HttpCommandOptions
+        {
+            Method = HttpMethod.Post,
+            Description = "AI agent explores the knowledge graph and generates Ask page example questions. Runs weekly (Sundays 03:00 UTC).",
+            IconName = "LightbulbFilament",
             IsHighlighted = false,
         }
     );

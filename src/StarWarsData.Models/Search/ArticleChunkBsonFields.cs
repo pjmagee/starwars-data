@@ -16,7 +16,7 @@ public static class ArticleChunkBsonFields
     public const string Text = "text";
     public const string Type = "type";
     public const string Continuity = "continuity";
-    public const string Universe = "universe";
+    public const string Realm = "realm";
     public const string Embedding = "embedding";
     public const string CreatedAt = "createdAt";
 }

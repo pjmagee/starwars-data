@@ -10,40 +10,28 @@ public sealed record UserPrompt(string Question, string? Continuity = null);
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum AskChartType
 {
-    [Description(
-        "Bar chart — counts or comparisons across named categories. Requires xAxisLabels and series."
-    )]
+    [Description("Bar chart — counts or comparisons across named categories. Requires xAxisLabels and series.")]
     Bar,
 
-    [Description(
-        "Donut chart — proportions of a whole. Requires labels and series where each series.data has one value per label."
-    )]
+    [Description("Donut chart — proportions of a whole. Requires labels and series where each series.data has one value per label.")]
     Donut,
 
     [Description("Line chart — trends over an ordinal axis. Requires xAxisLabels and series.")]
     Line,
 
-    [Description(
-        "Pie chart — proportions of a whole. Requires labels and series where each series.data has one value per label."
-    )]
+    [Description("Pie chart — proportions of a whole. Requires labels and series where each series.data has one value per label.")]
     Pie,
 
-    [Description(
-        "Stacked bar chart — multiple numeric series across the same categories. Requires xAxisLabels and series."
-    )]
+    [Description("Stacked bar chart — multiple numeric series across the same categories. Requires xAxisLabels and series.")]
     StackedBar,
 
     [Description("Time series chart — data points with real ISO dates. Requires timeSeries.")]
     TimeSeries,
 
-    [Description(
-        "Radar chart — data displayed on multiple axes from a central point. Requires xAxisLabels (axis names) and series."
-    )]
+    [Description("Radar chart — data displayed on multiple axes from a central point. Requires xAxisLabels (axis names) and series.")]
     Radar,
 
-    [Description(
-        "Rose chart — proportions of a whole displayed as a polar area chart. Requires labels and series where each series.data has one value per label."
-    )]
+    [Description("Rose chart — proportions of a whole displayed as a polar area chart. Requires labels and series where each series.data has one value per label.")]
     Rose,
 }
 
@@ -68,9 +56,7 @@ public class TableDescriptor
     public string Collection { get; set; } = string.Empty;
 
     [JsonPropertyName("fields")]
-    [Description(
-        "Which Data.Label fields to show as columns (e.g. [\"Born\", \"Died\", \"Homeworld\", \"Species\"]). Always include 3-6 relevant fields."
-    )]
+    [Description("Which Data.Label fields to show as columns (e.g. [\"Born\", \"Died\", \"Homeworld\", \"Species\"]). Always include 3-6 relevant fields.")]
     public List<string> Fields { get; set; } = [];
 
     [JsonPropertyName("search")]
@@ -86,9 +72,7 @@ public class TableDescriptor
     public List<Reference>? References { get; set; }
 }
 
-[Description(
-    "Ad-hoc data table — the AI provides the actual row data inline, for custom aggregations or sampled results"
-)]
+[Description("Ad-hoc data table — the AI provides the actual row data inline, for custom aggregations or sampled results")]
 public class DataTableDescriptor
 {
     [JsonPropertyName("title")]
@@ -108,9 +92,7 @@ public class DataTableDescriptor
     public List<Reference>? References { get; set; }
 }
 
-[Description(
-    "Chart component configuration — data is embedded since aggregations are unique per query"
-)]
+[Description("Chart component configuration — data is embedded since aggregations are unique per query")]
 public class ChartDescriptor
 {
     [JsonPropertyName("title")]
@@ -136,9 +118,7 @@ public class ChartDescriptor
     public List<string>? Labels { get; set; }
 
     [JsonPropertyName("series")]
-    [Description(
-        "Numeric series. For Bar/Line/StackedBar: one data value per xAxisLabels entry. For Pie/Donut: one series named 'Values' with one data value per labels entry."
-    )]
+    [Description("Numeric series. For Bar/Line/StackedBar: one data value per xAxisLabels entry. For Pie/Donut: one series named 'Values' with one data value per labels entry.")]
     public List<ChartSeries>? Series { get; set; }
 
     [JsonPropertyName("timeSeries")]
@@ -173,9 +153,7 @@ public class GraphDescriptor
     public string RootEntityName { get; set; } = string.Empty;
 
     [JsonPropertyName("maxDepth")]
-    [Description(
-        "How many hops to traverse (default 2). Use 1 for direct relationships, 2-3 for multi-hop exploration."
-    )]
+    [Description("How many hops to traverse (default 2). Use 1 for direct relationships, 2-3 for multi-hop exploration.")]
     public int MaxDepth { get; set; } = 2;
 
     [JsonPropertyName("labels")]
@@ -187,16 +165,11 @@ public class GraphDescriptor
     public List<string> Labels { get; set; } = [];
 
     [JsonPropertyName("enabledLabels")]
-    [Description(
-        "Labels to show by default. Subset of labels. If omitted, all labels are enabled."
-    )]
+    [Description("Labels to show by default. Subset of labels. If omitted, all labels are enabled.")]
     public List<string>? EnabledLabels { get; set; }
 
     [JsonPropertyName("layoutMode")]
-    [Description(
-        "Layout mode: 'force' for physics-based network graph (default), 'tree' for hierarchical layout. "
-            + "Use 'tree' for family trees, lineages, or organizational hierarchies."
-    )]
+    [Description("Layout mode: 'force' for physics-based network graph (default), 'tree' for hierarchical layout. " + "Use 'tree' for family trees, lineages, or organizational hierarchies.")]
     public string LayoutMode { get; set; } = "force";
 
     [JsonPropertyName("continuity")]
@@ -208,9 +181,7 @@ public class GraphDescriptor
     public List<Reference>? References { get; set; }
 }
 
-[Description(
-    "Timeline component configuration — the frontend fetches paginated timeline events from the API"
-)]
+[Description("Timeline component configuration — the frontend fetches paginated timeline events from the API")]
 public class TimelineDescriptor
 {
     [JsonPropertyName("title")]
@@ -219,7 +190,7 @@ public class TimelineDescriptor
 
     [JsonPropertyName("categories")]
     [Description(
-        "Timeline event categories to include (e.g. [\"Battle_infobox\", \"War_infobox\", \"Character_infobox\"]). Use available-categories to discover valid names."
+        "Timeline event categories to include (e.g. [\"Battle_infobox\", \"War_infobox\", \"Character_infobox\"] for galactic; [\"Book\", \"Film\", \"Video_game\"] for real-world). Use available-categories to discover valid names."
     )]
     public List<string> Categories { get; set; } = [];
 
@@ -227,20 +198,24 @@ public class TimelineDescriptor
     [Description("Number of year groups per page (default 15)")]
     public int PageSize { get; set; } = 15;
 
+    [JsonPropertyName("calendar")]
+    [Description("Calendar mode: 'Galactic' for in-universe BBY/ABY (default) or 'Real' for real-world CE publication dates.")]
+    public string? Calendar { get; set; }
+
     [JsonPropertyName("yearFrom")]
-    [Description("Start of year range filter (e.g. 41 for 41 BBY)")]
+    [Description("Start of year range filter. Galactic: magnitude (e.g. 41 with yearFromDemarcation='BBY'). Real: signed CE year (e.g. 1977; use negative for BCE).")]
     public float? YearFrom { get; set; }
 
     [JsonPropertyName("yearFromDemarcation")]
-    [Description("BBY or ABY for the start year")]
+    [Description("BBY or ABY for the start year (galactic mode only; omit for Real calendar).")]
     public string? YearFromDemarcation { get; set; }
 
     [JsonPropertyName("yearTo")]
-    [Description("End of year range filter (e.g. 4 for 4 ABY)")]
+    [Description("End of year range filter. Galactic: magnitude (e.g. 4 with yearToDemarcation='ABY'). Real: signed CE year (e.g. 2020).")]
     public float? YearTo { get; set; }
 
     [JsonPropertyName("yearToDemarcation")]
-    [Description("BBY or ABY for the end year")]
+    [Description("BBY or ABY for the end year (galactic mode only; omit for Real calendar).")]
     public string? YearToDemarcation { get; set; }
 
     [JsonPropertyName("search")]
@@ -252,9 +227,7 @@ public class TimelineDescriptor
     public List<Reference>? References { get; set; }
 }
 
-[Description(
-    "Infobox card — renders a wiki-style infobox for one or more pages. The frontend fetches full Page data by ID."
-)]
+[Description("Infobox card — renders a wiki-style infobox for one or more pages. The frontend fetches full Page data by ID.")]
 public class InfoboxDescriptor
 {
     [JsonPropertyName("title")]
@@ -305,9 +278,7 @@ public class TextSection
     public string? SourcePageTitle { get; set; }
 }
 
-[Description(
-    "English-to-Aurebesh auto-converter. Write plain English — the frontend renders it as Aurebesh."
-)]
+[Description("English-to-Aurebesh auto-converter. Write plain English — the frontend renders it as Aurebesh.")]
 public class AurebeshDescriptor
 {
     [JsonPropertyName("title")]
@@ -315,9 +286,7 @@ public class AurebeshDescriptor
     public string Title { get; set; } = string.Empty;
 
     [JsonPropertyName("text")]
-    [Description(
-        "Plain English text (with optional markdown). Automatically displayed as Aurebesh."
-    )]
+    [Description("Plain English text (with optional markdown). Automatically displayed as Aurebesh.")]
     public string Text { get; set; } = string.Empty;
 
     [JsonPropertyName("references")]

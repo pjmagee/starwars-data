@@ -1,5 +1,3 @@
-using System.Collections.Concurrent;
-using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
@@ -14,27 +12,14 @@ namespace StarWarsData.Services;
 public class RecordService
 {
     readonly ILogger<RecordService> _logger;
-    readonly InfoboxToEventsTransformer _recordToEventsTransformer;
     readonly SettingsOptions _settingsOptions;
     readonly IMongoClient _mongoClient;
-    readonly YearHelper _yearHelper;
-    readonly IEmbeddingGenerator<string, Embedding<float>> _textEmbeddingGenerationService;
 
-    public RecordService(
-        ILogger<RecordService> logger,
-        IOptions<SettingsOptions> settingsOptions,
-        YearHelper yearHelper,
-        IMongoClient mongoClient,
-        IEmbeddingGenerator<string, Embedding<float>> textEmbeddingGenerationService,
-        InfoboxToEventsTransformer recordToEventsTransformer
-    )
+    public RecordService(ILogger<RecordService> logger, IOptions<SettingsOptions> settingsOptions, IMongoClient mongoClient)
     {
         _logger = logger;
         _settingsOptions = settingsOptions.Value;
         _mongoClient = mongoClient;
-        _yearHelper = yearHelper;
-        _textEmbeddingGenerationService = textEmbeddingGenerationService;
-        _recordToEventsTransformer = recordToEventsTransformer;
     }
 
     IMongoCollection<Page> PagesCollection => _mongoClient.GetDatabase(_settingsOptions.DatabaseName).GetCollection<Page>(Collections.Pages);
@@ -73,7 +58,7 @@ public class RecordService
         return await PagesCollection.Find(filter).ToListAsync(cancellationToken);
     }
 
-    public async Task<List<string>> GetFilteredCollectionNames(Continuity? continuity, Universe? universe, CancellationToken cancellationToken)
+    public async Task<List<string>> GetFilteredCollectionNames(Continuity? continuity, Realm? realm, CancellationToken cancellationToken)
     {
         var matchConditions = new BsonDocument(PageBsonFields.Infobox, new BsonDocument("$ne", BsonNull.Value));
 
@@ -83,15 +68,15 @@ public class RecordService
             matchConditions.Add(PageBsonFields.Continuity, new BsonDocument("$in", new BsonArray { continuity.Value.ToString(), Continuity.Both.ToString() }));
         }
 
-        if (universe == Universe.InUniverse)
+        if (realm == Realm.Starwars)
         {
-            // Exclude out-of-universe pages; include InUniverse and Unknown
-            matchConditions.Add(PageBsonFields.Universe, new BsonDocument("$ne", Universe.OutOfUniverse.ToString()));
+            // Exclude real-world pages; include Starwars and Unknown
+            matchConditions.Add(PageBsonFields.Realm, new BsonDocument("$ne", Realm.Real.ToString()));
         }
-        else if (universe == Universe.OutOfUniverse)
+        else if (realm == Realm.Real)
         {
-            // Include out-of-universe and Unknown
-            matchConditions.Add(PageBsonFields.Universe, new BsonDocument("$in", new BsonArray { Universe.OutOfUniverse.ToString(), Universe.Unknown.ToString() }));
+            // Include real-world and Unknown
+            matchConditions.Add(PageBsonFields.Realm, new BsonDocument("$in", new BsonArray { Realm.Real.ToString(), Realm.Unknown.ToString() }));
         }
 
         var pipeline = new[] { new BsonDocument("$match", matchConditions), new BsonDocument("$group", new BsonDocument(MongoFields.Id, "$" + PageBsonFields.InfoboxTemplate)) };
@@ -129,40 +114,13 @@ public class RecordService
         }
     }
 
-    public async Task<PagedResult> GetSearchResult(string query, int page = 1, int pageSize = 50, CancellationToken token = default)
-    {
-        var pages = PagesCollection;
-
-        // Use $text search on title + content, filtered to pages with infoboxes
-        var textFilter = Builders<Page>.Filter.And(Builders<Page>.Filter.Ne(p => p.Infobox, null), Builders<Page>.Filter.Text(query));
-
-        var total = await pages.CountDocumentsAsync(textFilter, cancellationToken: token);
-        var data = await pages.Find(textFilter).Sort(Builders<Page>.Sort.MetaTextScore("score")).Skip((page - 1) * pageSize).Limit(pageSize).ToListAsync(token);
-
-        // Fallback to regex if text search returns nothing
-        if (total == 0)
-        {
-            var regexFilter = Builders<Page>.Filter.And(Builders<Page>.Filter.Ne(p => p.Infobox, null), Builders<Page>.Filter.Regex(PageBsonFields.Title, new BsonRegularExpression(query, "i")));
-            total = await pages.CountDocumentsAsync(regexFilter, cancellationToken: token);
-            data = await pages.Find(regexFilter).Skip((page - 1) * pageSize).Limit(pageSize).ToListAsync(token);
-        }
-
-        return new PagedResult
-        {
-            Total = (int)total,
-            Size = pageSize,
-            Page = page,
-            Items = data.Select(PageToInfobox).ToList(),
-        };
-    }
-
     public async Task<PagedResult> GetCollectionResult(
         string collectionName,
         string? searchText = null,
         int page = 1,
         int pageSize = 50,
         Continuity? continuity = null,
-        Universe? universe = null,
+        Realm? realm = null,
         CancellationToken token = default
     )
     {
@@ -171,8 +129,8 @@ public class RecordService
         // Match pages whose sanitized template matches the collection name
         var templateFilter = BuildTemplateFilter(collectionName);
 
-        // Apply global filters (continuity/universe) at the DB level on the Page documents.
-        var globalFilter = BuildPageGlobalFilter(continuity, universe);
+        // Apply global filters (continuity/realm) at the DB level on the Page documents.
+        var globalFilter = BuildPageGlobalFilter(continuity, realm);
         var baseFilter = Builders<Page>.Filter.And(templateFilter, globalFilter);
 
         if (searchText is null)
@@ -214,10 +172,10 @@ public class RecordService
 
     /// <summary>
     /// Builds a DB-level filter on <see cref="Page"/> for the app's global continuity /
-    /// universe filters. Matches the selected value plus Both/Unknown so "shared" and
+    /// realm filters. Matches the selected value plus Both/Unknown so "shared" and
     /// unclassified documents remain visible.
     /// </summary>
-    private static FilterDefinition<Page> BuildPageGlobalFilter(Continuity? continuity, Universe? universe)
+    private static FilterDefinition<Page> BuildPageGlobalFilter(Continuity? continuity, Realm? realm)
     {
         var filters = new List<FilterDefinition<Page>>();
 
@@ -226,98 +184,12 @@ public class RecordService
             filters.Add(Builders<Page>.Filter.In(p => p.Continuity, [continuity.Value, Continuity.Both, Continuity.Unknown]));
         }
 
-        if (universe is not null)
+        if (realm is not null)
         {
-            filters.Add(Builders<Page>.Filter.In(p => p.Universe, [universe.Value, Universe.Unknown]));
+            filters.Add(Builders<Page>.Filter.In(p => p.Realm, [realm.Value, Realm.Unknown]));
         }
 
         return filters.Count > 0 ? Builders<Page>.Filter.And(filters) : Builders<Page>.Filter.Empty;
-    }
-
-    public async Task CreateCategorizedTimelineEvents(CancellationToken token)
-    {
-        var timelineEventsDb = _mongoClient.GetDatabase(_settingsOptions.DatabaseName);
-        var pages = PagesCollection;
-
-        // Get all distinct templates
-        var templateNames = await GetCollectionNames(token);
-
-        const int batchSize = 1000;
-        var parallelOptions = new ParallelOptions { CancellationToken = token };
-
-        await Parallel.ForEachAsync(
-            templateNames,
-            parallelOptions,
-            async (templateName, ct) =>
-            {
-                try
-                {
-                    _logger.LogInformation("Processing timeline events for template: {TemplateName}", templateName);
-
-                    var timelineCollection = timelineEventsDb.GetCollection<TimelineEvent>(Collections.TimelinePrefix + templateName);
-
-                    // Clear existing data
-                    await timelineCollection.DeleteManyAsync(FilterDefinition<TimelineEvent>.Empty, ct);
-
-                    // Create indexes
-                    var indexKeysDefinition = Builders<TimelineEvent>.IndexKeys.Ascending(x => x.Demarcation).Ascending(x => x.Year);
-                    await timelineCollection.Indexes.CreateOneAsync(new CreateIndexModel<TimelineEvent>(indexKeysDefinition), cancellationToken: ct);
-
-                    var templateIndexKeysDefinition = Builders<TimelineEvent>.IndexKeys.Ascending(x => x.TemplateUri);
-                    await timelineCollection.Indexes.CreateOneAsync(new CreateIndexModel<TimelineEvent>(templateIndexKeysDefinition), cancellationToken: ct);
-
-                    var cleanedTemplateIndexKeysDefinition = Builders<TimelineEvent>.IndexKeys.Ascending(x => x.Template);
-                    await timelineCollection.Indexes.CreateOneAsync(new CreateIndexModel<TimelineEvent>(cleanedTemplateIndexKeysDefinition), cancellationToken: ct);
-
-                    // Query pages matching this template
-                    var templateFilter = BuildTemplateFilter(templateName);
-                    var cursor = pages.Find(templateFilter).ToCursor(ct);
-
-                    var batch = new List<TimelineEvent>(batchSize);
-                    var totalAdded = 0;
-
-                    while (await cursor.MoveNextAsync(ct))
-                    {
-                        foreach (var page in cursor.Current)
-                        {
-                            var timelineEvents = _recordToEventsTransformer.Transform(page);
-                            batch.AddRange(timelineEvents);
-
-                            if (batch.Count >= batchSize)
-                            {
-                                if (batch.Count > 0)
-                                {
-                                    await timelineCollection.InsertManyAsync(batch, cancellationToken: ct);
-                                    totalAdded += batch.Count;
-                                    batch.Clear();
-                                }
-                            }
-                        }
-                    }
-
-                    if (batch.Count > 0)
-                    {
-                        await timelineCollection.InsertManyAsync(batch, cancellationToken: ct);
-                        totalAdded += batch.Count;
-                    }
-
-                    if (totalAdded == 0)
-                    {
-                        _logger.LogInformation("No timeline events generated for template: {TemplateName}", templateName);
-                    }
-                    else
-                    {
-                        _logger.LogInformation("Added {Count} timeline events for template: {TemplateName}", totalAdded, templateName);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "Error processing timeline events for template: {TemplateName}", templateName);
-                }
-            }
-        );
-
-        _logger.LogInformation("Categorized timeline events creation complete");
     }
 
     /// <summary>
@@ -435,7 +307,7 @@ public class RecordService
 
         _logger.LogInformation("Pages indexes created");
 
-        // Timeline event collections — add Continuity and Universe indexes
+        // Timeline event collections — add Continuity and Realm indexes
         var timelineDb = _mongoClient.GetDatabase(_settingsOptions.DatabaseName);
         var collectionNames = await timelineDb.ListCollectionNamesAsync(cancellationToken: cancellationToken);
         var collections = (await collectionNames.ToListAsync(cancellationToken)).Where(n => n.StartsWith(Collections.TimelinePrefix)).ToList();
@@ -450,7 +322,7 @@ public class RecordService
             );
 
             await coll.Indexes.CreateOneAsync(
-                new CreateIndexModel<TimelineEvent>(Builders<TimelineEvent>.IndexKeys.Ascending(x => x.Universe), new CreateIndexOptions { Name = "idx_universe", Background = true }),
+                new CreateIndexModel<TimelineEvent>(Builders<TimelineEvent>.IndexKeys.Ascending(x => x.Realm), new CreateIndexOptions { Name = "idx_realm", Background = true }),
                 cancellationToken: cancellationToken
             );
 
@@ -501,52 +373,6 @@ public class RecordService
         _logger.LogInformation("All indexes created successfully");
     }
 
-    public async Task CreateVectorIndexesAsync(CancellationToken cancellationToken)
-    {
-        await CreateCosineVectorIndexAsync(Collections.Pages);
-    }
-
-    async Task CreateCosineVectorIndexAsync(string collectionName, string field = "embedding", string indexName = "vector_index", int dims = 3072)
-    {
-        var vectorDef = new BsonDocument
-        {
-            {
-                "fields",
-                new BsonArray
-                {
-                    new BsonDocument
-                    {
-                        { "type", "vector" },
-                        { "path", "embedding" },
-                        { "numDimensions", dims },
-                        { "similarity", "cosine" },
-                    },
-                }
-            },
-        };
-
-        var model = new CreateSearchIndexModel(name: indexName, definition: vectorDef);
-
-        var collection = _mongoClient.GetDatabase(_settingsOptions.DatabaseName).GetCollection<BsonDocument>(collectionName);
-        await collection.SearchIndexes.CreateOneAsync(model);
-
-        Console.WriteLine($"Created cosine vector index for '{collection.CollectionNamespace.CollectionName}.{field}'");
-    }
-
-    public async Task DeleteVectorIndexesAsync(CancellationToken cancellationToken)
-    {
-        var collection = _mongoClient.GetDatabase(_settingsOptions.DatabaseName).GetCollection<BsonDocument>(Collections.Pages);
-        await collection.SearchIndexes.DropOneAsync("vector_index", cancellationToken);
-    }
-
-    public async Task DeleteOpenAiEmbeddingsAsync(CancellationToken token)
-    {
-        var collection = _mongoClient.GetDatabase(_settingsOptions.DatabaseName).GetCollection<Page>(Collections.Pages);
-        var update = Builders<Page>.Update.Unset(new StringFieldDefinition<Page>("embedding"));
-        await collection.UpdateManyAsync(FilterDefinition<Page>.Empty, update, cancellationToken: token);
-        _logger.LogInformation("Embeddings removed from Pages collection");
-    }
-
     public async Task<List<string>> GetTimelineCategories(CancellationToken cancellationToken = default)
     {
         var db = _mongoClient.GetDatabase(_settingsOptions.DatabaseName);
@@ -557,11 +383,6 @@ public class RecordService
             .OrderBy(x => x)
             .ToList();
         return results;
-    }
-
-    public Task ProcessEmbeddingsAsync(CancellationToken none)
-    {
-        throw new NotImplementedException();
     }
 
     /// <summary>

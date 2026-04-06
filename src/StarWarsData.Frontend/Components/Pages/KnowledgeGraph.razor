@@ -553,9 +553,9 @@
             var c = GlobalFilterService.GetContinuityQueryParam();
             if (!string.IsNullOrEmpty(c))
                 qs["continuity"] = c;
-            var u = GlobalFilterService.GetUniverseQueryParam();
+            var u = GlobalFilterService.GetRealmQueryParam();
             if (!string.IsNullOrEmpty(u))
-                qs["universe"] = u;
+                qs["realm"] = u;
 
             var result = await Api.GetFromJsonAsync<BrowseTemporalNodesResult>(
                 $"api/RelationshipGraph/temporal-nodes?{qs}", ct);
@@ -617,9 +617,9 @@
             var c = GlobalFilterService.GetContinuityQueryParam();
             if (!string.IsNullOrEmpty(c))
                 qs["continuity"] = c;
-            var u = GlobalFilterService.GetUniverseQueryParam();
+            var u = GlobalFilterService.GetRealmQueryParam();
             if (!string.IsNullOrEmpty(u))
-                qs["universe"] = u;
+                qs["realm"] = u;
 
             var result = await Api.GetFromJsonAsync<BrowseEdgeLabelsResult>(
                 $"api/RelationshipGraph/edge-label-stats?{qs}", ct);

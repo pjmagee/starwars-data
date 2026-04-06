@@ -11,11 +11,18 @@ public class TimelineEvent : IComparable<TimelineEvent>
 
     [BsonIgnore]
     public string DisplayYear =>
-        Year.HasValue ? $"{Year.Value:##,###} {Demarcation}" : "Unknown Year";
+        Calendar == Calendar.Real
+            ? RealYear.HasValue
+                ? FormatRealYear(RealYear.Value)
+                : "Unknown Year"
+            : Year.HasValue
+                ? $"{Year.Value:##,###} {Demarcation}"
+                : "Unknown Year";
+
+    static string FormatRealYear(int year) => year < 0 ? $"{-year} BCE" : year.ToString();
 
     [BsonIgnore]
-    public string? DisplayImageWithoutRevision =>
-        ImageUrl?.Split(new[] { "/revision" }, StringSplitOptions.RemoveEmptyEntries)[0];
+    public string? DisplayImageWithoutRevision => ImageUrl?.Split(new[] { "/revision" }, StringSplitOptions.RemoveEmptyEntries)[0];
 
     [BsonId]
     public ObjectId Id { get; set; }
@@ -39,6 +46,22 @@ public class TimelineEvent : IComparable<TimelineEvent>
     [BsonElement("Year")]
     public float? Year { get; set; }
 
+    /// <summary>
+    /// Calendar system this event is plotted against. Galactic events use
+    /// <see cref="Year"/> + <see cref="Demarcation"/>; real events use <see cref="RealYear"/>.
+    /// </summary>
+    [BsonElement("Calendar")]
+    [BsonRepresentation(representation: BsonType.String)]
+    public Calendar Calendar { get; set; } = Calendar.Galactic;
+
+    /// <summary>
+    /// Signed CE year for real-world events (negative = BCE). Only set when
+    /// <see cref="Calendar"/> == <see cref="Calendar.Real"/>.
+    /// </summary>
+    [BsonElement("RealYear")]
+    [BsonIgnoreIfNull]
+    public int? RealYear { get; set; }
+
     [BsonElement("Properties")]
     public List<InfoboxProperty> Properties { get; set; } = []; // Initialize to avoid nulls
 
@@ -48,8 +71,8 @@ public class TimelineEvent : IComparable<TimelineEvent>
     [BsonElement("Continuity")]
     public Continuity Continuity { get; set; } = Continuity.Unknown;
 
-    [BsonElement("Universe")]
-    public Universe Universe { get; set; } = Universe.Unknown;
+    [BsonElement("Realm")]
+    public Realm Realm { get; set; } = Realm.Unknown;
 
     [BsonElement("PageId")]
     public int? PageId { get; set; }
@@ -62,32 +85,27 @@ public class TimelineEvent : IComparable<TimelineEvent>
         if (other is null)
             return 1;
 
-        // Handle null years - sort them after non-null years
-        if (!Year.HasValue && !other.Year.HasValue)
-            return 0; // Both null, consider equal
+        // Compare linear years across calendars. Real events use signed CE
+        // year; galactic events use signed BBY/ABY (BBY negative). Null sorts last.
+        var thisLinear = LinearYear();
+        var otherLinear = other.LinearYear();
+
+        if (thisLinear is null && otherLinear is null)
+            return 0;
+        if (thisLinear is null)
+            return 1;
+        if (otherLinear is null)
+            return -1;
+
+        return thisLinear.Value.CompareTo(otherLinear.Value);
+    }
+
+    double? LinearYear()
+    {
+        if (Calendar == Calendar.Real)
+            return RealYear.HasValue ? RealYear.Value : null;
         if (!Year.HasValue)
-            return 1; // This year is null, sort after other
-        if (!other.Year.HasValue)
-            return -1; // Other year is null, sort after this
-
-        // Existing demarcation comparison logic
-        switch (Demarcation)
-        {
-            case Demarcation.Bby when other.Demarcation == Demarcation.Aby:
-                return -1;
-            case Demarcation.Aby when other.Demarcation == Demarcation.Bby:
-                return 1;
-        }
-
-        // Existing year comparison logic (now using .Value)
-        return Demarcation switch
-        {
-            // BBY years sort descending (e.g., 10 BBY comes before 5 BBY)
-            Demarcation.Bby when other.Demarcation == Demarcation.Bby => other.Year.Value.CompareTo(
-                Year.Value
-            ),
-            // ABY years sort ascending (e.g., 5 ABY comes before 10 ABY)
-            _ => Year.Value.CompareTo(other.Year.Value),
-        };
+            return null;
+        return Demarcation == Demarcation.Bby ? -Year.Value : Year.Value;
     }
 }

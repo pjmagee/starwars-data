@@ -25,10 +25,6 @@ builder.AddServiceDefaults();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddAGUI();
-
-// Response caching — required by [ResponseCache(VaryByQueryKeys = ...)] on
-// GalaxyMapUnifiedController. The UseResponseCaching() call below must run
-// BEFORE MapControllers so the middleware can intercept controller responses.
 builder.Services.AddResponseCaching();
 
 builder
@@ -68,15 +64,10 @@ builder
     })
     .AddSingleton<MongoDefinitions>()
     .AddSingleton<CollectionFilters>()
-    .AddSingleton<YearComparer>()
-    .AddSingleton<YearHelper>()
     .AddSingleton<TemplateHelper>()
-    .AddScoped<InfoboxToEventsTransformer>()
     .AddScoped<RecordService>()
     .AddScoped<TimelineService>()
     .AddScoped<MapService>()
-    .AddScoped<GalaxyEventsService>()
-    .AddScoped<TerritoryControlService>()
     .AddScoped<GalaxyMapReadService>()
     // CharacterTimelineService is needed for read endpoints (list/get/search)
     // The ChatClient is only used by GenerateTimelineAsync (called from Admin app)
@@ -98,6 +89,7 @@ builder
     .AddSingleton<KnowledgeGraphQueryService>()
     .AddSingleton<SemanticSearchService>()
     .AddSingleton<KeywordSearchService>()
+    .AddSingleton<StarWarsData.Services.Suggestions.SuggestionService>()
     .AddScoped<ChatSessionService>()
     .AddSingleton<GraphRAGToolkit>(sp =>
     {
@@ -166,7 +158,10 @@ builder
             AIFunctionFactory.Create(
                 (string query, CancellationToken ct) => wikiSearchProvider.SearchAsync(query, ct),
                 "keyword_search",
-                "Keyword search over wiki page titles and content. Fast, no AI cost. " + "Best for exact name lookups. For why/how/explain questions, use semantic_search instead."
+                """
+                Keyword search over wiki page titles and content. Fast, no AI cost.
+                Best for exact name lookups. For why/how/explain questions, use semantic_search instead.
+                """
             )
         );
         if (mcpClient is not null)

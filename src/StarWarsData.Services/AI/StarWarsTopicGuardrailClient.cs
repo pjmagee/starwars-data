@@ -40,25 +40,15 @@ public sealed class StarWarsTopicGuardrail
         "I'm the Star Wars Archive assistant — I can only help with questions about the Star Wars universe. "
         + "Try asking about characters, planets, battles, ships, species, or any other Star Wars topic!";
 
-    private record TopicClassification(
-        [property: JsonPropertyName("is_star_wars_related")] bool IsStarWarsRelated,
-        [property: JsonPropertyName("reason")] string Reason
-    );
+    private record TopicClassification([property: JsonPropertyName("is_star_wars_related")] bool IsStarWarsRelated, [property: JsonPropertyName("reason")] string Reason);
 
     private static readonly ChatOptions ClassifierOptions = new()
     {
         Temperature = 0f,
-        ResponseFormat = ChatResponseFormat.ForJsonSchema<TopicClassification>(
-            schemaName: "topic_classification",
-            schemaDescription: "Classification of whether a question is related to Star Wars"
-        ),
+        ResponseFormat = ChatResponseFormat.ForJsonSchema<TopicClassification>(schemaName: "topic_classification", schemaDescription: "Classification of whether a question is related to Star Wars"),
     };
 
-    public StarWarsTopicGuardrail(
-        IChatClient classifierClient,
-        OpenAiStatusService? aiStatus = null,
-        ILogger? logger = null
-    )
+    public StarWarsTopicGuardrail(IChatClient classifierClient, OpenAiStatusService? aiStatus = null, ILogger? logger = null)
     {
         _classifierClient = classifierClient;
         _aiStatus = aiStatus;
@@ -68,13 +58,7 @@ public sealed class StarWarsTopicGuardrail
     /// <summary>
     /// Agent run middleware for non-streaming requests.
     /// </summary>
-    public async Task<AgentResponse> RunAsync(
-        IEnumerable<ChatMessage> messages,
-        AgentSession? session,
-        AgentRunOptions? options,
-        AIAgent innerAgent,
-        CancellationToken cancellationToken
-    )
+    public async Task<AgentResponse> RunAsync(IEnumerable<ChatMessage> messages, AgentSession? session, AgentRunOptions? options, AIAgent innerAgent, CancellationToken cancellationToken)
     {
         if (await IsOffTopicAsync(messages, cancellationToken))
         {
@@ -97,29 +81,17 @@ public sealed class StarWarsTopicGuardrail
     {
         if (await IsOffTopicAsync(messages, cancellationToken))
         {
-            yield return new AgentResponseUpdate(
-                new ChatResponseUpdate(ChatRole.Assistant, RejectionMessage)
-            );
+            yield return new AgentResponseUpdate(new ChatResponseUpdate(ChatRole.Assistant, RejectionMessage));
             yield break;
         }
 
-        await foreach (
-            var update in innerAgent.RunStreamingAsync(
-                messages,
-                session,
-                options,
-                cancellationToken
-            )
-        )
+        await foreach (var update in innerAgent.RunStreamingAsync(messages, session, options, cancellationToken))
         {
             yield return update;
         }
     }
 
-    private async Task<bool> IsOffTopicAsync(
-        IEnumerable<ChatMessage> messages,
-        CancellationToken cancellationToken
-    )
+    private async Task<bool> IsOffTopicAsync(IEnumerable<ChatMessage> messages, CancellationToken cancellationToken)
     {
         var userText = messages.LastOrDefault(m => m.Role == ChatRole.User)?.Text;
         if (string.IsNullOrWhiteSpace(userText))
@@ -131,17 +103,9 @@ public sealed class StarWarsTopicGuardrail
 
         try
         {
-            var classificationMessages = new ChatMessage[]
-            {
-                new(ChatRole.System, ClassifierSystemPrompt),
-                new(ChatRole.User, cleanedText),
-            };
+            var classificationMessages = new ChatMessage[] { new(ChatRole.System, ClassifierSystemPrompt), new(ChatRole.User, cleanedText) };
 
-            var response = await _classifierClient.GetResponseAsync(
-                classificationMessages,
-                ClassifierOptions,
-                cancellationToken
-            );
+            var response = await _classifierClient.GetResponseAsync(classificationMessages, ClassifierOptions, cancellationToken);
 
             var json = response.Messages.LastOrDefault()?.Text;
             if (string.IsNullOrWhiteSpace(json))
@@ -157,10 +121,7 @@ public sealed class StarWarsTopicGuardrail
         }
         catch (Exception ex)
         {
-            _logger?.LogWarning(
-                ex,
-                "Topic guardrail classification failed, allowing request through"
-            );
+            _logger?.LogWarning(ex, "Topic guardrail classification failed, allowing request through");
             _aiStatus?.RecordError("guardrail", ex);
             return false; // fail-open: allow request through if OpenAI call fails
         }
@@ -179,10 +140,7 @@ public sealed class StarWarsTopicGuardrail
                 break;
 
             var tag = span[1..close];
-            if (
-                tag.StartsWith("CONTINUITY:", StringComparison.OrdinalIgnoreCase)
-                || tag.StartsWith("PREFER:", StringComparison.OrdinalIgnoreCase)
-            )
+            if (tag.StartsWith("CONTINUITY:", StringComparison.OrdinalIgnoreCase) || tag.StartsWith("PREFER:", StringComparison.OrdinalIgnoreCase))
             {
                 span = span[(close + 1)..].TrimStart();
             }
@@ -202,17 +160,9 @@ public static class StarWarsGuardrailExtensions
     /// Adds Star Wars topic guardrail agent middleware.
     /// Rejects questions not related to Star Wars before they reach the agent pipeline.
     /// </summary>
-    public static AIAgentBuilder UseStarWarsTopicGuardrail(
-        this AIAgentBuilder builder,
-        IChatClient classifierClient,
-        OpenAiStatusService? aiStatus = null,
-        ILogger? logger = null
-    )
+    public static AIAgentBuilder UseStarWarsTopicGuardrail(this AIAgentBuilder builder, IChatClient classifierClient, OpenAiStatusService? aiStatus = null, ILogger? logger = null)
     {
         var guardrail = new StarWarsTopicGuardrail(classifierClient, aiStatus, logger);
-        return builder.Use(
-            runFunc: guardrail.RunAsync,
-            runStreamingFunc: guardrail.RunStreamingAsync
-        );
+        return builder.Use(runFunc: guardrail.RunAsync, runStreamingFunc: guardrail.RunStreamingAsync);
     }
 }

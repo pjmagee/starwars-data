@@ -16,10 +16,7 @@ public class ChatSessionService
         _sessions = db.GetCollection<ChatSession>(Collections.ChatSessions);
     }
 
-    public async Task<List<ChatSessionSummary>> GetSessionsAsync(
-        string userId,
-        CancellationToken ct = default
-    )
+    public async Task<List<ChatSessionSummary>> GetSessionsAsync(string userId, CancellationToken ct = default)
     {
         var sessions = await _sessions
             .Find(s => s.UserId == userId)
@@ -36,15 +33,9 @@ public class ChatSessionService
         return sessions;
     }
 
-    public async Task<ChatSessionDetail?> GetSessionAsync(
-        string userId,
-        Guid sessionId,
-        CancellationToken ct = default
-    )
+    public async Task<ChatSessionDetail?> GetSessionAsync(string userId, Guid sessionId, CancellationToken ct = default)
     {
-        var session = await _sessions
-            .Find(s => s.Id == sessionId && s.UserId == userId)
-            .FirstOrDefaultAsync(ct);
+        var session = await _sessions.Find(s => s.Id == sessionId && s.UserId == userId).FirstOrDefaultAsync(ct);
 
         if (session is null)
             return null;
@@ -59,11 +50,7 @@ public class ChatSessionService
         };
     }
 
-    public async Task<Guid> SaveSessionAsync(
-        string userId,
-        SaveChatSessionRequest request,
-        CancellationToken ct = default
-    )
+    public async Task<Guid> SaveSessionAsync(string userId, SaveChatSessionRequest request, CancellationToken ct = default)
     {
         var session = new ChatSession
         {
@@ -79,54 +66,30 @@ public class ChatSessionService
         return session.Id;
     }
 
-    public async Task<bool> UpdateSessionAsync(
-        string userId,
-        Guid sessionId,
-        SaveChatSessionRequest request,
-        CancellationToken ct = default
-    )
+    public async Task<bool> UpdateSessionAsync(string userId, Guid sessionId, SaveChatSessionRequest request, CancellationToken ct = default)
     {
-        var updateDef = Builders<ChatSession>
-            .Update.Set(s => s.Messages, request.Messages)
-            .Set(s => s.UpdatedAt, DateTime.UtcNow);
+        var updateDef = Builders<ChatSession>.Update.Set(s => s.Messages, request.Messages).Set(s => s.UpdatedAt, DateTime.UtcNow);
 
         if (!string.IsNullOrWhiteSpace(request.Title))
             updateDef = updateDef.Set(s => s.Title, request.Title);
 
         var update = updateDef;
 
-        var result = await _sessions.UpdateOneAsync(
-            s => s.Id == sessionId && s.UserId == userId,
-            update,
-            cancellationToken: ct
-        );
+        var result = await _sessions.UpdateOneAsync(s => s.Id == sessionId && s.UserId == userId, update, cancellationToken: ct);
 
         return result.ModifiedCount > 0;
     }
 
-    public async Task<bool> DeleteSessionAsync(
-        string userId,
-        Guid sessionId,
-        CancellationToken ct = default
-    )
+    public async Task<bool> DeleteSessionAsync(string userId, Guid sessionId, CancellationToken ct = default)
     {
-        var result = await _sessions.DeleteOneAsync(
-            s => s.Id == sessionId && s.UserId == userId,
-            ct
-        );
+        var result = await _sessions.DeleteOneAsync(s => s.Id == sessionId && s.UserId == userId, ct);
 
         return result.DeletedCount > 0;
     }
 
-    public async Task<List<ChatSession>> GetAllSessionsAsync(
-        string userId,
-        CancellationToken ct = default
-    )
+    public async Task<List<ChatSession>> GetAllSessionsAsync(string userId, CancellationToken ct = default)
     {
-        return await _sessions
-            .Find(s => s.UserId == userId)
-            .SortByDescending(s => s.UpdatedAt)
-            .ToListAsync(ct);
+        return await _sessions.Find(s => s.UserId == userId).SortByDescending(s => s.UpdatedAt).ToListAsync(ct);
     }
 
     public async Task<long> DeleteAllUserDataAsync(string userId, CancellationToken ct = default)

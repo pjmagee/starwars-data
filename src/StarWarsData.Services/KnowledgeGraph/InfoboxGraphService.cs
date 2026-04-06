@@ -19,6 +19,7 @@ public class InfoboxGraphService(IMongoClient mongoClient, IOptions<SettingsOpti
     readonly IMongoCollection<Page> _pages = mongoClient.GetDatabase(settings.Value.DatabaseName).GetCollection<Page>(Collections.Pages);
     readonly IMongoCollection<GraphNode> _nodes = mongoClient.GetDatabase(settings.Value.DatabaseName).GetCollection<GraphNode>(Collections.KgNodes);
     readonly IMongoCollection<RelationshipEdge> _edges = mongoClient.GetDatabase(settings.Value.DatabaseName).GetCollection<RelationshipEdge>(Collections.KgEdges);
+    readonly IMongoCollection<RelationshipLabel> _labels = mongoClient.GetDatabase(settings.Value.DatabaseName).GetCollection<RelationshipLabel>(Collections.KgLabels);
 
     // ── Field classification ──
     // All infobox field metadata (properties, relationships, temporal facets) lives in
@@ -53,7 +54,7 @@ public class InfoboxGraphService(IMongoClient mongoClient, IOptions<SettingsOpti
                     .Include(p => p.Infobox)
                     .Include(p => p.WikiUrl)
                     .Include(p => p.Continuity)
-                    .Include(p => p.Universe)
+                    .Include(p => p.Realm)
                     .Include(p => p.ContentHash)
             )
             .ToCursorAsync(ct);
@@ -73,11 +74,11 @@ public class InfoboxGraphService(IMongoClient mongoClient, IOptions<SettingsOpti
                         ? c
                         : Continuity.Unknown
                     : Continuity.Unknown;
-                var universe = doc.Contains(PageBsonFields.Universe)
-                    ? Enum.TryParse<Universe>(doc[PageBsonFields.Universe].AsString, out var u)
+                var realm = doc.Contains(PageBsonFields.Realm)
+                    ? Enum.TryParse<Realm>(doc[PageBsonFields.Realm].AsString, out var u)
                         ? u
-                        : Universe.Unknown
-                    : Universe.Unknown;
+                        : Realm.Unknown
+                    : Realm.Unknown;
                 var contentHash = doc.Contains(PageBsonFields.ContentHash) && !doc[PageBsonFields.ContentHash].IsBsonNull ? doc[PageBsonFields.ContentHash].AsString : null;
                 var wikiUrl = doc.Contains(PageBsonFields.WikiUrl) ? doc[PageBsonFields.WikiUrl].AsString : null;
 
@@ -238,10 +239,10 @@ public class InfoboxGraphService(IMongoClient mongoClient, IOptions<SettingsOpti
                         if (primaryLinks.Count > 0)
                         {
                             // Create edges only for primary entities from Values
-                            foreach (var (linkDoc, qualifier, fromYear, toYear) in primaryLinks)
+                            foreach (var pl in primaryLinks)
                             {
-                                var href = linkDoc.Contains(InfoboxBsonFields.Href) ? linkDoc[InfoboxBsonFields.Href].AsString : null;
-                                var content = linkDoc.Contains(InfoboxBsonFields.Content) ? linkDoc[InfoboxBsonFields.Content].AsString : null;
+                                var href = pl.Link.Contains(InfoboxBsonFields.Href) ? pl.Link[InfoboxBsonFields.Href].AsString : null;
+                                var content = pl.Link.Contains(InfoboxBsonFields.Content) ? pl.Link[InfoboxBsonFields.Content].AsString : null;
                                 if (href is null || content is null)
                                     continue;
 
@@ -253,16 +254,26 @@ public class InfoboxGraphService(IMongoClient mongoClient, IOptions<SettingsOpti
                                         FromId = pageId,
                                         FromName = title,
                                         FromType = type,
+                                        FromRealm = realm,
                                         ToId = targetPageId,
                                         ToName = content,
                                         ToType = "",
                                         Label = edgeLabel,
                                         Weight = weight,
-                                        Evidence = qualifier is not null ? $"Infobox field '{label}': {content} ({qualifier})" : $"Infobox field '{label}'",
+                                        Evidence = $"Infobox field '{label}'",
                                         SourcePageId = pageId,
                                         Continuity = continuity,
-                                        FromYear = fromYear,
-                                        ToYear = toYear,
+                                        FromYear = pl.FromYear,
+                                        ToYear = pl.ToYear,
+                                        Meta =
+                                            pl.Qualifier is null && pl.RawValue == content
+                                                ? null
+                                                : new EdgeMeta
+                                                {
+                                                    Qualifier = pl.Qualifier,
+                                                    RawValue = pl.RawValue != content ? pl.RawValue : null,
+                                                    Order = pl.Order,
+                                                },
                                     }
                                 );
                             }
@@ -284,6 +295,7 @@ public class InfoboxGraphService(IMongoClient mongoClient, IOptions<SettingsOpti
                                         FromId = pageId,
                                         FromName = title,
                                         FromType = type,
+                                        FromRealm = realm,
                                         ToId = targetPageId,
                                         ToName = content,
                                         ToType = "",
@@ -324,7 +336,7 @@ public class InfoboxGraphService(IMongoClient mongoClient, IOptions<SettingsOpti
                         Name = title,
                         Type = type,
                         Continuity = continuity,
-                        Universe = universe,
+                        Realm = realm,
                         Properties = properties,
                         ImageUrl = imageUrl,
                         WikiUrl = wikiUrl,
@@ -346,8 +358,16 @@ public class InfoboxGraphService(IMongoClient mongoClient, IOptions<SettingsOpti
 
         logger.LogInformation("InfoboxGraph: processed {Count} pages → {Nodes} nodes, {RawEdges} raw edges", processed, nodes.Count, edges.Count);
 
-        // ── Post-processing: filter noise edges and enrich with target type ──
+        // ── Post-processing: filter noise edges and enrich with target type + realm + reverse label ──
         var nodeTypeMap = nodes.ToDictionary(n => n.PageId, n => n.Type);
+        var nodeRealmMap = nodes.ToDictionary(n => n.PageId, n => n.Realm);
+
+        // label → reverse-label map sourced from FieldSemantics. Multiple semantic entries can
+        // map to the same canonical label, so dedupe by label. Populated onto each edge as
+        // `reverseLabel` for the kg.edges.bidir view's reverse branch.
+        var reverseLabelMap = FieldSemantics
+            .Relationships.Values.DistinctBy(d => d.Label, StringComparer.OrdinalIgnoreCase)
+            .ToDictionary(d => d.Label, d => d.Reverse, StringComparer.OrdinalIgnoreCase);
 
         var filteredEdges = new List<RelationshipEdge>(edges.Count);
         int droppedUnresolved = 0,
@@ -363,9 +383,12 @@ public class InfoboxGraphService(IMongoClient mongoClient, IOptions<SettingsOpti
                 continue;
             }
 
-            // Look up target type
+            // Look up target type + realm + reverse label
             var targetType = nodeTypeMap.GetValueOrDefault(edge.ToId, "");
             edge.ToType = targetType;
+            edge.ToRealm = nodeRealmMap.GetValueOrDefault(edge.ToId, Realm.Unknown);
+            if (reverseLabelMap.TryGetValue(edge.Label, out var revLabel) && !string.IsNullOrEmpty(revLabel))
+                edge.ReverseLabel = revLabel;
 
             // Drop edges to Year/Era entities — these are temporal metadata, not relationships
             if (targetType is KgNodeTypes.Year or KgNodeTypes.Era)
@@ -454,6 +477,31 @@ public class InfoboxGraphService(IMongoClient mongoClient, IOptions<SettingsOpti
             filteredEdges.Count(e => e.FromYear.HasValue) - derivedCount
         );
 
+        // ── Dedup: a single infobox can emit multiple edges with the same (fromId, toId, label)
+        // when two fields map to the same canonical label (e.g. "Masters" and "Teacher" both →
+        // apprentice_of → same target). Collapse these to one, preferring the richer instance
+        // (explicit temporal bounds > derived bounds > no bounds; then higher weight). This
+        // matches the unique constraint ix_fromId_toId_label on kg.edges and prevents the
+        // downstream QueryGraphAsync dedupe from having to do the same work on every read.
+        var preDedupe = filteredEdges.Count;
+        filteredEdges = filteredEdges
+            .OrderByDescending(e => e.FromYear.HasValue ? 1 : 0)
+            .ThenByDescending(e => e.Meta is not null ? 1 : 0)
+            .ThenByDescending(e => e.Weight)
+            .DistinctBy(e => (e.FromId, e.ToId, e.Label))
+            .ToList();
+        var deduped = preDedupe - filteredEdges.Count;
+        if (deduped > 0)
+            logger.LogInformation("InfoboxGraph: deduped {Dropped} duplicate edges ({Pre} → {Post})", deduped, preDedupe, filteredEdges.Count);
+
+        // ── Hierarchy helpers: precompute transitive closures for tree/DAG-shaped labels.
+        // Each registered lineage walks edges of a single label in a single direction from
+        // every seed node and stores the ordered closure on the seed as `lineages.<key>`.
+        // Cycle-safe: the BFS uses a visited set, so the two known apprentice_of cycles
+        // (characters who trained each other) are handled transparently.
+        // See ADR-003 Gap 1, Design-008, and HierarchyRegistry.
+        ComputeLineageClosures(nodes, filteredEdges);
+
         // Write to MongoDB
         logger.LogInformation("InfoboxGraph: writing nodes...");
         if (nodes.Count > 0)
@@ -483,22 +531,305 @@ public class InfoboxGraphService(IMongoClient mongoClient, IOptions<SettingsOpti
                     Builders<GraphNode>.IndexKeys.Ascending("temporalFacets.calendar").Ascending("temporalFacets.year"),
                     new CreateIndexOptions { Name = "ix_temporal_calendar_year" }
                 ),
+                // Wildcard index over all lineage closure subdocuments. Powers O(1) membership
+                // queries like {"lineages.apprentice_of": targetId} without requiring a dedicated
+                // index per HierarchyRegistry entry. See ADR-003 Gap 1 and Design-008.
+                new CreateIndexModel<GraphNode>(Builders<GraphNode>.IndexKeys.Ascending("lineages.$**"), new CreateIndexOptions { Name = "ix_lineages_wildcard" }),
             ],
             ct
         );
 
+        // ── Authoritative kg.edges index set ──
+        // This is the single site that creates indexes on kg.edges. RelationshipGraphBuilderService
+        // does NOT duplicate these — Phase 5 is a full delete+insert so we re-assert the index set
+        // on every rebuild. Singleton prefixes (fromId, toId) are intentionally omitted: they are
+        // covered by the compound (fromId, label) / (toId, label) indexes as leading-key prefixes.
         await _edges.Indexes.CreateManyAsync(
             [
-                new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.FromId)),
-                new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.ToId)),
-                new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.Label)),
-                new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.Continuity)),
-                new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.FromId).Ascending(e => e.Label)),
+                // Unique constraint + dedup key. Also covers queries leading with fromId
+                // (e.g. outgoing-edge Find for a single entity) via the leading-key prefix.
+                new CreateIndexModel<RelationshipEdge>(
+                    Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.FromId).Ascending(e => e.ToId).Ascending(e => e.Label),
+                    new CreateIndexOptions { Name = "ix_fromId_toId_label", Unique = true }
+                ),
+                // Outgoing-with-label (per-hop BFS outgoing pass + forward-direction $graphLookup).
+                new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.FromId).Ascending(e => e.Label), new CreateIndexOptions { Name = "ix_fromId_label" }),
+                // Inbound-with-label (per-hop BFS inbound pass + reverse-direction $graphLookup).
+                new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.ToId).Ascending(e => e.Label), new CreateIndexOptions { Name = "ix_toId_label" }),
+                // Label-only scans (ListRelationshipLabels, analytics aggregations).
+                new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.Label), new CreateIndexOptions { Name = "ix_label" }),
+                // Continuity-only scans (BrowseEdgeLabels etc.).
+                new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.Continuity), new CreateIndexOptions { Name = "ix_continuity" }),
+                // LLM extraction path: edges written during Phase 6 are keyed by source article.
+                new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.SourcePageId), new CreateIndexOptions { Name = "ix_sourcePageId" }),
+                // Forward/reverse edge pairs written by the LLM path (cleanup/dedup).
+                new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.PairId), new CreateIndexOptions { Name = "ix_pairId", Sparse = true }),
             ],
             ct
         );
 
+        // Refresh the kg.labels registry from the freshly-written edges.
+        await BuildLabelRegistryAsync(ct);
+
+        // Refresh the kg.edges.bidir view — a bidirectional projection of kg.edges that exposes
+        // each edge twice (forward + reverse with relabeled/flipped endpoints). Primary consumer
+        // is any $graphLookup that needs mixed-direction traversal in a single pipeline, since
+        // $graphLookup can only recurse in one direction per invocation.
+        await EnsureBidirectionalEdgesViewAsync(ct);
+
         logger.LogInformation("InfoboxGraph: complete. {Nodes} nodes, {Edges} edges (from {RawEdges} raw), indexes created.", nodes.Count, filteredEdges.Count, edges.Count);
+    }
+
+    /// <summary>
+    /// Compute transitive closures for every <see cref="HierarchyRegistry.Lineages"/> entry and
+    /// embed them on the matching nodes as <c>Lineages[lineageKey]</c>. Cycle-safe via BFS with
+    /// a visited set — the two known <c>apprentice_of</c> cycles on dev are handled transparently.
+    ///
+    /// Runs after edge dedup so the adjacency maps don't carry duplicate fan-out that would
+    /// cause redundant BFS work. Runs before <c>_nodes.InsertManyAsync</c> so the lineage data
+    /// lands in the initial insert rather than requiring a follow-up update pass.
+    /// </summary>
+    void ComputeLineageClosures(List<GraphNode> nodes, List<RelationshipEdge> filteredEdges)
+    {
+        var nodeMap = nodes.ToDictionary(n => n.PageId);
+
+        foreach (var lineage in HierarchyRegistry.Lineages)
+        {
+            // Build a one-hop adjacency map for this lineage: seed → next-hop neighbours.
+            // Forward direction: adjacency keyed by fromId, value = toIds.
+            // Reverse direction: adjacency keyed by toId, value = fromIds (so the walk proceeds
+            // against the stored edge direction).
+            var adjacency = new Dictionary<int, List<int>>();
+            foreach (var edge in filteredEdges)
+            {
+                if (!string.Equals(edge.Label, lineage.Label, StringComparison.OrdinalIgnoreCase))
+                    continue;
+
+                var seed = lineage.Direction == HierarchyRegistry.LineageDirection.Forward ? edge.FromId : edge.ToId;
+                var next = lineage.Direction == HierarchyRegistry.LineageDirection.Forward ? edge.ToId : edge.FromId;
+                if (!adjacency.TryGetValue(seed, out var list))
+                {
+                    list = [];
+                    adjacency[seed] = list;
+                }
+                list.Add(next);
+            }
+
+            if (adjacency.Count == 0)
+                continue;
+
+            // BFS from each seed. Closure is the full reachable set, ordered by hop distance
+            // (near ancestors first, farthest last). A visited set handles cycles and
+            // ensures each ancestor appears exactly once even if multiple paths reach it.
+            var populated = 0;
+            foreach (var (seedId, _) in adjacency)
+            {
+                var closure = new List<int>();
+                var visited = new HashSet<int> { seedId };
+                var queue = new Queue<int>();
+                queue.Enqueue(seedId);
+
+                while (queue.Count > 0)
+                {
+                    var current = queue.Dequeue();
+                    if (!adjacency.TryGetValue(current, out var neighbours))
+                        continue;
+                    foreach (var neighbour in neighbours)
+                    {
+                        if (visited.Add(neighbour))
+                        {
+                            closure.Add(neighbour);
+                            queue.Enqueue(neighbour);
+                        }
+                    }
+                }
+
+                if (closure.Count > 0 && nodeMap.TryGetValue(seedId, out var node))
+                {
+                    node.Lineages[lineage.LineageKey] = closure;
+                    populated++;
+                }
+            }
+
+            logger.LogInformation(
+                "InfoboxGraph: lineage {LineageKey} ({Label}/{Direction}) — populated {Populated} nodes, {Edges} edges in adjacency",
+                lineage.LineageKey,
+                lineage.Label,
+                lineage.Direction,
+                populated,
+                adjacency.Values.Sum(v => v.Count)
+            );
+        }
+    }
+
+    /// <summary>
+    /// Create (or replace) the <c>kg.edges.bidir</c> view. Forward branch passes through every
+    /// edge as-stored with <c>direction: "forward"</c>. Reverse branch unions a second copy of
+    /// <c>kg.edges</c> with <c>fromId</c>/<c>toId</c>, names, types, and realms flipped, and the
+    /// label replaced by its denormalized <c>reverseLabel</c> — edges with no reverse are dropped
+    /// from the reverse branch so the view never surfaces ambiguous labels.
+    /// </summary>
+    public async Task EnsureBidirectionalEdgesViewAsync(CancellationToken ct = default)
+    {
+        var db = _edges.Database;
+        const string ViewName = "kg.edges.bidir";
+
+        // Drop the existing view (if any) so we can replace its pipeline — MongoDB does not
+        // support altering a view in place; create-or-replace = drop + createView.
+        try
+        {
+            await db.DropCollectionAsync(ViewName, ct);
+        }
+        catch (MongoCommandException)
+        {
+            // View didn't exist — fine.
+        }
+
+        var pipeline = new BsonArray
+        {
+            // Forward branch: annotate each stored edge with direction="forward".
+            new BsonDocument("$addFields", new BsonDocument("direction", "forward")),
+            // Reverse branch: union another scan of kg.edges, dropping edges without a reverse
+            // label, then flip endpoints and swap the label.
+            new BsonDocument(
+                "$unionWith",
+                new BsonDocument
+                {
+                    { "coll", Collections.KgEdges },
+                    {
+                        "pipeline",
+                        new BsonArray
+                        {
+                            new BsonDocument(
+                                "$match",
+                                new BsonDocument(RelationshipEdgeBsonFields.ReverseLabel, new BsonDocument("$exists", true).Add("$nin", new BsonArray { BsonNull.Value, string.Empty }))
+                            ),
+                            new BsonDocument(
+                                "$project",
+                                new BsonDocument
+                                {
+                                    { MongoFields.Id, 1 },
+                                    { RelationshipEdgeBsonFields.FromId, "$" + RelationshipEdgeBsonFields.ToId },
+                                    { RelationshipEdgeBsonFields.ToId, "$" + RelationshipEdgeBsonFields.FromId },
+                                    { RelationshipEdgeBsonFields.FromName, "$" + RelationshipEdgeBsonFields.ToName },
+                                    { RelationshipEdgeBsonFields.ToName, "$" + RelationshipEdgeBsonFields.FromName },
+                                    { RelationshipEdgeBsonFields.FromType, "$" + RelationshipEdgeBsonFields.ToType },
+                                    { RelationshipEdgeBsonFields.ToType, "$" + RelationshipEdgeBsonFields.FromType },
+                                    { RelationshipEdgeBsonFields.FromRealm, "$" + RelationshipEdgeBsonFields.ToRealm },
+                                    { RelationshipEdgeBsonFields.ToRealm, "$" + RelationshipEdgeBsonFields.FromRealm },
+                                    { RelationshipEdgeBsonFields.Label, "$" + RelationshipEdgeBsonFields.ReverseLabel },
+                                    // Preserve original fields that don't flip.
+                                    { RelationshipEdgeBsonFields.Weight, 1 },
+                                    { RelationshipEdgeBsonFields.Evidence, 1 },
+                                    { RelationshipEdgeBsonFields.Continuity, 1 },
+                                    { RelationshipEdgeBsonFields.FromYear, 1 },
+                                    { RelationshipEdgeBsonFields.ToYear, 1 },
+                                    { RelationshipEdgeBsonFields.SourcePageId, 1 },
+                                    { "direction", "reverse" },
+                                }
+                            ),
+                        }
+                    },
+                }
+            ),
+        };
+
+        var createViewCommand = new BsonDocument
+        {
+            { "create", ViewName },
+            { "viewOn", Collections.KgEdges },
+            { "pipeline", pipeline },
+        };
+
+        await db.RunCommandAsync<BsonDocument>(createViewCommand, cancellationToken: ct);
+        logger.LogInformation("InfoboxGraph: created view {ViewName} (forward + reverse branches)", ViewName);
+    }
+
+    /// <summary>
+    /// Rebuild the <c>kg.labels</c> registry as a materialized view over <c>kg.edges</c>.
+    /// Seeds each label's <c>reverse</c>/<c>description</c>/<c>fromTypes</c>/<c>toTypes</c> from
+    /// <see cref="FieldSemantics.Relationships"/>, then overlays the observed usage count and
+    /// the actually-observed from/to type sets via a single aggregation pipeline.
+    /// </summary>
+    public async Task BuildLabelRegistryAsync(CancellationToken ct = default)
+    {
+        logger.LogInformation("InfoboxGraph: rebuilding kg.labels registry...");
+
+        // Definition-side seed: canonical label → (reverse, description).
+        // Multiple FieldSemantics entries can map to the same label (e.g. "Affiliation" and
+        // "Affiliations" both emit "affiliated_with") — dedupe by label.
+        var seed = FieldSemantics.Relationships.Values.DistinctBy(d => d.Label, StringComparer.OrdinalIgnoreCase).ToDictionary(d => d.Label, d => d, StringComparer.OrdinalIgnoreCase);
+
+        // Observed-side aggregation: group edges by label and collect usage stats + type cardinality.
+        var observed = await _edges
+            .Aggregate()
+            .Group(
+                new BsonDocument
+                {
+                    { "_id", "$label" },
+                    { "usageCount", new BsonDocument("$sum", 1) },
+                    { "fromTypes", new BsonDocument("$addToSet", "$fromType") },
+                    { "toTypes", new BsonDocument("$addToSet", "$toType") },
+                }
+            )
+            .ToListAsync(ct);
+
+        var now = DateTime.UtcNow;
+        var labelDocs = new List<RelationshipLabel>(capacity: observed.Count);
+        foreach (var row in observed)
+        {
+            var label = row["_id"].AsString;
+            seed.TryGetValue(label, out var def);
+
+            labelDocs.Add(
+                new RelationshipLabel
+                {
+                    Label = label,
+                    Reverse = def?.Reverse ?? string.Empty,
+                    Description = def?.Description ?? string.Empty,
+                    FromTypes = [.. row["fromTypes"].AsBsonArray.Select(v => v.AsString).Where(s => !string.IsNullOrEmpty(s)).OrderBy(s => s)],
+                    ToTypes = [.. row["toTypes"].AsBsonArray.Select(v => v.AsString).Where(s => !string.IsNullOrEmpty(s)).OrderBy(s => s)],
+                    UsageCount = row["usageCount"].AsInt32,
+                    CreatedAt = now,
+                }
+            );
+        }
+
+        // Also include seed-only labels (known in FieldSemantics but not yet observed in edges)
+        // so consumers can discover the full label vocabulary even on an empty KG.
+        foreach (var def in seed.Values)
+        {
+            if (labelDocs.Any(l => l.Label.Equals(def.Label, StringComparison.OrdinalIgnoreCase)))
+                continue;
+            labelDocs.Add(
+                new RelationshipLabel
+                {
+                    Label = def.Label,
+                    Reverse = def.Reverse,
+                    Description = def.Description,
+                    FromTypes = [],
+                    ToTypes = [.. def.ExpectedTargetTypes.OrderBy(s => s)],
+                    UsageCount = 0,
+                    CreatedAt = now,
+                }
+            );
+        }
+
+        await _labels.DeleteManyAsync(FilterDefinition<RelationshipLabel>.Empty, ct);
+        if (labelDocs.Count > 0)
+            await _labels.InsertManyAsync(labelDocs, new InsertManyOptions { IsOrdered = false }, ct);
+
+        // MongoDB can't compound-index two parallel arrays; split into single-array indexes.
+        await _labels.Indexes.CreateManyAsync(
+            [
+                new CreateIndexModel<RelationshipLabel>(Builders<RelationshipLabel>.IndexKeys.Descending(l => l.UsageCount), new CreateIndexOptions { Name = "ix_usageCount" }),
+                new CreateIndexModel<RelationshipLabel>(Builders<RelationshipLabel>.IndexKeys.Ascending(l => l.FromTypes), new CreateIndexOptions { Name = "ix_fromTypes" }),
+                new CreateIndexModel<RelationshipLabel>(Builders<RelationshipLabel>.IndexKeys.Ascending(l => l.ToTypes), new CreateIndexOptions { Name = "ix_toTypes" }),
+            ],
+            ct
+        );
+
+        logger.LogInformation("InfoboxGraph: kg.labels registry has {Count} labels ({Observed} observed, {SeedOnly} seed-only)", labelDocs.Count, observed.Count, labelDocs.Count - observed.Count);
     }
 
     /// <summary>
@@ -562,16 +893,21 @@ public class InfoboxGraphService(IMongoClient mongoClient, IOptions<SettingsOpti
     /// The primary entity is the text before the first '(' in the Value.
     /// Parenthetical text is treated as qualifier metadata, and temporal bounds are parsed from it.
     /// </summary>
-    static List<(BsonDocument link, string? qualifier, int? fromYear, int? toYear)> ExtractPrimaryLinks(List<string> values, Dictionary<string, BsonDocument> linkLookup)
+    internal readonly record struct PrimaryLink(BsonDocument Link, string? Qualifier, int? FromYear, int? ToYear, string RawValue, int Order);
+
+    static List<PrimaryLink> ExtractPrimaryLinks(List<string> values, Dictionary<string, BsonDocument> linkLookup)
     {
-        var results = new List<(BsonDocument link, string? qualifier, int? fromYear, int? toYear)>();
+        var results = new List<PrimaryLink>();
         if (values.Count == 0 || linkLookup.Count == 0)
             return results;
 
-        foreach (var value in values)
+        for (var i = 0; i < values.Count; i++)
         {
+            var value = values[i];
             if (string.IsNullOrWhiteSpace(value))
                 continue;
+
+            var rawValue = value.Trim();
 
             // Extract primary name: text before first '('
             var parenIdx = value.IndexOf('(');
@@ -592,27 +928,21 @@ public class InfoboxGraphService(IMongoClient mongoClient, IOptions<SettingsOpti
                     // Parse temporal bounds from qualifier: "19 BBY–4 ABY", "5 ABY, officially"
                     var yearMatches = Regex.Matches(qualifier, @"(\d[\d,]*)\s*(BBY|ABY)", RegexOptions.IgnoreCase);
                     if (yearMatches.Count >= 1)
-                    {
-                        var y1 = ParseGalacticYear(yearMatches[0].Value);
-                        fromYear = y1;
-                    }
+                        fromYear = ParseGalacticYear(yearMatches[0].Value);
                     if (yearMatches.Count >= 2)
-                    {
-                        var y2 = ParseGalacticYear(yearMatches[1].Value);
-                        toYear = y2;
-                    }
+                        toYear = ParseGalacticYear(yearMatches[1].Value);
                 }
             }
 
             // Try an exact match first — fastest path for simple values like "Kamino".
             if (linkLookup.TryGetValue(primaryName, out var matchedLink))
             {
-                results.Add((matchedLink, qualifier, fromYear, toYear));
+                results.Add(new PrimaryLink(matchedLink, qualifier, fromYear, toYear, rawValue, i));
             }
-            else if (linkLookup.TryGetValue(value.Trim(), out var fullMatch))
+            else if (linkLookup.TryGetValue(rawValue, out var fullMatch))
             {
                 // Fallback: try matching the full value text (handles values without parens)
-                results.Add((fullMatch, null, null, null));
+                results.Add(new PrimaryLink(fullMatch, null, null, null, rawValue, i));
             }
             else
             {
@@ -629,7 +959,7 @@ public class InfoboxGraphService(IMongoClient mongoClient, IOptions<SettingsOpti
                         continue;
                     if (primaryName.Contains(linkContent, StringComparison.OrdinalIgnoreCase) && emitted.Add(linkContent))
                     {
-                        results.Add((linkDoc, qualifier, fromYear, toYear));
+                        results.Add(new PrimaryLink(linkDoc, qualifier, fromYear, toYear, rawValue, i));
                     }
                 }
             }

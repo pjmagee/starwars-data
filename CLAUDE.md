@@ -104,6 +104,21 @@ Test fixtures: `ApiFixture` (shared MongoDB container with seed data for most te
 - Controllers under `ApiService/Features/<Feature>/` and `Admin/Features/<Feature>/` follow `[Route("api/[controller]")]` pattern
 - Frontend pages under `Frontend/Components/Pages/`, shared components under `Frontend/Components/Shared/`
 
+## Library Deviations
+
+**Rule: standard library components are the default.** Third-party libraries in this repo (MudBlazor for UI, MudBlazor theming, MongoDB.Driver, Microsoft.Extensions.AI, Microsoft.Agents.AI, Hangfire, etc.) should be used via their public APIs. If the first instinct is to roll custom HTML/CSS, a custom abstraction, or a wrapper that bypasses the library's intended usage, **stop and reconsider** — the library almost always has a parameter, variant, or extension point that covers the case.
+
+When a deviation is genuinely justified (the library's public API cannot meet the requirement), it **MUST** be recorded in an ADR under `eng/adr/` before or alongside the code change. The ADR entry must include:
+
+1. The file/location of the deviation
+2. The library component or API it replaces
+3. The concrete reason the standard component cannot be used (with specifics — "too big" is not enough; give numbers, parameter names, and what was tried)
+4. A **"Revisit when"** line describing the condition under which the deviation could be removed (e.g. a library feature being added)
+
+The current catalogue of MudBlazor deviations lives in [eng/adr/004-mudblazor-deviations.md](eng/adr/004-mudblazor-deviations.md). When adding a new deviation for a component already covered by an existing ADR, add it to that ADR's **Catalogue** section rather than creating a new ADR. Create a new ADR only when deviating from a library/framework not yet covered.
+
+Do not introduce silent deviations. A deviation that is not documented is a bug.
+
 ## MCP Servers & Skills
 
 Use the attached MCP servers and skills for domain-specific guidance instead of guessing:

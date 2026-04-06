@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using System.Text.Json;
 using Microsoft.Extensions.AI;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -30,15 +29,18 @@ public class RelationshipAnalystToolkit
     }
 
     [Description(
-        "Read the full content and infobox data for a page by its PageId. "
-            + "Returns the page title, infobox type, infobox labels/values/links, article content (truncated to ~8000 chars), "
-            + "and continuity. Use this to understand an entity before extracting relationships."
+        """
+            Read the full content and infobox data for a page by its PageId.
+            Returns the page title, infobox type, infobox labels/values/links, article content
+            (truncated to ~8000 chars), and continuity. Use this to understand an entity before
+            extracting relationships.
+            """
     )]
-    public async Task<string> GetPageContent([Description("The integer PageId (_id) of the page to read")] int pageId)
+    public async Task<PageContentDto> GetPageContent([Description("The integer PageId (_id) of the page to read")] int pageId)
     {
         var doc = await _pages.Find(new BsonDocument(MongoFields.Id, pageId)).FirstOrDefaultAsync();
         if (doc == null)
-            return JsonSerializer.Serialize(new { error = "Page not found" });
+            return new PageContentDto(null, null, null, null, null, null, null, null, Error: "Page not found");
 
         var infobox = doc.Contains(PageBsonFields.Infobox) && !doc[PageBsonFields.Infobox].IsBsonNull ? doc[PageBsonFields.Infobox].AsBsonDocument : null;
 
@@ -50,21 +52,19 @@ public class RelationshipAnalystToolkit
         var data =
             infobox
                 ?[InfoboxBsonFields.Data].AsBsonArray.OfType<BsonDocument>()
-                .Select(d => new
-                {
-                    label = d[InfoboxBsonFields.Label].AsString,
-                    values = d[InfoboxBsonFields.Values].AsBsonArray.Select(v => v.AsString).ToList(),
-                    links = d.Contains(InfoboxBsonFields.Links)
+                .Select(d => new InfoboxRowWithLinksDto(
+                    Label: d[InfoboxBsonFields.Label].AsString,
+                    Values: d[InfoboxBsonFields.Values].AsBsonArray.Select(v => v.AsString).ToList(),
+                    Links: d.Contains(InfoboxBsonFields.Links)
                         ? d[InfoboxBsonFields.Links]
                             .AsBsonArray.OfType<BsonDocument>()
-                            .Select(l => new
-                            {
-                                text = l.Contains(InfoboxBsonFields.Content) ? l[InfoboxBsonFields.Content].AsString : "",
-                                href = l.Contains(InfoboxBsonFields.Href) ? l[InfoboxBsonFields.Href].AsString : "",
-                            })
+                            .Select(l => new InfoboxLinkDto(
+                                Text: l.Contains(InfoboxBsonFields.Content) ? l[InfoboxBsonFields.Content].AsString : "",
+                                Href: l.Contains(InfoboxBsonFields.Href) ? l[InfoboxBsonFields.Href].AsString : ""
+                            ))
                             .ToList()
-                        : [],
-                })
+                        : []
+                ))
                 .ToList() ?? [];
 
         var content = doc.Contains("content") && !doc["content"].IsBsonNull ? doc["content"].AsString : "";
@@ -73,35 +73,37 @@ public class RelationshipAnalystToolkit
         if (content.Length > 8000)
             content = content[..8000] + "\n... [truncated]";
 
-        return JsonSerializer.Serialize(
-            new
-            {
-                pageId,
-                title = doc.Contains(PageBsonFields.Title) ? doc[PageBsonFields.Title].AsString : "",
-                type = template,
-                continuity = doc.Contains(PageBsonFields.Continuity) ? doc[PageBsonFields.Continuity].AsString : "Unknown",
-                imageUrl = infobox != null && infobox.Contains(InfoboxBsonFields.ImageUrl) && !infobox[InfoboxBsonFields.ImageUrl].IsBsonNull ? infobox[InfoboxBsonFields.ImageUrl].AsString : "",
-                wikiUrl = doc.Contains(PageBsonFields.WikiUrl) ? doc[PageBsonFields.WikiUrl].AsString : "",
-                infobox = data,
-                content,
-            }
+        return new PageContentDto(
+            PageId: pageId,
+            Title: doc.Contains(PageBsonFields.Title) ? doc[PageBsonFields.Title].AsString : "",
+            Type: template,
+            Continuity: doc.Contains(PageBsonFields.Continuity) ? doc[PageBsonFields.Continuity].AsString : "Unknown",
+            ImageUrl: infobox != null && infobox.Contains(InfoboxBsonFields.ImageUrl) && !infobox[InfoboxBsonFields.ImageUrl].IsBsonNull ? infobox[InfoboxBsonFields.ImageUrl].AsString : "",
+            WikiUrl: doc.Contains(PageBsonFields.WikiUrl) ? doc[PageBsonFields.WikiUrl].AsString : "",
+            Infobox: data,
+            Content: content
         );
     }
 
     [Description(
-        "Get pages that are linked from a specific page's infobox. "
-            + "Returns PageId, name, and type for each linked entity. "
-            + "Use this to understand what entities a page references before extracting relationships."
+        """
+            Get pages that are linked from a specific page's infobox.
+            Returns PageId, name, and type for each linked entity.
+            Use to understand what entities a page references before extracting relationships.
+            """
     )]
-    public async Task<string> GetLinkedPages([Description("The integer PageId (_id) of the source page")] int pageId, [Description("Max linked pages to return, default 30")] int limit = 30)
+    public async Task<List<LinkedPageDto>> GetLinkedPages(
+        [Description("The integer PageId (_id) of the source page")] int pageId,
+        [Description("Max linked pages to return, default 30")] int limit = 30
+    )
     {
         var doc = await _pages.Find(new BsonDocument(MongoFields.Id, pageId)).FirstOrDefaultAsync();
         if (doc == null)
-            return "[]";
+            return [];
 
         var infobox = doc.Contains(PageBsonFields.Infobox) && !doc[PageBsonFields.Infobox].IsBsonNull ? doc[PageBsonFields.Infobox].AsBsonDocument : null;
         if (infobox == null)
-            return "[]";
+            return [];
 
         // Collect all unique hrefs from infobox links
         var hrefs = infobox[InfoboxBsonFields.Data]
@@ -114,7 +116,7 @@ public class RelationshipAnalystToolkit
             .ToList();
 
         if (hrefs.Count == 0)
-            return "[]";
+            return [];
 
         // Resolve hrefs to pages
         var linkedPages = await _pages
@@ -144,7 +146,7 @@ public class RelationshipAnalystToolkit
             )
             .ToListAsync();
 
-        var results = linkedPages
+        return linkedPages
             .Select(d =>
             {
                 var ib = d.Contains(PageBsonFields.Infobox) && !d[PageBsonFields.Infobox].IsBsonNull ? d[PageBsonFields.Infobox].AsBsonDocument : null;
@@ -157,99 +159,85 @@ public class RelationshipAnalystToolkit
                     dataVal?.OfType<BsonDocument>().FirstOrDefault()?[InfoboxBsonFields.Values].AsBsonArray.FirstOrDefault()?.AsString
                     ?? (d.Contains(PageBsonFields.Title) ? d[PageBsonFields.Title].AsString : "");
 
-                return new
-                {
-                    pageId = d[MongoFields.Id].AsInt32,
-                    name,
-                    type = template,
-                    continuity = d.Contains(PageBsonFields.Continuity) ? d[PageBsonFields.Continuity].AsString : "Unknown",
-                };
+                return new LinkedPageDto(
+                    PageId: d[MongoFields.Id].AsInt32,
+                    Name: name,
+                    Type: template,
+                    Continuity: d.Contains(PageBsonFields.Continuity) ? d[PageBsonFields.Continuity].AsString : "Unknown"
+                );
             })
             .ToList();
-
-        return JsonSerializer.Serialize(results);
     }
 
     [Description(
-        "Get all canonical relationship labels currently in the registry. "
-            + "ALWAYS call this before extracting relationships to reuse existing labels. "
-            + "Returns each label with its reverse, description, and usage count."
+        """
+            Get all canonical relationship labels currently in the registry.
+            ALWAYS call this before extracting relationships to reuse existing labels.
+            Returns each label with its reverse, description, and usage count.
+            """
     )]
-    public async Task<string> GetExistingLabels()
+    public async Task<List<RelationshipLabelDto>> GetExistingLabels()
     {
         var labels = await _labels.Find(Builders<RelationshipLabel>.Filter.Empty).SortByDescending(l => l.UsageCount).ToListAsync();
 
-        var results = labels.Select(l => new
-        {
-            label = l.Label,
-            reverse = l.Reverse,
-            description = l.Description,
-            fromTypes = l.FromTypes,
-            toTypes = l.ToTypes,
-            usageCount = l.UsageCount,
-        });
-
-        return JsonSerializer.Serialize(results);
+        return labels
+            .Select(l => new RelationshipLabelDto(Label: l.Label, Reverse: l.Reverse, Description: l.Description, FromTypes: l.FromTypes, ToTypes: l.ToTypes, UsageCount: l.UsageCount))
+            .ToList();
     }
 
     [Description(
-        "Search for a similar label in the registry before creating a new one. "
-            + "Returns labels that are textually similar to your proposed label. "
-            + "If a match is found, use the existing label instead of creating a new one."
+        """
+            Search for a similar label in the registry before creating a new one.
+            Returns labels that are textually similar to your proposed label.
+            If a match is found, use the existing label instead of creating a new one.
+            """
     )]
-    public async Task<string> FindSimilarLabel([Description("The proposed label text to check for similarity, e.g. 'hires', 'employer_of'")] string proposedLabel)
+    public async Task<List<SimilarLabelDto>> FindSimilarLabel([Description("The proposed label text to check for similarity, e.g. 'hires', 'employer_of'")] string proposedLabel)
     {
         // Normalize for comparison
         var normalized = proposedLabel.ToLowerInvariant().Replace(" ", "_").Replace("-", "_");
 
         var allLabels = await _labels.Find(Builders<RelationshipLabel>.Filter.Empty).ToListAsync();
 
-        // Simple fuzzy matching: check substring containment, common stems, and Levenshtein-like similarity
-        var matches = allLabels
-            .Select(l => new
-            {
-                label = l.Label,
-                reverse = l.Reverse,
-                description = l.Description,
-                usageCount = l.UsageCount,
-                score = ComputeSimilarity(normalized, l.Label.ToLowerInvariant()),
-            })
-            .Where(m => m.score > 0.3)
-            .OrderByDescending(m => m.score)
+        return allLabels
+            .Select(l => new SimilarLabelDto(
+                Label: l.Label,
+                Reverse: l.Reverse,
+                Description: l.Description,
+                UsageCount: l.UsageCount,
+                Score: ComputeSimilarity(normalized, l.Label.ToLowerInvariant())
+            ))
+            .Where(m => m.Score > 0.3)
+            .OrderByDescending(m => m.Score)
             .Take(5)
             .ToList();
-
-        return JsonSerializer.Serialize(matches);
-    }
-
-    [Description("Get edges already stored for a specific entity. " + "Call this before extracting to avoid creating duplicate relationships.")]
-    public async Task<string> GetEntityEdges([Description("The PageId of the entity to check")] int pageId, [Description("Max edges to return, default 50")] int limit = 50)
-    {
-        var edges = await _edges.Find(Builders<RelationshipEdge>.Filter.Eq(e => e.FromId, pageId)).SortByDescending(e => e.Weight).Limit(limit).ToListAsync();
-
-        var results = edges.Select(e => new
-        {
-            toId = e.ToId,
-            toName = e.ToName,
-            toType = e.ToType,
-            label = e.Label,
-            weight = e.Weight,
-            evidence = e.Evidence,
-        });
-
-        return JsonSerializer.Serialize(results);
     }
 
     [Description(
-        "Store extracted relationship edges into the graph. "
-            + "Each edge is stored as a forward+reverse pair. "
-            + "New labels are automatically registered. Duplicate edges (same fromId+toId+label) are skipped. "
-            + "Returns the number of edges actually inserted."
+        """
+            Get edges already stored for a specific entity.
+            Call before extracting to avoid creating duplicate relationships.
+            """
     )]
-    public async Task<string> StoreEdges([Description("The PageId this extraction is sourced from")] int sourcePageId, [Description("Array of edge objects to store")] List<EdgeDto> edges)
+    public async Task<List<StoredEdgeDto>> GetEntityEdges([Description("The PageId of the entity to check")] int pageId, [Description("Max edges to return, default 50")] int limit = 50)
+    {
+        var edges = await _edges.Find(Builders<RelationshipEdge>.Filter.Eq(e => e.FromId, pageId)).SortByDescending(e => e.Weight).Limit(limit).ToListAsync();
+
+        return edges.Select(e => new StoredEdgeDto(ToId: e.ToId, ToName: e.ToName, ToType: e.ToType, Label: e.Label, Weight: e.Weight, Evidence: e.Evidence)).ToList();
+    }
+
+    [Description(
+        """
+            Store extracted relationship edges into the graph.
+            Each edge is stored as a forward+reverse pair.
+            New labels are automatically registered. Duplicate edges (same fromId+toId+label) are skipped.
+            Returns the number of edges actually inserted.
+            """
+    )]
+    public async Task<StoreEdgesResultDto> StoreEdges([Description("The PageId this extraction is sourced from")] int sourcePageId, [Description("Array of edge objects to store")] List<EdgeDto> edges)
     {
         if (edges.Count == 0)
-            return JsonSerializer.Serialize(new { inserted = 0 });
+            return new StoreEdgesResultDto(Inserted: 0, Total: 0);
 
         var edgeDtos = edges;
 
@@ -274,7 +262,6 @@ public class RelationshipAnalystToolkit
             if (await _edges.Find(existsFilter).AnyAsync())
                 continue;
 
-            var pairId = ObjectId.GenerateNewId().ToString();
             var continuity = Enum.TryParse<Continuity>(dto.Continuity, true, out var c) ? c : Continuity.Unknown;
             var now = DateTime.UtcNow;
 
@@ -293,7 +280,6 @@ public class RelationshipAnalystToolkit
                 Evidence = dto.Evidence,
                 SourcePageId = sourcePageId,
                 Continuity = continuity,
-                PairId = pairId,
                 CreatedAt = now,
             };
 
@@ -312,7 +298,6 @@ public class RelationshipAnalystToolkit
                 Evidence = dto.Evidence,
                 SourcePageId = sourcePageId,
                 Continuity = continuity,
-                PairId = pairId,
                 CreatedAt = now,
             };
 
@@ -332,11 +317,16 @@ public class RelationshipAnalystToolkit
             await UpsertLabel(reverseLabel, label, dto.ToType, dto.FromType, dto.Evidence);
         }
 
-        return JsonSerializer.Serialize(new { inserted, total = edgeDtos.Count });
+        return new StoreEdgesResultDto(Inserted: inserted, Total: edgeDtos.Count);
     }
 
-    [Description("Mark a page as processed in the crawl state tracker. " + "Call this after successfully extracting relationships from a page.")]
-    public async Task<string> MarkProcessed(
+    [Description(
+        """
+            Mark a page as processed in the crawl state tracker.
+            Call after successfully extracting relationships from a page.
+            """
+    )]
+    public async Task<StatusDto> MarkProcessed(
         [Description("The PageId that was processed")] int pageId,
         [Description("Number of edges extracted")] int edgesExtracted,
         [Description("The entity name")] string name,
@@ -362,11 +352,16 @@ public class RelationshipAnalystToolkit
             new ReplaceOptions { IsUpsert = true }
         );
 
-        return JsonSerializer.Serialize(new { status = "completed", pageId });
+        return new StatusDto(Status: "completed", PageId: pageId);
     }
 
-    [Description("Mark a page as skipped (no meaningful relationships to extract). " + "Use for redirects, stubs, disambiguation pages, or pages with no infobox.")]
-    public async Task<string> SkipPage(
+    [Description(
+        """
+            Mark a page as skipped (no meaningful relationships to extract).
+            Use for redirects, stubs, disambiguation pages, or pages with no infobox.
+            """
+    )]
+    public async Task<StatusDto> SkipPage(
         [Description("The PageId to skip")] int pageId,
         [Description("Why this page was skipped")] string reason,
         [Description("The entity name")] string name = "",
@@ -388,14 +383,7 @@ public class RelationshipAnalystToolkit
             new ReplaceOptions { IsUpsert = true }
         );
 
-        return JsonSerializer.Serialize(
-            new
-            {
-                status = "skipped",
-                pageId,
-                reason,
-            }
-        );
+        return new StatusDto(Status: "skipped", PageId: pageId, Reason: reason);
     }
 
     async Task UpsertLabel(string label, string reverse, string fromType, string toType, string evidence)

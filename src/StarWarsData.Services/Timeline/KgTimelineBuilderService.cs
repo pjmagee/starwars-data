@@ -10,13 +10,14 @@ namespace StarWarsData.Services;
 
 /// <summary>
 /// ETL that populates the <c>timeline.{TemplateName}</c> collections from the knowledge graph.
-/// Replaces the older <see cref="RecordService.CreateCategorizedTimelineEvents"/> path which
-/// walked infobox hyperlinks directly and had no calendar awareness.
+/// Sole writer of these collections: earlier revisions had a text-regex transformer that
+/// walked infobox hyperlinks directly, which was removed in favour of this calendar-aware path.
 ///
 /// <para>
-/// Source of truth is <see cref="GraphNode.TemporalFacets"/>: only facets with
-/// <c>calendar == "galactic"</c> and a parsed year are emitted, which keeps real-world
-/// publication dates (book releases, actor birthdays) out of the galactic timeline.
+/// Source of truth is <see cref="GraphNode.TemporalFacets"/>. Both galactic (BBY/ABY) and
+/// real-world (CE) facets with a parsed year are emitted, tagged with the corresponding
+/// <see cref="TimelineEvent.Calendar"/>. Downstream the <see cref="TimelineService"/> filters
+/// by calendar so the two modes never visually mix unless explicitly asked to.
 /// The display-side <see cref="TimelineEvent.Properties"/> payload — rendered as clickable
 /// links in the frontend info panel — is copied verbatim from the source <see cref="Page.Infobox"/>
 /// via a batched lookup, so the UI keeps every hyperlink it has today.
@@ -31,6 +32,7 @@ namespace StarWarsData.Services;
 public class KgTimelineBuilderService(IMongoClient mongoClient, IOptions<SettingsOptions> settings, ILogger<KgTimelineBuilderService> logger)
 {
     const string GalacticCalendar = "galactic";
+    const string RealCalendar = "real";
     const int PageBatchSize = 500;
 
     readonly IMongoDatabase _db = mongoClient.GetDatabase(settings.Value.DatabaseName);
@@ -48,12 +50,12 @@ public class KgTimelineBuilderService(IMongoClient mongoClient, IOptions<Setting
     {
         logger.LogInformation("KG-backed timeline ETL: starting");
 
-        // ── Step 1: Load every KG node that has at least one galactic temporal facet.
-        // Any node without such a facet can't produce galactic timeline rows, so filtering
-        // at the DB saves both transport and memory.
-        var elemMatch = Builders<GraphNode>.Filter.ElemMatch(n => n.TemporalFacets, Builders<TemporalFacet>.Filter.Eq(f => f.Calendar, GalacticCalendar));
+        // ── Step 1: Load every KG node that has at least one emittable temporal facet
+        // (galactic OR real). Any node without such a facet can't produce timeline rows, so
+        // filtering at the DB saves both transport and memory.
+        var elemMatch = Builders<GraphNode>.Filter.ElemMatch(n => n.TemporalFacets, Builders<TemporalFacet>.Filter.In(f => f.Calendar, new[] { GalacticCalendar, RealCalendar }));
         var nodes = await _nodes.Find(elemMatch).ToListAsync(ct);
-        logger.LogInformation("KG timeline ETL: loaded {Count} nodes with galactic facets", nodes.Count);
+        logger.LogInformation("KG timeline ETL: loaded {Count} nodes with temporal facets", nodes.Count);
 
         // ── Step 2: Batch-fetch the source Page documents for each KG node so we can copy
         // the original Infobox.Data into TimelineEvent.Properties for the info panel render.
@@ -92,30 +94,56 @@ public class KgTimelineBuilderService(IMongoClient mongoClient, IOptions<Setting
                 if (!IsEmittable(facet))
                     continue;
 
-                // Timeline storage convention: Year is the POSITIVE magnitude and Demarcation
-                // carries the sign. This matches what the legacy ETL wrote and what
-                // TimelineEvent.DisplayYear, GetErasAsync sorting, and BuildYearRangeFilter
-                // all expect at read time. Facet.Year is a sort-key (negative = BBY) so we
-                // split it back out here.
-                var sortKey = facet.Year!.Value;
-                var demarcation = sortKey < 0 ? Demarcation.Bby : Demarcation.Aby;
-                var magnitude = Math.Abs(sortKey);
+                var isGalactic = string.Equals(facet.Calendar, GalacticCalendar, StringComparison.OrdinalIgnoreCase);
 
-                var evt = new TimelineEvent
+                TimelineEvent evt;
+                if (isGalactic)
                 {
-                    Title = node.Name,
-                    Template = node.Type,
-                    TemplateUri = $"{Collections.TemplateUrlPrefix}{node.Type}",
-                    ImageUrl = node.ImageUrl,
-                    Year = magnitude,
-                    Demarcation = demarcation,
-                    DateEvent = NormaliseDateEvent(facet.Field),
-                    Properties = infoboxProperties ?? [],
-                    Continuity = node.Continuity,
-                    Universe = node.Universe,
-                    PageId = node.PageId,
-                    WikiUrl = node.WikiUrl,
-                };
+                    // Galactic storage convention: Year is the POSITIVE magnitude and
+                    // Demarcation carries the sign. Facet.Year is a sort-key (negative=BBY)
+                    // so split it back out here.
+                    var sortKey = facet.Year!.Value;
+                    var demarcation = sortKey < 0 ? Demarcation.Bby : Demarcation.Aby;
+                    var magnitude = Math.Abs(sortKey);
+
+                    evt = new TimelineEvent
+                    {
+                        Title = node.Name,
+                        Template = node.Type,
+                        TemplateUri = $"{Collections.TemplateUrlPrefix}{node.Type}",
+                        ImageUrl = node.ImageUrl,
+                        Calendar = Calendar.Galactic,
+                        Year = magnitude,
+                        Demarcation = demarcation,
+                        DateEvent = NormaliseDateEvent(facet.Field),
+                        Properties = infoboxProperties ?? [],
+                        Continuity = node.Continuity,
+                        Realm = node.Realm,
+                        PageId = node.PageId,
+                        WikiUrl = node.WikiUrl,
+                    };
+                }
+                else
+                {
+                    // Real-world storage: RealYear is the signed CE year (negative=BCE).
+                    // Year / Demarcation are left unset so galactic-mode $expr filters
+                    // naturally skip these rows, and vice versa for real-mode filters.
+                    evt = new TimelineEvent
+                    {
+                        Title = node.Name,
+                        Template = node.Type,
+                        TemplateUri = $"{Collections.TemplateUrlPrefix}{node.Type}",
+                        ImageUrl = node.ImageUrl,
+                        Calendar = Calendar.Real,
+                        RealYear = facet.Year!.Value,
+                        DateEvent = NormaliseDateEvent(facet.Field),
+                        Properties = infoboxProperties ?? [],
+                        Continuity = node.Continuity,
+                        Realm = node.Realm,
+                        PageId = node.PageId,
+                        WikiUrl = node.WikiUrl,
+                    };
+                }
 
                 if (!eventsByTemplate.TryGetValue(node.Type, out var list))
                 {
@@ -161,11 +189,12 @@ public class KgTimelineBuilderService(IMongoClient mongoClient, IOptions<Setting
     }
 
     /// <summary>
-    /// A facet contributes a timeline row when it is a galactic date with a parsed year.
-    /// Real-world publication dates, unknown calendars, and vague text facets (e.g.
-    /// "During the Clone Wars") all fall out here.
+    /// A facet contributes a timeline row when it has a parsed year and a known calendar
+    /// (galactic BBY/ABY or real-world CE). Vague text facets (e.g. "During the Clone Wars")
+    /// and unknown calendars fall out here.
     /// </summary>
-    static bool IsEmittable(TemporalFacet facet) => facet.Year.HasValue && string.Equals(facet.Calendar, GalacticCalendar, StringComparison.OrdinalIgnoreCase);
+    static bool IsEmittable(TemporalFacet facet) =>
+        facet.Year.HasValue && (string.Equals(facet.Calendar, GalacticCalendar, StringComparison.OrdinalIgnoreCase) || string.Equals(facet.Calendar, RealCalendar, StringComparison.OrdinalIgnoreCase));
 
     /// <summary>
     /// Mirrors the pre-KG transformer: a facet sourced from a plain "Date" infobox field

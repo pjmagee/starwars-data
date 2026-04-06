@@ -57,8 +57,8 @@
         <MudText Typo="Typo.h6" Class="mb-3 mt-4" Color="Color.Success">Phase 3 — Timeline Events</MudText>
         <MudStack Spacing="2" Class="mb-4">
             <MudButton Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Material.Filled.Timeline"
-                OnClick="@(() => RunJob("api/admin/mongo/create-categorized-timeline-events"))" Disabled="_isLoading" Size="Size.Medium">
-                3a. Build Timeline Events
+                OnClick="@(() => RunJob("api/admin/mongo/create-timeline-events-from-kg"))" Disabled="_isLoading" Size="Size.Medium">
+                3a. Build Timeline Events (from KG)
             </MudButton>
             <MudButton Variant="Variant.Outlined" Color="Color.Success" StartIcon="@Icons.Material.Filled.Storage"
                 OnClick="@(() => RunJob("api/admin/mongo/ensure-indexes"))" Disabled="_isLoading" Size="Size.Medium">
@@ -86,10 +86,6 @@
             <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.TravelExplore"
                 OnClick="@(() => RunJob("api/admin/mongo/create-index-embeddings"))" Disabled="_isLoading" Size="Size.Medium">
                 4c. Create Vector Indexes
-            </MudButton>
-            <MudButton Variant="Variant.Outlined" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteSweep"
-                OnClick="@(() => RunJob("api/admin/mongo/delete-embeddings"))" Disabled="_isLoading" Size="Size.Medium">
-                Delete Embeddings
             </MudButton>
             <MudButton Variant="Variant.Text" Color="Color.Warning" StartIcon="@Icons.Material.Filled.Dashboard"
                 Href="/article-chunks" Size="Size.Medium">

@@ -28,14 +28,15 @@ public class TimelineService
     public async Task<GroupedTimelineResult> GetTimelineEvents(
         IList<string> templates,
         Continuity? continuity = null,
-        Universe? universe = null,
+        Realm? realm = null,
         int page = 1,
         int pageSize = 20,
         float? yearFrom = null,
         Demarcation? yearFromDemarcation = null,
         float? yearTo = null,
         Demarcation? yearToDemarcation = null,
-        string? search = null
+        string? search = null,
+        Calendar? calendar = null
     )
     {
         // Get all available collections from timeline-events db
@@ -56,49 +57,85 @@ public class TimelineService
         // Build a BSON match filter.
         // Enums are stored as strings across this app via the global
         // EnumRepresentationConvention(BsonType.String) registered in Program.cs
-        // — filter values must be the enum names ("Canon", "InUniverse", "Bby"),
+        // — filter values must be the enum names ("Canon", "Starwars", "Bby"),
         // not the underlying ints.
         var matchConditions = new BsonArray();
 
         // Continuity filter
         if (continuity != null && continuity != Continuity.Both)
         {
-            matchConditions.Add(new BsonDocument("Continuity", new BsonDocument("$in", new BsonArray { continuity.Value.ToString(), Continuity.Both.ToString(), Continuity.Unknown.ToString() })));
-        }
-
-        // Universe filter
-        if (universe != null)
-        {
-            matchConditions.Add(new BsonDocument("Universe", new BsonDocument("$in", new BsonArray { universe.Value.ToString(), Universe.Unknown.ToString() })));
-        }
-
-        // Year range filter
-        if (yearFrom.HasValue && yearFromDemarcation.HasValue && yearTo.HasValue && yearToDemarcation.HasValue)
-        {
-            var linearFrom = ToLinearYear(yearFrom.Value, yearFromDemarcation.Value);
-            var linearTo = ToLinearYear(yearTo.Value, yearToDemarcation.Value);
-            if (linearFrom > linearTo)
-                (linearFrom, linearTo) = (linearTo, linearFrom);
-
-            var linearYearExpr = new BsonDocument(
-                "$cond",
-                new BsonArray { new BsonDocument("$eq", new BsonArray { "$Demarcation", "Bby" }), new BsonDocument("$multiply", new BsonArray { "$Year", -1 }), "$Year" }
-            );
-
             matchConditions.Add(
-                new BsonDocument(
-                    "$expr",
-                    new BsonDocument(
-                        "$and",
-                        new BsonArray
-                        {
-                            new BsonDocument("$ne", new BsonArray { "$Year", BsonNull.Value }),
-                            new BsonDocument("$gte", new BsonArray { linearYearExpr, linearFrom }),
-                            new BsonDocument("$lte", new BsonArray { linearYearExpr, linearTo }),
-                        }
-                    )
-                )
+                new BsonDocument(TimelineEventBsonFields.Continuity, new BsonDocument("$in", new BsonArray { continuity.Value.ToString(), Continuity.Both.ToString(), Continuity.Unknown.ToString() }))
             );
+        }
+
+        // Realm filter
+        if (realm != null)
+        {
+            matchConditions.Add(new BsonDocument(TimelineEventBsonFields.Realm, new BsonDocument("$in", new BsonArray { realm.Value.ToString(), Realm.Unknown.ToString() })));
+        }
+
+        // Calendar filter. Documents written before this field existed default to Galactic
+        // at read time via the $in check on the missing/Galactic branch.
+        if (calendar != null)
+        {
+            var targetCalendar = calendar.Value.ToString();
+            if (calendar == Calendar.Galactic)
+            {
+                // Match explicit Galactic AND legacy rows missing the Calendar field.
+                matchConditions.Add(
+                    new BsonDocument(
+                        "$or",
+                        new BsonArray { new BsonDocument(TimelineEventBsonFields.Calendar, targetCalendar), new BsonDocument(TimelineEventBsonFields.Calendar, new BsonDocument("$exists", false)) }
+                    )
+                );
+            }
+            else
+            {
+                matchConditions.Add(new BsonDocument(TimelineEventBsonFields.Calendar, targetCalendar));
+            }
+        }
+
+        // Year range filter. When BBY/ABY demarcations are supplied we assume a galactic
+        // range query; when only numeric bounds are supplied we treat them as signed CE
+        // years for the real calendar. The two branches never mix: a galactic range skips
+        // real rows (they have no $Year) and a real range skips galactic rows (no $RealYear).
+        if (yearFrom.HasValue && yearTo.HasValue)
+        {
+            if (yearFromDemarcation.HasValue && yearToDemarcation.HasValue)
+            {
+                var linearFrom = ToLinearYear(yearFrom.Value, yearFromDemarcation.Value);
+                var linearTo = ToLinearYear(yearTo.Value, yearToDemarcation.Value);
+                if (linearFrom > linearTo)
+                    (linearFrom, linearTo) = (linearTo, linearFrom);
+
+                var linearYearExpr = new BsonDocument(
+                    "$cond",
+                    new BsonArray { new BsonDocument("$eq", new BsonArray { "$Demarcation", "Bby" }), new BsonDocument("$multiply", new BsonArray { "$Year", -1 }), "$Year" }
+                );
+
+                matchConditions.Add(
+                    new BsonDocument(
+                        "$expr",
+                        new BsonDocument(
+                            "$and",
+                            new BsonArray
+                            {
+                                new BsonDocument("$ne", new BsonArray { "$Year", BsonNull.Value }),
+                                new BsonDocument("$gte", new BsonArray { linearYearExpr, linearFrom }),
+                                new BsonDocument("$lte", new BsonArray { linearYearExpr, linearTo }),
+                            }
+                        )
+                    )
+                );
+            }
+            else
+            {
+                // Real-calendar range — straight $gte/$lte on RealYear (signed CE).
+                var from = (int)Math.Round(Math.Min(yearFrom.Value, yearTo.Value));
+                var to = (int)Math.Round(Math.Max(yearFrom.Value, yearTo.Value));
+                matchConditions.Add(new BsonDocument(TimelineEventBsonFields.RealYear, new BsonDocument { { "$gte", from }, { "$lte", to } }));
+            }
         }
 
         // Search filter
@@ -131,14 +168,33 @@ public class TimelineService
         // Match (filter)
         pipeline.Add(matchStage);
 
-        // Sort: Demarcation ascending (ABY before BBY alphabetically — but we need BBY first)
-        // Use linear year for correct chronological order
+        // Sort chronologically. Real-calendar events use $RealYear directly (signed CE);
+        // galactic events compute -Year for BBY, +Year for ABY. The $switch picks the
+        // correct axis per document so mixed result sets still sort in a single pass.
         pipeline.Add(
             new BsonDocument(
                 "$addFields",
                 new BsonDocument(
                     "_linearYear",
-                    new BsonDocument("$cond", new BsonArray { new BsonDocument("$eq", new BsonArray { "$Demarcation", "Bby" }), new BsonDocument("$multiply", new BsonArray { "$Year", -1 }), "$Year" })
+                    new BsonDocument(
+                        "$switch",
+                        new BsonDocument
+                        {
+                            {
+                                "branches",
+                                new BsonArray
+                                {
+                                    new BsonDocument { { "case", new BsonDocument("$eq", new BsonArray { "$Calendar", "Real" }) }, { "then", "$RealYear" } },
+                                    new BsonDocument
+                                    {
+                                        { "case", new BsonDocument("$eq", new BsonArray { "$Demarcation", "Bby" }) },
+                                        { "then", new BsonDocument("$multiply", new BsonArray { "$Year", -1 }) },
+                                    },
+                                }
+                            },
+                            { "default", "$Year" },
+                        }
+                    )
                 )
             )
         );
@@ -197,14 +253,14 @@ public class TimelineService
         return collections.Select(_templateHelper.GetTemplateFromUri).Distinct().OrderBy(x => x).ToList();
     }
 
-    public async Task<GroupedTimelineResult> GetCategoryTimelineEvents(string category, Continuity? continuity = null, Universe? universe = null, int page = 1, int pageSize = 20)
+    public async Task<GroupedTimelineResult> GetCategoryTimelineEvents(string category, Continuity? continuity = null, Realm? realm = null, int page = 1, int pageSize = 20)
     {
         var categoryCollection = _timelineEventsDb.GetCollection<TimelineEvent>(Collections.TimelinePrefix + category);
 
         // Build combined filter
         var continuityFilter = BuildContinuityFilter(continuity);
-        var universeFilter = BuildUniverseFilter(universe);
-        var combinedFilter = Builders<TimelineEvent>.Filter.And(continuityFilter, universeFilter);
+        var realmFilter = BuildRealmFilter(realm);
+        var combinedFilter = Builders<TimelineEvent>.Filter.And(continuityFilter, realmFilter);
 
         var sort = Builders<TimelineEvent>.Sort.Ascending(x => x.Demarcation).Ascending(x => x.Year);
 
@@ -214,13 +270,19 @@ public class TimelineService
             .Select(doc => new TimelineEvent
             {
                 Title = doc.Title,
-                TemplateUri = doc.Template,
+                Template = doc.Template,
+                TemplateUri = doc.TemplateUri,
                 ImageUrl = doc.ImageUrl,
                 Demarcation = doc.Demarcation,
                 Year = doc.Year,
+                Calendar = doc.Calendar,
+                RealYear = doc.RealYear,
                 Properties = doc.Properties,
                 DateEvent = doc.DateEvent,
                 Continuity = doc.Continuity,
+                Realm = doc.Realm,
+                PageId = doc.PageId,
+                WikiUrl = doc.WikiUrl,
             })
             .ToList();
 
@@ -251,17 +313,17 @@ public class TimelineService
         return Builders<TimelineEvent>.Filter.Eq(x => x.Continuity, continuity.Value);
     }
 
-    private static FilterDefinition<TimelineEvent> BuildUniverseFilter(Universe? universe)
+    private static FilterDefinition<TimelineEvent> BuildRealmFilter(Realm? realm)
     {
-        if (universe == null)
+        if (realm == null)
         {
             // No filter — return all content
             return Builders<TimelineEvent>.Filter.Empty;
         }
 
-        // Include Unknown documents alongside the requested universe,
-        // since most timeline events don't have Universe explicitly set.
-        return Builders<TimelineEvent>.Filter.In(x => x.Universe, [universe.Value, Universe.Unknown]);
+        // Include Unknown documents alongside the requested realm,
+        // since most timeline events don't have Realm explicitly set.
+        return Builders<TimelineEvent>.Filter.In(x => x.Realm, [realm.Value, Realm.Unknown]);
     }
 
     public async Task<List<string>> GetTimelineCategories()

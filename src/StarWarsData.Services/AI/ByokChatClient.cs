@@ -25,13 +25,7 @@ public sealed class ByokChatClient : IChatClient
 
     /// <param name="serverClient">The default server ChatClient (used when no BYOK key).</param>
     /// <param name="clientFactory">Factory that creates an IChatClient from an API key string.</param>
-    public ByokChatClient(
-        IChatClient serverClient,
-        IHttpContextAccessor httpContextAccessor,
-        UserSettingsService userSettingsService,
-        Func<string, IChatClient> clientFactory,
-        ILogger logger
-    )
+    public ByokChatClient(IChatClient serverClient, IHttpContextAccessor httpContextAccessor, UserSettingsService userSettingsService, Func<string, IChatClient> clientFactory, ILogger logger)
     {
         _serverClient = serverClient;
         _httpContextAccessor = httpContextAccessor;
@@ -40,11 +34,7 @@ public sealed class ByokChatClient : IChatClient
         _logger = logger;
     }
 
-    public async Task<ChatResponse> GetResponseAsync(
-        IEnumerable<ChatMessage> chatMessages,
-        ChatOptions? options = null,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<ChatResponse> GetResponseAsync(IEnumerable<ChatMessage> chatMessages, ChatOptions? options = null, CancellationToken cancellationToken = default)
     {
         var client = await ResolveClientAsync(cancellationToken);
         return await client.GetResponseAsync(chatMessages, options, cancellationToken);
@@ -57,22 +47,17 @@ public sealed class ByokChatClient : IChatClient
     )
     {
         var client = await ResolveClientAsync(cancellationToken);
-        await foreach (
-            var update in client.GetStreamingResponseAsync(chatMessages, options, cancellationToken)
-        )
+        await foreach (var update in client.GetStreamingResponseAsync(chatMessages, options, cancellationToken))
             yield return update;
     }
 
-    public object? GetService(Type serviceType, object? serviceKey = null) =>
-        _serverClient.GetService(serviceType, serviceKey);
+    public object? GetService(Type serviceType, object? serviceKey = null) => _serverClient.GetService(serviceType, serviceKey);
 
     public void Dispose() { }
 
     async Task<IChatClient> ResolveClientAsync(CancellationToken ct)
     {
-        var userId = _httpContextAccessor
-            .HttpContext?.Request.Headers["X-User-Id"]
-            .FirstOrDefault();
+        var userId = _httpContextAccessor.HttpContext?.Request.Headers["X-User-Id"].FirstOrDefault();
         if (string.IsNullOrEmpty(userId))
             return _serverClient;
 

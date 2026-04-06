@@ -25,18 +25,18 @@
 
     <MudSwitch
         T="bool"
-        Value="_inUniverseEnabled"
-        ValueChanged="OnInUniverseChanged"
-        Label="In-Universe"
+        Value="_starwarsEnabled"
+        ValueChanged="OnStarwarsChanged"
+        Label="Star Wars"
         Color="Color.Tertiary"
         Size="Size.Small"
         Class="ma-0" />
 
     <MudSwitch
         T="bool"
-        Value="_outOfUniverseEnabled"
-        ValueChanged="OnOutOfUniverseChanged"
-        Label="Out-of-Universe"
+        Value="_realEnabled"
+        ValueChanged="OnRealChanged"
+        Label="Real World"
         Color="Color.Warning"
         Size="Size.Small"
         Class="ma-0" />
@@ -45,8 +45,8 @@
 @code {
     private bool _canonEnabled = true;
     private bool _legendsEnabled = true;
-    private bool _inUniverseEnabled = true;
-    private bool _outOfUniverseEnabled = false;
+    private bool _starwarsEnabled = true;
+    private bool _realEnabled = false;
 
     [Inject] private GlobalFilterService GlobalFilterService { get; set; } = default!;
 
@@ -79,19 +79,19 @@
                 break;
         }
 
-        switch (GlobalFilterService.SelectedUniverse)
+        switch (GlobalFilterService.SelectedRealm)
         {
-            case Universe.InUniverse:
-                _inUniverseEnabled = true;
-                _outOfUniverseEnabled = false;
+            case Realm.Starwars:
+                _starwarsEnabled = true;
+                _realEnabled = false;
                 break;
-            case Universe.OutOfUniverse:
-                _inUniverseEnabled = false;
-                _outOfUniverseEnabled = true;
+            case Realm.Real:
+                _starwarsEnabled = false;
+                _realEnabled = true;
                 break;
             default: // null = both
-                _inUniverseEnabled = true;
-                _outOfUniverseEnabled = true;
+                _starwarsEnabled = true;
+                _realEnabled = true;
                 break;
         }
     }
@@ -114,16 +114,23 @@
         UpdateContinuityService();
     }
 
-    private void OnInUniverseChanged(bool value)
+    private void OnStarwarsChanged(bool value)
     {
-        _inUniverseEnabled = value;
-        UpdateUniverseService();
+        _starwarsEnabled = value;
+        // If user just turned Star Wars off and Real was also off, auto-enable Real
+        // so at least one realm is always visible. Mirrors the Canon/Legends default
+        // (which defaults both-on, so turning one off flips cleanly to the other).
+        if (!_starwarsEnabled && !_realEnabled)
+            _realEnabled = true;
+        UpdateRealmService();
     }
 
-    private void OnOutOfUniverseChanged(bool value)
+    private void OnRealChanged(bool value)
     {
-        _outOfUniverseEnabled = value;
-        UpdateUniverseService();
+        _realEnabled = value;
+        if (!_starwarsEnabled && !_realEnabled)
+            _starwarsEnabled = true;
+        UpdateRealmService();
     }
 
     private void UpdateContinuityService()
@@ -144,21 +151,18 @@
         GlobalFilterService.SetContinuity(newContinuity);
     }
 
-    private void UpdateUniverseService()
+    private void UpdateRealmService()
     {
-        if (!_inUniverseEnabled && !_outOfUniverseEnabled)
+        // The per-switch handlers guarantee at least one side is on, so no
+        // fallback coercion is needed here — if both were off the handler
+        // that triggered this call already flipped the other side on.
+        Realm? newRealm = (_starwarsEnabled, _realEnabled) switch
         {
-            _inUniverseEnabled = true;
-            _outOfUniverseEnabled = false;
-        }
-
-        Universe? newUniverse = (_inUniverseEnabled, _outOfUniverseEnabled) switch
-        {
-            (true, false) => Universe.InUniverse,
-            (false, true) => Universe.OutOfUniverse,
+            (true, false) => Realm.Starwars,
+            (false, true) => Realm.Real,
             _ => null
         };
 
-        GlobalFilterService.SetUniverse(newUniverse);
+        GlobalFilterService.SetRealm(newRealm);
     }
 }

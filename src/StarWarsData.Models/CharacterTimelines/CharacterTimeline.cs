@@ -45,15 +45,39 @@ public class CharacterTimeline
 }
 
 /// <summary>
-/// A single event in a character's life, extracted by the LLM.
+/// A single event in a character's life, extracted by the LLM from wiki pages and enriched
+/// with temporal anchors derived from the knowledge graph.
 /// </summary>
 public class CharacterEvent : IComparable<CharacterEvent>
 {
     [BsonElement("eventType")]
     public string EventType { get; set; } = string.Empty;
 
+    /// <summary>One-sentence headline used for the sortable event title.</summary>
     [BsonElement("description")]
     public string Description { get; set; } = string.Empty;
+
+    /// <summary>
+    /// 2–4 sentences of narrative describing what happened, the context, and the consequences
+    /// for the character. Fills in the body text when the headline is too terse to be informative.
+    /// </summary>
+    [BsonElement("narrative")]
+    [BsonIgnoreIfNull]
+    public string? Narrative { get; set; }
+
+    /// <summary>Why this event matters in the character's arc (optional, 1 sentence).</summary>
+    [BsonElement("significance")]
+    [BsonIgnoreIfNull]
+    public string? Significance { get; set; }
+
+    /// <summary>What happened immediately before that set this event up (optional, 1 sentence).</summary>
+    [BsonElement("precedingContext")]
+    [BsonIgnoreIfNull]
+    public string? PrecedingContext { get; set; }
+
+    /// <summary>Consequences or outcomes that followed from this event (0..n bullet strings).</summary>
+    [BsonElement("consequences")]
+    public List<string> Consequences { get; set; } = [];
 
     [BsonElement("year")]
     public float? Year { get; set; }
@@ -61,6 +85,24 @@ public class CharacterEvent : IComparable<CharacterEvent>
     [BsonElement("demarcation")]
     [BsonRepresentation(BsonType.String)]
     public Demarcation Demarcation { get; set; } = Demarcation.Unset;
+
+    /// <summary>
+    /// Sort-hint year inferred from the knowledge graph when the LLM couldn't assign one.
+    /// Never overwrites <see cref="Year"/>; used only as a tiebreak in <see cref="CompareTo"/>.
+    /// </summary>
+    [BsonElement("inferredYear")]
+    [BsonIgnoreIfNull]
+    public int? InferredYear { get; set; }
+
+    /// <summary>Demarcation accompanying <see cref="InferredYear"/>.</summary>
+    [BsonElement("inferredDemarcation")]
+    [BsonIgnoreIfDefault]
+    public Demarcation InferredDemarcation { get; set; } = Demarcation.Unset;
+
+    /// <summary>Provenance string for InferredYear, e.g. "kg-edge:apprenticed_to→Qui-Gon Jinn".</summary>
+    [BsonElement("yearSource")]
+    [BsonIgnoreIfNull]
+    public string? YearSource { get; set; }
 
     [BsonElement("dateDescription")]
     public string? DateDescription { get; set; }
@@ -77,32 +119,41 @@ public class CharacterEvent : IComparable<CharacterEvent>
     [BsonElement("sourceWikiUrl")]
     public string? SourceWikiUrl { get; set; }
 
+    /// <summary>
+    /// Derive a sort key that collapses (Year, Demarcation) into a signed galactic year
+    /// (negative = BBY, positive = ABY), falling back to InferredYear when the LLM year is null.
+    /// Returns null only if both sources are null.
+    /// </summary>
+    public int? SortKey()
+    {
+        var (year, dem) = (Year, Demarcation) switch
+        {
+            (not null, Demarcation.Bby) => ((float?)Year, Demarcation.Bby),
+            (not null, Demarcation.Aby) => ((float?)Year, Demarcation.Aby),
+            (not null, _) => ((float?)Year, Demarcation.Aby), // treat Unset as ABY fallback
+            _ => (InferredYear.HasValue ? (float?)InferredYear : null, InferredDemarcation),
+        };
+        if (year is null)
+            return null;
+        return dem == Demarcation.Bby ? -(int)year.Value : (int)year.Value;
+    }
+
     public int CompareTo(CharacterEvent? other)
     {
         if (other is null)
             return 1;
-        if (!Year.HasValue && !other.Year.HasValue)
+
+        var a = SortKey();
+        var b = other.SortKey();
+
+        if (a is null && b is null)
             return 0;
-        if (!Year.HasValue)
+        if (a is null)
             return 1;
-        if (!other.Year.HasValue)
+        if (b is null)
             return -1;
 
-        switch (Demarcation)
-        {
-            case Demarcation.Bby when other.Demarcation == Demarcation.Aby:
-                return -1;
-            case Demarcation.Aby when other.Demarcation == Demarcation.Bby:
-                return 1;
-        }
-
-        return Demarcation switch
-        {
-            Demarcation.Bby when other.Demarcation == Demarcation.Bby => other.Year.Value.CompareTo(
-                Year.Value
-            ),
-            _ => Year.Value.CompareTo(other.Year.Value),
-        };
+        return a.Value.CompareTo(b.Value);
     }
 }
 

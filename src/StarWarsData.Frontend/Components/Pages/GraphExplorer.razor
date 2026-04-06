@@ -161,9 +161,9 @@
         var c = GlobalFilterService.GetContinuityQueryParam();
         if (!string.IsNullOrEmpty(c))
             query["continuity"] = c;
-        var u = GlobalFilterService.GetUniverseQueryParam();
+        var u = GlobalFilterService.GetRealmQueryParam();
         if (!string.IsNullOrEmpty(u))
-            query["universe"] = u;
+            query["realm"] = u;
     }
 
     private string BuildQueryString(params (string key, string value)[] parameters)

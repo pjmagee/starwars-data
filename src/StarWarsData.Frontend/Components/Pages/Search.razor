@@ -227,7 +227,7 @@
 
         try
         {
-            var qs = $"api/SemanticSearch?query={HttpUtility.UrlEncode(_query)}&mode={_mode}&limit=10";
+            var qs = $"api/search?q={HttpUtility.UrlEncode(_query)}&mode={_mode}&limit=10";
             if (!string.IsNullOrEmpty(_selectedType))
                 qs += $"&type={HttpUtility.UrlEncode(_selectedType)}";
 
@@ -237,9 +237,9 @@
             if (!string.IsNullOrEmpty(continuity))
                 qs += $"&continuity={HttpUtility.UrlEncode(continuity)}";
 
-            var universe = GlobalFilterService.GetUniverseQueryParam();
-            if (!string.IsNullOrEmpty(universe))
-                qs += $"&universe={HttpUtility.UrlEncode(universe)}";
+            var realm = GlobalFilterService.GetRealmQueryParam();
+            if (!string.IsNullOrEmpty(realm))
+                qs += $"&realm={HttpUtility.UrlEncode(realm)}";
 
             var response = await Api.GetAsync(qs);
 

@@ -31,7 +31,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         return (await labels.ToListAsync(ct)).Where(l => !string.IsNullOrEmpty(l)).OrderBy(l => l).ToList();
     }
 
-    public async Task<BrowseEntitiesResult> BrowseAsync(string? type, string? q, int page, int pageSize, string? continuity, string? universe, CancellationToken ct)
+    public async Task<BrowseEntitiesResult> BrowseAsync(string? type, string? q, int page, int pageSize, string? continuity, string? realm, CancellationToken ct)
     {
         if (pageSize > 100)
             pageSize = 100;
@@ -44,8 +44,8 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             filters.Add(Builders<GraphNode>.Filter.Regex(n => n.Name, new BsonRegularExpression(q, "i")));
         if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
-        if (universe is not null && Enum.TryParse<Universe>(universe, true, out var uni))
-            filters.Add(Builders<GraphNode>.Filter.In(n => n.Universe, [uni, Universe.Unknown]));
+        if (realm is not null && Enum.TryParse<Realm>(realm, true, out var r))
+            filters.Add(Builders<GraphNode>.Filter.In(n => n.Realm, [r, Realm.Unknown]));
 
         var filter = filters.Count > 0 ? Builders<GraphNode>.Filter.And(filters) : FilterDefinition<GraphNode>.Empty;
 
@@ -73,7 +73,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         };
     }
 
-    public async Task<List<EntitySearchDto>> SearchAsync(string q, string? type, string? continuity, string? universe, CancellationToken ct)
+    public async Task<List<EntitySearchDto>> SearchAsync(string q, string? type, string? continuity, string? realm, CancellationToken ct)
     {
         var filters = new List<FilterDefinition<GraphNode>> { Builders<GraphNode>.Filter.Regex(n => n.Name, new BsonRegularExpression(q, "i")) };
 
@@ -81,8 +81,8 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Type, type));
         if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
-        if (universe is not null && Enum.TryParse<Universe>(universe, true, out var uni))
-            filters.Add(Builders<GraphNode>.Filter.In(n => n.Universe, [uni, Universe.Unknown]));
+        if (realm is not null && Enum.TryParse<Realm>(realm, true, out var r))
+            filters.Add(Builders<GraphNode>.Filter.In(n => n.Realm, [r, Realm.Unknown]));
 
         return await _nodes
             .Find(Builders<GraphNode>.Filter.And(filters))
@@ -192,7 +192,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         string? calendar,
         string? sortBy,
         string? sortDirection,
-        string? universe,
+        string? realm,
         CancellationToken ct
     )
     {
@@ -217,8 +217,8 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             filters.Add(Builders<GraphNode>.Filter.Regex(n => n.Name, new BsonRegularExpression(q, "i")));
         if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
-        if (universe is not null && Enum.TryParse<Universe>(universe, true, out var uni))
-            filters.Add(Builders<GraphNode>.Filter.In(n => n.Universe, [uni, Universe.Unknown]));
+        if (realm is not null && Enum.TryParse<Realm>(realm, true, out var r))
+            filters.Add(Builders<GraphNode>.Filter.In(n => n.Realm, [r, Realm.Unknown]));
         if (temporalOnly)
             filters.Add(Builders<GraphNode>.Filter.SizeGt(n => n.TemporalFacets, 0));
         // Calendar-aware temporal filter: if a calendar (galactic/real) is specified,
@@ -301,57 +301,75 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         int maxDepth,
         string? continuity,
         bool onlyRoot = false,
-        string? universe = null,
+        string? realm = null,
+        int? yearFrom = null,
+        int? yearTo = null,
         CancellationToken ct = default
     )
     {
         maxDepth = Math.Clamp(maxDepth, 1, 4);
         var edgesRaw = _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges);
 
-        // Universe filter is applied lazily during traversal: edges don't carry the
-        // Universe field, so we look up the universe of each endpoint node we encounter
-        // and skip edges whose either endpoint fails the filter. Cached per request.
-        Universe? universeFilter = null;
-        if (!string.IsNullOrWhiteSpace(universe) && Enum.TryParse<Universe>(universe, true, out var uniParsed))
-            universeFilter = uniParsed;
-        var universeCache = new Dictionary<int, Universe>();
-
-        async Task<bool> NodePassesUniverseAsync(int nodeId)
+        // Optional temporal window filter: keep only edges whose [fromYear, toYear] interval
+        // overlaps [yearFrom, yearTo]. Null edge bounds are treated as open (±∞) and pass —
+        // this is recall-biased because most edges in kg.edges don't carry temporal bounds yet.
+        // Overlap = (edge.fromYear is null OR edge.fromYear <= yearTo)
+        //        AND (edge.toYear   is null OR edge.toYear   >= yearFrom)
+        FilterDefinition<BsonDocument>? temporalFilter = null;
+        if (yearFrom.HasValue || yearTo.HasValue)
         {
-            if (universeFilter is null)
-                return true;
-            if (universeCache.TryGetValue(nodeId, out var cached))
-                return cached == universeFilter.Value || cached == Universe.Unknown;
-            var u = await _nodes.Find(n => n.PageId == nodeId).Project(n => (Universe?)n.Universe).FirstOrDefaultAsync(ct) ?? Universe.Unknown;
-            universeCache[nodeId] = u;
-            return u == universeFilter.Value || u == Universe.Unknown;
-        }
-
-        async Task PrefetchUniverseAsync(IEnumerable<int> ids)
-        {
-            if (universeFilter is null)
-                return;
-            var missing = ids.Where(i => !universeCache.ContainsKey(i)).Distinct().ToList();
-            if (missing.Count == 0)
-                return;
-            var docs = await _nodes.Find(Builders<GraphNode>.Filter.In(n => n.PageId, missing)).Project(n => new { n.PageId, n.Universe }).ToListAsync(ct);
-            foreach (var d in docs)
-                universeCache[d.PageId] = d.Universe;
-            // Any id not returned is treated as Unknown (edge dangling past node set).
-            foreach (var id in missing)
-                universeCache.TryAdd(id, Universe.Unknown);
-        }
-
-        // Fast-fail: if the root node itself doesn't match the universe filter, return empty.
-        if (universeFilter is not null && !await NodePassesUniverseAsync(pageId))
-        {
-            return new RelationshipGraphResult
+            var b = Builders<BsonDocument>.Filter;
+            var clauses = new List<FilterDefinition<BsonDocument>>();
+            if (yearTo.HasValue)
             {
-                RootId = pageId,
-                RootName = $"#{pageId}",
-                Nodes = [],
-                Edges = [],
-            };
+                clauses.Add(
+                    b.Or(b.Eq(RelationshipEdgeBsonFields.FromYear, BsonNull.Value), b.Not(b.Exists(RelationshipEdgeBsonFields.FromYear)), b.Lte(RelationshipEdgeBsonFields.FromYear, yearTo.Value))
+                );
+            }
+            if (yearFrom.HasValue)
+            {
+                clauses.Add(
+                    b.Or(b.Eq(RelationshipEdgeBsonFields.ToYear, BsonNull.Value), b.Not(b.Exists(RelationshipEdgeBsonFields.ToYear)), b.Gte(RelationshipEdgeBsonFields.ToYear, yearFrom.Value))
+                );
+            }
+            temporalFilter = b.And(clauses);
+        }
+
+        // Realm is denormalized onto edges (fromRealm/toRealm) during Phase 5 ETL, so we
+        // push it directly into the edge filter instead of the per-edge node lookups the
+        // old implementation used. Unknown endpoints always pass the filter, preserving
+        // the prior "dangling edges are kept" semantics.
+        Realm? realmFilter = null;
+        if (!string.IsNullOrWhiteSpace(realm) && Enum.TryParse<Realm>(realm, true, out var rParsed))
+            realmFilter = rParsed;
+
+        FilterDefinition<BsonDocument>? outRealmFilter = null;
+        FilterDefinition<BsonDocument>? inRealmFilter = null;
+        if (realmFilter is not null)
+        {
+            var b = Builders<BsonDocument>.Filter;
+            var acceptedRealms = new[] { realmFilter.Value.ToString(), Realm.Unknown.ToString() };
+            // Back-compat: edges written before the realm denormalization landed won't
+            // carry the field. Treat "field missing" the same as Unknown so filtered
+            // queries don't silently lose all results until Phase 5 ETL re-runs.
+            outRealmFilter = b.Or(b.Not(b.Exists(RelationshipEdgeBsonFields.ToRealm)), b.In(RelationshipEdgeBsonFields.ToRealm, acceptedRealms));
+            inRealmFilter = b.Or(b.Not(b.Exists(RelationshipEdgeBsonFields.FromRealm)), b.In(RelationshipEdgeBsonFields.FromRealm, acceptedRealms));
+        }
+
+        // Fast-fail: if the root node itself doesn't match the realm filter, return empty.
+        if (realmFilter is not null)
+        {
+            var rootRealm = await _nodes.Find(n => n.PageId == pageId).Project(n => (Realm?)n.Realm).FirstOrDefaultAsync(ct) ?? Realm.Unknown;
+            if (rootRealm != realmFilter.Value && rootRealm != Realm.Unknown)
+            {
+                return new RelationshipGraphResult
+                {
+                    RootId = pageId,
+                    RootName = $"#{pageId}",
+                    Nodes = [],
+                    Edges = [],
+                };
+            }
         }
 
         // Early exit: client explicitly asked for just the root node and no edges.
@@ -441,13 +459,12 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                 outFilter &= Builders<BsonDocument>.Filter.In(RelationshipEdgeBsonFields.Label, outgoingLabelFilter);
             if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
                 outFilter &= Builders<BsonDocument>.Filter.Eq(GraphNodeBsonFields.Continuity, cont.ToString());
+            if (temporalFilter is not null)
+                outFilter &= temporalFilter;
+            if (outRealmFilter is not null)
+                outFilter &= outRealmFilter;
 
             var outEdges = await edgesRaw.Find(outFilter).Limit(500).ToListAsync(ct);
-
-            // Prefetch universes for all "to" endpoints in a single query so the per-edge
-            // filter below doesn't fan out into N lookups.
-            if (universeFilter is not null)
-                await PrefetchUniverseAsync(outEdges.Select(e => e[RelationshipEdgeBsonFields.ToId].AsInt32));
 
             // ── Inbound edges (frontier node is the target) ──
             // Rewritten at read time: we flip from/to and map the label to its reverse,
@@ -457,11 +474,12 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                 inFilter &= Builders<BsonDocument>.Filter.In(RelationshipEdgeBsonFields.Label, inboundLabelFilter);
             if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont2))
                 inFilter &= Builders<BsonDocument>.Filter.Eq(GraphNodeBsonFields.Continuity, cont2.ToString());
+            if (temporalFilter is not null)
+                inFilter &= temporalFilter;
+            if (inRealmFilter is not null)
+                inFilter &= inRealmFilter;
 
             var inEdges = await edgesRaw.Find(inFilter).Limit(500).ToListAsync(ct);
-
-            if (universeFilter is not null)
-                await PrefetchUniverseAsync(inEdges.Select(e => e[RelationshipEdgeBsonFields.FromId].AsInt32));
 
             var nextFrontier = new HashSet<int>();
 
@@ -469,8 +487,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             {
                 var toId = e[RelationshipEdgeBsonFields.ToId].AsInt32;
                 var fromId = e[RelationshipEdgeBsonFields.FromId].AsInt32;
-                if (universeFilter is not null && !await NodePassesUniverseAsync(toId))
-                    continue;
+                // Realm filter is already applied server-side via outRealmFilter.
                 allEdges.Add(
                     (
                         fromId,
@@ -498,8 +515,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                 // (possible when both endpoints are in the frontier).
                 if (frontier.Contains(origFromId))
                     continue;
-                if (universeFilter is not null && !await NodePassesUniverseAsync(origFromId))
-                    continue;
+                // Realm filter is already applied server-side via inRealmFilter.
 
                 // Flip the edge so the frontier node is the source, and rewrite
                 // the label to its reverse form so the graph reads correctly.
@@ -766,6 +782,8 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         int entityId2,
         int maxHops,
         string? continuity,
+        int? yearFrom = null,
+        int? yearTo = null,
         CancellationToken ct = default
     )
     {
@@ -774,6 +792,22 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         FilterDefinition<RelationshipEdge>? contFilter = null;
         if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
             contFilter = Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, cont);
+
+        // Temporal window filter — same semantics as QueryGraphAsync: recall-biased
+        // (null edge bounds pass through), AND-combined with the continuity filter.
+        FilterDefinition<RelationshipEdge>? temporalFilter = null;
+        if (yearFrom.HasValue || yearTo.HasValue)
+        {
+            var b = Builders<RelationshipEdge>.Filter;
+            var clauses = new List<FilterDefinition<RelationshipEdge>>();
+            if (yearTo.HasValue)
+                clauses.Add(b.Or(b.Eq(e => e.FromYear, null), b.Lte(e => e.FromYear, yearTo.Value)));
+            if (yearFrom.HasValue)
+                clauses.Add(b.Or(b.Eq(e => e.ToYear, null), b.Gte(e => e.ToYear, yearFrom.Value)));
+            temporalFilter = b.And(clauses);
+        }
+
+        var edgeFilter = contFilter is not null && temporalFilter is not null ? Builders<RelationshipEdge>.Filter.And(contFilter, temporalFilter) : contFilter ?? temporalFilter;
 
         if (entityId1 == entityId2)
             return (true, []);
@@ -791,14 +825,14 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         {
             if (frontier1.Count <= frontier2.Count)
             {
-                frontier1 = await ExpandFrontierAsync(frontier1, visited1, contFilter, ct);
+                frontier1 = await ExpandFrontierAsync(frontier1, visited1, edgeFilter, ct);
                 meetingPoint = frontier1.FirstOrDefault(id => visited2.ContainsKey(id));
                 if (meetingPoint == 0 && !visited2.ContainsKey(0))
                     meetingPoint = null;
             }
             else
             {
-                frontier2 = await ExpandFrontierAsync(frontier2, visited2, contFilter, ct);
+                frontier2 = await ExpandFrontierAsync(frontier2, visited2, edgeFilter, ct);
                 meetingPoint = frontier2.FirstOrDefault(id => visited1.ContainsKey(id));
                 if (meetingPoint == 0 && !visited1.ContainsKey(0))
                     meetingPoint = null;
@@ -1505,7 +1539,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         int pageSize,
         string? sortBy,
         string? sortDirection,
-        string? universe,
+        string? realm,
         CancellationToken ct
     )
     {
@@ -1536,11 +1570,11 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         if (match.ElementCount > 0)
             pipeline.Add(new BsonDocument("$match", match));
 
-        // Universe filter: edges don't carry Universe directly, so $lookup the source
+        // Realm filter: edges don't carry Realm directly, so $lookup the source
         // node from kg.nodes and keep edges whose source node matches the selected
-        // universe (plus Unknown). Applied after the cheap $match so the join set is
+        // realm (plus Unknown). Applied after the cheap $match so the join set is
         // as small as possible.
-        if (!string.IsNullOrWhiteSpace(universe) && Enum.TryParse<Universe>(universe, true, out var uni))
+        if (!string.IsNullOrWhiteSpace(realm) && Enum.TryParse<Realm>(realm, true, out var r))
         {
             pipeline.Add(
                 new BsonDocument(
@@ -1553,14 +1587,12 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                         { "as", "_fromNode" },
                         {
                             "pipeline",
-                            new BsonArray { new BsonDocument("$project", new BsonDocument(GraphNodeBsonFields.Universe, 1)) }
+                            new BsonArray { new BsonDocument("$project", new BsonDocument(GraphNodeBsonFields.Realm, 1)) }
                         },
                     }
                 )
             );
-            pipeline.Add(
-                new BsonDocument("$match", new BsonDocument("_fromNode." + GraphNodeBsonFields.Universe, new BsonDocument("$in", new BsonArray { uni.ToString(), nameof(Universe.Unknown) })))
-            );
+            pipeline.Add(new BsonDocument("$match", new BsonDocument("_fromNode." + GraphNodeBsonFields.Realm, new BsonDocument("$in", new BsonArray { r.ToString(), nameof(Realm.Unknown) }))));
         }
 
         pipeline.Add(
@@ -1679,4 +1711,151 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             PageSize = pageSize,
         };
     }
+
+    // ── Lineage traversal (direction-pure, hierarchy-shaped) ──
+
+    /// <summary>
+    /// Walk a hierarchy-shaped relationship (e.g. <c>apprentice_of</c>, <c>parent_of</c>, <c>successor_of</c>)
+    /// from a root entity, returning the full chain ordered by depth. This is the canonical
+    /// <c>$graphLookup</c> use case: a single-label, single-direction recursive traversal —
+    /// cheaper, clearer, and depth-aware compared to the hop-by-hop BFS used by
+    /// <see cref="QueryGraphAsync"/>, which is tuned for mixed-direction neighborhood exploration.
+    /// </summary>
+    /// <param name="rootId">PageId of the starting entity.</param>
+    /// <param name="label">The relationship label to follow (must exist as a forward label on <c>kg.edges</c>).</param>
+    /// <param name="direction">
+    ///   <c>forward</c>: walk edges in the stored direction (root is the <c>fromId</c> of the first hop,
+    ///   next seed is each edge's <c>toId</c>). For <c>apprentice_of</c>, this walks towards masters.
+    ///   For <c>parent_of</c>, it walks towards children.
+    ///   <c>reverse</c>: walk against the stored direction (root is the <c>toId</c> of the first hop,
+    ///   next seed is each edge's <c>fromId</c>). For <c>apprentice_of</c>, this walks towards apprentices.
+    ///   For <c>parent_of</c>, it walks towards parents.
+    /// </param>
+    /// <param name="maxDepth">Max hops from root (1-10).</param>
+    /// <param name="continuity">Optional continuity filter pushed into <c>restrictSearchWithMatch</c>.</param>
+    public async Task<LineageResult> GetLineageAsync(int rootId, string label, string direction, int maxDepth, string? continuity, CancellationToken ct = default)
+    {
+        maxDepth = Math.Clamp(maxDepth, 1, 10);
+        var reverse = string.Equals(direction, "reverse", StringComparison.OrdinalIgnoreCase);
+        var normalizedDirection = reverse ? "reverse" : "forward";
+
+        // Root must exist in kg.nodes — we start the aggregation there so $graphLookup
+        // can seed from the node's own _id (which equals PageId on GraphNode).
+        var rootNode = await _nodes.Find(n => n.PageId == rootId).FirstOrDefaultAsync(ct);
+        if (rootNode is null)
+            return new LineageResult
+            {
+                RootId = rootId,
+                RootName = $"#{rootId}",
+                Label = label,
+                Direction = normalizedDirection,
+                Chain = [],
+            };
+
+        // restrictSearchWithMatch is applied to every recursive lookup step, so
+        // label + continuity are pushed fully server-side. The initial $match
+        // on the root doc bounds the aggregation to a single starting document.
+        var restrict = new BsonDocument { { RelationshipEdgeBsonFields.Label, label } };
+        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+            restrict[RelationshipEdgeBsonFields.Continuity] = cont.ToString();
+
+        // forward:  first hop matches edges where fromId = root, then seeds next hop with toId
+        //           → connectToField="fromId" (match the current seed against edge.fromId)
+        //           → connectFromField="toId" (next seed is edge.toId)
+        // reverse:  first hop matches edges where toId = root, then seeds next hop with fromId
+        //           → connectToField="toId"
+        //           → connectFromField="fromId"
+        var connectFrom = reverse ? RelationshipEdgeBsonFields.FromId : RelationshipEdgeBsonFields.ToId;
+        var connectTo = reverse ? RelationshipEdgeBsonFields.ToId : RelationshipEdgeBsonFields.FromId;
+
+        var pipeline = new BsonDocument[]
+        {
+            new("$match", new BsonDocument(MongoFields.Id, rootId)),
+            new(
+                "$graphLookup",
+                new BsonDocument
+                {
+                    { "from", Collections.KgEdges },
+                    { "startWith", "$" + MongoFields.Id },
+                    { "connectFromField", connectFrom },
+                    { "connectToField", connectTo },
+                    { "as", "lineage" },
+                    // $graphLookup depth is 0-based, so N hops requires maxDepth = N - 1
+                    { "maxDepth", maxDepth - 1 },
+                    { "depthField", "d" },
+                    { "restrictSearchWithMatch", restrict },
+                }
+            ),
+            new("$project", new BsonDocument { { MongoFields.Id, 1 }, { "lineage", 1 } }),
+        };
+
+        var nodesRaw = _nodes.Database.GetCollection<BsonDocument>(Collections.KgNodes);
+        var result = await nodesRaw.Aggregate<BsonDocument>(pipeline, cancellationToken: ct).FirstOrDefaultAsync(ct);
+        if (result is null || !result.Contains("lineage"))
+            return new LineageResult
+            {
+                RootId = rootId,
+                RootName = rootNode.Name,
+                Label = label,
+                Direction = normalizedDirection,
+                Chain = [],
+            };
+
+        var chain = new List<LineageStep>();
+        foreach (var e in result["lineage"].AsBsonArray.OfType<BsonDocument>())
+        {
+            var depth = e.Contains("d") ? e["d"].ToInt32() : 0;
+            var fromId = e[RelationshipEdgeBsonFields.FromId].AsInt32;
+            var toId = e[RelationshipEdgeBsonFields.ToId].AsInt32;
+            chain.Add(
+                new LineageStep
+                {
+                    // Depth is 0-based from $graphLookup's perspective (the first hop from
+                    // root is depth 0). Surface as 1-based hops from root for the caller.
+                    Hop = depth + 1,
+                    FromId = fromId,
+                    FromName = e[RelationshipEdgeBsonFields.FromName].AsString,
+                    FromType = e[RelationshipEdgeBsonFields.FromType].AsString,
+                    ToId = toId,
+                    ToName = e[RelationshipEdgeBsonFields.ToName].AsString,
+                    ToType = e[RelationshipEdgeBsonFields.ToType].AsString,
+                    Label = e[RelationshipEdgeBsonFields.Label].AsString,
+                    Evidence = e.Contains(RelationshipEdgeBsonFields.Evidence) ? e[RelationshipEdgeBsonFields.Evidence].AsString : string.Empty,
+                }
+            );
+        }
+
+        chain.Sort((a, b) => a.Hop.CompareTo(b.Hop));
+
+        return new LineageResult
+        {
+            RootId = rootId,
+            RootName = rootNode.Name,
+            Label = label,
+            Direction = normalizedDirection,
+            Chain = chain,
+        };
+    }
+}
+
+public class LineageResult
+{
+    public int RootId { get; set; }
+    public string RootName { get; set; } = string.Empty;
+    public string Label { get; set; } = string.Empty;
+    public string Direction { get; set; } = string.Empty;
+    public List<LineageStep> Chain { get; set; } = [];
+}
+
+public class LineageStep
+{
+    public int Hop { get; set; }
+    public int FromId { get; set; }
+    public string FromName { get; set; } = string.Empty;
+    public string FromType { get; set; } = string.Empty;
+    public int ToId { get; set; }
+    public string ToName { get; set; } = string.Empty;
+    public string ToType { get; set; } = string.Empty;
+    public string Label { get; set; } = string.Empty;
+    public string Evidence { get; set; } = string.Empty;
 }

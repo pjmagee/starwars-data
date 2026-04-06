@@ -14,10 +14,12 @@ public static class TimelineEventBsonFields
     public const string ImageUrl = "ImageUrl";
     public const string Demarcation = "Demarcation";
     public const string Year = "Year";
+    public const string Calendar = "Calendar";
+    public const string RealYear = "RealYear";
     public const string Properties = "Properties";
     public const string DateEvent = "DateEvent";
     public const string Continuity = "Continuity";
-    public const string Universe = "Universe";
+    public const string Realm = "Realm";
     public const string PageId = "PageId";
     public const string WikiUrl = "WikiUrl";
 }

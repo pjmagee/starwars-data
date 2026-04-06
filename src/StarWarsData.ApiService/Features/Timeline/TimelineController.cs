@@ -30,36 +30,37 @@ public class TimelineController : ControllerBase
         return await _timelineService.GetTimelineEvents(
             categories,
             queryParams.Continuity,
-            queryParams.Universe,
+            queryParams.Realm,
             queryParams?.Page ?? 1,
             queryParams?.PageSize ?? 50,
             queryParams?.YearFrom,
             queryParams?.YearFromDemarcation,
             queryParams?.YearTo,
             queryParams?.YearToDemarcation,
-            queryParams?.Search
+            queryParams?.Search,
+            queryParams?.Calendar
         );
     }
 
     /// <summary>
-    /// Returns distinct infobox template names from Pages, filtered by continuity and universe.
+    /// Returns distinct infobox template names from Pages, filtered by continuity and realm.
     /// </summary>
     [HttpGet("categories")]
-    public async Task<List<string>> GetTimelineCategories([FromQuery] Continuity? continuity = null, [FromQuery] Universe? universe = null, CancellationToken cancellationToken = default)
+    public async Task<List<string>> GetTimelineCategories([FromQuery] Continuity? continuity = null, [FromQuery] Realm? realm = null, CancellationToken cancellationToken = default)
     {
-        return await _recordService.GetFilteredCollectionNames(continuity, universe, cancellationToken);
+        return await _recordService.GetFilteredCollectionNames(continuity, realm, cancellationToken);
     }
 
     [HttpGet("categories/{category}/events")]
     public async Task<GroupedTimelineResult?> GetCategoryTimelineEvents(
         string category,
         [FromQuery] Continuity? continuity = null,
-        [FromQuery] Universe? universe = null,
+        [FromQuery] Realm? realm = null,
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 50
     )
     {
-        return await _timelineService.GetCategoryTimelineEvents(category, continuity, universe, page, pageSize);
+        return await _timelineService.GetCategoryTimelineEvents(category, continuity, realm, page, pageSize);
     }
 
     [HttpGet("available-categories")]

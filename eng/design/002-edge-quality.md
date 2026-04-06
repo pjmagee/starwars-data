@@ -1,8 +1,10 @@
 # Design: Knowledge Graph Edge Quality — Noise Reduction & Semantic Relationships
 
-**Status:** Draft
-**Date:** 2026-04-03
+**Status:** Shipped (Phases 1–3) + one adjacent fix in ADR-003
+**Date:** 2026-04-03 (updated 2026-04-05)
 **Author:** Patrick Magee + Claude
+
+> **Update (2026-04-05):** Phases 1–3 of this design have shipped (noise filtering, qualifier parsing, temporal bound enrichment). A **separate** edge-quality concern was discovered during the work documented in [ADR-003](../adr/003-kg-query-architecture.md): the ETL was producing ~2,700 duplicate `(fromId, toId, label)` tuples because two infobox fields on the same page can map to the same canonical label against the same target (e.g. `Masters` and `Teacher` both → `apprentice_of` → Obi-Wan). A post-enrichment `DistinctBy((fromId, toId, label))` step with quality-ordered preference (explicit temporal bounds > derived bounds > weight) now runs in `InfoboxGraphService.ProcessAsync` immediately before `InsertManyAsync`, and the `(fromId, toId, label)` unique index on `kg.edges` is now enforceable. See ADR-003 for the architectural context and the full set of changes that landed alongside this fix.
 
 ## Problem
 
@@ -144,3 +146,8 @@ This finally populates the `fromYear`/`toYear` fields on `RelationshipEdge` that
 - `src/StarWarsData.Services/InfoboxGraphService.cs` — edge creation logic in `BuildGraphAsync`
 - `src/StarWarsData.Models/Entities/RelationshipEdge.cs` — potentially add `qualifier` field
 - Re-run ETL on `starwars-dev` after changes
+
+## Related
+
+- [ADR-003: KG Query Architecture](../adr/003-kg-query-architecture.md) — `(fromId, toId, label)` unique constraint, ETL dedup step, denormalization of `fromRealm`/`toRealm`/`reverseLabel` on edges
+- [Design-007: KG Bidirectional Edges View](./007-kg-bidirectional-edges-view.md) — `reverseLabel` denormalization and the `kg.edges.bidir` view that builds on this work

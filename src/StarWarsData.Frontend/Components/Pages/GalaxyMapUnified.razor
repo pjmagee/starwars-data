@@ -84,6 +84,11 @@
         border: none; transition: background 0.15s; white-space: nowrap;
     }
     .era-chip:hover { background: rgba(255,255,255,0.15); }
+    .era-chip.active {
+        background: var(--mud-palette-primary);
+        color: #fff; font-weight: 600;
+        box-shadow: 0 0 10px rgba(var(--mud-palette-primary-rgb), 0.6);
+    }
     .density-viewport {
         flex: 1; overflow-x: auto; overflow-y: hidden;
         height: 44px; min-height: 44px;
@@ -483,10 +488,10 @@
 
                 @{
                     var mappedEvents = FilteredEventCells.SelectMany(c => c.Events.Select(e => (evt: e, region: c.Region))).ToList();
-                    var unresolvedHidden = GlobalFilterService.SelectedUniverse switch
+                    var unresolvedHidden = GlobalFilterService.SelectedRealm switch
                     {
-                        Universe.InUniverse => _overview?.Lenses.Where(l => l.OutOfUniverse).Select(l => l.Lens).ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new(),
-                        Universe.OutOfUniverse => _overview?.Lenses.Where(l => !l.OutOfUniverse).Select(l => l.Lens).ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new(),
+                        Realm.Starwars => _overview?.Lenses.Where(l => l.IsReal).Select(l => l.Lens).ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new(),
+                        Realm.Real => _overview?.Lenses.Where(l => !l.IsReal).Select(l => l.Lens).ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new(),
                         _ => new HashSet<string>(),
                     };
                     var contFilter = GlobalFilterService.SelectedContinuity;
@@ -680,7 +685,8 @@
             <div class="timeline-eras">
                 @foreach (var era in _overview.Eras)
                 {
-                    <button class="era-chip" @onclick="() => JumpToYear(era.StartYear)"
+                    var isActiveEra = _year >= era.StartYear && _year <= era.EndYear;
+                    <button class="era-chip @(isActiveEra ? "active" : "")" @onclick="() => JumpToYear(era.StartYear)"
                             title="@($"{era.Name} ({FormatYear(era.StartYear)}{(era.EndYear != era.StartYear ? $" – {FormatYear(era.EndYear)}" : "")})")">@era.Name</button>
                 }
             </div>
@@ -743,7 +749,7 @@
 
     // Data
     GalaxyOverviewDocument? _overview;
-    GalaxyMapV2Overview? _geography;
+    GalaxyGeography? _geography;
     record ArticleIntroDto(string Heading, string Text, string WikiUrl, string Type);
 
     GalaxyYearDocument? _yearData;
@@ -754,9 +760,9 @@
     string _mode = "explore";
     string _selectedLens = "All";
 
-    // Explore state (from GalacticMapV2)
-    MapV2System? _selectedSystem;
-    MapV2Region? _selectedRegion;
+    // Explore state
+    GeoSystem? _selectedSystem;
+    GeoRegion? _selectedRegion;
     string _currentLevel = "overview";
     string _currentLabel = "";
     string _cellLabel = "";
@@ -777,7 +783,7 @@
     List<MapSearchResult>? _searchResults;
     WikiPage? _detailPage;
     bool _loadingDetails;
-    readonly Dictionary<int, MapV2System> _systemCache = new();
+    readonly Dictionary<int, GeoSystem> _systemCache = new();
     Dictionary<string, TerritoryFactionInfo> _factionInfo = new(StringComparer.OrdinalIgnoreCase);
 
     // Event hover popover state
@@ -805,15 +811,15 @@
         {
             if (_yearData?.EventCells is null) return [];
 
-            var oouLenses = _overview?.Lenses.Where(l => l.OutOfUniverse).Select(l => l.Lens).ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new();
-            var iuLenses = _overview?.Lenses.Where(l => !l.OutOfUniverse).Select(l => l.Lens).ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new();
+            var realLenses = _overview?.Lenses.Where(l => l.IsReal).Select(l => l.Lens).ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new();
+            var swLenses = _overview?.Lenses.Where(l => !l.IsReal).Select(l => l.Lens).ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new();
 
-            // Determine which lenses to hide based on universe filter
-            var hiddenLenses = GlobalFilterService.SelectedUniverse switch
+            // Determine which lenses to hide based on realm filter
+            var hiddenLenses = GlobalFilterService.SelectedRealm switch
             {
-                Universe.InUniverse => oouLenses,       // hide out-of-universe
-                Universe.OutOfUniverse => iuLenses,      // hide in-universe
-                _ => new HashSet<string>(),               // null = show both
+                Realm.Starwars => realLenses,           // hide real-world
+                Realm.Real => swLenses,                 // hide in-universe
+                _ => new HashSet<string>(),             // null = show both
             };
 
             var continuityFilter = GlobalFilterService.SelectedContinuity;
@@ -867,10 +873,10 @@
         ?? Enumerable.Empty<string>();
 
     IEnumerable<GalaxyLensSummary> FilteredLenses =>
-        _overview?.Lenses.Where(l => GlobalFilterService.SelectedUniverse switch
+        _overview?.Lenses.Where(l => GlobalFilterService.SelectedRealm switch
         {
-            Universe.InUniverse => !l.OutOfUniverse,
-            Universe.OutOfUniverse => l.OutOfUniverse,
+            Realm.Starwars => !l.IsReal,
+            Realm.Real => l.IsReal,
             _ => true, // null = show both
         }) ?? [];
 
@@ -902,8 +908,8 @@
         {
             var cq = ContinuityQuery;
             var geoUrl = string.IsNullOrEmpty(cq) ? "api/galaxy-map/geography" : $"api/galaxy-map/geography?{cq}";
-            var overviewUrl = string.IsNullOrEmpty(cq) ? "api/galaxy-map/overview" : $"api/galaxy-map/overview?{cq}";
-            var geoTask = Http.GetFromJsonAsync<GalaxyMapV2Overview>(geoUrl);
+            var overviewUrl = string.IsNullOrEmpty(cq) ? "api/galaxy-map" : $"api/galaxy-map?{cq}";
+            var geoTask = Http.GetFromJsonAsync<GalaxyGeography>(geoUrl);
             var overviewTask = Http.GetFromJsonAsync<GalaxyOverviewDocument>(overviewUrl);
             _geography = await geoTask;
             try { _overview = await overviewTask; } catch { }
@@ -947,14 +953,14 @@
     // ══════════ EXPLORE: JSInvokable callbacks ══════════
 
     [JSInvokable]
-    public async Task<GalaxyMapV2Systems?> FetchSystemsInRange(int minCol, int maxCol, int minRow, int maxRow)
+    public async Task<GalaxyGeographySystems?> FetchSystemsInRange(int minCol, int maxCol, int minRow, int maxRow)
     {
         try
         {
             var cq = ContinuityQuery;
             var url = $"api/galaxy-map/systems?minCol={minCol}&maxCol={maxCol}&minRow={minRow}&maxRow={maxRow}";
             if (!string.IsNullOrEmpty(cq)) url += $"&{cq}";
-            var result = await Http.GetFromJsonAsync<GalaxyMapV2Systems>(url);
+            var result = await Http.GetFromJsonAsync<GalaxyGeographySystems>(url);
             if (result?.Systems is not null)
                 foreach (var sys in result.Systems) _systemCache.TryAdd(sys.Id, sys);
             return result;
@@ -1034,15 +1040,8 @@
         _searchError = null;
         StateHasChanged();
         try {
-            string url;
-            if (_semanticSearch)
-            {
-                url = $"api/galaxy-map/semantic-search?q={Uri.EscapeDataString(value)}";
-            }
-            else
-            {
-                url = $"api/galaxy-map/search?term={Uri.EscapeDataString(value)}";
-            }
+            var url = $"api/galaxy-map/search?q={Uri.EscapeDataString(value)}";
+            if (_semanticSearch) url += "&semantic=true";
             var cq = ContinuityQuery;
             if (!string.IsNullOrEmpty(cq)) url += $"&{cq}";
             _searchResults = await Http.GetFromJsonAsync<List<MapSearchResult>>(url);
@@ -1131,7 +1130,7 @@
     async Task LoadYear()
     {
         if (_overview is null || _module is null) return;
-        try { _yearData = await Http.GetFromJsonAsync<GalaxyYearDocument>($"api/galaxy-map/year/{_year}"); } catch { _yearData = null; }
+        try { _yearData = await Http.GetFromJsonAsync<GalaxyYearDocument>($"api/galaxy-map/years/{_year}"); } catch { _yearData = null; }
         if (_yearData is not null)
         {
             var layers = new[] { "regions", "territory", "events" };

@@ -47,10 +47,7 @@ builder
     .AddSingleton<OpenAiStatusService>()
     .AddSingleton<MongoDefinitions>()
     .AddSingleton<CollectionFilters>()
-    .AddSingleton<YearComparer>()
-    .AddSingleton<YearHelper>()
     .AddSingleton<TemplateHelper>()
-    .AddScoped<InfoboxToEventsTransformer>()
     .AddScoped<RecordService>()
     .AddScoped<TimelineService>()
     .AddScoped<KgTimelineBuilderService>()
@@ -87,6 +84,14 @@ builder
     .AddSingleton<CharacterTimelineTracker>()
     .AddScoped<RelationshipGraphBuilderService>()
     .AddScoped<ArticleChunkingService>()
+    .AddSingleton<KnowledgeGraphQueryService>()
+    .AddSingleton<IChatClient>(sp =>
+    {
+        var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
+        var openAiClient = sp.GetRequiredService<OpenAIClient>();
+        return new ChatClientBuilder(openAiClient.GetChatClient(settings.OpenAiModel).AsIChatClient()).UseFunctionInvocation().UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build();
+    })
+    .AddScoped<StarWarsData.Services.Suggestions.SuggestionAgentService>()
     .AddSingleton<JobToggleService>()
     .AddSingleton<PageDownloader>()
     .AddSingleton<IEmbeddingGenerator<string, Embedding<float>>>(sp => sp.GetRequiredService<OpenAIClient>().GetEmbeddingClient("text-embedding-3-small").AsIEmbeddingGenerator());
@@ -148,6 +153,7 @@ if (hangfireEnabled)
         ("submit-graph-batch", "*/30 * * * *", "Submit one LLM batch every 30 min for relationship extraction", false),
         ("check-graph-batches", "*/5 * * * *", "Check OpenAI batch status every 5 min", false),
         ("daily-article-chunking", "0 5 * * *", "Daily article chunking at 05:00 UTC", true),
+        ("refresh-ask-suggestions", "0 3 * * 0", "Weekly AI-generated Ask page example questions (Sundays 03:00 UTC)", true),
     };
 
     foreach (var (id, cron, desc, enabled) in defaultJobs)
@@ -179,6 +185,8 @@ if (hangfireEnabled)
     RecurringJob.AddOrUpdate<RelationshipGraphBuilderService>("check-graph-batches", s => s.CheckBatchesAsync(CancellationToken.None), "*/5 * * * *");
 
     RecurringJob.AddOrUpdate<ArticleChunkingService>("daily-article-chunking", s => s.ProcessAllAsync(CancellationToken.None), Cron.Daily(5));
+
+    RecurringJob.AddOrUpdate<StarWarsData.Services.Suggestions.SuggestionAgentService>("refresh-ask-suggestions", s => s.GenerateAsync(CancellationToken.None), Cron.Weekly(DayOfWeek.Sunday, 3));
 }
 
 app.MapControllers();

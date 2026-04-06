@@ -12,7 +12,10 @@ public static class RelationshipEdgeBsonFields
     public const string ToId = "toId";
     public const string ToName = "toName";
     public const string ToType = "toType";
+    public const string FromRealm = "fromRealm";
+    public const string ToRealm = "toRealm";
     public const string Label = "label";
+    public const string ReverseLabel = "reverseLabel";
     public const string Weight = "weight";
     public const string Evidence = "evidence";
     public const string SourcePageId = "sourcePageId";

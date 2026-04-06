@@ -12,7 +12,14 @@
         <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-3">
             @if (Descriptor.YearFrom is not null && Descriptor.YearTo is not null)
             {
-                <span>Period: @Descriptor.YearFrom @Descriptor.YearFromDemarcation – @Descriptor.YearTo @Descriptor.YearToDemarcation</span>
+                @if (IsRealMode)
+                {
+                    <span>Period: @FormatRealYear(Descriptor.YearFrom.Value) – @FormatRealYear(Descriptor.YearTo.Value)</span>
+                }
+                else
+                {
+                    <span>Period: @Descriptor.YearFrom @Descriptor.YearFromDemarcation – @Descriptor.YearTo @Descriptor.YearToDemarcation</span>
+                }
             }
             @if (!string.IsNullOrEmpty(Descriptor.Search))
             {
@@ -205,9 +212,9 @@
             if (!string.IsNullOrEmpty(continuity))
                 query.Add("continuity", continuity);
 
-            var universe = GlobalFilterService.GetUniverseQueryParam();
-            if (!string.IsNullOrEmpty(universe))
-                query.Add("universe", universe);
+            var realm = GlobalFilterService.GetRealmQueryParam();
+            if (!string.IsNullOrEmpty(realm))
+                query.Add("realm", realm);
 
             if (Descriptor.YearFrom is not null)
                 query.Add("YearFrom", Descriptor.YearFrom.Value.ToString());
@@ -219,6 +226,8 @@
                 query.Add("YearToDemarcation", Descriptor.YearToDemarcation);
             if (!string.IsNullOrEmpty(Descriptor.Search))
                 query.Add("Search", Descriptor.Search);
+            if (!string.IsNullOrEmpty(Descriptor.Calendar))
+                query.Add("Calendar", Descriptor.Calendar);
 
             _pagedResult = await Http.GetFromJsonAsync<GroupedTimelineResult>($"Timeline/events?{query}");
 
@@ -249,5 +258,13 @@
         if (string.IsNullOrEmpty(evt.Template)) return Colors.Blue.Default;
         var cleaned = evt.Template.Replace("_infobox", "").ToLower();
         return _templateColorMap.TryGetValue(cleaned, out var color) ? color : Colors.Blue.Default;
+    }
+
+    private bool IsRealMode => string.Equals(Descriptor.Calendar, "Real", StringComparison.OrdinalIgnoreCase);
+
+    private static string FormatRealYear(float year)
+    {
+        var ce = (int)Math.Round(year);
+        return ce < 0 ? $"{-ce} BCE" : ce.ToString();
     }
 }

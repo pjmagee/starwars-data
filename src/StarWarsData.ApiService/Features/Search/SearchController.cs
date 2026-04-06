@@ -5,28 +5,37 @@ using StarWarsData.Services;
 
 namespace StarWarsData.ApiService.Controllers;
 
+/// <summary>
+/// Unified full-text search surface over the Star Wars corpus.
+/// Supports three retrieval strategies selected via <c>?mode=</c>:
+/// <list type="bullet">
+///   <item><c>keyword</c> — MongoDB <c>$text</c> over <c>raw.pages</c>.</item>
+///   <item><c>semantic</c> — <c>$vectorSearch</c> over <c>search.chunks</c> using OpenAI embeddings (default).</item>
+///   <item><c>hybrid</c> — parallel keyword + semantic, score-merged by page.</item>
+/// </list>
+/// Semantic and hybrid modes are rate-limited per client; keyword is free.
+/// </summary>
 [ApiController]
-[Route("api/[controller]")]
-public class SemanticSearchController(
-    SemanticSearchService semanticSearch,
-    KeywordSearchService keywordSearch,
-    SearchRateLimiter rateLimiter,
-    UserSettingsService userSettings
-) : ControllerBase
+[Route("api/search")]
+[Produces("application/json")]
+public class SearchController(SemanticSearchService semanticSearch, KeywordSearchService keywordSearch, SearchRateLimiter rateLimiter, UserSettingsService userSettings) : ControllerBase
 {
+    /// <summary>
+    /// Search the corpus. Returns up to <paramref name="limit"/> ranked hits.
+    /// </summary>
     [HttpGet]
     public async Task<IActionResult> Search(
-        [FromQuery] string query,
+        [FromQuery] string q,
         [FromQuery] string mode = "semantic",
         [FromQuery] string? type = null,
-        [FromQuery] string? continuity = null,
-        [FromQuery] string? universe = null,
+        [FromQuery] Continuity? continuity = null,
+        [FromQuery] Realm? realm = null,
         [FromQuery] int limit = 10,
         CancellationToken ct = default
     )
     {
-        if (string.IsNullOrWhiteSpace(query))
-            return BadRequest(new { error = "Query is required" });
+        if (string.IsNullOrWhiteSpace(q))
+            return BadRequest(new { error = "Query 'q' is required" });
 
         if (limit is < 1 or > 25)
             limit = 10;
@@ -34,7 +43,7 @@ public class SemanticSearchController(
         if (mode is not ("keyword" or "semantic" or "hybrid"))
             mode = "semantic";
 
-        // Rate limiting — keyword search doesn't cost API calls, only semantic/hybrid do
+        // Keyword search is free (local index); semantic/hybrid consume the embedding API.
         if (mode is "semantic" or "hybrid")
         {
             var rateLimitResult = await CheckRateLimit();
@@ -43,22 +52,18 @@ public class SemanticSearchController(
         }
 
         string[]? types = string.IsNullOrWhiteSpace(type) ? null : [type];
-        Continuity? cont = Enum.TryParse<Continuity>(continuity, ignoreCase: true, out var c)
-            ? c
-            : null;
-        Universe? uni = Enum.TryParse<Universe>(universe, ignoreCase: true, out var u) ? u : null;
 
         var results = mode switch
         {
-            "keyword" => await keywordSearch.SearchAsync(query, types, cont, uni, limit),
-            "hybrid" => await HybridSearchAsync(query, types, cont, uni, limit),
-            _ => await semanticSearch.SearchAsync(query, types, cont, uni, limit),
+            "keyword" => await keywordSearch.SearchAsync(q, types, continuity, realm, limit),
+            "hybrid" => await HybridSearchAsync(q, types, continuity, realm, limit),
+            _ => await semanticSearch.SearchAsync(q, types, continuity, realm, limit),
         };
 
         return Ok(
             new
             {
-                query,
+                query = q,
                 mode,
                 count = results.Count,
                 results = results.Select(r => new
@@ -78,41 +83,28 @@ public class SemanticSearchController(
         );
     }
 
-    async Task<List<SemanticSearchResult>> HybridSearchAsync(
-        string query,
-        string[]? types,
-        Continuity? continuity,
-        Universe? universe,
-        int limit
-    )
+    async Task<List<SearchHit>> HybridSearchAsync(string query, string[]? types, Continuity? continuity, Realm? realm, int limit)
     {
-        var keywordTask = keywordSearch.SearchAsync(query, types, continuity, universe, limit);
-        var semanticTask = semanticSearch.SearchAsync(query, types, continuity, universe, limit);
+        var keywordTask = keywordSearch.SearchAsync(query, types, continuity, realm, limit);
+        var semanticTask = semanticSearch.SearchAsync(query, types, continuity, realm, limit);
 
         await Task.WhenAll(keywordTask, semanticTask);
 
         var keywordResults = keywordTask.Result;
         var semanticResults = semanticTask.Result;
 
-        // Merge: group by PageId, take the best score and prefer semantic snippet
-        var merged = new Dictionary<int, SemanticSearchResult>();
+        // Merge by PageId: semantic hits win on snippet quality, overlap boosts score.
+        var merged = new Dictionary<int, SearchHit>();
 
         foreach (var r in semanticResults)
-        {
             merged[r.PageId] = r;
-        }
 
         foreach (var r in keywordResults)
         {
             if (merged.TryGetValue(r.PageId, out var existing))
-            {
-                // Boost score for items found by both strategies
                 existing.Score = Math.Min(1.0, (existing.Score + r.Score) / 2 * 1.2);
-            }
             else
-            {
                 merged[r.PageId] = r;
-            }
         }
 
         return merged.Values.OrderByDescending(r => r.Score).Take(limit).ToList();
@@ -127,28 +119,18 @@ public class SemanticSearchController(
         if (isAuthenticated)
             hasByok = await userSettings.HasOpenAiKeyAsync(userId!);
 
-        var isAdmin =
-            Request
-                .Headers["X-User-Roles"]
-                .FirstOrDefault()
-                ?.Split(',', StringSplitOptions.TrimEntries)
-                .Contains("admin", StringComparer.OrdinalIgnoreCase) ?? false;
+        var isAdmin = Request.Headers["X-User-Roles"].FirstOrDefault()?.Split(',', StringSplitOptions.TrimEntries).Contains("admin", StringComparer.OrdinalIgnoreCase) ?? false;
 
         if (hasByok || isAdmin)
             return null;
 
-        var clientIp =
-            Request.Headers["X-Forwarded-For"].FirstOrDefault()?.Split(',')[0].Trim()
-            ?? HttpContext.Connection.RemoteIpAddress?.ToString()
-            ?? "unknown";
+        var clientIp = Request.Headers["X-Forwarded-For"].FirstOrDefault()?.Split(',')[0].Trim() ?? HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
         var clientId = userId ?? $"anon:{clientIp}";
         var result = rateLimiter.TryAcquire(clientId, isAuthenticated);
 
         if (!result.Allowed)
         {
-            Response.Headers["Retry-After"] = (
-                (int)(result.RetryAfter?.TotalSeconds ?? 1800)
-            ).ToString();
+            Response.Headers["Retry-After"] = ((int)(result.RetryAfter?.TotalSeconds ?? 1800)).ToString();
             return StatusCode(
                 429,
                 new

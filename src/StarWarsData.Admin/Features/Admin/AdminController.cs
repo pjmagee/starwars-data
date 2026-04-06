@@ -189,22 +189,6 @@ public class AdminController(
         }
     }
 
-    [HttpPost("mongo/delete-embeddings")]
-    public ActionResult<string> EnqueueDeleteEmbeddings()
-    {
-        try
-        {
-            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.DeleteOpenAiEmbeddingsAsync)))
-                return Conflict(new { error = "Embeddings deletion already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.DeleteOpenAiEmbeddingsAsync(CancellationToken.None));
-            return Ok(new { jobId });
-        }
-        catch (InvalidOperationException ex)
-        {
-            return Conflict(new { error = ex.Message });
-        }
-    }
-
     [HttpPost("mongo/delete-pages")]
     public ActionResult<string> EnqueueDeletePages()
     {
@@ -253,27 +237,11 @@ public class AdminController(
         }
     }
 
-    [HttpPost("mongo/create-categorized-timeline-events")]
-    public ActionResult<string> EnqueueCreateCategorizedTimelineEvents()
-    {
-        try
-        {
-            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.CreateCategorizedTimelineEvents)))
-                return Conflict(new { error = "Categorized timeline events job already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.CreateCategorizedTimelineEvents(CancellationToken.None));
-            return Ok(new { jobId });
-        }
-        catch (InvalidOperationException ex)
-        {
-            return Conflict(new { error = ex.Message });
-        }
-    }
-
     /// <summary>
-    /// KG-backed timeline rebuild: reads <c>kg.nodes</c> (galactic temporal facets only)
-    /// and joins <c>raw.pages</c> for the display-side infobox properties. Replaces the
-    /// legacy <see cref="RecordService.CreateCategorizedTimelineEvents"/> path — same
-    /// output collections and schema, but calendar-aware and semantically richer.
+    /// KG-backed timeline rebuild: reads <c>kg.nodes</c> (galactic + real-world temporal
+    /// facets) and joins <c>raw.pages</c> for the display-side infobox properties. Emits
+    /// rows tagged with <c>Calendar</c> so the Timeline page and the AI agent's
+    /// <c>render_timeline</c> tool can filter by calendar mode.
     /// </summary>
     [HttpPost("mongo/create-timeline-events-from-kg")]
     public ActionResult<string> EnqueueCreateTimelineEventsFromKg()
@@ -315,22 +283,6 @@ public class AdminController(
             if (IsJobAlreadyActive(typeof(ArticleChunkingService), nameof(ArticleChunkingService.EnsureIndexesAsync)))
                 return Conflict(new { error = "Chunk index creation already running" });
             var jobId = BackgroundJob.Enqueue<ArticleChunkingService>(s => s.EnsureIndexesAsync(CancellationToken.None));
-            return Ok(new { jobId });
-        }
-        catch (InvalidOperationException ex)
-        {
-            return Conflict(new { error = ex.Message });
-        }
-    }
-
-    [HttpPost("mongo/delete-index-embeddings")]
-    public ActionResult<string> EnqueueDeleteVectorIndexes()
-    {
-        try
-        {
-            if (IsJobAlreadyActive(typeof(RecordService), nameof(RecordService.DeleteVectorIndexesAsync)))
-                return Conflict(new { error = "Vector index deletion already running" });
-            var jobId = BackgroundJob.Enqueue<RecordService>(s => s.DeleteVectorIndexesAsync(CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)
@@ -504,6 +456,24 @@ public class AdminController(
         {
             logger.LogError(ex, "Failed to build galaxy map");
             return StatusCode(500, new { error = ex.Message });
+        }
+    }
+
+    // === Ask page suggestions ===
+
+    [HttpPost("mongo/refresh-ask-suggestions")]
+    public ActionResult<string> EnqueueRefreshAskSuggestions()
+    {
+        try
+        {
+            if (IsJobAlreadyActive(typeof(StarWarsData.Services.Suggestions.SuggestionAgentService), nameof(StarWarsData.Services.Suggestions.SuggestionAgentService.GenerateAsync)))
+                return Conflict(new { error = "Ask suggestions refresh already running" });
+            var jobId = BackgroundJob.Enqueue<StarWarsData.Services.Suggestions.SuggestionAgentService>(s => s.GenerateAsync(CancellationToken.None));
+            return Ok(new { jobId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
         }
     }
 

@@ -9,7 +9,7 @@ public static class GraphNodeBsonFields
     public const string Name = "name";
     public const string Type = "type";
     public const string Continuity = "continuity";
-    public const string Universe = "universe";
+    public const string Realm = "realm";
     public const string Properties = "properties";
     public const string ImageUrl = "imageUrl";
     public const string WikiUrl = "wikiUrl";

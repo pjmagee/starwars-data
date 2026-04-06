@@ -27,86 +27,50 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
     private readonly int _characterPageId;
     private readonly IMongoCollection<BatchExtractionProgressDoc> _progressCollection;
 
-    private static readonly JsonSerializerOptions JsonOptions = new()
-    {
-        PropertyNameCaseInsensitive = true,
-    };
+    private static readonly JsonSerializerOptions JsonOptions = new() { PropertyNameCaseInsensitive = true };
 
     // In-memory state, seeded from MongoDB on HandleAsync entry
     private HashSet<int> _processedBatchIndices = [];
     private List<ExtractedEvent> _accumulatedEvents = [];
 
-    public BatchExtractionExecutor(
-        IChatClient chatClient,
-        ILogger logger,
-        CharacterTimelineTracker? tracker,
-        int characterPageId,
-        IMongoClient mongoClient,
-        string databaseName
-    )
+    public BatchExtractionExecutor(IChatClient chatClient, ILogger logger, CharacterTimelineTracker? tracker, int characterPageId, IMongoClient mongoClient, string databaseName)
         : base("BatchExtraction")
     {
         _chatClient = chatClient;
         _logger = logger;
         _tracker = tracker;
         _characterPageId = characterPageId;
-        _progressCollection = mongoClient
-            .GetDatabase(databaseName)
-            .GetCollection<BatchExtractionProgressDoc>(Collections.GenaiCharacterProgress);
+        _progressCollection = mongoClient.GetDatabase(databaseName).GetCollection<BatchExtractionProgressDoc>(Collections.GenaiCharacterProgress);
     }
 
-    protected override ValueTask OnCheckpointingAsync(
-        IWorkflowContext context,
-        CancellationToken cancellationToken
-    )
+    protected override ValueTask OnCheckpointingAsync(IWorkflowContext context, CancellationToken cancellationToken)
     {
-        return context.QueueStateUpdateAsync(
-            "checkpoint",
-            new BatchExtractionCheckpoint(_processedBatchIndices.ToList(), _accumulatedEvents),
-            "BatchExtraction",
-            cancellationToken
-        );
+        return context.QueueStateUpdateAsync("checkpoint", new BatchExtractionCheckpoint(_processedBatchIndices.ToList(), _accumulatedEvents), "BatchExtraction", cancellationToken);
     }
 
-    protected override async ValueTask OnCheckpointRestoredAsync(
-        IWorkflowContext context,
-        CancellationToken cancellationToken
-    )
+    protected override async ValueTask OnCheckpointRestoredAsync(IWorkflowContext context, CancellationToken cancellationToken)
     {
-        var checkpoint = await context.ReadStateAsync<BatchExtractionCheckpoint>(
-            "checkpoint",
-            "BatchExtraction",
-            cancellationToken
-        );
+        var checkpoint = await context.ReadStateAsync<BatchExtractionCheckpoint>("checkpoint", "BatchExtraction", cancellationToken);
 
         if (checkpoint is not null)
         {
             _processedBatchIndices = [.. checkpoint.ProcessedBatchIndices];
             _accumulatedEvents = [.. checkpoint.Events];
-            _logger.LogInformation(
-                "Restored batch extraction checkpoint: {ProcessedCount} batches, {EventCount} events",
-                _processedBatchIndices.Count,
-                _accumulatedEvents.Count
-            );
+            _logger.LogInformation("Restored batch extraction checkpoint: {ProcessedCount} batches, {EventCount} events", _processedBatchIndices.Count, _accumulatedEvents.Count);
         }
     }
 
-    public override async ValueTask<string> HandleAsync(
-        string message,
-        IWorkflowContext context,
-        CancellationToken ct = default
-    )
+    public override async ValueTask<string> HandleAsync(string message, IWorkflowContext context, CancellationToken ct = default)
     {
-        var batches =
-            await context.ReadStateAsync<List<PageBatch>>("batches", "Bundler", ct)
-            ?? throw new InvalidOperationException("No batches found in Bundler state");
+        var batches = await context.ReadStateAsync<List<PageBatch>>("batches", "Bundler", ct) ?? throw new InvalidOperationException("No batches found in Bundler state");
 
-        var characterTitle =
-            await context.ReadStateAsync<string>("characterTitle", "Discovery", ct) ?? "Unknown";
+        var characterTitle = await context.ReadStateAsync<string>("characterTitle", "Discovery", ct) ?? "Unknown";
 
-        var characterContinuity =
-            await context.ReadStateAsync<string>("characterContinuity", "Discovery", ct)
-            ?? "Unknown";
+        var characterContinuity = await context.ReadStateAsync<string>("characterContinuity", "Discovery", ct) ?? "Unknown";
+
+        // KG pre-pass output: deterministic anchors and lifespan bounds — injected into every prompt.
+        var anchors = await context.ReadStateAsync<List<TemporalAnchor>>("anchors", "Discovery", ct) ?? [];
+        var lifespan = await context.ReadStateAsync<LifespanBounds>("lifespan", "Discovery", ct) ?? new LifespanBounds(null, null);
 
         // Restore from MongoDB per-batch progress (survives mid-extraction crashes)
         await RestoreFromMongoProgressAsync(ct);
@@ -135,11 +99,7 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
             eventsExtracted: _accumulatedEvents.Count
         );
 
-        _logger.LogInformation(
-            "Starting batch extraction for {Title}: {Count} batches remaining",
-            characterTitle,
-            remaining.Count
-        );
+        _logger.LogInformation("Starting batch extraction for {Title}: {Count} batches remaining", characterTitle, remaining.Count);
 
         var processed = _processedBatchIndices.Count;
 
@@ -160,25 +120,13 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
             );
 
             await context.AddEventAsync(
-                new BatchExtractionStartedEvent(
-                    new BatchExtractionStartedData(
-                        batch.BatchIndex + 1,
-                        batches.Count,
-                        batch.Pages.Count,
-                        batch.Pages.Select(p => p.Title).ToList()
-                    )
-                ),
+                new BatchExtractionStartedEvent(new BatchExtractionStartedData(batch.BatchIndex + 1, batches.Count, batch.Pages.Count, batch.Pages.Select(p => p.Title).ToList())),
                 ct
             );
 
             try
             {
-                var events = await ExtractEventsFromBatch(
-                    batch,
-                    characterTitle,
-                    characterContinuity,
-                    ct
-                );
+                var events = await ExtractEventsFromBatch(batch, characterTitle, characterContinuity, anchors, lifespan, ct);
                 _accumulatedEvents.AddRange(events);
                 _processedBatchIndices.Add(batch.BatchIndex);
                 processed++;
@@ -188,29 +136,13 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
 
                 if (events.Count == 0)
                 {
-                    await context.AddEventAsync(
-                        new BatchExtractionEmptyEvent(
-                            new BatchExtractionEmptyData(batch.BatchIndex + 1, batch.Pages.Count)
-                        ),
-                        ct
-                    );
+                    await context.AddEventAsync(new BatchExtractionEmptyEvent(new BatchExtractionEmptyData(batch.BatchIndex + 1, batch.Pages.Count)), ct);
                 }
                 else
                 {
                     foreach (var evt in events)
                     {
-                        await context.AddEventAsync(
-                            new EventExtractedEvent(
-                                new EventExtractedData(
-                                    evt.EventType,
-                                    evt.Description,
-                                    evt.Year,
-                                    evt.Demarcation,
-                                    evt.SourcePageTitle
-                                )
-                            ),
-                            ct
-                        );
+                        await context.AddEventAsync(new EventExtractedEvent(new EventExtractedData(evt.EventType, evt.Description, evt.Year, evt.Demarcation, evt.SourcePageTitle)), ct);
                     }
                 }
 
@@ -225,24 +157,11 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
             }
             catch (Exception ex)
             {
-                _logger.LogWarning(
-                    ex,
-                    "Failed to extract from batch {BatchIndex}, skipping",
-                    batch.BatchIndex + 1
-                );
+                _logger.LogWarning(ex, "Failed to extract from batch {BatchIndex}, skipping", batch.BatchIndex + 1);
                 _processedBatchIndices.Add(batch.BatchIndex);
                 await SaveMongoProgressAsync(ct);
 
-                await context.AddEventAsync(
-                    new BatchExtractionFailedEvent(
-                        new BatchExtractionFailedData(
-                            batch.BatchIndex + 1,
-                            batch.Pages.Count,
-                            ex.Message
-                        )
-                    ),
-                    ct
-                );
+                await context.AddEventAsync(new BatchExtractionFailedEvent(new BatchExtractionFailedData(batch.BatchIndex + 1, batch.Pages.Count, ex.Message)), ct);
             }
         }
 
@@ -267,9 +186,7 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
 
     private async Task RestoreFromMongoProgressAsync(CancellationToken ct)
     {
-        var doc = await _progressCollection
-            .Find(Builders<BatchExtractionProgressDoc>.Filter.Eq(d => d.Id, _characterPageId))
-            .FirstOrDefaultAsync(ct);
+        var doc = await _progressCollection.Find(Builders<BatchExtractionProgressDoc>.Filter.Eq(d => d.Id, _characterPageId)).FirstOrDefaultAsync(ct);
 
         if (doc is not null && doc.ProcessedBatchIndices.Count > 0)
         {
@@ -277,11 +194,7 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
             {
                 _processedBatchIndices = [.. doc.ProcessedBatchIndices];
                 _accumulatedEvents = [.. doc.Events];
-                _logger.LogInformation(
-                    "Restored batch extraction progress from MongoDB: {ProcessedCount} batches, {EventCount} events",
-                    _processedBatchIndices.Count,
-                    _accumulatedEvents.Count
-                );
+                _logger.LogInformation("Restored batch extraction progress from MongoDB: {ProcessedCount} batches, {EventCount} events", _processedBatchIndices.Count, _accumulatedEvents.Count);
             }
         }
     }
@@ -296,20 +209,12 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
             UpdatedAt = DateTime.UtcNow,
         };
 
-        await _progressCollection.ReplaceOneAsync(
-            Builders<BatchExtractionProgressDoc>.Filter.Eq(d => d.Id, _characterPageId),
-            doc,
-            new ReplaceOptions { IsUpsert = true },
-            ct
-        );
+        await _progressCollection.ReplaceOneAsync(Builders<BatchExtractionProgressDoc>.Filter.Eq(d => d.Id, _characterPageId), doc, new ReplaceOptions { IsUpsert = true }, ct);
     }
 
     private async Task ClearMongoProgressAsync(CancellationToken ct)
     {
-        await _progressCollection.DeleteOneAsync(
-            Builders<BatchExtractionProgressDoc>.Filter.Eq(d => d.Id, _characterPageId),
-            ct
-        );
+        await _progressCollection.DeleteOneAsync(Builders<BatchExtractionProgressDoc>.Filter.Eq(d => d.Id, _characterPageId), ct);
     }
 
     // ── LLM batch extraction ────────────────────────────────────────────────
@@ -318,29 +223,90 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
         PageBatch batch,
         string characterTitle,
         string continuity,
+        List<TemporalAnchor> anchors,
+        LifespanBounds lifespan,
         CancellationToken ct
     )
     {
         var sb = new StringBuilder();
         sb.AppendLine(
             $"""
-            Extract timeline events for the character "{characterTitle}" from the following wiki pages.
-            Only extract events that directly involve or significantly affect {characterTitle}.
-            For pages with no relevant events, simply skip them.
+            You are extracting rich, multi-sentence timeline events for the Star Wars character "{characterTitle}"
+            from the wiki pages below. Only extract events that directly involve or significantly affect {characterTitle}.
 
-            IMPORTANT: This character belongs to the {continuity} continuity of Star Wars.
-            Only extract events consistent with {continuity} continuity. Do not include events,
-            characters, or references that belong exclusively to a different continuity.
-
-            For each event, include the sourcePageTitle field indicating which page it came from.
-
-            Event types: Birth, Death, Battle, Duel, War, Marriage, Apprenticeship, Promotion,
-            Exile, Capture, Rescue, Discovery, Betrayal, Alliance, Training, Mission,
-            Transformation, Founding, Destruction, Other.
-
+            CONTINUITY: This character belongs to the {continuity} continuity of Star Wars. Discard anything that
+            belongs exclusively to a different continuity.
             """
         );
 
+        // ── Lifespan bounds: hard hallucination filter ──
+        if (lifespan.StartYear.HasValue || lifespan.EndYear.HasValue)
+        {
+            var start = lifespan.StartYear.HasValue ? FormatGalactic(lifespan.StartYear.Value) : "(unknown birth)";
+            var end = lifespan.EndYear.HasValue ? FormatGalactic(lifespan.EndYear.Value) : "(still alive or unknown death)";
+            sb.AppendLine();
+            sb.AppendLine($"LIFESPAN BOUNDS (from knowledge graph): {characterTitle} lived from {start} to {end}.");
+            sb.AppendLine("Reject any event dated outside this window — the character could not have been involved.");
+        }
+
+        // ── Deterministic KG anchors — must appear in output, do not re-date them ──
+        if (anchors.Count > 0)
+        {
+            sb.AppendLine();
+            sb.AppendLine("KNOWN EVENTS FROM THE KNOWLEDGE GRAPH (these dates are ground truth — do NOT change them):");
+            for (int i = 0; i < anchors.Count; i++)
+            {
+                var a = anchors[i];
+                var dateStr = a.Year.HasValue ? $"{a.Year} {a.Demarcation}" : "(undated)";
+                sb.AppendLine($"  {i + 1}. [{a.EventType}] {a.Description} — {dateStr}");
+            }
+            sb.AppendLine();
+            sb.AppendLine(
+                """
+                For each known event above, emit a corresponding timeline event in your output, using the
+                ground-truth year/demarcation verbatim. Enrich its narrative with details from the wiki pages
+                (what happened, who else was involved, consequences). If the pages do not cover a known event,
+                still emit it with a brief narrative derived from the description above. DO NOT invent different
+                dates for these events.
+                """
+            );
+        }
+
+        sb.AppendLine();
+        sb.AppendLine(
+            """
+            ADDITIONAL EVENTS: Extract any OTHER significant life events for the character that are supported by
+            the wiki content below but are not in the known-events list. For pages with no relevant content, skip them.
+
+            Event types: Birth, Death, Battle, Duel, War, Marriage, Apprenticeship, Promotion, Exile, Capture,
+            Rescue, Discovery, Betrayal, Alliance, Training, Mission, Transformation, Founding, Destruction, Other.
+            """
+        );
+
+        sb.AppendLine();
+        sb.AppendLine(
+            $"""
+            FIELD CONTRACT — every event MUST include all of:
+              - description: ONE headline sentence, 10–25 words. Names what happened and where/when.
+              - narrative: 2–4 complete sentences. Describe what {characterTitle} did, the immediate context
+                (who was there, what preceded it), and the outcome. Do NOT restate the headline.
+              - significance: ONE sentence explaining why this event matters for {characterTitle}'s arc. Optional
+                if it is a minor event, otherwise required.
+              - precedingContext: ONE sentence on what happened just before. Optional.
+              - consequences: 0–4 short bullet strings (no full sentences needed) listing direct outcomes.
+              - year: float, galactic calendar.
+              - demarcation: "BBY" or "ABY". Omit if truly unknown.
+              - dateDescription: original date text from the wiki (e.g. "c. 3 ABY").
+              - location: where it happened.
+              - relatedCharacters: list of other characters involved, EXCLUDING {characterTitle}.
+              - sourcePageTitle: exact page title this event came from.
+              - sourceWikiUrl: exact wiki URL of the source page.
+
+            Thin one-sentence descriptions will be rejected. The narrative field is MANDATORY and must be substantial.
+            """
+        );
+
+        sb.AppendLine();
         foreach (var page in batch.Pages)
         {
             sb.AppendLine($"--- PAGE: {page.Title} ---");
@@ -366,27 +332,15 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
             sb.AppendLine();
         }
 
-        sb.AppendLine(
-            """
-            Return structured events with: eventType, description, year (float), demarcation (BBY/ABY),
-            dateDescription, location, relatedCharacters (excluding the main character),
-            sourcePageTitle (the exact page title this event came from), sourceWikiUrl.
-            """
-        );
-
         var chatOptions = new ChatOptions
         {
             ResponseFormat = ChatResponseFormat.ForJsonSchema<BatchExtractionSchema>(
                 schemaName: "batch_events",
-                schemaDescription: "Events extracted from a batch of wiki pages"
+                schemaDescription: "Timeline events extracted from a batch of wiki pages with rich narrative fields"
             ),
         };
 
-        var response = await _chatClient.GetResponseAsync(
-            [new ChatMessage(ChatRole.User, sb.ToString())],
-            chatOptions,
-            ct
-        );
+        var response = await _chatClient.GetResponseAsync([new ChatMessage(ChatRole.User, sb.ToString())], chatOptions, ct);
 
         var text = response.Text?.Trim();
         if (string.IsNullOrWhiteSpace(text))
@@ -409,6 +363,10 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
             .Events.Select(e => new ExtractedEvent(
                 e.EventType ?? "Other",
                 e.Description ?? "",
+                e.Narrative,
+                e.Significance,
+                e.PrecedingContext,
+                e.Consequences ?? [],
                 e.Year,
                 e.Demarcation,
                 e.DateDescription,
@@ -419,6 +377,8 @@ internal sealed class BatchExtractionExecutor : Executor<string, string>
             ))
             .ToList();
     }
+
+    private static string FormatGalactic(int sortKey) => sortKey < 0 ? $"{-sortKey} BBY" : $"{sortKey} ABY";
 }
 
 /// <summary>
@@ -438,7 +398,4 @@ internal sealed class BatchExtractionProgressDoc
 /// <summary>
 /// Checkpoint state for framework superstep boundaries.
 /// </summary>
-internal sealed record BatchExtractionCheckpoint(
-    List<int> ProcessedBatchIndices,
-    List<ExtractedEvent> Events
-);
+internal sealed record BatchExtractionCheckpoint(List<int> ProcessedBatchIndices, List<ExtractedEvent> Events);

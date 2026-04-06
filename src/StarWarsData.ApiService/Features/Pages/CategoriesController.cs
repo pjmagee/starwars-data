@@ -28,7 +28,7 @@ public class CategoriesController : ControllerBase
 
     // Allow categories that may contain slashes (e.g., template URLs)
     [HttpGet("{*category}")]
-    public async Task<PagedResult> Get(string category, [FromQuery] QueryParams queryParams, [FromQuery] Continuity? continuity = null, [FromQuery] Universe? universe = null)
+    public async Task<PagedResult> Get(string category, [FromQuery] QueryParams queryParams, [FromQuery] Continuity? continuity = null, [FromQuery] Realm? realm = null)
     {
         return await _recordService.GetCollectionResult(
             category,
@@ -36,7 +36,7 @@ public class CategoriesController : ControllerBase
             page: queryParams.Page,
             pageSize: queryParams.PageSize,
             continuity: continuity,
-            universe: universe,
+            realm: realm,
             token: _contextAccessor.HttpContext!.RequestAborted
         );
     }

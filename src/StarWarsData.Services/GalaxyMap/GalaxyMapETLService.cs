@@ -20,8 +20,8 @@ public class GalaxyMapETLService(IMongoClient mongoClient, IOptions<SettingsOpti
     readonly IMongoCollection<RelationshipEdge> _edges = mongoClient.GetDatabase(settings.Value.DatabaseName).GetCollection<RelationshipEdge>(Collections.KgEdges);
     readonly IMongoCollection<Page> _pages = mongoClient.GetDatabase(settings.Value.DatabaseName).GetCollection<Page>(Collections.Pages);
 
-    // Out-of-Universe detection now uses node.Universe field from the KG
-    // instead of a hardcoded list of type names. See lensOutOfUniverse population in BuildGalaxyMapAsync.
+    // Real-world detection now uses node.Realm field from the KG
+    // instead of a hardcoded list of type names. See lensIsReal population in BuildGalaxyMapAsync.
 
     public async Task BuildGalaxyMapAsync(CancellationToken ct = default)
     {
@@ -169,14 +169,14 @@ public class GalaxyMapETLService(IMongoClient mongoClient, IOptions<SettingsOpti
 
         // Debug: check continuity deserialization
         var contCounts = eventKgNodes.GroupBy(n => n.Continuity).ToDictionary(g => g.Key, g => g.Count());
-        var univCounts = eventKgNodes.GroupBy(n => n.Universe).ToDictionary(g => g.Key, g => g.Count());
+        var realmCounts = eventKgNodes.GroupBy(n => n.Realm).ToDictionary(g => g.Key, g => g.Count());
         logger.LogInformation("Galaxy map ETL: continuity breakdown: {Counts}", string.Join(", ", contCounts.Select(kv => $"{kv.Key}={kv.Value}")));
-        logger.LogInformation("Galaxy map ETL: universe breakdown: {Counts}", string.Join(", ", univCounts.Select(kv => $"{kv.Key}={kv.Value}")));
+        logger.LogInformation("Galaxy map ETL: realm breakdown: {Counts}", string.Join(", ", realmCounts.Select(kv => $"{kv.Key}={kv.Value}")));
 
         // Group by type (= lens) and by year
         var lensTotals = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
         var lensWithLocation = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-        var lensOutOfUniverse = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+        var lensIsReal = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
 
         var eventsByYear = new Dictionary<int, List<GraphNode>>();
 
@@ -184,7 +184,7 @@ public class GalaxyMapETLService(IMongoClient mongoClient, IOptions<SettingsOpti
         {
             var lens = node.Type;
             lensTotals[lens] = lensTotals.GetValueOrDefault(lens) + 1;
-            lensOutOfUniverse.TryAdd(lens, node.Universe == Universe.OutOfUniverse);
+            lensIsReal.TryAdd(lens, node.Realm == Realm.Real);
 
             // Use temporal facets for multi-year events (wars, campaigns span their duration)
             var startYear = node.StartYear!.Value;
@@ -351,7 +351,7 @@ public class GalaxyMapETLService(IMongoClient mongoClient, IOptions<SettingsOpti
                                     WikiUrl = node.WikiUrl,
                                     ImageUrl = node.ImageUrl,
                                     Continuity = node.Continuity,
-                                    Universe = node.Universe,
+                                    Realm = node.Realm,
                                 }
                             );
                         }
@@ -388,7 +388,7 @@ public class GalaxyMapETLService(IMongoClient mongoClient, IOptions<SettingsOpti
                                 WikiUrl = node.WikiUrl,
                                 ImageUrl = node.ImageUrl,
                                 Continuity = node.Continuity,
-                                Universe = node.Universe,
+                                Realm = node.Realm,
                             }
                         );
                     }
@@ -433,7 +433,7 @@ public class GalaxyMapETLService(IMongoClient mongoClient, IOptions<SettingsOpti
                 Lens = kv.Key,
                 TotalCount = kv.Value,
                 WithLocationCount = lensWithLocation.GetValueOrDefault(kv.Key),
-                OutOfUniverse = lensOutOfUniverse.GetValueOrDefault(kv.Key),
+                IsReal = lensIsReal.GetValueOrDefault(kv.Key),
             })
             .OrderByDescending(s => s.TotalCount)
             .ToList();

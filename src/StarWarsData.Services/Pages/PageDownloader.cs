@@ -86,7 +86,7 @@ public class PageDownloader
             WikiUrl = $"{WikiBase}{Uri.EscapeDataString(title.Replace(' ', '_'))}",
             LastModified = lastModified,
             Continuity = DetermineContinuity(title, categories),
-            Universe = DetermineUniverse(categories),
+            Realm = DetermineRealm(categories),
             DownloadedAt = DateTime.UtcNow,
         };
 
@@ -846,16 +846,44 @@ public class PageDownloader
         return Continuity.Unknown;
     }
 
-    static readonly string[] OutOfUniverseMarkers = ["Real-world articles", "Real-world media", "Out-of-universe articles", "Canceled projects", "Hoax articles", "Wookieepedia administration"];
+    // Substring markers — any category containing any of these is Real-world.
+    // "Real-world" catches the full tree (Real-world articles, Real-world media,
+    // Real-world people, Real-world music performers, Real-world stores, etc.).
+    static readonly string[] RealWorldMarkers =
+    [
+        "Real-world",
+        "Out-of-universe",
+        "Behind the scenes",
+        "Publishing eras",
+        "Canceled", // catches "Canceled projects", "Canceled video games", "Canceled comics"
+        "Hoax articles",
+        "Wookieepedia administration",
+        "webcomic", // "Canon webcomics", "Legends webcomics" — real-world publication format
+    ];
 
-    Universe DetermineUniverse(List<string> categories)
+    // Year-based markers: real-world publication tracking categories.
+    // Matches "Category:2018 articles and stories", "Category:2020 releases", etc.
+    static readonly System.Text.RegularExpressions.Regex YearBasedRealWorldRegex = new(
+        @"\b\d{4}\s+(articles\s+and\s+stories|releases|miscellaneous\s+releases)\b",
+        System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled
+    );
+
+    internal static Realm DetermineRealm(List<string> categories)
     {
-        if (categories.Any(c => OutOfUniverseMarkers.Any(m => c.Contains(m, StringComparison.OrdinalIgnoreCase))))
+        foreach (var category in categories)
         {
-            return Universe.OutOfUniverse;
+            if (RealWorldMarkers.Any(m => category.Contains(m, StringComparison.OrdinalIgnoreCase)))
+            {
+                return Realm.Real;
+            }
+
+            if (YearBasedRealWorldRegex.IsMatch(category))
+            {
+                return Realm.Real;
+            }
         }
 
-        return Universe.InUniverse;
+        return Realm.Starwars;
     }
 
     /// <summary>

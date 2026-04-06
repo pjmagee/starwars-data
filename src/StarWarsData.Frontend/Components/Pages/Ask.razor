@@ -51,17 +51,26 @@
                 <MudText Typo="Typo.subtitle1" Align="Align.Center" Class="mb-3">
                     @(SelectedMode is null ? "Try asking" : $"{SelectedMode.Label} examples")
                 </MudText>
-                <MudGrid Spacing="2" Justify="Justify.Center">
-                    @foreach (var example in FilteredExamples)
-                    {
-                        var prompt = example;
-                        <MudItem xs="12" sm="6" md="4">
-                            <MudPaper Outlined="true" Class="pa-3 cursor-pointer mud-clickable" @onclick="() => UseExample(prompt)">
-                                <MudText Typo="Typo.body2">@prompt</MudText>
-                            </MudPaper>
-                        </MudItem>
-                    }
-                </MudGrid>
+                @if (FilteredExamples.Length == 0)
+                {
+                    <MudText Typo="Typo.body2" Align="Align.Center" Color="Color.Secondary" Class="my-4">
+                        No example prompts are cached for this filter combination yet. Ask a question directly or try toggling the Canon, Legends, Star Wars, or Real World filters.
+                    </MudText>
+                }
+                else
+                {
+                    <MudGrid Spacing="2" Justify="Justify.Center">
+                        @foreach (var example in FilteredExamples)
+                        {
+                            var prompt = example;
+                            <MudItem xs="12" sm="6" md="4">
+                                <MudPaper Outlined="true" Class="pa-3 cursor-pointer mud-clickable" @onclick="() => UseExample(prompt)">
+                                    <MudText Typo="Typo.body2">@prompt</MudText>
+                                </MudPaper>
+                            </MudItem>
+                        }
+                    </MudGrid>
+                }
             </MudContainer>
         }
         else
@@ -495,28 +504,93 @@
     private string _selectedMode = "auto";
     private VisualizationMode? SelectedMode => _selectedMode == "auto" ? null : _modes.FirstOrDefault(m => m.Key == _selectedMode);
 
-    private string[] _randomExamples = PickRandomExamples();
+    // Dynamic suggestions fetched from api/suggestions; falls back to the hardcoded
+    // pool (shuffled without replacement) when the cache is empty or the endpoint errors.
+    // NOTE: the hardcoded pool is exclusively in-universe (Realm=Starwars). When the user
+    // has filtered to Real World only, we must NOT fall back to it — showing in-universe
+    // prompts would violate the filter. Instead we return an empty set and rely on the
+    // card grid to render nothing for that combination.
+    private string[] _randomExamples = [];
 
-    private static string[] PickRandomExamples()
+    private static string[] ShuffleFallback(string? mode, bool allowInUniverse)
     {
-        var all = _modes.SelectMany(m => m.Examples).ToArray();
-        return Random.Shared.GetItems(all, 6);
+        if (!allowInUniverse)
+            return [];
+
+        var pool = mode is null
+            ? _modes.SelectMany(m => m.Examples).ToArray()
+            : (_modes.FirstOrDefault(m => m.Key == mode)?.Examples ?? _modes.SelectMany(m => m.Examples).ToArray()).ToArray();
+        // Random.Shared.Shuffle is in-place; then Take samples without replacement.
+        Random.Shared.Shuffle(pool);
+        return pool.Take(6).ToArray();
     }
+
+    private async Task LoadSuggestionsAsync(string? mode = null)
+    {
+        // Continuity/realm always mirror the global filter; mode is an extra narrowing.
+        var continuity = GlobalFilterService.GetContinuityQueryParam();
+        var realm = GlobalFilterService.GetRealmQueryParam();
+
+        // The hardcoded fallback pool is all in-universe. It is only safe to use when the
+        // user has not filtered to Real-only. In-universe selected, Real-only filter, and
+        // "both realms" all permit the in-universe fallback; Real-only does not.
+        var allowInUniverseFallback = !string.Equals(realm, "Real", StringComparison.OrdinalIgnoreCase);
+
+        try
+        {
+            // Mode-scoped API call honoring the global filter. If the bucket has fewer
+            // than 6 items, the API returns whatever it has — we render that directly
+            // rather than retrying without the mode, because cross-mode leakage (e.g.
+            // chart prompts showing on the infobox cards) is worse UX than a short list.
+            var items = await FetchSuggestionsAsync(mode, continuity, realm);
+
+            if (items is { Count: > 0 })
+            {
+                _randomExamples = items.Select(i => i.Prompt).ToArray();
+                return;
+            }
+
+            // API returned nothing — either cache is unseeded or the bucket is genuinely
+            // empty. Fall back to the hardcoded mode-scoped pool only if the active realm
+            // filter allows in-universe content; otherwise return an empty set so the UI
+            // doesn't render prompts that violate the filter.
+            _randomExamples = ShuffleFallback(mode, allowInUniverseFallback);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogDebug(ex, "Failed to load dynamic Ask suggestions; using hardcoded fallback");
+            _randomExamples = ShuffleFallback(mode, allowInUniverseFallback);
+        }
+    }
+
+    private async Task<List<SuggestionDto>?> FetchSuggestionsAsync(string? mode, string? continuity, string? realm)
+    {
+        var qs = new List<string> { "count=6" };
+        if (!string.IsNullOrEmpty(mode))
+            qs.Add($"mode={Uri.EscapeDataString(mode)}");
+        if (!string.IsNullOrEmpty(continuity))
+            qs.Add($"continuity={Uri.EscapeDataString(continuity)}");
+        if (!string.IsNullOrEmpty(realm))
+            qs.Add($"realm={Uri.EscapeDataString(realm)}");
+
+        return await Http.GetFromJsonAsync<List<SuggestionDto>>($"api/suggestions?{string.Join("&", qs)}");
+    }
+
+    private sealed record SuggestionDto(string Mode, string Shape, string Prompt, string Continuity, string Realm, List<int> EntityIds);
 
     private void ToggleMode(string key)
     {
         _selectedMode = _selectedMode == key ? "auto" : key;
+        _ = InvokeAsync(async () =>
+        {
+            await LoadSuggestionsAsync(_selectedMode == "auto" ? null : _selectedMode);
+            StateHasChanged();
+        });
     }
 
-    private string[] FilteredExamples
-    {
-        get
-        {
-            if (SelectedMode is not null)
-                return SelectedMode.Examples;
-            return _randomExamples;
-        }
-    }
+    // Now that dynamic suggestions are loaded per-mode on toggle, _randomExamples
+    // already reflects the selected mode; no need to fall back to hardcoded pools.
+    private string[] FilteredExamples => _randomExamples;
 
     public class AskModel
     {
@@ -531,6 +605,7 @@
     protected override async Task OnInitializedAsync()
     {
         ChatHistory.OnChange += OnChatHistoryChanged;
+        GlobalFilterService.OnChange += OnGlobalFilterChanged;
 
         if (AuthState is not null)
         {
@@ -544,6 +619,7 @@
         }
 
         await CheckAiStatusAsync();
+        await LoadSuggestionsAsync();
     }
 
     private async Task CheckAiStatusAsync()
@@ -580,13 +656,32 @@
         _model = new AskModel();
         _conversation.Clear();
         _aguiMessages.Clear();
-        _randomExamples = PickRandomExamples();
+        // Intermediate placeholder while LoadSuggestionsAsync runs — respect the current realm filter.
+        var allowInUniverse = !string.Equals(GlobalFilterService.GetRealmQueryParam(), "Real", StringComparison.OrdinalIgnoreCase);
+        _randomExamples = ShuffleFallback(_selectedMode == "auto" ? null : _selectedMode, allowInUniverse);
         StateHasChanged();
+        _ = InvokeAsync(async () =>
+        {
+            await LoadSuggestionsAsync(_selectedMode == "auto" ? null : _selectedMode);
+            StateHasChanged();
+        });
+    }
+
+    private void OnGlobalFilterChanged()
+    {
+        // Continuity/Realm toggle changed — reload dynamic suggestions so the empty-state
+        // cards match the newly-selected filter scope.
+        _ = InvokeAsync(async () =>
+        {
+            await LoadSuggestionsAsync(_selectedMode == "auto" ? null : _selectedMode);
+            StateHasChanged();
+        });
     }
 
     public void Dispose()
     {
         ChatHistory.OnChange -= OnChatHistoryChanged;
+        GlobalFilterService.OnChange -= OnGlobalFilterChanged;
     }
 
 

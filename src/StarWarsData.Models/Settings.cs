@@ -100,4 +100,7 @@ public static class Collections
 
     // ── Admin ──
     public const string JobToggles = "admin.job_toggles";
+
+    // ── Dynamically generated Ask page suggestions ──
+    public const string SuggestionsExamples = "suggestions.examples";
 }

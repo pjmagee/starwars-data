@@ -9,7 +9,7 @@ namespace StarWarsData.Services;
 
 /// <summary>
 /// Keyword search over raw wiki pages using MongoDB $text index.
-/// Returns results in the same shape as <see cref="SemanticSearchResult"/> for unified display.
+/// Returns results in the same shape as <see cref="SearchHit"/> for unified display.
 /// </summary>
 public class KeywordSearchService
 {
@@ -22,14 +22,14 @@ public class KeywordSearchService
         _logger = logger;
     }
 
-    public async Task<List<SemanticSearchResult>> SearchAsync(string query, string[]? types = null, Continuity? continuity = null, Universe? universe = null, int limit = 10)
+    public async Task<List<SearchHit>> SearchAsync(string query, string[]? types = null, Continuity? continuity = null, Realm? realm = null, int limit = 10)
     {
         _logger.LogInformation(
-            "KeywordSearch: query={Query}, types={Types}, continuity={Continuity}, universe={Universe}",
+            "KeywordSearch: query={Query}, types={Types}, continuity={Continuity}, realm={Realm}",
             query,
             types is not null ? string.Join(",", types) : "all",
             continuity?.ToString() ?? "all",
-            universe?.ToString() ?? "all"
+            realm?.ToString() ?? "all"
         );
 
         var filters = new List<FilterDefinition<BsonDocument>> { Builders<BsonDocument>.Filter.Text(query), Builders<BsonDocument>.Filter.Ne(PageBsonFields.Infobox, BsonNull.Value) };
@@ -43,8 +43,8 @@ public class KeywordSearchService
         if (continuity.HasValue)
             filters.Add(Builders<BsonDocument>.Filter.Eq(PageBsonFields.Continuity, continuity.Value.ToString()));
 
-        if (universe.HasValue)
-            filters.Add(Builders<BsonDocument>.Filter.Eq(PageBsonFields.Universe, universe.Value.ToString()));
+        if (realm.HasValue)
+            filters.Add(Builders<BsonDocument>.Filter.Eq(PageBsonFields.Realm, realm.Value.ToString()));
 
         var filter = Builders<BsonDocument>.Filter.And(filters);
 
@@ -54,7 +54,7 @@ public class KeywordSearchService
             .Include(PageBsonFields.WikiUrl)
             .Include("content")
             .Include(PageBsonFields.Continuity)
-            .Include(PageBsonFields.Universe)
+            .Include(PageBsonFields.Realm)
             .Include("infobox.Template")
             .MetaTextScore("score");
 
@@ -74,7 +74,7 @@ public class KeywordSearchService
                 var snippet = content.Length > 300 ? content[..300] + "…" : content;
                 var rawScore = d.Contains("score") ? d["score"].AsDouble : 0;
 
-                return new SemanticSearchResult
+                return new SearchHit
                 {
                     PageId = d[PageBsonFields.PageId].AsInt32,
                     Title = d[PageBsonFields.Title].AsString,
@@ -86,7 +86,7 @@ public class KeywordSearchService
                             ? d[PageBsonFields.Infobox][InfoboxBsonFields.Template].AsString
                             : "",
                     Continuity = d.Contains(PageBsonFields.Continuity) && !d[PageBsonFields.Continuity].IsBsonNull ? d[PageBsonFields.Continuity].AsString : "",
-                    Universe = d.Contains(PageBsonFields.Universe) && !d[PageBsonFields.Universe].IsBsonNull ? d[PageBsonFields.Universe].AsString : "",
+                    Realm = d.Contains(PageBsonFields.Realm) && !d[PageBsonFields.Realm].IsBsonNull ? d[PageBsonFields.Realm].AsString : "",
                     Text = snippet,
                     Score = maxScore > 0 ? rawScore / maxScore : 0,
                 };

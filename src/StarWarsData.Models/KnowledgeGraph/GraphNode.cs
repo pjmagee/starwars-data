@@ -25,9 +25,9 @@ public class GraphNode
     [BsonRepresentation(BsonType.String)]
     public Continuity Continuity { get; set; } = Continuity.Unknown;
 
-    [BsonElement("universe")]
+    [BsonElement("realm")]
     [BsonRepresentation(BsonType.String)]
-    public Universe Universe { get; set; } = Universe.Unknown;
+    public Realm Realm { get; set; } = Realm.Unknown;
 
     /// <summary>Scalar properties (key → values). E.g. { "height": ["1.72 m"], "eye_color": ["Blue"] }</summary>
     [BsonElement("properties")]
@@ -64,6 +64,20 @@ public class GraphNode
     /// <summary>All temporal facets, preserving semantic meaning and lifecycle order.</summary>
     [BsonElement("temporalFacets")]
     public List<TemporalFacet> TemporalFacets { get; set; } = [];
+
+    /// <summary>
+    /// Precomputed transitive closures of tree- or DAG-shaped relationship labels
+    /// (see <c>HierarchyRegistry</c>). Key is the lineage name (e.g. <c>apprentice_of</c>,
+    /// <c>ancestors</c>, <c>in_region</c>); value is the ordered list of <c>PageId</c>s
+    /// reachable from this node by walking that lineage from nearest to farthest.
+    ///
+    /// Populated during Phase 5 post-processing. Empty subdocument for nodes that don't
+    /// participate in any registered lineage. Backed by a wildcard index on <c>lineages.$**</c>
+    /// so membership queries like <c>{"lineages.apprentice_of": targetId}</c> are O(1).
+    /// See ADR-003 Gap 1 and Design-008.
+    /// </summary>
+    [BsonElement("lineages")]
+    public Dictionary<string, List<int>> Lineages { get; set; } = [];
 
     /// <summary>Content hash from the Page at time of processing.</summary>
     [BsonElement("contentHash")]

@@ -79,6 +79,8 @@ public class RelationshipGraphController(KnowledgeGraphQueryService kg) : Contro
         [FromQuery] string? continuity = null,
         [FromQuery] bool onlyRoot = false,
         [FromQuery] string? universe = null,
+        [FromQuery] int? yearFrom = null,
+        [FromQuery] int? yearTo = null,
         CancellationToken ct = default
-    ) => kg.QueryGraphAsync(pageId, labels, maxDepth, continuity, onlyRoot, universe, ct);
+    ) => kg.QueryGraphAsync(pageId, labels, maxDepth, continuity, onlyRoot, universe, yearFrom, yearTo, ct);
 }

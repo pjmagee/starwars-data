@@ -198,8 +198,8 @@ public class RelationshipGraphBuilderService
 
         _logger.LogInformation("Relationship graph builder: {Count} pages to process", batch.Count);
 
-        // Pre-fetch existing labels once for the whole batch
-        var existingLabels = await _toolkit.GetExistingLabels();
+        // Pre-fetch existing labels once for the whole batch (serialized as JSON for embedding in LLM prompts)
+        var existingLabels = JsonSerializer.Serialize(await _toolkit.GetExistingLabels());
 
         int processed = 0;
         int failed = 0;
@@ -414,13 +414,13 @@ public class RelationshipGraphBuilderService
         prompt.AppendLine(existingLabels);
         prompt.AppendLine();
         prompt.AppendLine("## PAGE CONTENT");
-        prompt.AppendLine(await pageContentTask);
+        prompt.AppendLine(JsonSerializer.Serialize(await pageContentTask));
         prompt.AppendLine();
         prompt.AppendLine("## LINKED ENTITIES (only use PageIds from this list)");
-        prompt.AppendLine(await linkedPagesTask);
+        prompt.AppendLine(JsonSerializer.Serialize(await linkedPagesTask));
         prompt.AppendLine();
         prompt.AppendLine("## EXISTING EDGES (do not duplicate these)");
-        prompt.AppendLine(await existingEdgesTask);
+        prompt.AppendLine(JsonSerializer.Serialize(await existingEdgesTask));
         prompt.AppendLine();
         prompt.AppendLine("Extract ALL meaningful relationships from this page.");
         return prompt.ToString();
@@ -575,8 +575,8 @@ public class RelationshipGraphBuilderService
         {
             _logger.LogInformation("Batch {BatchId}: preparing {Count} requests", batchJob.Id, pages.Count);
 
-            // Pre-fetch existing labels once for the whole batch
-            var existingLabels = await _toolkit.GetExistingLabels();
+            // Pre-fetch existing labels once for the whole batch (serialized as JSON for embedding in LLM prompts)
+            var existingLabels = JsonSerializer.Serialize(await _toolkit.GetExistingLabels());
 
             // Build JSON schema for structured output
             var jsonSchema = BuildJsonSchema();
@@ -1529,24 +1529,14 @@ public class RelationshipGraphBuilderService
     }
 
     /// <summary>
-    /// Ensure required indexes exist on graph collections.
+    /// Ensure required indexes exist on collections owned by this service.
+    /// NOTE: <c>kg.edges</c> indexes are owned by <see cref="InfoboxGraphService"/> — Phase 5
+    /// wipes and reinserts the collection and re-asserts the full index set on every rebuild.
+    /// This method only touches <c>crawl_state</c>, which is the LLM extraction pipeline's
+    /// private working set.
     /// </summary>
     public async Task EnsureIndexesAsync(CancellationToken ct = default)
     {
-        // edges: $graphLookup traversal
-        await _edges.Indexes.CreateManyAsync(
-            [
-                new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.FromId), new CreateIndexOptions { Name = "ix_fromId" }),
-                new CreateIndexModel<RelationshipEdge>(
-                    Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.FromId).Ascending(e => e.ToId).Ascending(e => e.Label),
-                    new CreateIndexOptions { Name = "ix_fromId_toId_label", Unique = true }
-                ),
-                new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.SourcePageId), new CreateIndexOptions { Name = "ix_sourcePageId" }),
-                new CreateIndexModel<RelationshipEdge>(Builders<RelationshipEdge>.IndexKeys.Ascending(e => e.PairId), new CreateIndexOptions { Name = "ix_pairId" }),
-            ],
-            ct
-        );
-
         // crawl_state: status + type queries
         await _crawlState.Indexes.CreateManyAsync(
             [

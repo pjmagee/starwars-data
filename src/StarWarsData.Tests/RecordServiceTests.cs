@@ -5,7 +5,7 @@ namespace StarWarsData.Tests;
 /// against a Testcontainers instance seeded with diverse infobox types.
 ///
 /// Covers: GetCollectionNames, GetCollectionResult, GetPageById, GetPagesByIds,
-///         GetSearchResult, GetFilteredCollectionNames
+///         GetFilteredCollectionNames
 /// </summary>
 [Collection("Api")]
 public class RecordServiceTests(ApiFixture fixture)
@@ -68,12 +68,7 @@ public class RecordServiceTests(ApiFixture fixture)
     [Fact]
     public async Task GetCollectionResult_Pagination_RespectsPageSize()
     {
-        var page1 = await Svc.GetCollectionResult(
-            "Character",
-            page: 1,
-            pageSize: 2,
-            token: CancellationToken.None
-        );
+        var page1 = await Svc.GetCollectionResult("Character", page: 1, pageSize: 2, token: CancellationToken.None);
 
         Assert.True(page1.Total >= 4);
         Assert.Equal(2, page1.Items.Count());
@@ -84,18 +79,8 @@ public class RecordServiceTests(ApiFixture fixture)
     [Fact]
     public async Task GetCollectionResult_Page2_ReturnsDifferentItems()
     {
-        var page1 = await Svc.GetCollectionResult(
-            "Character",
-            page: 1,
-            pageSize: 2,
-            token: CancellationToken.None
-        );
-        var page2 = await Svc.GetCollectionResult(
-            "Character",
-            page: 2,
-            pageSize: 2,
-            token: CancellationToken.None
-        );
+        var page1 = await Svc.GetCollectionResult("Character", page: 1, pageSize: 2, token: CancellationToken.None);
+        var page2 = await Svc.GetCollectionResult("Character", page: 2, pageSize: 2, token: CancellationToken.None);
 
         var page1Ids = page1.Items.Select(i => i.PageId).ToHashSet();
         var page2Ids = page2.Items.Select(i => i.PageId).ToHashSet();
@@ -107,11 +92,7 @@ public class RecordServiceTests(ApiFixture fixture)
     [Fact]
     public async Task GetCollectionResult_WithSearch_FiltersByTitle()
     {
-        var result = await Svc.GetCollectionResult(
-            "Character",
-            searchText: "Luke",
-            token: CancellationToken.None
-        );
+        var result = await Svc.GetCollectionResult("Character", searchText: "Luke", token: CancellationToken.None);
 
         Assert.True(result.Total >= 1);
         Assert.Contains(result.Items, i => i.PageTitle == "Luke Skywalker");
@@ -120,10 +101,7 @@ public class RecordServiceTests(ApiFixture fixture)
     [Fact]
     public async Task GetCollectionResult_NonexistentCategory_ReturnsEmpty()
     {
-        var result = await Svc.GetCollectionResult(
-            "NonexistentType",
-            token: CancellationToken.None
-        );
+        var result = await Svc.GetCollectionResult("NonexistentType", token: CancellationToken.None);
 
         Assert.Equal(0, result.Total);
         Assert.Empty(result.Items);
@@ -213,55 +191,12 @@ public class RecordServiceTests(ApiFixture fixture)
         Assert.Empty(pages);
     }
 
-    // ── GetSearchResult ────────────────────────────────────────────────────
-
-    [Fact]
-    public async Task GetSearchResult_RegexFallback_FindsByTitle()
-    {
-        // Text search requires a text index; regex fallback should still work
-        var result = await Svc.GetSearchResult("Tatooine", token: CancellationToken.None);
-
-        Assert.True(result.Total >= 1);
-        Assert.Contains(result.Items, i => i.PageTitle == "Tatooine");
-    }
-
-    [Fact]
-    public async Task GetSearchResult_PartialMatch_FindsByRegex()
-    {
-        var result = await Svc.GetSearchResult("Skywalker", token: CancellationToken.None);
-
-        // Should find Luke, Anakin, Leia (all Skywalkers in title)
-        Assert.True(result.Total >= 2);
-    }
-
-    [Fact]
-    public async Task GetSearchResult_NoMatch_ReturnsEmptyItems()
-    {
-        var result = await Svc.GetSearchResult("ZZZZZNONEXISTENT", token: CancellationToken.None);
-
-        Assert.Equal(0, result.Total);
-        Assert.Empty(result.Items);
-    }
-
-    [Fact]
-    public async Task GetSearchResult_ExcludesNullInfoboxPages()
-    {
-        // "Disambiguation Page" (id=300) has null infobox — shouldn't appear
-        var result = await Svc.GetSearchResult("Disambiguation", token: CancellationToken.None);
-
-        Assert.DoesNotContain(result.Items, i => i.PageId == 300);
-    }
-
     // ── GetFilteredCollectionNames ─────────────────────────────────────────
 
     [Fact]
     public async Task GetFilteredCollectionNames_ByContinuity_FiltersCorrectly()
     {
-        var canonNames = await Svc.GetFilteredCollectionNames(
-            Models.Entities.Continuity.Canon,
-            null,
-            CancellationToken.None
-        );
+        var canonNames = await Svc.GetFilteredCollectionNames(Models.Entities.Continuity.Canon, null, CancellationToken.None);
 
         Assert.Contains("Planet", canonNames);
         Assert.Contains("Battle", canonNames);

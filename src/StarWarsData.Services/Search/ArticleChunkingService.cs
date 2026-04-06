@@ -79,7 +79,7 @@ public partial class ArticleChunkingService
                     { PageBsonFields.WikiUrl, 1 },
                     { "content", 1 },
                     { PageBsonFields.Continuity, 1 },
-                    { PageBsonFields.Universe, 1 },
+                    { PageBsonFields.Realm, 1 },
                     { "infobox.Template", 1 },
                 }
             )
@@ -124,12 +124,12 @@ public partial class ArticleChunkingService
                             : Continuity.Unknown
                         : Continuity.Unknown;
 
-                var universe =
-                    doc.Contains(PageBsonFields.Universe) && !doc[PageBsonFields.Universe].IsBsonNull
-                        ? Enum.TryParse<Universe>(doc[PageBsonFields.Universe].AsString, true, out var u)
+                var realm =
+                    doc.Contains(PageBsonFields.Realm) && !doc[PageBsonFields.Realm].IsBsonNull
+                        ? Enum.TryParse<Realm>(doc[PageBsonFields.Realm].AsString, true, out var u)
                             ? u
-                            : Universe.Unknown
-                        : Universe.Unknown;
+                            : Realm.Unknown
+                        : Realm.Unknown;
 
                 // Split content into chunks
                 var sections = SplitByMarkdownHeadings(content);
@@ -228,7 +228,7 @@ public partial class ArticleChunkingService
                             Text = chunks[i].text,
                             Type = template,
                             Continuity = continuity,
-                            Universe = universe,
+                            Realm = realm,
                             Embedding = vec,
                         }
                     );
@@ -490,7 +490,7 @@ public partial class ArticleChunkingService
                     },
                     new BsonDocument { { "type", "filter" }, { "path", ArticleChunkBsonFields.Type } },
                     new BsonDocument { { "type", "filter" }, { "path", ArticleChunkBsonFields.Continuity } },
-                    new BsonDocument { { "type", "filter" }, { "path", ArticleChunkBsonFields.Universe } },
+                    new BsonDocument { { "type", "filter" }, { "path", ArticleChunkBsonFields.Realm } },
                 }
             },
         };

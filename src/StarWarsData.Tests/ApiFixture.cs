@@ -33,12 +33,10 @@ public sealed class ApiFixture : IAsyncLifetime
 
         MongoClient = new MongoClient(_container.GetConnectionString());
 
-        var pagesCollection = MongoClient
-            .GetDatabase(DatabaseName)
-            .GetCollection<Page>(Collections.Pages);
+        var pagesCollection = MongoClient.GetDatabase(DatabaseName).GetCollection<Page>(Collections.Pages);
         await pagesCollection.InsertManyAsync(BuildSeedData());
 
-        // Create text index on title + content — required by RecordService.GetSearchResult
+        // Create text index on title + content — required by KeywordSearchService
         var textIndex = Builders<Page>.IndexKeys.Text(p => p.Title).Text(p => p.Content);
         await pagesCollection.Indexes.CreateOneAsync(new CreateIndexModel<Page>(textIndex));
 
@@ -52,25 +50,7 @@ public sealed class ApiFixture : IAsyncLifetime
             }
         );
 
-        var yearHelper = new YearHelper(new YearComparer());
-        var templateHelper = new TemplateHelper();
-        var transformer = new InfoboxToEventsTransformer(
-            NullLogger<InfoboxToEventsTransformer>.Instance,
-            templateHelper,
-            yearHelper
-        );
-
-        // Stub embedding generator — not needed for query tests
-        var embeddingGen = new NoOpEmbeddingGenerator();
-
-        RecordService = new RecordService(
-            NullLogger<RecordService>.Instance,
-            settings,
-            yearHelper,
-            MongoClient,
-            embeddingGen,
-            transformer
-        );
+        RecordService = new RecordService(NullLogger<RecordService>.Instance, settings, MongoClient);
 
         RelationshipAnalystToolkit = new RelationshipAnalystToolkit(MongoClient, DatabaseName);
     }
@@ -96,41 +76,11 @@ public sealed class ApiFixture : IAsyncLifetime
                     Prop("Titles", ["Luke Skywalker"]),
                     Prop("Born", ["19 BBY"]),
                     Prop("Died", [""]),
-                    Prop(
-                        "Homeworld",
-                        ["Tatooine"],
-                        [Link("Tatooine", "https://starwars.fandom.com/wiki/Tatooine")]
-                    ),
-                    Prop(
-                        "Species",
-                        ["Human"],
-                        [Link("Human", "https://starwars.fandom.com/wiki/Human")]
-                    ),
-                    Prop(
-                        "Parent(s)",
-                        ["Anakin Skywalker"],
-                        [
-                            Link(
-                                "Anakin Skywalker",
-                                "https://starwars.fandom.com/wiki/Anakin_Skywalker/Legends"
-                            ),
-                        ]
-                    ),
-                    Prop(
-                        "Sibling(s)",
-                        ["Leia Organa Solo"],
-                        [
-                            Link(
-                                "Leia Organa Solo",
-                                "https://starwars.fandom.com/wiki/Leia_Organa_Solo/Legends"
-                            ),
-                        ]
-                    ),
-                    Prop(
-                        "Children",
-                        ["Ben Skywalker"],
-                        [Link("Ben Skywalker", "https://starwars.fandom.com/wiki/Ben_Skywalker")]
-                    ),
+                    Prop("Homeworld", ["Tatooine"], [Link("Tatooine", "https://starwars.fandom.com/wiki/Tatooine")]),
+                    Prop("Species", ["Human"], [Link("Human", "https://starwars.fandom.com/wiki/Human")]),
+                    Prop("Parent(s)", ["Anakin Skywalker"], [Link("Anakin Skywalker", "https://starwars.fandom.com/wiki/Anakin_Skywalker/Legends")]),
+                    Prop("Sibling(s)", ["Leia Organa Solo"], [Link("Leia Organa Solo", "https://starwars.fandom.com/wiki/Leia_Organa_Solo/Legends")]),
+                    Prop("Children", ["Ben Skywalker"], [Link("Ben Skywalker", "https://starwars.fandom.com/wiki/Ben_Skywalker")]),
                 ],
                 "Luke Skywalker was a Force-sensitive Human male Jedi Master."
             ),
@@ -144,24 +94,11 @@ public sealed class ApiFixture : IAsyncLifetime
                     Prop("Titles", ["Anakin Skywalker"]),
                     Prop("Born", ["41 BBY"]),
                     Prop("Died", ["4 ABY"]),
-                    Prop(
-                        "Homeworld",
-                        ["Tatooine"],
-                        [Link("Tatooine", "https://starwars.fandom.com/wiki/Tatooine")]
-                    ),
+                    Prop("Homeworld", ["Tatooine"], [Link("Tatooine", "https://starwars.fandom.com/wiki/Tatooine")]),
                     Prop(
                         "Children",
                         ["Luke Skywalker", "Leia Organa Solo"],
-                        [
-                            Link(
-                                "Luke Skywalker",
-                                "https://starwars.fandom.com/wiki/Luke_Skywalker/Legends"
-                            ),
-                            Link(
-                                "Leia Organa Solo",
-                                "https://starwars.fandom.com/wiki/Leia_Organa_Solo/Legends"
-                            ),
-                        ]
+                        [Link("Luke Skywalker", "https://starwars.fandom.com/wiki/Luke_Skywalker/Legends"), Link("Leia Organa Solo", "https://starwars.fandom.com/wiki/Leia_Organa_Solo/Legends")]
                     ),
                 ],
                 "Anakin Skywalker was the Chosen One."
@@ -175,26 +112,8 @@ public sealed class ApiFixture : IAsyncLifetime
                 [
                     Prop("Titles", ["Leia Organa Solo"]),
                     Prop("Born", ["19 BBY"]),
-                    Prop(
-                        "Parent(s)",
-                        ["Anakin Skywalker"],
-                        [
-                            Link(
-                                "Anakin Skywalker",
-                                "https://starwars.fandom.com/wiki/Anakin_Skywalker/Legends"
-                            ),
-                        ]
-                    ),
-                    Prop(
-                        "Sibling(s)",
-                        ["Luke Skywalker"],
-                        [
-                            Link(
-                                "Luke Skywalker",
-                                "https://starwars.fandom.com/wiki/Luke_Skywalker/Legends"
-                            ),
-                        ]
-                    ),
+                    Prop("Parent(s)", ["Anakin Skywalker"], [Link("Anakin Skywalker", "https://starwars.fandom.com/wiki/Anakin_Skywalker/Legends")]),
+                    Prop("Sibling(s)", ["Luke Skywalker"], [Link("Luke Skywalker", "https://starwars.fandom.com/wiki/Luke_Skywalker/Legends")]),
                 ],
                 "Leia Organa Solo was a Force-sensitive Human female."
             ),
@@ -205,13 +124,7 @@ public sealed class ApiFixture : IAsyncLifetime
                 "https://starwars.fandom.com/wiki/Tatooine",
                 "https://starwars.fandom.com/wiki/Template:Planet",
                 Continuity.Canon,
-                [
-                    Prop("Titles", ["Tatooine"]),
-                    Prop("Region", ["Outer Rim Territories"]),
-                    Prop("Sector", ["Arkanis sector"]),
-                    Prop("System", ["Tatoo system"]),
-                    Prop("Suns", ["2"]),
-                ],
+                [Prop("Titles", ["Tatooine"]), Prop("Region", ["Outer Rim Territories"]), Prop("Sector", ["Arkanis sector"]), Prop("System", ["Tatoo system"]), Prop("Suns", ["2"])],
                 "Tatooine was a sparsely inhabited desert planet."
             ),
             // Starship
@@ -221,11 +134,7 @@ public sealed class ApiFixture : IAsyncLifetime
                 "https://starwars.fandom.com/wiki/Millennium_Falcon",
                 "https://starwars.fandom.com/wiki/Template:Starship",
                 Continuity.Canon,
-                [
-                    Prop("Titles", ["Millennium Falcon"]),
-                    Prop("Class", ["Light freighter"]),
-                    Prop("Manufacturer", ["Corellian Engineering Corporation"]),
-                ],
+                [Prop("Titles", ["Millennium Falcon"]), Prop("Class", ["Light freighter"]), Prop("Manufacturer", ["Corellian Engineering Corporation"])],
                 "The Millennium Falcon was a modified YT-1300."
             ),
             // Page with null infobox (should be filtered from categories)
@@ -241,15 +150,7 @@ public sealed class ApiFixture : IAsyncLifetime
                 Infobox = null,
             },
             // Page with empty Data array in infobox
-            MakePage(
-                400,
-                "Unknown Entity",
-                "https://starwars.fandom.com/wiki/Unknown_Entity",
-                "https://starwars.fandom.com/wiki/Template:Character",
-                Continuity.Unknown,
-                [],
-                ""
-            ),
+            MakePage(400, "Unknown Entity", "https://starwars.fandom.com/wiki/Unknown_Entity", "https://starwars.fandom.com/wiki/Template:Character", Continuity.Unknown, [], ""),
             // Battle (for timeline-related tests)
             MakePage(
                 500,
@@ -260,11 +161,7 @@ public sealed class ApiFixture : IAsyncLifetime
                 [
                     Prop("Titles", ["Battle of Yavin"]),
                     Prop("Date", ["0 BBY"]),
-                    Prop(
-                        "Location",
-                        ["Yavin system"],
-                        [Link("Yavin", "https://starwars.fandom.com/wiki/Yavin")]
-                    ),
+                    Prop("Location", ["Yavin system"], [Link("Yavin", "https://starwars.fandom.com/wiki/Yavin")]),
                     Prop("Outcome", ["Rebel Alliance victory"]),
                 ],
                 "The Battle of Yavin was a decisive battle."
@@ -275,25 +172,13 @@ public sealed class ApiFixture : IAsyncLifetime
                 "https://starwars.fandom.com/wiki/Battle_of_Endor",
                 "https://starwars.fandom.com/wiki/Template:Battle",
                 Continuity.Canon,
-                [
-                    Prop("Titles", ["Battle of Endor"]),
-                    Prop("Date", ["4 ABY"]),
-                    Prop("Location", ["Endor system"]),
-                ],
+                [Prop("Titles", ["Battle of Endor"]), Prop("Date", ["4 ABY"]), Prop("Location", ["Endor system"])],
                 "The Battle of Endor was a major battle."
             ),
         ];
     }
 
-    static Page MakePage(
-        int id,
-        string title,
-        string wikiUrl,
-        string template,
-        Continuity continuity,
-        List<InfoboxProperty> data,
-        string content
-    )
+    static Page MakePage(int id, string title, string wikiUrl, string template, Continuity continuity, List<InfoboxProperty> data, string content)
     {
         return new Page
         {
@@ -326,11 +211,7 @@ internal sealed class NoOpEmbeddingGenerator : IEmbeddingGenerator<string, Embed
 {
     public EmbeddingGeneratorMetadata Metadata { get; } = new("no-op");
 
-    public Task<GeneratedEmbeddings<Embedding<float>>> GenerateAsync(
-        IEnumerable<string> values,
-        EmbeddingGenerationOptions? options = null,
-        CancellationToken cancellationToken = default
-    )
+    public Task<GeneratedEmbeddings<Embedding<float>>> GenerateAsync(IEnumerable<string> values, EmbeddingGenerationOptions? options = null, CancellationToken cancellationToken = default)
     {
         var embeddings = values.Select(_ => new Embedding<float>(new float[] { 0f })).ToList();
         return Task.FromResult(new GeneratedEmbeddings<Embedding<float>>(embeddings));
