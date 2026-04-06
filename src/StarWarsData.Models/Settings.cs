@@ -44,14 +44,13 @@ public class SettingsOptions
     /// </summary>
     public int GraphBuilderBatchSize { get; set; } = 100;
 
-    // ── Databases ──
-    // All app data lives in one database; Hangfire gets its own (it manages its schema)
+    // ── Database ──
+    // All app data + Hangfire live in one database.
+    // Hangfire collections are namespaced via its Prefix option (default "hangfire").
 
-    /// <summary>Single unified database for all application collections.</summary>
-    public string DatabaseName { get; set; } = "starwars";
-
-    /// <summary>Separate database for Hangfire (it creates its own collections).</summary>
-    public string HangfireDb { get; set; } = "starwars-hangfire";
+    /// <summary>Single unified database for all collections (app data + Hangfire).</summary>
+    /// <remarks>Defaults to dev — production overrides via appsettings or env var Settings__DatabaseName.</remarks>
+    public string DatabaseName { get; set; } = "starwars-dev";
 }
 
 /// <summary>

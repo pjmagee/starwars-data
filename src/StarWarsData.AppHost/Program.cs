@@ -10,6 +10,8 @@ var mongoPassword = builder.AddParameter("mongo-password", value: "password", se
 var mongoHost = builder.AddParameter("mongo-host", value: "192.168.1.102");
 var mongoPort = builder.AddParameter("mongo-port", value: "27018");
 
+var starwarsDb = builder.AddParameter("starwars-db", value: "starwars-dev");
+
 var apiService = builder
     .AddProject<StarWarsData_ApiService>("apiservice")
     .WithExternalHttpEndpoints()
@@ -17,6 +19,16 @@ var apiService = builder
     .WithEnvironment("Settings__HangfireEnabled", "true");
 
 var mongo = builder.AddConnectionString("mongodb", ReferenceExpression.Create($"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true"));
+
+// MongoDB migrations: runs mongosh migrate.js inside mongo:latest, then exits.
+// Tracked in the `migrations` collection — re-runs are safe (idempotent).
+var mongoDbMigrations = builder
+    .AddContainer("mongodb-migrations", "mongo", "latest")
+    .WithBindMount("../StarWarsData.MongoDbMigrations", "/migrations", isReadOnly: true)
+    .WithEnvironment("MDB_MCP_CONNECTION_STRING", ReferenceExpression.Create($"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true"))
+    .WithEnvironment("STARWARS_DB", starwarsDb)
+    .WithEntrypoint("/bin/sh")
+    .WithArgs("-c", "mongosh \"$MDB_MCP_CONNECTION_STRING\" --quiet --eval \"STARWARS_DB='$STARWARS_DB'\" --file /migrations/migrate.js");
 
 apiService.WithReference(mongo).WaitFor(mongo);
 
@@ -260,16 +272,25 @@ builder
         env["APISERVICE_HOST_PORT"] = new() { Name = "APISERVICE_HOST_PORT", DefaultValue = "9080" };
         env["ADMIN_HOST_PORT"] = new() { Name = "ADMIN_HOST_PORT", DefaultValue = "9082" };
         env["DASHBOARD_HOST_PORT"] = new() { Name = "DASHBOARD_HOST_PORT", DefaultValue = "18888" };
+        env["STARWARS_DB"] = new() { Name = "STARWARS_DB", DefaultValue = "starwars-dev" };
     })
     .ConfigureComposeFile(static compose =>
     {
         // Configure all services with restart policy and Unraid labels
         foreach (var (name, service) in compose.Services)
         {
-            service.Restart = "unless-stopped";
+            // Migration container runs once and exits — don't restart it
+            service.Restart = name == "mongodb-migrations" ? "no" : "unless-stopped";
             service.Labels ??= [];
 
             service.Labels["net.unraid.docker.managed"] = "composeman";
+
+            // Inject database name from STARWARS_DB for services that use MongoDB
+            if (name is "apiservice" or "admin")
+            {
+                service.Environment ??= [];
+                service.Environment["Settings__DatabaseName"] = "${STARWARS_DB:-starwars-dev}";
+            }
 
             switch (name)
             {

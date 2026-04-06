@@ -134,8 +134,7 @@ Set the following in `appsettings.json` or environment variables:
   "Settings": {
     "OpenAiKey": "<your-openai-api-key>",
     "OpenAiModel": "gpt-5-mini",
-    "DatabaseName": "starwars",
-    "HangfireDb": "starwars-hangfire"
+    "DatabaseName": "starwars"
   }
 }
 ```

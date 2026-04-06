@@ -114,7 +114,7 @@ builder.Services.AddHangfire(
         var mongoClient = provider.GetRequiredService<IMongoClient>();
         config.UseMongoStorage(
             mongoClient,
-            settings.HangfireDb,
+            settings.DatabaseName,
             new MongoStorageOptions
             {
                 MigrationOptions = new MongoMigrationOptions { MigrationStrategy = new DropMongoMigrationStrategy(), BackupStrategy = new NoneMongoBackupStrategy() },

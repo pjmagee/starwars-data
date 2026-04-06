@@ -44,7 +44,6 @@ public sealed class ApiFixture : IAsyncLifetime
             new SettingsOptions
             {
                 DatabaseName = DatabaseName,
-                HangfireDb = "test-hangfire",
                 StarWarsBaseUrl = "https://starwars.fandom.com",
                 OpenAiKey = "test-key",
             }

@@ -24,12 +24,7 @@ public class ComponentToolkitTests
     {
         var toolkit = new ComponentToolkit();
 
-        var result = toolkit.RenderChart(
-            chartType: chartType,
-            title: "Test Chart",
-            xAxisLabels: ["A", "B", "C"],
-            series: [new ChartSeries { Name = "S1", Data = [1, 2, 3] }]
-        );
+        var result = toolkit.RenderChart(chartType: chartType, title: "Test Chart", xAxisLabels: ["A", "B", "C"], series: [new ChartSeries { Name = "S1", Data = [1, 2, 3] }]);
 
         Assert.NotNull(result);
         Assert.Equal("Test Chart", result.Title);
@@ -48,12 +43,7 @@ public class ComponentToolkitTests
     {
         var toolkit = new ComponentToolkit();
 
-        var result = toolkit.RenderChart(
-            chartType: chartType,
-            title: "Distribution",
-            labels: ["Jedi", "Sith", "Mandalorian"],
-            series: [new ChartSeries { Name = "Values", Data = [45, 30, 25] }]
-        );
+        var result = toolkit.RenderChart(chartType: chartType, title: "Distribution", labels: ["Jedi", "Sith", "Mandalorian"], series: [new ChartSeries { Name = "Values", Data = [45, 30, 25] }]);
 
         Assert.NotNull(result);
         Assert.NotNull(result.Labels);
@@ -74,11 +64,7 @@ public class ComponentToolkitTests
                 new TimeSeriesChartSeries
                 {
                     Name = "Events",
-                    Data =
-                    [
-                        new TimeSeriesDataPoint { X = new DateTime(2024, 1, 1), Y = 10 },
-                        new TimeSeriesDataPoint { X = new DateTime(2024, 6, 1), Y = 20 },
-                    ],
+                    Data = [new TimeSeriesDataPoint { X = new DateTime(2024, 1, 1), Y = 10 }, new TimeSeriesDataPoint { X = new DateTime(2024, 6, 1), Y = 20 }],
                 },
             ]
         );
@@ -95,12 +81,7 @@ public class ComponentToolkitTests
     {
         var toolkit = new ComponentToolkit();
 
-        var result = toolkit.RenderChart(
-            chartType: "InvalidType",
-            title: "Fallback",
-            xAxisLabels: ["A"],
-            series: [new ChartSeries { Name = "S1", Data = [1] }]
-        );
+        var result = toolkit.RenderChart(chartType: "InvalidType", title: "Fallback", xAxisLabels: ["A"], series: [new ChartSeries { Name = "S1", Data = [1] }]);
 
         Assert.Equal(AskChartType.Bar, result.ChartType);
     }
@@ -110,12 +91,7 @@ public class ComponentToolkitTests
     {
         var toolkit = new ComponentToolkit();
 
-        var result = toolkit.RenderChart(
-            chartType: "pie",
-            title: "Case Test",
-            labels: ["A"],
-            series: [new ChartSeries { Name = "S1", Data = [1] }]
-        );
+        var result = toolkit.RenderChart(chartType: "pie", title: "Case Test", labels: ["A"], series: [new ChartSeries { Name = "S1", Data = [1] }]);
 
         Assert.Equal(AskChartType.Pie, result.ChartType);
     }
@@ -140,12 +116,7 @@ public class ComponentToolkitTests
 
         // AI might pass mismatched label/data counts — toolkit shouldn't validate,
         // but the descriptor should be created for the frontend to handle
-        var result = toolkit.RenderChart(
-            chartType: "Bar",
-            title: "Mismatched",
-            xAxisLabels: ["A", "B"],
-            series: [new ChartSeries { Name = "S1", Data = [1, 2, 3, 4] }]
-        ); // 4 values, 2 labels
+        var result = toolkit.RenderChart(chartType: "Bar", title: "Mismatched", xAxisLabels: ["A", "B"], series: [new ChartSeries { Name = "S1", Data = [1, 2, 3, 4] }]); // 4 values, 2 labels
 
         Assert.NotNull(result);
         Assert.Equal(2, result.XAxisLabels!.Count);
@@ -162,13 +133,7 @@ public class ComponentToolkitTests
             new() { Title = "Wookieepedia", Url = "https://starwars.fandom.com" },
         };
 
-        var result = toolkit.RenderChart(
-            chartType: "Bar",
-            title: "With Refs",
-            xAxisLabels: ["A"],
-            series: [new ChartSeries { Name = "S1", Data = [1] }],
-            references: refs
-        );
+        var result = toolkit.RenderChart(chartType: "Bar", title: "With Refs", xAxisLabels: ["A"], series: [new ChartSeries { Name = "S1", Data = [1] }], references: refs);
 
         Assert.NotNull(result.References);
         Assert.Single(result.References!);
@@ -183,12 +148,7 @@ public class ComponentToolkitTests
             chartType: "StackedBar",
             title: "Multi-Series",
             xAxisLabels: ["2020", "2021", "2022"],
-            series:
-            [
-                new ChartSeries { Name = "Canon", Data = [10, 20, 30] },
-                new ChartSeries { Name = "Legends", Data = [5, 15, 25] },
-                new ChartSeries { Name = "Both", Data = [3, 8, 12] },
-            ]
+            series: [new ChartSeries { Name = "Canon", Data = [10, 20, 30] }, new ChartSeries { Name = "Legends", Data = [5, 15, 25] }, new ChartSeries { Name = "Both", Data = [3, 8, 12] }]
         );
 
         Assert.Equal(3, result.Series!.Count);
@@ -204,11 +164,7 @@ public class ComponentToolkitTests
     {
         var toolkit = new ComponentToolkit();
 
-        var result = toolkit.RenderTable(
-            title: "Characters",
-            infoboxType: "Character",
-            fields: ["Born", "Died", "Homeworld", "Species"]
-        );
+        var result = toolkit.RenderTable(title: "Characters", infoboxType: "Character", fields: ["Born", "Died", "Homeworld", "Species"]);
 
         Assert.NotNull(result);
         Assert.Equal("Characters", result.Title);
@@ -222,12 +178,7 @@ public class ComponentToolkitTests
     {
         var toolkit = new ComponentToolkit();
 
-        var result = toolkit.RenderTable(
-            title: "Big Table",
-            infoboxType: "Planet",
-            fields: ["Region"],
-            pageSize: 100
-        );
+        var result = toolkit.RenderTable(title: "Big Table", infoboxType: "Planet", fields: ["Region"], pageSize: 100);
 
         Assert.Equal(100, result.PageSize);
     }
@@ -237,12 +188,7 @@ public class ComponentToolkitTests
     {
         var toolkit = new ComponentToolkit();
 
-        var result = toolkit.RenderTable(
-            title: "Search Table",
-            infoboxType: "Character",
-            fields: ["Born"],
-            search: "Skywalker"
-        );
+        var result = toolkit.RenderTable(title: "Search Table", infoboxType: "Character", fields: ["Born"], search: "Skywalker");
 
         Assert.Equal("Skywalker", result.Search);
     }
@@ -320,13 +266,7 @@ public class ComponentToolkitTests
     {
         var toolkit = new ComponentToolkit();
 
-        var result = toolkit.RenderGraph(
-            rootEntityId: 100,
-            rootEntityName: "Galactic Empire",
-            title: "Empire Hierarchy",
-            labels: ["head_of_state", "has_military_branch"],
-            continuity: "Canon"
-        );
+        var result = toolkit.RenderGraph(rootEntityId: 100, rootEntityName: "Galactic Empire", title: "Empire Hierarchy", labels: ["head_of_state", "has_military_branch"], continuity: "Canon");
 
         Assert.NotNull(result);
         Assert.Equal("Canon", result.Continuity);
@@ -338,13 +278,7 @@ public class ComponentToolkitTests
     {
         var toolkit = new ComponentToolkit();
 
-        var result = toolkit.RenderGraph(
-            rootEntityId: 1,
-            rootEntityName: "Luke Skywalker",
-            title: "Deep Tree",
-            labels: ["child_of"],
-            maxDepth: 5
-        );
+        var result = toolkit.RenderGraph(rootEntityId: 1, rootEntityName: "Luke Skywalker", title: "Deep Tree", labels: ["child_of"], maxDepth: 5);
 
         Assert.Equal(5, result.MaxDepth);
     }
@@ -356,14 +290,7 @@ public class ComponentToolkitTests
     {
         var toolkit = new ComponentToolkit();
 
-        var result = toolkit.RenderTimeline(
-            title: "Clone Wars Timeline",
-            categories: ["Battle", "War"],
-            yearFrom: 22,
-            yearFromDemarcation: "BBY",
-            yearTo: 19,
-            yearToDemarcation: "BBY"
-        );
+        var result = toolkit.RenderTimeline(title: "Clone Wars Timeline", categories: ["Battle", "War"], yearFrom: 22, yearFromDemarcation: "BBY", yearTo: 19, yearToDemarcation: "BBY");
 
         Assert.NotNull(result);
         Assert.Equal("Clone Wars Timeline", result.Title);
@@ -392,11 +319,7 @@ public class ComponentToolkitTests
     {
         var toolkit = new ComponentToolkit();
 
-        var result = toolkit.RenderTimeline(
-            title: "Skywalker Events",
-            categories: ["Character"],
-            search: "Skywalker"
-        );
+        var result = toolkit.RenderTimeline(title: "Skywalker Events", categories: ["Character"], search: "Skywalker");
 
         Assert.Equal("Skywalker", result.Search);
     }
@@ -470,12 +393,7 @@ public class ComponentToolkitTests
     {
         var toolkit = new ComponentToolkit();
 
-        toolkit.RenderChart(
-            "Bar",
-            "Test",
-            ["A"],
-            series: [new ChartSeries { Name = "S", Data = [1] }]
-        );
+        toolkit.RenderChart("Bar", "Test", ["A"], series: [new ChartSeries { Name = "S", Data = [1] }]);
 
         Assert.NotNull(toolkit.ChartResult);
         Assert.Null(toolkit.TableResult);
@@ -491,20 +409,10 @@ public class ComponentToolkitTests
     {
         var toolkit = new ComponentToolkit();
 
-        toolkit.RenderChart(
-            "Bar",
-            "First",
-            ["A"],
-            series: [new ChartSeries { Name = "S", Data = [1] }]
-        );
+        toolkit.RenderChart("Bar", "First", ["A"], series: [new ChartSeries { Name = "S", Data = [1] }]);
         Assert.Equal("First", toolkit.ChartResult!.Title);
 
-        toolkit.RenderChart(
-            "Pie",
-            "Second",
-            labels: ["A"],
-            series: [new ChartSeries { Name = "S", Data = [1] }]
-        );
+        toolkit.RenderChart("Pie", "Second", labels: ["A"], series: [new ChartSeries { Name = "S", Data = [1] }]);
         Assert.Equal("Second", toolkit.ChartResult!.Title);
         Assert.Equal(AskChartType.Pie, toolkit.ChartResult!.ChartType);
     }
@@ -517,7 +425,7 @@ public class ComponentToolkitTests
         var toolkit = new ComponentToolkit();
         var functions = toolkit.AsAIFunctions();
 
-        Assert.Equal(7, functions.Count);
+        Assert.Equal(8, functions.Count);
         var names = functions.Select(f => f.Name).ToHashSet();
         Assert.Contains("render_table", names);
         Assert.Contains("render_data_table", names);
@@ -526,5 +434,6 @@ public class ComponentToolkitTests
         Assert.Contains("render_timeline", names);
         Assert.Contains("render_infobox", names);
         Assert.Contains("render_markdown", names);
+        Assert.Contains("render_aurebesh", names);
     }
 }

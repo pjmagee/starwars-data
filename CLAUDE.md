@@ -53,12 +53,13 @@ Test fixtures: `ApiFixture` (shared MongoDB container with seed data for most te
 
 ## Architecture
 
-**Aspire-orchestrated app** with four runtime components:
+**Aspire-orchestrated app** with five runtime components:
 
 - **AppHost** — .NET Aspire orchestrator. Wires MongoDB connection, OpenAI key, and defines HTTP commands for the ETL pipeline phases (visible in the Aspire dashboard). Also manages a MongoDB MCP sidecar container.
 - **ApiService** — ASP.NET Core API. Hosts the AI agent (via Microsoft.Agents.AI + AGUI), MCP client for MongoDB tools, and feature endpoints. Organized into `Features/` folders: `CharacterTimelines`, `Chat`, `GalaxyMap`, `KnowledgeGraph`, `Pages`, `RPG`, `Search`, `Timeline`, `User`.
 - **Admin** — Blazor Interactive Server app (MudBlazor UI) for ETL pipeline management, Hangfire background jobs, and admin dashboards. Organized into `Features/` folders: `Admin`, `KnowledgeGraph`, `Search`. Also has `Components/Pages/`, `Components/Layout/`, `Components/Shared/`.
 - **Frontend** — Blazor Interactive Server with MudBlazor UI. Authenticates via Keycloak OIDC. Uses `Components/Pages/`, `Components/Layout/`, `Components/Shared/`.
+- **MongoDbMigrations** — Run-once container (`mongo:latest`) that executes `mongosh migrate.js` against the target database. Tracked in a `migrations` collection — re-runs are idempotent. Scripts live in `src/StarWarsData.MongoDbMigrations/`.
 
 **Shared libraries:**
 
@@ -74,7 +75,7 @@ Test fixtures: `ApiFixture` (shared MongoDB container with seed data for most te
 
 **AI Agent pipeline** (in `ApiService/Program.cs`): Topic guardrail classifier -> AI agent with tool registry (ComponentToolkit, DataExplorerToolkit, GraphRAGToolkit, WikiSearchProvider, MongoDB MCP tools) -> AGUI streaming endpoint at `/kernel/stream`.
 
-**MongoDB**: External self-hosted server (not Aspire-managed). Connection string assembled from parameters in AppHost. Two databases configured via `SettingsOptions`: `starwars` (unified database with namespaced collections: `raw.*`, `timeline.*`, `kg.*`, `search.*`, `genai.*`, `chat.*`, `territory.*`, `galaxy.*`, `admin.*`) and `starwars-hangfire` (Hangfire job storage). Collection names are defined in the `Collections` static class in `Settings.cs`.
+**MongoDB**: External self-hosted server (not Aspire-managed). Connection string assembled from parameters in AppHost. Single database configured via `SettingsOptions.DatabaseName` with namespaced collections: `raw.*`, `timeline.*`, `kg.*`, `search.*`, `genai.*`, `chat.*`, `territory.*`, `galaxy.*`, `admin.*`, `hangfire.*`. Hangfire collections live in the same database, namespaced by the `Prefix` option (default `"hangfire"`). Collection names are defined in the `Collections` static class in `Settings.cs`. Two database environments: `starwars-dev` (default, used in local/dev — safe for experimentation) and `starwars` (production). The default in code is `starwars-dev`; production overrides via `appsettings.json` or env var `Settings__DatabaseName`.
 
 **ETL pipeline** (ordered phases, triggered via admin endpoints or Aspire HTTP commands):
 
@@ -125,7 +126,7 @@ Use the attached MCP servers and skills for domain-specific guidance instead of 
 
 - **Aspire MCP** (`mcp__aspire__*`) — Interact with running Aspire resources: logs, traces, restart services, execute HTTP commands.
 - **MongoDB MCP** (`mcp__MongoDB__*`) — Query, aggregate, inspect schemas, manage indexes on the MongoDB databases. Use `starwars-dev` for writes (see feedback memory).
-- **MudBlazor MCP** (`mcp__mudmcp__*`) — Look up MudBlazor component docs, parameters, examples, and API reference when building or modifying Blazor UI.
+- **MudBlazor MCP** (`mcp__mudblazor__*`) — Look up MudBlazor component docs, parameters, examples, and API reference when building or modifying Blazor UI.
 - **Playwright MCP** (`mcp__playwright__*`) — Browser automation for testing and screenshots.
 - **MediaWiki MCP** (`mcp__mediawiki-mcp-server__*`) — Search and fetch Wookieepedia pages directly.
 - **OpenAI Developer Docs** (`mcp__openaiDeveloperDocs__*`) — Search OpenAI API docs and specs.

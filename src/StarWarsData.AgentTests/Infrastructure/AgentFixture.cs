@@ -42,7 +42,7 @@ public class AgentFixture
         OpenAiClient = new OpenAIClient(new ApiKeyCredential(apiKey), new OpenAIClientOptions { NetworkTimeout = TimeSpan.FromMinutes(5) });
 
         MongoClient = new MongoClient(mongoConnectionString);
-        var settings = Options.Create(new SettingsOptions { DatabaseName = databaseName, HangfireDb = $"{databaseName}-hangfire" });
+        var settings = Options.Create(new SettingsOptions { DatabaseName = databaseName });
 
         // Build toolkits — same as Program.cs
         var kgService = new KnowledgeGraphQueryService(MongoClient, settings);
