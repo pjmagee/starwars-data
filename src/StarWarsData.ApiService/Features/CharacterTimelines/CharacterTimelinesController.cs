@@ -31,6 +31,7 @@ public class CharacterTimelinesController : ControllerBase
                 .Select(a => new ActiveGenerationDto
                 {
                     PageId = a.PageId,
+                    CharacterTitle = a.Status.CharacterTitle,
                     Stage = a.Status.Stage,
                     Message = a.Status.Message,
                     CurrentItem = a.Status.CurrentItem,
@@ -108,12 +109,14 @@ public class CharacterTimelinesController : ControllerBase
     }
 
     [HttpPost("{pageId:int}/generate")]
-    public IActionResult Generate(int pageId)
+    public async Task<IActionResult> Generate(int pageId, CancellationToken ct)
     {
         if (_tracker.IsRunning(pageId))
             return Conflict(new { message = "Generation already in progress" });
 
-        if (!_tracker.TryStart(pageId))
+        var characterInfo = await _service.GetCharacterInfoAsync(pageId, _tracker, ct);
+
+        if (!_tracker.TryStart(pageId, characterInfo?.Title))
             return Conflict(new { message = "Generation already in progress" });
 
         // Fire-and-forget with a new DI scope for the background work
@@ -139,6 +142,7 @@ public class CharacterTimelinesController : ControllerBase
 public class ActiveGenerationDto
 {
     public int PageId { get; set; }
+    public string? CharacterTitle { get; set; }
     public GenerationStage Stage { get; set; }
     public string Message { get; set; } = string.Empty;
     public string? CurrentItem { get; set; }

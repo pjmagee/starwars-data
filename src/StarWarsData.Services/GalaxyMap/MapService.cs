@@ -13,25 +13,26 @@ public class MapService
 {
     readonly ILogger<MapService> _logger;
     readonly IMongoCollection<Page> _pages;
+    readonly IMongoCollection<GraphNode> _nodes;
+    readonly IMongoCollection<RelationshipEdge> _edges;
     readonly SemanticSearchService _semanticSearch;
 
     public MapService(ILogger<MapService> logger, IOptions<SettingsOptions> settingsOptions, IMongoClient mongoClient, SemanticSearchService semanticSearch)
     {
         _logger = logger;
-        _pages = mongoClient.GetDatabase(settingsOptions.Value.DatabaseName).GetCollection<Page>(Collections.Pages);
+        var db = mongoClient.GetDatabase(settingsOptions.Value.DatabaseName);
+        _pages = db.GetCollection<Page>(Collections.Pages);
+        _nodes = db.GetCollection<GraphNode>(Collections.KgNodes);
+        _edges = db.GetCollection<RelationshipEdge>(Collections.KgEdges);
         _semanticSearch = semanticSearch;
     }
+
+    // ── Raw.pages helpers (used only by search methods) ──
 
     static FilterDefinition<Page> TemplateFilter(string type) => Builders<Page>.Filter.Eq("infobox.Template", $"{Collections.TemplateUrlPrefix}{type}");
 
     static FilterDefinition<Page> InfoboxDataFilter(string type, string label) =>
         Builders<Page>.Filter.And(TemplateFilter(type), Builders<Page>.Filter.ElemMatch<BsonDocument>("infobox.Data", new BsonDocument(InfoboxBsonFields.Label, label)));
-
-    static FilterDefinition<Page> InfoboxDataValueFilter(string type, string label, string value) =>
-        Builders<Page>.Filter.And(
-            TemplateFilter(type),
-            Builders<Page>.Filter.ElemMatch<BsonDocument>("infobox.Data", new BsonDocument { { InfoboxBsonFields.Label, label }, { InfoboxBsonFields.Values, value } })
-        );
 
     static List<string> GetDataValues(Page page, string label) => page.Infobox?.Data.FirstOrDefault(d => d.Label == label)?.Values ?? [];
 
@@ -39,24 +40,18 @@ public class MapService
 
     /// <summary>
     /// Normalize region names to merge duplicates in the wiki data.
-    /// E.g. "Mid Rim" and "Mid Rim Territories" are the same region,
-    /// as are "Inner Rim" / "Inner Rim Territories", case variants, and compound entries.
     /// </summary>
     internal static string NormalizeRegionName(string region)
     {
-        // Strip compound suffixes like "; Inner Zuma Region", ", Greater Javin"
         var sepIdx = region.IndexOfAny([';', ',']);
         if (sepIdx > 0)
             region = region[..sepIdx].Trim();
 
-        // Normalize case
         region = region.Trim();
 
-        // Merge "X" / "X Territories" variants
         if (region.EndsWith(" Territories", StringComparison.OrdinalIgnoreCase))
             region = region[..^" Territories".Length];
 
-        // Canonical names
         return region.ToLowerInvariant() switch
         {
             "outer rim" => "Outer Rim Territories",
@@ -68,7 +63,7 @@ public class MapService
         };
     }
 
-    // Labels on non-spatial entities that reference locations
+    // Labels on non-spatial entities that reference locations (used by search)
     static readonly string[] LocationLabels =
     [
         "Homeworld",
@@ -92,14 +87,31 @@ public class MapService
         "Located",
     ];
 
+    // ── KG helpers ──
+
+    static string GetNodeProperty(GraphNode node, string key) => node.Properties.TryGetValue(key, out var vals) ? vals.FirstOrDefault() ?? "" : "";
+
+    static List<string> GetNodeProperties(GraphNode node, string key) => node.Properties.TryGetValue(key, out var vals) ? vals : [];
+
+    /// <summary>
+    /// Get the display name for a KG node. Uses the Titles property (clean infobox title)
+    /// falling back to the node name.
+    /// </summary>
+    static string GetDisplayName(GraphNode node)
+    {
+        var titles = GetNodeProperties(node, InfoboxFieldLabels.Titles);
+        return titles.Count > 0 ? titles[0] : node.Name;
+    }
+
+    // ══════════ SEARCH (still uses raw.pages for text search) ══════════
+
     public async Task<List<MapSearchResult>> SearchGridAsync(string term, Continuity? continuity = null)
     {
         var escaped = Regex.Escape(term);
         var results = new List<MapSearchResult>();
-        var seen = new HashSet<string>(); // dedupe grid keys
+        var seen = new HashSet<string>();
 
-        // 1. Direct matches: entities WITH InfoboxFieldLabels.GridSquare whose title or content matches
-        //    Use $text search for relevance-ranked results across title + content
+        // 1. Direct matches: entities WITH grid squares whose title or content matches
         var directTextFilter = Builders<Page>.Filter.And(
             Builders<Page>.Filter.Text(term),
             Builders<Page>.Filter.ElemMatch<BsonDocument>("infobox.Data", new BsonDocument(InfoboxBsonFields.Label, InfoboxFieldLabels.GridSquare))
@@ -109,7 +121,6 @@ public class MapService
 
         var directMatches = await _pages.Find(directTextFilter).Sort(Builders<Page>.Sort.MetaTextScore("score")).Limit(50).ToListAsync();
 
-        // Fallback to regex on title if text search returns nothing
         if (directMatches.Count == 0)
         {
             var directRegexFilter = Builders<Page>.Filter.And(
@@ -129,7 +140,6 @@ public class MapService
             if (parts.Length != 2 || !int.TryParse(parts[1], out _))
                 continue;
             var gridKey = $"{parts[0].Trim()}-{parts[1].Trim()}";
-
             var template = page.Infobox?.Template?.Split(':').LastOrDefault();
             results.Add(
                 new MapSearchResult
@@ -144,8 +154,7 @@ public class MapService
             seen.Add(gridKey);
         }
 
-        // 2. Indirect matches: entities WITHOUT grid squares whose title or content matches
-        //    We look at their location-related infobox properties to find referenced places
+        // 2. Indirect matches: entities WITHOUT grid squares — follow location references
         var indirectTextFilter = Builders<Page>.Filter.And(
             Builders<Page>.Filter.Text(term),
             Builders<Page>.Filter.Not(Builders<Page>.Filter.ElemMatch<BsonDocument>("infobox.Data", new BsonDocument(InfoboxBsonFields.Label, InfoboxFieldLabels.GridSquare))),
@@ -156,7 +165,6 @@ public class MapService
 
         var indirectMatches = await _pages.Find(indirectTextFilter).Sort(Builders<Page>.Sort.MetaTextScore("score")).Limit(50).ToListAsync();
 
-        // Fallback to regex on title
         if (indirectMatches.Count == 0)
         {
             var indirectRegexFilter = Builders<Page>.Filter.And(
@@ -169,7 +177,6 @@ public class MapService
             indirectMatches = await _pages.Find(indirectRegexFilter).Limit(50).ToListAsync();
         }
 
-        // Collect all referenced location names from infobox properties
         var locationRefs = new Dictionary<string, List<(int sourcePageId, string entityName, string label)>>();
         foreach (var page in indirectMatches)
         {
@@ -181,12 +188,9 @@ public class MapService
                     continue;
                 if (!LocationLabels.Any(l => prop.Label.Contains(l, StringComparison.OrdinalIgnoreCase)))
                     continue;
-
-                // Collect values and link contents as potential location names
                 var names = new List<string>();
                 names.AddRange(prop.Values.Where(v => !string.IsNullOrWhiteSpace(v)));
                 names.AddRange(prop.Links.Select(l => l.Content).Where(c => !string.IsNullOrWhiteSpace(c)));
-
                 foreach (var name in names.Distinct())
                 {
                     if (!locationRefs.ContainsKey(name))
@@ -198,13 +202,11 @@ public class MapService
 
         if (locationRefs.Count > 0)
         {
-            // Batch-lookup all referenced location names to find their grid squares
             var nameFilter = Builders<Page>.Filter.And(
                 Builders<Page>.Filter.In(PageBsonFields.Title, locationRefs.Keys),
                 Builders<Page>.Filter.ElemMatch<BsonDocument>("infobox.Data", new BsonDocument(InfoboxBsonFields.Label, InfoboxFieldLabels.GridSquare))
             );
             var resolved = await _pages.Find(nameFilter).ToListAsync();
-
             foreach (var page in resolved)
             {
                 var gridSquare = GetFirstDataValue(page, InfoboxFieldLabels.GridSquare);
@@ -214,7 +216,6 @@ public class MapService
                 if (parts.Length != 2 || !int.TryParse(parts[1], out _))
                     continue;
                 var gridKey = $"{parts[0].Trim()}-{parts[1].Trim()}";
-
                 if (!locationRefs.TryGetValue(page.Title, out var refs))
                     continue;
                 foreach (var (sourcePageId, entityName, label) in refs)
@@ -240,31 +241,19 @@ public class MapService
         return results;
     }
 
-    /// <summary>
-    /// Semantic search for the galaxy map: delegates to SemanticSearchService,
-    /// then resolves results to grid-square-placeable entities.
-    /// </summary>
     public async Task<List<MapSearchResult>> SemanticSearchGridAsync(string query, Continuity? continuity = null, int limit = 10)
     {
-        // Fetch more results than needed — many won't have grid squares.
-        // minScore 0.6 filters out low-relevance noise.
         const double minScore = 0.6;
         var spatialResults = await _semanticSearch.SearchAsync(query, [KgNodeTypes.System, KgNodeTypes.CelestialBody], continuity, limit: limit * 2, minScore: minScore);
         var allResults = await _semanticSearch.SearchAsync(query, null, continuity, limit: limit * 3, minScore: minScore);
 
-        _logger.LogInformation("SemanticSearchGridAsync: query={Query}, spatialHits={Spatial}, allHits={All}", query, spatialResults.Count, allResults.Count);
-
-        // Merge, spatial first (higher priority for map placement)
         var pageScores = new Dictionary<int, SearchHit>();
         foreach (var r in spatialResults.Concat(allResults))
-        {
             pageScores.TryAdd(r.PageId, r);
-        }
 
         if (pageScores.Count == 0)
             return [];
 
-        // ── Resolve to grid squares ──
         var pageIds = pageScores.Keys.ToList();
         var gridFilter = Builders<Page>.Filter.And(
             Builders<Page>.Filter.In(p => p.PageId, pageIds),
@@ -285,9 +274,7 @@ public class MapService
                 continue;
             if (!pageScores.TryGetValue(page.PageId, out var info))
                 continue;
-
             seenPages.Add(page.PageId);
-            var text = info.Text;
             results.Add(
                 new MapSearchResult
                 {
@@ -296,13 +283,12 @@ public class MapService
                     MatchedName = page.Title,
                     Template = page.Infobox?.Template?.Split(':').LastOrDefault(),
                     MatchType = "semantic",
-                    Snippet = text.Length > 200 ? text[..200] + "..." : text,
+                    Snippet = info.Text.Length > 200 ? info.Text[..200] + "..." : info.Text,
                     Score = info.Score,
                 }
             );
         }
 
-        // Indirect: pages without grid squares → follow infobox location links
         var pagesWithoutGrid = pageIds.Where(id => !seenPages.Contains(id)).ToList();
         if (pagesWithoutGrid.Count > 0)
         {
@@ -340,15 +326,12 @@ public class MapService
                     var gridSquare = GetFirstDataValue(locPage, InfoboxFieldLabels.GridSquare);
                     if (!TryParseGridSquare(gridSquare, out var col, out var row))
                         continue;
-
                     var sourcePage = noGridPages.FirstOrDefault(p =>
                         p.Infobox?.Data?.Any(d => LocationLabels.Contains(d.Label) && d.Links.Any(l => l.Content.Equals(locPage.Title, StringComparison.OrdinalIgnoreCase))) == true
                     );
                     if (sourcePage is null || !pageScores.TryGetValue(sourcePage.PageId, out var info))
                         continue;
-
                     seenPages.Add(locPage.PageId);
-                    var text = info.Text;
                     results.Add(
                         new MapSearchResult
                         {
@@ -360,7 +343,7 @@ public class MapService
                             LinkedVia = sourcePage.Title,
                             SourcePageId = sourcePage.PageId,
                             SourceName = sourcePage.Title,
-                            Snippet = text.Length > 200 ? text[..200] + "..." : text,
+                            Snippet = info.Text.Length > 200 ? info.Text[..200] + "..." : info.Text,
                             Score = info.Score,
                         }
                     );
@@ -368,8 +351,6 @@ public class MapService
             }
         }
 
-        // Direct semantic matches (the entity's own article matched) rank above
-        // indirect linked matches (a related entity's article matched and linked here)
         return results.OrderByDescending(r => r.MatchType == "semantic" ? 1 : 0).ThenByDescending(r => r.Score).Take(limit).ToList();
     }
 
@@ -392,102 +373,158 @@ public class MapService
         return true;
     }
 
+    // ══════════ GEOGRAPHY (KG-backed) ══════════
+
     /// <summary>
-    /// Lightweight overview: regions, trade routes, nebulas. No systems.
-    /// Called once on page load (~300 elements).
+    /// Lightweight overview: regions, trade routes, nebulas, cell summaries. No systems.
+    /// All data sourced from kg.nodes + kg.edges.
     /// </summary>
     public async Task<GalaxyGeography> GetGeographyAsync(Continuity? continuity = null)
     {
         var result = new GalaxyGeography();
 
-        // Load all systems server-side to compute region boundaries and resolve trade route waypoints.
-        // We do NOT return them to the client — only the derived data.
-        var sysFilter = InfoboxDataFilter(KgNodeTypes.System, InfoboxFieldLabels.GridSquare);
+        // ── Load all System nodes with grid squares ──
+        var sysFilter = Builders<GraphNode>.Filter.And(Builders<GraphNode>.Filter.Eq(n => n.Type, KgNodeTypes.System), Builders<GraphNode>.Filter.Exists("properties.Grid square"));
         if (continuity.HasValue)
-            sysFilter = Builders<Page>.Filter.And(sysFilter, Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value));
-        var sysRecs = await _pages.Find(sysFilter).Project<Page>(Builders<Page>.Projection.Include(p => p.Title).Include(p => p.PageId).Include("infobox.Data")).ToListAsync();
+            sysFilter = Builders<GraphNode>.Filter.And(sysFilter, Builders<GraphNode>.Filter.Eq(n => n.Continuity, continuity.Value));
 
+        var systemNodes = await _nodes
+            .Find(sysFilter)
+            .Project(Builders<GraphNode>.Projection.Include(n => n.PageId).Include(n => n.Name).Include("properties.Grid square").Include("properties.Titles"))
+            .ToListAsync();
+
+        // ── Load edges for region/sector resolution ──
+        var systemIds = systemNodes.Select(n => n[MongoFields.Id].AsInt32).ToList();
+
+        var regionEdges = await _edges
+            .Find(
+                Builders<RelationshipEdge>.Filter.And(
+                    Builders<RelationshipEdge>.Filter.Eq(e => e.Label, KgLabels.InRegion),
+                    Builders<RelationshipEdge>.Filter.Eq(e => e.FromType, KgNodeTypes.System),
+                    Builders<RelationshipEdge>.Filter.Eq(e => e.ToType, KgNodeTypes.Region)
+                )
+            )
+            .Project(Builders<RelationshipEdge>.Projection.Include(e => e.FromId).Include(e => e.ToName))
+            .ToListAsync();
+
+        var sectorEdges = await _edges
+            .Find(
+                Builders<RelationshipEdge>.Filter.And(
+                    Builders<RelationshipEdge>.Filter.Eq(e => e.Label, KgLabels.InSector),
+                    Builders<RelationshipEdge>.Filter.Eq(e => e.FromType, KgNodeTypes.System),
+                    Builders<RelationshipEdge>.Filter.Eq(e => e.ToType, KgNodeTypes.Sector)
+                )
+            )
+            .Project(Builders<RelationshipEdge>.Projection.Include(e => e.FromId).Include(e => e.ToName))
+            .ToListAsync();
+
+        // Build lookups: systemId → region, systemId → sector
+        var systemToRegion = new Dictionary<int, string>();
+        foreach (var e in regionEdges)
+        {
+            var id = e[RelationshipEdgeBsonFields.FromId].AsInt32;
+            var region = NormalizeRegionName(e[RelationshipEdgeBsonFields.ToName].AsString);
+            systemToRegion.TryAdd(id, region);
+        }
+
+        var systemToSector = new Dictionary<int, string>();
+        foreach (var e in sectorEdges)
+        {
+            var id = e[RelationshipEdgeBsonFields.FromId].AsInt32;
+            systemToSector.TryAdd(id, e[RelationshipEdgeBsonFields.ToName].AsString);
+        }
+
+        // ── Build spatial lookups ──
         var nameToGrid = new Dictionary<string, (int col, int row)>(StringComparer.OrdinalIgnoreCase);
+        var pageIdToGrid = new Dictionary<int, (int col, int row)>();
+        var pageIdToName = new Dictionary<int, string>();
         var regionCells = new Dictionary<string, HashSet<(int col, int row)>>(StringComparer.OrdinalIgnoreCase);
-        // Track per-cell system count, dominant region, and sector breakdown
         var cellCounts = new Dictionary<(int col, int row), int>();
         var cellRegion = new Dictionary<(int col, int row), Dictionary<string, int>>();
         var cellSectors = new Dictionary<(int col, int row), Dictionary<string, int>>();
 
-        foreach (var rec in sysRecs)
+        foreach (var doc in systemNodes)
         {
-            var gridSquare = GetFirstDataValue(rec, InfoboxFieldLabels.GridSquare);
-            if (!TryParseGridSquare(gridSquare, out var col, out var row))
+            var pageId = doc[MongoFields.Id].AsInt32;
+            var name = doc[GraphNodeBsonFields.Name].AsString;
+            var gridArr = doc["properties"]["Grid square"].AsBsonArray;
+            var gridStr = gridArr.Count > 0 ? gridArr[0].AsString : null;
+            if (!TryParseGridSquare(gridStr, out var col, out var row))
                 continue;
-            nameToGrid.TryAdd(rec.Title, (col, row));
+
+            nameToGrid.TryAdd(name, (col, row));
+            pageIdToGrid.TryAdd(pageId, (col, row));
+            pageIdToName.TryAdd(pageId, name);
+            if (doc["properties"].AsBsonDocument.Contains("Titles"))
+            {
+                var titles = doc["properties"]["Titles"].AsBsonArray;
+                foreach (var t in titles)
+                    nameToGrid.TryAdd(t.AsString, (col, row));
+            }
 
             var key = (col, row);
             cellCounts[key] = cellCounts.GetValueOrDefault(key) + 1;
 
-            var regionRaw = GetFirstDataValue(rec, InfoboxFieldLabels.Region);
-            if (!string.IsNullOrEmpty(regionRaw))
+            if (systemToRegion.TryGetValue(pageId, out var region))
             {
-                var region = NormalizeRegionName(regionRaw);
                 if (!regionCells.TryGetValue(region, out var cells))
-                {
-                    cells = [];
-                    regionCells[region] = cells;
-                }
-                cells.Add((col, row));
+                    regionCells[region] = cells = [];
+                cells.Add(key);
 
                 if (!cellRegion.TryGetValue(key, out var regionCount))
-                {
-                    regionCount = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-                    cellRegion[key] = regionCount;
-                }
+                    cellRegion[key] = regionCount = new(StringComparer.OrdinalIgnoreCase);
                 regionCount[region] = regionCount.GetValueOrDefault(region) + 1;
             }
 
-            var sectorRaw = GetFirstDataValue(rec, InfoboxFieldLabels.Sector);
-            if (!string.IsNullOrEmpty(sectorRaw))
+            if (systemToSector.TryGetValue(pageId, out var sector))
             {
                 if (!cellSectors.TryGetValue(key, out var sectorCount))
-                {
-                    sectorCount = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-                    cellSectors[key] = sectorCount;
-                }
-                sectorCount[sectorRaw] = sectorCount.GetValueOrDefault(sectorRaw) + 1;
+                    cellSectors[key] = sectorCount = new(StringComparer.OrdinalIgnoreCase);
+                sectorCount[sector] = sectorCount.GetValueOrDefault(sector) + 1;
             }
         }
 
-        // Also index celestial bodies for trade route resolution
-        var cbFilter = InfoboxDataFilter(KgNodeTypes.CelestialBody, InfoboxFieldLabels.GridSquare);
+        // ── Also index CelestialBody nodes with grid squares (for trade route resolution) ──
+        var cbFilter = Builders<GraphNode>.Filter.And(Builders<GraphNode>.Filter.Eq(n => n.Type, KgNodeTypes.CelestialBody), Builders<GraphNode>.Filter.Exists("properties.Grid square"));
         if (continuity.HasValue)
-            cbFilter = Builders<Page>.Filter.And(cbFilter, Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value));
-        var cbRecs = await _pages.Find(cbFilter).Project<Page>(Builders<Page>.Projection.Include(p => p.Title).Include("infobox.Data")).ToListAsync();
+            cbFilter = Builders<GraphNode>.Filter.And(cbFilter, Builders<GraphNode>.Filter.Eq(n => n.Continuity, continuity.Value));
 
-        foreach (var rec in cbRecs)
+        var cbNodes = await _nodes
+            .Find(cbFilter)
+            .Project(Builders<GraphNode>.Projection.Include(n => n.PageId).Include(n => n.Name).Include("properties.Grid square").Include("properties.Titles"))
+            .ToListAsync();
+
+        foreach (var doc in cbNodes)
         {
-            var gridSquare = GetFirstDataValue(rec, InfoboxFieldLabels.GridSquare);
-            if (!TryParseGridSquare(gridSquare, out var col, out var row))
+            var name = doc[GraphNodeBsonFields.Name].AsString;
+            var gridArr = doc["properties"]["Grid square"].AsBsonArray;
+            var gridStr = gridArr.Count > 0 ? gridArr[0].AsString : null;
+            if (!TryParseGridSquare(gridStr, out var col, out var row))
                 continue;
-            nameToGrid.TryAdd(rec.Title, (col, row));
-
-            var regionRaw = GetFirstDataValue(rec, InfoboxFieldLabels.Region);
-            if (!string.IsNullOrEmpty(regionRaw))
+            nameToGrid.TryAdd(name, (col, row));
+            var cbPageId = doc[MongoFields.Id].AsInt32;
+            pageIdToGrid.TryAdd(cbPageId, (col, row));
+            pageIdToName.TryAdd(cbPageId, name);
+            if (doc["properties"].AsBsonDocument.Contains("Titles"))
             {
-                var region = NormalizeRegionName(regionRaw);
+                var titles = doc["properties"]["Titles"].AsBsonArray;
+                foreach (var t in titles)
+                    nameToGrid.TryAdd(t.AsString, (col, row));
+            }
+
+            if (systemToRegion.TryGetValue(cbPageId, out var region))
+            {
                 if (!regionCells.TryGetValue(region, out var cells))
-                {
-                    cells = [];
-                    regionCells[region] = cells;
-                }
+                    regionCells[region] = cells = [];
                 cells.Add((col, row));
             }
         }
 
-        // Build regions
+        // ── Build regions ──
         foreach (var (name, cells) in regionCells)
-        {
             result.Regions.Add(new GeoRegion { Name = name, Cells = cells.Select(c => new[] { c.col, c.row }).ToList() });
-        }
 
-        // Build cell summaries
+        // ── Build cell summaries ──
         foreach (var (key, count) in cellCounts)
         {
             string? dominantRegion = null;
@@ -496,9 +533,7 @@ public class MapService
 
             List<GeoCellSector>? sectors = null;
             if (cellSectors.TryGetValue(key, out var sectorCounts) && sectorCounts.Count > 0)
-            {
                 sectors = sectorCounts.OrderByDescending(kv => kv.Value).Select(kv => new GeoCellSector { Name = kv.Key, Count = kv.Value }).ToList();
-            }
 
             result.Cells.Add(
                 new GeoCellSummary
@@ -512,7 +547,7 @@ public class MapService
             );
         }
 
-        // Compute actual grid bounds from data
+        // ── Compute grid bounds ──
         if (cellCounts.Count > 0)
         {
             var cols = cellCounts.Keys.Select(k => k.col).ToList();
@@ -523,162 +558,245 @@ public class MapService
             result.GridRows = rows.Max() - rows.Min() + 1;
         }
 
-        // Nebulas — parse multi-grid values like "S-5 and S-6", "T-9/T-10", "E-9, F-9"
-        var nebFilter = InfoboxDataFilter(KgNodeTypes.Nebula, InfoboxFieldLabels.GridSquare);
+        // ── Nebulas from KG ──
+        var nebFilter = Builders<GraphNode>.Filter.And(Builders<GraphNode>.Filter.Eq(n => n.Type, KgNodeTypes.Nebula), Builders<GraphNode>.Filter.Exists("properties.Grid square"));
         if (continuity.HasValue)
-            nebFilter = Builders<Page>.Filter.And(nebFilter, Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value));
-        var nebRecs = await _pages.Find(nebFilter).ToListAsync();
-        foreach (var rec in nebRecs)
+            nebFilter = Builders<GraphNode>.Filter.And(nebFilter, Builders<GraphNode>.Filter.Eq(n => n.Continuity, continuity.Value));
+
+        var nebNodes = await _nodes.Find(nebFilter).ToListAsync();
+        foreach (var neb in nebNodes)
         {
-            var gridValues = GetDataValues(rec, InfoboxFieldLabels.GridSquare);
+            var gridVals = GetNodeProperties(neb, InfoboxFieldLabels.GridSquare);
             var cells = new List<(int col, int row)>();
-            foreach (var raw in gridValues)
+            foreach (var raw in gridVals)
             {
-                // Split on common separators: "/", " and ", "&", ","
                 var parts = Regex.Split(raw, @"[/,&]|\band\b", RegexOptions.IgnoreCase);
                 foreach (var part in parts)
-                {
                     if (TryParseGridSquare(part.Trim(), out var c, out var r))
                         cells.Add((c, r));
-                }
             }
             if (cells.Count == 0)
                 continue;
+            var regionVal = GetNodeProperty(neb, InfoboxFieldLabels.Region);
             result.Nebulas.Add(
                 new GeoNebula
                 {
-                    Id = rec.PageId,
-                    Name = rec.Title,
+                    Id = neb.PageId,
+                    Name = GetDisplayName(neb),
                     Col = cells[0].col,
                     Row = cells[0].row,
                     Cells = cells.Select(c => new[] { c.col, c.row }).ToList(),
-                    Region = GetFirstDataValue(rec, InfoboxFieldLabels.Region) is { } rn ? NormalizeRegionName(rn) : null,
+                    Region = !string.IsNullOrEmpty(regionVal) ? NormalizeRegionName(regionVal) : null,
                 }
             );
         }
 
-        // Trade routes — resolve waypoints via the name→grid lookup
-        var trFilter = TemplateFilter(KgNodeTypes.TradeRoute);
+        // ── Trade routes from KG nodes (ordered pageId sequences in properties) ──
+        var trNodeFilter = Builders<GraphNode>.Filter.Eq(n => n.Type, KgNodeTypes.TradeRoute);
         if (continuity.HasValue)
-            trFilter = Builders<Page>.Filter.And(trFilter, Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value));
-        var trRecs = await _pages.Find(trFilter).ToListAsync();
-        foreach (var rec in trRecs)
+            trNodeFilter = Builders<GraphNode>.Filter.And(trNodeFilter, Builders<GraphNode>.Filter.Eq(n => n.Continuity, continuity.Value));
+
+        var tradeRouteNodes = await _nodes.Find(trNodeFilter).ToListAsync();
+        foreach (var trNode in tradeRouteNodes)
         {
-            var endpoints = GetDataValues(rec, "End points");
-            var otherObjects = GetDataValues(rec, "Other objects");
+            // Ordered pageId sequences stored by the ETL as "{field}Ids" properties.
+            // Prefer "Other objectsIds" (full waypoint sequence), then "Transit pointsIds", then "End pointsIds".
+            var waypointIds = GetNodeProperties(trNode, "Other objectsIds");
+            if (waypointIds.Count == 0)
+                waypointIds = GetNodeProperties(trNode, "Transit pointsIds");
+            if (waypointIds.Count == 0)
+                waypointIds = GetNodeProperties(trNode, "End pointsIds");
 
-            var waypointNames = new List<string>();
-            foreach (var obj in otherObjects)
+            // Resolve each pageId to grid coordinates in order
+            var waypoints = new List<GeoWaypoint>();
+            foreach (var idStr in waypointIds)
             {
-                var parts = obj.Split([" - ", " – "], StringSplitOptions.RemoveEmptyEntries);
-                waypointNames.AddRange(parts.Select(p => p.Trim()));
+                if (!int.TryParse(idStr, out var wpId))
+                    continue;
+                if (!pageIdToGrid.TryGetValue(wpId, out var grid))
+                    continue;
+                if (waypoints.Count > 0 && waypoints[^1].Col == grid.col && waypoints[^1].Row == grid.row)
+                    continue;
+                var wpName = pageIdToName.GetValueOrDefault(wpId, wpId.ToString());
+                waypoints.Add(
+                    new GeoWaypoint
+                    {
+                        Name = wpName,
+                        Col = grid.col,
+                        Row = grid.row,
+                    }
+                );
             }
-            if (waypointNames.Count == 0)
-                waypointNames.AddRange(endpoints);
 
-            var resolved = new List<GeoWaypoint>();
-            foreach (var name in waypointNames)
-            {
-                if (nameToGrid.TryGetValue(name, out var grid))
-                {
-                    if (resolved.Count > 0 && resolved[^1].Col == grid.col && resolved[^1].Row == grid.row)
-                        continue;
-                    resolved.Add(
-                        new GeoWaypoint
-                        {
-                            Name = name,
-                            Col = grid.col,
-                            Row = grid.row,
-                        }
-                    );
-                }
-            }
-            if (resolved.Count >= 2)
+            if (waypoints.Count >= 2)
                 result.TradeRoutes.Add(
                     new GeoTradeRoute
                     {
-                        Id = rec.PageId,
-                        Name = rec.Title,
-                        Waypoints = resolved,
+                        Id = trNode.PageId,
+                        Name = GetDisplayName(trNode),
+                        Waypoints = waypoints,
                     }
                 );
         }
 
-        _logger.LogInformation("GalaxyMap V2 overview: {Regions} regions, {Routes} trade routes, {Nebulas} nebulas", result.Regions.Count, result.TradeRoutes.Count, result.Nebulas.Count);
+        _logger.LogInformation(
+            "GalaxyMap geography (KG): {Regions} regions, {Routes} trade routes, {Nebulas} nebulas, {Cells} cells",
+            result.Regions.Count,
+            result.TradeRoutes.Count,
+            result.Nebulas.Count,
+            result.Cells.Count
+        );
 
         return result;
     }
 
+    // ══════════ SYSTEMS (KG-backed) ══════════
+
     /// <summary>
-    /// Returns systems (with planets) within a grid range. Called on-demand as user zooms in.
+    /// Returns systems (with celestial bodies) within a grid range.
+    /// All data sourced from kg.nodes + kg.edges.
     /// </summary>
     public async Task<GalaxyGeographySystems> GetSystemsInRangeAsync(int minCol, int maxCol, int minRow, int maxRow, Continuity? continuity = null)
     {
-        var sysFilter = InfoboxDataFilter(KgNodeTypes.System, InfoboxFieldLabels.GridSquare);
+        // Load system nodes with grid squares
+        var sysFilter = Builders<GraphNode>.Filter.And(Builders<GraphNode>.Filter.Eq(n => n.Type, KgNodeTypes.System), Builders<GraphNode>.Filter.Exists("properties.Grid square"));
         if (continuity.HasValue)
-            sysFilter = Builders<Page>.Filter.And(sysFilter, Builders<Page>.Filter.Eq(r => r.Continuity, continuity.Value));
-        var sysRecs = await _pages.Find(sysFilter).ToListAsync();
+            sysFilter = Builders<GraphNode>.Filter.And(sysFilter, Builders<GraphNode>.Filter.Eq(n => n.Continuity, continuity.Value));
 
-        // Build a name→(id, class, continuity) lookup for all celestial bodies to resolve planet IDs
-        var cbLookup = new Dictionary<string, (int id, string? cls, Continuity continuity)>(StringComparer.OrdinalIgnoreCase);
-        var cbRecs = await _pages
-            .Find(TemplateFilter(KgNodeTypes.CelestialBody))
-            .Project<Page>(Builders<Page>.Projection.Include(p => p.PageId).Include(p => p.Title).Include(p => p.Continuity).Include("infobox.Data"))
-            .ToListAsync();
-        foreach (var cb in cbRecs)
+        var systemNodes = await _nodes.Find(sysFilter).ToListAsync();
+
+        // Filter to viewport
+        var inRange = new List<GraphNode>();
+        foreach (var node in systemNodes)
         {
-            var cls = GetFirstDataValue(cb, InfoboxFieldLabels.Class);
-            cbLookup.TryAdd(cb.Title, (cb.PageId, cls, cb.Continuity));
+            var gridStr = GetNodeProperty(node, InfoboxFieldLabels.GridSquare);
+            if (!TryParseGridSquare(gridStr, out var col, out var row))
+                continue;
+            if (col >= minCol && col <= maxCol && row >= minRow && row <= maxRow)
+                inRange.Add(node);
         }
 
-        var systems = new List<GeoSystem>();
-        foreach (var rec in sysRecs)
+        // Load region + sector edges for these systems
+        var inRangeIds = inRange.Select(n => n.PageId).ToHashSet();
+
+        var regionEdges = await _edges
+            .Find(
+                Builders<RelationshipEdge>.Filter.And(
+                    Builders<RelationshipEdge>.Filter.Eq(e => e.Label, KgLabels.InRegion),
+                    Builders<RelationshipEdge>.Filter.Eq(e => e.FromType, KgNodeTypes.System),
+                    Builders<RelationshipEdge>.Filter.Eq(e => e.ToType, KgNodeTypes.Region)
+                )
+            )
+            .Project(Builders<RelationshipEdge>.Projection.Include(e => e.FromId).Include(e => e.ToName))
+            .ToListAsync();
+
+        var sectorEdges = await _edges
+            .Find(
+                Builders<RelationshipEdge>.Filter.And(
+                    Builders<RelationshipEdge>.Filter.Eq(e => e.Label, KgLabels.InSector),
+                    Builders<RelationshipEdge>.Filter.Eq(e => e.FromType, KgNodeTypes.System),
+                    Builders<RelationshipEdge>.Filter.Eq(e => e.ToType, KgNodeTypes.Sector)
+                )
+            )
+            .Project(Builders<RelationshipEdge>.Projection.Include(e => e.FromId).Include(e => e.ToName))
+            .ToListAsync();
+
+        var systemRegion = new Dictionary<int, string>();
+        foreach (var e in regionEdges)
         {
-            var gridSquare = GetFirstDataValue(rec, InfoboxFieldLabels.GridSquare);
-            if (!TryParseGridSquare(gridSquare, out var col, out var row))
-                continue;
-            if (col < minCol || col > maxCol || row < minRow || row > maxRow)
+            var id = e[RelationshipEdgeBsonFields.FromId].AsInt32;
+            if (inRangeIds.Contains(id))
+                systemRegion.TryAdd(id, NormalizeRegionName(e[RelationshipEdgeBsonFields.ToName].AsString));
+        }
+
+        var systemSector = new Dictionary<int, string>();
+        foreach (var e in sectorEdges)
+        {
+            var id = e[RelationshipEdgeBsonFields.FromId].AsInt32;
+            if (inRangeIds.Contains(id))
+                systemSector.TryAdd(id, e[RelationshipEdgeBsonFields.ToName].AsString);
+        }
+
+        // Load orbited_by edges for celestial bodies
+        var orbitEdges = await _edges
+            .Find(Builders<RelationshipEdge>.Filter.And(Builders<RelationshipEdge>.Filter.In(e => e.FromId, inRangeIds), Builders<RelationshipEdge>.Filter.Eq(e => e.Label, KgLabels.OrbitedBy)))
+            .ToListAsync();
+
+        // Group orbited_by by system
+        var systemBodies = new Dictionary<int, List<(int toId, string toName)>>();
+        foreach (var e in orbitEdges)
+        {
+            if (!systemBodies.TryGetValue(e.FromId, out var list))
+                systemBodies[e.FromId] = list = [];
+            list.Add((e.ToId, e.ToName));
+        }
+
+        // Load celestial body nodes for class + continuity
+        var allBodyIds = systemBodies.Values.SelectMany(l => l.Select(b => b.toId)).Distinct().ToList();
+        var bodyNodes =
+            allBodyIds.Count > 0
+                ? await _nodes
+                    .Find(Builders<GraphNode>.Filter.In(n => n.PageId, allBodyIds))
+                    .Project(Builders<GraphNode>.Projection.Include(n => n.PageId).Include(n => n.Name).Include(n => n.Continuity).Include("properties.Class").Include("properties.Titles"))
+                    .ToListAsync()
+                : [];
+
+        var bodyLookup = bodyNodes.ToDictionary(
+            d => d[MongoFields.Id].AsInt32,
+            d =>
+            {
+                var cls = d["properties"].AsBsonDocument.Contains("Class") && d["properties"]["Class"].AsBsonArray.Count > 0 ? d["properties"]["Class"][0].AsString : null;
+                var cont = d.Contains(GraphNodeBsonFields.Continuity) ? d[GraphNodeBsonFields.Continuity].AsString : "Unknown";
+                var name =
+                    d["properties"].AsBsonDocument.Contains("Titles") && d["properties"]["Titles"].AsBsonArray.Count > 0 ? d["properties"]["Titles"][0].AsString : d[GraphNodeBsonFields.Name].AsString;
+                return (name, cls, cont);
+            }
+        );
+
+        // Build result
+        var systems = new List<GeoSystem>();
+        foreach (var node in inRange)
+        {
+            var gridStr = GetNodeProperty(node, InfoboxFieldLabels.GridSquare);
+            if (!TryParseGridSquare(gridStr, out var col, out var row))
                 continue;
 
-            // Collect all orbital body names from all relevant properties
-            var bodyNames = new List<string>();
-            bodyNames.AddRange(GetDataValues(rec, "Orbiting bodies"));
-            bodyNames.AddRange(GetDataValues(rec, "Planets"));
-            bodyNames.AddRange(GetDataValues(rec, "Moons"));
-            bodyNames.AddRange(GetDataValues(rec, "Asteroids"));
-            bodyNames.AddRange(GetDataValues(rec, "Other objects"));
-            var distinctNames = bodyNames.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
-
-            var celestialBodies = distinctNames
-                .Select(n =>
+            var celestialBodies = new List<GeoCelestialBody>();
+            if (systemBodies.TryGetValue(node.PageId, out var bodies))
+            {
+                foreach (var (toId, toName) in bodies)
                 {
-                    cbLookup.TryGetValue(n, out var info);
-                    return new GeoCelestialBody
-                    {
-                        Id = info.id,
-                        Name = n,
-                        Class = info.cls,
-                        Continuity = info.continuity.ToString(),
-                    };
-                })
-                .ToList();
+                    if (bodyLookup.TryGetValue(toId, out var info))
+                        celestialBodies.Add(
+                            new GeoCelestialBody
+                            {
+                                Id = toId,
+                                Name = info.name,
+                                Class = info.cls,
+                                Continuity = info.cont,
+                            }
+                        );
+                    else
+                        celestialBodies.Add(new GeoCelestialBody { Id = toId, Name = toName });
+                }
+            }
 
             systems.Add(
                 new GeoSystem
                 {
-                    Id = rec.PageId,
-                    Name = rec.Title,
+                    Id = node.PageId,
+                    Name = GetDisplayName(node),
                     Col = col,
                     Row = row,
-                    Continuity = rec.Continuity.ToString(),
-                    Region = GetFirstDataValue(rec, InfoboxFieldLabels.Region) is { } rn ? NormalizeRegionName(rn) : null,
-                    Sector = GetFirstDataValue(rec, InfoboxFieldLabels.Sector),
+                    Continuity = node.Continuity.ToString(),
+                    Region = systemRegion.GetValueOrDefault(node.PageId),
+                    Sector = systemSector.GetValueOrDefault(node.PageId),
                     CelestialBodies = celestialBodies,
                 }
             );
         }
 
-        _logger.LogInformation("GalaxyMap V2 systems [{MinCol},{MinRow}]-[{MaxCol},{MaxRow}]: {Count} systems", minCol, minRow, maxCol, maxRow, systems.Count);
+        _logger.LogInformation("GalaxyMap systems (KG) [{MinCol},{MinRow}]-[{MaxCol},{MaxRow}]: {Count} systems", minCol, minRow, maxCol, maxRow, systems.Count);
 
         return new GalaxyGeographySystems
         {

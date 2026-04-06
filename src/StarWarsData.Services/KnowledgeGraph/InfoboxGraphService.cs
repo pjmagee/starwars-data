@@ -312,6 +312,26 @@ public class InfoboxGraphService(IMongoClient mongoClient, IOptions<SettingsOpti
                         // If no links at all, store as property
                         if (links.Count == 0 && values.Count > 0)
                             properties[label] = values;
+
+                        // Trade routes: store ordered pageId sequences so consumers can
+                        // reconstruct the geographic route without name-based joins.
+                        // The property key is "{label}Ids" (e.g. "Other objectsIds").
+                        if (type == KgNodeTypes.TradeRoute && primaryLinks.Count > 0)
+                        {
+                            var orderedIds = primaryLinks
+                                .OrderBy(pl => pl.Order)
+                                .Select(pl =>
+                                {
+                                    var href = pl.Link.Contains(InfoboxBsonFields.Href) ? pl.Link[InfoboxBsonFields.Href].AsString : null;
+                                    var content = pl.Link.Contains(InfoboxBsonFields.Content) ? pl.Link[InfoboxBsonFields.Content].AsString : null;
+                                    return href is not null && content is not null ? ResolveLinkTarget(href, content, wikiUrlToPageId) : 0;
+                                })
+                                .Where(id => id > 0)
+                                .Select(id => id.ToString())
+                                .ToList();
+                            if (orderedIds.Count > 0)
+                                properties[$"{label}Ids"] = orderedIds;
+                        }
                     }
                 }
 

@@ -48,7 +48,9 @@ public static class KgLabels
 
     // ── Geography ──
     public const string InRegion = "in_region";
+    public const string InSector = "in_sector";
     public const string LocatedIn = "located_in";
+    public const string OrbitedBy = "orbited_by";
 
     // ── Construction / manufacture ──
     public const string Built = "built";

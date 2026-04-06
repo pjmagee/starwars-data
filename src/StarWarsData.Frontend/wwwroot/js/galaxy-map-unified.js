@@ -362,7 +362,7 @@ export function initialize(containerId, overview, dotNetRef) {
             .attr('fill', 'rgba(138,43,226,0.35)')
             .attr('font-size', '7px').attr('font-style', 'italic')
             .style('pointer-events', 'none')
-            .text(n.name.replace(/\/Legends$/i, ''));
+            .text(n.name);
 
         // Hover interaction
         ng.on('mouseover', function (event) {
@@ -373,7 +373,7 @@ export function initialize(containerId, overview, dotNetRef) {
             d3.select(this).select('text')
                 .transition().duration(200).attr('fill', 'rgba(138,43,226,0.8)');
 
-            let html = `<strong style="color:#9b59b6;">${n.name.replace(/\/Legends$/i, '')}</strong>`;
+            let html = `<strong style="color:#9b59b6;">${n.name}</strong>`;
             html += `<br><span style="color:#aaa">Type:</span> Nebula`;
             html += `<br><span style="color:#aaa">Grid:</span> ${cells.map(([c,r]) => String.fromCharCode(65+c)+'-'+(r+1)).join(', ')}`;
             if (n.region) html += `<br><span style="color:#aaa">Region:</span> ${n.region}`;
@@ -706,7 +706,7 @@ export function initialize(containerId, overview, dotNetRef) {
             .attr('dy', cellW * -0.025).attr('text-anchor', 'middle')
             .attr('fill', '#e0e0f0').attr('font-size', `${cellW * 0.012}px`)
             .style('pointer-events', 'none')
-            .text(d => d.name.replace(/ system$/i, '').replace(/\/Legends$/i, ''));
+            .text(d => d.name);
 
         appendContinuityDot(sysG, dotR);
 
@@ -1024,7 +1024,7 @@ export function initialize(containerId, overview, dotNetRef) {
             .attr('dy', cellW * -0.03).attr('text-anchor', 'middle')
             .attr('fill', '#e0e0f0').attr('font-size', `${cellW * 0.015}px`)
             .style('pointer-events', 'none')
-            .text(d => d.name.replace(/ system$/i, '').replace(/\/Legends$/i, ''));
+            .text(d => d.name);
 
         appendContinuityDot(sysG, dotR2);
 
@@ -1104,7 +1104,7 @@ export function initialize(containerId, overview, dotNetRef) {
             .attr('x', cx).attr('y', cy - unit * 12)
             .attr('text-anchor', 'middle').attr('fill', '#ffd866')
             .attr('font-size', `${unit * 5}px`).attr('font-weight', '600')
-            .text(sys.name.replace(/ system$/i, '').replace(/\/Legends$/i, ''));
+            .text(sys.name);
 
         // System continuity badge — letter inside the central star circle
         if (sys.continuity && sys.continuity !== 'Unknown') {

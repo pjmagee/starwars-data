@@ -229,6 +229,7 @@ public class GenerationStatus
     public string Message { get; set; } = string.Empty;
     public DateTime StartedAt { get; set; }
     public string? Error { get; set; }
+    public string? CharacterTitle { get; set; }
 
     // Granular progress within the current stage
     public int CurrentStep { get; set; }

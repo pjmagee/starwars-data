@@ -13,13 +13,14 @@ public class CharacterTimelineTracker
 
     public GenerationStatus? GetStatus(int pageId) => _statuses.GetValueOrDefault(pageId);
 
-    public bool TryStart(int pageId)
+    public bool TryStart(int pageId, string? characterTitle = null)
     {
         var status = new GenerationStatus
         {
             Stage = GenerationStage.Queued,
             Message = "Queued for generation...",
             StartedAt = DateTime.UtcNow,
+            CharacterTitle = characterTitle,
         };
         return _statuses.TryAdd(pageId, status);
     }
