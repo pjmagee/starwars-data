@@ -85,6 +85,14 @@
         <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="mb-4" />
     }
 
+    @if (_searchError is not null)
+    {
+        <MudAlert Severity="Severity.Error" Variant="Variant.Outlined" Class="mb-4" ShowCloseIcon="true"
+                  CloseIconClicked="() => _searchError = null">
+            @_searchError
+        </MudAlert>
+    }
+
     @* ── Results ── *@
     @if (_results is not null)
     {
@@ -185,6 +193,7 @@
     private bool _loading;
     private bool _rateLimited;
     private string _rateLimitMessage = "";
+    private string? _searchError;
     private List<SearchResult>? _results;
     private List<string> _entityTypes = [];
 
@@ -220,6 +229,7 @@
 
         _loading = true;
         _rateLimited = false;
+        _searchError = null;
         _results = null;
         _searchedQuery = _query;
         _searchedMode = _mode;
@@ -256,14 +266,23 @@
                 return;
             }
 
-            response.EnsureSuccessStatusCode();
+            if (!response.IsSuccessStatusCode)
+            {
+                _searchError = response.StatusCode switch
+                {
+                    >= System.Net.HttpStatusCode.InternalServerError => "Search is temporarily unavailable. A backend index may be rebuilding — please try again in a few minutes.",
+                    System.Net.HttpStatusCode.BadRequest => "Invalid search query. Please try different search terms.",
+                    _ => $"Search failed (HTTP {(int)response.StatusCode}). Please try again.",
+                };
+                return;
+            }
 
             var result = await response.Content.ReadFromJsonAsync<SearchResponse>(JsonOptions);
             _results = result?.Results ?? [];
         }
         catch (Exception ex)
         {
-            Snackbar.Add($"Search failed: {ex.Message}", Severity.Error);
+            _searchError = $"Search failed: {ex.Message}";
         }
         finally
         {
