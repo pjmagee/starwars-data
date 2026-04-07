@@ -631,6 +631,39 @@ export function filterByYear(year) {
     }
 }
 
+/**
+ * Highlight nodes whose name matches the search query (case-insensitive).
+ * Matching nodes pulse with a bright ring; non-matching nodes dim.
+ * Pass empty string to clear. Returns the count of matching nodes.
+ */
+export function highlightNodes(query) {
+    if (!_state) return 0;
+    const { nodeGroup } = _state;
+
+    if (!query) {
+        // Clear: restore all nodes to normal
+        nodeGroup.selectAll('g.node').style('opacity', 1);
+        nodeGroup.selectAll('g.node circle')
+            .attr('stroke', d => d.isRoot ? '#c8a832' : getTypeColor(d.type))
+            .attr('stroke-width', d => d.isRoot ? 3 : 2);
+        return 0;
+    }
+
+    const q = query.toLowerCase();
+    let matchCount = 0;
+
+    nodeGroup.selectAll('g.node').each(function(d) {
+        const matches = d.name && d.name.toLowerCase().includes(q);
+        if (matches) matchCount++;
+        d3.select(this).style('opacity', matches ? 1 : 0.15);
+        d3.select(this).select('circle')
+            .attr('stroke', matches ? '#ffd700' : (d.isRoot ? '#c8a832' : getTypeColor(d.type)))
+            .attr('stroke-width', matches ? 5 : (d.isRoot ? 3 : 2));
+    });
+
+    return matchCount;
+}
+
 export function fitToScreen() {
     if (!_state) return;
     const { svg, zoomBehavior, nodesData, width, height } = _state;

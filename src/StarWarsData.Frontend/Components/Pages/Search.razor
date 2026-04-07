@@ -122,7 +122,7 @@
                         @if (!string.IsNullOrEmpty(result.Continuity))
                         {
                             <MudChip T="string" Size="Size.Small" Variant="Variant.Filled"
-                                     Color="@(result.Continuity == "Canon" ? Color.Info : Color.Warning)">
+                                     Color="@(result.Continuity == "Canon" ? Color.Primary : Color.Secondary)">
                                 @result.Continuity
                             </MudChip>
                         }

@@ -171,7 +171,7 @@ builder
             tools.AddRange(mcpTools.Select(t => t.WithName(t.Name.Replace('-', '_'))).Where(t => allowedMcpTools.Contains(t.Name)).Cast<AITool>());
         }
 
-        var instructions = AgentPrompt.Instructions;
+        var instructions = AgentPrompt.GetInstructions(settings.DatabaseName);
 
         // BYOK chat client — wraps the server OpenAI client and swaps to user's key when available
         var byokClient = sp.GetRequiredService<ByokChatClient>();

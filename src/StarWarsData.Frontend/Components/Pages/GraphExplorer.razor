@@ -114,11 +114,14 @@
                      OnLabelsBulkSet="OnLabelsBulkSet"
                      MaxDepth="_maxDepth"
                      OnDepthChanged="OnDepthChanged"
+                     MaxNodeLimit="_maxNodeLimit"
+                     OnMaxNodeLimitChanged="OnMaxNodeLimitChanged"
                      History="_history"
-                     CurrentEntityName="_selectedEntityName"
+                     CurrentEntityName="@_selectedEntityName"
                      OnNavigateBack="NavigateBack"
                      OnBreadcrumbClicked="OnBreadcrumbClicked"
                      Stats="_graphStats"
+                     IsTruncated="_graphTruncated"
                      OnNodeExpandRequested="OnNodeExpand" />
     }
 </MudContainer>
@@ -143,6 +146,8 @@
     private HashSet<string> _defaultLabels = new();
     private bool _loadingLabels;
     private int _maxDepth = 2;
+    private int _maxNodeLimit = 150;
+    private bool _autoReduceDepth;
 
     // Graph state
     private GraphViewer? _graphViewer;
@@ -150,6 +155,7 @@
     private bool _graphLoading;
     private string? _graphError;
     private (int nodes, int edges)? _graphStats;
+    private bool _graphTruncated;
 
     // Navigation
     private List<(int Id, string Name)> _history = [];
@@ -294,6 +300,8 @@
         _graphError = null;
         _graphStats = null;
         _selectedLabels.Clear();
+        _autoReduceDepth = true;
+        _maxDepth = 2;
 
         Navigation.NavigateTo($"/graph-explorer/{id}", replace: true);
 
@@ -342,13 +350,13 @@
 
         _graphLoading = true;
         _graphError = null;
-        _graphData = null;
-        _graphStats = null;
+        // Don't null _graphData here — it unmounts GraphViewer and loses fullscreen state.
+        // The component stays mounted and updates when we assign the new result below.
         StateHasChanged();
 
         try
         {
-            var queryParams = new List<(string, string)> { ("maxDepth", _maxDepth.ToString()) };
+            var queryParams = new List<(string, string)> { ("maxDepth", _maxDepth.ToString()), ("maxNodes", _maxNodeLimit.ToString()) };
             if (_selectedLabels.Count == 0)
             {
                 // User explicitly toggled all labels off — ask the server for just the root
@@ -367,6 +375,7 @@
 
             if (result is null)
             {
+                _graphData = null;
                 _graphError = "No graph data found. The crawler may not have processed this entity yet.";
                 return;
             }
@@ -375,12 +384,29 @@
             // we still want to render the root node. Only treat "no nodes at all" as an error.
             if (result.Nodes.Count == 0)
             {
+                _graphData = null;
                 _graphError = "No graph data found. The crawler may not have processed this entity yet.";
                 return;
             }
 
+            // Auto-reduce depth only on initial entity load, not when user explicitly changes settings
+            if (_autoReduceDepth && result.Nodes.Count > _maxNodeLimit && _maxDepth > 1)
+            {
+                _maxDepth = 1;
+                Snackbar.Add($"This entity has {result.Nodes.Count} connected nodes — reduced depth to 1.", Severity.Warning);
+                await LoadGraph();
+                return;
+            }
+            _autoReduceDepth = false;
+
             _graphData = result;
             _graphStats = (result.Nodes.Count, result.Edges.Count);
+            _graphTruncated = result.Truncated;
+
+            if (result.Truncated)
+            {
+                Snackbar.Add($"Graph capped at {_maxNodeLimit} nodes. Increase the node limit or filter labels to see more.", Severity.Info);
+            }
         }
         catch (Exception ex)
         {
@@ -412,6 +438,12 @@
     private async Task OnDepthChanged(int value)
     {
         _maxDepth = value;
+        await LoadGraph();
+    }
+
+    private async Task OnMaxNodeLimitChanged(int value)
+    {
+        _maxNodeLimit = value;
         await LoadGraph();
     }
 

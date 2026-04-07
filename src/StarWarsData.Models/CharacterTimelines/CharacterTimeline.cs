@@ -173,11 +173,25 @@ public class CharacterTimelineListResult
 /// </summary>
 public class CharacterTimelineSummary
 {
+    [BsonElement("characterPageId")]
     public int CharacterPageId { get; set; }
+
+    [BsonElement("characterTitle")]
     public string CharacterTitle { get; set; } = string.Empty;
+
+    [BsonElement("imageUrl")]
     public string? ImageUrl { get; set; }
+
+    [BsonElement("continuity")]
     public Continuity Continuity { get; set; }
+
+    [BsonElement("eventCount")]
     public int EventCount { get; set; }
+
+    [BsonElement("sourceCount")]
+    public int SourceCount { get; set; }
+
+    [BsonElement("generatedAt")]
     public DateTime GeneratedAt { get; set; }
 }
 

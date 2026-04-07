@@ -42,7 +42,7 @@ public sealed record EntityTimelineDto(
     string? Error = null
 );
 
-public sealed record RelationshipTargetDto(int PageId, string Name, string Type, double Weight, string Evidence);
+public sealed record RelationshipTargetDto(int PageId, string Name, string Type, double Weight, string Evidence, Dictionary<string, string>? Properties = null);
 
 public sealed record EntityRelationshipsDto(int EntityId, string? EntityName, Dictionary<string, List<RelationshipTargetDto>> Relationships, int TotalEdges, string? Note = null);
 

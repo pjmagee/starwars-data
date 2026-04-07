@@ -5,58 +5,102 @@
 
 <div style="@($"position:relative; overflow:hidden; border-radius:8px; {(_fullscreen ? "position:fixed; top:0; left:0; right:0; bottom:0; z-index:9999; border-radius:0;" : "")}")">
 
-    @* ── Controls overlay (top-left, inside canvas) ── *@
-    <div style="position:absolute; top:8px; left:8px; z-index:10; display:flex; flex-direction:column; gap:6px; max-width:calc(100% - 80px);">
+    @* ── Settings panel (left side, inside canvas) ── *@
+    <div style="position:absolute; top:8px; left:8px; bottom:8px; z-index:10; width:320px; max-height:calc(100% - 16px); overflow-y:auto; display:flex; flex-direction:column; gap:4px; background:rgba(20,20,46,0.92); border-radius:8px; padding:8px; scrollbar-width:thin;">
 
         @* Breadcrumbs *@
         @if (History is { Count: > 0 })
         {
-            <div style="display:flex; align-items:center; gap:4px; background:rgba(30,30,56,0.85); padding:4px 10px; border-radius:6px; flex-wrap:wrap;">
+            <div style="display:flex; align-items:center; gap:4px; padding:2px 0; flex-wrap:wrap;">
                 <MudIconButton Icon="@Icons.Material.Filled.ArrowBack" Size="Size.Small"
                                Style="color:#e0e0f0;" OnClick="@(() => OnNavigateBack.InvokeAsync())" />
                 @foreach (var crumb in History)
                 {
                     var c = crumb;
-                    <MudLink Style="color:#90caf9; font-size:12px; cursor:pointer;"
+                    <MudLink Style="color:#90caf9; font-size:11px; cursor:pointer;"
                              OnClick="@(() => OnBreadcrumbClicked.InvokeAsync(c))">@c.Name</MudLink>
                     <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.4);">›</MudText>
                 }
-                <MudText Typo="Typo.caption" Style="color:#ffa726; font-weight:600;">@CurrentEntityName</MudText>
+                <MudText Typo="Typo.caption" Style="color:#ffa726; font-weight:600; font-size:11px;">@CurrentEntityName</MudText>
             </div>
+            <hr style="border:none; border-top:1px solid rgba(255,255,255,0.1); margin:2px 0;" />
         }
 
         @* Depth control *@
         @if (MaxDepth.HasValue)
         {
-            <div style="display:flex; align-items:center; gap:6px; background:rgba(30,30,56,0.85); padding:4px 10px; border-radius:6px;">
-                <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.5);">Depth</MudText>
+            <div style="display:flex; align-items:center; gap:6px; padding:2px 0;">
+                <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.5); width:40px;">Depth</MudText>
                 <MudSlider T="int" Value="MaxDepth.Value" ValueChanged="@(v => OnDepthChanged.InvokeAsync(v))"
-                           Min="1" Max="4" Step="1" Style="max-width:120px; min-width:80px;"
-                           Color="Color.Primary" />
-                <MudText Typo="Typo.caption" Style="color:#90caf9;">@MaxDepth.Value</MudText>
+                           Min="1" Max="4" Step="1" TickMarks="true" Immediate="false"
+                           Style="flex:1;" Color="Color.Primary" />
+                <MudText Typo="Typo.caption" Style="color:#90caf9; width:16px; text-align:right;">@MaxDepth.Value</MudText>
+            </div>
+        }
+
+        @* Node limit control *@
+        @if (MaxNodeLimit.HasValue)
+        {
+            <div style="display:flex; align-items:center; gap:6px; padding:2px 0;">
+                <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.5); width:40px;">Nodes</MudText>
+                <MudSlider T="int" Value="MaxNodeLimit.Value" ValueChanged="@(v => OnMaxNodeLimitChanged.InvokeAsync(v))"
+                           Min="10" Max="500" Step="10" TickMarks="true" Immediate="false"
+                           Style="flex:1;" Color="Color.Secondary" />
+                <MudText Typo="Typo.caption" Style="color:#ce93d8; width:28px; text-align:right;">@MaxNodeLimit.Value</MudText>
+            </div>
+        }
+
+        @* Stats + truncation warning *@
+        @if (Stats.HasValue)
+        {
+            <div style="display:flex; align-items:center; gap:4px; padding:2px 0;">
+                @if (IsTruncated)
+                {
+                    <MudIcon Icon="@Icons.Material.Filled.Warning" Size="Size.Small" Style="color:#ffa726;" />
+                }
+                <MudText Typo="Typo.caption" Style="@($"color:{(IsTruncated ? "#ffa726" : "rgba(255,255,255,0.5)")}")">
+                    @Stats.Value.nodes nodes · @Stats.Value.edges edges@(IsTruncated ? " (capped)" : "")
+                </MudText>
             </div>
         }
 
         @* Temporal slider *@
         @if (_hasTemporalData)
         {
-            <div style="display:flex; align-items:center; gap:6px; background:rgba(30,30,56,0.85); padding:4px 10px; border-radius:6px;">
+            <hr style="border:none; border-top:1px solid rgba(255,255,255,0.1); margin:2px 0;" />
+            <div style="display:flex; align-items:center; gap:4px; padding:2px 0;">
                 <MudIcon Icon="@Icons.Material.Filled.Schedule" Size="Size.Small" Style="color:#ffa726;" />
                 <MudSlider T="int" Value="_selectedTickIndex" ValueChanged="OnTickChanged"
                            Min="0" Max="@(_temporalTicks.Count - 1)" Step="1"
-                           Style="max-width:250px; min-width:120px;" Color="Color.Warning" />
-                <MudText Typo="Typo.caption" Style="color:#ffa726; white-space:nowrap;">
+                           Style="flex:1;" Color="Color.Warning" />
+                <MudText Typo="Typo.caption" Style="color:#ffa726; white-space:nowrap; font-size:11px;">
                     @FormatYear(_temporalTicks[_selectedTickIndex])
                 </MudText>
                 <MudIconButton Icon="@Icons.Material.Filled.RestartAlt" Size="Size.Small"
-                               OnClick="ClearYearFilter" Style="color:#aaa;" />
+                               OnClick="ClearYearFilter" Style="color:#aaa; padding:2px;" />
             </div>
         }
+
+        @* Node search / highlight *@
+        <hr style="border:none; border-top:1px solid rgba(255,255,255,0.1); margin:2px 0;" />
+        <div style="display:flex; align-items:center; gap:4px; padding:2px 0;">
+            <MudIcon Icon="@Icons.Material.Filled.Search" Size="Size.Small" Style="color:rgba(255,255,255,0.5);" />
+            <input type="text" placeholder="Find node..." @bind="_nodeSearch" @bind:event="oninput"
+                   @onkeyup="OnNodeSearchChanged"
+                   style="background:transparent; border:none; outline:none; color:white; font-size:12px; flex:1; min-width:0;" />
+            @if (!string.IsNullOrEmpty(_nodeSearch))
+            {
+                <MudText Typo="Typo.caption" Style="color:#90caf9; font-size:10px;">@_nodeSearchCount</MudText>
+                <MudIconButton Icon="@Icons.Material.Filled.Clear" Size="Size.Small"
+                               OnClick="ClearNodeSearch" Style="color:#aaa; padding:2px;" />
+            }
+        </div>
 
         @* Label chips + bulk toggle buttons *@
         @if (Labels is { Count: > 0 })
         {
-            <div style="display:flex; align-items:center; gap:4px; background:rgba(30,30,56,0.85); padding:4px 10px; border-radius:6px; flex-wrap:wrap;">
+            <hr style="border:none; border-top:1px solid rgba(255,255,255,0.1); margin:2px 0;" />
+            <div style="display:flex; align-items:center; gap:4px; flex-wrap:wrap;">
                 @{
                     var enabledCount = Labels.Count(l => EnabledLabels?.Contains(l) ?? true);
                 }
@@ -92,7 +136,6 @@
                     <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.4); margin:0 4px;">
                         @enabledCount/@Labels.Count
                     </MudText>
-                    <span style="width:1px; height:16px; background:rgba(255,255,255,0.2); margin:0 4px;"></span>
                 }
                 @foreach (var label in Labels)
                 {
@@ -261,6 +304,10 @@
     [Parameter] public int? MaxDepth { get; set; }
     [Parameter] public EventCallback<int> OnDepthChanged { get; set; }
 
+    // ── Node limit control (optional) ──
+    [Parameter] public int? MaxNodeLimit { get; set; }
+    [Parameter] public EventCallback<int> OnMaxNodeLimitChanged { get; set; }
+
     // ── Navigation breadcrumbs (optional) ──
     [Parameter] public List<(int Id, string Name)>? History { get; set; }
     [Parameter] public string? CurrentEntityName { get; set; }
@@ -269,6 +316,7 @@
 
     // ── Stats (optional) ──
     [Parameter] public (int nodes, int edges)? Stats { get; set; }
+    [Parameter] public bool IsTruncated { get; set; }
 
     // ── Keyboard shortcuts (optional) ──
     [Parameter] public bool EnableKeyboardShortcuts { get; set; }
@@ -285,6 +333,10 @@
     private bool _hasTemporalData;
     private List<int> _temporalTicks = [];
     private int _selectedTickIndex;
+
+    // Node search
+    private string _nodeSearch = "";
+    private int _nodeSearchCount;
 
     private RelationshipGraphResult? _lastRenderedData;
     private bool _pendingRender;
@@ -441,6 +493,28 @@
     async Task ClearYearFilter()
     {
         if (_jsModule is not null) await _jsModule.InvokeVoidAsync("filterByYear", (int?)null);
+    }
+
+    async Task OnNodeSearchChanged()
+    {
+        if (_jsModule is null) return;
+        if (string.IsNullOrWhiteSpace(_nodeSearch))
+        {
+            _nodeSearchCount = 0;
+            await _jsModule.InvokeVoidAsync("highlightNodes", "");
+        }
+        else
+        {
+            _nodeSearchCount = await _jsModule.InvokeAsync<int>("highlightNodes", _nodeSearch);
+        }
+    }
+
+    async Task ClearNodeSearch()
+    {
+        _nodeSearch = "";
+        _nodeSearchCount = 0;
+        if (_jsModule is not null)
+            await _jsModule.InvokeVoidAsync("highlightNodes", "");
     }
 
     void CloseNodePanel() { _selectedNodePage = null; _selectedNodeId = 0; _loadingNodeDetails = false; }

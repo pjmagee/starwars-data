@@ -34,8 +34,10 @@
                 </MudMenuItem>
             }
         </MudMenu>
-        <MudIconButton Icon="@Icons.Material.Filled.Translate" Color="@(_aurebesh ? Color.Warning : Color.Inherit)"
-                       OnClick="ToggleAurebesh" title="@(_aurebesh ? "Switch to Galactic Basic" : "Switch to Aurebesh")" />
+        <MudTooltip Text="@(_aurebesh ? "Aurebesh mode ON — click to disable" : "Aurebesh mode — render selected text in Star Wars script")">
+            <MudIconButton Icon="@Icons.Material.Filled.Translate" Color="@(_aurebesh ? Color.Warning : Color.Inherit)"
+                           OnClick="ToggleAurebesh" />
+        </MudTooltip>
         <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle"/>
         <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Href="https://github.com/pjmagee/starwars-data" Target="_blank" title="GitHub" />
         <AuthorizeView>

@@ -83,7 +83,7 @@ public class AgentFixture
 
         var prefix = continuityPrefix ?? "[CONTINUITY: Both] [PREFER: auto] ";
 
-        var messages = new List<ChatMessage> { new(ChatRole.System, AgentPrompt.Instructions), new(ChatRole.User, prefix + userMessage) };
+        var messages = new List<ChatMessage> { new(ChatRole.System, AgentPrompt.GetInstructions(DefaultDatabaseName)), new(ChatRole.User, prefix + userMessage) };
 
         var options = new ChatOptions { Tools = Tools };
 

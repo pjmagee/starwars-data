@@ -5,6 +5,7 @@
 @inject IHttpClientFactory HttpClientFactory
 @inject GlobalFilterService GlobalFilterService
 @inject ChatHistoryService ChatHistory
+@inject NavigationManager Navigation
 @inject IJSRuntime JS
 @inject ILogger<Ask> Logger
 @implements IDisposable
@@ -81,7 +82,7 @@
                 {
                     @if (msg.Role == ConversationRole.User)
                     {
-                        <div class="ask-msg ask-msg-user mb-3">
+                        <div @key="msg.Id" class="ask-msg ask-msg-user mb-3">
                             <MudPaper Elevation="0" Class="pa-3 d-flex align-start gap-3" Style="background:var(--mud-palette-background-grey); border-radius:12px;">
                                 <MudIcon Icon="@Icons.Material.Filled.Person" Color="Color.Primary" />
                                 <MudText Typo="Typo.body1" Style="white-space:pre-wrap">@msg.Text</MudText>
@@ -90,7 +91,7 @@
                     }
                     else if (msg.Role == ConversationRole.ToolGroup)
                     {
-                        <div class="ask-msg ask-msg-tools mb-2 ml-2">
+                        <div @key="msg.Id" class="ask-msg ask-msg-tools mb-2 ml-2">
                             <MudPaper Elevation="0" Class="pa-2 px-3" Style="background:transparent;border-left:3px solid var(--mud-palette-primary);border-radius:0">
                                 <div class="d-flex align-center gap-2 cursor-pointer" @onclick="() => msg.IsExpanded = !msg.IsExpanded" style="user-select:none">
                                     @if (msg.ToolCalls!.All(t => t.IsComplete))
@@ -164,7 +165,7 @@
                     }
                     else if (msg.Role == ConversationRole.Visualization)
                     {
-                        <div class="ask-msg ask-msg-viz mb-3 ml-2">
+                        <div @key="msg.Id" class="ask-msg ask-msg-viz mb-3 ml-2">
                             @switch (msg.VisualizationType)
                             {
                                 case "chart" when msg.ChartDescriptor is not null:
@@ -196,7 +197,7 @@
                     }
                     else if (msg.Role == ConversationRole.Assistant)
                     {
-                        <div class="ask-msg ask-msg-assistant mb-3 ml-2">
+                        <div @key="msg.Id" class="ask-msg ask-msg-assistant mb-3 ml-2">
                             <MudPaper Elevation="0" Class="pa-3 d-flex align-start gap-3" Style="border-radius:12px;">
                                 <MudIcon Icon="@Icons.Material.Filled.AutoAwesome" Color="Color.Secondary" Style="margin-top:2px" />
                                 <div style="flex:1; min-width:0;">
@@ -207,7 +208,7 @@
                     }
                     else if (msg.Role == ConversationRole.Error)
                     {
-                        <div class="ask-msg mb-3 ml-2">
+                        <div @key="msg.Id" class="ask-msg mb-3 ml-2">
                             <MudAlert Severity="Severity.Error">@msg.Text</MudAlert>
                         </div>
                     }
@@ -337,6 +338,7 @@
 
     class ConversationMessage
     {
+        public string Id { get; } = Guid.NewGuid().ToString("N");
         public ConversationRole Role { get; set; }
         public string? Text { get; set; }
         public List<ToolCallInfo>? ToolCalls { get; set; }
@@ -614,8 +616,7 @@
             _userId = state.User.FindFirst("sub")?.Value
                       ?? state.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
 
-            if (_isAuthenticated)
-                await ChatHistory.EnsureLoadedAsync();
+            ChatHistory.SetAuthenticated(_isAuthenticated);
         }
 
         await CheckAiStatusAsync();
@@ -641,12 +642,15 @@
     {
         InvokeAsync(() =>
         {
-            // New Chat was clicked — reset if there's any state to clear
+            // Only reset when "New Chat" was explicitly clicked (ActiveSessionId cleared)
+            // AND we're not in the middle of streaming a response
             if (ChatHistory.ActiveSessionId is null
-                && (_currentSessionId is not null || _conversation.Count > 0))
+                && (_currentSessionId is not null || _conversation.Count > 0)
+                && !_loading)
             {
                 ResetChat();
             }
+            StateHasChanged();
         });
     }
 
@@ -685,15 +689,45 @@
     }
 
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && _isAuthenticated)
+        {
+            // Migrate any anonymous localStorage sessions to the authenticated API
+            await MigrateAnonymousSessionsAsync();
+        }
+    }
+
+    private async Task MigrateAnonymousSessionsAsync()
+    {
+        try
+        {
+            var localSessions = await ChatHistory.GetAllLocalSessionsAsync();
+            if (localSessions.Count == 0) return;
+
+            foreach (var local in localSessions)
+            {
+                var body = new SaveChatSessionRequest { Title = local.Title, Messages = local.Messages };
+                await Http.PostAsJsonAsync("api/ChatSessions", body);
+            }
+
+            await ChatHistory.ClearLocalSessionsAsync();
+            await ChatHistory.LoadAsync();
+        }
+        catch { }
+    }
+
     protected override async Task OnParametersSetAsync()
     {
         if (SessionId.HasValue && SessionId != _currentSessionId)
         {
             await LoadSession(SessionId.Value);
         }
-        else if (!SessionId.HasValue && _currentSessionId.HasValue)
+        else if (!SessionId.HasValue && _currentSessionId.HasValue && _conversation.Count == 0)
         {
-            // Navigated to /ask without a session ID — start fresh
+            // Navigated to /ask without a session ID and no active conversation — start fresh.
+            // The _conversation.Count check prevents resetting when we just saved an anonymous
+            // session (URL stays /ask but the conversation is still live in memory).
             NewChat();
         }
     }
@@ -859,10 +893,17 @@
                 await ScrollToBottom();
             }
 
-            // If the stream completed but no assistant message was rendered,
-            // the guardrail or agent returned an empty/unrecognised response
-            var lastNonUser = _conversation.LastOrDefault(m => m.Role != ConversationRole.User);
-            if (lastNonUser is null || lastNonUser.Timestamp < _conversation.Last(m => m.Role == ConversationRole.User).Timestamp)
+            // If the stream completed but no assistant/tool/visualization message appeared
+            // after the user's message, the guardrail or agent returned an empty response.
+            var lastUserIdx = -1;
+            for (int i = _conversation.Count - 1; i >= 0; i--)
+            {
+                if (_conversation[i].Role == ConversationRole.User) { lastUserIdx = i; break; }
+            }
+            var hasResponseAfterUser = lastUserIdx >= 0
+                && _conversation.Skip(lastUserIdx + 1).Any(m => m.Role is ConversationRole.Assistant or ConversationRole.Visualization or ConversationRole.ToolGroup);
+
+            if (!hasResponseAfterUser)
             {
                 _conversation.Add(new ConversationMessage
                 {
@@ -874,9 +915,8 @@
             // Finalize: build AGUI replay messages for this turn
             FinalizeAguiTurn();
 
-            // Auto-save session for authenticated users
-            if (_isAuthenticated && _userId is not null)
-                await SaveCurrentSessionAsync(userPrompt);
+            // Auto-save session
+            await SaveCurrentSessionAsync(userPrompt);
         }
         catch (OperationCanceledException)
         {
@@ -1103,94 +1143,116 @@
                 ? await ChatHistory.SummarizeTitleAsync(userPrompt)
                 : "";
 
-            // Build session messages from conversation + AGUI data for replay
-            var messages = new List<ChatSessionMessage>();
+            var messages = BuildSessionMessages();
 
-            foreach (var msg in _conversation)
+            if (_isAuthenticated && _userId is not null)
             {
-                switch (msg.Role)
+                // Authenticated: save to API
+                var body = new SaveChatSessionRequest { Title = title, Messages = messages };
+
+                if (_currentSessionId is not null)
                 {
-                    case ConversationRole.User:
-                        messages.Add(new ChatSessionMessage
-                        {
-                            Role = "user",
-                            Content = msg.Text ?? "",
-                            Timestamp = msg.Timestamp,
-                        });
-                        break;
-                    case ConversationRole.Assistant:
-                        messages.Add(new ChatSessionMessage
-                        {
-                            Role = "assistant",
-                            Content = msg.Text ?? "",
-                            Timestamp = msg.Timestamp,
-                        });
-                        break;
-                    case ConversationRole.ToolGroup:
-                        foreach (var tc in msg.ToolCalls ?? [])
-                        {
-                            messages.Add(new ChatSessionMessage
-                            {
-                                Role = "tool",
-                                ToolName = tc.ToolName,
-                                ToolCallId = tc.CallId,
-                                ToolCallArgs = tc.Arguments,
-                                Content = tc.Result ?? "",
-                                Timestamp = msg.Timestamp,
-                            });
-                        }
-                        break;
-                    case ConversationRole.Visualization:
-                        messages.Add(new ChatSessionMessage
-                        {
-                            Role = "visualization",
-                            VisualizationType = msg.VisualizationType,
-                            VisualizationData = msg.VisualizationType switch
-                            {
-                                "chart" => JsonSerializer.Serialize(msg.ChartDescriptor, JsonOpts),
-                                "graph" => JsonSerializer.Serialize(msg.GraphDescriptor, JsonOpts),
-                                "table" => JsonSerializer.Serialize(msg.TableDescriptor, JsonOpts),
-                                "data_table" => JsonSerializer.Serialize(msg.DataTableDescriptor, JsonOpts),
-                                "timeline" => JsonSerializer.Serialize(msg.TimelineDescriptor, JsonOpts),
-                                "infobox" => JsonSerializer.Serialize(msg.InfoboxDescriptor, JsonOpts),
-                                "text" => JsonSerializer.Serialize(msg.TextDescriptor, JsonOpts),
-                                _ => null,
-                            },
-                            Timestamp = msg.Timestamp,
-                        });
-                        break;
-                    case ConversationRole.Error:
-                        messages.Add(new ChatSessionMessage
-                        {
-                            Role = "error",
-                            Content = msg.Text ?? "",
-                            Timestamp = msg.Timestamp,
-                        });
-                        break;
+                    await Http.PutAsJsonAsync($"api/ChatSessions/{_currentSessionId}", body);
+                    await ChatHistory.LoadAsync();
                 }
-            }
-
-            var body = new SaveChatSessionRequest { Title = title, Messages = messages };
-
-            if (_currentSessionId is not null)
-            {
-                // Update existing session
-                await Http.PutAsJsonAsync($"api/ChatSessions/{_currentSessionId}", body);
-                await ChatHistory.LoadAsync();
+                else
+                {
+                    var response = await Http.PostAsJsonAsync("api/ChatSessions", body);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        _currentSessionId = await response.Content.ReadFromJsonAsync<Guid>();
+                        ChatHistory.ActiveSessionId = _currentSessionId;
+                        await ChatHistory.LoadAsync();
+                    }
+                }
             }
             else
             {
-                // Create new session
-                var response = await Http.PostAsJsonAsync("api/ChatSessions", body);
-                if (response.IsSuccessStatusCode)
+                // Anonymous: save to localStorage
+                var isNew = _currentSessionId is null;
+                _currentSessionId ??= Guid.NewGuid();
+                if (string.IsNullOrEmpty(title))
                 {
-                    _currentSessionId = await response.Content.ReadFromJsonAsync<Guid>();
-                    ChatHistory.ActiveSessionId = _currentSessionId;
-                    await ChatHistory.LoadAsync();
+                    // Existing session — preserve original title
+                    var existing = await ChatHistory.LoadLocalSessionAsync(_currentSessionId.Value);
+                    title = existing?.Title ?? ChatHistoryService.FallbackTitle(userPrompt);
                 }
+                await ChatHistory.SaveLocalSessionAsync(_currentSessionId.Value, title, messages);
+                ChatHistory.ActiveSessionId = _currentSessionId;
             }
         }
         catch { }
+    }
+
+    private List<ChatSessionMessage> BuildSessionMessages()
+    {
+        var messages = new List<ChatSessionMessage>();
+
+        foreach (var msg in _conversation)
+        {
+            switch (msg.Role)
+            {
+                case ConversationRole.User:
+                    messages.Add(new ChatSessionMessage
+                    {
+                        Role = "user",
+                        Content = msg.Text ?? "",
+                        Timestamp = msg.Timestamp,
+                    });
+                    break;
+                case ConversationRole.Assistant:
+                    messages.Add(new ChatSessionMessage
+                    {
+                        Role = "assistant",
+                        Content = msg.Text ?? "",
+                        Timestamp = msg.Timestamp,
+                    });
+                    break;
+                case ConversationRole.ToolGroup:
+                    foreach (var tc in msg.ToolCalls ?? [])
+                    {
+                        messages.Add(new ChatSessionMessage
+                        {
+                            Role = "tool",
+                            ToolName = tc.ToolName,
+                            ToolCallId = tc.CallId,
+                            ToolCallArgs = tc.Arguments,
+                            Content = tc.Result ?? "",
+                            Timestamp = msg.Timestamp,
+                        });
+                    }
+                    break;
+                case ConversationRole.Visualization:
+                    messages.Add(new ChatSessionMessage
+                    {
+                        Role = "visualization",
+                        VisualizationType = msg.VisualizationType,
+                        VisualizationData = msg.VisualizationType switch
+                        {
+                            "chart" => JsonSerializer.Serialize(msg.ChartDescriptor, JsonOpts),
+                            "graph" => JsonSerializer.Serialize(msg.GraphDescriptor, JsonOpts),
+                            "table" => JsonSerializer.Serialize(msg.TableDescriptor, JsonOpts),
+                            "data_table" => JsonSerializer.Serialize(msg.DataTableDescriptor, JsonOpts),
+                            "timeline" => JsonSerializer.Serialize(msg.TimelineDescriptor, JsonOpts),
+                            "infobox" => JsonSerializer.Serialize(msg.InfoboxDescriptor, JsonOpts),
+                            "text" => JsonSerializer.Serialize(msg.TextDescriptor, JsonOpts),
+                            _ => null,
+                        },
+                        Timestamp = msg.Timestamp,
+                    });
+                    break;
+                case ConversationRole.Error:
+                    messages.Add(new ChatSessionMessage
+                    {
+                        Role = "error",
+                        Content = msg.Text ?? "",
+                        Timestamp = msg.Timestamp,
+                    });
+                    break;
+            }
+        }
+
+        return messages;
     }
 
     private async Task LoadSession(Guid sessionId)
@@ -1202,19 +1264,32 @@
 
         try
         {
-            var response = await Http.GetAsync($"api/ChatSessions/{sessionId}");
+            List<ChatSessionMessage>? sessionMessages = null;
 
-            if (response.IsSuccessStatusCode)
+            if (_isAuthenticated)
             {
-                var session = await response.Content.ReadFromJsonAsync<ChatSessionDetail>(JsonOpts);
-                if (session is not null)
+                var response = await Http.GetAsync($"api/ChatSessions/{sessionId}");
+                if (response.IsSuccessStatusCode)
                 {
-                    _currentSessionId = session.Id;
-                    ChatHistory.ActiveSessionId = session.Id;
+                    var session = await response.Content.ReadFromJsonAsync<ChatSessionDetail>(JsonOpts);
+                    sessionMessages = session?.Messages;
+                }
+            }
+            else
+            {
+                var local = await ChatHistory.LoadLocalSessionAsync(sessionId);
+                sessionMessages = local?.Messages;
+            }
+
+            if (sessionMessages is not null)
+            {
+                {
+                    _currentSessionId = sessionId;
+                    ChatHistory.ActiveSessionId = sessionId;
                     _model.Prompt = "";
 
                     // Rebuild conversation display and AGUI replay from saved messages
-                    foreach (var msg in session.Messages)
+                    foreach (var msg in sessionMessages)
                     {
                         switch (msg.Role)
                         {
@@ -1326,6 +1401,10 @@
                         }
                     }
                 }
+            }
+            else
+            {
+                _conversation.Add(new ConversationMessage { Role = ConversationRole.Error, Text = "Chat session not found. It may have been deleted or belongs to a different account." });
             }
         }
         catch (Exception ex)

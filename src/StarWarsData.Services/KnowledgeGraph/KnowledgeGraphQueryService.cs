@@ -304,10 +304,12 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         string? realm = null,
         int? yearFrom = null,
         int? yearTo = null,
+        int maxNodes = 200,
         CancellationToken ct = default
     )
     {
         maxDepth = Math.Clamp(maxDepth, 1, 4);
+        maxNodes = Math.Clamp(maxNodes, 10, 1000);
         var edgesRaw = _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges);
 
         // Optional temporal window filter: keep only edges whose [fromYear, toYear] interval
@@ -451,7 +453,8 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         var allEdges = new List<(int from, string fromName, int to, string toName, string label, double weight, int? fromYear, int? toYear)>();
         var frontier = new HashSet<int> { pageId };
 
-        for (var depth = 0; depth < maxDepth && frontier.Count > 0; depth++)
+        var truncated = false;
+        for (var depth = 0; depth < maxDepth && frontier.Count > 0 && !truncated; depth++)
         {
             // ── Outgoing edges (frontier node is the source) ──
             var outFilter = Builders<BsonDocument>.Filter.In(RelationshipEdgeBsonFields.FromId, frontier);
@@ -464,7 +467,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             if (outRealmFilter is not null)
                 outFilter &= outRealmFilter;
 
-            var outEdges = await edgesRaw.Find(outFilter).Limit(500).ToListAsync(ct);
+            var outEdges = await edgesRaw.Find(outFilter).Limit(200).ToListAsync(ct);
 
             // ── Inbound edges (frontier node is the target) ──
             // Rewritten at read time: we flip from/to and map the label to its reverse,
@@ -479,7 +482,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             if (inRealmFilter is not null)
                 inFilter &= inRealmFilter;
 
-            var inEdges = await edgesRaw.Find(inFilter).Limit(500).ToListAsync(ct);
+            var inEdges = await edgesRaw.Find(inFilter).Limit(200).ToListAsync(ct);
 
             var nextFrontier = new HashSet<int>();
 
@@ -501,8 +504,10 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                     )
                 );
 
-                if (visited.Add(toId))
+                if (visited.Count < maxNodes && visited.Add(toId))
                     nextFrontier.Add(toId);
+                else if (visited.Count >= maxNodes)
+                    truncated = true;
             }
 
             foreach (var e in inEdges)
@@ -534,15 +539,20 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                     )
                 );
 
-                if (visited.Add(origFromId))
+                if (visited.Count < maxNodes && visited.Add(origFromId))
                     nextFrontier.Add(origFromId);
+                else if (visited.Count >= maxNodes)
+                    truncated = true;
             }
 
             frontier = nextFrontier;
         }
 
+        // Filter edges to only include those where both endpoints are in the visited set
+        var filteredEdges = allEdges.Where(e => visited.Contains(e.from) && visited.Contains(e.to)).DistinctBy(e => (e.from, e.to, e.label)).ToList();
+
         var rootNode = await _nodes.Find(n => n.PageId == pageId).FirstOrDefaultAsync(ct);
-        var nodeIds = allEdges.SelectMany(e => new[] { e.from, e.to }).Distinct().ToList();
+        var nodeIds = visited.ToList();
         var nodeDocs = await _nodes.Find(Builders<GraphNode>.Filter.In(n => n.PageId, nodeIds)).ToListAsync(ct);
         var nodeMap = nodeDocs.ToDictionary(n => n.PageId);
 
@@ -563,21 +573,19 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             }
             else
             {
-                var edge = allEdges.First(e => e.to == id);
+                var edge = filteredEdges.FirstOrDefault(e => e.to == id || e.from == id);
                 resultNodes.Add(
                     new RelationshipGraphNode
                     {
                         Id = id,
-                        Name = edge.toName,
+                        Name = edge.to == id ? edge.toName : edge.fromName,
                         Type = "",
                     }
                 );
             }
         }
 
-        var resultEdges = allEdges
-            .DistinctBy(e => (e.from, e.to, e.label))
-            .Take(200)
+        var resultEdges = filteredEdges
             .Select(e => new RelationshipGraphEdge
             {
                 FromId = e.from,
@@ -595,6 +603,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             RootName = rootNode?.Name ?? $"#{pageId}",
             Nodes = resultNodes,
             Edges = resultEdges,
+            Truncated = truncated,
         };
     }
 
@@ -614,6 +623,39 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
 
     /// <summary>Get a single node by PageId.</summary>
     public Task<GraphNode?> GetNodeByIdAsync(int pageId, CancellationToken ct = default) => _nodes.Find(n => n.PageId == pageId).FirstOrDefaultAsync(ct)!;
+
+    /// <summary>
+    /// Batch-load a summary of properties for multiple nodes by PageId.
+    /// Returns a dictionary of PageId → top properties (first value per key, up to 8 keys).
+    /// Used to enrich relationship results so the agent doesn't need N follow-up calls.
+    /// </summary>
+    public async Task<Dictionary<int, Dictionary<string, string>>> GetNodePropertiesBatchAsync(List<int> pageIds, CancellationToken ct = default)
+    {
+        if (pageIds.Count == 0)
+            return [];
+
+        var filter = Builders<GraphNode>.Filter.In(n => n.PageId, pageIds);
+        var nodes = await _nodes.Find(filter).Project(n => new { n.PageId, n.Properties }).ToListAsync(ct);
+
+        var result = new Dictionary<int, Dictionary<string, string>>();
+        foreach (var node in nodes)
+        {
+            if (node.Properties is null || node.Properties.Count == 0)
+                continue;
+
+            var summary = new Dictionary<string, string>();
+            foreach (var kvp in node.Properties.Take(8))
+            {
+                var val = kvp.Value?.FirstOrDefault();
+                if (!string.IsNullOrEmpty(val))
+                    summary[kvp.Key] = val.Length > 100 ? val[..100] + "…" : val;
+            }
+            if (summary.Count > 0)
+                result[node.PageId] = summary;
+        }
+
+        return result;
+    }
 
     /// <summary>Find nodes by temporal range with optional semantic dimension filter.</summary>
     public async Task<List<GraphNode>> FindNodesByYearAsync(int year, string type, int? yearEnd, string? continuity, string? semantic, int limit, CancellationToken ct = default)
@@ -960,6 +1002,32 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
     /// Count nodes grouped by a property value.
     /// E.g. "Characters grouped by species" or "Starships grouped by manufacturer".
     /// </summary>
+    public async Task<List<BsonDocument>> CountNodesByPropertiesAsync(string entityType, List<string> properties, string? continuity, bool includeExample, int limit, CancellationToken ct = default)
+    {
+        limit = Math.Clamp(limit, 1, 50);
+
+        var match = new BsonDocument(GraphNodeBsonFields.Type, entityType);
+        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+            match[GraphNodeBsonFields.Continuity] = cont.ToString();
+
+        // Build $group _id from multiple properties
+        var groupId = new BsonDocument();
+        foreach (var prop in properties)
+            groupId[prop] = new BsonDocument("$ifNull", new BsonArray { $"$properties.{prop}", "Unknown" });
+
+        var group = new BsonDocument { [MongoFields.Id] = groupId, ["count"] = new BsonDocument("$sum", 1) };
+
+        if (includeExample)
+        {
+            group["exampleTitle"] = new BsonDocument("$first", "$title");
+            group["examplePageId"] = new BsonDocument("$first", "$pageId");
+        }
+
+        var pipeline = new List<BsonDocument> { new("$match", match), new("$group", group), new("$sort", new BsonDocument("count", -1)), new("$limit", limit) };
+
+        return await _nodes.Database.GetCollection<BsonDocument>(Collections.KgNodes).Aggregate<BsonDocument>(pipeline.ToArray()).ToListAsync(ct);
+    }
+
     public async Task<List<(string value, int count)>> CountNodesByPropertyAsync(string entityType, string property, string? continuity, int limit, CancellationToken ct = default)
     {
         limit = Math.Clamp(limit, 1, 50);

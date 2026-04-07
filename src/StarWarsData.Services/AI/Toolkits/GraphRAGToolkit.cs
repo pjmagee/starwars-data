@@ -21,6 +21,7 @@ public class GraphRAGToolkit
 {
     readonly KnowledgeGraphQueryService _kg;
     readonly SemanticSearchService _search;
+    readonly IMongoCollection<GraphNode> _nodesCollection;
     readonly IMongoCollection<GalaxyYearDocument> _galaxyYears;
     readonly IMongoCollection<BsonDocument> _galaxyYearsRaw;
 
@@ -31,6 +32,7 @@ public class GraphRAGToolkit
         _kg = kg;
         _search = search;
         var db = mongoClient.GetDatabase(databaseName);
+        _nodesCollection = db.GetCollection<GraphNode>(Collections.KgNodes);
         _galaxyYears = db.GetCollection<GalaxyYearDocument>(Collections.GalaxyYears);
         _galaxyYearsRaw = db.GetCollection<BsonDocument>(Collections.GalaxyYears);
     }
@@ -102,28 +104,45 @@ public class GraphRAGToolkit
 
     [Description(
         """
-            Get properties (attributes) of a knowledge graph entity — height, eye color, classification, etc.
-            Use for factual questions about an entity's characteristics. Call search_entities first to get the PageId.
+            Get properties (attributes) of one or more knowledge graph entities — height, eye color, classification, etc.
+            Accepts a single PageId or a comma-separated list of PageIds for batch lookups (max 20).
+            Use for factual questions about entity characteristics. Call search_entities first to get PageIds.
+            ALWAYS pass multiple IDs in one call rather than calling this function multiple times.
             """
     )]
-    public async Task<KgNodeDetailDto> GetEntityProperties([Description("The PageId of the entity (from search_entities)")] int entityId)
+    public async Task<List<KgNodeDetailDto>> GetEntityProperties([Description("Comma-separated PageIds (e.g. '12345' or '12345,67890,11111'). Max 20.")] string entityIds)
     {
-        var node = await _kg.GetNodeByIdAsync(entityId);
-        if (node is null)
-            return new KgNodeDetailDto(null, null, null, null, null, null, null, null, null, null, Error: "Entity not found in knowledge graph.");
+        var ids = entityIds
+            .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .Select(s => int.TryParse(s, out var id) ? id : (int?)null)
+            .Where(id => id.HasValue)
+            .Select(id => id!.Value)
+            .Take(20)
+            .ToList();
 
-        return new KgNodeDetailDto(
-            PageId: node.PageId,
-            Name: node.Name,
-            Type: node.Type,
-            Continuity: node.Continuity.ToString(),
-            Properties: node.Properties,
-            StartYear: node.StartYear,
-            EndYear: node.EndYear,
-            TemporalFacets: node.TemporalFacets.Select(f => ToFacetDto(f, includeOrder: true)).ToList(),
-            ImageUrl: node.ImageUrl,
-            WikiUrl: node.WikiUrl
-        );
+        if (ids.Count == 0)
+            return [new KgNodeDetailDto(null, null, null, null, null, null, null, null, null, null, Error: "No valid PageIds provided.")];
+
+        var filter = Builders<GraphNode>.Filter.In(n => n.PageId, ids);
+        var nodes = await _nodesCollection.Find(filter).ToListAsync();
+
+        if (nodes.Count == 0)
+            return [new KgNodeDetailDto(null, null, null, null, null, null, null, null, null, null, Error: "No entities found in knowledge graph.")];
+
+        return nodes
+            .Select(node => new KgNodeDetailDto(
+                PageId: node.PageId,
+                Name: node.Name,
+                Type: node.Type,
+                Continuity: node.Continuity.ToString(),
+                Properties: node.Properties,
+                StartYear: node.StartYear,
+                EndYear: node.EndYear,
+                TemporalFacets: node.TemporalFacets.Select(f => ToFacetDto(f, includeOrder: true)).ToList(),
+                ImageUrl: node.ImageUrl,
+                WikiUrl: node.WikiUrl
+            ))
+            .ToList();
     }
 
     [Description(
@@ -155,9 +174,22 @@ public class GraphRAGToolkit
                 Note: "No relationships found (outgoing or inbound). The entity may not have been processed, or the label filter excluded everything."
             );
 
+        // Batch-load target node properties so the agent doesn't need N follow-up calls
+        var targetIds = edges.Select(e => e.ToId).Distinct().ToList();
+        var targetProps = await _kg.GetNodePropertiesBatchAsync(targetIds);
+
         var grouped = edges
             .GroupBy(e => e.Label)
-            .ToDictionary(g => g.Key, g => g.Select(e => new RelationshipTargetDto(e.ToId, e.ToName, e.ToType, Math.Round(e.Weight, 2), Truncate(e.Evidence, 200))).ToList());
+            .ToDictionary(
+                g => g.Key,
+                g =>
+                    g.Select(e =>
+                        {
+                            targetProps.TryGetValue(e.ToId, out var props);
+                            return new RelationshipTargetDto(e.ToId, e.ToName, e.ToType, Math.Round(e.Weight, 2), Truncate(e.Evidence, 200), props);
+                        })
+                        .ToList()
+            );
 
         return new EntityRelationshipsDto(EntityId: entityId, EntityName: edges[0].FromName, Relationships: grouped, TotalEdges: edges.Count);
     }
@@ -380,32 +412,49 @@ public class GraphRAGToolkit
 
     [Description(
         """
-            Get the full temporal lifecycle of an entity with rich semantic facets.
+            Get the full temporal lifecycle of one or more entities with rich semantic facets.
+            Accepts a single PageId or comma-separated PageIds (max 10).
             Returns all temporal data points: birth/death for characters,
             established/dissolved/reorganized/restored/fragmented for institutions,
             beginning/end for conflicts, constructed/destroyed for structures, release dates for publications.
             Each facet includes the semantic dimension, calendar system, parsed year, and original text.
+            ALWAYS pass multiple IDs in one call rather than calling this function multiple times.
             Use for 'When was the Galactic Republic reorganized?', 'When did Yoda die?'.
             """
     )]
-    public async Task<EntityTimelineDto> GetEntityTimeline([Description("The PageId of the entity")] int entityId)
+    public async Task<List<EntityTimelineDto>> GetEntityTimeline([Description("Comma-separated PageIds (e.g. '12345' or '12345,67890'). Max 10.")] string entityIds)
     {
-        var node = await _kg.GetNodeByIdAsync(entityId);
-        if (node is null)
-            return new EntityTimelineDto(null, null, null, null, null, null, null, null, null, null, Error: "Entity not found.");
+        var ids = entityIds
+            .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .Select(s => int.TryParse(s, out var id) ? id : (int?)null)
+            .Where(id => id.HasValue)
+            .Select(id => id!.Value)
+            .Take(10)
+            .ToList();
 
-        return new EntityTimelineDto(
-            PageId: node.PageId,
-            Name: node.Name,
-            Type: node.Type,
-            Continuity: node.Continuity.ToString(),
-            Realm: node.Realm.ToString(),
-            StartYear: node.StartYear,
-            EndYear: node.EndYear,
-            Duration: node.StartYear.HasValue && node.EndYear.HasValue ? $"{Math.Abs(node.EndYear.Value - node.StartYear.Value)} years" : null,
-            WikiUrl: node.WikiUrl,
-            TemporalFacets: node.TemporalFacets.OrderBy(f => f.Order).Select(f => ToFacetDto(f, includeOrder: true)).ToList()
-        );
+        if (ids.Count == 0)
+            return [new EntityTimelineDto(null, null, null, null, null, null, null, null, null, null, Error: "No valid PageIds provided.")];
+
+        var filter = Builders<GraphNode>.Filter.In(n => n.PageId, ids);
+        var nodes = await _nodesCollection.Find(filter).ToListAsync();
+
+        if (nodes.Count == 0)
+            return [new EntityTimelineDto(null, null, null, null, null, null, null, null, null, null, Error: "No entities found.")];
+
+        return nodes
+            .Select(node => new EntityTimelineDto(
+                PageId: node.PageId,
+                Name: node.Name,
+                Type: node.Type,
+                Continuity: node.Continuity.ToString(),
+                Realm: node.Realm.ToString(),
+                StartYear: node.StartYear,
+                EndYear: node.EndYear,
+                Duration: node.StartYear.HasValue && node.EndYear.HasValue ? $"{Math.Abs(node.EndYear.Value - node.StartYear.Value)} years" : null,
+                WikiUrl: node.WikiUrl,
+                TemporalFacets: node.TemporalFacets.OrderBy(f => f.Order).Select(f => ToFacetDto(f, includeOrder: true)).ToList()
+            ))
+            .ToList();
     }
 
     [Description(

@@ -3,10 +3,29 @@
 @using System.Web
 @inject IHttpClientFactory HttpClientFactory
 @inject GlobalFilterService GlobalFilterService
-@implements IDisposable
+@inject IJSRuntime JS
+@implements IAsyncDisposable
 
-<MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
-    <MudText Typo="Typo.h6" Class="mb-2">@Descriptor.Title</MudText>
+<MudPaper Outlined="true" Class="@PaperClass" Style="width:100%">
+
+    @* ── Header ── *@
+    <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-2">
+        <MudText Typo="Typo.h6">@Descriptor.Title</MudText>
+        <MudSpacer />
+        @if (_pagedResult is not null)
+        {
+            <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mr-2">
+                @_pagedResult.Total.ToString("N0") events
+            </MudText>
+            <MudTooltip Text="@(_maximized ? "Exit fullscreen" : "Fullscreen")">
+                <MudIconButton Icon="@(_maximized ? Icons.Material.Filled.FullscreenExit : Icons.Material.Filled.Fullscreen)"
+                               Size="Size.Small"
+                               Variant="Variant.Outlined"
+                               OnClick="ToggleFullscreen" />
+            </MudTooltip>
+        }
+    </MudStack>
+
     @if (Descriptor.YearFrom is not null || !string.IsNullOrEmpty(Descriptor.Search))
     {
         <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-3">
@@ -28,7 +47,7 @@
         </MudText>
     }
 
-    @if (_loading)
+    @if (_loading && _allItems.Count == 0)
     {
         <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="pa-4">
             <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" />
@@ -50,14 +69,18 @@
             }
         </MudStack>
 
-        <MudPagination @bind-Selected="CurrentPage" ShowFirstButton="true" ShowLastButton="true" Count="_pages" Class="ma-4" />
+        @if (!_maximized)
+        {
+            <MudPagination @bind-Selected="CurrentPage" ShowFirstButton="true" ShowLastButton="true" Count="_pages" Class="ma-4" />
+        }
 
         <MudTimeline TimelineOrientation="TimelineOrientation.Vertical" TimelineAlign="TimelineAlign.Default" TimelinePosition="TimelinePosition.Alternate" Class="ma-4" Modifiers="false">
             @{
                 var isStart = true;
+                var items = _maximized ? _allItems : (_pagedResult.Items?.ToList() ?? []);
             }
 
-            @foreach (var group in _pagedResult.Items)
+            @foreach (var group in items)
             {
                 var contentAlign = isStart ? Align.Left : Align.Right;
                 var yearAlign = isStart ? Align.Right : Align.Left;
@@ -104,7 +127,28 @@
             }
         </MudTimeline>
 
-        <MudPagination @bind-Selected="CurrentPage" ShowFirstButton="true" ShowLastButton="true" Count="_pages" Class="ma-4" />
+        @if (!_maximized)
+        {
+            <MudPagination @bind-Selected="CurrentPage" ShowFirstButton="true" ShowLastButton="true" Count="_pages" Class="ma-4" />
+        }
+
+        @* ── Infinite scroll sentinel (fullscreen only) ── *@
+        @if (_maximized && _hasMore)
+        {
+            <div @ref="_sentinel" class="d-flex justify-center pa-4">
+                @if (_loadingMore)
+                {
+                    <MudProgressCircular Size="Size.Small" Color="Color.Primary" Indeterminate="true" />
+                    <MudText Typo="Typo.caption" Class="ml-2">Loading more events...</MudText>
+                }
+            </div>
+        }
+        else if (_maximized && _allItems.Count > 0 && !_hasMore)
+        {
+            <MudText Typo="Typo.caption" Color="Color.Secondary" Align="Align.Center" Class="pa-4">
+                All @_pagedResult.Total.ToString("N0") events loaded
+            </MudText>
+        }
     }
     else
     {
@@ -112,6 +156,25 @@
     }
     <AskReferencesSection References="@Descriptor.References" />
 </MudPaper>
+
+@if (_maximized)
+{
+    <MudFab Color="Color.Tertiary"
+            StartIcon="@Icons.Material.Filled.ArrowCircleUp"
+            Style="position: fixed; bottom: 32px; right: 32px; z-index: 1400;"
+            OnClick="ScrollToTop" />
+}
+
+<style>
+    .ask-timeline-maximized {
+        position: fixed;
+        inset: 0;
+        z-index: 1300;
+        background: var(--mud-palette-background);
+        overflow-y: auto;
+        padding: 24px;
+    }
+</style>
 
 @code {
     [Parameter, EditorRequired]
@@ -123,6 +186,7 @@
     private string? _error;
     private int _pages;
 
+    // Pagination mode (inline)
     private int _currentPage = 1;
     private int CurrentPage
     {
@@ -136,6 +200,17 @@
             }
         }
     }
+
+    // Fullscreen + infinite scroll state
+    private bool _maximized;
+    private List<GroupedTimelines> _allItems = [];
+    private bool _hasMore;
+    private bool _loadingMore;
+    private ElementReference _sentinel;
+    private IJSObjectReference? _jsModule;
+    private DotNetObjectReference<AskTimelineView>? _dotNetRef;
+
+    private string PaperClass => _maximized ? "ask-timeline-maximized" : "pa-4 mt-4";
 
     private readonly Dictionary<string, string> _templateColorMap = new();
 
@@ -160,18 +235,106 @@
         _loading = true;
         _error = null;
         _pagedResult = null;
+        _allItems.Clear();
         StateHasChanged();
         await LoadData();
     }
 
-    public void Dispose()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _jsModule = await JS.InvokeAsync<IJSObjectReference>("import", "./js/infinite-scroll.js");
+            _dotNetRef = DotNetObjectReference.Create(this);
+        }
+
+        if (_maximized && _hasMore && !_loadingMore && _jsModule is not null && _dotNetRef is not null)
+        {
+            try
+            {
+                await _jsModule.InvokeVoidAsync("observe", _sentinel, _dotNetRef);
+            }
+            catch (JSException) { }
+        }
+    }
+
+    public async ValueTask DisposeAsync()
     {
         GlobalFilterService.OnChange -= OnFilterChanged;
+
+        if (_jsModule is not null)
+        {
+            try
+            {
+                await _jsModule.InvokeVoidAsync("dispose", _sentinel);
+                await _jsModule.DisposeAsync();
+            }
+            catch (JSDisconnectedException) { }
+        }
+
+        _dotNetRef?.Dispose();
+    }
+
+    [JSInvokable]
+    public async Task OnSentinelVisible()
+    {
+        if (_loadingMore || !_hasMore || !_maximized) return;
+
+        _loadingMore = true;
+        await InvokeAsync(StateHasChanged);
+
+        try
+        {
+            _currentPage++;
+            var result = await FetchPage(_currentPage);
+
+            if (result?.Items.Any() == true)
+            {
+                MergeItems(result.Items);
+                _hasMore = _currentPage < _pages;
+            }
+            else
+            {
+                _hasMore = false;
+            }
+        }
+        finally
+        {
+            _loadingMore = false;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private async Task ToggleFullscreen()
+    {
+        _maximized = !_maximized;
+
+        if (_maximized)
+        {
+            // Entering fullscreen: reset to page 1 and load with infinite scroll
+            _currentPage = 1;
+            _allItems.Clear();
+            await LoadData();
+        }
+        else
+        {
+            // Exiting fullscreen: reset to page 1 pagination view
+            _currentPage = 1;
+            _allItems.Clear();
+            _hasMore = false;
+            await LoadData();
+        }
+    }
+
+    private async Task ScrollToTop()
+    {
+        await JS.InvokeVoidAsync("eval", "document.querySelector('.ask-timeline-maximized')?.scrollTo({top: 0, behavior: 'smooth'})");
     }
 
     private async void OnFilterChanged()
     {
         _currentPage = 1;
+        _allItems.Clear();
         await LoadData();
         await InvokeAsync(StateHasChanged);
     }
@@ -201,35 +364,8 @@
 
         try
         {
-            var query = HttpUtility.ParseQueryString(string.Empty);
-            query.Add("Page", _currentPage.ToString());
-            query.Add("PageSize", Descriptor.PageSize.ToString());
-
-            foreach (var cat in Descriptor.Categories)
-                query.Add("Categories", cat);
-
-            var continuity = GlobalFilterService.GetContinuityQueryParam();
-            if (!string.IsNullOrEmpty(continuity))
-                query.Add("continuity", continuity);
-
-            var realm = GlobalFilterService.GetRealmQueryParam();
-            if (!string.IsNullOrEmpty(realm))
-                query.Add("realm", realm);
-
-            if (Descriptor.YearFrom is not null)
-                query.Add("YearFrom", Descriptor.YearFrom.Value.ToString());
-            if (!string.IsNullOrEmpty(Descriptor.YearFromDemarcation))
-                query.Add("YearFromDemarcation", Descriptor.YearFromDemarcation);
-            if (Descriptor.YearTo is not null)
-                query.Add("YearTo", Descriptor.YearTo.Value.ToString());
-            if (!string.IsNullOrEmpty(Descriptor.YearToDemarcation))
-                query.Add("YearToDemarcation", Descriptor.YearToDemarcation);
-            if (!string.IsNullOrEmpty(Descriptor.Search))
-                query.Add("Search", Descriptor.Search);
-            if (!string.IsNullOrEmpty(Descriptor.Calendar))
-                query.Add("Calendar", Descriptor.Calendar);
-
-            _pagedResult = await Http.GetFromJsonAsync<GroupedTimelineResult>($"Timeline/events?{query}");
+            var result = await FetchPage(_currentPage);
+            _pagedResult = result;
 
             _pages = (_pagedResult is { Total: > 0, Size: > 0 })
                 ? (int)Math.Ceiling((double)_pagedResult.Total / _pagedResult.Size)
@@ -241,6 +377,12 @@
                 await LoadData();
                 return;
             }
+
+            if (_maximized && result?.Items.Any() == true)
+            {
+                MergeItems(result.Items);
+                _hasMore = _currentPage < _pages;
+            }
         }
         catch (Exception ex)
         {
@@ -250,6 +392,55 @@
         {
             _loading = false;
             await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private async Task<GroupedTimelineResult?> FetchPage(int page)
+    {
+        var query = HttpUtility.ParseQueryString(string.Empty);
+        query.Add("Page", page.ToString());
+        query.Add("PageSize", Descriptor.PageSize.ToString());
+
+        foreach (var cat in Descriptor.Categories)
+            query.Add("Categories", cat);
+
+        var continuity = GlobalFilterService.GetContinuityQueryParam();
+        if (!string.IsNullOrEmpty(continuity))
+            query.Add("continuity", continuity);
+
+        var realm = GlobalFilterService.GetRealmQueryParam();
+        if (!string.IsNullOrEmpty(realm))
+            query.Add("realm", realm);
+
+        if (Descriptor.YearFrom is not null)
+            query.Add("YearFrom", Descriptor.YearFrom.Value.ToString());
+        if (!string.IsNullOrEmpty(Descriptor.YearFromDemarcation))
+            query.Add("YearFromDemarcation", Descriptor.YearFromDemarcation);
+        if (Descriptor.YearTo is not null)
+            query.Add("YearTo", Descriptor.YearTo.Value.ToString());
+        if (!string.IsNullOrEmpty(Descriptor.YearToDemarcation))
+            query.Add("YearToDemarcation", Descriptor.YearToDemarcation);
+        if (!string.IsNullOrEmpty(Descriptor.Search))
+            query.Add("Search", Descriptor.Search);
+        if (!string.IsNullOrEmpty(Descriptor.Calendar))
+            query.Add("Calendar", Descriptor.Calendar);
+
+        return await Http.GetFromJsonAsync<GroupedTimelineResult>($"Timeline/events?{query}");
+    }
+
+    private void MergeItems(IEnumerable<GroupedTimelines> newItems)
+    {
+        foreach (var group in newItems)
+        {
+            var existing = _allItems.LastOrDefault();
+            if (existing is not null && existing.Year == group.Year)
+            {
+                existing.Events.AddRange(group.Events);
+            }
+            else
+            {
+                _allItems.Add(group);
+            }
         }
     }
 

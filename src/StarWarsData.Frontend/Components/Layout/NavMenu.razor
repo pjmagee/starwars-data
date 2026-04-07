@@ -4,14 +4,7 @@
 
 <MudNavMenu>
     <MudText Typo="Typo.caption" Class="px-4 pt-3 pb-1" Color="Color.Secondary">Chat</MudText>
-    <AuthorizeView>
-        <Authorized>
-            <ChatHistoryNav />
-        </Authorized>
-        <NotAuthorized>
-            <MudNavLink Href="/ask" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.AutoAwesome">Ask AI</MudNavLink>
-        </NotAuthorized>
-    </AuthorizeView>
+    <ChatHistoryNav />
 
     <MudDivider Class="my-2" />
     <MudText Typo="Typo.caption" Class="px-4 pt-1 pb-1" Color="Color.Secondary">Explore</MudText>

@@ -66,14 +66,25 @@
         if (AuthState is not null)
         {
             var state = await AuthState;
-            if (state.User.Identity?.IsAuthenticated == true)
+            var isAuth = state.User.Identity?.IsAuthenticated == true;
+            ChatHistory.SetAuthenticated(isAuth);
+
+            if (isAuth)
             {
                 _userId = state.User.FindFirst("sub")?.Value
                           ?? state.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
-
-                await ChatHistory.EnsureLoadedAsync();
-                _sessions = ChatHistory.Sessions;
             }
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // JS interop is only available after first render (Blazor Server)
+            await ChatHistory.EnsureLoadedAsync();
+            _sessions = ChatHistory.Sessions;
+            StateHasChanged();
         }
     }
 

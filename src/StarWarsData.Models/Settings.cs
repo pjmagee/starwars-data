@@ -48,6 +48,17 @@ public class SettingsOptions
     // All app data + Hangfire live in one database.
     // Hangfire collections are namespaced via its Prefix option (default "hangfire").
 
+    // ── Rate Limiting ──
+
+    /// <summary>Rate limit for anonymous users (requests per window). 0 = unlimited.</summary>
+    public int RateLimitAnonymous { get; set; } = 3;
+
+    /// <summary>Rate limit for authenticated users without BYOK (requests per window). 0 = unlimited.</summary>
+    public int RateLimitAuthenticated { get; set; } = 10;
+
+    /// <summary>Rate limit sliding window duration in minutes.</summary>
+    public int RateLimitWindowMinutes { get; set; } = 30;
+
     /// <summary>Single unified database for all collections (app data + Hangfire).</summary>
     /// <remarks>Defaults to dev — production overrides via appsettings or env var Settings__DatabaseName.</remarks>
     public string DatabaseName { get; set; } = "starwars-dev";

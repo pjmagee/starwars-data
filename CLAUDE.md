@@ -105,6 +105,20 @@ Test fixtures: `ApiFixture` (shared MongoDB container with seed data for most te
 - Controllers under `ApiService/Features/<Feature>/` and `Admin/Features/<Feature>/` follow `[Route("api/[controller]")]` pattern
 - Frontend pages under `Frontend/Components/Pages/`, shared components under `Frontend/Components/Shared/`
 
+### Global Filter
+
+The Frontend has a global filter bar (continuity: Canon/Legends, realm: Star Wars/Real) managed by `GlobalFilterService`. **Every page and component that queries the API must respect the global filter** by subscribing to `GlobalFilterService.OnChange` and passing the filter values via `GetContinuityQueryParam()` / `GetRealmQueryParam()` to API calls. When the filter changes, active queries and data must be refreshed.
+
+### Continuity Color Convention
+
+Continuity chips and badges **must** use MudBlazor theme colors consistently:
+
+- `Continuity.Canon` → `Color.Primary`
+- `Continuity.Legends` → `Color.Secondary`
+- Everything else → `Color.Default`
+
+Do not use `Color.Info`, `Color.Warning`, or other colors for continuity. This matches the `ContinuityFilter` toggle switches and `ContinuityBadge` component. See `ContinuityBadge.razor` and `ContinuityFilter.razor` as canonical references.
+
 ## Library Deviations
 
 **Rule: standard library components are the default.** Third-party libraries in this repo (MudBlazor for UI, MudBlazor theming, MongoDB.Driver, Microsoft.Extensions.AI, Microsoft.Agents.AI, Hangfire, etc.) should be used via their public APIs. If the first instinct is to roll custom HTML/CSS, a custom abstraction, or a wrapper that bypasses the library's intended usage, **stop and reconsider** — the library almost always has a parameter, variant, or extension point that covers the case.

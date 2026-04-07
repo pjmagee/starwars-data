@@ -15,193 +15,190 @@
 
 @if (PageId is null)
 {
-    @* ── Search View ── *@
-    <MudTextField T="string" @bind-Value="_search" Label="Search characters" Variant="Variant.Outlined"
-                  Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
-                  Immediate="true" DebounceInterval="400" OnDebounceIntervalElapsed="OnSearchChanged"
-                  Placeholder="e.g. Anakin Skywalker, Ahsoka Tano, Darth Revan..."
-                  Class="mb-4" />
+    @* ── List View ── *@
+    <MudTabs Elevation="0" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pt-4">
+        <MudTabPanel Text="Search" Icon="@Icons.Material.Filled.Search">
+            <MudTextField T="string" @bind-Value="_search" Label="Search characters" Variant="Variant.Outlined"
+                          Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                          Immediate="true" DebounceInterval="400" OnDebounceIntervalElapsed="OnSearchChanged"
+                          Placeholder="e.g. Anakin Skywalker, Ahsoka Tano, Darth Revan..."
+                          Class="mb-4" />
 
-    @if (_searching)
-    {
-        <MudProgressLinear Indeterminate="true" Color="Color.Primary" />
-    }
+            @if (_searching)
+            {
+                <MudProgressLinear Indeterminate="true" Color="Color.Primary" />
+            }
 
-    @if (_searchResults is not null)
-    {
-        @* ── Active search results ── *@
-        @if (_searchResults.Count == 0 && !string.IsNullOrWhiteSpace(_search))
-        {
-            <MudAlert Severity="Severity.Info" Variant="Variant.Outlined">
-                No characters found matching "@_search".
-            </MudAlert>
-        }
-        else
-        {
-            <MudGrid>
-                @foreach (var character in _searchResults)
+            @if (_searchResults is not null)
+            {
+                @if (_searchResults.Count == 0 && !string.IsNullOrWhiteSpace(_search))
                 {
-                    <MudItem xs="12" sm="6" md="4">
-                        <MudCard Outlined="true" Style="height:100%; cursor:pointer"
-                                 @onclick="() => NavigateToTimeline(character.PageId)">
-                            <MudStack Row="true" Class="pa-3" Spacing="3">
-                                @if (character.ImageUrl is not null)
+                    <MudAlert Severity="Severity.Info" Variant="Variant.Outlined">
+                        No characters found matching "@_search".
+                    </MudAlert>
+                }
+                else
+                {
+                    <MudTable Items="_searchResults" T="CharacterSearchResult" Dense="true" Hover="true"
+                              OnRowClick="OnSearchRowClick" RowStyle="cursor:pointer;">
+                        <HeaderContent>
+                            <MudTh></MudTh>
+                            <MudTh>Character</MudTh>
+                            <MudTh>Continuity</MudTh>
+                            <MudTh>Status</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd>
+                                @if (context.ImageUrl is not null)
                                 {
-                                    <MudImage Src="@character.ImageUrl" Alt="@character.Title"
-                                              Width="80" Height="80" ObjectFit="ObjectFit.Cover"
-                                              Class="rounded-lg flex-shrink-0" />
+                                    <MudImage Src="@context.ImageUrl" Alt="@context.Title"
+                                              Width="40" Height="40" ObjectFit="ObjectFit.Cover" Class="rounded" />
                                 }
-                                <MudStack Spacing="1" Style="min-width:0; flex:1">
-                                    <MudText Typo="Typo.h6" Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap">
-                                        @character.Title
-                                    </MudText>
-                                    <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
-                                        <MudChip T="string" Size="Size.Small" Color="@GetContinuityColor(character.Continuity)"
-                                                 Variant="Variant.Filled">
-                                            @character.Continuity
-                                        </MudChip>
-                                        @if (character.HasTimeline)
-                                        {
-                                            <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Success" Size="Size.Small" />
-                                            <MudText Typo="Typo.caption" Color="Color.Success">Timeline available</MudText>
-                                        }
-                                        else if (character.GenerationStatus is not null
-                                            && character.GenerationStatus.Stage is not (GenerationStage.Complete or GenerationStage.Failed))
-                                        {
-                                            <MudIcon Icon="@Icons.Material.Filled.HourglassTop" Color="Color.Warning" Size="Size.Small" />
-                                            <MudText Typo="Typo.caption" Color="Color.Warning">Generating...</MudText>
-                                        }
-                                    </MudStack>
-                                </MudStack>
-                                <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Color="Color.Default" Class="align-self-center" />
-                            </MudStack>
-                        </MudCard>
-                    </MudItem>
+                                else
+                                {
+                                    <MudAvatar Size="Size.Small" Color="Color.Primary" Variant="Variant.Outlined">
+                                        @context.Title[0]
+                                    </MudAvatar>
+                                }
+                            </MudTd>
+                            <MudTd>@context.Title</MudTd>
+                            <MudTd>
+                                <MudChip T="string" Size="Size.Small" Color="@GetContinuityColor(context.Continuity)" Variant="Variant.Filled">
+                                    @context.Continuity
+                                </MudChip>
+                            </MudTd>
+                            <MudTd>
+                                @if (context.HasTimeline)
+                                {
+                                    <MudChip T="string" Size="Size.Small" Color="Color.Success" Variant="Variant.Outlined">
+                                        Timeline available
+                                    </MudChip>
+                                }
+                                else if (context.GenerationStatus is not null
+                                    && context.GenerationStatus.Stage is not (GenerationStage.Complete or GenerationStage.Failed))
+                                {
+                                    <MudChip T="string" Size="Size.Small" Color="Color.Warning" Variant="Variant.Outlined">
+                                        Generating...
+                                    </MudChip>
+                                }
+                                else
+                                {
+                                    <MudText Typo="Typo.caption" Color="Color.Secondary">No timeline</MudText>
+                                }
+                            </MudTd>
+                        </RowTemplate>
+                    </MudTable>
                 }
-            </MudGrid>
-        }
-    }
-    else
-    {
-        <MudTabs Elevation="0" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pt-4">
-            <MudTabPanel Text="Generated" BadgeData="@_timelineList?.Total" BadgeColor="Color.Primary">
-                @if (_timelineList is not null)
-                {
-                    @if (_timelineList.Total > 0)
-                    {
-                        <MudGrid>
-                            @foreach (var item in _timelineList.Items)
-                            {
-                                <MudItem xs="12" sm="6" md="4" lg="3">
-                                    <MudCard Outlined="true" Style="height:100%; cursor:pointer"
-                                             @onclick="() => NavigateToTimeline(item.CharacterPageId)">
-                                        <MudStack Class="pa-3" Spacing="2">
-                                            <MudStack Row="true" Spacing="3" AlignItems="AlignItems.Center">
-                                                @if (item.ImageUrl is not null)
-                                                {
-                                                    <MudImage Src="@item.ImageUrl" Alt="@item.CharacterTitle"
-                                                              Width="64" Height="64" ObjectFit="ObjectFit.Cover"
-                                                              Class="rounded-lg flex-shrink-0" />
-                                                }
-                                                else
-                                                {
-                                                    <MudAvatar Size="Size.Large" Color="Color.Primary" Variant="Variant.Outlined"
-                                                               Class="flex-shrink-0">
-                                                        @item.CharacterTitle[0]
-                                                    </MudAvatar>
-                                                }
-                                                <MudStack Spacing="0" Style="min-width:0; flex:1">
-                                                    <MudText Typo="Typo.subtitle1" Style="font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">
-                                                        @item.CharacterTitle
-                                                    </MudText>
-                                                    <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
-                                                        <MudChip T="string" Size="Size.Small"
-                                                                 Color="@GetContinuityColor(item.Continuity)"
-                                                                 Variant="Variant.Filled">
-                                                            @item.Continuity
-                                                        </MudChip>
-                                                    </MudStack>
-                                                </MudStack>
-                                            </MudStack>
-                                            <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
-                                                <MudText Typo="Typo.caption" Color="Color.Secondary">
-                                                    @item.EventCount events
-                                                </MudText>
-                                                <MudText Typo="Typo.caption" Color="Color.Secondary">
-                                                    @item.GeneratedAt.ToString("MMM d, yyyy")
-                                                </MudText>
-                                            </MudStack>
-                                        </MudStack>
-                                    </MudCard>
-                                </MudItem>
-                            }
-                        </MudGrid>
-
-                        @if (_timelineListTotalPages > 1)
+            }
+            else
+            {
+                <MudAlert Severity="Severity.Info" Variant="Variant.Text">
+                    Type a character name above to search all Wookieepedia characters.
+                </MudAlert>
+            }
+        </MudTabPanel>
+        <MudTabPanel Text="Generated" Icon="@Icons.Material.Filled.Timeline">
+            <MudTable @ref="_table" T="CharacterTimelineSummary" ServerData="LoadServerData"
+                      Dense="true" Hover="true" Striped="true" FixedHeader="true"
+                      OnRowClick="OnRowClick" RowStyle="cursor:pointer;"
+                      Loading="@_tableLoading" LoadingProgressColor="Color.Primary">
+                <ToolBarContent>
+                    <MudText Typo="Typo.h6">Generated Timelines</MudText>
+                    <MudSpacer />
+                    <MudTextField T="string" @bind-Value="_tableSearch" Placeholder="Search character..."
+                                  Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                                  IconSize="Size.Medium" Immediate="true" DebounceInterval="400"
+                                  OnDebounceIntervalElapsed="OnTableSearchChanged" />
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh></MudTh>
+                    <MudTh><MudTableSortLabel SortLabel="title" T="CharacterTimelineSummary">Character</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortLabel="continuity" T="CharacterTimelineSummary">Continuity</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortLabel="events" T="CharacterTimelineSummary">Events</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortLabel="sources" T="CharacterTimelineSummary">Sources</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortLabel="generated" T="CharacterTimelineSummary" InitialDirection="SortDirection.Descending">Generated</MudTableSortLabel></MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Image">
+                        @if (context.ImageUrl is not null)
                         {
-                            <div class="d-flex justify-center mt-4">
-                                <MudPagination Count="@_timelineListTotalPages" Selected="@_timelineListPage"
-                                               SelectedChanged="OnTimelineListPageChanged"
-                                               Color="Color.Primary" Variant="Variant.Outlined"
-                                               BoundaryCount="1" MiddleCount="3" />
-                            </div>
+                            <MudImage Src="@context.ImageUrl" Alt="@context.CharacterTitle"
+                                      Width="40" Height="40" ObjectFit="ObjectFit.Cover" Class="rounded" />
                         }
-                    }
-                    else
-                    {
-                        <MudPaper Outlined="true" Class="pa-6" Style="text-align:center">
-                            <MudIcon Icon="@Icons.Material.Filled.Timeline" Style="font-size:48px" Color="Color.Secondary" />
-                            <MudText Typo="Typo.h6" Class="mt-2 mb-1">No Timelines Yet</MudText>
-                            <MudText Typo="Typo.body2" Color="Color.Secondary">
-                                Search for a character above and generate their first timeline.
-                            </MudText>
-                        </MudPaper>
-                    }
-                }
-            </MudTabPanel>
-            <MudTabPanel Text="Generating" BadgeData="@(_activeGenerations?.Count ?? 0)" BadgeColor="Color.Warning"
-                         Disabled="@(_activeGenerations is not { Count: > 0 })">
-                @if (_activeGenerations is { Count: > 0 })
-                {
-                    <MudStack Spacing="2">
-                        @foreach (var gen in _activeGenerations)
+                        else
                         {
-                            <MudCard Outlined="true" Style="cursor:pointer" @onclick="() => NavigateToTimeline(gen.PageId)">
-                                <MudCardContent>
-                                    <MudStack Spacing="1">
-                                        <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
-                                            <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
-                                                <MudChip T="string" Size="Size.Small" Color="Color.Warning" Variant="Variant.Filled">
-                                                    @gen.Stage
-                                                </MudChip>
-                                                <MudText Typo="Typo.subtitle2">@(gen.CharacterTitle ?? $"Page {gen.PageId}")</MudText>
-                                            </MudStack>
-                                            @if (gen.EventsExtracted > 0)
-                                            {
-                                                <MudText Typo="Typo.caption" Color="Color.Secondary">
-                                                    @gen.EventsExtracted events extracted
-                                                </MudText>
-                                            }
-                                        </MudStack>
-                                        <MudText Typo="Typo.body2" Color="Color.Secondary">@gen.Message</MudText>
-                                        @if (gen.TotalSteps > 0)
-                                        {
-                                            <MudProgressLinear Value="@gen.CurrentStep" Max="@gen.TotalSteps"
-                                                               Color="Color.Warning" Rounded="true" Size="Size.Small" />
-                                        }
-                                        else
-                                        {
-                                            <MudProgressLinear Indeterminate="true" Color="Color.Warning" Rounded="true" Size="Size.Small" />
-                                        }
-                                    </MudStack>
-                                </MudCardContent>
-                            </MudCard>
+                            <MudAvatar Size="Size.Small" Color="Color.Primary" Variant="Variant.Outlined">
+                                @context.CharacterTitle[0]
+                            </MudAvatar>
                         }
+                    </MudTd>
+                    <MudTd DataLabel="Character">@context.CharacterTitle</MudTd>
+                    <MudTd DataLabel="Continuity">
+                        <MudChip T="string" Size="Size.Small" Color="@GetContinuityColor(context.Continuity)" Variant="Variant.Filled">
+                            @context.Continuity
+                        </MudChip>
+                    </MudTd>
+                    <MudTd DataLabel="Events">@context.EventCount</MudTd>
+                    <MudTd DataLabel="Sources">@context.SourceCount</MudTd>
+                    <MudTd DataLabel="Generated">@context.GeneratedAt.ToString("MMM d, yyyy")</MudTd>
+                </RowTemplate>
+                <NoRecordsContent>
+                    <MudStack AlignItems="AlignItems.Center" Class="pa-6">
+                        <MudIcon Icon="@Icons.Material.Filled.Timeline" Style="font-size:48px" Color="Color.Secondary" />
+                        <MudText Typo="Typo.h6" Class="mt-2 mb-1">No Timelines Yet</MudText>
+                        <MudText Typo="Typo.body2" Color="Color.Secondary">
+                            Search for a character above and generate their first timeline.
+                        </MudText>
                     </MudStack>
-                }
-            </MudTabPanel>
-        </MudTabs>
-    }
+                </NoRecordsContent>
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
+            </MudTable>
+        </MudTabPanel>
+        <MudTabPanel Text="Generating" Icon="@Icons.Material.Filled.HourglassTop"
+                     BadgeData="@(_activeGenerations?.Count ?? 0)" BadgeColor="Color.Warning"
+                     Disabled="@(_activeGenerations is not { Count: > 0 })">
+            @if (_activeGenerations is { Count: > 0 })
+            {
+                <MudStack Spacing="2">
+                    @foreach (var gen in _activeGenerations)
+                    {
+                        <MudCard Outlined="true" Style="cursor:pointer" @onclick="() => NavigateToTimeline(gen.PageId)">
+                            <MudCardContent>
+                                <MudStack Spacing="1">
+                                    <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+                                        <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+                                            <MudChip T="string" Size="Size.Small" Color="Color.Warning" Variant="Variant.Filled">
+                                                @gen.Stage
+                                            </MudChip>
+                                            <MudText Typo="Typo.subtitle2">@(gen.CharacterTitle ?? $"Page {gen.PageId}")</MudText>
+                                        </MudStack>
+                                        @if (gen.EventsExtracted > 0)
+                                        {
+                                            <MudText Typo="Typo.caption" Color="Color.Secondary">
+                                                @gen.EventsExtracted events extracted
+                                            </MudText>
+                                        }
+                                    </MudStack>
+                                    <MudText Typo="Typo.body2" Color="Color.Secondary">@gen.Message</MudText>
+                                    @if (gen.TotalSteps > 0)
+                                    {
+                                        <MudProgressLinear Value="@gen.CurrentStep" Max="@gen.TotalSteps"
+                                                           Color="Color.Warning" Rounded="true" Size="Size.Small" />
+                                    }
+                                    else
+                                    {
+                                        <MudProgressLinear Indeterminate="true" Color="Color.Warning" Rounded="true" Size="Size.Small" />
+                                    }
+                                </MudStack>
+                            </MudCardContent>
+                        </MudCard>
+                    }
+                </MudStack>
+            }
+        </MudTabPanel>
+    </MudTabs>
 }
 else
 {
@@ -606,11 +603,10 @@ else
     private string? _search;
     private bool _searching;
 
-    // ── Timeline listing state (shown when no search is active) ──
-    private CharacterTimelineListResult? _timelineList;
-    private int _timelineListPage = 1;
-    private int _timelineListTotalPages;
-    private const int TimelineListPageSize = 12;
+    // ── Table state ──
+    private MudTable<CharacterTimelineSummary>? _table;
+    private string? _tableSearch;
+    private bool _tableLoading;
 
     // ── Active generations (landing page banner) ──
     private List<ActiveGenerationDto>? _activeGenerations;
@@ -697,12 +693,8 @@ else
             _generationStatus = null;
             StopPolling();
 
-            if (string.IsNullOrWhiteSpace(_search))
-            {
-                await LoadTimelineList();
-                await LoadActiveGenerations();
-                StartActiveGenPolling();
-            }
+            await LoadActiveGenerations();
+            StartActiveGenPolling();
         }
     }
 
@@ -719,10 +711,12 @@ else
 
         await InvokeAsync(async () =>
         {
+            // Re-run active search if the user changed continuity/realm
             if (!string.IsNullOrWhiteSpace(_search))
-                await DoSearch();
-            else
-                await LoadTimelineList();
+                await OnSearchChanged(_search);
+
+            if (_table is not null)
+                await _table.ReloadServerData();
 
             StateHasChanged();
         });
@@ -745,14 +739,9 @@ else
         if (string.IsNullOrWhiteSpace(value))
         {
             _searchResults = null;
-            await LoadTimelineList();
             return;
         }
-        await DoSearch();
-    }
 
-    private async Task DoSearch()
-    {
         _searching = true;
         StateHasChanged();
 
@@ -774,35 +763,67 @@ else
         }
     }
 
-    // ── Timeline listing (no search) ──
-
-    private async Task LoadTimelineList()
+    private void OnSearchRowClick(TableRowClickEventArgs<CharacterSearchResult> args)
     {
+        if (args.Item is not null)
+            NavigateToTimeline(args.Item.PageId);
+    }
+
+    // ── Table server data ──
+
+    private async Task<TableData<CharacterTimelineSummary>> LoadServerData(TableState state, CancellationToken ct)
+    {
+        _tableLoading = true;
+
         try
         {
             var query = System.Web.HttpUtility.ParseQueryString(string.Empty);
-            query.Add("page", _timelineListPage.ToString());
-            query.Add("pageSize", TimelineListPageSize.ToString());
+            query.Add("page", (state.Page + 1).ToString()); // MudTable is 0-based, API is 1-based
+            query.Add("pageSize", state.PageSize.ToString());
+
+            if (!string.IsNullOrWhiteSpace(_tableSearch))
+                query.Add("search", _tableSearch);
 
             var continuity = GlobalFilterService.GetContinuityQueryParam();
             if (!string.IsNullOrEmpty(continuity))
                 query.Add("continuity", continuity);
 
-            _timelineList = await Http.GetFromJsonAsync<CharacterTimelineListResult>($"CharacterTimelines/list?{query}");
-            _timelineListTotalPages = _timelineList is not null
-                ? (int)Math.Ceiling((double)_timelineList.Total / TimelineListPageSize)
-                : 0;
+            if (!string.IsNullOrEmpty(state.SortLabel))
+            {
+                query.Add("sort", state.SortLabel);
+                query.Add("sortDirection", state.SortDirection.ToString());
+            }
+
+            var result = await Http.GetFromJsonAsync<CharacterTimelineListResult>(
+                $"CharacterTimelines/list?{query}", ct);
+
+            return new TableData<CharacterTimelineSummary>
+            {
+                Items = result?.Items ?? [],
+                TotalItems = result?.Total ?? 0,
+            };
         }
         catch
         {
-            _timelineList = new CharacterTimelineListResult();
+            return new TableData<CharacterTimelineSummary> { Items = [], TotalItems = 0 };
+        }
+        finally
+        {
+            _tableLoading = false;
         }
     }
 
-    private async Task OnTimelineListPageChanged(int page)
+    private async Task OnTableSearchChanged(string value)
     {
-        _timelineListPage = page;
-        await LoadTimelineList();
+        _tableSearch = value;
+        if (_table is not null)
+            await _table.ReloadServerData();
+    }
+
+    private void OnRowClick(TableRowClickEventArgs<CharacterTimelineSummary> args)
+    {
+        if (args.Item is not null)
+            NavigateToTimeline(args.Item.CharacterPageId);
     }
 
     // ── Active generations (landing page) ──
@@ -1056,8 +1077,8 @@ else
 
     private static Color GetContinuityColor(Continuity continuity) => continuity switch
     {
-        Continuity.Canon => Color.Info,
-        Continuity.Legends => Color.Warning,
+        Continuity.Canon => Color.Primary,
+        Continuity.Legends => Color.Secondary,
         _ => Color.Default,
     };
 

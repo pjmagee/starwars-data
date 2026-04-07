@@ -50,6 +50,7 @@ public class RelationshipGraphResult
     public string RootName { get; init; } = string.Empty;
     public List<RelationshipGraphNode> Nodes { get; init; } = [];
     public List<RelationshipGraphEdge> Edges { get; init; } = [];
+    public bool Truncated { get; init; }
 }
 
 public class RelationshipGraphNode

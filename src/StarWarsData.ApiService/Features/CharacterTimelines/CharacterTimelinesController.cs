@@ -50,10 +50,12 @@ public class CharacterTimelinesController : ControllerBase
         [FromQuery] int pageSize = 12,
         [FromQuery] string? search = null,
         [FromQuery] Continuity? continuity = null,
+        [FromQuery] string? sort = null,
+        [FromQuery] string? sortDirection = null,
         CancellationToken ct = default
     )
     {
-        return await _service.ListTimelinesAsync(page, pageSize, search, continuity, ct);
+        return await _service.ListTimelinesAsync(page, pageSize, search, continuity, sort, sortDirection, ct);
     }
 
     [HttpGet("search")]

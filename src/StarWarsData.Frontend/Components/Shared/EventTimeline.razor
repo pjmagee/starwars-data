@@ -41,6 +41,15 @@
         }
     </MudStack>
 
+    @if (_pagedResult is not null && !_fullscreenHintDismissed && !_maximized)
+    {
+        <MudAlert Severity="Severity.Info" Variant="Variant.Text" Dense="true"
+                  ShowCloseIcon="true" CloseIconClicked="() => _fullscreenHintDismissed = true"
+                  Icon="@Icons.Material.Filled.Fullscreen" Class="mb-2">
+            Use the <strong>fullscreen</strong> button above for an immersive timeline experience.
+        </MudAlert>
+    }
+
     @* ── Collapsible filters ── *@
     @if (!_filtersCollapsed)
     {
@@ -268,16 +277,20 @@
     // UX state
     private bool _filtersCollapsed;
     private bool _maximized;
+    private bool _fullscreenHintDismissed;
     private ElementReference _timelineContainer;
 
     [Parameter] public string? Category { get; set; }
     [Parameter] public bool ShowCategoryFilter { get; set; } = true;
 
-    // Derive the calendar mode from the global Realm filter so the page behaviour tracks
-    // the existing realm toggle (Star Wars → Galactic BBY/ABY, Real → real-world CE).
-    // When the user has no explicit realm selection (null = both), we default to galactic
-    // to keep the historical experience unchanged.
-    private Calendar CurrentCalendar => GlobalFilterService.SelectedRealm == Realm.Real ? Calendar.Real : Calendar.Galactic;
+    /// <summary>
+    /// When set, locks this component to a specific calendar (Galactic or Real) regardless
+    /// of the global realm filter. Used by the Timeline page tabs to separate the two timelines.
+    /// When null, falls back to deriving calendar from the global Realm filter.
+    /// </summary>
+    [Parameter] public Calendar? CalendarMode { get; set; }
+
+    private Calendar CurrentCalendar => CalendarMode ?? (GlobalFilterService.SelectedRealm == Realm.Real ? Calendar.Real : Calendar.Galactic);
 
     // Color map is rebuilt from the currently visible categories whenever the filter
     // set changes. We use HSL hues evenly spaced around the wheel (with a golden-ratio
@@ -614,13 +627,20 @@
         if (!string.IsNullOrEmpty(continuityParam))
             query.Add("continuity", continuityParam);
 
-        var realmParam = GlobalFilterService.GetRealmQueryParam();
-        if (!string.IsNullOrEmpty(realmParam))
-            query.Add("realm", realmParam);
+        if (CalendarMode.HasValue)
+        {
+            // Tab-controlled: derive realm from the locked calendar so the API
+            // returns only in-universe or out-of-universe entities accordingly.
+            var realm = CalendarMode.Value == Calendar.Real ? Realm.Real : Realm.Starwars;
+            query.Add("realm", realm.ToString());
+        }
+        else
+        {
+            var realmParam = GlobalFilterService.GetRealmQueryParam();
+            if (!string.IsNullOrEmpty(realmParam))
+                query.Add("realm", realmParam);
+        }
 
-        // Map realm → calendar: Real realm uses the CE calendar, everything else stays
-        // galactic. Sent as an explicit query parameter so the API filters timeline rows
-        // by calendar and returns a chronologically coherent page.
         query.Add("calendar", CurrentCalendar.ToString());
     }
 

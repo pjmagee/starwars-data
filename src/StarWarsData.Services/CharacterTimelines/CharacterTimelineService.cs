@@ -317,7 +317,7 @@ public class CharacterTimelineService
     /// <summary>
     /// List cached character timelines with search, continuity filtering, and pagination.
     /// </summary>
-    public async Task<CharacterTimelineListResult> ListTimelinesAsync(int page, int pageSize, string? search, Continuity? continuity, CancellationToken ct)
+    public async Task<CharacterTimelineListResult> ListTimelinesAsync(int page, int pageSize, string? search, Continuity? continuity, string? sort, string? sortDirection, CancellationToken ct)
     {
         var filters = new List<FilterDefinition<CharacterTimeline>>();
 
@@ -336,20 +336,49 @@ public class CharacterTimelineService
         var total = await Timelines.CountDocumentsAsync(filter, cancellationToken: ct);
         var skip = (page - 1) * pageSize;
 
+        var descending = string.Equals(sortDirection, "Descending", StringComparison.OrdinalIgnoreCase);
+        var direction = descending ? -1 : 1;
+
+        var sortDoc = sort switch
+        {
+            "title" => new BsonDocument("characterTitle", direction),
+            "continuity" => new BsonDocument("continuity", direction),
+            "events" => new BsonDocument("_eventCount", direction),
+            "sources" => new BsonDocument("_sourceCount", direction),
+            "generated" => new BsonDocument("generatedAt", direction),
+            _ => new BsonDocument("characterTitle", 1),
+        };
+
         var timelines = await Timelines
-            .Find(filter)
-            .SortBy(t => t.CharacterTitle)
+            .Aggregate()
+            .Match(filter)
+            .AppendStage<BsonDocument>(
+                new BsonDocument(
+                    "$addFields",
+                    new BsonDocument
+                    {
+                        ["_eventCount"] = new BsonDocument("$size", new BsonDocument("$ifNull", new BsonArray { "$events", new BsonArray() })),
+                        ["_sourceCount"] = new BsonDocument("$size", new BsonDocument("$ifNull", new BsonArray { "$sources", new BsonArray() })),
+                    }
+                )
+            )
+            .Sort(sortDoc)
             .Skip(skip)
             .Limit(pageSize)
-            .Project(t => new CharacterTimelineSummary
-            {
-                CharacterPageId = t.CharacterPageId,
-                CharacterTitle = t.CharacterTitle,
-                ImageUrl = t.ImageUrl,
-                Continuity = t.Continuity,
-                EventCount = t.Events.Count,
-                GeneratedAt = t.GeneratedAt,
-            })
+            .Project(
+                new BsonDocument
+                {
+                    ["_id"] = 0,
+                    ["characterPageId"] = 1,
+                    ["characterTitle"] = 1,
+                    ["imageUrl"] = 1,
+                    ["continuity"] = 1,
+                    ["eventCount"] = "$_eventCount",
+                    ["sourceCount"] = "$_sourceCount",
+                    ["generatedAt"] = 1,
+                }
+            )
+            .As<CharacterTimelineSummary>()
             .ToListAsync(ct);
 
         return new CharacterTimelineListResult

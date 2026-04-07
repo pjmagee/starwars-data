@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using Microsoft.Extensions.AI;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using StarWarsData.Models;
 using StarWarsData.Models.Entities;
@@ -62,6 +63,51 @@ public class KGAnalyticsToolkit
             results.Reverse();
 
         return results.Select(r => new NamedCountDto(r.name, r.id, r.count)).ToList();
+    }
+
+    [Description(
+        """
+            Count nodes grouped by MULTIPLE properties simultaneously with optional example entity per group.
+            Returns each combination of property values, a count, and optionally one example entity name + PageId.
+            Use this instead of count_nodes_by_property when you need 2+ grouping dimensions or want examples.
+            Example: 'Starship classes with manufacturer, count, and a famous ship' →
+                entityType='Starship', properties=['Class', 'Manufacturer'], includeExample=true
+            ONE call returns all combinations — never loop through entities individually.
+            Best for: render_data_table with multi-column grouping.
+            """
+    )]
+    public async Task<List<Dictionary<string, object>>> CountNodesByProperties(
+        [Description("Entity type to aggregate (e.g. Starship, Character, CelestialBody)")] string entityType,
+        [Description("Property names to group by (e.g. ['Class', 'Manufacturer']). Case-sensitive.")] List<string> properties,
+        [Description("Include one example entity per group (title + pageId)")] bool includeExample = false,
+        [Description("Max results (default 30, max 50)")] int limit = 30,
+        [Description(ContinuityParamDescription)] string? continuity = null
+    )
+    {
+        var results = await _kg.CountNodesByPropertiesAsync(entityType, properties, continuity, includeExample, limit);
+
+        return results
+            .Select(doc =>
+            {
+                var row = new Dictionary<string, object>();
+                var id = doc["_id"].AsBsonDocument;
+                foreach (var prop in properties)
+                {
+                    var val = id.GetValue(prop, BsonNull.Value);
+                    row[prop] =
+                        val.IsBsonNull ? "Unknown"
+                        : val.IsBsonArray ? string.Join(", ", val.AsBsonArray.Select(v => v.AsString))
+                        : val.AsString;
+                }
+                row["count"] = doc["count"].AsInt32;
+                if (includeExample && doc.Contains("exampleTitle"))
+                {
+                    row["exampleTitle"] = doc["exampleTitle"].AsString;
+                    row["examplePageId"] = doc["examplePageId"].AsInt32;
+                }
+                return row;
+            })
+            .ToList();
     }
 
     [Description(
