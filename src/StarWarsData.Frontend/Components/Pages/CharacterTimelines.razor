@@ -16,7 +16,7 @@
 @if (PageId is null)
 {
     @* ── List View ── *@
-    <MudTabs Elevation="0" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pt-4">
+    <MudTabs Elevation="0" Rounded="true" ApplyEffectsToContainer="true" TabPanelsClass="pt-4">
         <MudTabPanel Text="Search" Icon="@Icons.Material.Filled.Search">
             <MudTextField T="string" @bind-Value="_search" Label="Search characters" Variant="Variant.Outlined"
                           Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"

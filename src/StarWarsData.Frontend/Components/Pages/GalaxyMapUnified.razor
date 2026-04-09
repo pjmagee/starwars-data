@@ -148,10 +148,11 @@
                         <MudToggleItem Value="@("explore")" Text="Explore" />
                         <MudToggleItem Value="@("timeline")" Text="Timeline" />
                     </MudToggleGroup>
-                    <MudIconButton Icon="@(Layout.IsFullscreen ? Icons.Material.Filled.FullscreenExit : Icons.Material.Filled.Fullscreen)"
-                                   Size="Size.Medium" Color="Color.Inherit" OnClick="ToggleFullscreen"
-                                   Title="@(Layout.IsFullscreen ? "Exit fullscreen" : "Fullscreen")"
-                                   Style="color:rgba(255,255,255,0.8);" />
+                    <MudTooltip Text="@(Layout.IsFullscreen ? "Exit fullscreen" : "Fullscreen")">
+                        <MudIconButton Icon="@(Layout.IsFullscreen ? Icons.Material.Filled.FullscreenExit : Icons.Material.Filled.Fullscreen)"
+                                       Size="Size.Medium" Color="Color.Inherit" OnClick="ToggleFullscreen"
+                                       Style="color:rgba(255,255,255,0.8);" />
+                    </MudTooltip>
                     </MudStack>
 
                     <!-- Breadcrumbs -->
@@ -185,7 +186,7 @@
                     <MudExpansionPanels Dense="true" Elevation="0"
                                         Style="background:transparent; --mud-palette-surface:transparent;">
                         <!-- Display toggles -->
-                        <MudExpansionPanel Text="Display" IsInitiallyExpanded="false" Dense="true"
+                        <MudExpansionPanel Text="Display" Expanded="false" Dense="true"
                                            Style="background:rgba(255,255,255,0.03);border-radius:6px;margin-bottom:4px;">
                             <MudStack Spacing="0">
                                 <MudSwitch Value="_showBackground" Color="Color.Default" Size="Size.Small"
@@ -208,7 +209,7 @@
                         </MudExpansionPanel>
 
                         <!-- Region filter -->
-                        <MudExpansionPanel Dense="true" IsInitiallyExpanded="true"
+                        <MudExpansionPanel Dense="true" Expanded="true"
                                            Style="background:rgba(255,255,255,0.03);border-radius:6px;margin-bottom:4px;">
                             <TitleContent>
                                 <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
@@ -241,7 +242,7 @@
                         <!-- Sector browser -->
                         @if (_mode == "explore" && _geography?.Cells is not null)
                         {
-                            <MudExpansionPanel Dense="true" IsInitiallyExpanded="false"
+                            <MudExpansionPanel Dense="true" Expanded="false"
                                                Style="background:rgba(255,255,255,0.03);border-radius:6px;margin-bottom:4px;">
                                 <TitleContent>
                                     <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
@@ -274,7 +275,7 @@
                         @if (_mode == "timeline" && _overview?.Lenses is not null)
                         {
                             <!-- Event lens filter -->
-                            <MudExpansionPanel Dense="true" IsInitiallyExpanded="true"
+                            <MudExpansionPanel Dense="true" Expanded="true"
                                                Style="background:rgba(255,255,255,0.03);border-radius:6px;margin-bottom:4px;">
                                 <TitleContent>
                                     <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">

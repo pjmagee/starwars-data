@@ -29,13 +29,10 @@
         <MudGrid Spacing="2">
             <MudItem xs="12">
                 <MudToggleGroup T="string" @bind-Value="_mode" Color="Color.Primary"
-                                Outline="true" Dense="true" Class="mb-2">
-                    <MudToggleItem T="string" Value="@("semantic")" Text="Semantic"
-                                   Icon="@Icons.Material.Filled.Psychology" />
-                    <MudToggleItem T="string" Value="@("keyword")" Text="Keyword"
-                                   Icon="@Icons.Material.Filled.TextFields" />
-                    <MudToggleItem T="string" Value="@("hybrid")" Text="Hybrid"
-                                   Icon="@Icons.Material.Filled.JoinInner" />
+                                Outlined="true" Size="Size.Small" Class="mb-2">
+                    <MudToggleItem T="string" Value="@("semantic")" Text="Semantic" />
+                    <MudToggleItem T="string" Value="@("keyword")" Text="Keyword" />
+                    <MudToggleItem T="string" Value="@("hybrid")" Text="Hybrid" />
                 </MudToggleGroup>
             </MudItem>
             <MudItem xs="12">

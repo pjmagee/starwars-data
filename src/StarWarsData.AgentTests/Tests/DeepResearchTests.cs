@@ -9,7 +9,7 @@ public class DeepResearchTests
     static EvaluatorAgent Evaluator => new(AgentFixture.EvaluatorClient);
 
     [TestMethod]
-    [Timeout(120_000)] // 2 min — this is a complex multi-step query
+    [Timeout(120_000, CooperativeCancellation = true)] // 2 min — this is a complex multi-step query
     public async Task RevanHolocronToBrotherhoodToRuusanReformation_MultiEntityChain()
     {
         var capture = new ConversationCapture();
@@ -24,38 +24,22 @@ public class DeepResearchTests
 
         // Must search for multiple entities across different types
         var searchCalls = capture.GetToolCalls("search_entities");
-        Assert.IsTrue(
-            searchCalls.Count >= 2,
-            $"Should search for multiple entities, got {searchCalls.Count} search_entities calls"
-        );
+        Assert.IsGreaterThanOrEqualTo(searchCalls.Count, 2, $"Should search for multiple entities, got {searchCalls.Count} search_entities calls");
 
         // Must use at least one temporal tool (get_entity_timeline or find_entities_by_year)
-        Assert.IsTrue(
-            capture.HasToolCall("get_entity_timeline")
-                || capture.HasToolCall("find_entities_by_year"),
-            "Should use temporal tools to look up lifecycles or date ranges"
-        );
+        Assert.IsTrue(capture.HasToolCall("get_entity_timeline") || capture.HasToolCall("find_entities_by_year"), "Should use temporal tools to look up lifecycles or date ranges");
 
         // Must use relationship or article tools for the connection chain
         Assert.IsTrue(
-            capture.HasToolCall("get_entity_relationships")
-                || capture.HasToolCall("traverse_graph")
-                || capture.HasToolCall("find_connections")
-                || capture.HasToolCall("semantic_search"),
+            capture.HasToolCall("get_entity_relationships") || capture.HasToolCall("traverse_graph") || capture.HasToolCall("find_connections") || capture.HasToolCall("semantic_search"),
             "Should use relationship or article search tools to trace the chain"
         );
 
         // Must produce some output
-        Assert.IsTrue(
-            capture.HasToolCallStartingWith("render_") || capture.FinalResponse is not null,
-            "Should render results or provide a text response"
-        );
+        Assert.IsTrue(capture.HasToolCallStartingWith("render_") || capture.FinalResponse is not null, "Should render results or provide a text response");
 
         // Must make at least 4 tool calls total for a question this complex
-        Assert.IsTrue(
-            capture.ToolCalls.Count >= 4,
-            $"Complex question should require 4+ tool calls, got {capture.ToolCalls.Count}"
-        );
+        Assert.IsGreaterThanOrEqualTo(capture.ToolCalls.Count, 4, $"Complex question should require 4+ tool calls, got {capture.ToolCalls.Count}");
 
         // LLM evaluator with detailed rubric
         var eval = await Evaluator.EvaluateAsync(
@@ -87,11 +71,7 @@ public class DeepResearchTests
             """
         );
 
-        Assert.IsGreaterThanOrEqualTo(
-            2,
-            eval.Score,
-            $"Evaluator score {eval.Score}/5: {eval.Reasoning}"
-        );
+        Assert.IsGreaterThanOrEqualTo(2, eval.Score, $"Evaluator score {eval.Score}/5: {eval.Reasoning}");
 
         // Log the full evaluation for manual review
         Console.WriteLine($"=== Deep Research Evaluation ===");
@@ -101,8 +81,6 @@ public class DeepResearchTests
         Console.WriteLine($"Issues: {string.Join("; ", eval.Issues)}");
         Console.WriteLine($"Tool calls made: {capture.ToolCalls.Count}");
         foreach (var tc in capture.ToolCalls)
-            Console.WriteLine(
-                $"  - {tc.Name}({(tc.Arguments.Length > 100 ? tc.Arguments[..100] + "..." : tc.Arguments)})"
-            );
+            Console.WriteLine($"  - {tc.Name}({(tc.Arguments.Length > 100 ? tc.Arguments[..100] + "..." : tc.Arguments)})");
     }
 }
