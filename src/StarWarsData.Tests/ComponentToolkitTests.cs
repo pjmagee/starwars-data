@@ -425,12 +425,13 @@ public class ComponentToolkitTests
         var toolkit = new ComponentToolkit();
         var functions = toolkit.AsAIFunctions();
 
-        Assert.Equal(8, functions.Count);
+        Assert.Equal(9, functions.Count);
         var names = functions.Select(f => f.Name).ToHashSet();
         Assert.Contains("render_table", names);
         Assert.Contains("render_data_table", names);
         Assert.Contains("render_chart", names);
         Assert.Contains("render_graph", names);
+        Assert.Contains("render_path", names);
         Assert.Contains("render_timeline", names);
         Assert.Contains("render_infobox", names);
         Assert.Contains("render_markdown", names);
