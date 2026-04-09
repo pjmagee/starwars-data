@@ -705,11 +705,16 @@
             var localSessions = await ChatHistory.GetAllLocalSessionsAsync();
             if (localSessions.Count == 0) return;
 
+            // Only clear localStorage if ALL migrations succeed
+            var allSucceeded = true;
             foreach (var local in localSessions)
             {
                 var body = new SaveChatSessionRequest { Title = local.Title, Messages = local.Messages };
-                await Http.PostAsJsonAsync("api/ChatSessions", body);
+                var response = await Http.PostAsJsonAsync("api/ChatSessions", body);
+                if (!response.IsSuccessStatusCode) { allSucceeded = false; break; }
             }
+
+            if (!allSucceeded) return;
 
             await ChatHistory.ClearLocalSessionsAsync();
             await ChatHistory.LoadAsync();

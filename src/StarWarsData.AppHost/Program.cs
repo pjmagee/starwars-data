@@ -12,11 +12,15 @@ var mongoPort = builder.AddParameter("mongo-port", value: "27018");
 
 var starwarsDb = builder.AddParameter("starwars-db", value: "starwars-dev");
 
+// Keycloak service-account credentials for GDPR user deletion
+var keycloakAdminSecret = builder.AddParameter("keycloak-admin-secret", value: Environment.GetEnvironmentVariable("KEYCLOAK_ADMIN_SECRET") ?? "", secret: true);
+
 var apiService = builder
     .AddProject<StarWarsData_ApiService>("apiservice")
     .WithExternalHttpEndpoints()
     .WithEnvironment("Settings__OpenAiKey", openApi)
-    .WithEnvironment("Settings__HangfireEnabled", "true");
+    .WithEnvironment("Settings__HangfireEnabled", "true")
+    .WithEnvironment("Settings__KeycloakAdminClientSecret", keycloakAdminSecret);
 
 var connString = ReferenceExpression.Create($"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true");
 var mongo = builder.AddConnectionString("mongodb", connString);
@@ -290,6 +294,13 @@ builder
             {
                 service.Environment ??= [];
                 service.Environment["Settings__DatabaseName"] = "${STARWARS_DB:-starwars-dev}";
+            }
+
+            // Inject Keycloak admin secret for GDPR user deletion
+            if (name is "apiservice")
+            {
+                service.Environment ??= [];
+                service.Environment["Settings__KeycloakAdminClientSecret"] = "${KEYCLOAK_ADMIN_SECRET:-}";
             }
 
             switch (name)

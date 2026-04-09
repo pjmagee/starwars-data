@@ -1,59 +1,115 @@
 @using StarWarsData.Models.Entities
 @using StarWarsData.Frontend.Services
+@inject IJSRuntime JS
 @implements IDisposable
 
 <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="3" Class="mr-4">
-    <MudSwitch
-        T="bool"
-        Value="_canonEnabled"
-        ValueChanged="OnCanonChanged"
-        Label="Canon"
-        Color="Color.Primary"
-        Size="Size.Small"
-        Class="ma-0" />
+    <MudTooltip Placement="Placement.Bottom" Arrow="true" Color="Color.Dark">
+        <TooltipContent>
+            <div style="max-width:240px; font-size:12px;">
+                <strong>Canon</strong> — The official Star Wars continuity established by Lucasfilm after 2014.
+                Includes all films, TV series (The Clone Wars, Rebels, Mandalorian, etc.), and post-2014 books, comics, and games.
+            </div>
+        </TooltipContent>
+        <ChildContent>
+            <MudSwitch
+                T="bool"
+                Value="_canonEnabled"
+                ValueChanged="OnCanonChanged"
+                Label="Canon"
+                Color="Color.Primary"
+                Size="Size.Small"
+                Class="ma-0" />
+        </ChildContent>
+    </MudTooltip>
 
-    <MudSwitch
-        T="bool"
-        Value="_legendsEnabled"
-        ValueChanged="OnLegendsChanged"
-        Label="Legends"
-        Color="Color.Secondary"
-        Size="Size.Small"
-        Class="ma-0" />
+    <MudTooltip Placement="Placement.Bottom" Arrow="true" Color="Color.Dark">
+        <TooltipContent>
+            <div style="max-width:240px; font-size:12px;">
+                <strong>Legends</strong> — The pre-2014 Expanded Universe. Thousands of books, comics, and games
+                produced before the Disney acquisition. Rich lore but no longer considered official canon.
+                <em>Default: OFF</em>
+            </div>
+        </TooltipContent>
+        <ChildContent>
+            <MudSwitch
+                T="bool"
+                Value="_legendsEnabled"
+                ValueChanged="OnLegendsChanged"
+                Label="Legends"
+                Color="Color.Secondary"
+                Size="Size.Small"
+                Class="ma-0" />
+        </ChildContent>
+    </MudTooltip>
 
     <MudDivider Vertical="true" FlexItem="true" />
 
-    <MudSwitch
-        T="bool"
-        Value="_starwarsEnabled"
-        ValueChanged="OnStarwarsChanged"
-        Label="Star Wars"
-        Color="Color.Tertiary"
-        Size="Size.Small"
-        Class="ma-0" />
+    <MudTooltip Placement="Placement.Bottom" Arrow="true" Color="Color.Dark">
+        <TooltipContent>
+            <div style="max-width:240px; font-size:12px;">
+                <strong>Star Wars</strong> — In-universe content: characters, planets, battles, ships, organisations,
+                and events from the Star Wars galaxy. Dates use BBY/ABY (Before/After Battle of Yavin).
+            </div>
+        </TooltipContent>
+        <ChildContent>
+            <MudSwitch
+                T="bool"
+                Value="_starwarsEnabled"
+                ValueChanged="OnStarwarsChanged"
+                Label="Star Wars"
+                Color="Color.Tertiary"
+                Size="Size.Small"
+                Class="ma-0" />
+        </ChildContent>
+    </MudTooltip>
 
-    <MudSwitch
-        T="bool"
-        Value="_realEnabled"
-        ValueChanged="OnRealChanged"
-        Label="Real World"
-        Color="Color.Warning"
-        Size="Size.Small"
-        Class="ma-0" />
+    <MudTooltip Placement="Placement.Bottom" Arrow="true" Color="Color.Dark">
+        <TooltipContent>
+            <div style="max-width:240px; font-size:12px;">
+                <strong>Real World</strong> — Behind-the-scenes content: actors, authors, directors,
+                publication dates, and release information. Dates use standard years (e.g. 1977, 2025).
+            </div>
+        </TooltipContent>
+        <ChildContent>
+            <MudSwitch
+                T="bool"
+                Value="_realEnabled"
+                ValueChanged="OnRealChanged"
+                Label="Real World"
+                Color="Color.Warning"
+                Size="Size.Small"
+                Class="ma-0" />
+        </ChildContent>
+    </MudTooltip>
+
+    <MudTooltip Text="Show filter guide" Placement="Placement.Bottom">
+        <MudIconButton Icon="@Icons.Material.Filled.HelpOutline" Size="Size.Small"
+                       Color="Color.Default" OnClick="ShowBanner" />
+    </MudTooltip>
 </MudStack>
 
 @code {
     private bool _canonEnabled = true;
-    private bool _legendsEnabled = true;
+    private bool _legendsEnabled = false;
     private bool _starwarsEnabled = true;
     private bool _realEnabled = false;
-
     [Inject] private GlobalFilterService GlobalFilterService { get; set; } = default!;
 
     protected override void OnInitialized()
     {
         UpdateSwitchesFromService();
         GlobalFilterService.OnChange += OnFilterServiceChanged;
+    }
+
+    private async Task ShowBanner()
+    {
+        try
+        {
+            await JS.InvokeVoidAsync("localStorage.removeItem", "sw-filter-guide-dismissed");
+            await JS.InvokeVoidAsync("location.reload");
+        }
+        catch { }
     }
 
     public void Dispose()
@@ -117,9 +173,6 @@
     private void OnStarwarsChanged(bool value)
     {
         _starwarsEnabled = value;
-        // If user just turned Star Wars off and Real was also off, auto-enable Real
-        // so at least one realm is always visible. Mirrors the Canon/Legends default
-        // (which defaults both-on, so turning one off flips cleanly to the other).
         if (!_starwarsEnabled && !_realEnabled)
             _realEnabled = true;
         UpdateRealmService();
@@ -153,9 +206,6 @@
 
     private void UpdateRealmService()
     {
-        // The per-switch handlers guarantee at least one side is on, so no
-        // fallback coercion is needed here — if both were off the handler
-        // that triggered this call already flipped the other side on.
         Realm? newRealm = (_starwarsEnabled, _realEnabled) switch
         {
             (true, false) => Realm.Starwars,

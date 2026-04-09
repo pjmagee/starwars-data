@@ -46,7 +46,8 @@ builder
     .AddSingleton<AskRateLimiter>()
     .AddSingleton<SearchRateLimiter>()
     .AddSingleton<UserSettingsService>()
-    .AddSingleton<ByokChatClient>(sp =>
+    .AddHttpClient<KeycloakAdminService>()
+    .Services.AddSingleton<ByokChatClient>(sp =>
     {
         var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
         var openAiClient = sp.GetRequiredService<OpenAIClient>();

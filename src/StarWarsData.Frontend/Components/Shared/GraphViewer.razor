@@ -389,7 +389,7 @@
         _temporalTicks = [.. yearSet];
         _hasTemporalData = _temporalTicks.Count > 1;
         if (_hasTemporalData)
-            _selectedTickIndex = _temporalTicks.Count - 1;
+            _selectedTickIndex = 0;
 
         var data = new { nodes, edges, rootId = GraphData.RootId, layoutMode = LayoutMode };
 

@@ -125,6 +125,14 @@
                 }
             }
             function swGetAurebesh() { return localStorage.getItem('sw-aurebesh') === 'true'; }
+
+            // Chat session localStorage helpers (global, no ES module import needed)
+            var _chatKey = 'starwars-chat-sessions';
+            function swChatLoad() { try { return JSON.parse(localStorage.getItem(_chatKey)) || []; } catch { return []; } }
+            function swChatSave(session) { var s = swChatLoad(); var i = s.findIndex(x => x.id === session.id); if (i >= 0) s[i] = session; else s.unshift(session); localStorage.setItem(_chatKey, JSON.stringify(s)); }
+            function swChatLoadOne(id) { return swChatLoad().find(x => x.id === id) || null; }
+            function swChatDelete(id) { localStorage.setItem(_chatKey, JSON.stringify(swChatLoad().filter(x => x.id !== id))); }
+            function swChatClear() { localStorage.removeItem(_chatKey); }
         </script>
     </head>
     <body>

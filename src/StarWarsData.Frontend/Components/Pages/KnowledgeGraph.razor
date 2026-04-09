@@ -13,7 +13,7 @@
 
 <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-4 px-4">
 
-    <MudText Typo="Typo.h5" Class="mb-4">Knowledge Graph</MudText>
+    @* <MudText Typo="Typo.h5" Class="mb-4">Knowledge Graph</MudText> *@
 
     <MudTabs Elevation="0" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-0 pt-4">
     <MudTabPanel Text="Nodes" Icon="@Icons.Material.Filled.AccountTree">
@@ -61,49 +61,51 @@
                               Immediate="true" DebounceInterval="400" OnDebounceIntervalElapsed="OnSearchChanged"
                               Clearable="true" Variant="Variant.Outlined" Margin="Margin.Dense"
                               Style="min-width:240px; max-width:280px;" />
-                <MudSelect T="string" @bind-Value="_selectedType" Variant="Variant.Outlined" Margin="Margin.Dense"
-                           @bind-Value:after="OnFilterChanged" Style="min-width:160px; max-width:180px;" Clearable="true"
-                           Placeholder="All Types">
-                    @foreach (var type in _entityTypes)
-                    {
-                        <MudSelectItem T="string" Value="@type">@FormatTypeName(type)</MudSelectItem>
-                    }
-                </MudSelect>
+                <MudAutocomplete T="string" @bind-Value="_selectedType" @bind-Value:after="OnFilterChanged"
+                                 SearchFunc="SearchEntityTypes" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                 Placeholder="All Types" Clearable="true" Dense="true"
+                                 ToStringFunc="@(v => FormatTypeName(v))"
+                                 Style="min-width:160px; max-width:200px;" MaxItems="20"
+                                 ResetValueOnEmptyText="true" CoerceValue="false" />
                 <MudSwitch T="bool" @bind-Value="_temporalOnly" @bind-Value:after="OnFilterChanged"
                            Color="Color.Primary" Label="Temporal only" />
-                <MudSelect T="string" @bind-Value="_selectedSemantic" Variant="Variant.Outlined" Margin="Margin.Dense"
-                           @bind-Value:after="OnFilterChanged" Style="min-width:160px; max-width:180px;" Clearable="true"
-                           Placeholder="All Dimensions">
-                    <MudSelectItem T="string" Value="@("lifespan")">Lifespan</MudSelectItem>
-                    <MudSelectItem T="string" Value="@("conflict")">Conflict</MudSelectItem>
-                    <MudSelectItem T="string" Value="@("construction")">Construction</MudSelectItem>
-                    <MudSelectItem T="string" Value="@("creation")">Creation</MudSelectItem>
-                    <MudSelectItem T="string" Value="@("institutional")">Institutional</MudSelectItem>
-                    <MudSelectItem T="string" Value="@("publication")">Publication</MudSelectItem>
-                    <MudSelectItem T="string" Value="@("usage")">Usage</MudSelectItem>
-                </MudSelect>
-                <MudSelect T="string" @bind-Value="_selectedCalendar" Variant="Variant.Outlined" Margin="Margin.Dense"
-                           @bind-Value:after="OnFilterChanged" Style="min-width:160px; max-width:180px;" Clearable="true"
-                           Placeholder="All Calendars">
-                    <MudSelectItem T="string" Value="@("galactic")">Galactic (BBY/ABY)</MudSelectItem>
-                    <MudSelectItem T="string" Value="@("real")">Real-world (CE)</MudSelectItem>
-                </MudSelect>
-                <MudSelect T="string" @bind-Value="_selectedLabel" Variant="Variant.Outlined" Margin="Margin.Dense"
-                           @bind-Value:after="OnFilterChanged" Style="min-width:180px; max-width:200px;" Clearable="true"
-                           Placeholder="All Relationships">
-                    @foreach (var lbl in _edgeLabels)
-                    {
-                        <MudSelectItem T="string" Value="@lbl">@FormatPropertyKey(lbl)</MudSelectItem>
-                    }
-                </MudSelect>
-                <MudNumericField T="int?" @bind-Value="_yearFrom" @bind-Value:after="OnFilterChanged"
-                                 Placeholder="Year from" Variant="Variant.Outlined" Margin="Margin.Dense"
-                                 Clearable="true" HideSpinButtons="true" Style="max-width:130px;"
-                                 HelperText="@GetYearHelperText()" />
-                <MudNumericField T="int?" @bind-Value="_yearTo" @bind-Value:after="OnFilterChanged"
-                                 Placeholder="Year to" Variant="Variant.Outlined" Margin="Margin.Dense"
-                                 Clearable="true" HideSpinButtons="true" Style="max-width:130px;"
-                                 HelperText="@GetYearHelperText()" />
+                <MudAutocomplete T="string" @bind-Value="_selectedSemantic" @bind-Value:after="OnFilterChanged"
+                                 SearchFunc="SearchSemantics" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                 Placeholder="All Dimensions" Clearable="true" Dense="true"
+                                 ToStringFunc="@(v => FormatPropertyKey(v))"
+                                 Style="min-width:160px; max-width:200px;" MaxItems="10"
+                                 ResetValueOnEmptyText="true" CoerceValue="false" />
+                <MudAutocomplete T="string" @bind-Value="_selectedLabel" @bind-Value:after="OnFilterChanged"
+                                 SearchFunc="SearchEdgeLabels" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                 Placeholder="All Relationships" Clearable="true" Dense="true"
+                                 ToStringFunc="@(v => FormatPropertyKey(v))"
+                                 Style="min-width:180px; max-width:220px;" MaxItems="20"
+                                 ResetValueOnEmptyText="true" CoerceValue="false" />
+                <MudToggleGroup T="string" @bind-Value="_selectedCalendar" @bind-Value:after="OnCalendarChanged"
+                                Style="height:40px;" Color="Color.Primary" Rounded="true" Dense="true"
+                                Outlined="true" Delimiters="true">
+                    <MudToggleItem T="string" Value="@("")" Text="All" />
+                    <MudToggleItem T="string" Value="@("galactic")" Text="Galactic" />
+                    <MudToggleItem T="string" Value="@("real")" Text="Real World" />
+                </MudToggleGroup>
+                <MudNumericField T="int?" @bind-Value="_yearFromAbs" @bind-Value:after="OnYearInputChanged"
+                                 Placeholder="@(_selectedCalendar == "real" ? "e.g. 1977" : "Year")"
+                                 Variant="Variant.Outlined" Margin="Margin.Dense"
+                                 Clearable="true" HideSpinButtons="true" Style="max-width:120px;" Min="0"
+                                 Label="From"
+                                 Adornment="@(_selectedCalendar == "galactic" ? Adornment.End : Adornment.None)"
+                                 AdornmentText="@_yearFromEra"
+                                 AdornmentColor="Color.Warning"
+                                 OnAdornmentClick="ToggleFromEra" />
+                <MudNumericField T="int?" @bind-Value="_yearToAbs" @bind-Value:after="OnYearInputChanged"
+                                 Placeholder="@(_selectedCalendar == "real" ? "e.g. 2025" : "Year")"
+                                 Variant="Variant.Outlined" Margin="Margin.Dense"
+                                 Clearable="true" HideSpinButtons="true" Style="max-width:120px;" Min="0"
+                                 Label="To"
+                                 Adornment="@(_selectedCalendar == "galactic" ? Adornment.End : Adornment.None)"
+                                 AdornmentText="@_yearToEra"
+                                 AdornmentColor="Color.Warning"
+                                 OnAdornmentClick="ToggleToEra" />
             </MudStack>
         </ToolBarContent>
         <HeaderContent>
@@ -345,25 +347,21 @@
                                   Immediate="true" DebounceInterval="400" OnDebounceIntervalElapsed="OnLabelSearchChanged"
                                   Clearable="true" Variant="Variant.Outlined" Margin="Margin.Dense"
                                   Style="min-width:240px; max-width:280px;" />
-                    <MudSelect T="string" @bind-Value="_labelFromType" Variant="Variant.Outlined" Margin="Margin.Dense"
-                               @bind-Value:after="OnLabelFilterChanged" Style="min-width:160px; max-width:180px;"
-                               Clearable="true" Placeholder="From type">
-                        @foreach (var t in _entityTypes)
-                        {
-                            <MudSelectItem T="string" Value="@t">@FormatTypeName(t)</MudSelectItem>
-                        }
-                    </MudSelect>
-                    <MudSelect T="string" @bind-Value="_labelToType" Variant="Variant.Outlined" Margin="Margin.Dense"
-                               @bind-Value:after="OnLabelFilterChanged" Style="min-width:160px; max-width:180px;"
-                               Clearable="true" Placeholder="To type">
-                        @foreach (var t in _entityTypes)
-                        {
-                            <MudSelectItem T="string" Value="@t">@FormatTypeName(t)</MudSelectItem>
-                        }
-                    </MudSelect>
-                    <MudNumericField T="long" @bind-Value="_labelMinCount" @bind-Value:after="OnLabelFilterChanged"
+                    <MudAutocomplete T="string" @bind-Value="_labelFromType" @bind-Value:after="OnLabelFilterChanged"
+                                     SearchFunc="SearchEntityTypes" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                     Placeholder="From type" Clearable="true" Dense="true"
+                                     ToStringFunc="@(v => FormatTypeName(v))"
+                                     Style="min-width:160px; max-width:200px;" MaxItems="20"
+                                     ResetValueOnEmptyText="true" CoerceValue="false" />
+                    <MudAutocomplete T="string" @bind-Value="_labelToType" @bind-Value:after="OnLabelFilterChanged"
+                                     SearchFunc="SearchEntityTypes" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                     Placeholder="To type" Clearable="true" Dense="true"
+                                     ToStringFunc="@(v => FormatTypeName(v))"
+                                     Style="min-width:160px; max-width:200px;" MaxItems="20"
+                                     ResetValueOnEmptyText="true" CoerceValue="false" />
+                    <MudNumericField T="long?" @bind-Value="_labelMinCount" @bind-Value:after="OnLabelFilterChanged"
                                      Placeholder="Min count" Variant="Variant.Outlined" Margin="Margin.Dense"
-                                     HideSpinButtons="true" Style="max-width:130px;" />
+                                     Clearable="true" HideSpinButtons="true" Style="max-width:130px;" />
                 </MudStack>
             </ToolBarContent>
             <HeaderContent>
@@ -457,6 +455,12 @@
     private string _selectedCalendar = "";
     private int? _yearFrom;
     private int? _yearTo;
+
+    // Galactic mode: user-friendly absolute year + era selector
+    private int? _yearFromAbs;
+    private string _yearFromEra = "BBY";
+    private int? _yearToAbs;
+    private string _yearToEra = "ABY";
     private List<string> _entityTypes = [];
     private List<string> _edgeLabels = [];
     private int? _expandedNodeId;
@@ -472,7 +476,7 @@
     private string _labelSearch = "";
     private string _labelFromType = "";
     private string _labelToType = "";
-    private long _labelMinCount;
+    private long? _labelMinCount;
 
     private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
 
@@ -504,10 +508,43 @@
         catch { }
     }
 
+    private static readonly string[] _semanticOptions = ["lifespan", "conflict", "construction", "creation", "institutional", "publication", "usage"];
+
+    private Task<IEnumerable<string>> SearchEntityTypes(string? value, CancellationToken ct)
+    {
+        var results = string.IsNullOrWhiteSpace(value)
+            ? _entityTypes.AsEnumerable()
+            : _entityTypes.Where(t => FormatTypeName(t).Contains(value, StringComparison.OrdinalIgnoreCase));
+        return Task.FromResult(results);
+    }
+
+    private Task<IEnumerable<string>> SearchSemantics(string? value, CancellationToken ct)
+    {
+        var results = string.IsNullOrWhiteSpace(value)
+            ? _semanticOptions.AsEnumerable()
+            : _semanticOptions.Where(s => s.Contains(value, StringComparison.OrdinalIgnoreCase));
+        return Task.FromResult(results);
+    }
+
+    private Task<IEnumerable<string>> SearchEdgeLabels(string? value, CancellationToken ct)
+    {
+        var results = string.IsNullOrWhiteSpace(value)
+            ? _edgeLabels.AsEnumerable()
+            : _edgeLabels.Where(l => FormatPropertyKey(l).Contains(value, StringComparison.OrdinalIgnoreCase));
+        return Task.FromResult(results);
+    }
+
     private async void OnGlobalFilterChanged()
     {
-        await InvokeAsync(() =>
+        await InvokeAsync(async () =>
         {
+            // Clear label selection if it might not exist in the new filter context
+            if (!string.IsNullOrEmpty(_selectedLabel))
+            {
+                _selectedLabel = "";
+            }
+
+            await LoadEntityTypes();
             _table?.ReloadServerData();
             _labelTable?.ReloadServerData();
             StateHasChanged();
@@ -603,8 +640,8 @@
                 qs["fromType"] = _labelFromType;
             if (!string.IsNullOrWhiteSpace(_labelToType))
                 qs["toType"] = _labelToType;
-            if (_labelMinCount > 0)
-                qs["minCount"] = _labelMinCount.ToString();
+            if (_labelMinCount is > 0)
+                qs["minCount"] = _labelMinCount.Value.ToString();
 
             if (!string.IsNullOrWhiteSpace(state.SortLabel))
             {
@@ -690,12 +727,43 @@
         }
     }
 
-    private string GetYearHelperText() => _selectedCalendar switch
+    private void OnYearInputChanged()
     {
-        "galactic" => "neg=BBY, pos=ABY",
-        "real" => "CE year (e.g. 2015)",
-        _ => "BBY neg / ABY pos / CE",
-    };
+        if (_selectedCalendar == "galactic")
+        {
+            _yearFrom = _yearFromAbs.HasValue ? (_yearFromEra == "BBY" ? -_yearFromAbs.Value : _yearFromAbs.Value) : null;
+            _yearTo = _yearToAbs.HasValue ? (_yearToEra == "BBY" ? -_yearToAbs.Value : _yearToAbs.Value) : null;
+        }
+        else
+        {
+            _yearFrom = _yearFromAbs;
+            _yearTo = _yearToAbs;
+        }
+        OnFilterChanged();
+    }
+
+    private void OnCalendarChanged()
+    {
+        _yearFromAbs = null;
+        _yearToAbs = null;
+        _yearFrom = null;
+        _yearTo = null;
+        _yearFromEra = "BBY";
+        _yearToEra = "ABY";
+        OnFilterChanged();
+    }
+
+    private void ToggleFromEra()
+    {
+        _yearFromEra = _yearFromEra == "BBY" ? "ABY" : "BBY";
+        OnYearInputChanged();
+    }
+
+    private void ToggleToEra()
+    {
+        _yearToEra = _yearToEra == "BBY" ? "ABY" : "BBY";
+        OnYearInputChanged();
+    }
 
     private void ClearSelection()
     {
@@ -738,14 +806,15 @@
         }
     }
 
-    static string FormatTypeName(string type) => type switch
+    static string FormatTypeName(string? type) => type switch
     {
+        null or "" => "",
         "CelestialBody" => "Planet / Body",
         _ => System.Text.RegularExpressions.Regex.Replace(type, "(?<!^)([A-Z])", " $1"),
     };
 
-    static string FormatPropertyKey(string key) =>
-        key.Replace("_", " ");
+    static string FormatPropertyKey(string? key) =>
+        key?.Replace("_", " ") ?? "";
 
     static string FormatFacetRole(string semantic)
     {

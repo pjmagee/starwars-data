@@ -13,7 +13,6 @@ public class ChatHistoryService(IHttpClientFactory httpClientFactory, IJSRuntime
     private List<ChatSessionSummary> _sessions = [];
     private bool _loaded;
     private bool _isAuthenticated;
-    private IJSObjectReference? _storageModule;
 
     public IReadOnlyList<ChatSessionSummary> Sessions => _sessions;
 
@@ -35,12 +34,6 @@ public class ChatHistoryService(IHttpClientFactory httpClientFactory, IJSRuntime
         }
     }
 
-    private async Task<IJSObjectReference> GetStorageModuleAsync()
-    {
-        _storageModule ??= await js.InvokeAsync<IJSObjectReference>("import", "./js/chat-storage.js");
-        return _storageModule;
-    }
-
     public async Task LoadAsync()
     {
         try
@@ -55,9 +48,8 @@ public class ChatHistoryService(IHttpClientFactory httpClientFactory, IJSRuntime
             }
             else
             {
-                var module = await GetStorageModuleAsync();
-                var local = await module.InvokeAsync<List<LocalChatSession>>("loadSessions");
-                _sessions = local
+                var local = await js.InvokeAsync<List<LocalChatSession>>("swChatLoad");
+                _sessions = (local ?? [])
                     .Select(s => new ChatSessionSummary
                     {
                         Id = s.Id,
@@ -91,8 +83,7 @@ public class ChatHistoryService(IHttpClientFactory httpClientFactory, IJSRuntime
             }
             else
             {
-                var module = await GetStorageModuleAsync();
-                await module.InvokeVoidAsync("deleteSession", sessionId);
+                await js.InvokeVoidAsync("swChatDelete", sessionId);
             }
 
             _sessions.RemoveAll(s => s.Id == sessionId);
@@ -108,7 +99,6 @@ public class ChatHistoryService(IHttpClientFactory httpClientFactory, IJSRuntime
     /// </summary>
     public async Task SaveLocalSessionAsync(Guid sessionId, string title, List<ChatSessionMessage> messages)
     {
-        var module = await GetStorageModuleAsync();
         var session = new LocalChatSession
         {
             Id = sessionId,
@@ -117,7 +107,7 @@ public class ChatHistoryService(IHttpClientFactory httpClientFactory, IJSRuntime
             UpdatedAt = DateTime.UtcNow,
             Messages = messages,
         };
-        await module.InvokeVoidAsync("saveSession", session);
+        await js.InvokeVoidAsync("swChatSave", session);
 
         // Update in-memory list
         var existing = _sessions.FindIndex(s => s.Id == sessionId);
@@ -142,8 +132,7 @@ public class ChatHistoryService(IHttpClientFactory httpClientFactory, IJSRuntime
     /// </summary>
     public async Task<LocalChatSession?> LoadLocalSessionAsync(Guid sessionId)
     {
-        var module = await GetStorageModuleAsync();
-        return await module.InvokeAsync<LocalChatSession?>("loadSession", sessionId.ToString());
+        return await js.InvokeAsync<LocalChatSession?>("swChatLoadOne", sessionId.ToString());
     }
 
     /// <summary>
@@ -153,8 +142,7 @@ public class ChatHistoryService(IHttpClientFactory httpClientFactory, IJSRuntime
     {
         try
         {
-            var module = await GetStorageModuleAsync();
-            return await module.InvokeAsync<List<LocalChatSession>>("loadSessions");
+            return await js.InvokeAsync<List<LocalChatSession>>("swChatLoad") ?? [];
         }
         catch
         {
@@ -169,8 +157,7 @@ public class ChatHistoryService(IHttpClientFactory httpClientFactory, IJSRuntime
     {
         try
         {
-            var module = await GetStorageModuleAsync();
-            await module.InvokeVoidAsync("clearAll");
+            await js.InvokeVoidAsync("swChatClear");
         }
         catch { }
     }

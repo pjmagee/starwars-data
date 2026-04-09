@@ -53,10 +53,7 @@ builder
                     {
                         using var doc = JsonDocument.Parse(realmAccess);
 
-                        if (
-                            doc.RootElement.TryGetProperty("roles", out var rolesElement)
-                            && rolesElement.ValueKind == JsonValueKind.Array
-                        )
+                        if (doc.RootElement.TryGetProperty("roles", out var rolesElement) && rolesElement.ValueKind == JsonValueKind.Array)
                         {
                             foreach (var role in rolesElement.EnumerateArray())
                             {
@@ -92,7 +89,7 @@ builder
     .AddHttpContextAccessor()
     .AddScoped<EndpointService>()
     .AddScoped<NavigationService>()
-    .AddSingleton<GlobalFilterService>()
+    .AddScoped<GlobalFilterService>()
     .AddScoped<ChatHistoryService>()
     .AddScoped<LayoutService>();
 

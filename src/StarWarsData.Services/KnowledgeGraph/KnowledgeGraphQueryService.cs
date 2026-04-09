@@ -585,15 +585,25 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             }
         }
 
+        // Deduplicate edges between the same directed node pair.
+        // Multiple edges A→B with different labels (e.g. "includes_battle" + "fought_in")
+        // are merged into one edge with the labels joined. This avoids overlapping lines
+        // and duplicate arrows in the D3 graph.
         var resultEdges = filteredEdges
-            .Select(e => new RelationshipGraphEdge
+            .GroupBy(e => (e.from, e.to))
+            .Select(g =>
             {
-                FromId = e.from,
-                ToId = e.to,
-                Label = e.label,
-                Weight = e.weight,
-                FromYear = e.fromYear,
-                ToYear = e.toYear,
+                var best = g.OrderByDescending(e => e.weight).First();
+                var labels = g.Select(e => e.label).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+                return new RelationshipGraphEdge
+                {
+                    FromId = best.from,
+                    ToId = best.to,
+                    Label = string.Join(" / ", labels),
+                    Weight = best.weight,
+                    FromYear = best.fromYear,
+                    ToYear = best.toYear,
+                };
             })
             .ToList();
 
@@ -1663,12 +1673,22 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             pipeline.Add(new BsonDocument("$match", new BsonDocument("_fromNode." + GraphNodeBsonFields.Realm, new BsonDocument("$in", new BsonArray { r.ToString(), nameof(Realm.Unknown) }))));
         }
 
+        // Two-stage group to avoid pushing all edges into a single document (16MB BSON limit).
+        // Stage 1: group by (label, fromType, toType) to get per-triple counts — small result set.
         pipeline.Add(
             new BsonDocument(
                 "$group",
                 new BsonDocument
                 {
-                    { MongoFields.Id, "$" + RelationshipEdgeBsonFields.Label },
+                    {
+                        MongoFields.Id,
+                        new BsonDocument
+                        {
+                            { "label", "$" + RelationshipEdgeBsonFields.Label },
+                            { "fromType", "$" + RelationshipEdgeBsonFields.FromType },
+                            { "toType", "$" + RelationshipEdgeBsonFields.ToType },
+                        }
+                    },
                     { "count", new BsonDocument("$sum", 1) },
                     {
                         "canonCount",
@@ -1685,8 +1705,6 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                         )
                     },
                     { "avgWeight", new BsonDocument("$avg", "$" + RelationshipEdgeBsonFields.Weight) },
-                    { "fromTypes", new BsonDocument("$push", "$" + RelationshipEdgeBsonFields.FromType) },
-                    { "toTypes", new BsonDocument("$push", "$" + RelationshipEdgeBsonFields.ToType) },
                     {
                         "sample",
                         new BsonDocument(
@@ -1700,6 +1718,24 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                             }
                         )
                     },
+                }
+            )
+        );
+
+        // Stage 2: re-group by label, rolling up type counts and merging stats.
+        pipeline.Add(
+            new BsonDocument(
+                "$group",
+                new BsonDocument
+                {
+                    { MongoFields.Id, "$_id.label" },
+                    { "count", new BsonDocument("$sum", "$count") },
+                    { "canonCount", new BsonDocument("$sum", "$canonCount") },
+                    { "legendsCount", new BsonDocument("$sum", "$legendsCount") },
+                    { "avgWeight", new BsonDocument("$avg", "$avgWeight") },
+                    { "fromTypes", new BsonDocument("$push", new BsonDocument { { "type", "$_id.fromType" }, { "count", "$count" } }) },
+                    { "toTypes", new BsonDocument("$push", new BsonDocument { { "type", "$_id.toType" }, { "count", "$count" } }) },
+                    { "sample", new BsonDocument("$first", "$sample") },
                 }
             )
         );
@@ -1732,12 +1768,12 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         var totalArr = result["total"].AsBsonArray;
         var total = totalArr.Count > 0 ? totalArr[0]["n"].ToInt64() : 0;
 
+        // fromTypes/toTypes are now pre-aggregated {type, count} docs from the two-stage group
         static List<TypeCount> TopTypes(BsonValue arr) =>
             arr
-                .AsBsonArray.Select(x => x.IsBsonNull ? string.Empty : x.AsString)
-                .Where(s => !string.IsNullOrEmpty(s))
-                .GroupBy(s => s)
-                .Select(g => new TypeCount { Type = g.Key, Count = g.LongCount() })
+                .AsBsonArray.Where(x => x.IsBsonDocument && !x["type"].IsBsonNull && x["type"].AsString != "")
+                .GroupBy(x => x["type"].AsString)
+                .Select(g => new TypeCount { Type = g.Key, Count = g.Sum(x => x["count"].ToInt64()) })
                 .OrderByDescending(t => t.Count)
                 .Take(5)
                 .ToList();

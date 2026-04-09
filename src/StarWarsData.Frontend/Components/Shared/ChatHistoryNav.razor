@@ -81,8 +81,14 @@
     {
         if (firstRender)
         {
-            // JS interop is only available after first render (Blazor Server)
-            await ChatHistory.EnsureLoadedAsync();
+            // First attempt may fail with TaskCanceledException during
+            // prerender→interactive circuit handoff. Retry after delay.
+            await ChatHistory.LoadAsync();
+            if (ChatHistory.Sessions.Count == 0)
+            {
+                await Task.Delay(500);
+                await ChatHistory.LoadAsync();
+            }
             _sessions = ChatHistory.Sessions;
             StateHasChanged();
         }

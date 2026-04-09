@@ -62,6 +62,20 @@ public class SettingsOptions
     /// <summary>Single unified database for all collections (app data + Hangfire).</summary>
     /// <remarks>Defaults to dev — production overrides via appsettings or env var Settings__DatabaseName.</remarks>
     public string DatabaseName { get; set; } = "starwars-dev";
+
+    // ── Keycloak Admin API (service account for GDPR user deletion) ──
+
+    /// <summary>Base URL of the Keycloak server (e.g. "https://auth.magaoidh.pro").</summary>
+    public string KeycloakBaseUrl { get; set; } = "https://auth.magaoidh.pro";
+
+    /// <summary>Keycloak realm name.</summary>
+    public string KeycloakRealm { get; set; } = "starwars-data";
+
+    /// <summary>Client ID of the confidential service-account client.</summary>
+    public string KeycloakAdminClientId { get; set; } = "starwars-api-admin";
+
+    /// <summary>Client secret for the service-account client.</summary>
+    public string KeycloakAdminClientSecret { get; set; } = null!;
 }
 
 /// <summary>

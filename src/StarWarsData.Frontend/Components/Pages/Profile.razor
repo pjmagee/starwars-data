@@ -280,7 +280,9 @@
                 else
                 {
                     <MudAlert Severity="Severity.Warning" Dense="true" Class="mb-3">
-                        Are you sure? This will permanently delete all your chat sessions, API keys, and settings.
+                        Are you sure? This will permanently delete <strong>all</strong> your data, including chat sessions, API keys, settings,
+                        and your account on <strong>auth.magaoidh.pro</strong> (including any linked sign-in providers such as Microsoft, Facebook, or Google).
+                        You will be signed out and will need to create a new account to use this site again.
                     </MudAlert>
                     <MudStack Row="true" Spacing="2">
                         <MudButton Variant="Variant.Filled" Color="Color.Error"
@@ -461,6 +463,10 @@
                 _deleteSuccess = true;
                 _confirmDelete = false;
                 _hasOpenAiKey = false;
+                // Keycloak account was deleted — sign the user out after a brief delay
+                // so they can see the success message before being redirected.
+                _ = Task.Delay(2000).ContinueWith(_ =>
+                    InvokeAsync(() => NavigationManager.NavigateTo("/authentication/logout", forceLoad: true)));
             }
             else
             {

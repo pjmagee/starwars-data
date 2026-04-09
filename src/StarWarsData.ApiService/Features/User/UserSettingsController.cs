@@ -6,41 +6,27 @@ namespace StarWarsData.ApiService.Controllers;
 
 [ApiController]
 [Route("api/user/settings")]
-public class UserSettingsController(
-    UserSettingsService userSettingsService,
-    ChatSessionService chatSessionService,
-    ByokChatClient byokChatClient
-) : ControllerBase
+public class UserSettingsController(UserSettingsService userSettingsService, ChatSessionService chatSessionService, ByokChatClient byokChatClient, KeycloakAdminService keycloakAdminService)
+    : ControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult> GetSettings(
-        [FromHeader(Name = "X-User-Id")] string? userId,
-        CancellationToken ct
-    )
+    public async Task<ActionResult> GetSettings([FromHeader(Name = "X-User-Id")] string? userId, CancellationToken ct)
     {
         if (string.IsNullOrWhiteSpace(userId))
             return Unauthorized();
 
         var settings = await userSettingsService.GetAsync(userId, ct);
-        return Ok(
-            new { hasOpenAiKey = settings?.OpenAiKeySet == true, updatedAt = settings?.UpdatedAt }
-        );
+        return Ok(new { hasOpenAiKey = settings?.OpenAiKeySet == true, updatedAt = settings?.UpdatedAt });
     }
 
     [HttpPut("openai-key")]
-    public async Task<ActionResult> SetOpenAiKey(
-        [FromHeader(Name = "X-User-Id")] string? userId,
-        [FromBody] SetKeyRequest request,
-        CancellationToken ct
-    )
+    public async Task<ActionResult> SetOpenAiKey([FromHeader(Name = "X-User-Id")] string? userId, [FromBody] SetKeyRequest request, CancellationToken ct)
     {
         if (string.IsNullOrWhiteSpace(userId))
             return Unauthorized();
 
         if (string.IsNullOrWhiteSpace(request.ApiKey) || !request.ApiKey.StartsWith("sk-"))
-            return BadRequest(
-                new { error = "Invalid OpenAI API key format. Keys should start with 'sk-'." }
-            );
+            return BadRequest(new { error = "Invalid OpenAI API key format. Keys should start with 'sk-'." });
 
         await userSettingsService.SetOpenAiKeyAsync(userId, request.ApiKey, ct);
         byokChatClient.InvalidateClient(userId);
@@ -49,10 +35,7 @@ public class UserSettingsController(
     }
 
     [HttpDelete("openai-key")]
-    public async Task<ActionResult> RemoveOpenAiKey(
-        [FromHeader(Name = "X-User-Id")] string? userId,
-        CancellationToken ct
-    )
+    public async Task<ActionResult> RemoveOpenAiKey([FromHeader(Name = "X-User-Id")] string? userId, CancellationToken ct)
     {
         if (string.IsNullOrWhiteSpace(userId))
             return Unauthorized();
@@ -67,10 +50,7 @@ public class UserSettingsController(
     /// GDPR right to erasure — deletes all user data (settings, BYOK key, chat sessions).
     /// </summary>
     [HttpDelete("all-data")]
-    public async Task<ActionResult> DeleteAllUserData(
-        [FromHeader(Name = "X-User-Id")] string? userId,
-        CancellationToken ct
-    )
+    public async Task<ActionResult> DeleteAllUserData([FromHeader(Name = "X-User-Id")] string? userId, CancellationToken ct)
     {
         if (string.IsNullOrWhiteSpace(userId))
             return Unauthorized();
@@ -79,17 +59,24 @@ public class UserSettingsController(
         await userSettingsService.DeleteAllUserDataAsync(userId, ct);
         var sessionsDeleted = await chatSessionService.DeleteAllUserDataAsync(userId, ct);
 
-        return Ok(new { deleted = true, sessionsDeleted });
+        // Delete the user from Keycloak (GDPR right to erasure — removes account, federated links, sessions)
+        var keycloakDeleted = await keycloakAdminService.DeleteUserAsync(userId, ct);
+
+        return Ok(
+            new
+            {
+                deleted = true,
+                sessionsDeleted,
+                keycloakDeleted,
+            }
+        );
     }
 
     /// <summary>
     /// GDPR right of access — exports all user data as a JSON file.
     /// </summary>
     [HttpGet("export")]
-    public async Task<ActionResult> ExportUserData(
-        [FromHeader(Name = "X-User-Id")] string? userId,
-        CancellationToken ct
-    )
+    public async Task<ActionResult> ExportUserData([FromHeader(Name = "X-User-Id")] string? userId, CancellationToken ct)
     {
         if (string.IsNullOrWhiteSpace(userId))
             return Unauthorized();
@@ -127,14 +114,7 @@ public class UserSettingsController(
             }),
         };
 
-        var json = JsonSerializer.SerializeToUtf8Bytes(
-            export,
-            new JsonSerializerOptions
-            {
-                WriteIndented = true,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            }
-        );
+        var json = JsonSerializer.SerializeToUtf8Bytes(export, new JsonSerializerOptions { WriteIndented = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
 
         return File(json, "application/json", $"swdata-export-{DateTime.UtcNow:yyyy-MM-dd}.json");
     }

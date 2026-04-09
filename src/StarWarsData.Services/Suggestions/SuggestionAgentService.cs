@@ -161,7 +161,16 @@ public sealed class SuggestionAgentService(
 
     static string BuildExplorationPrompt(Continuity continuity, Realm realm, string bucketLabel)
     {
-        var continuityInstruction = continuity == Continuity.Canon ? "use the continuity filter 'Canon' when calling tools" : "use the continuity filter 'Legends' when calling tools";
+        // Real-world KG nodes (actors, authors, books, etc.) are overwhelmingly tagged
+        // continuity=Unknown because Wookieepedia meta-articles don't carry a continuity
+        // banner. Filtering tool calls by Canon/Legends would miss nearly all data.
+        // Instead, tell the agent to explore without a continuity filter and theme the
+        // questions toward Canon-era or Legends-era media via the prompt text.
+        var continuityInstruction =
+            realm == Realm.Real
+                ? $"Do NOT pass a continuity filter when calling KG tools — real-world nodes are tagged 'Unknown' continuity in the database. Instead, focus your questions thematically on {continuity}-era media, publications, and creators."
+            : continuity == Continuity.Canon ? "use the continuity filter 'Canon' when calling tools"
+            : "use the continuity filter 'Legends' when calling tools";
 
         var realmExploration =
             realm == Realm.Real

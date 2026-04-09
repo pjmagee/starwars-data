@@ -156,8 +156,8 @@ export function renderForceGraph(containerId, data, dotnetRef) {
             .attr('x1', d => d.source.x).attr('y1', d => d.source.y)
             .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
         linkGroup.selectAll('text')
-            .attr('x', d => (d.source.x + d.target.x) / 2)
-            .attr('y', d => (d.source.y + d.target.y) / 2);
+            .attr('x', d => d.source.x + (d.target.x - d.source.x) * (d._labelPos ?? 0.5))
+            .attr('y', d => d.source.y + (d.target.y - d.source.y) * (d._labelPos ?? 0.5));
         nodeGroup.selectAll('g.node')
             .attr('transform', d => `translate(${d.x},${d.y})`);
     }
@@ -290,8 +290,19 @@ function updateVisuals() {
         .attr('stroke-opacity', 0.6)
         .attr('marker-end', 'url(#arrowhead)');
 
-    // Edge labels
-    const edgeLabel = linkGroup.selectAll('text').data(linksData, d => `${d.source.id ?? d.source}-${d.target.id ?? d.target}-${d.label}`);
+    // Edge labels — position at varying points along the edge to avoid overlap
+    // when a hub node has many edges with the same label to different targets.
+    // First edge gets label at 60% (closer to target), subsequent ones at 75%, 85%, etc.
+    const sourceLabelCounts = {};
+    const edgeLabelData = linksData.map(d => {
+        const srcId = d.source.id ?? d.source;
+        const key = `${srcId}-${d.label}`;
+        const idx = sourceLabelCounts[key] || 0;
+        sourceLabelCounts[key] = idx + 1;
+        return { ...d, _labelPos: idx === 0 ? 0.5 : 0.3 + idx * 0.1 };
+    });
+
+    const edgeLabel = linkGroup.selectAll('text').data(edgeLabelData, d => `${d.source.id ?? d.source}-${d.target.id ?? d.target}-${d.label}`);
     edgeLabel.exit().remove();
     edgeLabel.enter().append('text')
         .text(d => formatLabel(d.label))

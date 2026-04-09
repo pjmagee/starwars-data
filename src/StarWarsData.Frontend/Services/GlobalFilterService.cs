@@ -1,32 +1,77 @@
+using Microsoft.JSInterop;
 using StarWarsData.Models.Entities;
 
 namespace StarWarsData.Frontend.Services;
 
 /// <summary>
-/// Service for managing application-wide content filters: continuity (Canon/Legends) and realm (Star Wars/Real world)
+/// Service for managing application-wide content filters: continuity (Canon/Legends) and realm (Star Wars/Real world).
+/// Filter state is persisted in sessionStorage so it survives page refreshes within the same browser tab.
 /// </summary>
-public class GlobalFilterService
+public class GlobalFilterService(IJSRuntime js)
 {
-    private Continuity? _selectedContinuity = null; // null = both
-    private Realm? _selectedRealm = Realm.Starwars; // default to in-universe Star Wars content
+    private Continuity? _selectedContinuity = Continuity.Canon; // default Canon only (Legends OFF)
+    private Realm? _selectedRealm = Realm.Starwars;
+    private bool _loaded;
 
-    /// <summary>
-    /// The currently selected continuity filter. Null means both Canon and Legends.
-    /// </summary>
     public Continuity? SelectedContinuity => _selectedContinuity;
-
-    /// <summary>
-    /// The currently selected realm filter. Null means both Star Wars and Real.
-    /// </summary>
     public Realm? SelectedRealm => _selectedRealm;
 
     public event Action? OnChange;
+
+    /// <summary>
+    /// Load persisted filter state from sessionStorage. Call from OnAfterRenderAsync(firstRender).
+    /// </summary>
+    public async Task LoadFromStorageAsync()
+    {
+        if (_loaded)
+            return;
+        _loaded = true;
+
+        try
+        {
+            var continuity = await js.InvokeAsync<string?>("sessionStorage.getItem", "sw-filter-continuity");
+            var realm = await js.InvokeAsync<string?>("sessionStorage.getItem", "sw-filter-realm");
+
+            var changed = false;
+
+            if (continuity is not null)
+            {
+                var parsed =
+                    continuity == "" ? null
+                    : Enum.TryParse<Continuity>(continuity, true, out var c) ? c
+                    : (Continuity?)null;
+                if (parsed != _selectedContinuity)
+                {
+                    _selectedContinuity = parsed;
+                    changed = true;
+                }
+            }
+
+            if (realm is not null)
+            {
+                var parsed =
+                    realm == "" ? null
+                    : Enum.TryParse<Realm>(realm, true, out var r) ? r
+                    : (Realm?)null;
+                if (parsed != _selectedRealm)
+                {
+                    _selectedRealm = parsed;
+                    changed = true;
+                }
+            }
+
+            if (changed)
+                OnChange?.Invoke();
+        }
+        catch { }
+    }
 
     public void SetContinuity(Continuity? continuity)
     {
         if (_selectedContinuity != continuity)
         {
             _selectedContinuity = continuity;
+            PersistAsync();
             OnChange?.Invoke();
         }
     }
@@ -36,17 +81,22 @@ public class GlobalFilterService
         if (_selectedRealm != realm)
         {
             _selectedRealm = realm;
+            PersistAsync();
             OnChange?.Invoke();
         }
     }
 
-    /// <summary>
-    /// Gets the continuity as a query parameter string for API calls, or null if no filtering.
-    /// </summary>
     public string? GetContinuityQueryParam() => _selectedContinuity?.ToString();
 
-    /// <summary>
-    /// Gets the realm as a query parameter string for API calls, or null if no filtering.
-    /// </summary>
     public string? GetRealmQueryParam() => _selectedRealm?.ToString();
+
+    private async void PersistAsync()
+    {
+        try
+        {
+            await js.InvokeVoidAsync("sessionStorage.setItem", "sw-filter-continuity", _selectedContinuity?.ToString() ?? "");
+            await js.InvokeVoidAsync("sessionStorage.setItem", "sw-filter-realm", _selectedRealm?.ToString() ?? "");
+        }
+        catch { }
+    }
 }
