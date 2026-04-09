@@ -1018,7 +1018,7 @@
             info.Result = contentJson;
 
         // Check if this is a render_* tool and create inline visualization
-        if (toolName is "render_table" or "render_data_table" or "render_chart" or "render_graph" or "render_timeline" or "render_infobox" or "render_markdown" or "render_aurebesh"
+        if (toolName is "render_table" or "render_data_table" or "render_chart" or "render_graph" or "render_path" or "render_timeline" or "render_infobox" or "render_markdown" or "render_aurebesh"
             && contentJson is not null)
         {
             var vizMsg = new ConversationMessage { Role = ConversationRole.Visualization };
@@ -1039,6 +1039,7 @@
                         vizMsg.ChartDescriptor = JsonSerializer.Deserialize<ChartDescriptor>(contentJson, JsonOpts);
                         break;
                     case "render_graph":
+                    case "render_path":
                         vizMsg.VisualizationType = "graph";
                         vizMsg.GraphDescriptor = JsonSerializer.Deserialize<GraphDescriptor>(contentJson, JsonOpts);
                         break;

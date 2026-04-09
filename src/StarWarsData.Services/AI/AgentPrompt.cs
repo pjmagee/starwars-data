@@ -50,7 +50,8 @@ public static class AgentPrompt
         FRONTEND-FETCHED — these render tools fetch their own data. The agent provides config only (IDs, types, fields). Minimal research needed — just find the right identifiers:
         - render_infobox(pageIds): wiki-style profile cards. Accepts multiple PageIds for side-by-side comparison. Frontend fetches all infobox data.
         - render_table(infoboxType, fields): paginated browsable table. Frontend fetches and paginates. Agent provides type + 3-6 field names.
-        - render_graph(rootEntityId, labels, layoutMode): relationship network powered by kg.edges. Call get_relationship_types(entityId) first to discover available KG edge labels. Pass relevant labels to focus the graph. Two layout modes: layoutMode="tree" renders a hierarchical top-down layout (root at top, connections below) — works for ANY entity type (family trees, government hierarchies, organizational structures). layoutMode="force" (default) renders a physics-based network for general exploration.
+        - render_graph(rootEntityId, labels, layoutMode): relationship network powered by kg.edges. Call get_relationship_types(entityId) first to discover available KG edge labels. Pass relevant labels to focus the graph. Layout modes: layoutMode="Tree" renders a hierarchical top-down layout (root at top, connections below) — works for ANY entity type. layoutMode="Force" (default) renders a physics-based network for general exploration. Do NOT use this for shortest-path results — use render_path instead.
+        - render_path(fromEntityId, toEntityId, pathSteps): focused path graph showing only the shortest connection between two entities. Call find_connections() first, then pass the path steps. Renders nodes left-to-right in chain order — no BFS expansion, no extra nodes.
         - render_timeline(categories, yearFrom, yearTo): temporal events. Frontend fetches events. Agent provides category names (call list_timeline_categories if unsure) + optional year range.
 
         AGENT-PROVIDED — agent must query data first, then pass results to these render tools:
@@ -159,15 +160,15 @@ public static class AgentPrompt
         - "Show all battles / Browse species" → render_table(infoboxType, fields)
         - "List all wars with dates and outcomes" → render_table("War", ["Date", "Outcome", ...])
 
-        RELATIONSHIPS & NETWORKS (use KG tools for discovery, render_graph for visualization):
-        - "Family tree of X" → search_entities to find a CHARACTER (not a Family) → get_relationship_types(entityId) to discover labels → render_graph(labels=["child_of","parent_of","partner_of","sibling_of"], layoutMode="tree", maxDepth=3)
+        RELATIONSHIPS & NETWORKS (use KG tools for discovery, render_graph/render_path for visualization):
+        - "Family tree of X" → search_entities to find a CHARACTER (not a Family) → get_relationship_types(entityId) to discover labels → render_graph(labels=["child_of","parent_of","partner_of","sibling_of"], layoutMode="Tree", maxDepth=3)
           IMPORTANT: Root MUST be a Character. "Skywalker family tree" → root on "Anakin Skywalker", NOT "Skywalker family".
-        - "Master-apprentice lineage of X" → search_entities → get_relationship_types → render_graph(labels=["apprentice_of","master_of"], layoutMode="tree", maxDepth=3)
-        - "Political hierarchy of X" → search_entities → get_relationship_types → render_graph(labels=["head_of_state","has_military_branch","has_executive_branch","has_legislative_branch","has_judicial_branch","commander_in_chief"], maxDepth=3, layoutMode="tree"). Use enabledLabels to pre-select only the most relevant structural labels — omit ancillary labels like has_capital, uses_currency, has_anthem.
+        - "Master-apprentice lineage of X" → search_entities → get_relationship_types → render_graph(labels=["apprentice_of","master_of"], layoutMode="Tree", maxDepth=3)
+        - "Political hierarchy of X" → search_entities → get_relationship_types → render_graph(labels=["head_of_state","has_military_branch","has_executive_branch","has_legislative_branch","has_judicial_branch","commander_in_chief"], maxDepth=3, layoutMode="Tree"). Use enabledLabels to pre-select only the most relevant structural labels — omit ancillary labels like has_capital, uses_currency, has_anthem.
         - "Who trained X?" → search_entities → get_entity_relationships(label="apprentice_of") → render_markdown or render_data_table
         - "All of X's mentorship ties" / "X's military associations" → search_entities → get_relationships_by_category(entityId, category="mentorship"|"military"|"family"|...) → render_markdown or render_graph. Scopes to one topical lens without needing to enumerate label names.
-        - "How is X related to Y?" → search_entities for both → find_connections → render_markdown
-        - "X's connections" → search_entities → get_relationship_types → render_graph(labels=[relevant labels], layoutMode="force")
+        - "How is X related to Y?" / "Trace connection from X to Y" / "Shortest path between X and Y" → search_entities for both → find_connections → render_path (pass the path steps directly — renders a focused graph with only the path nodes)
+        - "X's connections" → search_entities → get_relationship_types → render_graph(labels=[relevant labels], layoutMode="Force")
 
         TEMPORAL & GALAXY (agent-provided):
         - "What happened in 19 BBY?" → get_galaxy_year(-19) → render_markdown
@@ -252,7 +253,8 @@ public static class AgentPrompt
         - semantic_search finds content by meaning — ALWAYS use it for lore, history, motivations, consequences, and explanation questions. Do NOT use it for profiles, browsing, timelines, or structured lookups — those have faster dedicated tools.
         - keyword_search is for exact title/name lookups only. If the question is conceptual or asks why/how, use semantic_search instead.
         - render_markdown supports full markdown — use headings, bold, lists, and links for readability.
-        - render_graph: Call get_relationship_types(entityId) first to discover available KG edge labels. Pass only relevant labels to focus the graph. layoutMode="tree" works for ANY entity type — hierarchy is inferred from graph structure (BFS depth from root). Use "tree" for family trees, government hierarchies, organizational structures. Use "force" for general exploration. Labels use snake_case (e.g. child_of, head_of_state, affiliated_with).
+        - render_graph: Call get_relationship_types(entityId) first to discover available KG edge labels. Pass only relevant labels to focus the graph. layoutMode="Tree" works for ANY entity type — hierarchy is inferred from graph structure (BFS depth from root). Use "Tree" for family trees, government hierarchies, organizational structures. Use "Force" for general exploration. Labels use snake_case (e.g. child_of, head_of_state, affiliated_with). Do NOT use render_graph for shortest-path results — use render_path instead.
+        - render_path: For path/connection queries between two entities. Call find_connections() first, then pass the path steps to render_path(). The path steps include fromId/toId/fromName/toName/fromType/toType/label/evidence — pass them directly. Renders a focused left-to-right graph with only the path nodes and edges.
         - render_timeline: use list_timeline_categories if you don't know valid category names.
         - find_entities_by_year: use sort-key format (negative=BBY, positive=ABY) for galactic dates, CE years for publication dates. ONE call for ranges via year+yearEnd. Use semantic parameter to distinguish "alive during" from "existed during".
         - get_entity_timeline: returns temporalFacets — read the semantic field to understand what each date means. Present lifecycle chains in order (established → fragmented → reorganized → dissolved → restored).

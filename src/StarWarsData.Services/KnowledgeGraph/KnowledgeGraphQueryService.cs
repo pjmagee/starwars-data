@@ -829,7 +829,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
     }
 
     /// <summary>Bidirectional BFS to find the shortest path between two entities.</summary>
-    public async Task<(bool connected, List<(int from, int to, string label, string evidence, string fromName, string toName)> path)> FindConnectionsAsync(
+    public async Task<(bool connected, List<(int from, int to, string label, string evidence, string fromName, string fromType, string toName, string toType)> path)> FindConnectionsAsync(
         int entityId1,
         int entityId2,
         int maxHops,
@@ -866,10 +866,10 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
 
         var frontier1 = new HashSet<int> { entityId1 };
         var frontier2 = new HashSet<int> { entityId2 };
-        var visited1 = new Dictionary<int, (int parent, string label, string evidence, string fromName, string toName)>();
-        var visited2 = new Dictionary<int, (int parent, string label, string evidence, string fromName, string toName)>();
-        visited1[entityId1] = (-1, "", "", "", "");
-        visited2[entityId2] = (-1, "", "", "", "");
+        var visited1 = new Dictionary<int, (int parent, string label, string evidence, string fromName, string fromType, string toName, string toType)>();
+        var visited2 = new Dictionary<int, (int parent, string label, string evidence, string fromName, string fromType, string toName, string toType)>();
+        visited1[entityId1] = (-1, "", "", "", "", "", "");
+        visited2[entityId2] = (-1, "", "", "", "", "", "");
 
         int? meetingPoint = null;
 
@@ -897,16 +897,16 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         if (meetingPoint is null)
             return (false, []);
 
-        var path = new List<(int from, int to, string label, string evidence, string fromName, string toName)>();
+        var path = new List<(int from, int to, string label, string evidence, string fromName, string fromType, string toName, string toType)>();
 
         var current = meetingPoint.Value;
-        var pathFromE1 = new List<(int from, int to, string label, string evidence, string fromName, string toName)>();
+        var pathFromE1 = new List<(int from, int to, string label, string evidence, string fromName, string fromType, string toName, string toType)>();
         while (current != entityId1 && visited1.ContainsKey(current))
         {
-            var (parent, label, evidence, fromName, toName) = visited1[current];
+            var (parent, label, evidence, fromName, fromType, toName, toType) = visited1[current];
             if (parent == -1)
                 break;
-            pathFromE1.Add((parent, current, label, evidence, fromName, toName));
+            pathFromE1.Add((parent, current, label, evidence, fromName, fromType, toName, toType));
             current = parent;
         }
         pathFromE1.Reverse();
@@ -914,10 +914,10 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         current = meetingPoint.Value;
         while (current != entityId2 && visited2.ContainsKey(current))
         {
-            var (parent, label, evidence, fromName, toName) = visited2[current];
+            var (parent, label, evidence, fromName, fromType, toName, toType) = visited2[current];
             if (parent == -1)
                 break;
-            path.Add((current, parent, label, evidence, fromName, toName));
+            path.Add((current, parent, label, evidence, fromName, fromType, toName, toType));
             current = parent;
         }
 
@@ -927,7 +927,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
 
     async Task<HashSet<int>> ExpandFrontierAsync(
         HashSet<int> frontier,
-        Dictionary<int, (int parent, string label, string evidence, string fromName, string toName)> visited,
+        Dictionary<int, (int parent, string label, string evidence, string fromName, string fromType, string toName, string toType)> visited,
         FilterDefinition<RelationshipEdge>? contFilter,
         CancellationToken ct
     )
@@ -942,7 +942,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         {
             if (!visited.ContainsKey(edge.ToId))
             {
-                visited[edge.ToId] = (edge.FromId, edge.Label, edge.Evidence, edge.FromName, edge.ToName);
+                visited[edge.ToId] = (edge.FromId, edge.Label, edge.Evidence, edge.FromName, edge.FromType, edge.ToName, edge.ToType);
                 newFrontier.Add(edge.ToId);
             }
         }

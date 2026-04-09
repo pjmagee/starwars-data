@@ -1,3 +1,4 @@
+@using StarWarsData.Models.Queries
 @inject IHttpClientFactory HttpClientFactory
 
 <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
@@ -16,10 +17,18 @@
     }
     else if (_graphData is not null)
     {
-        <GraphViewer GraphData="_graphData" LayoutMode="@Descriptor.LayoutMode"
-                     Labels="_allLabels" EnabledLabels="_enabledLabels"
-                     OnLabelToggled="ToggleLabel"
-                     MaxDepth="_maxDepth" OnDepthChanged="OnDepthChanged" />
+        @if (_isPathMode)
+        {
+            @* Path mode: no depth/label controls — the graph is fixed *@
+            <GraphViewer GraphData="_graphData" LayoutMode="@Descriptor.LayoutMode" />
+        }
+        else
+        {
+            <GraphViewer GraphData="_graphData" LayoutMode="@Descriptor.LayoutMode"
+                         Labels="_allLabels" EnabledLabels="_enabledLabels"
+                         OnLabelToggled="ToggleLabel"
+                         MaxDepth="_maxDepth" OnDepthChanged="OnDepthChanged" />
+        }
     }
 
     <AskReferencesSection References="@Descriptor.References" />
@@ -30,6 +39,7 @@
     public GraphDescriptor Descriptor { get; set; } = null!;
 
     private bool _loading = true;
+    private bool _isPathMode;
     private string? _error;
     private int _loadGeneration;
     private RelationshipGraphResult? _graphData;
@@ -42,6 +52,7 @@
 
     protected override async Task OnParametersSetAsync()
     {
+        _isPathMode = Descriptor.PathData is { Steps.Count: > 0 };
         _maxDepth = Descriptor.MaxDepth;
         _allLabels = [..Descriptor.Labels];
         _enabledLabels = Descriptor.EnabledLabels is { Count: > 0 }
@@ -61,23 +72,32 @@
 
         try
         {
-            var activeLabels = _allLabels.Where(_enabledLabels.Contains).ToList();
-            var labelsParam = string.Join(",", activeLabels);
-
-            var query = $"api/RelationshipGraph/query/{Descriptor.RootEntityId}?maxDepth={_maxDepth}";
-            if (!string.IsNullOrEmpty(labelsParam))
-                query += $"&labels={Uri.EscapeDataString(labelsParam)}";
-            if (!string.IsNullOrEmpty(Descriptor.Continuity))
-                query += $"&continuity={Uri.EscapeDataString(Descriptor.Continuity)}";
-
-            var result = await Http.GetFromJsonAsync<RelationshipGraphResult>(query);
-
-            if (generation != _loadGeneration) return;
-
-            if (result?.Nodes is { Count: > 0 })
-                _graphData = result;
+            if (_isPathMode)
+            {
+                // Path mode: build graph inline from PathData — no API call
+                _graphData = BuildGraphFromPath(Descriptor.PathData!);
+            }
             else
-                _error = $"No relationship data found for \"{Descriptor.RootEntityName}\".";
+            {
+                // BFS mode: fetch from API
+                var activeLabels = _allLabels.Where(_enabledLabels.Contains).ToList();
+                var labelsParam = string.Join(",", activeLabels);
+
+                var query = $"api/RelationshipGraph/query/{Descriptor.RootEntityId}?maxDepth={_maxDepth}";
+                if (!string.IsNullOrEmpty(labelsParam))
+                    query += $"&labels={Uri.EscapeDataString(labelsParam)}";
+                if (!string.IsNullOrEmpty(Descriptor.Continuity))
+                    query += $"&continuity={Uri.EscapeDataString(Descriptor.Continuity)}";
+
+                var result = await Http.GetFromJsonAsync<RelationshipGraphResult>(query);
+
+                if (generation != _loadGeneration) return;
+
+                if (result?.Nodes is { Count: > 0 })
+                    _graphData = result;
+                else
+                    _error = $"No relationship data found for \"{Descriptor.RootEntityName}\".";
+            }
         }
         catch (Exception ex)
         {
@@ -88,6 +108,43 @@
         {
             if (generation == _loadGeneration) _loading = false;
         }
+    }
+
+    static RelationshipGraphResult BuildGraphFromPath(PathData path)
+    {
+        var nodeMap = new Dictionary<int, RelationshipGraphNode>();
+        foreach (var step in path.Steps)
+        {
+            nodeMap.TryAdd(step.FromId, new RelationshipGraphNode
+            {
+                Id = step.FromId,
+                Name = step.FromName,
+                Type = step.FromType,
+            });
+            nodeMap.TryAdd(step.ToId, new RelationshipGraphNode
+            {
+                Id = step.ToId,
+                Name = step.ToName,
+                Type = step.ToType,
+            });
+        }
+
+        var edges = path.Steps.Select(s => new RelationshipGraphEdge
+        {
+            FromId = s.FromId,
+            ToId = s.ToId,
+            Label = s.Label,
+            Weight = 1.0,
+        }).ToList();
+
+        return new RelationshipGraphResult
+        {
+            RootId = path.FromId,
+            RootName = path.FromName,
+            Nodes = [.. nodeMap.Values],
+            Edges = edges,
+            Truncated = false,
+        };
     }
 
     async Task OnDepthChanged(int value)

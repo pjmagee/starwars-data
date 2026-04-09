@@ -331,7 +331,11 @@ public class GraphRAGToolkit
         if (!connected)
             return new ConnectionsDto(Connected: false, SearchedHops: maxHops, Note: $"No connection found within {maxHops} hops.");
 
-        return new ConnectionsDto(Connected: true, PathLength: path.Count, Path: path.Select(s => new ConnectionStepDto(s.fromName, s.toName, s.label, Truncate(s.evidence, 200))).ToList());
+        return new ConnectionsDto(
+            Connected: true,
+            PathLength: path.Count,
+            Path: path.Select(s => new ConnectionStepDto(s.from, s.fromName, s.fromType, s.to, s.toName, s.toType, s.label, Truncate(s.evidence, 200))).ToList()
+        );
     }
 
     [Description(

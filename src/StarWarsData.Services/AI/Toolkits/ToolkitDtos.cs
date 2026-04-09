@@ -67,9 +67,12 @@ public sealed record GraphTraversalRootDto(int Id);
 
 public sealed record GraphTraversalDto(GraphTraversalRootDto Root, List<GraphNodeDto> Nodes, List<GraphEdgeDto> Edges, string Summary);
 
-public sealed record ConnectionStepDto(string From, string To, string Label, string Evidence);
+public sealed record ConnectionStepDto(int FromId, string From, string FromType, int ToId, string To, string ToType, string Label, string Evidence);
 
 public sealed record ConnectionsDto(bool Connected, int? PathLength = null, List<ConnectionStepDto>? Path = null, int? SearchedHops = null, string? Note = null);
+
+/// <summary>Input record for render_path tool — maps from find_connections() output.</summary>
+public sealed record PathStepInput(int FromId, string FromName, string FromType, int ToId, string ToName, string ToType, string Label, string Evidence);
 
 public sealed record LineageStepDto(int Hop, int FromId, string FromName, string FromType, int ToId, string ToName, string ToType, string Label);
 

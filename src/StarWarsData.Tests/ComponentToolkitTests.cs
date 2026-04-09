@@ -258,7 +258,7 @@ public class ComponentToolkitTests
         Assert.Equal("Luke Skywalker", result.RootEntityName);
         Assert.Equal(2, result.MaxDepth); // default
         Assert.Equal(4, result.Labels.Count);
-        Assert.Equal("tree", result.LayoutMode);
+        Assert.Equal(GraphLayoutMode.Tree, result.LayoutMode);
     }
 
     [Fact]

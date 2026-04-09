@@ -1,6 +1,7 @@
-// D3.js unified graph renderer — force-directed (default) and hierarchical tree layouts
+// D3.js unified graph renderer — force-directed (default), hierarchical tree, and path layouts
 // Supports in-place node expansion, navigation history, fullscreen
 // Tree layout: infers hierarchy from BFS depth — works with any edge labels
+// Path layout: horizontal left-to-right chain for shortest-path results
 
 const TYPE_COLORS = {
     Character: '#7e6fff',
@@ -95,12 +96,22 @@ export function renderForceGraph(containerId, data, dotnetRef) {
     addData(data);
 
     const isTreeLayout = data.layoutMode === 'tree';
+    const isPathLayout = data.layoutMode === 'path';
     let simulation = null;
 
     if (isTreeLayout) {
         // ── Tree layout: deterministic positions from BFS depth ──
         computeBfsDepths(nodesData, linksData, data.rootId);
         layoutTreePositions(nodesData, width, height);
+    } else if (isPathLayout) {
+        // ── Path layout: horizontal chain from BFS depth ──
+        computeBfsDepths(nodesData, linksData, data.rootId);
+        layoutPathPositions(nodesData, width, height);
+        // Resolve link source/target IDs to objects (no forceLink to do it)
+        for (const link of linksData) {
+            if (typeof link.source !== 'object') link.source = nodeMap.get(link.source) || link.source;
+            if (typeof link.target !== 'object') link.target = nodeMap.get(link.target) || link.target;
+        }
     } else {
         // ── Force layout: physics simulation ──
         simulation = d3.forceSimulation(nodesData)
@@ -117,7 +128,7 @@ export function renderForceGraph(containerId, data, dotnetRef) {
     _state = {
         container, svg, defs, zoomGroup, zoomBehavior, linkGroup, nodeGroup,
         simulation, nodeMap, edgeSet, nodesData, linksData, dotnetRef,
-        width, height, currentRootId: data.rootId, isTreeLayout,
+        width, height, currentRootId: data.rootId, isTreeLayout, isPathLayout,
     };
 
     updateVisuals();
@@ -127,6 +138,10 @@ export function renderForceGraph(containerId, data, dotnetRef) {
         drawTreeEdges();
         nodeGroup.selectAll('g.node')
             .attr('transform', d => `translate(${d.x},${d.y})`);
+        setTimeout(() => fitToScreen(), 100);
+    } else if (isPathLayout) {
+        // Path layout: straight-line edges, position once, fit to screen
+        tick();
         setTimeout(() => fitToScreen(), 100);
     }
 
@@ -277,6 +292,26 @@ function layoutTreePositions(nodes, width, height) {
     }
 }
 
+/**
+ * Position nodes in a horizontal chain by BFS depth for path layout.
+ * Each depth gets one node, arranged left-to-right.
+ */
+function layoutPathPositions(nodes, width, height) {
+    const NODE_SPACING = 220;
+    const maxDepth = Math.max(...nodes.map(n => n._depth ?? 0), 0);
+    const totalWidth = maxDepth * NODE_SPACING;
+    const startX = (width - totalWidth) / 2;
+    const centerY = height / 2;
+
+    for (const n of nodes) {
+        const depth = n._depth ?? 0;
+        n.x = startX + depth * NODE_SPACING;
+        n.y = centerY;
+        n.fx = n.x;
+        n.fy = n.y;
+    }
+}
+
 function updateVisuals() {
     if (!_state) return;
     const { linkGroup, nodeGroup, simulation, linksData, nodesData, defs, dotnetRef } = _state;
@@ -321,13 +356,14 @@ function updateVisuals() {
     let dragStartX = 0, dragStartY = 0;
     const DRAG_THRESHOLD = 5;
     const isTree = _state?.isTreeLayout;
+    const isPath = _state?.isPathLayout;
 
     const enter = node.enter().append('g')
         .attr('class', 'node')
         .attr('cursor', 'pointer');
 
-    // Only enable drag for force layout (not tree)
-    if (!isTree) {
+    // Only enable drag for force layout (not tree or path — those have fixed positions)
+    if (!isTree && !isPath) {
         enter.call(d3.drag()
             .on('start', (event, d) => {
                 dragMoved = false;

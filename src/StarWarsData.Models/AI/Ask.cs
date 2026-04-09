@@ -5,6 +5,21 @@ namespace StarWarsData.Models.Queries;
 
 public sealed record UserPrompt(string Question, string? Continuity = null);
 
+// ── Graph layout modes ────────────────────────────────────────────────
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum GraphLayoutMode
+{
+    [Description("Physics-based network graph. Nodes repel and edges attract, settling into a natural layout. Best for general exploration and multi-hop networks.")]
+    Force,
+
+    [Description("Hierarchical top-down tree layout. Root at top, connections below in rows by BFS depth. Best for family trees, org charts, government hierarchies.")]
+    Tree,
+
+    [Description("Horizontal path layout. Nodes arranged left-to-right in chain order with straight-line edges. Used for shortest-path results between two entities.")]
+    Path,
+}
+
 // ── Chart subtypes (Bar, Line, Pie, etc.) ──────────────────────────────
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -169,16 +184,67 @@ public class GraphDescriptor
     public List<string>? EnabledLabels { get; set; }
 
     [JsonPropertyName("layoutMode")]
-    [Description("Layout mode: 'force' for physics-based network graph (default), 'tree' for hierarchical layout. " + "Use 'tree' for family trees, lineages, or organizational hierarchies.")]
-    public string LayoutMode { get; set; } = "force";
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    [Description("Layout mode: Force (physics-based network, default), Tree (hierarchical top-down), or Path (horizontal chain for shortest-path results).")]
+    public GraphLayoutMode LayoutMode { get; set; } = GraphLayoutMode.Force;
 
     [JsonPropertyName("continuity")]
     [Description("Optional continuity filter: Canon, Legends, or omit for all")]
     public string? Continuity { get; set; }
 
+    [JsonPropertyName("pathData")]
+    [Description("Pre-resolved path for focused rendering. When present, the frontend renders only these nodes/edges without a BFS API call.")]
+    public PathData? PathData { get; set; }
+
     [JsonPropertyName("references")]
     [Description("Optional source references from wiki pages used to generate this result")]
     public List<Reference>? References { get; set; }
+}
+
+[Description("Pre-resolved shortest path between two entities for focused graph rendering.")]
+public class PathData
+{
+    [JsonPropertyName("fromId")]
+    public int FromId { get; set; }
+
+    [JsonPropertyName("fromName")]
+    public string FromName { get; set; } = string.Empty;
+
+    [JsonPropertyName("toId")]
+    public int ToId { get; set; }
+
+    [JsonPropertyName("toName")]
+    public string ToName { get; set; } = string.Empty;
+
+    [JsonPropertyName("steps")]
+    public List<PathStep> Steps { get; set; } = [];
+}
+
+public class PathStep
+{
+    [JsonPropertyName("fromId")]
+    public int FromId { get; set; }
+
+    [JsonPropertyName("fromName")]
+    public string FromName { get; set; } = string.Empty;
+
+    [JsonPropertyName("fromType")]
+    public string FromType { get; set; } = string.Empty;
+
+    [JsonPropertyName("toId")]
+    public int ToId { get; set; }
+
+    [JsonPropertyName("toName")]
+    public string ToName { get; set; } = string.Empty;
+
+    [JsonPropertyName("toType")]
+    public string ToType { get; set; } = string.Empty;
+
+    [JsonPropertyName("label")]
+    public string Label { get; set; } = string.Empty;
+
+    [JsonPropertyName("evidence")]
+    public string Evidence { get; set; } = string.Empty;
 }
 
 [Description("Timeline component configuration — the frontend fetches paginated timeline events from the API")]

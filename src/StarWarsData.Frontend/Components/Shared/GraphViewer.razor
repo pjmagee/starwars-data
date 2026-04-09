@@ -288,7 +288,7 @@
     [Parameter, EditorRequired]
     public RelationshipGraphResult GraphData { get; set; } = null!;
 
-    [Parameter] public string LayoutMode { get; set; } = "force";
+    [Parameter] public GraphLayoutMode LayoutMode { get; set; } = GraphLayoutMode.Force;
     [Parameter] public int Height { get; set; } = 650;
     [Parameter] public string? Hint { get; set; }
     [Parameter] public EventCallback<(int id, string name)> OnNodeExpandRequested { get; set; }
@@ -391,7 +391,7 @@
         if (_hasTemporalData)
             _selectedTickIndex = 0;
 
-        var data = new { nodes, edges, rootId = GraphData.RootId, layoutMode = LayoutMode };
+        var data = new { nodes, edges, rootId = GraphData.RootId, layoutMode = LayoutMode.ToString().ToLowerInvariant() };
 
         _dotnetRef?.Dispose();
         _dotnetRef = DotNetObjectReference.Create(this);

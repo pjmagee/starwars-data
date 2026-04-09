@@ -123,8 +123,9 @@ public class ComponentToolkit
               political orgs    → head_of_state, has_military_branch, has_executive_branch, commander_in_chief
               alliances         → affiliated_with, member_of
             Layout modes:
-              tree  = hierarchical top-down (works for any entity type: Characters, Governments, Organizations)
-              force = physics-based network for general exploration (default)
+              Tree  = hierarchical top-down (works for any entity type: Characters, Governments, Organizations)
+              Force = physics-based network for general exploration (default)
+            Do NOT use this for shortest-path results — use render_path instead.
             """
     )]
     public GraphDescriptor RenderGraph(
@@ -134,11 +135,18 @@ public class ComponentToolkit
         [Description("KG edge labels to traverse. Pass only labels relevant to the question, not all available labels.")] List<string> labels,
         [Description("Traversal depth from the root. 1 = direct only, 2 = default (direct + one hop), 3 = deeper hierarchies/family trees.")] int maxDepth = 2,
         [Description("Subset of labels to enable by default in the UI. If omitted, all labels are enabled.")] List<string>? enabledLabels = null,
-        [Description("'tree' for hierarchical top-down (family trees, org charts, political hierarchies), 'force' for physics-based network (default).")] string layoutMode = "force",
+        [Description("'Tree' for hierarchical top-down (family trees, org charts, political hierarchies), 'Force' for physics-based network (default).")] string layoutMode = "Force",
         [Description("Optional continuity filter: Canon, Legends, or omit for all")] string? continuity = null,
         [Description(ReferencesParamDescription)] List<Reference>? references = null
     )
     {
+        if (!Enum.TryParse<GraphLayoutMode>(layoutMode, ignoreCase: true, out var parsedMode))
+            parsedMode = GraphLayoutMode.Force;
+
+        // Path mode is only valid via render_path — clamp to Force if misused here
+        if (parsedMode == GraphLayoutMode.Path)
+            parsedMode = GraphLayoutMode.Force;
+
         GraphResult = new GraphDescriptor
         {
             Title = title,
@@ -147,8 +155,61 @@ public class ComponentToolkit
             MaxDepth = maxDepth,
             Labels = labels,
             EnabledLabels = enabledLabels,
-            LayoutMode = layoutMode is "tree" or "force" ? layoutMode : "force",
+            LayoutMode = parsedMode,
             Continuity = continuity,
+            References = references,
+        };
+        return GraphResult;
+    }
+
+    [Description(
+        """
+            Render a focused path graph showing only the shortest connection between two entities.
+            Call find_connections() first to discover the path, then pass the path steps here.
+            The frontend renders only the specified nodes and edges — no BFS expansion.
+            Nodes are arranged left-to-right in chain order.
+            """
+    )]
+    public GraphDescriptor RenderPath(
+        [Description("Descriptive title for the path graph")] string title,
+        [Description("PageId of the starting entity")] int fromEntityId,
+        [Description("Display name of the starting entity")] string fromEntityName,
+        [Description("PageId of the ending entity")] int toEntityId,
+        [Description("Display name of the ending entity")] string toEntityName,
+        [Description("Path steps from find_connections(). Each step: { fromId, fromName, fromType, toId, toName, toType, label, evidence }")] List<PathStepInput> pathSteps,
+        [Description("Optional continuity filter: Canon, Legends, or omit for all")] string? continuity = null,
+        [Description(ReferencesParamDescription)] List<Reference>? references = null
+    )
+    {
+        GraphResult = new GraphDescriptor
+        {
+            Title = title,
+            RootEntityId = fromEntityId,
+            RootEntityName = fromEntityName,
+            MaxDepth = pathSteps.Count,
+            Labels = pathSteps.Select(s => s.Label).Distinct().ToList(),
+            LayoutMode = GraphLayoutMode.Path,
+            Continuity = continuity,
+            PathData = new PathData
+            {
+                FromId = fromEntityId,
+                FromName = fromEntityName,
+                ToId = toEntityId,
+                ToName = toEntityName,
+                Steps = pathSteps
+                    .Select(s => new PathStep
+                    {
+                        FromId = s.FromId,
+                        FromName = s.FromName,
+                        FromType = s.FromType,
+                        ToId = s.ToId,
+                        ToName = s.ToName,
+                        ToType = s.ToType,
+                        Label = s.Label,
+                        Evidence = s.Evidence,
+                    })
+                    .ToList(),
+            },
             References = references,
         };
         return GraphResult;
@@ -331,6 +392,7 @@ public class ComponentToolkit
             AIFunctionFactory.Create(RenderDataTable, "render_data_table"),
             AIFunctionFactory.Create(RenderChart, "render_chart"),
             AIFunctionFactory.Create(RenderGraph, "render_graph"),
+            AIFunctionFactory.Create(RenderPath, "render_path"),
             AIFunctionFactory.Create(RenderTimeline, "render_timeline"),
             AIFunctionFactory.Create(RenderInfobox, "render_infobox"),
             AIFunctionFactory.Create(RenderText, "render_markdown"),
