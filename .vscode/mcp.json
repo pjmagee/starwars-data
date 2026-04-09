@@ -46,7 +46,14 @@
 				"--version",
 				"9.2.0"
 			]
-		},  
+		},
+		"chrome-devtools": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"chrome-devtools-mcp@latest"
+			]
+		}
 	},
 	"inputs": [
 		{

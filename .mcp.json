@@ -51,6 +51,12 @@
       "env": {
         "MDB_MCP_CONNECTION_STRING": "$MDB_MCP_CONNECTION_STRING"
       }
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "chrome-devtools-mcp@latest"
+      ]
     }
   }
 }
