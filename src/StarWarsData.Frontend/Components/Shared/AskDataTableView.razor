@@ -1,27 +1,56 @@
 @using StarWarsData.Models.Queries
 
-<MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
-    <MudText Typo="Typo.h6" Class="mb-4">@Descriptor.Title</MudText>
-    <MudTable T="List<string>" Items="Descriptor.Rows" Dense="true" Hover="true" Striped="true" Bordered="true">
-        <HeaderContent>
-            @foreach (var col in Descriptor.Columns)
-            {
-                <MudTh>@col</MudTh>
-            }
-        </HeaderContent>
-        <RowTemplate>
-            @for (var i = 0; i < Descriptor.Columns.Count; i++)
-            {
-                var idx = i;
-                <MudTd DataLabel="@Descriptor.Columns[idx]">@(idx < context.Count ? context[idx] : "—")</MudTd>
-            }
-        </RowTemplate>
-        <PagerContent>
-            <MudTablePager />
-        </PagerContent>
-    </MudTable>
-    <AskReferencesSection References="@Descriptor.References" />
-</MudPaper>
+@* Desktop visualization (md+): full inline-row data table *@
+<div class="d-none d-md-block">
+    <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
+        <MudText Typo="Typo.h6" Class="mb-4">@Descriptor.Title</MudText>
+        <MudTable T="List<string>" Items="Descriptor.Rows" Dense="true" Hover="true" Striped="true" Bordered="true">
+            <HeaderContent>
+                @foreach (var col in Descriptor.Columns)
+                {
+                    <MudTh>@col</MudTh>
+                }
+            </HeaderContent>
+            <RowTemplate>
+                @for (var i = 0; i < Descriptor.Columns.Count; i++)
+                {
+                    var idx = i;
+                    <MudTd DataLabel="@Descriptor.Columns[idx]">@(idx < context.Count ? context[idx] : "—")</MudTd>
+                }
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+        <AskReferencesSection References="@Descriptor.References" />
+    </MudPaper>
+</div>
+
+@* Mobile fallback (< md): markdown bullet summary written by the agent *@
+<div class="d-block d-md-none">
+    @if (!string.IsNullOrWhiteSpace(Descriptor.MobileSummary))
+    {
+        <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
+            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-3">
+                <MudIcon Icon="@Icons.Material.Filled.GridOn" Color="Color.Primary" Size="Size.Small" />
+                <MudText Typo="Typo.h6">@Descriptor.Title</MudText>
+            </MudStack>
+            <MudMarkdown Value="@Descriptor.MobileSummary" />
+            <AskReferencesSection References="@Descriptor.References" />
+        </MudPaper>
+    }
+    else
+    {
+        <MudPaper Outlined="true" Class="pa-3 mt-3" Style="width:100%">
+            <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+                <MudIcon Icon="@Icons.Material.Filled.GridOn" Color="Color.Secondary" />
+                <MudText Typo="Typo.body2" Color="Color.Secondary" Style="flex:1">
+                    <strong>@Descriptor.Title</strong> — data table best viewed on desktop
+                </MudText>
+            </MudStack>
+        </MudPaper>
+    }
+</div>
 
 @code {
     [Parameter, EditorRequired]

@@ -30,11 +30,12 @@
         @if (_conversation.Count == 0 && !_loading)
         {
             @* ── Empty state: mode cards + examples ── *@
-            <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="py-8">
-                <MudText Typo="Typo.h5" Align="Align.Center" Class="mb-6" Color="Color.Secondary">
+            <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="py-4 py-sm-8">
+                <MudText Typo="Typo.h5" Align="Align.Center" Class="mb-4 mb-sm-6" Color="Color.Secondary">
                     What would you like to explore?
                 </MudText>
-                <div class="d-flex flex-wrap gap-2 justify-center mb-6">
+                @* Mode card grid hidden below md — pure CSS via MudBlazor display utilities *@
+                <div class="d-none d-md-flex flex-wrap gap-2 justify-center mb-6">
                     @foreach (var mode in _modes)
                     {
                         var m = mode;
@@ -231,8 +232,8 @@
     <div class="ask-chat-input">
         <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="py-2">
 
-            @* Compact mode chips *@
-            <div class="d-flex flex-wrap gap-1 mb-2 justify-center">
+            @* Compact mode chips — visible md and up only, hidden below *@
+            <div class="d-none d-md-flex flex-wrap gap-1 mb-2 justify-center">
                 <MudChip T="string"
                          Color="@(_selectedMode == "auto" ? Color.Primary : Color.Default)"
                          Variant="@(_selectedMode == "auto" ? Variant.Filled : Variant.Outlined)"
@@ -253,10 +254,12 @@
                 }
             </div>
 
-            @* Input row *@
+            @* Input row — two parallel layouts. Desktop (md+): inline. Mobile (<md): stacked.
+               Both bind to the same _model.Prompt; only one is visible per breakpoint via CSS. *@
             <EditForm Model="_model" OnValidSubmit="SubmitAsync">
                 <DataAnnotationsValidator />
-                <div class="d-flex gap-2 align-end">
+                @* Desktop layout: text field + button inline *@
+                <div class="d-none d-md-flex gap-2 align-end">
                     <MudTextField @bind-Value="_model.Prompt"
                                   Label="@(SelectedMode is null ? "Ask anything about Star Wars\u2026" : SelectedMode.Placeholder)"
                                   Variant="Variant.Outlined"
@@ -278,6 +281,27 @@
                         @(_loading ? "Thinking\u2026" : _aiUnavailable ? "Unavailable" : "Send")
                     </MudButton>
                 </div>
+                @* Mobile layout: text field full-width on top, button full-width below *@
+                <div class="d-flex d-md-none flex-column gap-2">
+                    <MudTextField @bind-Value="_model.Prompt"
+                                  Label="Ask anything about Star Wars…"
+                                  Variant="Variant.Outlined"
+                                  Required="true"
+                                  Immediate="true"
+                                  FullWidth="true"
+                                  Disabled="_loading"
+                                  OnKeyDown="OnInputKeyDown"
+                                  Lines="3" />
+                    <MudButton ButtonType="ButtonType.Submit"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               Disabled="@(_loading || _aiUnavailable)"
+                               StartIcon="@Icons.Material.Filled.Send"
+                               FullWidth="true"
+                               Size="Size.Large">
+                        @(_loading ? "Thinking…" : _aiUnavailable ? "Unavailable" : "Send")
+                    </MudButton>
+                </div>
             </EditForm>
 
             @if (!_isAuthenticated)
@@ -296,7 +320,7 @@
     .ask-chat-container {
         display: flex;
         flex-direction: column;
-        height: calc(100vh - 80px);
+        height: calc(100dvh - 80px);
     }
     .ask-chat-messages {
         flex: 1;

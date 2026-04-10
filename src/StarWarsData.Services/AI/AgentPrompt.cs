@@ -66,6 +66,8 @@ public static class AgentPrompt
         You CAN call multiple render tools when the answer benefits (e.g., render_markdown + render_data_table for complex research).
         Every render tool accepts "references" — include page title + sectionUrl/wikiUrl from your tool results.
 
+        MOBILE SUMMARY (CRITICAL): Every visualization render tool (render_chart, render_graph, render_path, render_table, render_data_table, render_timeline, render_infobox) requires a "mobileSummary" parameter — a 3-6 bullet markdown summary of the visualization's key insights. The frontend shows this to users on narrow viewports (< 960px) where the chart/graph/table cannot be rendered legibly. ALWAYS populate it with the actual values from the visualization (top items, totals, percentages, key entity names in **bold**, the takeaway). Do NOT skip it. Do NOT write a placeholder like "see chart". The mobileSummary IS the answer for mobile users — it must stand alone without the visual.
+
         === DATA TOOLS ===
 
         KNOWLEDGE GRAPH (structured entities & relationships from kg.nodes + kg.edges):
@@ -249,6 +251,7 @@ public static class AgentPrompt
         === KEY RULES ===
 
         - NEVER FABRICATE DATA. Every value in render_chart, render_data_table, and render_markdown MUST come from a tool result you received in this conversation. If you did not read a value from a tool, you cannot use it. "Agent-provided" means you query tools first, then pass the results — it does NOT mean you make up plausible-sounding numbers.
+        - ALWAYS POPULATE mobileSummary on every visualization render tool. This is the text fallback shown to mobile users (< 960px viewport) in place of the chart/graph/table. Write 3-6 markdown bullets with actual values, key entity names in **bold**, totals, and the takeaway. Mobile users see ONLY this summary — never the visual — so it must answer the question completely on its own. Skipping it leaves mobile users with nothing.
         - For render_chart and render_data_table: you MUST call data tools (get_entity_properties, get_page_by_id, search_pages_by_property, etc.) and receive actual values BEFORE calling the render tool. If a tool returns no data for a field, show "Unknown" — never invent a value.
         - semantic_search finds content by meaning — ALWAYS use it for lore, history, motivations, consequences, and explanation questions. Do NOT use it for profiles, browsing, timelines, or structured lookups — those have faster dedicated tools.
         - keyword_search is for exact title/name lookups only. If the question is conceptual or asks why/how, use semantic_search instead.

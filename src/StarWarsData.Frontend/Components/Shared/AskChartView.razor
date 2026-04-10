@@ -1,30 +1,62 @@
 @using StarWarsData.Models.Queries
 
-<MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
-    <div class="d-flex align-center gap-3 mb-4">
-        <MudText Typo="Typo.h6" Style="flex:1">@Descriptor.Title</MudText>
-        <MudMenu Icon="@_menuIcons[_chartType]" EndIcon="@Icons.Material.Filled.ArrowDropDown"
-                 Variant="Variant.Outlined" Size="Size.Small" AnchorOrigin="Origin.BottomRight">
-            @foreach (var (type, icon) in _menuIcons)
-            {
-                var t = type;
-                <MudMenuItem Icon="@icon"
-                             OnClick="() => _chartType = t"
-                             Disabled="@(_chartType == t)">
-                    @t
-                </MudMenuItem>
-            }
-        </MudMenu>
-    </div>
+@* Desktop visualization (md and up): full chart with type picker *@
+<div class="d-none d-md-block">
+    <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
+        <div class="d-flex align-center gap-3 mb-4">
+            <MudText Typo="Typo.h6" Style="flex:1">@Descriptor.Title</MudText>
+            <MudMenu Icon="@_menuIcons[_chartType]" EndIcon="@Icons.Material.Filled.ArrowDropDown"
+                     Variant="Variant.Outlined" Size="Size.Small" AnchorOrigin="Origin.BottomRight">
+                @foreach (var (type, icon) in _menuIcons)
+                {
+                    var t = type;
+                    <MudMenuItem Icon="@icon"
+                                 OnClick="() => _chartType = t"
+                                 Disabled="@(_chartType == t)">
+                        @t
+                    </MudMenuItem>
+                }
+            </MudMenu>
+        </div>
 
-    <MudChart ChartType="@_chartType"
-              ChartSeries="@_series"
-              ChartLabels="@_labels"
-              Width="100%" Height="400px"
-              CanHideSeries MatchBoundsToSize />
+        <MudChart ChartType="@_chartType"
+                  ChartSeries="@_series"
+                  ChartLabels="@_labels"
+                  Width="100%" Height="400px"
+                  CanHideSeries MatchBoundsToSize />
 
-    <AskReferencesSection References="@Descriptor.References" />
-</MudPaper>
+        <AskReferencesSection References="@Descriptor.References" />
+    </MudPaper>
+</div>
+
+@* Mobile fallback (below md): markdown bullet summary written by the agent.
+   Falls back to the chart if the agent forgot to populate mobileSummary (legacy sessions). *@
+<div class="d-block d-md-none">
+    @if (!string.IsNullOrWhiteSpace(Descriptor.MobileSummary))
+    {
+        <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
+            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-3">
+                <MudIcon Icon="@Icons.Material.Filled.BarChart" Color="Color.Primary" Size="Size.Small" />
+                <MudText Typo="Typo.h6">@Descriptor.Title</MudText>
+            </MudStack>
+            <MudMarkdown Value="@Descriptor.MobileSummary" />
+            <AskReferencesSection References="@Descriptor.References" />
+        </MudPaper>
+    }
+    else
+    {
+        @* Legacy session without mobileSummary — render the chart at narrow width as a fallback *@
+        <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
+            <MudText Typo="Typo.h6" Class="mb-4">@Descriptor.Title</MudText>
+            <MudChart ChartType="@_chartType"
+                      ChartSeries="@_series"
+                      ChartLabels="@_labels"
+                      Width="100%" Height="400px"
+                      CanHideSeries MatchBoundsToSize />
+            <AskReferencesSection References="@Descriptor.References" />
+        </MudPaper>
+    }
+</div>
 
 @code {
     [Parameter, EditorRequired]

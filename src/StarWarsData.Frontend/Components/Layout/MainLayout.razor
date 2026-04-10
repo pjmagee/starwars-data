@@ -2,12 +2,16 @@
 @using System.Security.Claims
 @using StarWarsData.Models.Entities
 @using StarWarsData.Frontend.Services
+@using StarWarsData.Frontend.Theming
 @inherits LayoutComponentBase
 @inject LayoutService Layout
 @inject IJSRuntime JS
 @implements IDisposable
 
-<MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode"/>
+<MudThemeProvider @ref="_mudThemeProvider"
+                  Theme="@_theme"
+                  @bind-IsDarkMode="_isDarkMode"
+                  ObserveSystemDarkModeChange="true" />
 <MudPopoverProvider/>
 <MudDialogProvider/>
 <MudSnackbarProvider/>
@@ -17,32 +21,91 @@
     <MudAppBar Elevation="1">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())"/>
         <MudImage Src="img/galaxy-logo.svg" Alt="Star Wars Data" Width="32" Height="32" Class="ml-2" />
-        <MudText Typo="Typo.h5" Class="ml-2">Star Wars Data</MudText>
+        @* Title hidden below md (< 960px) — pure CSS via MudBlazor display utilities *@
+        <MudText Typo="Typo.h5" Class="ml-2 d-none d-md-flex">Star Wars Data</MudText>
         <MudSpacer/>
         <ContinuityFilter />
-        <MudLink Href="https://www.buymeacoffee.com/pjmagee" Target="_blank" Class="d-flex align-center" Style="height:28px;">
-            <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=pjmagee&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a coffee" style="height:28px;" />
-        </MudLink>
-        <MudMenu Icon="@Icons.Material.Filled.FormatSize" Color="Color.Inherit"
-                 AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Dense="true">
-            @foreach (var (label, value) in _fontScales)
-            {
-                var v = value;
-                <MudMenuItem OnClick="@(() => SetFontScale(v))"
-                             Icon="@(Math.Abs(_fontScale - v) < 0.01 ? Icons.Material.Filled.Check : null)">
-                    @label
+        @* Desktop-only secondary controls (md and up): individual icon buttons *@
+        <div class="d-none d-md-flex align-center">
+            <MudLink Href="https://www.buymeacoffee.com/pjmagee" Target="_blank" Class="d-flex align-center" Style="height:28px;">
+                <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=pjmagee&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a coffee" style="height:28px;" />
+            </MudLink>
+            <MudMenu Icon="@Icons.Material.Filled.FormatSize" Color="Color.Inherit"
+                     AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Dense="true">
+                @foreach (var (label, value) in _fontScales)
+                {
+                    var v = value;
+                    <MudMenuItem OnClick="@(() => SetFontScale(v))"
+                                 Icon="@(Math.Abs(_fontScale - v) < 0.01 ? Icons.Material.Filled.Check : null)">
+                        @label
+                    </MudMenuItem>
+                }
+            </MudMenu>
+            <MudTooltip Text="Faction theme — change the colour palette">
+                <MudMenu Icon="@Icons.Material.Filled.Palette" Color="Color.Inherit"
+                         AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Dense="true">
+                    @foreach (var theme in Enum.GetValues<SwTheme>())
+                    {
+                        var t = theme;
+                        <MudMenuItem OnClick="@(() => SetTheme(t))"
+                                     Icon="@(_selectedTheme == t ? Icons.Material.Filled.Check : Icons.Material.Filled.Palette)">
+                            @t.Label()
+                        </MudMenuItem>
+                    }
+                </MudMenu>
+            </MudTooltip>
+            <MudTooltip Text="@(_aurebesh ? "Aurebesh mode ON — click to disable" : "Aurebesh mode — render selected text in Star Wars script")">
+                <MudIconButton Icon="@Icons.Material.Filled.Translate" Color="@(_aurebesh ? Color.Warning : Color.Inherit)"
+                               OnClick="ToggleAurebesh" />
+            </MudTooltip>
+            <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle"/>
+            <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Href="https://github.com/pjmagee/starwars-data" Target="_blank" title="GitHub" />
+        </div>
+        @* Mobile-only overflow menu (below md): collapses the desktop icons into one menu *@
+        <div class="d-flex d-md-none align-center">
+            <MudMenu Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit"
+                     AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight" Dense="true">
+                <MudMenuItem OnClick="@DarkModeToggle" Icon="@DarkLightModeButtonIcon">
+                    @(_isDarkMode ? "Light mode" : "Dark mode")
                 </MudMenuItem>
-            }
-        </MudMenu>
-        <MudTooltip Text="@(_aurebesh ? "Aurebesh mode ON — click to disable" : "Aurebesh mode — render selected text in Star Wars script")">
-            <MudIconButton Icon="@Icons.Material.Filled.Translate" Color="@(_aurebesh ? Color.Warning : Color.Inherit)"
-                           OnClick="ToggleAurebesh" />
-        </MudTooltip>
-        <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle"/>
-        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Href="https://github.com/pjmagee/starwars-data" Target="_blank" title="GitHub" />
+                <MudMenuItem OnClick="ToggleAurebesh" Icon="@Icons.Material.Filled.Translate"
+                             IconColor="@(_aurebesh ? Color.Warning : Color.Default)">
+                    @(_aurebesh ? "Aurebesh: ON" : "Aurebesh: OFF")
+                </MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Disabled="true">
+                    <MudText Typo="Typo.caption" Color="Color.Secondary">Theme</MudText>
+                </MudMenuItem>
+                @foreach (var theme in Enum.GetValues<SwTheme>())
+                {
+                    var t = theme;
+                    <MudMenuItem OnClick="@(() => SetTheme(t))"
+                                 Icon="@(_selectedTheme == t ? Icons.Material.Filled.Check : Icons.Material.Filled.Palette)">
+                        @t.Label()
+                    </MudMenuItem>
+                }
+                <MudDivider />
+                <MudMenuItem Disabled="true">
+                    <MudText Typo="Typo.caption" Color="Color.Secondary">Font size</MudText>
+                </MudMenuItem>
+                @foreach (var (label, value) in _fontScales)
+                {
+                    var v = value;
+                    <MudMenuItem OnClick="@(() => SetFontScale(v))"
+                                 Icon="@(Math.Abs(_fontScale - v) < 0.01 ? Icons.Material.Filled.Check : null)">
+                        @label
+                    </MudMenuItem>
+                }
+                <MudDivider />
+                <MudMenuItem Href="https://github.com/pjmagee/starwars-data" Icon="@Icons.Custom.Brands.GitHub">
+                    GitHub
+                </MudMenuItem>
+            </MudMenu>
+        </div>
         <AuthorizeView>
             <Authorized>
-                <MudMenu Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Inherit" AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight">
+                <MudMenu Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Inherit"
+                         AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight">
                     <MudMenuItem Disabled="true">
                         <MudText Typo="Typo.body2">@(context.User.Identity?.Name ?? context.User.FindFirst("preferred_username")?.Value ?? "User")</MudText>
                     </MudMenuItem>
@@ -52,7 +115,12 @@
                 </MudMenu>
             </Authorized>
             <NotAuthorized>
-                <MudButton Href="/authentication/login" Variant="Variant.Text" Color="Color.Inherit" StartIcon="@Icons.Material.Filled.Login">Sign in</MudButton>
+                @* Desktop sign-in button (full text) — md and up *@
+                <MudButton Href="/authentication/login" Variant="Variant.Text" Color="Color.Inherit"
+                           StartIcon="@Icons.Material.Filled.Login" Class="d-none d-md-inline-flex">Sign in</MudButton>
+                @* Mobile sign-in icon — below md *@
+                <MudIconButton Icon="@Icons.Material.Filled.Login" Color="Color.Inherit" Edge="Edge.End"
+                               Href="/authentication/login" title="Sign in" Class="d-flex d-md-none" />
             </NotAuthorized>
         </AuthorizeView>
     </MudAppBar>
@@ -102,6 +170,8 @@
     private bool _aurebesh;
     private MudTheme? _theme;
     private double _fontScale = 1.0;
+    private SwTheme _selectedTheme = SwTheme.Holonet;
+    private MudThemeProvider _mudThemeProvider = null!;
 
     private static readonly (string Label, double Value)[] _fontScales =
     [
@@ -120,20 +190,33 @@
     {
         base.OnInitialized();
         Layout.OnChange += StateHasChanged;
-        _theme = BuildTheme(_fontScale);
+        _theme = BuildTheme(_fontScale, _selectedTheme);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
+            // Seed dark mode from the system preference. The MudThemeProvider also watches
+            // for changes via ObserveSystemDarkModeChange="true" — if the user has not
+            // explicitly toggled dark mode in this session, we honour the OS setting.
+            _isDarkMode = await _mudThemeProvider.GetSystemDarkModeAsync();
+            await _mudThemeProvider.WatchSystemDarkModeAsync(OnSystemDarkModeChanged);
+
+            var savedTheme = await JS.InvokeAsync<string?>("swGetTheme");
+            if (!string.IsNullOrEmpty(savedTheme))
+            {
+                _selectedTheme = SwThemeExtensions.FromId(savedTheme);
+            }
+
             var savedScale = await JS.InvokeAsync<double>("swGetFontScale");
             if (Math.Abs(savedScale - _fontScale) > 0.01)
             {
                 _fontScale = savedScale;
-                _theme = BuildTheme(_fontScale);
-                StateHasChanged();
             }
+
+            _theme = BuildTheme(_fontScale, _selectedTheme);
+            StateHasChanged();
 
             _aurebesh = await JS.InvokeAsync<bool>("swGetAurebesh");
             if (_aurebesh)
@@ -141,11 +224,25 @@
         }
     }
 
+    private Task OnSystemDarkModeChanged(bool newValue)
+    {
+        _isDarkMode = newValue;
+        return InvokeAsync(StateHasChanged);
+    }
+
     private async Task SetFontScale(double scale)
     {
         _fontScale = scale;
-        _theme = BuildTheme(scale);
+        _theme = BuildTheme(scale, _selectedTheme);
         await JS.InvokeVoidAsync("swSetFontScale", scale);
+    }
+
+    private async Task SetTheme(SwTheme theme)
+    {
+        _selectedTheme = theme;
+        _theme = BuildTheme(_fontScale, _selectedTheme);
+        await JS.InvokeVoidAsync("swSetTheme", theme.Id());
+        StateHasChanged();
     }
 
     private async Task ToggleAurebesh()
@@ -154,13 +251,17 @@
         await JS.InvokeVoidAsync("swSetAurebesh", _aurebesh);
     }
 
-    private MudTheme BuildTheme(double scale) => new()
+    private MudTheme BuildTheme(double scale, SwTheme theme)
     {
-        PaletteLight = _lightPalette,
-        PaletteDark = _darkPalette,
-        LayoutProperties = new LayoutProperties(),
-        Typography = ScaleTypography(scale),
-    };
+        var (light, dark) = Themes.GetPalettes(theme);
+        return new MudTheme
+        {
+            PaletteLight = light,
+            PaletteDark = dark,
+            LayoutProperties = new LayoutProperties(),
+            Typography = ScaleTypography(scale),
+        };
+    }
 
     private static MudBlazor.Typography ScaleTypography(double scale)
     {
@@ -203,45 +304,6 @@
     {
         _isDarkMode = !_isDarkMode;
     }
-
-    private readonly PaletteLight _lightPalette = new()
-    {
-        Black = "#110e2d",
-        AppbarText = "#424242",
-        AppbarBackground = "rgba(255,255,255,0.8)",
-        DrawerBackground = "#ffffff",
-        GrayLight = "#e8e8e8",
-        GrayLighter = "#f9f9f9",
-    };
-
-    private readonly PaletteDark _darkPalette = new()
-    {
-        Primary = "#7e6fff",
-        Surface = "#1e1e2d",
-        Background = "#1a1a27",
-        BackgroundGray = "#151521",
-        AppbarText = "#92929f",
-        AppbarBackground = "rgba(26,26,39,0.8)",
-        DrawerBackground = "#1a1a27",
-        ActionDefault = "#74718e",
-        ActionDisabled = "#9999994d",
-        ActionDisabledBackground = "#605f6d4d",
-        TextPrimary = "#b2b0bf",
-        TextSecondary = "#92929f",
-        TextDisabled = "#ffffff33",
-        DrawerIcon = "#92929f",
-        DrawerText = "#92929f",
-        GrayLight = "#2a2833",
-        GrayLighter = "#1e1e2d",
-        Info = "#4a86ff",
-        Success = "#3dcb6c",
-        Warning = "#ffb545",
-        Error = "#ff3f5f",
-        LinesDefault = "#33323e",
-        TableLines = "#33323e",
-        Divider = "#292838",
-        OverlayLight = "#1e1e2d80",
-    };
 
     public string DarkLightModeButtonIcon => _isDarkMode switch
     {

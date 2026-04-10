@@ -6,6 +6,8 @@
 @inject IJSRuntime JS
 @implements IAsyncDisposable
 
+@* Desktop visualization (md+): full event timeline with calendar/era/year controls *@
+<div class="d-none d-md-block">
 <MudPaper Outlined="true" Class="@PaperClass" Style="width:100%">
 
     @* ── Header ── *@
@@ -164,6 +166,33 @@
             Style="position: fixed; bottom: 32px; right: 32px; z-index: 1400;"
             OnClick="ScrollToTop" />
 }
+</div>
+
+@* Mobile fallback (< md): markdown bullet summary written by the agent *@
+<div class="d-block d-md-none">
+    @if (!string.IsNullOrWhiteSpace(Descriptor.MobileSummary))
+    {
+        <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
+            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-3">
+                <MudIcon Icon="@Icons.Material.Filled.Timeline" Color="Color.Primary" Size="Size.Small" />
+                <MudText Typo="Typo.h6">@Descriptor.Title</MudText>
+            </MudStack>
+            <MudMarkdown Value="@Descriptor.MobileSummary" />
+            <AskReferencesSection References="@Descriptor.References" />
+        </MudPaper>
+    }
+    else
+    {
+        <MudPaper Outlined="true" Class="pa-3 mt-3" Style="width:100%">
+            <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+                <MudIcon Icon="@Icons.Material.Filled.Timeline" Color="Color.Secondary" />
+                <MudText Typo="Typo.body2" Color="Color.Secondary" Style="flex:1">
+                    <strong>@Descriptor.Title</strong> — timeline best viewed on desktop
+                </MudText>
+            </MudStack>
+        </MudPaper>
+    }
+</div>
 
 <style>
     .ask-timeline-maximized {

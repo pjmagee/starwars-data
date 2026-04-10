@@ -6,15 +6,16 @@
     <MudText Typo="Typo.caption" Class="px-4 pt-3 pb-1" Color="Color.Secondary">Chat</MudText>
     <ChatHistoryNav />
 
-    <MudDivider Class="my-2" />
-    <MudText Typo="Typo.caption" Class="px-4 pt-1 pb-1" Color="Color.Secondary">Explore</MudText>
-    <MudNavLink Href="/search" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.ManageSearch">Search</MudNavLink>
-    <MudNavLink Href="/galaxy-map" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Explore">Galaxy Map</MudNavLink>
-    <MudNavLink Href="/timeline" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Timeline">Timeline</MudNavLink>
-    <MudNavLink Href="/character-timelines" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Person">Character Timelines</MudNavLink>
-    <MudNavLink Href="/tables" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.TableView">Data Tables</MudNavLink>
-    <MudNavLink Href="/knowledge-graph" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.AccountTree">Knowledge Graph</MudNavLink>
-    <MudNavLink Href="/graph-explorer" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Hub">Graph Explorer</MudNavLink>
+    @* Explore section hidden below md (< 960px) — pure CSS via MudBlazor display utilities *@
+    <MudDivider Class="my-2 d-none d-md-block" />
+    <MudText Typo="Typo.caption" Class="px-4 pt-1 pb-1 d-none d-md-block" Color="Color.Secondary">Explore</MudText>
+    <MudNavLink Href="/search" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.ManageSearch" Class="d-none d-md-flex">Search</MudNavLink>
+    <MudNavLink Href="/galaxy-map" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Explore" Class="d-none d-md-flex">Galaxy Map</MudNavLink>
+    <MudNavLink Href="/timeline" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Timeline" Class="d-none d-md-flex">Timeline</MudNavLink>
+    <MudNavLink Href="/character-timelines" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Person" Class="d-none d-md-flex">Character Timelines</MudNavLink>
+    <MudNavLink Href="/tables" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.TableView" Class="d-none d-md-flex">Data Tables</MudNavLink>
+    <MudNavLink Href="/knowledge-graph" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.AccountTree" Class="d-none d-md-flex">Knowledge Graph</MudNavLink>
+    <MudNavLink Href="/graph-explorer" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Hub" Class="d-none d-md-flex">Graph Explorer</MudNavLink>
 
     <MudDivider Class="my-2" />
     <MudNavLink Href="/about" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Info">About</MudNavLink>

@@ -12,3 +12,9 @@ repos:
         language: system
         pass_filenames: false
         files: \.(cs|razor|csproj|slnx)$
+      - id: dotnet-test
+        name: dotnet test
+        entry: dotnet test src/StarWarsData.Tests --no-restore -c Release
+        language: system
+        pass_filenames: false
+        files: \.(cs|razor|csproj|slnx)$

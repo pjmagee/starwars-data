@@ -8,12 +8,9 @@ namespace StarWarsData.ApiService.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ArticleChunksController(IMongoClient mongoClient, IOptions<SettingsOptions> settings)
-    : ControllerBase
+public class ArticleChunksController(IMongoClient mongoClient, IOptions<SettingsOptions> settings) : ControllerBase
 {
-    readonly IMongoCollection<ArticleChunk> _chunks = mongoClient
-        .GetDatabase(settings.Value.DatabaseName)
-        .GetCollection<ArticleChunk>(Collections.SearchChunks);
+    readonly IMongoCollection<ArticleChunk> _chunks = mongoClient.GetDatabase(settings.Value.DatabaseName).GetCollection<ArticleChunk>(Collections.SearchChunks);
 
     /// <summary>
     /// Get the intro section of an article by PageId (first chunk).

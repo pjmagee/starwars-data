@@ -31,8 +31,11 @@ When the AppHost is running, use the **Aspire MCP server** (`mcp__aspire__*`) to
 - `list_console_logs` / `list_structured_logs` — read service logs and diagnose issues
 - `list_traces` / `list_trace_structured_logs` — inspect distributed traces
 - `execute_resource_command` — restart services or trigger the HTTP commands defined in the AppHost (ETL pipeline phases, index creation, etc.)
+- `search_docs` / `list_docs` / `get_doc` — search and read .NET Aspire documentation directly
 
-The AppHost defines HTTP commands on the **admin** resource for every ETL pipeline phase (1a–8). These are visible in the Aspire dashboard and executable via the MCP.
+The AppHost defines HTTP commands on the **admin** resource for every ETL pipeline phase (1a–9). These are visible in the Aspire dashboard and executable via the MCP.
+
+When working with Aspire APIs, configuration, or orchestration patterns, **always check the Aspire docs via the MCP first** (`mcp__aspire__search_docs`, `mcp__aspire__get_doc`) rather than guessing or relying on stale knowledge.
 
 ## Tests
 
@@ -75,7 +78,7 @@ Test fixtures: `ApiFixture` (shared MongoDB container with seed data for most te
 
 **AI Agent pipeline** (in `ApiService/Program.cs`): Topic guardrail classifier -> AI agent with tool registry (ComponentToolkit, DataExplorerToolkit, GraphRAGToolkit, WikiSearchProvider, MongoDB MCP tools) -> AGUI streaming endpoint at `/kernel/stream`.
 
-**MongoDB**: External self-hosted server (not Aspire-managed). Connection string assembled from parameters in AppHost. Single database configured via `SettingsOptions.DatabaseName` with namespaced collections: `raw.*`, `timeline.*`, `kg.*`, `search.*`, `genai.*`, `chat.*`, `territory.*`, `galaxy.*`, `admin.*`, `hangfire.*`. Hangfire collections live in the same database, namespaced by the `Prefix` option (default `"hangfire"`). Collection names are defined in the `Collections` static class in `Settings.cs`. Two database environments: `starwars-dev` (default, used in local/dev — safe for experimentation) and `starwars` (production). The default in code is `starwars-dev`; production overrides via `appsettings.json` or env var `Settings__DatabaseName`.
+**MongoDB**: External self-hosted MongoDB Atlas Local (Community Edition) — not Aspire-managed. Connection string is assembled from parameters in the AppHost (`mongo-user`, `mongo-password`, `mongo-host`, `mongo-port`). **When using the MongoDB MCP server (`mcp__MongoDB__*`) directly, always connect using the host machine's `MDB_MCP_CONNECTION_STRING` environment variable** — do not hardcode credentials or construct connection strings manually. The default database is `starwars-dev` (safe for experimentation); production is `starwars` and must never be written to from dev tooling. Single database configured via `SettingsOptions.DatabaseName` with namespaced collections: `raw.*`, `timeline.*`, `kg.*`, `search.*`, `genai.*`, `chat.*`, `territory.*`, `galaxy.*`, `admin.*`, `hangfire.*`. Hangfire collections live in the same database, namespaced by the `Prefix` option (default `"hangfire"`). Collection names are defined in the `Collections` static class in `Settings.cs`. Production overrides via `appsettings.json` or env var `Settings__DatabaseName`.
 
 **ETL pipeline** (ordered phases, triggered via admin endpoints or Aspire HTTP commands):
 
@@ -138,8 +141,9 @@ Do not introduce silent deviations. A deviation that is not documented is a bug.
 
 Use the attached MCP servers and skills for domain-specific guidance instead of guessing:
 
-- **Aspire MCP** (`mcp__aspire__*`) — Interact with running Aspire resources: logs, traces, restart services, execute HTTP commands.
-- **MongoDB MCP** (`mcp__MongoDB__*`) — Query, aggregate, inspect schemas, manage indexes on the MongoDB databases. Use `starwars-dev` for writes (see feedback memory).
+- **Aspire MCP** (`mcp__aspire__*`) — Interact with running Aspire resources: logs, traces, restart services, execute HTTP commands. Also provides `search_docs`/`get_doc` for looking up .NET Aspire documentation — use these before guessing at Aspire APIs.
+- **MongoDB MCP** (`mcp__MongoDB__*`) — Query, aggregate, inspect schemas, manage indexes on the MongoDB databases. Always connects via the host `MDB_MCP_CONNECTION_STRING` env var. Default database: `starwars-dev` — never write to `starwars` (production).
+- **Chrome DevTools MCP** (`mcp__chrome-devtools__*`) — Inspect live browser sessions: DOM snapshots, console logs, network requests, screenshots, performance traces, Lighthouse audits. Uses Brave browser.
 - **MudBlazor MCP** (`mcp__mudblazor__*`) — Look up MudBlazor component docs, parameters, examples, and API reference when building or modifying Blazor UI.
 - **Playwright MCP** (`mcp__playwright__*`) — Browser automation for testing and screenshots.
 - **MediaWiki MCP** (`mcp__mediawiki-mcp-server__*`) — Search and fetch Wookieepedia pages directly.

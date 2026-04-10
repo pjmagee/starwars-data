@@ -28,6 +28,13 @@ public class ComponentToolkit
 
     const string ReferencesParamDescription = "Optional source references (title + wikiUrl) from pages used to answer this query.";
 
+    const string MobileSummaryParamDescription =
+        "REQUIRED for mobile users. Concise markdown summary (3-6 bullet points or short paragraphs) of "
+        + "the visualization's key insights — top items, distribution, outliers, key facts. Shown to users on "
+        + "narrow viewports (< 960px) where the chart/graph/table cannot be rendered legibly. This is the "
+        + "ONLY thing mobile users will see in place of the visual, so include the actual numeric values, "
+        + "key entity names in **bold**, and the takeaway. Always populate this — never leave it null.";
+
     [Description(
         """
             Render a paginated table browsing pages of a given infobox type.
@@ -41,7 +48,8 @@ public class ComponentToolkit
         [Description("infobox.Data label names to show as columns, e.g. [\"Born\", \"Died\", \"Homeworld\", \"Species\"]. Pick 3-6 relevant fields.")] List<string> fields,
         [Description("Optional text search to filter results by page title")] string? search = null,
         [Description("Number of rows per page (default 25)")] int pageSize = 25,
-        [Description(ReferencesParamDescription)] List<Reference>? references = null
+        [Description(ReferencesParamDescription)] List<Reference>? references = null,
+        [Description(MobileSummaryParamDescription)] string mobileSummary = ""
     )
     {
         TableResult = new TableDescriptor
@@ -51,6 +59,7 @@ public class ComponentToolkit
             Fields = fields,
             Search = search,
             PageSize = pageSize,
+            MobileSummary = mobileSummary,
             References = references,
         };
         return TableResult;
@@ -68,7 +77,8 @@ public class ComponentToolkit
         [Description("Descriptive title for the table")] string title,
         [Description("Column header names")] List<string> columns,
         [Description("Row data — each row is a list of string values in the same order as columns")] List<List<string>> rows,
-        [Description(ReferencesParamDescription)] List<Reference>? references = null
+        [Description(ReferencesParamDescription)] List<Reference>? references = null,
+        [Description(MobileSummaryParamDescription)] string mobileSummary = ""
     )
     {
         DataTableResult = new DataTableDescriptor
@@ -76,6 +86,7 @@ public class ComponentToolkit
             Title = title,
             Columns = columns,
             Rows = rows,
+            MobileSummary = mobileSummary,
             References = references,
         };
         return DataTableResult;
@@ -94,7 +105,8 @@ public class ComponentToolkit
         [Description("For Pie/Donut/Rose: slice labels")] List<string>? labels = null,
         [Description("For Bar/Line/StackedBar/Pie/Donut/Rose/Radar: array of { name, data: number[] }")] List<ChartSeries>? series = null,
         [Description("For TimeSeries: array of { name, data: [{ x: ISO-date-string, y: number }] }")] List<TimeSeriesChartSeries>? timeSeries = null,
-        [Description(ReferencesParamDescription)] List<Reference>? references = null
+        [Description(ReferencesParamDescription)] List<Reference>? references = null,
+        [Description(MobileSummaryParamDescription)] string mobileSummary = ""
     )
     {
         if (!Enum.TryParse<AskChartType>(chartType, ignoreCase: true, out var parsedType))
@@ -108,6 +120,7 @@ public class ComponentToolkit
             Labels = labels,
             Series = series,
             TimeSeries = timeSeries,
+            MobileSummary = mobileSummary,
             References = references,
         };
         return ChartResult;
@@ -137,7 +150,8 @@ public class ComponentToolkit
         [Description("Subset of labels to enable by default in the UI. If omitted, all labels are enabled.")] List<string>? enabledLabels = null,
         [Description("'Tree' for hierarchical top-down (family trees, org charts, political hierarchies), 'Force' for physics-based network (default).")] string layoutMode = "Force",
         [Description("Optional continuity filter: Canon, Legends, or omit for all")] string? continuity = null,
-        [Description(ReferencesParamDescription)] List<Reference>? references = null
+        [Description(ReferencesParamDescription)] List<Reference>? references = null,
+        [Description(MobileSummaryParamDescription)] string mobileSummary = ""
     )
     {
         if (!Enum.TryParse<GraphLayoutMode>(layoutMode, ignoreCase: true, out var parsedMode))
@@ -157,6 +171,7 @@ public class ComponentToolkit
             EnabledLabels = enabledLabels,
             LayoutMode = parsedMode,
             Continuity = continuity,
+            MobileSummary = mobileSummary,
             References = references,
         };
         return GraphResult;
@@ -178,7 +193,8 @@ public class ComponentToolkit
         [Description("Display name of the ending entity")] string toEntityName,
         [Description("Path steps from find_connections(). Each step: { fromId, fromName, fromType, toId, toName, toType, label, evidence }")] List<PathStepInput> pathSteps,
         [Description("Optional continuity filter: Canon, Legends, or omit for all")] string? continuity = null,
-        [Description(ReferencesParamDescription)] List<Reference>? references = null
+        [Description(ReferencesParamDescription)] List<Reference>? references = null,
+        [Description(MobileSummaryParamDescription)] string mobileSummary = ""
     )
     {
         GraphResult = new GraphDescriptor
@@ -190,6 +206,7 @@ public class ComponentToolkit
             Labels = pathSteps.Select(s => s.Label).Distinct().ToList(),
             LayoutMode = GraphLayoutMode.Path,
             Continuity = continuity,
+            MobileSummary = mobileSummary,
             PathData = new PathData
             {
                 FromId = fromEntityId,
@@ -249,7 +266,8 @@ public class ComponentToolkit
         [Description("End of year range. Galactic: magnitude e.g. 4 with yearToDemarcation='ABY'. Real: signed CE year e.g. 2020.")] float? yearTo = null,
         [Description("Demarcation for yearTo: 'BBY' or 'ABY'. Galactic mode only — omit when calendar='Real'.")] string? yearToDemarcation = null,
         [Description("Optional text to filter timeline event titles (e.g. entity name like 'Skywalker')")] string? search = null,
-        [Description(ReferencesParamDescription)] List<Reference>? references = null
+        [Description(ReferencesParamDescription)] List<Reference>? references = null,
+        [Description(MobileSummaryParamDescription)] string mobileSummary = ""
     )
     {
         // Normalise the calendar argument so downstream string-compares are stable.
@@ -274,6 +292,7 @@ public class ComponentToolkit
             YearTo = yearTo,
             YearToDemarcation = yearToDemarcation,
             Search = search,
+            MobileSummary = mobileSummary,
             References = references,
         };
         return TimelineResult;
@@ -289,13 +308,15 @@ public class ComponentToolkit
     public InfoboxDescriptor RenderInfobox(
         [Description("Descriptive title, e.g. 'Mace Windu' or 'Yoda vs Count Dooku'")] string title,
         [Description("One or more PageId integers to display as infobox cards. Use search_pages_by_name to find these.")] List<int> pageIds,
-        [Description(ReferencesParamDescription)] List<Reference>? references = null
+        [Description(ReferencesParamDescription)] List<Reference>? references = null,
+        [Description(MobileSummaryParamDescription)] string mobileSummary = ""
     )
     {
         InfoboxResult = new InfoboxDescriptor
         {
             Title = title,
             PageIds = pageIds,
+            MobileSummary = mobileSummary,
             References = references,
         };
         return InfoboxResult;

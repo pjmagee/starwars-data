@@ -74,6 +74,10 @@
             function swSetFontScale(scale) { localStorage.setItem('sw-font-scale', scale.toString()); }
             function swGetFontScale() { return parseFloat(localStorage.getItem('sw-font-scale')) || 1.0; }
 
+            // Faction theme: persist user's selected MudTheme palette
+            function swSetTheme(themeId) { localStorage.setItem('sw-theme', themeId); }
+            function swGetTheme() { return localStorage.getItem('sw-theme'); }
+
             // Aurebesh preview: show selected text in galactic script
             var _aurebeshBar = null;
             function swSetAurebesh(enabled) {

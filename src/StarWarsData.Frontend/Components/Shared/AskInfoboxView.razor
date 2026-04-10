@@ -3,84 +3,113 @@
 @using WikiPage = StarWarsData.Models.Entities.Page
 @inject IHttpClientFactory HttpClientFactory
 
-@if (_loading)
-{
-    <MudProgressLinear Indeterminate="true" Color="Color.Primary" Class="mt-4" />
-}
+@* Desktop visualization (md+): full infobox cards with images, properties, links *@
+<div class="d-none d-md-block">
+    @if (_loading)
+    {
+        <MudProgressLinear Indeterminate="true" Color="Color.Primary" Class="mt-4" />
+    }
 
-@if (_pages.Count > 0)
-{
-    <MudText Typo="Typo.h5" Class="mt-6 mb-3">@Descriptor.Title</MudText>
+    @if (_pages.Count > 0)
+    {
+        <MudText Typo="Typo.h5" Class="mt-6 mb-3">@Descriptor.Title</MudText>
 
-    <MudGrid Spacing="3">
-        @foreach (var wikiPage in _pages)
-        {
-            <MudItem xs="12" sm="@(_pages.Count == 1 ? 12 : 6)" md="@ColWidth">
-                <MudCard Outlined="true" Class="infobox-card">
-                    @* Header with image *@
-                    @if (wikiPage.Infobox?.ImageUrl is not null)
-                    {
-                        <MudCardMedia Image="@StripRevision(wikiPage.Infobox.ImageUrl)" Height="300" />
-                    }
-
-                    <MudCardHeader>
-                        <CardHeaderContent>
-                            <MudText Typo="Typo.h6">@wikiPage.Title</MudText>
-                            @if (wikiPage.Infobox?.Template is not null)
-                            {
-                                <MudText Typo="Typo.caption" Color="Color.Secondary">
-                                    @SanitizeTemplate(wikiPage.Infobox.Template)
-                                    @if (wikiPage.Continuity != Continuity.Unknown)
-                                    {
-                                        <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined"
-                                                 Color="@(wikiPage.Continuity == Continuity.Canon ? Color.Primary : Color.Secondary)"
-                                                 Class="ml-2">
-                                            @wikiPage.Continuity
-                                        </MudChip>
-                                    }
-                                </MudText>
-                            }
-                        </CardHeaderContent>
-                    </MudCardHeader>
-
-                    <MudCardContent>
-                        @if (wikiPage.Infobox?.Data is not null)
+        <MudGrid Spacing="3">
+            @foreach (var wikiPage in _pages)
+            {
+                <MudItem xs="12" sm="@(_pages.Count == 1 ? 12 : 6)" md="@ColWidth">
+                    <MudCard Outlined="true" Class="infobox-card">
+                        @* Header with image *@
+                        @if (wikiPage.Infobox?.ImageUrl is not null)
                         {
-                            <MudSimpleTable Dense="true" Bordered="true" Striped="true" Style="overflow-x:auto">
-                                <tbody>
-                                    @foreach (var prop in wikiPage.Infobox.Data.Where(p => HasContent(p)))
-                                    {
-                                        <tr>
-                                            <td style="font-weight:600; white-space:nowrap; width:1%; padding:6px 12px; vertical-align:top;">
-                                                @prop.Label
-                                            </td>
-                                            <td style="padding:6px 12px;">
-                                                @foreach (var link in prop.Links)
-                                                {
-                                                    <MudLink Href="@link.Href" Underline="Underline.Always" Class="mr-1" Target="_blank">@link.Content</MudLink>
-                                                }
-                                                @GetPlainValues(prop)
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </MudSimpleTable>
+                            <MudCardMedia Image="@StripRevision(wikiPage.Infobox.ImageUrl)" Height="300" />
                         }
-                    </MudCardContent>
 
-                    <MudCardActions>
-                        <MudButton Href="@wikiPage.WikiUrl" Target="_blank" Variant="Variant.Text" Color="Color.Primary"
-                                   StartIcon="@Icons.Material.Filled.OpenInNew" Size="Size.Small">
-                            View on Wookieepedia
-                        </MudButton>
-                    </MudCardActions>
-                </MudCard>
-            </MudItem>
-        }
-    </MudGrid>
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.h6">@wikiPage.Title</MudText>
+                                @if (wikiPage.Infobox?.Template is not null)
+                                {
+                                    <MudText Typo="Typo.caption" Color="Color.Secondary">
+                                        @SanitizeTemplate(wikiPage.Infobox.Template)
+                                        @if (wikiPage.Continuity != Continuity.Unknown)
+                                        {
+                                            <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined"
+                                                     Color="@(wikiPage.Continuity == Continuity.Canon ? Color.Primary : Color.Secondary)"
+                                                     Class="ml-2">
+                                                @wikiPage.Continuity
+                                            </MudChip>
+                                        }
+                                    </MudText>
+                                }
+                            </CardHeaderContent>
+                        </MudCardHeader>
 
-    <AskReferencesSection References="@_allReferences" />
-}
+                        <MudCardContent>
+                            @if (wikiPage.Infobox?.Data is not null)
+                            {
+                                <MudSimpleTable Dense="true" Bordered="true" Striped="true" Style="overflow-x:auto">
+                                    <tbody>
+                                        @foreach (var prop in wikiPage.Infobox.Data.Where(p => HasContent(p)))
+                                        {
+                                            <tr>
+                                                <td style="font-weight:600; white-space:nowrap; width:1%; padding:6px 12px; vertical-align:top;">
+                                                    @prop.Label
+                                                </td>
+                                                <td style="padding:6px 12px;">
+                                                    @foreach (var link in prop.Links)
+                                                    {
+                                                        <MudLink Href="@link.Href" Underline="Underline.Always" Class="mr-1" Target="_blank">@link.Content</MudLink>
+                                                    }
+                                                    @GetPlainValues(prop)
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </MudSimpleTable>
+                            }
+                        </MudCardContent>
+
+                        <MudCardActions>
+                            <MudButton Href="@wikiPage.WikiUrl" Target="_blank" Variant="Variant.Text" Color="Color.Primary"
+                                       StartIcon="@Icons.Material.Filled.OpenInNew" Size="Size.Small">
+                                View on Wookieepedia
+                            </MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+            }
+        </MudGrid>
+
+        <AskReferencesSection References="@_allReferences" />
+    }
+</div>
+
+@* Mobile fallback (< md): markdown bullet summary written by the agent *@
+<div class="d-block d-md-none">
+    @if (!string.IsNullOrWhiteSpace(Descriptor.MobileSummary))
+    {
+        <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
+            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-3">
+                <MudIcon Icon="@Icons.Material.Filled.Badge" Color="Color.Primary" Size="Size.Small" />
+                <MudText Typo="Typo.h6">@Descriptor.Title</MudText>
+            </MudStack>
+            <MudMarkdown Value="@Descriptor.MobileSummary" />
+            <AskReferencesSection References="@_allReferences" />
+        </MudPaper>
+    }
+    else
+    {
+        <MudPaper Outlined="true" Class="pa-3 mt-3" Style="width:100%">
+            <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+                <MudIcon Icon="@Icons.Material.Filled.Badge" Color="Color.Secondary" />
+                <MudText Typo="Typo.body2" Color="Color.Secondary" Style="flex:1">
+                    <strong>@Descriptor.Title</strong> — infobox best viewed on desktop
+                </MudText>
+            </MudStack>
+        </MudPaper>
+    }
+</div>
 
 @code {
     [Parameter, EditorRequired]

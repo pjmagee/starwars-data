@@ -1,9 +1,11 @@
 @using StarWarsData.Models.Entities
 @using StarWarsData.Frontend.Services
-@inject IJSRuntime JS
 @implements IDisposable
 
-<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="3" Class="mr-4">
+<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1" Class="mr-md-4">
+    @* Each switch is rendered twice — full label visible md+, abbreviated visible <md.
+       Both versions bind to the same backing field so state stays in sync; only one
+       is visible at any breakpoint via MudBlazor's d-* responsive display utilities. *@
     <MudTooltip Placement="Placement.Bottom" Arrow="true" Color="Color.Dark">
         <TooltipContent>
             <div style="max-width:240px; font-size:12px;">
@@ -12,14 +14,14 @@
             </div>
         </TooltipContent>
         <ChildContent>
-            <MudSwitch
-                T="bool"
-                Value="_canonEnabled"
-                ValueChanged="OnCanonChanged"
-                Label="Canon"
-                Color="Color.Primary"
-                Size="Size.Small"
-                Class="ma-0" />
+            <div class="d-none d-md-flex">
+                <MudSwitch T="bool" Value="_canonEnabled" ValueChanged="OnCanonChanged"
+                           Label="Canon" Color="Color.Primary" Size="Size.Small" Class="ma-0" />
+            </div>
+            <div class="d-flex d-md-none">
+                <MudSwitch T="bool" Value="_canonEnabled" ValueChanged="OnCanonChanged"
+                           Label="C" Color="Color.Primary" Size="Size.Small" Class="ma-0" />
+            </div>
         </ChildContent>
     </MudTooltip>
 
@@ -32,18 +34,18 @@
             </div>
         </TooltipContent>
         <ChildContent>
-            <MudSwitch
-                T="bool"
-                Value="_legendsEnabled"
-                ValueChanged="OnLegendsChanged"
-                Label="Legends"
-                Color="Color.Secondary"
-                Size="Size.Small"
-                Class="ma-0" />
+            <div class="d-none d-md-flex">
+                <MudSwitch T="bool" Value="_legendsEnabled" ValueChanged="OnLegendsChanged"
+                           Label="Legends" Color="Color.Secondary" Size="Size.Small" Class="ma-0" />
+            </div>
+            <div class="d-flex d-md-none">
+                <MudSwitch T="bool" Value="_legendsEnabled" ValueChanged="OnLegendsChanged"
+                           Label="L" Color="Color.Secondary" Size="Size.Small" Class="ma-0" />
+            </div>
         </ChildContent>
     </MudTooltip>
 
-    <MudDivider Vertical="true" FlexItem="true" />
+    <MudDivider Vertical="true" FlexItem="true" Class="d-none d-md-flex" />
 
     <MudTooltip Placement="Placement.Bottom" Arrow="true" Color="Color.Dark">
         <TooltipContent>
@@ -53,14 +55,14 @@
             </div>
         </TooltipContent>
         <ChildContent>
-            <MudSwitch
-                T="bool"
-                Value="_starwarsEnabled"
-                ValueChanged="OnStarwarsChanged"
-                Label="Star Wars"
-                Color="Color.Tertiary"
-                Size="Size.Small"
-                Class="ma-0" />
+            <div class="d-none d-md-flex">
+                <MudSwitch T="bool" Value="_starwarsEnabled" ValueChanged="OnStarwarsChanged"
+                           Label="Star Wars" Color="Color.Tertiary" Size="Size.Small" Class="ma-0" />
+            </div>
+            <div class="d-flex d-md-none">
+                <MudSwitch T="bool" Value="_starwarsEnabled" ValueChanged="OnStarwarsChanged"
+                           Label="SW" Color="Color.Tertiary" Size="Size.Small" Class="ma-0" />
+            </div>
         </ChildContent>
     </MudTooltip>
 
@@ -72,21 +74,52 @@
             </div>
         </TooltipContent>
         <ChildContent>
-            <MudSwitch
-                T="bool"
-                Value="_realEnabled"
-                ValueChanged="OnRealChanged"
-                Label="Real World"
-                Color="Color.Warning"
-                Size="Size.Small"
-                Class="ma-0" />
+            <div class="d-none d-md-flex">
+                <MudSwitch T="bool" Value="_realEnabled" ValueChanged="OnRealChanged"
+                           Label="Real World" Color="Color.Warning" Size="Size.Small" Class="ma-0" />
+            </div>
+            <div class="d-flex d-md-none">
+                <MudSwitch T="bool" Value="_realEnabled" ValueChanged="OnRealChanged"
+                           Label="R" Color="Color.Warning" Size="Size.Small" Class="ma-0" />
+            </div>
         </ChildContent>
     </MudTooltip>
 
-    <MudTooltip Text="Show filter guide" Placement="Placement.Bottom">
-        <MudIconButton Icon="@Icons.Material.Filled.HelpOutline" Size="Size.Small"
-                       Color="Color.Default" OnClick="ShowBanner" />
-    </MudTooltip>
+    <div class="d-none d-md-flex">
+        <MudTooltip Text="Show filter guide" Placement="Placement.Bottom">
+            <MudIconButton Icon="@Icons.Material.Filled.HelpOutline" Size="Size.Small"
+                           Color="Color.Default" OnClick="ToggleGuide" />
+        </MudTooltip>
+    </div>
+    <MudPopover Open="_guideOpen" AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight" Class="pa-4" MaxHeight="400" DropShadow="true">
+        <MudStack Spacing="2" Style="max-width:340px;">
+            <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
+                <MudText Typo="Typo.subtitle1"><b>Filter Guide</b></MudText>
+                <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small" OnClick="ToggleGuide" />
+            </MudStack>
+            <MudText Typo="Typo.body2">These filters control which data is shown across every page.</MudText>
+            <MudDivider />
+            <MudText Typo="Typo.subtitle2">Continuity</MudText>
+            <MudText Typo="Typo.body2">
+                <MudChip T="string" Color="Color.Primary" Size="Size.Small">Canon</MudChip>
+                The official continuity established by Lucasfilm after 2014. Films, TV series, and post-2014 books, comics, and games.
+            </MudText>
+            <MudText Typo="Typo.body2">
+                <MudChip T="string" Color="Color.Secondary" Size="Size.Small">Legends</MudChip>
+                The pre-2014 Expanded Universe. Thousands of books, comics, and games. Rich lore but no longer official canon.
+            </MudText>
+            <MudDivider />
+            <MudText Typo="Typo.subtitle2">Realm</MudText>
+            <MudText Typo="Typo.body2">
+                <b>Star Wars</b> — In-universe content: characters, planets, battles, ships. Dates use BBY/ABY.
+            </MudText>
+            <MudText Typo="Typo.body2">
+                <b>Real World</b> — Behind-the-scenes: actors, authors, directors, publication dates.
+            </MudText>
+            <MudDivider />
+            <MudText Typo="Typo.caption">Toggle any combination. At least one must remain active in each group.</MudText>
+        </MudStack>
+    </MudPopover>
 </MudStack>
 
 @code {
@@ -94,6 +127,7 @@
     private bool _legendsEnabled = false;
     private bool _starwarsEnabled = true;
     private bool _realEnabled = false;
+    private bool _guideOpen;
     [Inject] private GlobalFilterService GlobalFilterService { get; set; } = default!;
 
     protected override void OnInitialized()
@@ -102,15 +136,7 @@
         GlobalFilterService.OnChange += OnFilterServiceChanged;
     }
 
-    private async Task ShowBanner()
-    {
-        try
-        {
-            await JS.InvokeVoidAsync("localStorage.removeItem", "sw-filter-guide-dismissed");
-            await JS.InvokeVoidAsync("location.reload");
-        }
-        catch { }
-    }
+    private void ToggleGuide() => _guideOpen = !_guideOpen;
 
     public void Dispose()
     {

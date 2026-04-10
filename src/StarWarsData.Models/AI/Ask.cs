@@ -82,6 +82,12 @@ public class TableDescriptor
     [Description("Number of rows per page (default 25)")]
     public int PageSize { get; set; } = 25;
 
+    [JsonPropertyName("mobileSummary")]
+    [Description(
+        "Concise markdown text summary (3-6 bullet points or short paragraphs) of the table's key insights. Shown to users on narrow viewports (< 960px) where the wide table cannot be rendered legibly. Always populate this — it is the only thing mobile users will see in place of the table. Use bullet points and bold key entities."
+    )]
+    public string? MobileSummary { get; set; }
+
     [JsonPropertyName("references")]
     [Description("Optional source references from wiki pages used to generate this result")]
     public List<Reference>? References { get; set; }
@@ -101,6 +107,12 @@ public class DataTableDescriptor
     [JsonPropertyName("rows")]
     [Description("Row data — each row is a list of string values matching the columns order")]
     public List<List<string>> Rows { get; set; } = [];
+
+    [JsonPropertyName("mobileSummary")]
+    [Description(
+        "Concise markdown text summary (3-6 bullet points or short paragraphs) of the data table's key insights. Shown to users on narrow viewports (< 960px) where the wide table cannot be rendered legibly. Always populate this — it is the only thing mobile users will see in place of the table. Use bullet points and bold key entities."
+    )]
+    public string? MobileSummary { get; set; }
 
     [JsonPropertyName("references")]
     [Description("Optional source references from wiki pages used to generate this result")]
@@ -142,6 +154,12 @@ public class ChartDescriptor
 
     [JsonPropertyName("options")]
     public ChartOptions? Options { get; set; }
+
+    [JsonPropertyName("mobileSummary")]
+    [Description(
+        "Concise markdown text summary (3-6 bullet points or short paragraphs) of the chart's key insights — top items, distribution, outliers, what the user should take away. Shown to users on narrow viewports (< 960px) where the chart cannot be rendered legibly (axis labels overlap, bars become unreadable). Always populate this — it is the only thing mobile users will see in place of the chart. Use bullet points and include the actual numeric values from the chart."
+    )]
+    public string? MobileSummary { get; set; }
 
     [JsonPropertyName("references")]
     [Description("Optional source references from wiki pages used to generate this result")]
@@ -195,6 +213,12 @@ public class GraphDescriptor
     [JsonPropertyName("pathData")]
     [Description("Pre-resolved path for focused rendering. When present, the frontend renders only these nodes/edges without a BFS API call.")]
     public PathData? PathData { get; set; }
+
+    [JsonPropertyName("mobileSummary")]
+    [Description(
+        "Concise markdown text summary (3-6 bullet points or short paragraphs) of the relationship graph's key insights — central entities, important paths, notable connections. Shown to users on narrow viewports (< 960px) where the force-directed graph cannot be navigated by touch. Always populate this — it is the only thing mobile users will see in place of the graph. Use bullet points and bold key entities."
+    )]
+    public string? MobileSummary { get; set; }
 
     [JsonPropertyName("references")]
     [Description("Optional source references from wiki pages used to generate this result")]
@@ -288,6 +312,12 @@ public class TimelineDescriptor
     [Description("Optional text to filter timeline event titles")]
     public string? Search { get; set; }
 
+    [JsonPropertyName("mobileSummary")]
+    [Description(
+        "Concise markdown text summary (3-6 bullet points or short paragraphs) of the timeline's key events with their dates and significance. Shown to users on narrow viewports (< 960px) where the timeline visualization cannot be rendered legibly. Always populate this — it is the only thing mobile users will see in place of the timeline. Use bullet points organized chronologically with dates in **bold**."
+    )]
+    public string? MobileSummary { get; set; }
+
     [JsonPropertyName("references")]
     [Description("Optional source references from wiki pages used to generate this result")]
     public List<Reference>? References { get; set; }
@@ -303,6 +333,12 @@ public class InfoboxDescriptor
     [JsonPropertyName("pageIds")]
     [Description("One or more PageId integers to display as infobox cards")]
     public List<int> PageIds { get; set; } = [];
+
+    [JsonPropertyName("mobileSummary")]
+    [Description(
+        "Concise markdown text summary (3-6 bullet points or short paragraphs) of the infobox subject(s) — key facts, dates, affiliations, comparisons. Shown to users on narrow viewports (< 960px) where the side-by-side cards become illegible. Always populate this — it is the only thing mobile users will see in place of the infobox. Use bullet points and **bold** field names."
+    )]
+    public string? MobileSummary { get; set; }
 
     [JsonPropertyName("references")]
     [Description("Optional source references from wiki pages used to generate this result")]

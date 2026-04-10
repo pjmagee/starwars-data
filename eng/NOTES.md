@@ -3,8 +3,6 @@
 Some material is media, star wars material, art
 Some other material is research on technology, temporal knowledge graphs
 
-
-
 # linting
 
 <https://csharpier.com/docs/Pre-commit>
@@ -42,9 +40,5 @@ mcp <https://blazor.syncfusion.com/documentation/mcp-server/overview>
 
 react root for react components??
 <https://learn.microsoft.com/en-us/aspnet/core/blazor/javascript-interoperability/call-javascript-from-dotnet?view=aspnetcore-10.0>
-
-
-
-
 
 https://wrvh.home.xs4all.nl/galaxymap/
