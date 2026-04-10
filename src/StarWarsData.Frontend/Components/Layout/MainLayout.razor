@@ -186,10 +186,28 @@
         ?? Assembly.GetExecutingAssembly().GetName().Version?.ToString(3)
         ?? "0.0.0";
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        base.OnInitialized();
         Layout.OnChange += StateHasChanged;
+
+        // Prerendering is disabled (App.razor), so OnInitializedAsync runs in the
+        // interactive circuit context and IJSRuntime is available. Loading persisted
+        // preferences here means the first render already uses the saved palette —
+        // no flash from the default theme.
+        var savedTheme = await JS.InvokeAsync<string?>("swGetTheme");
+        if (!string.IsNullOrEmpty(savedTheme))
+        {
+            _selectedTheme = SwThemeExtensions.FromId(savedTheme);
+        }
+
+        var savedScale = await JS.InvokeAsync<double>("swGetFontScale");
+        if (Math.Abs(savedScale - _fontScale) > 0.01)
+        {
+            _fontScale = savedScale;
+        }
+
+        _aurebesh = await JS.InvokeAsync<bool>("swGetAurebesh");
+
         _theme = BuildTheme(_fontScale, _selectedTheme);
     }
 
@@ -197,28 +215,12 @@
     {
         if (firstRender)
         {
-            // Seed dark mode from the system preference. The MudThemeProvider also watches
-            // for changes via ObserveSystemDarkModeChange="true" — if the user has not
-            // explicitly toggled dark mode in this session, we honour the OS setting.
+            // _mudThemeProvider ref is only bound after the first render, so the system
+            // dark mode seed and watch must live here rather than OnInitializedAsync.
             _isDarkMode = await _mudThemeProvider.GetSystemDarkModeAsync();
             await _mudThemeProvider.WatchSystemDarkModeAsync(OnSystemDarkModeChanged);
-
-            var savedTheme = await JS.InvokeAsync<string?>("swGetTheme");
-            if (!string.IsNullOrEmpty(savedTheme))
-            {
-                _selectedTheme = SwThemeExtensions.FromId(savedTheme);
-            }
-
-            var savedScale = await JS.InvokeAsync<double>("swGetFontScale");
-            if (Math.Abs(savedScale - _fontScale) > 0.01)
-            {
-                _fontScale = savedScale;
-            }
-
-            _theme = BuildTheme(_fontScale, _selectedTheme);
             StateHasChanged();
 
-            _aurebesh = await JS.InvokeAsync<bool>("swGetAurebesh");
             if (_aurebesh)
                 await JS.InvokeVoidAsync("swSetAurebesh", true);
         }
