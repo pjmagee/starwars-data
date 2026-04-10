@@ -1,11 +1,13 @@
 @using System.Reflection
 @using System.Security.Claims
+@using Microsoft.JSInterop
 @using StarWarsData.Models.Entities
 @using StarWarsData.Frontend.Services
 @using StarWarsData.Frontend.Theming
 @inherits LayoutComponentBase
 @inject LayoutService Layout
 @inject IJSRuntime JS
+@inject ILogger<MainLayout> Logger
 @implements IDisposable
 
 <MudThemeProvider @ref="_mudThemeProvider"
@@ -30,17 +32,19 @@
             <MudLink Href="https://www.buymeacoffee.com/pjmagee" Target="_blank" Class="d-flex align-center" Style="height:28px;">
                 <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=pjmagee&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a coffee" style="height:28px;" />
             </MudLink>
-            <MudMenu Icon="@Icons.Material.Filled.FormatSize" Color="Color.Inherit"
-                     AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Dense="true">
-                @foreach (var (label, value) in _fontScales)
-                {
-                    var v = value;
-                    <MudMenuItem OnClick="@(() => SetFontScale(v))"
-                                 Icon="@(Math.Abs(_fontScale - v) < 0.01 ? Icons.Material.Filled.Check : null)">
-                        @label
-                    </MudMenuItem>
-                }
-            </MudMenu>
+            <MudTooltip Text="Text size — adjust the font scale">
+                <MudMenu Icon="@Icons.Material.Filled.FormatSize" Color="Color.Inherit"
+                         AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Dense="true">
+                    @foreach (var (label, value) in _textSizes)
+                    {
+                        var v = value;
+                        <MudMenuItem OnClick="@(() => SetTextSize(v))"
+                                     Icon="@(_textSize == v ? Icons.Material.Filled.Check : Icons.Material.Filled.FormatSize)">
+                            @label
+                        </MudMenuItem>
+                    }
+                </MudMenu>
+            </MudTooltip>
             <MudTooltip Text="Faction theme — change the colour palette">
                 <MudMenu Icon="@Icons.Material.Filled.Palette" Color="Color.Inherit"
                          AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Dense="true">
@@ -86,13 +90,13 @@
                 }
                 <MudDivider />
                 <MudMenuItem Disabled="true">
-                    <MudText Typo="Typo.caption" Color="Color.Secondary">Font size</MudText>
+                    <MudText Typo="Typo.caption" Color="Color.Secondary">Text size</MudText>
                 </MudMenuItem>
-                @foreach (var (label, value) in _fontScales)
+                @foreach (var (label, value) in _textSizes)
                 {
                     var v = value;
-                    <MudMenuItem OnClick="@(() => SetFontScale(v))"
-                                 Icon="@(Math.Abs(_fontScale - v) < 0.01 ? Icons.Material.Filled.Check : null)">
+                    <MudMenuItem OnClick="@(() => SetTextSize(v))"
+                                 Icon="@(_textSize == v ? Icons.Material.Filled.Check : Icons.Material.Filled.FormatSize)">
                         @label
                     </MudMenuItem>
                 }
@@ -169,16 +173,16 @@
     private bool _isDarkMode = true;
     private bool _aurebesh;
     private MudTheme? _theme;
-    private double _fontScale = 1.0;
+    private string _textSize = "default";
     private SwTheme _selectedTheme = SwTheme.Holonet;
     private MudThemeProvider _mudThemeProvider = null!;
 
-    private static readonly (string Label, double Value)[] _fontScales =
+    private static readonly (string Label, string Value)[] _textSizes =
     [
-        ("Small", 0.85),
-        ("Default", 1.0),
-        ("Large", 1.15),
-        ("Extra Large", 1.3),
+        ("Small", "small"),
+        ("Default", "default"),
+        ("Large", "large"),
+        ("Extra Large", "extra-large"),
     ];
 
     private readonly string _version = Assembly.GetExecutingAssembly()
@@ -186,45 +190,63 @@
         ?? Assembly.GetExecutingAssembly().GetName().Version?.ToString(3)
         ?? "0.0.0";
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Layout.OnChange += StateHasChanged;
-
-        // Prerendering is disabled (App.razor), so OnInitializedAsync runs in the
-        // interactive circuit context and IJSRuntime is available. Loading persisted
-        // preferences here means the first render already uses the saved palette —
-        // no flash from the default theme.
-        var savedTheme = await JS.InvokeAsync<string?>("swGetTheme");
-        if (!string.IsNullOrEmpty(savedTheme))
-        {
-            _selectedTheme = SwThemeExtensions.FromId(savedTheme);
-        }
-
-        var savedScale = await JS.InvokeAsync<double>("swGetFontScale");
-        if (Math.Abs(savedScale - _fontScale) > 0.01)
-        {
-            _fontScale = savedScale;
-        }
-
-        _aurebesh = await JS.InvokeAsync<bool>("swGetAurebesh");
-
-        _theme = BuildTheme(_fontScale, _selectedTheme);
+        // Build with current (default) field values so MudThemeProvider has a non-null
+        // Theme on the very first render. The saved palette is loaded later in
+        // OnAfterRenderAsync once JS interop is safe. Text size is handled entirely
+        // via CSS variable overrides on <html data-text-size="...">; the inline
+        // script in App.razor's <head> applies it synchronously before Blazor loads,
+        // so MainLayout never has to rebuild the MudTheme to scale typography.
+        _theme = BuildTheme(_selectedTheme);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+        if (!firstRender) return;
+
+        // Critical: load all persisted UI state in ONE round-trip via swGetUiState.
+        // Empirically, in Blazor Server with prerender disabled the SignalR circuit
+        // can be torn down between consecutive awaited JS interop calls during the
+        // first-connect retry race, causing the second call to throw
+        // JSDisconnectedException. Batching into a single call sidesteps that.
+        try
         {
-            // _mudThemeProvider ref is only bound after the first render, so the system
-            // dark mode seed and watch must live here rather than OnInitializedAsync.
+            var ui = await JS.InvokeAsync<UiState>("swGetUiState");
+            if (!string.IsNullOrEmpty(ui.Theme))
+                _selectedTheme = SwThemeExtensions.FromId(ui.Theme);
+            _textSize = string.IsNullOrEmpty(ui.TextSize) ? "default" : ui.TextSize;
+            _aurebesh = ui.Aurebesh;
+
+            _theme = BuildTheme(_selectedTheme);
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogWarning(ex, "Failed loading persisted UI state");
+        }
+
+        // Best-effort follow-ups. These may JSDisconnectedException-throw on the
+        // first circuit; if so, the SECOND circuit (the one that survives) will
+        // run this method again and pick them up.
+        try
+        {
+            if (_aurebesh)
+                await JS.InvokeVoidAsync("swSetAurebesh", true);
+
             _isDarkMode = await _mudThemeProvider.GetSystemDarkModeAsync();
             await _mudThemeProvider.WatchSystemDarkModeAsync(OnSystemDarkModeChanged);
             StateHasChanged();
-
-            if (_aurebesh)
-                await JS.InvokeVoidAsync("swSetAurebesh", true);
+        }
+        catch (JSDisconnectedException) { }
+        catch (Exception ex)
+        {
+            Logger.LogWarning(ex, "Failed wiring system dark mode watcher");
         }
     }
+
+    private sealed record UiState(string? Theme, string? TextSize, bool Aurebesh);
 
     private Task OnSystemDarkModeChanged(bool newValue)
     {
@@ -232,17 +254,16 @@
         return InvokeAsync(StateHasChanged);
     }
 
-    private async Task SetFontScale(double scale)
+    private async Task SetTextSize(string size)
     {
-        _fontScale = scale;
-        _theme = BuildTheme(scale, _selectedTheme);
-        await JS.InvokeVoidAsync("swSetFontScale", scale);
+        _textSize = size;
+        await JS.InvokeVoidAsync("swSetTextSize", size);
     }
 
     private async Task SetTheme(SwTheme theme)
     {
         _selectedTheme = theme;
-        _theme = BuildTheme(_fontScale, _selectedTheme);
+        _theme = BuildTheme(_selectedTheme);
         await JS.InvokeVoidAsync("swSetTheme", theme.Id());
         StateHasChanged();
     }
@@ -253,7 +274,7 @@
         await JS.InvokeVoidAsync("swSetAurebesh", _aurebesh);
     }
 
-    private MudTheme BuildTheme(double scale, SwTheme theme)
+    private static MudTheme BuildTheme(SwTheme theme)
     {
         var (light, dark) = Themes.GetPalettes(theme);
         return new MudTheme
@@ -261,38 +282,9 @@
             PaletteLight = light,
             PaletteDark = dark,
             LayoutProperties = new LayoutProperties(),
-            Typography = ScaleTypography(scale),
+            // Typography intentionally omitted — text-size is controlled by
+            // [data-text-size="..."] CSS overrides on <html>, see style.css.
         };
-    }
-
-    private static MudBlazor.Typography ScaleTypography(double scale)
-    {
-        if (Math.Abs(scale - 1.0) < 0.01)
-            return new MudBlazor.Typography();
-
-        return new MudBlazor.Typography
-        {
-            Default = new DefaultTypography { FontSize = ScaleRem(".875rem", scale) },
-            H1 = new H1Typography { FontSize = ScaleRem("6rem", scale) },
-            H2 = new H2Typography { FontSize = ScaleRem("3.75rem", scale) },
-            H3 = new H3Typography { FontSize = ScaleRem("3rem", scale) },
-            H4 = new H4Typography { FontSize = ScaleRem("2.125rem", scale) },
-            H5 = new H5Typography { FontSize = ScaleRem("1.5rem", scale) },
-            H6 = new H6Typography { FontSize = ScaleRem("1.25rem", scale) },
-            Subtitle1 = new Subtitle1Typography { FontSize = ScaleRem("1rem", scale) },
-            Subtitle2 = new Subtitle2Typography { FontSize = ScaleRem(".875rem", scale) },
-            Body1 = new Body1Typography { FontSize = ScaleRem("1rem", scale) },
-            Body2 = new Body2Typography { FontSize = ScaleRem(".875rem", scale) },
-            Button = new ButtonTypography { FontSize = ScaleRem(".875rem", scale) },
-            Caption = new CaptionTypography { FontSize = ScaleRem(".75rem", scale) },
-            Overline = new OverlineTypography { FontSize = ScaleRem(".75rem", scale) },
-        };
-    }
-
-    private static string ScaleRem(string rem, double scale)
-    {
-        var num = double.Parse(rem.Replace("rem", ""), System.Globalization.CultureInfo.InvariantCulture);
-        return $"{(num * scale).ToString("0.####", System.Globalization.CultureInfo.InvariantCulture)}rem";
     }
 
     public void Dispose() => Layout.OnChange -= StateHasChanged;

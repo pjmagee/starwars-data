@@ -110,6 +110,13 @@ builder
 
 var app = builder.Build();
 
+// Route MudBlazor's internal lifecycle exceptions to our ILogger so they don't
+// silently disappear. Without this hook, anything MudBlazor catches inside its
+// own components (theme provider JS interop, dialog/snackbar lifecycle, etc.)
+// goes to a default no-op handler and never reaches the Aspire log stream.
+var mudLogger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("MudBlazor");
+MudBlazor.MudGlobal.UnhandledExceptionHandler = ex => mudLogger.LogError(ex, "MudBlazor unhandled exception");
+
 app.MapGet(
         "/debug/claims",
         (ClaimsPrincipal user) =>

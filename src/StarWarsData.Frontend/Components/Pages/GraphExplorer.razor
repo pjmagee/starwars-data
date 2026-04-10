@@ -13,27 +13,36 @@
 
 <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-4 px-4">
 
+    @* ── Filter card (MudPaper + MudGrid — same idiomatic pattern as
+       KnowledgeGraph and Search). Bounded max-width keeps the inputs at a
+       reasonable size on wide monitors instead of ballooning across the
+       full ExtraExtraLarge container ── *@
+    <MudPaper Outlined="true" Class="pa-3 mb-3" Style="max-width:800px">
+        <MudGrid Spacing="2">
+            <MudItem xs="12" sm="6">
+                <MudTextField T="string" @bind-Value="_search" Placeholder="Search entities..."
+                              Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                              Immediate="true" DebounceInterval="400" OnDebounceIntervalElapsed="OnSearchChanged"
+                              Clearable="true" Variant="Variant.Outlined" Margin="Margin.Dense" />
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudSelect T="string" @bind-Value="_selectedType" Variant="Variant.Outlined" Margin="Margin.Dense"
+                           @bind-Value:after="OnTypeFilterChanged" Clearable="true" Placeholder="All Types">
+                    @foreach (var type in _entityTypes)
+                    {
+                        <MudSelectItem T="string" Value="@type">@FormatTypeName(type)</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+
     <!-- Entity browse table -->
     <MudTable T="EntitySearchDto" ServerData="LoadBrowseData" @ref="_browseTable" Dense="true"
               Hover="true" Bordered="false" Striped="true" Elevation="1"
               RowClass="cursor-pointer" OnRowClick="OnBrowseRowClick"
               RowClassFunc="@((item, _) => item.Id == _selectedEntityId ? "mud-theme-primary" : "")"
               Loading="_browseLoading" LoadingProgressColor="Color.Primary" Class="mb-4">
-        <ToolBarContent>
-            <MudTextField T="string" @bind-Value="_search" Placeholder="Search entities..."
-                          Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
-                          Immediate="true" DebounceInterval="400" OnDebounceIntervalElapsed="OnSearchChanged"
-                          Clearable="true" Variant="Variant.Outlined" Margin="Margin.Dense"
-                          Style="max-width:350px;" Class="mr-4" />
-            <MudSelect T="string" @bind-Value="_selectedType" Variant="Variant.Outlined" Margin="Margin.Dense"
-                       @bind-Value:after="OnTypeFilterChanged" Style="max-width:200px;" Clearable="true"
-                       Placeholder="All Types">
-                @foreach (var type in _entityTypes)
-                {
-                    <MudSelectItem T="string" Value="@type">@FormatTypeName(type)</MudSelectItem>
-                }
-            </MudSelect>
-        </ToolBarContent>
         <HeaderContent>
             <MudTh>Name</MudTh>
             <MudTh>Type</MudTh>

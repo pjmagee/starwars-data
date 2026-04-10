@@ -167,3 +167,67 @@
     overflow: auto;
     border-left: 1px solid rgba(255,255,255,0.1);
 }
+
+/*
+ * Text size buckets — applied via [data-text-size="..."] on <html>.
+ * The data attribute is set synchronously by an inline script in App.razor's
+ * <head> block (reading localStorage), so the page comes up at the user's
+ * chosen size on the very first paint with zero flash. Switching sizes is a
+ * single attribute toggle — no MudTheme rebuild, no Blazor re-render.
+ *
+ * Each bucket is a uniform multiplier of MudBlazor's default rem values:
+ *   small        × 0.85
+ *   default      × 1.00 (no override needed — matches MudBlazor defaults)
+ *   large        × 1.15
+ *   extra-large  × 1.30
+ */
+html[data-text-size="small"] {
+    --mud-typography-default-size: 0.74375rem;
+    --mud-typography-h1-size: 5.1rem;
+    --mud-typography-h2-size: 3.1875rem;
+    --mud-typography-h3-size: 2.55rem;
+    --mud-typography-h4-size: 1.80625rem;
+    --mud-typography-h5-size: 1.275rem;
+    --mud-typography-h6-size: 1.0625rem;
+    --mud-typography-subtitle1-size: 0.85rem;
+    --mud-typography-subtitle2-size: 0.74375rem;
+    --mud-typography-body1-size: 0.85rem;
+    --mud-typography-body2-size: 0.74375rem;
+    --mud-typography-button-size: 0.74375rem;
+    --mud-typography-caption-size: 0.6375rem;
+    --mud-typography-overline-size: 0.6375rem;
+}
+
+html[data-text-size="large"] {
+    --mud-typography-default-size: 1.00625rem;
+    --mud-typography-h1-size: 6.9rem;
+    --mud-typography-h2-size: 4.3125rem;
+    --mud-typography-h3-size: 3.45rem;
+    --mud-typography-h4-size: 2.44375rem;
+    --mud-typography-h5-size: 1.725rem;
+    --mud-typography-h6-size: 1.4375rem;
+    --mud-typography-subtitle1-size: 1.15rem;
+    --mud-typography-subtitle2-size: 1.00625rem;
+    --mud-typography-body1-size: 1.15rem;
+    --mud-typography-body2-size: 1.00625rem;
+    --mud-typography-button-size: 1.00625rem;
+    --mud-typography-caption-size: 0.8625rem;
+    --mud-typography-overline-size: 0.8625rem;
+}
+
+html[data-text-size="extra-large"] {
+    --mud-typography-default-size: 1.1375rem;
+    --mud-typography-h1-size: 7.8rem;
+    --mud-typography-h2-size: 4.875rem;
+    --mud-typography-h3-size: 3.9rem;
+    --mud-typography-h4-size: 2.7625rem;
+    --mud-typography-h5-size: 1.95rem;
+    --mud-typography-h6-size: 1.625rem;
+    --mud-typography-subtitle1-size: 1.3rem;
+    --mud-typography-subtitle2-size: 1.1375rem;
+    --mud-typography-body1-size: 1.3rem;
+    --mud-typography-body2-size: 1.1375rem;
+    --mud-typography-button-size: 1.1375rem;
+    --mud-typography-caption-size: 0.975rem;
+    --mud-typography-overline-size: 0.975rem;
+}

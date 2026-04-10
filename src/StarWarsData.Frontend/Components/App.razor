@@ -70,13 +70,47 @@
             // Auto-load if previously accepted
             if (swGetCookieConsent() === 'accepted') swLoadAnalytics();
 
-            // Accessibility: persist font scale preference
-            function swSetFontScale(scale) { localStorage.setItem('sw-font-scale', scale.toString()); }
-            function swGetFontScale() { return parseFloat(localStorage.getItem('sw-font-scale')) || 1.0; }
+            // Accessibility: persist text-size preference. Stored as one of
+            // 'small' | 'default' | 'large' | 'extra-large'. The actual sizing
+            // is done via [data-text-size="..."] CSS overrides on <html> in
+            // style.css — switching is a single attribute toggle, no MudTheme
+            // rebuild, no Blazor re-render.
+            function swSetTextSize(size) {
+                localStorage.setItem('sw-text-size', size);
+                if (size && size !== 'default') {
+                    document.documentElement.dataset.textSize = size;
+                } else {
+                    delete document.documentElement.dataset.textSize;
+                }
+            }
+            function swGetTextSize() { return localStorage.getItem('sw-text-size') || 'default'; }
+
+            // Apply the saved text size NOW, synchronously, before Blazor loads.
+            // This eliminates the flash from default sizing to user sizing on the
+            // very first paint. The script tag is in <head> so it runs before any
+            // body content is parsed.
+            (function applySavedTextSize() {
+                var size = localStorage.getItem('sw-text-size');
+                if (size && size !== 'default') {
+                    document.documentElement.dataset.textSize = size;
+                }
+            })();
 
             // Faction theme: persist user's selected MudTheme palette
             function swSetTheme(themeId) { localStorage.setItem('sw-theme', themeId); }
             function swGetTheme() { return localStorage.getItem('sw-theme'); }
+
+            // Combined UI state read — used by MainLayout on first render so we
+            // only need ONE JS interop round-trip. The circuit can be torn down
+            // between consecutive awaited interop calls during the SignalR
+            // first-connect retry cycle, so a single batched call is reliable.
+            function swGetUiState() {
+                return {
+                    theme: localStorage.getItem('sw-theme'),
+                    textSize: localStorage.getItem('sw-text-size') || 'default',
+                    aurebesh: localStorage.getItem('sw-aurebesh') === 'true'
+                };
+            }
 
             // Aurebesh preview: show selected text in galactic script
             var _aurebeshBar = null;
