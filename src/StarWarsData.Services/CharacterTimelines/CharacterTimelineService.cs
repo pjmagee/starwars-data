@@ -79,7 +79,7 @@ public class CharacterTimelineService
         var filters = new List<FilterDefinition<Page>>
         {
             Builders<Page>.Filter.Eq("infobox.Template", $"{Collections.TemplateUrlPrefix}Character"),
-            Builders<Page>.Filter.Regex(p => p.Title, new BsonRegularExpression(System.Text.RegularExpressions.Regex.Escape(query), "i")),
+            Builders<Page>.Filter.Regex(p => p.Title, MongoSafe.Regex(query, escape: true)),
         };
 
         if (continuity.HasValue)
@@ -323,7 +323,7 @@ public class CharacterTimelineService
 
         if (!string.IsNullOrWhiteSpace(search))
         {
-            filters.Add(Builders<CharacterTimeline>.Filter.Regex(t => t.CharacterTitle, new BsonRegularExpression(System.Text.RegularExpressions.Regex.Escape(search), "i")));
+            filters.Add(Builders<CharacterTimeline>.Filter.Regex(t => t.CharacterTitle, MongoSafe.Regex(search, escape: true)));
         }
 
         if (continuity.HasValue)

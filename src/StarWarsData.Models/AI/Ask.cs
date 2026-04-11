@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace StarWarsData.Models.Queries;
@@ -63,14 +64,18 @@ public enum TimeSeriesDisplayType
 public class TableDescriptor
 {
     [JsonPropertyName("title")]
+    [Required]
     [Description("Descriptive title for the table")]
     public string Title { get; set; } = string.Empty;
 
     [JsonPropertyName("collection")]
+    [Required]
     [Description("The MongoDB collection to query (e.g. Character, Battle, Planet, ForcePower)")]
     public string Collection { get; set; } = string.Empty;
 
     [JsonPropertyName("fields")]
+    [Required]
+    [MinLength(1)]
     [Description("Which Data.Label fields to show as columns (e.g. [\"Born\", \"Died\", \"Homeworld\", \"Species\"]). Always include 3-6 relevant fields.")]
     public List<string> Fields { get; set; } = [];
 
@@ -83,10 +88,11 @@ public class TableDescriptor
     public int PageSize { get; set; } = 25;
 
     [JsonPropertyName("mobileSummary")]
+    [Required]
     [Description(
         "Concise markdown text summary (3-6 bullet points or short paragraphs) of the table's key insights. Shown to users on narrow viewports (< 960px) where the wide table cannot be rendered legibly. Always populate this — it is the only thing mobile users will see in place of the table. Use bullet points and bold key entities."
     )]
-    public string? MobileSummary { get; set; }
+    public string MobileSummary { get; set; } = string.Empty;
 
     [JsonPropertyName("references")]
     [Description("Optional source references from wiki pages used to generate this result")]
@@ -97,22 +103,28 @@ public class TableDescriptor
 public class DataTableDescriptor
 {
     [JsonPropertyName("title")]
+    [Required]
     [Description("Descriptive title for the table")]
     public string Title { get; set; } = string.Empty;
 
     [JsonPropertyName("columns")]
+    [Required]
+    [MinLength(1)]
     [Description("Column headers for the table")]
     public List<string> Columns { get; set; } = [];
 
     [JsonPropertyName("rows")]
+    [Required]
+    [MinLength(1)]
     [Description("Row data — each row is a list of string values matching the columns order")]
     public List<List<string>> Rows { get; set; } = [];
 
     [JsonPropertyName("mobileSummary")]
+    [Required]
     [Description(
         "Concise markdown text summary (3-6 bullet points or short paragraphs) of the data table's key insights. Shown to users on narrow viewports (< 960px) where the wide table cannot be rendered legibly. Always populate this — it is the only thing mobile users will see in place of the table. Use bullet points and bold key entities."
     )]
-    public string? MobileSummary { get; set; }
+    public string MobileSummary { get; set; } = string.Empty;
 
     [JsonPropertyName("references")]
     [Description("Optional source references from wiki pages used to generate this result")]
@@ -123,11 +135,13 @@ public class DataTableDescriptor
 public class ChartDescriptor
 {
     [JsonPropertyName("title")]
+    [Required]
     [Description("Descriptive title for the chart")]
     public string Title { get; set; } = string.Empty;
 
     [JsonPropertyName("chartType")]
     [JsonConverter(typeof(JsonStringEnumConverter))]
+    [Required]
     [Description("The type of chart to render")]
     public AskChartType ChartType { get; set; }
 
@@ -156,10 +170,11 @@ public class ChartDescriptor
     public ChartOptions? Options { get; set; }
 
     [JsonPropertyName("mobileSummary")]
+    [Required]
     [Description(
         "Concise markdown text summary (3-6 bullet points or short paragraphs) of the chart's key insights — top items, distribution, outliers, what the user should take away. Shown to users on narrow viewports (< 960px) where the chart cannot be rendered legibly (axis labels overlap, bars become unreadable). Always populate this — it is the only thing mobile users will see in place of the chart. Use bullet points and include the actual numeric values from the chart."
     )]
-    public string? MobileSummary { get; set; }
+    public string MobileSummary { get; set; } = string.Empty;
 
     [JsonPropertyName("references")]
     [Description("Optional source references from wiki pages used to generate this result")]
@@ -174,14 +189,17 @@ public class ChartDescriptor
 public class GraphDescriptor
 {
     [JsonPropertyName("title")]
+    [Required]
     [Description("Descriptive title for the graph")]
     public string Title { get; set; } = string.Empty;
 
     [JsonPropertyName("rootEntityId")]
+    [Required]
     [Description("The entity's PageId from the knowledge graph")]
     public int RootEntityId { get; set; }
 
     [JsonPropertyName("rootEntityName")]
+    [Required]
     [Description("The entity's display name")]
     public string RootEntityName { get; set; } = string.Empty;
 
@@ -190,6 +208,8 @@ public class GraphDescriptor
     public int MaxDepth { get; set; } = 2;
 
     [JsonPropertyName("labels")]
+    [Required]
+    [MinLength(1)]
     [Description(
         "KG edge labels to traverse (e.g. child_of, parent_of, head_of_state, affiliated_with). "
             + "Call get_relationship_types(entityId) to discover available labels. "
@@ -215,10 +235,11 @@ public class GraphDescriptor
     public PathData? PathData { get; set; }
 
     [JsonPropertyName("mobileSummary")]
+    [Required]
     [Description(
         "Concise markdown text summary (3-6 bullet points or short paragraphs) of the relationship graph's key insights — central entities, important paths, notable connections. Shown to users on narrow viewports (< 960px) where the force-directed graph cannot be navigated by touch. Always populate this — it is the only thing mobile users will see in place of the graph. Use bullet points and bold key entities."
     )]
-    public string? MobileSummary { get; set; }
+    public string MobileSummary { get; set; } = string.Empty;
 
     [JsonPropertyName("references")]
     [Description("Optional source references from wiki pages used to generate this result")]
@@ -229,42 +250,55 @@ public class GraphDescriptor
 public class PathData
 {
     [JsonPropertyName("fromId")]
+    [Required]
     public int FromId { get; set; }
 
     [JsonPropertyName("fromName")]
+    [Required]
     public string FromName { get; set; } = string.Empty;
 
     [JsonPropertyName("toId")]
+    [Required]
     public int ToId { get; set; }
 
     [JsonPropertyName("toName")]
+    [Required]
     public string ToName { get; set; } = string.Empty;
 
     [JsonPropertyName("steps")]
+    [Required]
+    [MinLength(1)]
     public List<PathStep> Steps { get; set; } = [];
 }
 
 public class PathStep
 {
     [JsonPropertyName("fromId")]
+    [Required]
     public int FromId { get; set; }
 
     [JsonPropertyName("fromName")]
+    [Required]
     public string FromName { get; set; } = string.Empty;
 
     [JsonPropertyName("fromType")]
+    [Required]
     public string FromType { get; set; } = string.Empty;
 
     [JsonPropertyName("toId")]
+    [Required]
     public int ToId { get; set; }
 
     [JsonPropertyName("toName")]
+    [Required]
     public string ToName { get; set; } = string.Empty;
 
     [JsonPropertyName("toType")]
+    [Required]
     public string ToType { get; set; } = string.Empty;
 
     [JsonPropertyName("label")]
+    [Required]
     public string Label { get; set; } = string.Empty;
 
     [JsonPropertyName("evidence")]
@@ -275,10 +309,13 @@ public class PathStep
 public class TimelineDescriptor
 {
     [JsonPropertyName("title")]
+    [Required]
     [Description("Descriptive title for the timeline")]
     public string Title { get; set; } = string.Empty;
 
     [JsonPropertyName("categories")]
+    [Required]
+    [MinLength(1)]
     [Description(
         "Timeline event categories to include (e.g. [\"Battle_infobox\", \"War_infobox\", \"Character_infobox\"] for galactic; [\"Book\", \"Film\", \"Video_game\"] for real-world). Use available-categories to discover valid names."
     )]
@@ -313,10 +350,11 @@ public class TimelineDescriptor
     public string? Search { get; set; }
 
     [JsonPropertyName("mobileSummary")]
+    [Required]
     [Description(
         "Concise markdown text summary (3-6 bullet points or short paragraphs) of the timeline's key events with their dates and significance. Shown to users on narrow viewports (< 960px) where the timeline visualization cannot be rendered legibly. Always populate this — it is the only thing mobile users will see in place of the timeline. Use bullet points organized chronologically with dates in **bold**."
     )]
-    public string? MobileSummary { get; set; }
+    public string MobileSummary { get; set; } = string.Empty;
 
     [JsonPropertyName("references")]
     [Description("Optional source references from wiki pages used to generate this result")]
@@ -327,18 +365,22 @@ public class TimelineDescriptor
 public class InfoboxDescriptor
 {
     [JsonPropertyName("title")]
+    [Required]
     [Description("Descriptive title (e.g. 'Mace Windu' or 'Comparing Yoda and Dooku')")]
     public string Title { get; set; } = string.Empty;
 
     [JsonPropertyName("pageIds")]
+    [Required]
+    [MinLength(1)]
     [Description("One or more PageId integers to display as infobox cards")]
     public List<int> PageIds { get; set; } = [];
 
     [JsonPropertyName("mobileSummary")]
+    [Required]
     [Description(
         "Concise markdown text summary (3-6 bullet points or short paragraphs) of the infobox subject(s) — key facts, dates, affiliations, comparisons. Shown to users on narrow viewports (< 960px) where the side-by-side cards become illegible. Always populate this — it is the only thing mobile users will see in place of the infobox. Use bullet points and **bold** field names."
     )]
-    public string? MobileSummary { get; set; }
+    public string MobileSummary { get; set; } = string.Empty;
 
     [JsonPropertyName("references")]
     [Description("Optional source references from wiki pages used to generate this result")]
@@ -349,10 +391,13 @@ public class InfoboxDescriptor
 public class TextDescriptor
 {
     [JsonPropertyName("title")]
+    [Required]
     [Description("Descriptive title for the text section")]
     public string Title { get; set; } = string.Empty;
 
     [JsonPropertyName("sections")]
+    [Required]
+    [MinLength(1)]
     [Description("Text sections to display, each with a heading and content")]
     public List<TextSection> Sections { get; set; } = [];
 
@@ -364,10 +409,12 @@ public class TextDescriptor
 public class TextSection
 {
     [JsonPropertyName("heading")]
+    [Required]
     [Description("Section heading (e.g. 'Biography', 'Powers and Abilities')")]
     public string Heading { get; set; } = string.Empty;
 
     [JsonPropertyName("content")]
+    [Required]
     [Description("The text content — plain text or markdown")]
     public string Content { get; set; } = string.Empty;
 
@@ -384,10 +431,12 @@ public class TextSection
 public class AurebeshDescriptor
 {
     [JsonPropertyName("title")]
+    [Required]
     [Description("Title shown in normal English font above the Aurebesh output")]
     public string Title { get; set; } = string.Empty;
 
     [JsonPropertyName("text")]
+    [Required]
     [Description("Plain English text (with optional markdown). Automatically displayed as Aurebesh.")]
     public string Text { get; set; } = string.Empty;
 
@@ -402,10 +451,12 @@ public class AurebeshDescriptor
 public class Reference
 {
     [JsonPropertyName("title")]
+    [Required]
     [Description("Display title of the source page")]
     public string Title { get; set; } = string.Empty;
 
     [JsonPropertyName("url")]
+    [Required]
     [Description("The Wookieepedia URL for the source page")]
     public string Url { get; set; } = string.Empty;
 }
@@ -416,10 +467,13 @@ public class Reference
 public class ChartSeries
 {
     [JsonPropertyName("name")]
+    [Required]
     [Description("The name of the series")]
     public string Name { get; set; } = default!;
 
     [JsonPropertyName("data")]
+    [Required]
+    [MinLength(1)]
     [Description("The data points for the series")]
     public List<double> Data { get; set; } = [];
 }
@@ -428,10 +482,13 @@ public class ChartSeries
 public class TimeSeriesChartSeries
 {
     [JsonPropertyName("name")]
+    [Required]
     [Description("The name of the series")]
     public string Name { get; set; } = default!;
 
     [JsonPropertyName("data")]
+    [Required]
+    [MinLength(1)]
     [Description("The data points for the series")]
     public List<TimeSeriesDataPoint> Data { get; set; } = [];
 }
@@ -440,10 +497,12 @@ public class TimeSeriesChartSeries
 public class TimeSeriesDataPoint
 {
     [JsonPropertyName("x")]
+    [Required]
     [Description("The date of the data point")]
     public DateTime X { get; set; }
 
     [JsonPropertyName("y")]
+    [Required]
     [Description("The value of the data point")]
     public double Y { get; set; }
 }

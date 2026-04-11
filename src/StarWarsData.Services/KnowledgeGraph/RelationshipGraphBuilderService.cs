@@ -1517,7 +1517,7 @@ public class RelationshipGraphBuilderService
         }
 
         if (!string.IsNullOrWhiteSpace(search))
-            filters.Add(Builders<RelationshipCrawlState>.Filter.Regex(s => s.Name, new BsonRegularExpression(search, "i")));
+            filters.Add(Builders<RelationshipCrawlState>.Filter.Regex(s => s.Name, MongoSafe.Regex(search)));
 
         var filter = Builders<RelationshipCrawlState>.Filter.And(filters);
 

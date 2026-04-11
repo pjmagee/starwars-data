@@ -141,7 +141,7 @@ public class TimelineService
         // Search filter
         if (!string.IsNullOrWhiteSpace(search))
         {
-            matchConditions.Add(new BsonDocument("Title", new BsonDocument("$regex", new BsonRegularExpression(search, "i"))));
+            matchConditions.Add(new BsonDocument("Title", new BsonDocument("$regex", MongoSafe.Regex(search))));
         }
 
         var matchFilter = matchConditions.Count switch

@@ -219,6 +219,16 @@ public class InfoboxGraphService(IMongoClient mongoClient, IOptions<SettingsOpti
                         if (values.Count > 0)
                             properties[label] = values;
                     }
+                    else if (!hasLabelDef && links.Count == 0)
+                    {
+                        // Fallthrough: field has no property definition, no relationship
+                        // definition, no temporal classification, and no links. Preserve
+                        // the raw infobox text so it's not silently lost — the KG is the
+                        // single runtime source of truth, so anything raw.pages has must
+                        // land on the node. See eng/design/013-kg-property-edge-duality.md.
+                        if (values.Count > 0)
+                            properties[label] = values;
+                    }
                     else if (hasLabelDef || links.Count > 0)
                     {
                         var edgeLabel = labelDef?.Label ?? NormaliseLabel(label);

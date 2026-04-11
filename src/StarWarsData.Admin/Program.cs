@@ -70,14 +70,14 @@ builder
         {
             var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
             var openAiClient = sp.GetRequiredService<OpenAIClient>();
-            return new ChatClientBuilder(openAiClient.GetChatClient(settings.RelationshipAnalystModel).AsIChatClient()).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build();
+            return new ChatClientBuilder(openAiClient.GetResponsesClient().AsIChatClient(settings.RelationshipAnalystModel)).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build();
         }
     )
     .AddSingleton<CharacterTimelineChatClient>(sp =>
     {
         var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
         var openAiClient = sp.GetRequiredService<OpenAIClient>();
-        var inner = new ChatClientBuilder(openAiClient.GetChatClient(settings.CharacterTimelineModel).AsIChatClient()).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build();
+        var inner = new ChatClientBuilder(openAiClient.GetResponsesClient().AsIChatClient(settings.CharacterTimelineModel)).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build();
         return new CharacterTimelineChatClient(inner);
     })
     .AddScoped<CharacterTimelineService>()
@@ -89,7 +89,10 @@ builder
     {
         var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
         var openAiClient = sp.GetRequiredService<OpenAIClient>();
-        return new ChatClientBuilder(openAiClient.GetChatClient(settings.OpenAiModel).AsIChatClient()).UseFunctionInvocation().UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build();
+        return new ChatClientBuilder(openAiClient.GetResponsesClient().AsIChatClient(settings.OpenAiModel))
+            .UseFunctionInvocation()
+            .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
+            .Build();
     })
     .AddScoped<StarWarsData.Services.Suggestions.SuggestionAgentService>()
     .AddSingleton<JobToggleService>()

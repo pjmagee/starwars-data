@@ -526,7 +526,7 @@ public class PageDownloader
     {
         // Anchor to the template name portion of the URL (after "Template:")
         // so "War" matches Template:War but not starwars.fandom.com
-        var regex = new MongoDB.Bson.BsonRegularExpression($"Template:{templatePattern}$", "i");
+        var regex = new MongoDB.Bson.BsonRegularExpression($"Template:{MongoSafe.Sanitize(templatePattern)}$", "i");
         var filter = Builders<Page>.Filter.Regex("infobox.Template", regex);
 
         var titles = await _pagesCollection.Find(filter).Project(p => p.Title).ToListAsync(cancellationToken);

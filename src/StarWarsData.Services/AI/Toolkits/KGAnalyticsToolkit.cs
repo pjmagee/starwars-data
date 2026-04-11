@@ -39,6 +39,20 @@ public class KGAnalyticsToolkit
         : year == 0 ? "0 BBY/ABY"
         : $"{year} ABY";
 
+    /// <summary>
+    /// Properties that are genuinely categorical (few distinct values expected).
+    /// The sparse-redirect should NOT fire for these — few values is correct, not a sign
+    /// that the data is modeled as edges.
+    /// </summary>
+    static bool IsCategoricalProperty(string property) =>
+        property.Equals("Era", StringComparison.OrdinalIgnoreCase)
+        || property.Equals("Period", StringComparison.OrdinalIgnoreCase)
+        || property.Equals("Epoch", StringComparison.OrdinalIgnoreCase)
+        || property.Equals("Phase", StringComparison.OrdinalIgnoreCase)
+        || property.Equals("Alignment", StringComparison.OrdinalIgnoreCase)
+        || property.Equals("Gender", StringComparison.OrdinalIgnoreCase)
+        || property.Equals("Outcome", StringComparison.OrdinalIgnoreCase);
+
     [Description(
         """
             Count entities of one type connected to each entity of another type via a relationship label.
@@ -67,11 +81,15 @@ public class KGAnalyticsToolkit
 
     [Description(
         """
-            Count nodes grouped by MULTIPLE properties simultaneously with optional example entity per group.
-            Returns each combination of property values, a count, and optionally one example entity name + PageId.
-            Use this instead of count_nodes_by_property when you need 2+ grouping dimensions or want examples.
-            Example: 'Starship classes with manufacturer, count, and a famous ship' →
-                entityType='Starship', properties=['Class', 'Manufacturer'], includeExample=true
+            Count nodes grouped by MULTIPLE properties simultaneously, with the contributing
+            source nodes attached to every row so the agent can cite them in `references`.
+            Each row contains the property combination, a count, and a `sources` array of
+            up to `maxSources` contributing nodes (pageId + title + wikiUrl). Use these wikiUrls
+            to populate `references` on render_chart / render_data_table — never invent citations.
+
+            Example: 'Starship classes with manufacturer, count, and example ships' →
+                entityType='Starship', properties=['Class', 'Manufacturer']
+
             ONE call returns all combinations — never loop through entities individually.
             Best for: render_data_table with multi-column grouping.
             """
@@ -79,12 +97,12 @@ public class KGAnalyticsToolkit
     public async Task<List<Dictionary<string, object>>> CountNodesByProperties(
         [Description("Entity type to aggregate (e.g. Starship, Character, CelestialBody)")] string entityType,
         [Description("Property names to group by (e.g. ['Class', 'Manufacturer']). Case-sensitive.")] List<string> properties,
-        [Description("Include one example entity per group (title + pageId)")] bool includeExample = false,
+        [Description("Max contributing source nodes attached per row (default 5, max 25). Use 1 if you only need a single citation per row.")] int maxSources = 5,
         [Description("Max results (default 30, max 50)")] int limit = 30,
         [Description(ContinuityParamDescription)] string? continuity = null
     )
     {
-        var results = await _kg.CountNodesByPropertiesAsync(entityType, properties, continuity, includeExample, limit);
+        var results = await _kg.CountNodesByPropertiesAsync(entityType, properties, continuity, maxSources, limit);
 
         return results
             .Select(doc =>
@@ -100,34 +118,119 @@ public class KGAnalyticsToolkit
                         : val.AsString;
                 }
                 row["count"] = doc["count"].AsInt32;
-                if (includeExample && doc.Contains("exampleTitle"))
-                {
-                    row["exampleTitle"] = doc["exampleTitle"].AsString;
-                    row["examplePageId"] = doc["examplePageId"].AsInt32;
-                }
+                row["sources"] = ReadSourcesFromDoc(doc);
                 return row;
+            })
+            .ToList();
+    }
+
+    static List<NodeRefDto> ReadSourcesFromDoc(BsonDocument doc)
+    {
+        if (!doc.Contains("sources") || doc["sources"].IsBsonNull)
+            return [];
+        return doc["sources"]
+            .AsBsonArray.Select(s =>
+            {
+                var sd = s.AsBsonDocument;
+                return new NodeRefDto(
+                    PageId: sd.GetValue("pageId", 0).ToInt32(),
+                    Title: sd.GetValue("title", "").IsBsonNull ? "" : sd["title"].AsString,
+                    WikiUrl: sd.GetValue("wikiUrl", BsonNull.Value).IsBsonNull ? null : sd["wikiUrl"].AsString
+                );
             })
             .ToList();
     }
 
     [Description(
         """
-            Count knowledge graph nodes grouped by a property value.
-            Example: 'Characters by species' → entityType='Character', property='Species'.
-            Property names are infobox field names (case-sensitive, typically PascalCase).
-            Call get_entity_properties on a sample entity first to discover available property names.
-            Best for: Pie, Donut, Rose, Bar charts.
+            PRIMARY TOOL for property aggregation on the KG. Call this for ANY property you want
+            to group entities by — it's safe to call even if you're not sure whether the field
+            is a true scalar or a link-bearing field that's been promoted to an edge. The
+            response is SELF-CORRECTING: if the property aggregation comes back sparse and a
+            stronger edge label exists for that source type, the response carries a Note plus
+            RecommendedEdgeLabels pointing you to group_entities_by_connection.
+
+            Read the response in this order:
+              1. If `note` is populated → the property data is sparse. Switch to
+                 group_entities_by_connection(sourceType=<entityType>, label=<top recommended
+                 edge label>) and discard `results`. Do NOT chart the sparse residual.
+              2. If `note` is null → `results` is the canonical answer. Each row has
+                 up to `maxSources` contributing nodes (pageId + title + wikiUrl) for citations.
+
+            Examples that work directly (no redirect):
+              'ForcePower by Alignment' → entityType='ForcePower', property='Alignment' (170 rows)
+              'Character by Gender'     → entityType='Character', property='Gender' (33k+ rows)
+              'Battle by Outcome'       → entityType='Battle', property='Outcome' (3500+ rows)
+
+            Examples that will trigger a redirect (sparse property → edge label hint):
+              'Character by Species'    → property aggregation has 48 residuals; note will say
+                                          "use group_entities_by_connection with label=species"
+              'Food by Place of origin' → property aggregation is empty; note will redirect
+                                          to label=originates_from / found_at
+
+            AFTER THIS TOOL RETURNS → call render_chart (when a chart was requested) or
+            render_data_table (for tabular output). Do NOT write the counts as plain text.
+
+            EXCEPTION — categorical properties (Era, Period, Epoch, Phase, Alignment, Gender):
+            These naturally have few values (< 20). If the sparse-redirect note fires for one
+            of these, IGNORE IT — chart the results directly. The redirect is wrong here because
+            the property is genuinely categorical, not a mis-modeled edge.
+
+            Best for: Pie, Donut, Rose, Bar charts. Trust the note for non-categorical fields.
             """
     )]
-    public async Task<List<ValueCountDto>> CountNodesByProperty(
-        [Description("Entity type to aggregate (e.g. Character, Starship, CelestialBody)")] string entityType,
-        [Description("Property name to group by (e.g. Species, Homeworld, Manufacturer). Case-sensitive.")] string property,
+    public async Task<CountNodesByPropertyResult> CountNodesByProperty(
+        [Description("Entity type to aggregate (e.g. Character, Starship, CelestialBody, ForcePower)")] string entityType,
+        [Description("Property name to group by (e.g. Alignment, Gender, Homeworld, Manufacturer). Case-sensitive.")] string property,
         [Description("Max results (default 20, max 50)")] int limit = 20,
+        [Description("Max contributing source nodes attached per row (default 5, max 25). Use 1 if you only need a single citation per row.")] int maxSources = 5,
         [Description(ContinuityParamDescription)] string? continuity = null
     )
     {
-        var results = await _kg.CountNodesByPropertyAsync(entityType, property, continuity, limit);
-        return results.Select(r => new ValueCountDto(r.value, r.count)).ToList();
+        var raw = await _kg.CountNodesByPropertyAsync(entityType, property, continuity, limit, maxSources);
+        var results = raw.Select(r => new ValueCountDto(r.value, r.count, r.sources)).ToList();
+        var totalMatched = results.Sum(r => r.Count);
+
+        // Self-correcting hint: when the property aggregation came back sparse, check whether
+        // there's a much stronger edge label on this source type. If so, the agent should be
+        // redirected to group_entities_by_connection instead of charting the residual.
+        // "Sparse" = total matched count is small in absolute terms (< 20). For genuinely
+        // populated scalar fields like Alignment (170 rows on ForcePower), no hint fires.
+        //
+        // EXCEPTION: categorical properties (Era, Period, Epoch, Alignment, Gender, Outcome)
+        // naturally have few distinct values — the sparse redirect is a false positive for these.
+        if (totalMatched < 20 && !IsCategoricalProperty(property))
+        {
+            var edgeLabels = await _kg.GetEdgeLabelsForSourceTypeAsync(entityType, continuity);
+            // Find labels that have substantially more data than the property — these are the
+            // ones the agent should switch to. Cap at top 3 to keep the hint concise.
+            var stronger = edgeLabels.Where(e => e.count >= Math.Max(totalMatched * 5, 10)).Take(3).Select(e => new LabelCountDto(e.label, e.count)).ToList();
+
+            if (stronger.Count > 0)
+            {
+                var topAlt = stronger[0];
+                var note =
+                    $"Property '{property}' on type '{entityType}' aggregated to only {totalMatched} entries — "
+                    + $"this field appears to be stored as an edge in kg.edges, not as a node property. "
+                    + $"Switch to: group_entities_by_connection(sourceType='{entityType}', label='{topAlt.Label}') "
+                    + $"which has {topAlt.Count} edges. Other candidate labels: "
+                    + string.Join(", ", stronger.Skip(1).Select(s => $"{s.Label} ({s.Count})"))
+                    + ". DO NOT chart the sparse `results` — they are misleading.";
+                return new CountNodesByPropertyResult(results, totalMatched, stronger, note);
+            }
+        }
+
+        // For categorical properties with zero results, suggest a year-range fallback
+        if (totalMatched == 0 && IsCategoricalProperty(property))
+        {
+            var note =
+                $"Property '{property}' on type '{entityType}' returned 0 results — this property "
+                + $"may not be populated for this entity type. Try count_by_year_range to partition "
+                + $"'{entityType}' entities by time period instead, then render_chart with those results.";
+            return new CountNodesByPropertyResult(results, totalMatched, Note: note);
+        }
+
+        return new CountNodesByPropertyResult(results, totalMatched);
     }
 
     [Description(
@@ -148,7 +251,7 @@ public class KGAnalyticsToolkit
               'Battles started per year' → entityType='Battle', semantic='conflict.start'
               'Ships built per decade' → entityType='Starship', bucket=10, semantic='construction.start'
 
-            Best for: TimeSeries, Line charts.
+            Best for: TimeSeries, Line, Pie, Bar charts. When the user asked for a Pie/Bar chart and this returns data, ALWAYS follow with render_chart — year-range buckets are valid chart categories.
             """
     )]
     public async Task<List<YearCountDto>> CountByYearRange(
@@ -236,6 +339,11 @@ public class KGAnalyticsToolkit
     [Description(
         """
             For a specific named entity, get the property distribution of its connected entities.
+            Each result row carries up to `maxSources` contributing nodes (pageId + title + wikiUrl)
+            so the agent can cite them in `references` on the render tool. When `count: 1`, that
+            single source IS the answer for that bucket — always cite it. Use these wikiUrls —
+            never invent citations.
+
             Example: 'Species breakdown of Jedi Order members' → rootEntityId=<Jedi Order pageId>,
               label='member_of', property='Species', rootIsTarget=true (members point TO the Jedi Order).
             'Homeworlds of Imperial officers' → rootEntityId=<Galactic Empire pageId>, label='member_of', property='Homeworld'.
@@ -255,21 +363,34 @@ public class KGAnalyticsToolkit
         )]
             bool rootIsTarget = true,
         [Description("Max results (default 20, max 50)")] int limit = 20,
+        [Description("Max contributing source nodes attached per row (default 5, max 25). Use 1 if you only need a single citation per row.")] int maxSources = 5,
         [Description(ContinuityParamDescription)] string? continuity = null
     )
     {
-        var results = await _kg.CountPropertyForRelatedEntitiesAsync(rootEntityId, label, property, rootIsTarget, continuity, limit);
-        return results.Select(r => new ValueCountDto(r.value, r.count)).ToList();
+        var results = await _kg.CountPropertyForRelatedEntitiesAsync(rootEntityId, label, property, rootIsTarget, continuity, limit, maxSources);
+        return results.Select(r => new ValueCountDto(r.value, r.count, r.sources)).ToList();
     }
 
     [Description(
         """
-            Group entities by what they connect to via a relationship label — returns named target entities as chart categories.
+            PRIMARY TOOL for aggregation grouped by a LINKED entity. This is the right tool
+            whenever the grouping dimension is a field that points to another entity — Species,
+            Homeworld, Affiliation, Place, Origin, Faction, War, Manufacturer, etc. If you were
+            about to call count_nodes_by_property for a field that references another entity,
+            call THIS instead. Queries kg.edges directly and returns real, canonical counts
+            grouped by the target entity's name.
+
             Examples:
-              'Characters grouped by faction'          → sourceType='Character', label='member_of'
-              'Battles grouped by war'                 → sourceType='Battle', label='battle_in'
-              'Planets grouped by governing faction'   → sourceType='CelestialBody', label='governed_by'
-            Best for: Bar, Pie, Donut charts where you want named factions/orgs/wars as labels.
+              'Characters by Species'                 → sourceType='Character', label='species'
+              'Characters by Homeworld'               → sourceType='Character', label='homeworld'
+              'Characters grouped by faction'         → sourceType='Character', label='member_of'
+              'Battles grouped by war'                → sourceType='Battle',   label='battle_in'
+              'Food by Place of origin'               → sourceType='Food',     label='originates_from'
+              'Planets grouped by governing faction'  → sourceType='CelestialBody', label='governed_by'
+
+            Best for: Bar, Pie, Donut charts where the X-axis is a named entity (faction, war,
+            planet, species, etc). Call describe_relationship_labels first if you're unsure
+            which edge label a field has been normalized to.
             """
     )]
     public async Task<List<NamedCountDto>> GroupEntitiesByConnection(
@@ -495,28 +616,44 @@ public class KGAnalyticsToolkit
                 TotalEdges: 0
             );
 
-        var grouped = edges.GroupBy(e => e.Label).ToDictionary(g => g.Key, g => g.Select(e => new CategoryRelationshipTargetDto(e.ToId, e.ToName, e.ToType, e.FromYear, e.ToYear)).ToList());
+        // Batch-enrich target nodes with wikiUrl so each relationship target is directly citable
+        // from this single tool call — no follow-up search_entities needed to build references.
+        var targetIds = edges.Select(e => e.ToId).Distinct().ToList();
+        var enrichment = await _kg.GetNodePropertiesBatchAsync(targetIds);
+
+        var grouped = edges
+            .GroupBy(e => e.Label)
+            .ToDictionary(
+                g => g.Key,
+                g =>
+                    g.Select(e =>
+                        {
+                            enrichment.TryGetValue(e.ToId, out var info);
+                            return new CategoryRelationshipTargetDto(e.ToId, e.ToName, e.ToType, e.FromYear, e.ToYear, WikiUrl: info?.WikiUrl);
+                        })
+                        .ToList()
+            );
 
         return new RelationshipsByCategoryDto(EntityId: entityId, EntityName: edges[0].FromName, Category: category, Relationships: grouped, TotalEdges: edges.Count);
     }
 
     public IReadOnlyList<AITool> AsAIFunctions() =>
         [
-            AIFunctionFactory.Create(DescribeRelationshipLabels, "describe_relationship_labels"),
-            AIFunctionFactory.Create(CountRelatedEntities, "count_related_entities"),
-            AIFunctionFactory.Create(CountNodesByProperty, "count_nodes_by_property"),
-            AIFunctionFactory.Create(CountByYearRange, "count_by_year_range"),
-            AIFunctionFactory.Create(CountEdgesBetweenTypes, "count_edges_between_types"),
-            AIFunctionFactory.Create(TopConnectedEntities, "top_connected_entities"),
-            AIFunctionFactory.Create(EntityProfile, "entity_profile"),
-            AIFunctionFactory.Create(CountNodesByType, "count_nodes_by_type"),
-            AIFunctionFactory.Create(CountPropertyForRelatedEntities, "count_property_for_related_entities"),
-            AIFunctionFactory.Create(GroupEntitiesByConnection, "group_entities_by_connection"),
-            AIFunctionFactory.Create(CompareEntities, "compare_entities"),
-            AIFunctionFactory.Create(DescribeEntitySchema, "describe_entity_schema"),
-            AIFunctionFactory.Create(FindByLifecycleTransition, "find_by_lifecycle_transition"),
-            AIFunctionFactory.Create(CountLifecycleTransitions, "count_lifecycle_transitions"),
-            AIFunctionFactory.Create(ListLabelsByCategory, "list_labels_by_category"),
-            AIFunctionFactory.Create(GetRelationshipsByCategory, "get_relationships_by_category"),
+            AIFunctionFactory.Create(DescribeRelationshipLabels, ToolNames.KGAnalytics.DescribeRelationshipLabels),
+            AIFunctionFactory.Create(CountRelatedEntities, ToolNames.KGAnalytics.CountRelatedEntities),
+            AIFunctionFactory.Create(CountNodesByProperty, ToolNames.KGAnalytics.CountNodesByProperty),
+            AIFunctionFactory.Create(CountByYearRange, ToolNames.KGAnalytics.CountByYearRange),
+            AIFunctionFactory.Create(CountEdgesBetweenTypes, ToolNames.KGAnalytics.CountEdgesBetweenTypes),
+            AIFunctionFactory.Create(TopConnectedEntities, ToolNames.KGAnalytics.TopConnectedEntities),
+            AIFunctionFactory.Create(EntityProfile, ToolNames.KGAnalytics.EntityProfile),
+            AIFunctionFactory.Create(CountNodesByType, ToolNames.KGAnalytics.CountNodesByType),
+            AIFunctionFactory.Create(CountPropertyForRelatedEntities, ToolNames.KGAnalytics.CountPropertyForRelatedEntities),
+            AIFunctionFactory.Create(GroupEntitiesByConnection, ToolNames.KGAnalytics.GroupEntitiesByConnection),
+            AIFunctionFactory.Create(CompareEntities, ToolNames.KGAnalytics.CompareEntities),
+            AIFunctionFactory.Create(DescribeEntitySchema, ToolNames.KGAnalytics.DescribeEntitySchema),
+            AIFunctionFactory.Create(FindByLifecycleTransition, ToolNames.KGAnalytics.FindByLifecycleTransition),
+            AIFunctionFactory.Create(CountLifecycleTransitions, ToolNames.KGAnalytics.CountLifecycleTransitions),
+            AIFunctionFactory.Create(ListLabelsByCategory, ToolNames.KGAnalytics.ListLabelsByCategory),
+            AIFunctionFactory.Create(GetRelationshipsByCategory, ToolNames.KGAnalytics.GetRelationshipsByCategory),
         ];
 }

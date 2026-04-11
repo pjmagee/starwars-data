@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Build & Run
 
-All projects live under `src/` with the solution at `src/StarWarsData.slnx`. Requires .NET 10 SDK (see `src/global.json`).
+All projects live under `src/` with the solution at `src/StarWarsData.slnx`. Requires .NET 10 SDK (see `global.json` at the repo root).
 
 ```bash
 # Build everything
@@ -39,20 +39,46 @@ When working with Aspire APIs, configuration, or orchestration patterns, **alway
 
 ## Tests
 
-Tests use xUnit with Testcontainers for MongoDB (requires Docker running). There are no unit tests — all tests are integration tests that spin up real MongoDB containers.
+The whole suite lives in **one project** — `src/StarWarsData.Tests` — and uses **MSTest on `MSTest.Sdk`** running through the new `Microsoft.Testing.Platform` (MTP) runner. The runner is selected via `global.json` at the repo root (`"test": { "runner": "Microsoft.Testing.Platform" }`); the legacy VSTest mode is no longer supported on .NET 10.
+
+Tests are split into three tiers under matching folders, tagged with `[TestCategory(TestTiers.Unit|Integration|Agent)]`:
+
+| Tier         | Folder                | What it touches                                | Where it runs                             |
+| ------------ | --------------------- | ---------------------------------------------- | ----------------------------------------- |
+| `Unit`       | `Unit/`               | Pure logic. No Docker, env vars, or network.   | Pre-commit + CI + Docker build            |
+| `Integration`| `Integration/`        | Testcontainers MongoDB only.                   | CI (Docker required)                      |
+| `Agent`      | `Agent/`              | Real OpenAI key + live `starwars-dev` MongoDB. | Manual / nightly only                     |
+
+Filter syntax is the standard MSTest one. Always pass the test project with `--project` (the new MTP `dotnet test` mode requires it):
 
 ```bash
-# Run all tests
-dotnet test src/StarWarsData.Tests
+# Pre-commit / fast CI gate — pure unit tests, ~700ms
+dotnet test --project src/StarWarsData.Tests --filter "TestCategory=Unit"
 
-# Run a single test class
-dotnet test src/StarWarsData.Tests --filter "FullyQualifiedName~RecordServiceTests"
+# CI gate — unit + integration (needs Docker for Testcontainers), ~15s
+dotnet test --project src/StarWarsData.Tests --filter "TestCategory=Unit|TestCategory=Integration"
 
-# Run a single test method
-dotnet test src/StarWarsData.Tests --filter "FullyQualifiedName~RecordServiceTests.Search_returns_matching_pages"
+# Manual / nightly — Agent tier (needs STARWARS_OPENAI_KEY + MDB_MCP_CONNECTION_STRING)
+dotnet test --project src/StarWarsData.Tests --filter "TestCategory=Agent"
+
+# Single test class
+dotnet test --project src/StarWarsData.Tests --filter "FullyQualifiedName~RecordServiceTests"
+
+# Single test method
+dotnet test --project src/StarWarsData.Tests --filter "FullyQualifiedName~RecordServiceTests.GetCollectionNames_ResultsAreSorted"
 ```
 
-Test fixtures: `ApiFixture` (shared MongoDB container with seed data for most tests, xUnit collection `"Api"`) and `MongoFixture` (for relationship graph tests, collection `"Mongo"`). Both use `IAsyncLifetime` to start/stop Testcontainers.
+**Fixtures** all live in `src/StarWarsData.Tests/Infrastructure/` and are **lazy static** — they expose `EnsureInitializedAsync()` and are wired in via `[ClassInitialize]` on each test class that needs them, with a single `[AssemblyCleanup]` in `AssemblyHooks.cs` disposing whichever ones got touched. Unit-only runs never spin up containers or contact OpenAI.
+
+- `ApiFixture` — shared Testcontainers MongoDB seeded with diverse infobox types. Used by `RecordServiceTests`, `RelationshipAnalystToolkitTests`, `RelationshipGraphPipelineTests`.
+- `CheckpointStoreFixture` — separate Testcontainers MongoDB for `MongoCheckpointStoreTests` (no seed).
+- `AgentFixture` — real OpenAI client + live MongoDB connection for the Agent tier (`AskAiPipelineTests`, `DeepResearchTests`, `RelationshipQueryTests`, `TemporalQueryTests`).
+
+`ArticleChunkingIntegrationTests` owns its own Testcontainer via `[ClassInitialize]`/`[ClassCleanup]` so chunking writes can't pollute the shared `ApiFixture` seed.
+
+Parallelism: assembly-level `[Parallelize(Scope = ExecutionScope.ClassLevel)]` (sequential within a class, parallel across classes). Integration and Agent classes that share fixture state are marked `[DoNotParallelize]` to keep their writes from racing.
+
+When adding a new test, decide its tier first and put it in the matching folder with `[TestCategory(TestTiers.X)]`. New tier constants live in `src/StarWarsData.Tests/TestTiers.cs`.
 
 ## Architecture
 

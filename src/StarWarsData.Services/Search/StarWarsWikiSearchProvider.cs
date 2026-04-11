@@ -65,7 +65,7 @@ public sealed class StarWarsWikiSearchProvider : MessageAIContextProvider
         if (docs.Count == 0)
         {
             _logger?.LogInformation("Text search returned no results, falling back to regex for: {Query}", query);
-            var regexFilter = Builders<BsonDocument>.Filter.Regex(PageBsonFields.Title, new BsonRegularExpression(Regex.Escape(query), "i"));
+            var regexFilter = Builders<BsonDocument>.Filter.Regex(PageBsonFields.Title, MongoSafe.Regex(query, escape: true));
             docs = await _pages.Find(regexFilter).Project(projection).Limit(5).ToListAsync(ct);
         }
 

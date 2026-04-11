@@ -107,6 +107,7 @@ public class MapService
 
     public async Task<List<MapSearchResult>> SearchGridAsync(string term, Continuity? continuity = null)
     {
+        term = MongoSafe.Sanitize(term);
         var escaped = Regex.Escape(term);
         var results = new List<MapSearchResult>();
         var seen = new HashSet<string>();

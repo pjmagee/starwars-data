@@ -156,7 +156,7 @@ public class RecordService
         // Fallback to regex if text search returns nothing
         if (textTotal == 0)
         {
-            var regexFilter = Builders<Page>.Filter.And(baseFilter, Builders<Page>.Filter.Regex(PageBsonFields.Title, new BsonRegularExpression(searchText, "i")));
+            var regexFilter = Builders<Page>.Filter.And(baseFilter, Builders<Page>.Filter.Regex(PageBsonFields.Title, MongoSafe.Regex(searchText)));
             textTotal = await pages.CountDocumentsAsync(regexFilter, cancellationToken: token);
             textData = await pages.Find(regexFilter).Skip((page - 1) * pageSize).Limit(pageSize).ToListAsync(token);
         }

@@ -26,7 +26,15 @@ public class ComponentToolkit
     public TextDescriptor? TextResult { get; private set; }
     public TimelineDescriptor? TimelineResult { get; private set; }
 
-    const string ReferencesParamDescription = "Optional source references (title + wikiUrl) from pages used to answer this query.";
+    const string ReferencesParamDescription =
+        "Source references (title + wikiUrl) for EVERY distinct entity represented in this visualization. "
+        + "If the chart/table/graph has N named entity rows, segments, or nodes, you MUST provide N references — "
+        + "one per item — using the wikiUrls returned from the KG tools (search_entities, get_entity_relationships, "
+        + "count_nodes_by_property sources[], etc). Do NOT curate a subset, do NOT limit to 'the top 5', and do NOT "
+        + "omit references for items you didn't write about in prose. Every chart segment, every data_table row, "
+        + "and every graph node with a known source MUST be citable in `references`. If an individual item has no "
+        + "known wikiUrl (e.g. it came from aggregation with no source attached) omit only that one entry, keeping "
+        + "references for the rest. A 50-item donut chart must produce ~50 references, not 8.";
 
     const string MobileSummaryParamDescription =
         "REQUIRED for mobile users. Concise markdown summary (3-6 bullet points or short paragraphs) of "
@@ -96,6 +104,16 @@ public class ComponentToolkit
         """
             Render a chart with pre-computed aggregated data for counts, comparisons, distributions, or trends.
             You MUST aggregate the data first (use the KGAnalytics tools) and pass the results here.
+
+            CRITICAL — NEVER FABRICATE NUMBERS. Every value in `series` MUST come from a tool result
+            you received in this conversation (count_nodes_by_property, count_related_entities,
+            count_by_year_range, etc.). Do not invent plausible-looking counts. If a value is missing
+            from the tool result, label it "Unknown" or omit it.
+
+            Chart selection cheat sheet:
+              counts/rankings → Bar (top N) or Pie/Donut (distribution)
+              time series     → TimeSeries (with timeSeries param) or Line
+              comparisons     → Radar (multi-axis) or StackedBar (multi-dimension)
             """
     )]
     public ChartDescriptor RenderChart(
@@ -129,16 +147,32 @@ public class ComponentToolkit
     [Description(
         """
             Render a relationship graph powered by the knowledge graph (kg.edges).
-            Call get_relationship_types(entityId) first to discover available edge labels, then pass
-            ONLY the labels relevant to the question — not every available label.
-            Typical label sets:
-              family trees      → child_of, parent_of, partner_of, sibling_of
-              political orgs    → head_of_state, has_military_branch, has_executive_branch, commander_in_chief
-              alliances         → affiliated_with, member_of
+
+            REQUIRED PRECONDITION — CALL get_relationship_types(rootEntityId) FIRST, EVERY TIME.
+            This is not optional, not a shortcut you may skip, and not something you can satisfy
+            from memory or training data. KG edge labels are normalized from infobox field names,
+            vary by source template, and the same semantic concept may have several variants
+            (child_of vs son_of vs daughter_of, found_at vs originates_from, etc.). Passing labels
+            that don't exist on this entity silently produces an empty graph.
+
+            Workflow for EVERY render_graph call:
+              1. search_entities → resolve the PageId for the root.
+              2. get_relationship_types(rootEntityId) → list the labels that actually exist.
+              3. render_graph with labels drawn ONLY from step 2's output — never from guesses,
+                 never from typical-family/political/alliance cheatsheets, never from training data.
+
+            Pass ALL relevant labels from step 2, not a subset — pruning irrelevant ones in
+            `enabledLabels` is cheap, but missing labels are invisible to the user.
+
             Layout modes:
-              Tree  = hierarchical top-down (works for any entity type: Characters, Governments, Organizations)
+              Tree  = hierarchical top-down (works for any entity type: Characters, Governments)
               Force = physics-based network for general exploration (default)
             Do NOT use this for shortest-path results — use render_path instead.
+
+            HARD ANTI-PATTERN: calling render_graph with labels=["child_of","parent_of",...] or any
+            other hand-picked list without a preceding get_relationship_types call in this
+            conversation. The tool-call budget will penalise it and the evaluator will mark it
+            as a skipped precondition.
             """
     )]
     public GraphDescriptor RenderGraph(
@@ -327,13 +361,33 @@ public class ComponentToolkit
             Render markdown-formatted text content — articles, summaries, analysis, or RAG results.
             The frontend renders content via MudMarkdown, so write proper markdown:
               ## headings, **bold**, bullet lists (blank line before), [links](url), > blockquotes, `code`.
-            For hyperlinks, use wikiUrl from tool results, e.g. [Darth Vader](https://starwars.fandom.com/wiki/Darth_Vader).
-            Fetch page data first via get_page_by_id, semantic_search, or KG tools, then write sections.
+
+            ROUTING — this is the DEFAULT renderer for narrative answers:
+              "Why / how / explain / what caused / consequences" questions → semantic_search → render_markdown
+              "Tell me the story of X" → KG facts + semantic_search → render_markdown
+              When in doubt and the answer is prose, use this.
+
+            STOP CONDITION: After calling this tool, the agent's job is done. Do NOT continue making
+            tool calls. Do NOT summarize what you wrote in plain text afterwards. End the turn.
+
+            CITATION RULES (critical — the frontend already renders a dedicated Sources footer from the `references` param):
+            1. Inline every entity mention as a markdown link on the entity's own name, using its wikiUrl from tool results.
+               GOOD:  "Masters [Shaak Ti](https://starwars.fandom.com/wiki/Shaak_Ti) and [Ahsoka Tano](https://starwars.fandom.com/wiki/Ahsoka_Tano) appear throughout Clone-era sources."
+               BAD:   "Masters Shaak Ti and Ahsoka Tano appear throughout Clone-era sources. (Ahsoka Tano [link], Shaak Ti [link])"
+               BAD:   "Masters Shaak Ti (link) and Ahsoka Tano (link)"   — name and link must be the SAME clickable text, never duplicated.
+            2. NEVER write a plain-text "Sources:" / "Key examples:" / "Refs:" footer inside section content. No PageIds, no bare page titles, no parenthetical source lists. Pass attribution via the top-level `references` parameter — the frontend renders it as a clickable Sources chip row automatically.
+            3. Every external URL must be a markdown link `[label](url)`. Never emit a bare URL.
+            4. `sourcePageTitle` on a section is ONLY for when the whole section is a near-verbatim excerpt from one page. Otherwise leave it null and rely on inline links + the `references` list.
+
+            Workflow: fetch page data first via get_page_by_id, semantic_search, or KG tools, capture each wikiUrl, then write sections with entity names already wrapped as `[Name](wikiUrl)`.
             """
     )]
     public TextDescriptor RenderText(
         [Description("Descriptive title for the text section")] string title,
-        [Description("Text sections to display. Each has: heading (plain title), content (markdown body), and optional sourcePageTitle for attribution.")] List<TextSection> sections,
+        [Description(
+            "Text sections to display. Each has: heading (plain title) and content (markdown body). Inline every entity as [Name](wikiUrl); do NOT write a plain-text Sources footer inside content — pass attribution via the top-level `references` parameter instead."
+        )]
+            List<TextSection> sections,
         [Description(ReferencesParamDescription)] List<Reference>? references = null
     )
     {
@@ -409,14 +463,14 @@ public class ComponentToolkit
 
     public List<AITool> AsAIFunctions() =>
         [
-            AIFunctionFactory.Create(RenderTable, "render_table"),
-            AIFunctionFactory.Create(RenderDataTable, "render_data_table"),
-            AIFunctionFactory.Create(RenderChart, "render_chart"),
-            AIFunctionFactory.Create(RenderGraph, "render_graph"),
-            AIFunctionFactory.Create(RenderPath, "render_path"),
-            AIFunctionFactory.Create(RenderTimeline, "render_timeline"),
-            AIFunctionFactory.Create(RenderInfobox, "render_infobox"),
-            AIFunctionFactory.Create(RenderText, "render_markdown"),
-            AIFunctionFactory.Create(RenderAurebesh, "render_aurebesh"),
+            AIFunctionFactory.Create(RenderTable, ToolNames.Component.RenderTable),
+            AIFunctionFactory.Create(RenderDataTable, ToolNames.Component.RenderDataTable),
+            AIFunctionFactory.Create(RenderChart, ToolNames.Component.RenderChart),
+            AIFunctionFactory.Create(RenderGraph, ToolNames.Component.RenderGraph),
+            AIFunctionFactory.Create(RenderPath, ToolNames.Component.RenderPath),
+            AIFunctionFactory.Create(RenderTimeline, ToolNames.Component.RenderTimeline),
+            AIFunctionFactory.Create(RenderInfobox, ToolNames.Component.RenderInfobox),
+            AIFunctionFactory.Create(RenderText, ToolNames.Component.RenderMarkdown),
+            AIFunctionFactory.Create(RenderAurebesh, ToolNames.Component.RenderAurebesh),
         ];
 }

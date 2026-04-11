@@ -19,6 +19,14 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
 
     readonly IMongoCollection<RelationshipEdge> _edges = mongoClient.GetDatabase(settings.Value.DatabaseName).GetCollection<RelationshipEdge>(Collections.KgEdges);
 
+    /// <summary>
+    /// Parses a continuity filter string into a <see cref="Continuity"/> value for querying.
+    /// Returns <c>null</c> for "Both" and "Unknown" since those mean "no filter" — no documents
+    /// in the KG have <c>continuity: "Both"</c>.
+    /// </summary>
+    private static Continuity? ParseContinuityFilter(string? continuity) =>
+        continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var c) && c is Continuity.Canon or Continuity.Legends ? c : null;
+
     public async Task<List<string>> GetEntityTypesAsync(CancellationToken ct)
     {
         var types = await _nodes.DistinctAsync(new StringFieldDefinition<GraphNode, string>(GraphNodeBsonFields.Type), FilterDefinition<GraphNode>.Empty, cancellationToken: ct);
@@ -41,8 +49,8 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         if (!string.IsNullOrWhiteSpace(type))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Type, type));
         if (!string.IsNullOrWhiteSpace(q))
-            filters.Add(Builders<GraphNode>.Filter.Regex(n => n.Name, new BsonRegularExpression(q, "i")));
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+            filters.Add(Builders<GraphNode>.Filter.Regex(n => n.Name, MongoSafe.Regex(q)));
+        if (ParseContinuityFilter(continuity) is { } cont)
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
         if (realm is not null && Enum.TryParse<Realm>(realm, true, out var r))
             filters.Add(Builders<GraphNode>.Filter.In(n => n.Realm, [r, Realm.Unknown]));
@@ -75,11 +83,11 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
 
     public async Task<List<EntitySearchDto>> SearchAsync(string q, string? type, string? continuity, string? realm, CancellationToken ct)
     {
-        var filters = new List<FilterDefinition<GraphNode>> { Builders<GraphNode>.Filter.Regex(n => n.Name, new BsonRegularExpression(q, "i")) };
+        var filters = new List<FilterDefinition<GraphNode>> { Builders<GraphNode>.Filter.Regex(n => n.Name, MongoSafe.Regex(q)) };
 
         if (!string.IsNullOrWhiteSpace(type))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Type, type));
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
         if (realm is not null && Enum.TryParse<Realm>(realm, true, out var r))
             filters.Add(Builders<GraphNode>.Filter.In(n => n.Realm, [r, Realm.Unknown]));
@@ -214,8 +222,8 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         if (!string.IsNullOrWhiteSpace(type))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Type, type));
         if (!string.IsNullOrWhiteSpace(q))
-            filters.Add(Builders<GraphNode>.Filter.Regex(n => n.Name, new BsonRegularExpression(q, "i")));
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+            filters.Add(Builders<GraphNode>.Filter.Regex(n => n.Name, MongoSafe.Regex(q)));
+        if (ParseContinuityFilter(continuity) is { } cont)
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
         if (realm is not null && Enum.TryParse<Realm>(realm, true, out var r))
             filters.Add(Builders<GraphNode>.Filter.In(n => n.Realm, [r, Realm.Unknown]));
@@ -229,7 +237,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         {
             var facetClauses = new List<FilterDefinition<TemporalFacet>>();
             if (!string.IsNullOrWhiteSpace(semantic))
-                facetClauses.Add(Builders<TemporalFacet>.Filter.Regex(f => f.Semantic, new BsonRegularExpression($"^{Regex.Escape(semantic)}", "i")));
+                facetClauses.Add(Builders<TemporalFacet>.Filter.Regex(f => f.Semantic, new BsonRegularExpression($"^{Regex.Escape(MongoSafe.Sanitize(semantic))}", "i")));
             if (hasCalendar)
                 facetClauses.Add(Builders<TemporalFacet>.Filter.Eq(f => f.Calendar, calendar));
             if (yearFrom.HasValue)
@@ -460,7 +468,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             var outFilter = Builders<BsonDocument>.Filter.In(RelationshipEdgeBsonFields.FromId, frontier);
             if (outgoingLabelFilter is not null)
                 outFilter &= Builders<BsonDocument>.Filter.In(RelationshipEdgeBsonFields.Label, outgoingLabelFilter);
-            if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+            if (ParseContinuityFilter(continuity) is { } cont)
                 outFilter &= Builders<BsonDocument>.Filter.Eq(GraphNodeBsonFields.Continuity, cont.ToString());
             if (temporalFilter is not null)
                 outFilter &= temporalFilter;
@@ -475,7 +483,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             var inFilter = Builders<BsonDocument>.Filter.In(RelationshipEdgeBsonFields.ToId, frontier);
             if (inboundLabelFilter is not null)
                 inFilter &= Builders<BsonDocument>.Filter.In(RelationshipEdgeBsonFields.Label, inboundLabelFilter);
-            if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont2))
+            if (ParseContinuityFilter(continuity) is { } cont2)
                 inFilter &= Builders<BsonDocument>.Filter.Eq(GraphNodeBsonFields.Continuity, cont2.ToString());
             if (temporalFilter is not null)
                 inFilter &= temporalFilter;
@@ -622,10 +630,10 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
     /// <summary>Search nodes by name with optional type/continuity filter.</summary>
     public async Task<List<GraphNode>> SearchNodesAsync(string query, string? type, string? continuity, int limit, CancellationToken ct = default)
     {
-        var filters = new List<FilterDefinition<GraphNode>> { Builders<GraphNode>.Filter.Regex(n => n.Name, new BsonRegularExpression(query, "i")) };
+        var filters = new List<FilterDefinition<GraphNode>> { Builders<GraphNode>.Filter.Regex(n => n.Name, MongoSafe.Regex(query)) };
         if (!string.IsNullOrWhiteSpace(type))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Type, type));
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
 
         return await _nodes.Find(Builders<GraphNode>.Filter.And(filters)).SortBy(n => n.Name).Limit(Math.Min(limit, 50)).ToListAsync(ct);
@@ -639,29 +647,41 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
     /// Returns a dictionary of PageId → top properties (first value per key, up to 8 keys).
     /// Used to enrich relationship results so the agent doesn't need N follow-up calls.
     /// </summary>
-    public async Task<Dictionary<int, Dictionary<string, string>>> GetNodePropertiesBatchAsync(List<int> pageIds, CancellationToken ct = default)
+    public async Task<Dictionary<int, NodeBatchInfoDto>> GetNodePropertiesBatchAsync(List<int> pageIds, CancellationToken ct = default)
     {
         if (pageIds.Count == 0)
             return [];
 
         var filter = Builders<GraphNode>.Filter.In(n => n.PageId, pageIds);
-        var nodes = await _nodes.Find(filter).Project(n => new { n.PageId, n.Properties }).ToListAsync(ct);
+        var nodes = await _nodes
+            .Find(filter)
+            .Project(n => new
+            {
+                n.PageId,
+                n.Name,
+                n.WikiUrl,
+                n.Properties,
+            })
+            .ToListAsync(ct);
 
-        var result = new Dictionary<int, Dictionary<string, string>>();
+        var result = new Dictionary<int, NodeBatchInfoDto>();
         foreach (var node in nodes)
         {
-            if (node.Properties is null || node.Properties.Count == 0)
-                continue;
-
-            var summary = new Dictionary<string, string>();
-            foreach (var kvp in node.Properties.Take(8))
+            Dictionary<string, string>? summary = null;
+            if (node.Properties is { Count: > 0 })
             {
-                var val = kvp.Value?.FirstOrDefault();
-                if (!string.IsNullOrEmpty(val))
-                    summary[kvp.Key] = val.Length > 100 ? val[..100] + "…" : val;
+                summary = [];
+                foreach (var kvp in node.Properties.Take(8))
+                {
+                    var val = kvp.Value?.FirstOrDefault();
+                    if (!string.IsNullOrEmpty(val))
+                        summary[kvp.Key] = val.Length > 100 ? val[..100] + "…" : val;
+                }
+                if (summary.Count == 0)
+                    summary = null;
             }
-            if (summary.Count > 0)
-                result[node.PageId] = summary;
+
+            result[node.PageId] = new NodeBatchInfoDto(WikiUrl: node.WikiUrl, Name: node.Name, Properties: summary);
         }
 
         return result;
@@ -681,7 +701,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                 Builders<GraphNode>.Filter.ElemMatch(
                     n => n.TemporalFacets,
                     Builders<TemporalFacet>.Filter.And(
-                        Builders<TemporalFacet>.Filter.Regex(f => f.Semantic, new BsonRegularExpression($"^{semantic}", "i")),
+                        Builders<TemporalFacet>.Filter.Regex(f => f.Semantic, new BsonRegularExpression($"^{Regex.Escape(MongoSafe.Sanitize(semantic))}", "i")),
                         Builders<TemporalFacet>.Filter.Lte(f => f.Year, rangeEnd),
                         Builders<TemporalFacet>.Filter.Gte(f => f.Year, rangeStart)
                     )
@@ -694,7 +714,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             filters.Add(Builders<GraphNode>.Filter.Or(Builders<GraphNode>.Filter.Eq(n => n.EndYear, (int?)null), Builders<GraphNode>.Filter.Gte(n => n.EndYear, rangeStart)));
         }
 
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
 
         return await _nodes.Find(Builders<GraphNode>.Filter.And(filters)).SortBy(n => n.Name).Limit(Math.Min(limit, 50)).ToListAsync(ct);
@@ -710,7 +730,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             var labels = labelFilter.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
             filter &= Builders<RelationshipEdge>.Filter.In(e => e.Label, labels);
         }
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             filter &= Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, cont);
 
         return await _edges.Find(filter).SortByDescending(e => e.Weight).Limit(Math.Min(limit, 50)).ToListAsync(ct);
@@ -755,7 +775,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         if (inboundForwardLabels is not null)
             inFilter &= Builders<RelationshipEdge>.Filter.In(e => e.Label, inboundForwardLabels);
 
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
         {
             var contFilter = Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, cont);
             outFilter &= contFilter;
@@ -805,7 +825,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
     public async Task<List<(string label, int count, double avgWeight)>> GetRelationshipTypesAsync(int entityId, string? continuity, CancellationToken ct = default)
     {
         var matchFilter = new BsonDocument(RelationshipEdgeBsonFields.FromId, entityId);
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             matchFilter[GraphNodeBsonFields.Continuity] = cont.ToString();
 
         var pipeline = new[]
@@ -842,7 +862,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         maxHops = Math.Clamp(maxHops, 1, 4);
 
         FilterDefinition<RelationshipEdge>? contFilter = null;
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             contFilter = Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, cont);
 
         // Temporal window filter — same semantics as QueryGraphAsync: recall-biased
@@ -979,7 +999,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             match[RelationshipEdgeBsonFields.FromType] = relatedType;
             match[RelationshipEdgeBsonFields.ToType] = entityType;
         }
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             match[GraphNodeBsonFields.Continuity] = cont.ToString();
 
         var groupField = groupBySource ? RelationshipEdgeBsonFields.FromName : RelationshipEdgeBsonFields.ToName;
@@ -1012,12 +1032,13 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
     /// Count nodes grouped by a property value.
     /// E.g. "Characters grouped by species" or "Starships grouped by manufacturer".
     /// </summary>
-    public async Task<List<BsonDocument>> CountNodesByPropertiesAsync(string entityType, List<string> properties, string? continuity, bool includeExample, int limit, CancellationToken ct = default)
+    public async Task<List<BsonDocument>> CountNodesByPropertiesAsync(string entityType, List<string> properties, string? continuity, int maxSources, int limit, CancellationToken ct = default)
     {
         limit = Math.Clamp(limit, 1, 50);
+        maxSources = Math.Clamp(maxSources, 1, 25);
 
         var match = new BsonDocument(GraphNodeBsonFields.Type, entityType);
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             match[GraphNodeBsonFields.Continuity] = cont.ToString();
 
         // Build $group _id from multiple properties
@@ -1025,39 +1046,89 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         foreach (var prop in properties)
             groupId[prop] = new BsonDocument("$ifNull", new BsonArray { $"$properties.{prop}", "Unknown" });
 
-        var group = new BsonDocument { [MongoFields.Id] = groupId, ["count"] = new BsonDocument("$sum", 1) };
-
-        if (includeExample)
+        var group = new BsonDocument
         {
-            group["exampleTitle"] = new BsonDocument("$first", "$title");
-            group["examplePageId"] = new BsonDocument("$first", "$pageId");
-        }
+            [MongoFields.Id] = groupId,
+            ["count"] = new BsonDocument("$sum", 1),
+            ["sources"] = new BsonDocument(
+                "$push",
+                new BsonDocument
+                {
+                    { "pageId", "$" + MongoFields.Id },
+                    { "title", "$" + GraphNodeBsonFields.Name },
+                    { "wikiUrl", "$" + GraphNodeBsonFields.WikiUrl },
+                }
+            ),
+        };
 
-        var pipeline = new List<BsonDocument> { new("$match", match), new("$group", group), new("$sort", new BsonDocument("count", -1)), new("$limit", limit) };
+        var pipeline = new List<BsonDocument>
+        {
+            new("$match", match),
+            new("$group", group),
+            new("$sort", new BsonDocument("count", -1)),
+            new("$limit", limit),
+            new(
+                "$project",
+                new BsonDocument
+                {
+                    { MongoFields.Id, 1 },
+                    { "count", 1 },
+                    { "sources", new BsonDocument("$slice", new BsonArray { "$sources", maxSources }) },
+                }
+            ),
+        };
 
         return await _nodes.Database.GetCollection<BsonDocument>(Collections.KgNodes).Aggregate<BsonDocument>(pipeline.ToArray()).ToListAsync(ct);
     }
 
-    public async Task<List<(string value, int count)>> CountNodesByPropertyAsync(string entityType, string property, string? continuity, int limit, CancellationToken ct = default)
+    public async Task<List<(string value, int count, List<NodeRefDto> sources)>> CountNodesByPropertyAsync(
+        string entityType,
+        string property,
+        string? continuity,
+        int limit,
+        int maxSources,
+        CancellationToken ct = default
+    )
     {
         limit = Math.Clamp(limit, 1, 50);
+        maxSources = Math.Clamp(maxSources, 1, 25);
 
         var match = new BsonDocument(GraphNodeBsonFields.Type, entityType);
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             match[GraphNodeBsonFields.Continuity] = cont.ToString();
 
         var pipeline = new[]
         {
             new BsonDocument("$match", match),
             new BsonDocument("$unwind", $"$properties.{property}"),
-            new BsonDocument("$group", new BsonDocument { { MongoFields.Id, $"$properties.{property}" }, { "count", new BsonDocument("$sum", 1) } }),
+            new BsonDocument(
+                "$group",
+                new BsonDocument
+                {
+                    { MongoFields.Id, $"$properties.{property}" },
+                    { "count", new BsonDocument("$sum", 1) },
+                    {
+                        "sources",
+                        new BsonDocument(
+                            "$push",
+                            new BsonDocument
+                            {
+                                { "pageId", "$" + MongoFields.Id },
+                                { "title", "$" + GraphNodeBsonFields.Name },
+                                { "wikiUrl", "$" + GraphNodeBsonFields.WikiUrl },
+                            }
+                        )
+                    },
+                }
+            ),
             new BsonDocument("$sort", new BsonDocument("count", -1)),
             new BsonDocument("$limit", limit),
+            new BsonDocument("$project", new BsonDocument { { "count", 1 }, { "sources", new BsonDocument("$slice", new BsonArray { "$sources", maxSources }) } }),
         };
 
         var results = await _nodes.Database.GetCollection<BsonDocument>(Collections.KgNodes).Aggregate<BsonDocument>(pipeline).ToListAsync(ct);
 
-        return results.Select(d => (value: d[MongoFields.Id].AsString, count: d["count"].AsInt32)).ToList();
+        return results.Select(d => (value: d[MongoFields.Id].AsString, count: d["count"].AsInt32, sources: ReadSources(d))).ToList();
     }
 
     /// <summary>
@@ -1086,7 +1157,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         {
             // Semantic path: unwind temporalFacets, match on semantic prefix + year range
             var match = new BsonDocument(GraphNodeBsonFields.Type, entityType);
-            if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont1))
+            if (ParseContinuityFilter(continuity) is { } cont1)
                 match[GraphNodeBsonFields.Continuity] = cont1.ToString();
 
             pipeline.Add(new BsonDocument("$match", match));
@@ -1129,7 +1200,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                     new BsonDocument { { "$gte", rangeStart }, { "$lte", rangeEnd } }
                 },
             };
-            if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont2))
+            if (ParseContinuityFilter(continuity) is { } cont2)
                 match[GraphNodeBsonFields.Continuity] = cont2.ToString();
 
             pipeline.Add(new BsonDocument("$match", match));
@@ -1167,7 +1238,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         limit = Math.Clamp(limit, 1, 50);
 
         var match = new BsonDocument { { RelationshipEdgeBsonFields.FromType, fromType }, { RelationshipEdgeBsonFields.ToType, toType } };
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             match[GraphNodeBsonFields.Continuity] = cont.ToString();
 
         var pipeline = new[]
@@ -1196,7 +1267,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             match[RelationshipEdgeBsonFields.FromType] = entityType;
         if (!string.IsNullOrWhiteSpace(label))
             match[RelationshipEdgeBsonFields.Label] = label;
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             match[GraphNodeBsonFields.Continuity] = cont.ToString();
 
         var pipeline = new List<BsonDocument>();
@@ -1233,7 +1304,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
     public async Task<List<(string dimension, int count)>> EntityProfileAsync(int entityId, List<string> labels, string? continuity, CancellationToken ct = default)
     {
         var match = new BsonDocument { { RelationshipEdgeBsonFields.FromId, entityId }, { RelationshipEdgeBsonFields.Label, new BsonDocument("$in", new BsonArray(labels)) } };
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             match[GraphNodeBsonFields.Continuity] = cont.ToString();
 
         var pipeline = new[]
@@ -1259,7 +1330,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         limit = Math.Clamp(limit, 1, 50);
 
         var match = new BsonDocument();
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             match[GraphNodeBsonFields.Continuity] = cont.ToString();
 
         var pipeline = new[]
@@ -1279,18 +1350,22 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
     /// For a specific entity, find its connected entities via a label, then group those
     /// connected entities by a property value. E.g. "Species breakdown of Jedi Order members":
     /// root=Jedi Order, label=member_of (edges FROM members TO Jedi Order), property=Species.
+    /// Each result row carries up to <paramref name="maxSources"/> contributing nodes
+    /// (pageId/title/wikiUrl) so the caller can build provenance/citations.
     /// </summary>
-    public async Task<List<(string value, int count)>> CountPropertyForRelatedEntitiesAsync(
+    public async Task<List<(string value, int count, List<NodeRefDto> sources)>> CountPropertyForRelatedEntitiesAsync(
         int rootEntityId,
         string label,
         string property,
         bool rootIsTarget,
         string? continuity,
         int limit,
+        int maxSources,
         CancellationToken ct = default
     )
     {
         limit = Math.Clamp(limit, 1, 50);
+        maxSources = Math.Clamp(maxSources, 1, 25);
 
         // Step 1: find connected entity IDs via the edge label
         var edgeMatch = new BsonDocument(RelationshipEdgeBsonFields.Label, label);
@@ -1298,7 +1373,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             edgeMatch[RelationshipEdgeBsonFields.ToId] = rootEntityId;
         else
             edgeMatch[RelationshipEdgeBsonFields.FromId] = rootEntityId;
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             edgeMatch[GraphNodeBsonFields.Continuity] = cont.ToString();
 
         var connectedField = rootIsTarget ? RelationshipEdgeBsonFields.FromId : RelationshipEdgeBsonFields.ToId;
@@ -1311,19 +1386,81 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         if (connectedIds.Count == 0)
             return [];
 
-        // Step 2: aggregate connected nodes by the property value
+        // Step 2: aggregate connected nodes by the property value, pushing each contributing node
+        // (pageId/title/wikiUrl) into a sources array so the caller can cite them. The follow-up
+        // $project caps the array via $slice so high-cardinality buckets don't return huge payloads.
         var nodePipeline = new[]
         {
             new BsonDocument("$match", new BsonDocument(MongoFields.Id, new BsonDocument("$in", new BsonArray(connectedIds)))),
             new BsonDocument("$unwind", $"$properties.{property}"),
-            new BsonDocument("$group", new BsonDocument { { MongoFields.Id, $"$properties.{property}" }, { "count", new BsonDocument("$sum", 1) } }),
+            new BsonDocument(
+                "$group",
+                new BsonDocument
+                {
+                    { MongoFields.Id, $"$properties.{property}" },
+                    { "count", new BsonDocument("$sum", 1) },
+                    {
+                        "sources",
+                        new BsonDocument(
+                            "$push",
+                            new BsonDocument
+                            {
+                                { "pageId", "$" + MongoFields.Id },
+                                { "title", "$" + GraphNodeBsonFields.Name },
+                                { "wikiUrl", "$" + GraphNodeBsonFields.WikiUrl },
+                            }
+                        )
+                    },
+                }
+            ),
             new BsonDocument("$sort", new BsonDocument("count", -1)),
             new BsonDocument("$limit", limit),
+            new BsonDocument("$project", new BsonDocument { { "count", 1 }, { "sources", new BsonDocument("$slice", new BsonArray { "$sources", maxSources }) } }),
         };
 
         var results = await _nodes.Database.GetCollection<BsonDocument>(Collections.KgNodes).Aggregate<BsonDocument>(nodePipeline).ToListAsync(ct);
 
-        return results.Select(d => (value: d[MongoFields.Id].AsString, count: d["count"].AsInt32)).ToList();
+        return results.Select(d => (value: d[MongoFields.Id].AsString, count: d["count"].AsInt32, sources: ReadSources(d))).ToList();
+    }
+
+    static List<NodeRefDto> ReadSources(BsonDocument doc)
+    {
+        if (!doc.Contains("sources") || doc["sources"].IsBsonNull)
+            return [];
+        return doc["sources"]
+            .AsBsonArray.Select(s =>
+            {
+                var sd = s.AsBsonDocument;
+                return new NodeRefDto(
+                    PageId: sd.GetValue("pageId", 0).ToInt32(),
+                    Title: sd.GetValue("title", "").IsBsonNull ? "" : sd["title"].AsString,
+                    WikiUrl: sd.GetValue("wikiUrl", BsonNull.Value).IsBsonNull ? null : sd["wikiUrl"].AsString
+                );
+            })
+            .ToList();
+    }
+
+    /// <summary>
+    /// Returns the distinct edge labels (with counts) for edges originating from nodes of the
+    /// given source type. Used by count_nodes_by_property's self-correcting hint to redirect
+    /// the agent to group_entities_by_connection when a property aggregation came back sparse
+    /// because the data is actually stored as edges.
+    /// </summary>
+    public async Task<List<(string label, int count)>> GetEdgeLabelsForSourceTypeAsync(string sourceType, string? continuity, CancellationToken ct = default)
+    {
+        var match = new BsonDocument(RelationshipEdgeBsonFields.FromType, sourceType);
+        if (ParseContinuityFilter(continuity) is { } cont)
+            match[GraphNodeBsonFields.Continuity] = cont.ToString();
+
+        var pipeline = new[]
+        {
+            new BsonDocument("$match", match),
+            new BsonDocument("$group", new BsonDocument { { MongoFields.Id, "$" + RelationshipEdgeBsonFields.Label }, { "count", new BsonDocument("$sum", 1) } }),
+            new BsonDocument("$sort", new BsonDocument("count", -1)),
+        };
+
+        var docs = await _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges).Aggregate<BsonDocument>(pipeline).ToListAsync(ct);
+        return docs.Select(d => (label: d[MongoFields.Id].AsString, count: d["count"].AsInt32)).ToList();
     }
 
     /// <summary>
@@ -1345,7 +1482,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         var match = new BsonDocument { { RelationshipEdgeBsonFields.FromType, sourceType }, { RelationshipEdgeBsonFields.Label, label } };
         if (!string.IsNullOrWhiteSpace(targetType))
             match[RelationshipEdgeBsonFields.ToType] = targetType;
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             match[GraphNodeBsonFields.Continuity] = cont.ToString();
 
         var pipeline = new[]
@@ -1390,7 +1527,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             { RelationshipEdgeBsonFields.FromId, new BsonDocument("$in", new BsonArray(entityIds)) },
             { RelationshipEdgeBsonFields.Label, new BsonDocument("$in", new BsonArray(labels)) },
         };
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             match[GraphNodeBsonFields.Continuity] = cont.ToString();
 
         var pipeline = new[]
@@ -1463,7 +1600,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         var match = new BsonDocument();
         if (!string.IsNullOrWhiteSpace(entityType))
             match[GraphNodeBsonFields.Type] = entityType;
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             match[GraphNodeBsonFields.Continuity] = cont.ToString();
 
         // Pre-filter to nodes containing at least one matching facet to limit the $unwind fanout.
@@ -1552,7 +1689,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         var match = new BsonDocument();
         if (!string.IsNullOrWhiteSpace(entityType))
             match[GraphNodeBsonFields.Type] = entityType;
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             match[GraphNodeBsonFields.Continuity] = cont.ToString();
 
         match[GraphNodeBsonFields.TemporalFacets] = new BsonDocument(
@@ -1629,7 +1766,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         var match = new BsonDocument();
         if (!string.IsNullOrWhiteSpace(q))
             match[RelationshipEdgeBsonFields.Label] = new BsonDocument { { "$regex", q }, { "$options", "i" } };
-        if (!string.IsNullOrWhiteSpace(continuity) && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             match[RelationshipEdgeBsonFields.Continuity] = cont.ToString();
         if (!string.IsNullOrWhiteSpace(fromType))
             match[RelationshipEdgeBsonFields.FromType] = fromType;
@@ -1860,7 +1997,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         // label + continuity are pushed fully server-side. The initial $match
         // on the root doc bounds the aggregation to a single starting document.
         var restrict = new BsonDocument { { RelationshipEdgeBsonFields.Label, label } };
-        if (continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var cont))
+        if (ParseContinuityFilter(continuity) is { } cont)
             restrict[RelationshipEdgeBsonFields.Continuity] = cont.ToString();
 
         // forward:  first hop matches edges where fromId = root, then seeds next hop with toId

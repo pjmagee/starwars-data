@@ -23,12 +23,12 @@
     <MudAppBar Elevation="1">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())"/>
         <MudImage Src="img/galaxy-logo.svg" Alt="Star Wars Data" Width="32" Height="32" Class="ml-2" />
-        @* Title hidden below md (< 960px) — pure CSS via MudBlazor display utilities *@
-        <MudText Typo="Typo.h5" Class="ml-2 d-none d-md-flex">Star Wars Data</MudText>
+        @* Title hidden below lg (< 1280px) — at md (960–1279) the AppBar is too cramped once filters are in. *@
+        <MudText Typo="Typo.h5" Class="ml-2 d-none d-lg-flex">Star Wars Data</MudText>
         <MudSpacer/>
         <ContinuityFilter />
-        @* Desktop-only secondary controls (md and up): individual icon buttons *@
-        <div class="d-none d-md-flex align-center">
+        @* Desktop-only secondary controls (lg and up): individual icon buttons *@
+        <div class="d-none d-lg-flex align-center">
             <MudLink Href="https://www.buymeacoffee.com/pjmagee" Target="_blank" Class="d-flex align-center" Style="height:28px;">
                 <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=pjmagee&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a coffee" style="height:28px;" />
             </MudLink>
@@ -81,60 +81,7 @@
             </MudTooltip>
             <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Href="https://github.com/pjmagee/starwars-data" Target="_blank" title="GitHub" />
         </div>
-        @* Mobile-only overflow menu (below md): collapses the desktop icons into one menu *@
-        <div class="d-flex d-md-none align-center">
-            <MudMenu Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit"
-                     AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight" Dense="true">
-                <MudMenuItem Disabled="true">
-                    <MudText Typo="Typo.caption" Color="Color.Secondary">Appearance</MudText>
-                </MudMenuItem>
-                <MudMenuItem OnClick="@(() => SetDarkMode("light"))"
-                             Icon="@(_darkModePreference == "light" ? Icons.Material.Filled.Check : Icons.Material.Outlined.LightMode)">
-                    Light
-                </MudMenuItem>
-                <MudMenuItem OnClick="@(() => SetDarkMode("dark"))"
-                             Icon="@(_darkModePreference == "dark" ? Icons.Material.Filled.Check : Icons.Material.Outlined.DarkMode)">
-                    Dark
-                </MudMenuItem>
-                <MudMenuItem OnClick="@(() => SetDarkMode("system"))"
-                             Icon="@(_darkModePreference == "system" ? Icons.Material.Filled.Check : Icons.Material.Rounded.AutoMode)">
-                    System
-                </MudMenuItem>
-                <MudDivider />
-                <MudMenuItem OnClick="ToggleAurebesh" Icon="@Icons.Material.Filled.Translate"
-                             IconColor="@(_aurebesh ? Color.Warning : Color.Default)">
-                    @(_aurebesh ? "Aurebesh: ON" : "Aurebesh: OFF")
-                </MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="true">
-                    <MudText Typo="Typo.caption" Color="Color.Secondary">Theme</MudText>
-                </MudMenuItem>
-                @foreach (var theme in Enum.GetValues<SwTheme>())
-                {
-                    var t = theme;
-                    <MudMenuItem OnClick="@(() => SetTheme(t))"
-                                 Icon="@(_selectedTheme == t ? Icons.Material.Filled.Check : Icons.Material.Filled.Palette)">
-                        @t.Label()
-                    </MudMenuItem>
-                }
-                <MudDivider />
-                <MudMenuItem Disabled="true">
-                    <MudText Typo="Typo.caption" Color="Color.Secondary">Text size</MudText>
-                </MudMenuItem>
-                @foreach (var (label, value) in _textSizes)
-                {
-                    var v = value;
-                    <MudMenuItem OnClick="@(() => SetTextSize(v))"
-                                 Icon="@(_textSize == v ? Icons.Material.Filled.Check : Icons.Material.Filled.FormatSize)">
-                        @label
-                    </MudMenuItem>
-                }
-                <MudDivider />
-                <MudMenuItem Href="https://github.com/pjmagee/starwars-data" Icon="@Icons.Custom.Brands.GitHub">
-                    GitHub
-                </MudMenuItem>
-            </MudMenu>
-        </div>
+        @* Compact overflow menu removed: Appearance / Theme / Text size / Aurebesh / GitHub now live in the nav drawer below lg. *@
         <AuthorizeView>
             <Authorized>
                 <MudMenu Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Inherit"
@@ -148,24 +95,84 @@
                 </MudMenu>
             </Authorized>
             <NotAuthorized>
-                @* Desktop sign-in button (full text) — md and up *@
+                @* Desktop sign-in button (full text) — lg and up *@
                 <MudButton Href="/authentication/login" Variant="Variant.Text" Color="Color.Inherit"
-                           StartIcon="@Icons.Material.Filled.Login" Class="d-none d-md-inline-flex">Sign in</MudButton>
-                @* Mobile sign-in icon — below md *@
+                           StartIcon="@Icons.Material.Filled.Login" Class="d-none d-lg-inline-flex">Sign in</MudButton>
+                @* Compact sign-in icon — below lg *@
                 <MudIconButton Icon="@Icons.Material.Filled.Login" Color="Color.Inherit" Edge="Edge.End"
-                               Href="/authentication/login" title="Sign in" Class="d-flex d-md-none" />
+                               Href="/authentication/login" title="Sign in" Class="d-flex d-lg-none" />
             </NotAuthorized>
         </AuthorizeView>
     </MudAppBar>
     <MudDrawer id="nav-drawer" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2" Width="280px">
-        <NavMenu/>
+        @* Three flex zones: scrollable NavMenu on top (absorbs chat history growth),
+           then compact-only Settings + Footer pinned to the bottom. Settings use collapsed
+           MudNavGroups so they stay one row until tapped. *@
+        <div class="d-flex flex-column" style="height:100%;">
+            <div style="flex:1; min-height:0; overflow-y:auto;">
+                <NavMenu/>
+            </div>
+            @* Compact-only Settings — hidden at lg+ where the AppBar icon cluster takes over. *@
+            <div class="d-lg-none" style="flex-shrink:0; border-top:1px solid var(--mud-palette-lines-default);">
+                <MudNavMenu>
+                    <MudNavGroup Title="Appearance" Icon="@DarkLightModeButtonIcon" Expanded="false">
+                        <MudNavLink OnClick="@(() => SetDarkMode("light"))"
+                                    Icon="@(_darkModePreference == "light" ? Icons.Material.Filled.Check : Icons.Material.Outlined.LightMode)">Light</MudNavLink>
+                        <MudNavLink OnClick="@(() => SetDarkMode("dark"))"
+                                    Icon="@(_darkModePreference == "dark" ? Icons.Material.Filled.Check : Icons.Material.Outlined.DarkMode)">Dark</MudNavLink>
+                        <MudNavLink OnClick="@(() => SetDarkMode("system"))"
+                                    Icon="@(_darkModePreference == "system" ? Icons.Material.Filled.Check : Icons.Material.Rounded.AutoMode)">System</MudNavLink>
+                    </MudNavGroup>
+                    <MudNavGroup Title="Theme" Icon="@Icons.Material.Filled.Palette" Expanded="false">
+                        @foreach (var theme in Enum.GetValues<SwTheme>())
+                        {
+                            var t = theme;
+                            <MudNavLink OnClick="@(() => SetTheme(t))"
+                                        Icon="@(_selectedTheme == t ? Icons.Material.Filled.Check : Icons.Material.Filled.Palette)">@t.Label()</MudNavLink>
+                        }
+                    </MudNavGroup>
+                    <MudNavGroup Title="Text size" Icon="@Icons.Material.Filled.FormatSize" Expanded="false">
+                        @foreach (var (label, value) in _textSizes)
+                        {
+                            var v = value;
+                            <MudNavLink OnClick="@(() => SetTextSize(v))"
+                                        Icon="@(_textSize == v ? Icons.Material.Filled.Check : Icons.Material.Filled.FormatSize)">@label</MudNavLink>
+                        }
+                    </MudNavGroup>
+                    <MudNavLink OnClick="ToggleAurebesh"
+                                Icon="@Icons.Material.Filled.Translate"
+                                IconColor="@(_aurebesh ? Color.Warning : Color.Default)">
+                        @(_aurebesh ? "Aurebesh: ON" : "Aurebesh: OFF")
+                    </MudNavLink>
+                    <MudNavLink Href="https://github.com/pjmagee/starwars-data" Target="_blank" Icon="@Icons.Custom.Brands.GitHub">GitHub</MudNavLink>
+                </MudNavMenu>
+            </div>
+            @* Compact-only footer pinned to the bottom of the drawer (below lg) — mirrors the desktop <footer>. *@
+            <div class="pa-3 d-lg-none" style="flex-shrink:0; border-top:1px solid var(--mud-palette-lines-default);">
+                <MudStack Spacing="1">
+                    <MudText Typo="Typo.caption" Color="Color.Secondary">
+                        Made with ❤️ by
+                        <MudLink Href="https://magaoidh.pro" Target="_blank" Color="Color.Secondary" Underline="Underline.Always">Patrick Magee</MudLink>
+                        &copy; @DateTime.UtcNow.Year
+                    </MudText>
+                    <MudText Typo="Typo.caption" Color="Color.Secondary">v@(_version)</MudText>
+                    <MudText Typo="Typo.caption" Style="color:rgba(146,146,159,0.6); font-size:11px;">
+                        Not affiliated with or endorsed by Wookieepedia, Fandom, Disney, or Lucasfilm.
+                        Star Wars and all related properties are trademarks of Disney/Lucasfilm Ltd.
+                        This is an independent fan project.
+                        <MudLink Href="/about" Style="font-size:11px;" Color="Color.Secondary" Underline="Underline.Hover">Learn more</MudLink>
+                    </MudText>
+                </MudStack>
+            </div>
+        </div>
     </MudDrawer>
     }
     <MudMainContent Class="@(Layout.IsFullscreen ? "" : "pt-16 pa-4")" Style="@(Layout.IsFullscreen ? "padding-top:0!important;" : "")">
         @Body
         @if (!Layout.IsFullscreen)
         {
-        <footer class="d-flex flex-column align-center gap-2 pa-4 mt-4">
+        @* Footer hidden below lg (< 1280px) — its content lives in the nav drawer in compact mode. *@
+        <footer class="d-none d-lg-flex flex-column align-center gap-2 pa-4 mt-4">
             <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center" Justify="Justify.Center" Class="flex-wrap">
                 <MudText Typo="Typo.caption" Color="Color.Secondary">
                     Made with ❤️ by

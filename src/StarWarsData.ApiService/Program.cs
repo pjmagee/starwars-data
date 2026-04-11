@@ -56,10 +56,10 @@ builder
         var logger = sp.GetRequiredService<ILoggerFactory>().CreateLogger("ByokChatClient");
 
         return new ByokChatClient(
-            openAiClient.GetChatClient(settings.OpenAiModel).AsIChatClient(),
+            openAiClient.GetResponsesClient().AsIChatClient(settings.OpenAiModel),
             httpContextAccessor,
             userSettingsService,
-            apiKey => new OpenAIClient(apiKey).GetChatClient(settings.OpenAiModel).AsIChatClient(),
+            apiKey => new OpenAIClient(apiKey).GetResponsesClient().AsIChatClient(settings.OpenAiModel),
             logger
         );
     })
@@ -76,7 +76,7 @@ builder
     {
         var settingsOptions = sp.GetRequiredService<IOptions<SettingsOptions>>();
         var openAiClient = sp.GetRequiredService<OpenAIClient>();
-        var inner = new ChatClientBuilder(openAiClient.GetChatClient(settingsOptions.Value.CharacterTimelineModel).AsIChatClient()).Build();
+        var inner = new ChatClientBuilder(openAiClient.GetResponsesClient().AsIChatClient(settingsOptions.Value.CharacterTimelineModel)).Build();
         return new CharacterTimelineChatClient(inner);
     })
     .AddScoped<CharacterTimelineService>()
@@ -101,7 +101,7 @@ builder
         return new GraphRAGToolkit(kgService, search, mongoClient, settings.DatabaseName);
     })
     .AddSingleton<IChatClient>(sp =>
-        new ChatClientBuilder(sp.GetRequiredService<OpenAIClient>().GetChatClient("gpt-4o-mini").AsIChatClient()).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build()
+        new ChatClientBuilder(sp.GetRequiredService<OpenAIClient>().GetResponsesClient().AsIChatClient("gpt-5.4-mini")).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build()
     )
     .AddSingleton<IEmbeddingGenerator<string, Embedding<float>>>(sp => sp.GetRequiredService<OpenAIClient>().GetEmbeddingClient("text-embedding-3-small").AsIEmbeddingGenerator())
     .AddKeyedSingleton<McpClient?>(
@@ -177,15 +177,39 @@ builder
         // BYOK chat client — wraps the server OpenAI client and swaps to user's key when available
         var byokClient = sp.GetRequiredService<ByokChatClient>();
 
-        var chatClient = new ChatClientBuilder(byokClient).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build();
+        // Explicit function-invocation wiring with a hard iteration cap. Default is 40, which
+        // is far too generous for this app — see eng/design/012-ai-agent-tool-call-efficiency.md.
+        // We also opt out of the agent's auto-wrapping (UseProvidedChatClientAsIs = true) so the
+        // settings configured here are the ones that actually run.
+        var chatClient = new ChatClientBuilder(byokClient)
+            .UseFunctionInvocation(configure: c =>
+            {
+                c.MaximumIterationsPerRequest = 12;
+                c.AllowConcurrentInvocation = true;
+            })
+            .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
+            .Build();
 
         // Lightweight classifier client for topic guardrail (always uses server key)
-        var classifierClient = new ChatClientBuilder(openAiClient.GetChatClient("gpt-4o-mini").AsIChatClient()).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build();
+        var classifierClient = new ChatClientBuilder(openAiClient.GetResponsesClient().AsIChatClient("gpt-5.4-mini")).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build();
 
         var aiStatus = sp.GetRequiredService<OpenAiStatusService>();
-        var guardrailLogger = sp.GetRequiredService<ILoggerFactory>().CreateLogger("StarWarsTopicGuardrail");
+        var loggerFactory = sp.GetRequiredService<ILoggerFactory>();
+        var guardrailLogger = loggerFactory.CreateLogger("StarWarsTopicGuardrail");
+        var budgetLogger = loggerFactory.CreateLogger("ToolCallBudget");
 
-        return chatClient.AsAIAgent(instructions: instructions, tools: tools).AsBuilder().UseStarWarsTopicGuardrail(classifierClient, aiStatus, guardrailLogger).Build();
+        var agentOptions = new ChatClientAgentOptions
+        {
+            ChatOptions = new ChatOptions { Instructions = instructions, Tools = tools },
+            UseProvidedChatClientAsIs = true,
+        };
+
+        return chatClient
+            .AsAIAgent(agentOptions)
+            .AsBuilder()
+            .UseToolCallBudget(softWarnAt: 10, hardLimit: 15, logger: budgetLogger)
+            .UseStarWarsTopicGuardrail(classifierClient, aiStatus, guardrailLogger)
+            .Build();
     });
 
 builder.Services.AddCors(options =>

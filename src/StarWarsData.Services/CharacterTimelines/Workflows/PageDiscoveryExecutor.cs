@@ -113,7 +113,7 @@ internal sealed class PageDiscoveryExecutor : Executor<string, string>
             "infobox.Data",
             new BsonDocument(
                 "$elemMatch",
-                new BsonDocument("Links", new BsonDocument("$elemMatch", new BsonDocument("Href", new BsonDocument("$regex", new BsonRegularExpression(Regex.Escape(character.WikiUrl), "i")))))
+                new BsonDocument("Links", new BsonDocument("$elemMatch", new BsonDocument("Href", new BsonDocument("$regex", MongoSafe.Regex(character.WikiUrl, escape: true)))))
             )
         );
 

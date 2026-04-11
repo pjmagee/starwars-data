@@ -22,12 +22,16 @@ public sealed class StarWarsTopicGuardrail
         You are a topic classifier for a Star Wars data website. The user is ALREADY on a Star Wars website,
         so almost every question they ask is about Star Wars — even if it doesn't explicitly say "Star Wars".
 
+        You will be shown the recent conversation (if any) followed by the LATEST user message to classify.
+        Use the prior turns purely as context to disambiguate the latest message.
+
         DEFAULT TO ALLOWING. Only reject questions that are CLEARLY and UNAMBIGUOUSLY about something else.
 
         ALWAYS ALLOW (is_star_wars_related = true):
         - Any question about characters, planets, species, vehicles, weapons, battles, events, wars, elections, treaties, governments, factions, organizations, Force powers, lightsabers, ships, droids, creatures, food, religions, artifacts, or any other topic that COULD exist in Star Wars
         - Generic-sounding data queries like "show all X", "list all Y", "browse Z", "compare X and Y" — these are querying the Star Wars database
         - Questions about lore, history, timeline, statistics, or data exploration — they mean Star Wars data
+        - Short follow-ups like "what about X", "tell me more", "what relationships", "why", "and the others?" — these continue the prior Star Wars topic and MUST be allowed whenever the prior turns were about Star Wars
         - Anything ambiguous — if it COULD be about Star Wars, allow it
 
         ONLY REJECT (is_star_wars_related = false):
@@ -91,9 +95,14 @@ public sealed class StarWarsTopicGuardrail
         }
     }
 
+    private const int HistoryTurnsForContext = 4;
+    private const int HistoryCharBudgetPerTurn = 400;
+
     private async Task<bool> IsOffTopicAsync(IEnumerable<ChatMessage> messages, CancellationToken cancellationToken)
     {
-        var userText = messages.LastOrDefault(m => m.Role == ChatRole.User)?.Text;
+        var messageList = messages as IList<ChatMessage> ?? messages.ToList();
+
+        var userText = messageList.LastOrDefault(m => m.Role == ChatRole.User)?.Text;
         if (string.IsNullOrWhiteSpace(userText))
             return false;
 
@@ -103,7 +112,8 @@ public sealed class StarWarsTopicGuardrail
 
         try
         {
-            var classificationMessages = new ChatMessage[] { new(ChatRole.System, ClassifierSystemPrompt), new(ChatRole.User, cleanedText) };
+            var classifierUserContent = BuildClassifierUserContent(messageList, cleanedText);
+            var classificationMessages = new ChatMessage[] { new(ChatRole.System, ClassifierSystemPrompt), new(ChatRole.User, classifierUserContent) };
 
             var response = await _classifierClient.GetResponseAsync(classificationMessages, ClassifierOptions, cancellationToken);
 
@@ -125,6 +135,57 @@ public sealed class StarWarsTopicGuardrail
             _aiStatus?.RecordError("guardrail", ex);
             return false; // fail-open: allow request through if OpenAI call fails
         }
+    }
+
+    /// <summary>
+    /// Builds the classifier's user turn: a short transcript of the prior conversation (excluding the latest user
+    /// message) followed by the latest user message. Gives the classifier enough context to recognize follow-up
+    /// questions like "what relationships are there for these?" as continuations of a Star Wars topic.
+    /// </summary>
+    private static string BuildClassifierUserContent(IList<ChatMessage> messages, string latestUserText)
+    {
+        var lastUserIndex = -1;
+        for (var i = messages.Count - 1; i >= 0; i--)
+        {
+            if (messages[i].Role == ChatRole.User)
+            {
+                lastUserIndex = i;
+                break;
+            }
+        }
+
+        var priorTurns = new List<string>();
+        if (lastUserIndex > 0)
+        {
+            for (var i = lastUserIndex - 1; i >= 0 && priorTurns.Count < HistoryTurnsForContext; i--)
+            {
+                var msg = messages[i];
+                if (msg.Role != ChatRole.User && msg.Role != ChatRole.Assistant)
+                    continue;
+
+                var text = msg.Text;
+                if (string.IsNullOrWhiteSpace(text))
+                    continue;
+
+                if (msg.Role == ChatRole.User)
+                    text = StripMetadataPrefixes(text);
+
+                if (string.IsNullOrWhiteSpace(text))
+                    continue;
+
+                if (text.Length > HistoryCharBudgetPerTurn)
+                    text = text[..HistoryCharBudgetPerTurn] + "…";
+
+                var label = msg.Role == ChatRole.User ? "USER" : "ASSISTANT";
+                priorTurns.Add($"{label}: {text}");
+            }
+        }
+
+        if (priorTurns.Count == 0)
+            return $"LATEST USER MESSAGE:\n{latestUserText}";
+
+        priorTurns.Reverse();
+        return $"RECENT CONVERSATION:\n{string.Join("\n", priorTurns)}\n\nLATEST USER MESSAGE:\n{latestUserText}";
     }
 
     /// <summary>

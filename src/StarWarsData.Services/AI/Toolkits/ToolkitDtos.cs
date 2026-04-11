@@ -42,11 +42,18 @@ public sealed record EntityTimelineDto(
     string? Error = null
 );
 
-public sealed record RelationshipTargetDto(int PageId, string Name, string Type, double Weight, string Evidence, Dictionary<string, string>? Properties = null);
+public sealed record RelationshipTargetDto(int PageId, string Name, string Type, double Weight, string Evidence, string? WikiUrl = null, Dictionary<string, string>? Properties = null);
 
-public sealed record EntityRelationshipsDto(int EntityId, string? EntityName, Dictionary<string, List<RelationshipTargetDto>> Relationships, int TotalEdges, string? Note = null);
+public sealed record EntityRelationshipsDto(
+    int EntityId,
+    string? EntityName,
+    string? EntityWikiUrl,
+    Dictionary<string, List<RelationshipTargetDto>> Relationships,
+    int TotalEdges,
+    string? Note = null
+);
 
-public sealed record CategoryRelationshipTargetDto(int PageId, string Name, string Type, int? FromYear, int? ToYear);
+public sealed record CategoryRelationshipTargetDto(int PageId, string Name, string Type, int? FromYear, int? ToYear, string? WikiUrl = null);
 
 public sealed record RelationshipsByCategoryDto(
     int EntityId,
@@ -106,7 +113,26 @@ public sealed record LabelCountDto(string Label, int Count);
 
 public sealed record NamedCountDto(string Name, int PageId, int Count);
 
-public sealed record ValueCountDto(string Value, int Count);
+/// <summary>A node that contributed to a count bucket. Use as the building block for `references` on render tools.</summary>
+public sealed record NodeRefDto(int PageId, string Title, string? WikiUrl);
+
+/// <summary>
+/// Result wrapper for count_nodes_by_property. Carries the per-value counts plus a self-correcting
+/// hint when the result is sparse and a stronger edge label exists in kg.edges. The agent should
+/// read <see cref="Note"/> first — if it's populated, the property aggregation under-counted and
+/// the agent should follow the redirect to <c>group_entities_by_connection</c> with one of the
+/// labels in <see cref="RecommendedEdgeLabels"/>.
+/// </summary>
+public sealed record CountNodesByPropertyResult(List<ValueCountDto> Results, int TotalMatched, List<LabelCountDto>? RecommendedEdgeLabels = null, string? Note = null);
+
+/// <summary>
+/// Internal batch-enrichment record. Pairs a node's wikiUrl, name, and a small property summary
+/// so a single query against kg.nodes can feed both citations and context for a list of PageIds.
+/// Used by GetNodePropertiesBatchAsync and its consumers.
+/// </summary>
+public sealed record NodeBatchInfoDto(string? WikiUrl, string? Name, Dictionary<string, string>? Properties);
+
+public sealed record ValueCountDto(string Value, int Count, List<NodeRefDto>? Sources = null);
 
 public sealed record YearCountDto(int Year, string YearDisplay, int Count);
 
@@ -141,6 +167,15 @@ public sealed record InfoboxDataRowDto(string Label, List<string> Values);
 public sealed record PageDetailDto(int Id, string Continuity, string WikiUrl, List<InfoboxDataRowDto> Data);
 
 public sealed record PageMatchDto(int Id, string Name, List<string>? MatchValue, string Continuity, string WikiUrl);
+
+/// <summary>
+/// Result wrapper for search_pages_by_property. On empty matches, populates either
+/// <see cref="ValidInfoboxTypes"/> (when the infobox type guess was wrong) or
+/// <see cref="AvailableLabels"/> (when the type is correct but the label doesn't exist on it),
+/// so the agent can retry intelligently instead of guessing again. Read the <see cref="Note"/>
+/// for the diagnosis.
+/// </summary>
+public sealed record SearchPagesByPropertyResult(List<PageMatchDto> Results, List<LabelPageCountDto>? AvailableLabels = null, List<string>? ValidInfoboxTypes = null, string? Note = null);
 
 public sealed record PageDateMatchDto(int Id, string Name, List<string>? Date, string Continuity, string WikiUrl);
 

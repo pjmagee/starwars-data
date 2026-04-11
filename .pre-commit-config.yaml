@@ -13,8 +13,8 @@ repos:
         pass_filenames: false
         files: \.(cs|razor|csproj|slnx)$
       - id: dotnet-test
-        name: dotnet test
-        entry: dotnet test src/StarWarsData.Tests --no-restore -c Release
+        name: dotnet test (Unit + Integration tiers)
+        entry: dotnet test --project src/StarWarsData.Tests/StarWarsData.Tests.csproj --no-restore -c Release --filter "TestCategory=Unit|TestCategory=Integration"
         language: system
         pass_filenames: false
         files: \.(cs|razor|csproj|slnx)$

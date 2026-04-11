@@ -25,12 +25,12 @@ public class SettingsOptions
 
     public string OpenAiKey { get; set; } = null!;
 
-    public string OpenAiModel { get; set; } = "gpt-5-mini";
+    public string OpenAiModel { get; set; } = "gpt-5.4-mini";
 
     /// <summary>
     /// The model to use for character timeline generation (needs large context window)
     /// </summary>
-    public string CharacterTimelineModel { get; set; } = "gpt-5";
+    public string CharacterTimelineModel { get; set; } = "gpt-5.4";
 
     public IEnumerable<string> TimelineCollections { get; set; } = [];
 

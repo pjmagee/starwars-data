@@ -6,5 +6,7 @@
     <FileVersion Condition="'$(FileVersion)' == ''">0.0.1.0</FileVersion>
     <InformationalVersion Condition="'$(InformationalVersion)' == ''">0.0.1-local</InformationalVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- Suppress experimental API warning for OpenAI Responses API (GetResponsesClient / AsIChatClient) -->
+    <NoWarn>$(NoWarn);OPENAI001</NoWarn>
   </PropertyGroup>
 </Project>

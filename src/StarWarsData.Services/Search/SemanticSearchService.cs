@@ -47,7 +47,7 @@ public class SemanticSearchService
         var embeddings = await _embedder.GenerateAsync([query]);
         var vector = embeddings[0].Vector.ToArray();
 
-        _logger.LogInformation("SemanticSearch: embedding returned {Dims} dimensions, first3=[{V0:F4},{V1:F4},{V2:F4}]", vector.Length, vector[0], vector[1], vector[2]);
+        _logger.LogInformation("SemanticSearch: embedding returned {Dims} dimensions", vector.Length);
 
         var queryVector = new BsonArray(vector.Select(f => (double)f));
         var results = await SearchByVectorAsync(queryVector, types, continuity, realm, limit, minScore);

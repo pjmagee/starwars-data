@@ -426,13 +426,13 @@ public class RelationshipAnalystToolkit
 
     public IReadOnlyList<AITool> AsAIFunctions() =>
         [
-            AIFunctionFactory.Create(GetPageContent, "get_page_content"),
-            AIFunctionFactory.Create(GetLinkedPages, "get_linked_pages"),
-            AIFunctionFactory.Create(GetExistingLabels, "get_existing_labels"),
-            AIFunctionFactory.Create(FindSimilarLabel, "find_similar_label"),
-            AIFunctionFactory.Create(GetEntityEdges, "get_entity_edges"),
-            AIFunctionFactory.Create(StoreEdges, "store_edges"),
-            AIFunctionFactory.Create(MarkProcessed, "mark_processed"),
-            AIFunctionFactory.Create(SkipPage, "skip_page"),
+            AIFunctionFactory.Create(GetPageContent, ToolNames.RelationshipAnalyst.GetPageContent),
+            AIFunctionFactory.Create(GetLinkedPages, ToolNames.RelationshipAnalyst.GetLinkedPages),
+            AIFunctionFactory.Create(GetExistingLabels, ToolNames.RelationshipAnalyst.GetExistingLabels),
+            AIFunctionFactory.Create(FindSimilarLabel, ToolNames.RelationshipAnalyst.FindSimilarLabel),
+            AIFunctionFactory.Create(GetEntityEdges, ToolNames.RelationshipAnalyst.GetEntityEdges),
+            AIFunctionFactory.Create(StoreEdges, ToolNames.RelationshipAnalyst.StoreEdges),
+            AIFunctionFactory.Create(MarkProcessed, ToolNames.RelationshipAnalyst.MarkProcessed),
+            AIFunctionFactory.Create(SkipPage, ToolNames.RelationshipAnalyst.SkipPage),
         ];
 }

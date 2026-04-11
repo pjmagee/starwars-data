@@ -174,8 +174,10 @@
                                         Style="padding:0;color:rgba(255,255,255,0.7);" />
                     </MudStack>
 
-                    @if (_mode == "explore")
-                    {
+                    @* Keep MudTextField mounted across mode toggles — disposing+remounting races
+                       MudInput's first-render JS interop (DotNetObjectReference serialized after dispose). *@
+                    @{ var exploreSearchClass = _mode == "explore" ? null : "d-none"; }
+                    <div class="@exploreSearchClass">
                         <MudTextField @bind-Value="_searchTerm"
                                       Placeholder="@(_semanticSearch ? "e.g. planets destroyed during the Clone Wars" : "Search planets, systems, people...")"
                                       Variant="Variant.Outlined" Adornment="Adornment.Start"
@@ -187,8 +189,7 @@
                         <MudSwitch Value="_semanticSearch" Color="Color.Tertiary" Size="Size.Small"
                                    Label="AI Semantic Search" Style="color:rgba(255,255,255,0.5);margin:0;"
                                    ValueChanged="OnSemanticToggle" T="bool" />
-
-                    }
+                    </div>
 
                     <MudExpansionPanels Dense="true" Elevation="0"
                                         Style="background:transparent; --mud-palette-surface:transparent;">
@@ -246,10 +247,13 @@
                             </ChildContent>
                         </MudExpansionPanel>
 
-                        <!-- Sector browser -->
-                        @if (_mode == "explore" && _geography?.Cells is not null)
+                        @* Sector browser — CSS-hidden (not conditionally removed) when mode != explore
+                           so the inner MudTextField isn't disposed + remounted (first-render JS interop race). *@
+                        @if (_geography?.Cells is not null)
                         {
+                            var sectorPanelClass = _mode == "explore" ? null : "d-none";
                             <MudExpansionPanel Dense="true" Expanded="false"
+                                               Class="@sectorPanelClass"
                                                Style="background:rgba(255,255,255,0.03);border-radius:6px;margin-bottom:4px;">
                                 <TitleContent>
                                     <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">

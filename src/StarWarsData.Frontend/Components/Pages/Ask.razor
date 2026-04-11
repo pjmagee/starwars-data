@@ -34,8 +34,8 @@
                 <MudText Typo="Typo.h5" Align="Align.Center" Class="mb-4 mb-sm-6" Color="Color.Secondary">
                     What would you like to explore?
                 </MudText>
-                @* Mode card grid hidden below md — pure CSS via MudBlazor display utilities *@
-                <div class="d-none d-md-flex flex-wrap gap-2 justify-center mb-6">
+                @* Mode card grid hidden below lg — compact layout kicks in at md (1024) too. *@
+                <div class="d-none d-lg-flex flex-wrap gap-2 justify-center mb-6">
                     @foreach (var mode in _modes)
                     {
                         var m = mode;
@@ -78,7 +78,7 @@
         else
         {
             @* ── Conversation messages ── *@
-            <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="py-4">
+            <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Gutters="false" Class="py-4 px-2 px-lg-4">
                 @foreach (var msg in _conversation)
                 {
                     @if (msg.Role == ConversationRole.User)
@@ -230,10 +230,10 @@
 
     @* ── Sticky input area at bottom ── *@
     <div class="ask-chat-input">
-        <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="py-2">
+        <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Gutters="false" Class="py-2 px-2 px-lg-4">
 
-            @* Compact mode chips — visible md and up only, hidden below *@
-            <div class="d-none d-md-flex flex-wrap gap-1 mb-2 justify-center">
+            @* Compact mode chips — visible lg and up only, hidden below *@
+            <div class="d-none d-lg-flex flex-wrap gap-1 mb-2 justify-center">
                 <MudChip T="string"
                          Color="@(_selectedMode == "auto" ? Color.Primary : Color.Default)"
                          Variant="@(_selectedMode == "auto" ? Variant.Filled : Variant.Outlined)"
@@ -254,12 +254,10 @@
                 }
             </div>
 
-            @* Input row — two parallel layouts. Desktop (md+): inline. Mobile (<md): stacked.
-               Both bind to the same _model.Prompt; only one is visible per breakpoint via CSS. *@
+            @* Input row — single responsive layout: auto-growing text field + icon-only send button. *@
             <EditForm Model="_model" OnValidSubmit="SubmitAsync">
                 <DataAnnotationsValidator />
-                @* Desktop layout: text field + button inline *@
-                <div class="d-none d-md-flex gap-2 align-end">
+                <div class="d-flex gap-1 align-center">
                     <MudTextField @bind-Value="_model.Prompt"
                                   Label="@(SelectedMode is null ? "Ask anything about Star Wars\u2026" : SelectedMode.Placeholder)"
                                   Variant="Variant.Outlined"
@@ -267,48 +265,31 @@
                                   Immediate="true"
                                   FullWidth="true"
                                   Disabled="_loading"
-                                  Adornment="Adornment.Start"
-                                  AdornmentIcon="@Icons.Material.Filled.Search"
                                   OnKeyDown="OnInputKeyDown"
+                                  Sizing="InputSizing.Auto"
+                                  MaxLines="6"
                                   Lines="1"
                                   Class="flex-grow-1" />
-                    <MudButton ButtonType="ButtonType.Submit"
-                               Variant="Variant.Filled"
-                               Color="Color.Primary"
-                               Disabled="@(_loading || _aiUnavailable)"
-                               StartIcon="@Icons.Material.Filled.Send"
-                               Style="height: 56px;">
-                        @(_loading ? "Thinking\u2026" : _aiUnavailable ? "Unavailable" : "Send")
-                    </MudButton>
-                </div>
-                @* Mobile layout: text field full-width on top, button full-width below *@
-                <div class="d-flex d-md-none flex-column gap-2">
-                    <MudTextField @bind-Value="_model.Prompt"
-                                  Label="Ask anything about Star Wars…"
-                                  Variant="Variant.Outlined"
-                                  Required="true"
-                                  Immediate="true"
-                                  FullWidth="true"
-                                  Disabled="_loading"
-                                  OnKeyDown="OnInputKeyDown"
-                                  Lines="3" />
-                    <MudButton ButtonType="ButtonType.Submit"
-                               Variant="Variant.Filled"
-                               Color="Color.Primary"
-                               Disabled="@(_loading || _aiUnavailable)"
-                               StartIcon="@Icons.Material.Filled.Send"
-                               FullWidth="true"
-                               Size="Size.Large">
-                        @(_loading ? "Thinking…" : _aiUnavailable ? "Unavailable" : "Send")
-                    </MudButton>
+                    <MudTooltip Text="@(_loading ? "Thinking\u2026" : _aiUnavailable ? "Unavailable" : "Send")">
+                        <MudIconButton ButtonType="ButtonType.Submit"
+                                       Variant="Variant.Filled"
+                                       Color="Color.Primary"
+                                       Disabled="@(_loading || _aiUnavailable)"
+                                       Icon="@(_loading ? Icons.Material.Filled.HourglassEmpty : Icons.Material.Filled.Send)"
+                                       Size="Size.Medium" />
+                    </MudTooltip>
                 </div>
             </EditForm>
 
             @if (!_isAuthenticated)
             {
-                <MudText Typo="Typo.caption" Color="Color.Secondary" Align="Align.Center" Class="mt-2">
+                <MudText Typo="Typo.caption" Color="Color.Secondary" Align="Align.Center" Class="mt-2 d-none d-lg-block">
                     <MudLink Href="/authentication/login" Underline="Underline.Always" Color="Color.Secondary">Sign in</MudLink>
                     to save chat history, get more requests, and bring your own OpenAI key.
+                </MudText>
+                <MudText Typo="Typo.caption" Color="Color.Secondary" Align="Align.Center" Class="mt-2 d-block d-lg-none">
+                    <MudLink Href="/authentication/login" Underline="Underline.Always" Color="Color.Secondary">Sign in</MudLink>
+                    for history &amp; more requests
                 </MudText>
             }
 
@@ -432,6 +413,11 @@
     private ConversationMessage? _currentToolGroup;
     private bool _toolGroupInterrupted;
     private ConversationMessage? _currentAssistantMsg;
+    // Set true after any render_* tool result fires this turn. Subsequent TEXT_MESSAGE_CONTENT
+    // events are suppressed because the visualization IS the answer — any post-render prose
+    // (or worse, JSON-as-text leaking from a regurgitated tool call) is clutter. The system
+    // prompt instructs the agent to end the turn after rendering; this is the structural backstop.
+    private bool _renderedThisTurn;
     private List<AguiToolCall> _pendingAguiToolCalls = [];
 
     private AskModel _model = new();
@@ -474,9 +460,9 @@
                 "Show the political hierarchy of the Galactic Empire — who governed what and who reported to whom",
                 "How is Thrawn connected to Palpatine through the chain of command?",
             ]),
-        new("table", "Table", "Browse and filter paginated collections with custom column selection",
+        new("table", "Browse", "Page through an entire collection of one entity type with the columns you pick",
             "e.g. Browse all wars with their dates, belligerents, and outcome",
-            Icons.Material.Filled.TableChart, Color.Tertiary,
+            Icons.Material.Filled.ViewList, Color.Tertiary,
             [
                 "Browse all wars with their date, belligerents, location, and outcome",
                 "Show all fleets with their affiliation, commanding officer, and notable engagements",
@@ -484,9 +470,9 @@
                 "Browse all lightsabers with their crystal, owner, and type",
                 "Show all space stations with their location, affiliation, and destruction date",
             ]),
-        new("data_table", "Data Table", "Cross-reference and join data the AI assembles from multiple queries",
+        new("data_table", "Custom Grid", "A one-off grid the AI assembles by joining data from multiple queries",
             "e.g. Which Sith Lords outlived their masters, and by how long?",
-            Icons.Material.Filled.GridOn, Color.Info,
+            Icons.Material.Filled.Dataset, Color.Info,
             [
                 "List every Sith master-apprentice pair, how each master died, and whether the apprentice was responsible",
                 "Which characters were alive during both the Clone Wars and the Galactic Civil War? Show their allegiance in each",
@@ -799,6 +785,7 @@
         _currentToolGroup = null;
         _toolGroupInterrupted = false;
         _currentAssistantMsg = null;
+        _renderedThisTurn = false;
         _pendingAguiToolCalls = [];
 
         await ScrollToBottom();
@@ -846,10 +833,11 @@
             await using var stream = await response.Content.ReadAsStreamAsync(cts.Token);
             using var reader = new System.IO.StreamReader(stream);
 
-            while (!reader.EndOfStream && !cts.Token.IsCancellationRequested)
+            while (!cts.Token.IsCancellationRequested)
             {
                 var line = await reader.ReadLineAsync(cts.Token);
-                if (string.IsNullOrEmpty(line)) continue;
+                if (line is null) break;
+                if (line.Length == 0) continue;
                 if (!line.StartsWith("data:")) continue;
 
                 var json = line["data:".Length..].Trim();
@@ -876,12 +864,20 @@
                             HandleToolCallResult(root);
                             break;
                         case "TEXT_MESSAGE_START":
+                            // Suppress new text-only messages after a render tool has fired this turn.
+                            // The visualization is the answer; any post-render assistant prose
+                            // (including raw JSON args of a regurgitated tool call) is clutter.
+                            if (_renderedThisTurn)
+                                break;
                             _currentAssistantMsg = new ConversationMessage { Role = ConversationRole.Assistant, Text = "" };
                             _conversation.Add(_currentAssistantMsg);
                             _toolGroupInterrupted = true;
                             break;
                         case "TEXT_MESSAGE_CONTENT":
                         {
+                            // Same post-render suppression as TEXT_MESSAGE_START.
+                            if (_renderedThisTurn)
+                                break;
                             var delta = root.TryGetProperty("delta", out var d) ? d.GetString() : null;
                             if (delta is not null)
                             {
@@ -1086,6 +1082,10 @@
                 }
                 _conversation.Add(vizMsg);
                 _toolGroupInterrupted = true;
+                // Lock out post-render assistant text — see _renderedThisTurn declaration.
+                _renderedThisTurn = true;
+                // Drop any in-progress assistant text bubble; the visualization replaces it.
+                _currentAssistantMsg = null;
             }
             catch (JsonException ex)
             {
