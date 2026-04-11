@@ -46,6 +46,13 @@
         background: rgba(255,255,255,0.15); border-radius: 3px;
     }
     .search-results-list { overflow-y: auto; max-height: 40vh; }
+    .search-result-item {
+        padding: 6px 12px; cursor: pointer; border-left: 2px solid transparent;
+        transition: background 0.15s, border-left-color 0.15s;
+    }
+    .search-result-item:hover {
+        background: rgba(255,215,0,0.08); border-left-color: #ffd700;
+    }
     .galaxy-timeline-bar {
         position: absolute; bottom: 0; left: 0; right: 0; z-index: 110;
         display: flex; flex-direction: column; gap: 4px; padding: 6px 16px 8px;
@@ -339,45 +346,43 @@
             else if (_mode == "explore" && _searchResults is { Count: > 0 })
             {
                 <MudPaper Elevation="8" Class="pa-0 mt-1" Style="background:rgba(15,15,35,0.92);backdrop-filter:blur(8px);">
-                    <div class="search-results-list">
-                        <MudList Dense="true" T="MapSearchResult" Style="color:#e0e0f0;">
-                            @foreach (var group in _searchResults.GroupBy(r => r.GridKey))
-                            {
-                                <MudListSubheader Style="background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.5);">
-                                    <MudIcon Icon="@Icons.Material.Filled.GridOn" Size="Size.Small" />
-                                    <MudText Typo="Typo.subtitle2" Style="display:inline;margin-left:4px;">Grid @group.Key</MudText>
-                                </MudListSubheader>
+                    <div class="search-results-list" style="color:#e0e0f0;">
+                        @foreach (var group in _searchResults.GroupBy(r => r.GridKey))
+                        {
+                            <div style="background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.5);padding:6px 12px;display:flex;align-items:center;gap:6px;">
+                                <MudIcon Icon="@Icons.Material.Filled.GridOn" Size="Size.Small" />
+                                <MudText Typo="Typo.subtitle2">Grid @group.Key</MudText>
+                            </div>
                                 @foreach (var result in group)
                                 {
-                                    <MudListItem T="MapSearchResult" OnClick="() => SelectSearchResult(result)">
-                                        <MudStack Spacing="0">
-                                            <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
-                                                <MudText Typo="Typo.body2">@result.MatchedName</MudText>
-                                                @if (result.Score.HasValue)
-                                                {
-                                                    <MudChip T="string" Size="Size.Small" Variant="Variant.Text"
-                                                             Color="Color.Tertiary" Style="margin:0;font-size:10px;">
-                                                        @($"{result.Score:P0}")
-                                                    </MudChip>
-                                                }
-                                            </MudStack>
-                                            @if (result.MatchType is "linked" or "semantic-linked" && result.LinkedVia is not null)
+                                    <div class="search-result-item"
+                                         data-search-grid="@result.GridKey"
+                                         @onclick="() => SelectSearchResult(result)">
+                                        <div style="display:flex;align-items:center;gap:6px;">
+                                            <MudText Typo="Typo.body2">@result.MatchedName</MudText>
+                                            @if (result.Score.HasValue)
                                             {
-                                                <MudText Typo="Typo.caption" Style="color:rgba(255,215,0,0.6);">
-                                                    @(result.MatchType == "semantic-linked" ? $"via {result.LinkedVia}" : result.LinkedVia)
-                                                </MudText>
+                                                <MudChip T="string" Size="Size.Small" Variant="Variant.Text"
+                                                         Color="Color.Tertiary" Style="margin:0;font-size:10px;">
+                                                    @($"{result.Score:P0}")
+                                                </MudChip>
                                             }
-                                            @if (result.Snippet is not null)
-                                            {
-                                                <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.4);font-size:11px;line-height:1.3;margin-top:2px;">
-                                                    @result.Snippet
-                                                </MudText>
-                                            }
-                                        </MudStack>
-                                    </MudListItem>
-                                }
+                                        </div>
+                                        @if (result.MatchType is "linked" or "semantic-linked" && result.LinkedVia is not null)
+                                        {
+                                            <MudText Typo="Typo.caption" Style="color:rgba(255,215,0,0.6);">
+                                                @(result.MatchType == "semantic-linked" ? $"via {result.LinkedVia}" : result.LinkedVia)
+                                            </MudText>
+                                        }
+                                        @if (result.Snippet is not null)
+                                        {
+                                            <MudText Typo="Typo.caption" Style="color:rgba(255,255,255,0.4);font-size:11px;line-height:1.3;margin-top:2px;">
+                                                @result.Snippet
+                                            </MudText>
+                                        }
+                                </div>
                             }
-                        </MudList>
+                        }
                     </div>
                 </MudPaper>
             }
@@ -958,9 +963,10 @@
             _d3Initialized = true;
             _dotNetRef?.Dispose();
             _dotNetRef = DotNetObjectReference.Create(this);
-            _module = await JS.InvokeAsync<IJSObjectReference>("import", "./js/galaxy-map-unified.js");
+            _module = await JS.InvokeAsync<IJSObjectReference>("import", "./js/galaxy-map-unified.js?v=5");
             await _module.InvokeVoidAsync("initialize", "galaxy-map-root", _geography, _dotNetRef);
             await _module.InvokeVoidAsync("setupPanelHoverListeners", "galaxy-map-panel");
+            await _module.InvokeVoidAsync("setupSearchResultHover");
             if (_onlyWithBodies)
                 await _module.InvokeVoidAsync("setSystemFilter", true);
         }
@@ -1136,6 +1142,8 @@
 
     async Task SelectSearchResult(MapSearchResult result)
     {
+        if (_module is not null)
+            await _module.InvokeVoidAsync("clearPreviewHighlight");
         if (TryParseGridKey(result.GridKey, out int col, out int row) && _module is not null)
             await _module.InvokeVoidAsync("navigateToCell", col, row);
         await LoadPageDetail(result.PageId);

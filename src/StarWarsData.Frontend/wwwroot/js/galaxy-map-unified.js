@@ -1562,6 +1562,27 @@ export function setupPanelHoverListeners(panelId) {
     });
 }
 
+let _searchHoverInstalled = false;
+export function setupSearchResultHover() {
+    if (_searchHoverInstalled) return;
+    _searchHoverInstalled = true;
+    console.log('[galaxy-map] search hover delegation installed');
+    document.body.addEventListener('mouseover', (e) => {
+        const el = e.target.closest('[data-search-grid]');
+        if (!el) return;
+        const key = el.getAttribute('data-search-grid');
+        console.log('[galaxy-map] search result hover', key);
+        if (!key) return;
+        const m = key.match(/^([A-Za-z])-(\d+)$/);
+        if (!m) { console.warn('[galaxy-map] grid key did not match', key); return; }
+        const col = m[1].toUpperCase().charCodeAt(0) - 65;
+        const row = parseInt(m[2], 10) - 1;
+        if (row < 0) return;
+        // Reuse the same highlightCells function used by sector clicks.
+        highlightCells(key, [[col, row]]);
+    });
+}
+
 function _renderTerritory() {
     if (!_state) return;
     const { territoryLayer, cellW, cellH, colX, rowY, regionCellMap, currentYearData } = _state;
@@ -1713,6 +1734,29 @@ export function toggleTradeRoutes(visible) {
 export function toggleNebulae(visible) {
     if (!_state) return;
     _state.svg.select('.layer-nebulae').style('display', visible ? null : 'none');
+}
+
+export function previewHighlightCell(col, row) {
+    console.log('[galaxy-map] previewHighlightCell', col, row, '_state?', !!_state);
+    if (!_state) return;
+    const { svg, cellW, cellH, colX, rowY } = _state;
+    // Use the top-level transformed group so the highlight isn't hidden by drill-down content.
+    const g = svg.select('g');
+    g.selectAll('.cell-preview-highlight').remove();
+    const color = '#ffd700';
+    g.append('rect')
+        .attr('class', 'cell-preview-highlight')
+        .attr('x', colX(col) + 1).attr('y', rowY(row) + 1)
+        .attr('width', cellW - 2).attr('height', cellH - 2)
+        .attr('fill', color).attr('fill-opacity', 0.18)
+        .attr('stroke', color).attr('stroke-opacity', 0.9)
+        .attr('stroke-width', 2).attr('rx', 2)
+        .style('pointer-events', 'none');
+}
+
+export function clearPreviewHighlight() {
+    if (!_state) return;
+    _state.svg.select('g').selectAll('.cell-preview-highlight').remove();
 }
 
 export function highlightCells(label, cells) {
