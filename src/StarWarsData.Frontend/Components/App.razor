@@ -100,6 +100,52 @@
             function swSetTheme(themeId) { localStorage.setItem('sw-theme', themeId); }
             function swGetTheme() { return localStorage.getItem('sw-theme'); }
 
+            // Dark mode preference: 'light' | 'dark' | 'system'. When 'system',
+            // MainLayout follows prefers-color-scheme; otherwise the OS preference
+            // is ignored so the user's explicit choice survives reconnects.
+            function swSetDarkMode(mode) { localStorage.setItem('sw-dark-mode', mode); }
+            function swGetDarkMode() { return localStorage.getItem('sw-dark-mode') || 'system'; }
+            function swGetSystemDarkMode() { return window.matchMedia('(prefers-color-scheme: dark)').matches; }
+
+            // Custom system dark-mode watcher. We deliberately do NOT use
+            // MudThemeProvider's built-in observer (ObserveSystemDarkModeChange):
+            // its JSInvokable callback writes the new value back through the
+            // two-way IsDarkMode binding BEFORE our handler runs, so a guard
+            // on the .NET side cannot prevent it from stomping a user's
+            // explicit Light/Dark choice. We register our own listener and
+            // route through a JSInvokable that the layout can ignore based
+            // on the persisted preference.
+            var _swDarkModeMql = null;
+            var _swDarkModeListener = null;
+            var _swDarkModeRef = null;
+            function swRegisterDarkModeWatcher(dotnetRef) {
+                swUnregisterDarkModeWatcher();
+                _swDarkModeRef = dotnetRef;
+                _swDarkModeMql = window.matchMedia('(prefers-color-scheme: dark)');
+                _swDarkModeListener = function (e) {
+                    if (_swDarkModeRef) {
+                        _swDarkModeRef.invokeMethodAsync('OnSystemDarkModeChangedJs', e.matches);
+                    }
+                };
+                if (_swDarkModeMql.addEventListener) {
+                    _swDarkModeMql.addEventListener('change', _swDarkModeListener);
+                } else if (_swDarkModeMql.addListener) {
+                    _swDarkModeMql.addListener(_swDarkModeListener);
+                }
+            }
+            function swUnregisterDarkModeWatcher() {
+                if (_swDarkModeMql && _swDarkModeListener) {
+                    if (_swDarkModeMql.removeEventListener) {
+                        _swDarkModeMql.removeEventListener('change', _swDarkModeListener);
+                    } else if (_swDarkModeMql.removeListener) {
+                        _swDarkModeMql.removeListener(_swDarkModeListener);
+                    }
+                }
+                _swDarkModeMql = null;
+                _swDarkModeListener = null;
+                _swDarkModeRef = null;
+            }
+
             // Combined UI state read — used by MainLayout on first render so we
             // only need ONE JS interop round-trip. The circuit can be torn down
             // between consecutive awaited interop calls during the SignalR
@@ -108,7 +154,9 @@
                 return {
                     theme: localStorage.getItem('sw-theme'),
                     textSize: localStorage.getItem('sw-text-size') || 'default',
-                    aurebesh: localStorage.getItem('sw-aurebesh') === 'true'
+                    aurebesh: localStorage.getItem('sw-aurebesh') === 'true',
+                    darkMode: localStorage.getItem('sw-dark-mode') || 'system',
+                    systemDark: window.matchMedia('(prefers-color-scheme: dark)').matches
                 };
             }
 

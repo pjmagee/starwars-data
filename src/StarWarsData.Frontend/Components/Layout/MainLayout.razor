@@ -13,7 +13,7 @@
 <MudThemeProvider @ref="_mudThemeProvider"
                   Theme="@_theme"
                   @bind-IsDarkMode="_isDarkMode"
-                  ObserveSystemDarkModeChange="true" />
+                  ObserveSystemDarkModeChange="false" />
 <MudPopoverProvider/>
 <MudDialogProvider/>
 <MudSnackbarProvider/>
@@ -62,16 +62,45 @@
                 <MudIconButton Icon="@Icons.Material.Filled.Translate" Color="@(_aurebesh ? Color.Warning : Color.Inherit)"
                                OnClick="ToggleAurebesh" />
             </MudTooltip>
-            <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle"/>
+            <MudTooltip Text="Appearance — light, dark, or follow system">
+                <MudMenu Icon="@DarkLightModeButtonIcon" Color="Color.Inherit"
+                         AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Dense="true">
+                    <MudMenuItem OnClick="@(() => SetDarkMode("light"))"
+                                 Icon="@(_darkModePreference == "light" ? Icons.Material.Filled.Check : Icons.Material.Outlined.LightMode)">
+                        Light
+                    </MudMenuItem>
+                    <MudMenuItem OnClick="@(() => SetDarkMode("dark"))"
+                                 Icon="@(_darkModePreference == "dark" ? Icons.Material.Filled.Check : Icons.Material.Outlined.DarkMode)">
+                        Dark
+                    </MudMenuItem>
+                    <MudMenuItem OnClick="@(() => SetDarkMode("system"))"
+                                 Icon="@(_darkModePreference == "system" ? Icons.Material.Filled.Check : Icons.Material.Rounded.AutoMode)">
+                        System
+                    </MudMenuItem>
+                </MudMenu>
+            </MudTooltip>
             <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Href="https://github.com/pjmagee/starwars-data" Target="_blank" title="GitHub" />
         </div>
         @* Mobile-only overflow menu (below md): collapses the desktop icons into one menu *@
         <div class="d-flex d-md-none align-center">
             <MudMenu Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit"
                      AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight" Dense="true">
-                <MudMenuItem OnClick="@DarkModeToggle" Icon="@DarkLightModeButtonIcon">
-                    @(_isDarkMode ? "Light mode" : "Dark mode")
+                <MudMenuItem Disabled="true">
+                    <MudText Typo="Typo.caption" Color="Color.Secondary">Appearance</MudText>
                 </MudMenuItem>
+                <MudMenuItem OnClick="@(() => SetDarkMode("light"))"
+                             Icon="@(_darkModePreference == "light" ? Icons.Material.Filled.Check : Icons.Material.Outlined.LightMode)">
+                    Light
+                </MudMenuItem>
+                <MudMenuItem OnClick="@(() => SetDarkMode("dark"))"
+                             Icon="@(_darkModePreference == "dark" ? Icons.Material.Filled.Check : Icons.Material.Outlined.DarkMode)">
+                    Dark
+                </MudMenuItem>
+                <MudMenuItem OnClick="@(() => SetDarkMode("system"))"
+                             Icon="@(_darkModePreference == "system" ? Icons.Material.Filled.Check : Icons.Material.Rounded.AutoMode)">
+                    System
+                </MudMenuItem>
+                <MudDivider />
                 <MudMenuItem OnClick="ToggleAurebesh" Icon="@Icons.Material.Filled.Translate"
                              IconColor="@(_aurebesh ? Color.Warning : Color.Default)">
                     @(_aurebesh ? "Aurebesh: ON" : "Aurebesh: OFF")
@@ -171,11 +200,14 @@
 @code {
     private bool _drawerOpen = true;
     private bool _isDarkMode = true;
+    private string _darkModePreference = "system"; // "light" | "dark" | "system"
     private bool _aurebesh;
     private MudTheme? _theme;
     private string _textSize = "default";
     private SwTheme _selectedTheme = SwTheme.Holonet;
     private MudThemeProvider _mudThemeProvider = null!;
+    private DotNetObjectReference<MainLayout>? _dotNetRef;
+    private bool _darkModeWatcherRegistered;
 
     private static readonly (string Label, string Value)[] _textSizes =
     [
@@ -218,6 +250,14 @@
                 _selectedTheme = SwThemeExtensions.FromId(ui.Theme);
             _textSize = string.IsNullOrEmpty(ui.TextSize) ? "default" : ui.TextSize;
             _aurebesh = ui.Aurebesh;
+            _darkModePreference = string.IsNullOrEmpty(ui.DarkMode) ? "system" : ui.DarkMode;
+
+            _isDarkMode = _darkModePreference switch
+            {
+                "dark" => true,
+                "light" => false,
+                _ => ui.SystemDark,
+            };
 
             _theme = BuildTheme(_selectedTheme);
             StateHasChanged();
@@ -235,8 +275,13 @@
             if (_aurebesh)
                 await JS.InvokeVoidAsync("swSetAurebesh", true);
 
-            _isDarkMode = await _mudThemeProvider.GetSystemDarkModeAsync();
-            await _mudThemeProvider.WatchSystemDarkModeAsync(OnSystemDarkModeChanged);
+            if (!_darkModeWatcherRegistered)
+            {
+                _dotNetRef ??= DotNetObjectReference.Create(this);
+                await JS.InvokeVoidAsync("swRegisterDarkModeWatcher", _dotNetRef);
+                _darkModeWatcherRegistered = true;
+            }
+
             StateHasChanged();
         }
         catch (JSDisconnectedException) { }
@@ -246,11 +291,16 @@
         }
     }
 
-    private sealed record UiState(string? Theme, string? TextSize, bool Aurebesh);
+    private sealed record UiState(string? Theme, string? TextSize, bool Aurebesh, string? DarkMode, bool SystemDark);
 
-    private Task OnSystemDarkModeChanged(bool newValue)
+    [JSInvokable]
+    public Task OnSystemDarkModeChangedJs(bool systemIsDark)
     {
-        _isDarkMode = newValue;
+        // Only honour OS-level theme changes when the user has asked to follow
+        // the system. Explicit Light/Dark choices must survive any noise the
+        // browser emits on prefers-color-scheme.
+        if (_darkModePreference != "system") return Task.CompletedTask;
+        _isDarkMode = systemIsDark;
         return InvokeAsync(StateHasChanged);
     }
 
@@ -287,22 +337,55 @@
         };
     }
 
-    public void Dispose() => Layout.OnChange -= StateHasChanged;
+    public void Dispose()
+    {
+        Layout.OnChange -= StateHasChanged;
+        if (_darkModeWatcherRegistered)
+        {
+            try
+            {
+                _ = JS.InvokeVoidAsync("swUnregisterDarkModeWatcher");
+            }
+            catch { }
+        }
+        _dotNetRef?.Dispose();
+    }
 
     private void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
     }
 
-    private void DarkModeToggle()
+    private async Task SetDarkMode(string mode)
     {
-        _isDarkMode = !_isDarkMode;
+        _darkModePreference = mode;
+        if (mode == "system")
+        {
+            try
+            {
+                _isDarkMode = await JS.InvokeAsync<bool>("swGetSystemDarkMode");
+            }
+            catch (JSDisconnectedException) { }
+        }
+        else
+        {
+            _isDarkMode = mode == "dark";
+        }
+
+        try
+        {
+            await JS.InvokeVoidAsync("swSetDarkMode", mode);
+        }
+        catch (JSDisconnectedException) { }
+
+        StateHasChanged();
     }
 
-    public string DarkLightModeButtonIcon => _isDarkMode switch
+    public string DarkLightModeButtonIcon => _darkModePreference switch
     {
-        true => Icons.Material.Rounded.AutoMode,
-        false => Icons.Material.Outlined.DarkMode,
+        "light" => Icons.Material.Outlined.LightMode,
+        "dark" => Icons.Material.Outlined.DarkMode,
+        _ => Icons.Material.Rounded.AutoMode,
     };
 
 }
