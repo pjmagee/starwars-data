@@ -246,8 +246,17 @@
                     <MudIconButton Icon="@Icons.Material.Filled.ArrowBack" Size="Size.Small"
                                    Color="Color.Primary" OnClick="GoBack" />
                 }
-                <MudBreadcrumbs Items="_breadcrumbs" MaxItems="3"
-                                Style="padding:0;color:rgba(255,255,255,0.7);font-size:13px;" />
+                <MudTooltip Text="Back to galaxy overview">
+                    <MudIconButton Icon="@Icons.Material.Filled.Explore" Size="Size.Small"
+                                   OnClick="GoToOverview"
+                                   Disabled="@(_currentLevel == "overview")"
+                                   Style="color:rgba(255,255,255,0.7);" />
+                </MudTooltip>
+                @if (_breadcrumbs.Count > 1)
+                {
+                    <MudBreadcrumbs Items="_breadcrumbs.Skip(1).ToList()" MaxItems="3"
+                                    Style="padding:0;color:rgba(255,255,255,0.7);font-size:13px;" />
+                }
                 <MudSpacer />
                 <MudToggleGroup T="string" Value="_mode" ValueChanged="OnModeChanged" Size="Size.Small">
                     <MudToggleItem Value="@("explore")" Text="Explore" />
@@ -1229,6 +1238,7 @@
     // ══════════ EXPLORE: Navigation ══════════
 
     async Task GoBack() { if (_module is not null) await _module.InvokeVoidAsync("goBack"); }
+    async Task GoToOverview() { if (_module is not null) await _module.InvokeVoidAsync("goToOverview"); }
 
     void UpdateBreadcrumbs()
     {

@@ -1471,6 +1471,13 @@ export function goBack() {
     if (_state && _state.goBack) _state.goBack();
 }
 
+export function goToOverview() {
+    if (_state && _state.goBack) {
+        // goBack repeatedly until we're at overview
+        while (_state.getCurrentLevel() !== 'overview') _state.goBack();
+    }
+}
+
 export function navigateToCell(col, row) {
     if (!_state) return;
     const level = _state.getCurrentLevel();
