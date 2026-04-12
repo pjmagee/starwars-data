@@ -278,33 +278,25 @@
         <div class="galaxy-nav-panel @(_panelOpen ? "panel-open" : "")">
             <MudPaper Elevation="8" Class="pa-3" Style="background:rgba(15,15,35,0.93);backdrop-filter:blur(10px);min-width:0;">
                 <MudStack Row="false" Spacing="1">
-                    @* Keep MudTextField mounted across mode toggles — disposing+remounting races
-                       MudInput's first-render JS interop (DotNetObjectReference serialized after dispose).
-                       ErrorBoundary prevents the circuit from dying when navigating away and back
-                       triggers MudInput's OnAfterRenderAsync with a disposed DotNetObjectReference. *@
+                    @* Defer MudTextField until the component is mounted to avoid the
+                       MudInput DotNetObjectReference dispose/remount race on navigation.
+                       Keep mounted across mode toggles via CSS d-none (not conditional removal). *@
                     @{ var exploreSearchClass = _mode == "explore" ? null : "d-none"; }
                     <div class="@exploreSearchClass">
-                        <ErrorBoundary @ref="_searchErrorBoundary">
-                            <ChildContent>
-                                <MudTextField @bind-Value="_searchTerm"
-                                              Placeholder="@(_semanticSearch ? "e.g. planets destroyed during the Clone Wars" : "Search planets, systems, people...")"
-                                              Variant="Variant.Outlined" Adornment="Adornment.Start"
-                                              AdornmentIcon="@(_semanticSearch ? Icons.Material.Filled.AutoAwesome : Icons.Material.Filled.Search)"
-                                              Immediate="true" DebounceInterval="@(_semanticSearch ? 1000 : 600)"
-                                              OnDebounceIntervalElapsed="OnSearchChanged"
-                                              Clearable="true" OnClearButtonClick="ClearSearch" Margin="Margin.Dense"
-                                              Style="color:#e0e0f0;" />
-                                <MudSwitch Value="_semanticSearch" Color="Color.Tertiary" Size="Size.Small"
-                                           Label="AI Semantic Search" Style="color:rgba(255,255,255,0.5);margin:0;"
-                                           ValueChanged="OnSemanticToggle" T="bool" />
-                            </ChildContent>
-                            <ErrorContent>
-                                <MudAlert Severity="Severity.Warning" Dense="true" Class="my-1"
-                                          CloseIconClicked="() => _searchErrorBoundary?.Recover()">
-                                    Search temporarily unavailable — click to retry
-                                </MudAlert>
-                            </ErrorContent>
-                        </ErrorBoundary>
+                        @if (_mounted)
+                        {
+                            <MudTextField @bind-Value="_searchTerm"
+                                          Placeholder="@(_semanticSearch ? "e.g. planets destroyed during the Clone Wars" : "Search planets, systems, people...")"
+                                          Variant="Variant.Outlined" Adornment="Adornment.Start"
+                                          AdornmentIcon="@(_semanticSearch ? Icons.Material.Filled.AutoAwesome : Icons.Material.Filled.Search)"
+                                          Immediate="true" DebounceInterval="@(_semanticSearch ? 1000 : 600)"
+                                          OnDebounceIntervalElapsed="OnSearchChanged"
+                                          Clearable="true" OnClearButtonClick="ClearSearch" Margin="Margin.Dense"
+                                          Style="color:#e0e0f0;" />
+                            <MudSwitch Value="_semanticSearch" Color="Color.Tertiary" Size="Size.Small"
+                                       Label="AI Semantic Search" Style="color:rgba(255,255,255,0.5);margin:0;"
+                                       ValueChanged="OnSemanticToggle" T="bool" />
+                        }
                     </div>
 
                     <MudExpansionPanels Dense="true" Elevation="0"
@@ -383,10 +375,13 @@
                                     </MudStack>
                                 </TitleContent>
                                 <ChildContent>
-                                    <MudTextField @bind-Value="_sectorSearch" Placeholder="Filter sectors..."
-                                                  Variant="Variant.Outlined" Margin="Margin.Dense"
-                                                  Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
-                                                  Immediate="true" Style="color:#e0e0f0;margin-bottom:6px;" />
+                                    @if (_mounted)
+                                    {
+                                        <MudTextField @bind-Value="_sectorSearch" Placeholder="Filter sectors..."
+                                                      Variant="Variant.Outlined" Margin="Margin.Dense"
+                                                      Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                                                      Immediate="true" Style="color:#e0e0f0;margin-bottom:6px;" />
+                                    }
                                     <MudStack Row="true" Spacing="1" Class="flex-wrap" Style="max-height:200px;overflow-y:auto;">
                                         @foreach (var sec in FilteredSectors)
                                         {
@@ -922,7 +917,7 @@
 @code {
     IJSObjectReference? _module;
     DotNetObjectReference<GalaxyMapUnified>? _dotNetRef;
-    ErrorBoundary? _searchErrorBoundary;
+    bool _mounted;
 
     // Data
     GalaxyOverviewDocument? _overview;
@@ -1088,6 +1083,12 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        if (firstRender && !_mounted)
+        {
+            _mounted = true;
+            StateHasChanged();
+        }
+
         if (!_d3Initialized && _geography is not null)
         {
             _d3Initialized = true;
