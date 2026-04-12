@@ -15,13 +15,10 @@
 </HeadContent>
 
 <style>
-    /* Prevent scrolling and ensure dark background covers the entire layout behind the map */
+    /* Galaxy map needs edge-to-edge layout — remove MudMainContent padding and prevent scroll */
     .mud-main-content:has(.galaxy-map-container) {
         overflow: hidden;
-        background: #0a0a1a;
-    }
-    .mud-layout:has(.galaxy-map-container),
-    .mud-drawer-container:has(.galaxy-map-container) {
+        padding: 0 !important;
         background: #0a0a1a;
     }
     .galaxy-map-container {
