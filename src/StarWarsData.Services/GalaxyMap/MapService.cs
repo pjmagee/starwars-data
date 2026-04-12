@@ -635,6 +635,7 @@ public class MapService
                     {
                         Id = trNode.PageId,
                         Name = GetDisplayName(trNode),
+                        Continuity = trNode.Continuity.ToString(),
                         Waypoints = waypoints,
                     }
                 );

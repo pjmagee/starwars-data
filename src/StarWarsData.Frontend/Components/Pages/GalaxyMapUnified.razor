@@ -31,13 +31,13 @@
         height: 100vh;
     }
     .galaxy-nav-panel {
-        position: absolute; top: 12px; left: 12px; z-index: 110;
-        width: 360px; max-height: calc(100% - 24px);
+        position: absolute; top: 60px; left: 12px; z-index: 110;
+        width: 360px; max-height: calc(100% - 72px);
         display: flex; flex-direction: column;
     }
     .galaxy-detail-panel {
-        position: absolute; top: 12px; right: 12px; width: 420px;
-        max-height: calc(100% - 24px); overflow-y: auto; z-index: 100;
+        position: absolute; top: 60px; right: 12px; width: 420px;
+        max-height: calc(100% - 72px); overflow-y: auto; z-index: 100;
     }
     .galaxy-detail-panel::-webkit-scrollbar, .search-results-list::-webkit-scrollbar {
         width: 6px;
@@ -132,6 +132,95 @@
     .event-detail-panel .drag-handle {
         cursor: move; user-select: none;
     }
+
+    /* ══════════ TOP BAR (floating breadcrumbs + controls) ══════════ */
+    .galaxy-top-bar {
+        position: absolute; top: 12px; left: 12px; right: 12px; z-index: 120;
+        pointer-events: none;
+    }
+    .galaxy-top-bar > * {
+        pointer-events: auto;
+    }
+
+    /* Panel toggle — always visible */
+    .galaxy-panel-toggle {
+        display: inline-flex !important;
+    }
+
+    /* Backdrop scrim when panel is open (tablet/mobile only) */
+    .galaxy-panel-backdrop {
+        display: none; position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.45); z-index: 105; cursor: pointer;
+    }
+
+    /* Panel slide transitions */
+    .galaxy-nav-panel, .galaxy-detail-panel {
+        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+    }
+    .galaxy-nav-panel:not(.panel-open) {
+        transform: translateX(calc(-100% - 24px));
+        opacity: 0;
+        pointer-events: none;
+    }
+    .galaxy-detail-panel:not(.panel-open) {
+        transform: translateX(calc(100% + 24px));
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* ══════════ TABLET (up to 1280px) ══════════ */
+    @@media (max-width: 1279.95px) {
+        .galaxy-panel-backdrop.panel-open {
+            display: block;
+        }
+        .galaxy-nav-panel {
+            width: 320px;
+            max-height: calc(100% - 72px);
+        }
+        .galaxy-detail-panel {
+            width: 340px;
+        }
+    }
+
+    /* ══════════ SMALL TABLET / LARGE PHONE (up to 960px) ══════════ */
+    @@media (max-width: 959.95px) {
+        .galaxy-nav-panel {
+            width: calc(100vw - 24px);
+            max-width: 340px;
+        }
+        .galaxy-detail-panel {
+            width: calc(100vw - 24px);
+            max-width: 380px;
+        }
+    }
+
+    /* ══════════ PHONE (up to 600px) ══════════ */
+    @@media (max-width: 599.95px) {
+        .galaxy-top-bar {
+            left: 8px;
+            right: 8px;
+            top: 8px;
+        }
+        .galaxy-nav-panel {
+            left: 8px;
+            top: 56px;
+            width: calc(100vw - 16px);
+            max-width: none;
+        }
+        .galaxy-detail-panel {
+            left: 8px;
+            right: 8px;
+            width: auto;
+            max-width: none;
+            top: auto;
+            bottom: 8px;
+            max-height: 50vh;
+        }
+        .galaxy-timeline-bar {
+            padding: 4px 8px 6px;
+        }
+    }
 </style>
 
 <div class="galaxy-map-container @(Layout.IsFullscreen ? "fullscreen" : "")" id="galaxy-map-root"
@@ -143,37 +232,52 @@
         </div>
     }
 
+    @* ══════════ FLOATING TOP BAR ══════════ *@
+    @if (_geography is not null)
+    {
+        <div class="galaxy-top-bar">
+            <MudPaper Elevation="4" Class="pa-1 px-2 d-flex align-center gap-1 flex-grow-1"
+                      Style="background:rgba(15,15,35,0.93);backdrop-filter:blur(10px);border-radius:8px;">
+                <MudIconButton Icon="@(_panelOpen ? Icons.Material.Filled.Close : Icons.Material.Filled.Tune)"
+                               Size="Size.Small" OnClick="TogglePanel" Class="galaxy-panel-toggle"
+                               title="@(_panelOpen ? "Close panel" : "Open controls")"
+                               Style="color:rgba(255,255,255,0.8);" />
+                @if (_currentLevel != "overview")
+                {
+                    <MudIconButton Icon="@Icons.Material.Filled.ArrowBack" Size="Size.Small"
+                                   Color="Color.Primary" OnClick="GoBack" />
+                }
+                <MudBreadcrumbs Items="_breadcrumbs" MaxItems="3"
+                                Style="padding:0;color:rgba(255,255,255,0.7);font-size:13px;" />
+                <MudSpacer />
+                <MudToggleGroup T="string" Value="_mode" ValueChanged="OnModeChanged" Size="Size.Small">
+                    <MudToggleItem Value="@("explore")" Text="Explore" />
+                    <MudToggleItem Value="@("timeline")" Text="Timeline" />
+                </MudToggleGroup>
+                <MudTooltip Text="@(_detailPanelOpen ? "Hide details" : "Show details")">
+                    <MudIconButton Icon="@(_detailPanelOpen ? Icons.Material.Filled.Info : Icons.Material.Outlined.Info)"
+                                   Size="Size.Small" OnClick="ToggleDetailPanel"
+                                   Style="color:rgba(255,255,255,0.8);" />
+                </MudTooltip>
+                <MudTooltip Text="@(Layout.IsFullscreen ? "Exit fullscreen" : "Fullscreen")">
+                    <MudIconButton Icon="@(Layout.IsFullscreen ? Icons.Material.Filled.FullscreenExit : Icons.Material.Filled.Fullscreen)"
+                                   Size="Size.Small" Color="Color.Inherit" OnClick="ToggleFullscreen"
+                                   Style="color:rgba(255,255,255,0.8);" />
+                </MudTooltip>
+            </MudPaper>
+        </div>
+
+        @* Panel backdrop scrim (tablet/mobile only via CSS) *@
+        <div class="galaxy-panel-backdrop @(_panelOpen ? "panel-open" : "")"
+             @onclick="@(() => { _panelOpen = false; })"></div>
+    }
+
     @* ══════════ LEFT NAV PANEL ══════════ *@
     @if (_geography is not null)
     {
-        <div class="galaxy-nav-panel">
-            <MudPaper Elevation="8" Class="pa-3" Style="background:rgba(15,15,35,0.93);backdrop-filter:blur(10px);min-width:300px;">
+        <div class="galaxy-nav-panel @(_panelOpen ? "panel-open" : "")">
+            <MudPaper Elevation="8" Class="pa-3" Style="background:rgba(15,15,35,0.93);backdrop-filter:blur(10px);min-width:0;">
                 <MudStack Row="false" Spacing="1">
-                    <!-- Mode toggle + fullscreen -->
-                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
-                    <MudToggleGroup T="string" Value="_mode" ValueChanged="OnModeChanged" Size="Size.Small">
-                        <MudToggleItem Value="@("explore")" Text="Explore" />
-                        <MudToggleItem Value="@("timeline")" Text="Timeline" />
-                    </MudToggleGroup>
-                    <MudTooltip Text="@(Layout.IsFullscreen ? "Exit fullscreen" : "Fullscreen")">
-                        <MudIconButton Icon="@(Layout.IsFullscreen ? Icons.Material.Filled.FullscreenExit : Icons.Material.Filled.Fullscreen)"
-                                       Size="Size.Medium" Color="Color.Inherit" OnClick="ToggleFullscreen"
-                                       Style="color:rgba(255,255,255,0.8);" />
-                    </MudTooltip>
-                    </MudStack>
-
-                    <!-- Breadcrumbs -->
-                    <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
-                        @if (_currentLevel != "overview")
-                        {
-                            <MudIconButton Icon="@Icons.Material.Filled.ArrowBack" Size="Size.Medium"
-                                           Color="Color.Primary" OnClick="GoBack"
-                                           Style="margin-right:4px;" />
-                        }
-                        <MudBreadcrumbs Items="_breadcrumbs" MaxItems="3"
-                                        Style="padding:0;color:rgba(255,255,255,0.7);" />
-                    </MudStack>
-
                     @* Keep MudTextField mounted across mode toggles — disposing+remounting races
                        MudInput's first-render JS interop (DotNetObjectReference serialized after dispose). *@
                     @{ var exploreSearchClass = _mode == "explore" ? null : "d-none"; }
@@ -200,9 +304,12 @@
                                 <MudSwitch Value="_showBackground" Color="Color.Default" Size="Size.Small"
                                            Label="Background" Style="color:rgba(255,255,255,0.5);margin:0;"
                                            ValueChanged="OnToggleBackground" T="bool" />
-                                <MudSwitch Value="_showTradeRoutes" Color="Color.Warning" Size="Size.Small"
-                                           Label="Routes" Style="color:rgba(255,255,255,0.5);margin:0;"
-                                           ValueChanged="OnToggleTradeRoutes" T="bool" />
+                                <MudSwitch Value="_showCanonRoutes" Color="Color.Primary" Size="Size.Small"
+                                           Label="Canon Routes" Style="color:rgba(255,255,255,0.5);margin:0;"
+                                           ValueChanged="OnToggleCanonRoutes" T="bool" />
+                                <MudSwitch Value="_showLegendsRoutes" Color="Color.Secondary" Size="Size.Small"
+                                           Label="Legends Routes" Style="color:rgba(255,255,255,0.5);margin:0;"
+                                           ValueChanged="OnToggleLegendsRoutes" T="bool" />
                                 <MudSwitch Value="_showNebulae" Color="Color.Info" Size="Size.Small"
                                            Label="Nebulae" Style="color:rgba(255,255,255,0.5);margin:0;"
                                            ValueChanged="OnToggleNebulae" T="bool" />
@@ -399,7 +506,7 @@
         @* Region hover *@
         @if (_hoveredRegionName is not null && _detailPage is null && _selectedSystem is null)
         {
-            <div class="galaxy-detail-panel">
+            <div class="galaxy-detail-panel @(_detailPanelOpen ? "panel-open" : "")">
                 <MudPaper Elevation="12" Class="pa-3" Style="background:rgba(15,15,35,0.92);backdrop-filter:blur(12px);">
                     <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
                         <div style="width:12px;height:12px;border-radius:50%;background:@_hoveredRegionColor;"></div>
@@ -416,7 +523,7 @@
         @* Entity detail (system, route, body) *@
         @if (_detailPage is not null || _selectedSystem is not null)
         {
-            <div class="galaxy-detail-panel">
+            <div class="galaxy-detail-panel @(_detailPanelOpen ? "panel-open" : "")">
                 <MudPaper Elevation="12" Class="pa-0" Style="background:rgba(15,15,35,0.92);backdrop-filter:blur(12px);">
                     <div style="display:flex;justify-content:flex-end;padding:4px 4px 0 0;">
                         <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small" OnClick="ClearDetailPanel" />
@@ -509,7 +616,7 @@
     else if (_mode == "timeline" && _yearData is not null)
     {
         @* Timeline info panel (right) *@
-        <div class="galaxy-detail-panel" id="galaxy-map-panel">
+        <div class="galaxy-detail-panel @(_detailPanelOpen ? "panel-open" : "")" id="galaxy-map-panel">
             <MudPaper Elevation="12" Class="pa-3" Style="background:rgba(15,15,35,0.92);backdrop-filter:blur(12px);">
                 <MudText Typo="Typo.h5" Style="color:rgba(255,255,255,0.9);">@_yearData.YearDisplay</MudText>
                 @if (_yearData.Era is not null)
@@ -816,6 +923,11 @@
     // Mode
     string _mode = "explore";
     string _selectedLens = "All";
+    bool _panelOpen = true;
+    bool _detailPanelOpen = true;
+
+    void TogglePanel() => _panelOpen = !_panelOpen;
+    void ToggleDetailPanel() => _detailPanelOpen = !_detailPanelOpen;
 
     // Explore state
     GeoSystem? _selectedSystem;
@@ -831,7 +943,8 @@
     bool _searchLoading;
     string? _searchError;
     bool _showBackground = true;
-    bool _showTradeRoutes = true;
+    bool _showCanonRoutes = true;
+    bool _showLegendsRoutes = true;
     bool _showNebulae = true;
     readonly HashSet<string> _hiddenRegions = new();
     string? _sectorSearch;
@@ -967,7 +1080,7 @@
             _d3Initialized = true;
             _dotNetRef?.Dispose();
             _dotNetRef = DotNetObjectReference.Create(this);
-            _module = await JS.InvokeAsync<IJSObjectReference>("import", "./js/galaxy-map-unified.js?v=5");
+            _module = await JS.InvokeAsync<IJSObjectReference>("import", "./js/galaxy-map-unified.js");
             await _module.InvokeVoidAsync("initialize", "galaxy-map-root", _geography, _dotNetRef);
             await _module.InvokeVoidAsync("setupPanelHoverListeners", "galaxy-map-panel");
             await _module.InvokeVoidAsync("setupSearchResultHover");
@@ -1167,10 +1280,16 @@
         if (_module is not null) await _module.InvokeVoidAsync("toggleBackground", value);
     }
 
-    async Task OnToggleTradeRoutes(bool value)
+    async Task OnToggleCanonRoutes(bool value)
     {
-        _showTradeRoutes = value;
-        if (_module is not null) await _module.InvokeVoidAsync("toggleTradeRoutes", value);
+        _showCanonRoutes = value;
+        if (_module is not null) await _module.InvokeVoidAsync("toggleTradeRoutesByContinuity", "canon", value);
+    }
+
+    async Task OnToggleLegendsRoutes(bool value)
+    {
+        _showLegendsRoutes = value;
+        if (_module is not null) await _module.InvokeVoidAsync("toggleTradeRoutesByContinuity", "legends", value);
     }
 
     async Task OnToggleNebulae(bool value)
