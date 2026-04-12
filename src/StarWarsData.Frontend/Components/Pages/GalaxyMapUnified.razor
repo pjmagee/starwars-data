@@ -279,20 +279,32 @@
             <MudPaper Elevation="8" Class="pa-3" Style="background:rgba(15,15,35,0.93);backdrop-filter:blur(10px);min-width:0;">
                 <MudStack Row="false" Spacing="1">
                     @* Keep MudTextField mounted across mode toggles — disposing+remounting races
-                       MudInput's first-render JS interop (DotNetObjectReference serialized after dispose). *@
+                       MudInput's first-render JS interop (DotNetObjectReference serialized after dispose).
+                       ErrorBoundary prevents the circuit from dying when navigating away and back
+                       triggers MudInput's OnAfterRenderAsync with a disposed DotNetObjectReference. *@
                     @{ var exploreSearchClass = _mode == "explore" ? null : "d-none"; }
                     <div class="@exploreSearchClass">
-                        <MudTextField @bind-Value="_searchTerm"
-                                      Placeholder="@(_semanticSearch ? "e.g. planets destroyed during the Clone Wars" : "Search planets, systems, people...")"
-                                      Variant="Variant.Outlined" Adornment="Adornment.Start"
-                                      AdornmentIcon="@(_semanticSearch ? Icons.Material.Filled.AutoAwesome : Icons.Material.Filled.Search)"
-                                      Immediate="true" DebounceInterval="@(_semanticSearch ? 1000 : 600)"
-                                      OnDebounceIntervalElapsed="OnSearchChanged"
-                                      Clearable="true" OnClearButtonClick="ClearSearch" Margin="Margin.Dense"
-                                      Style="color:#e0e0f0;" />
-                        <MudSwitch Value="_semanticSearch" Color="Color.Tertiary" Size="Size.Small"
-                                   Label="AI Semantic Search" Style="color:rgba(255,255,255,0.5);margin:0;"
-                                   ValueChanged="OnSemanticToggle" T="bool" />
+                        <ErrorBoundary @ref="_searchErrorBoundary">
+                            <ChildContent>
+                                <MudTextField @bind-Value="_searchTerm"
+                                              Placeholder="@(_semanticSearch ? "e.g. planets destroyed during the Clone Wars" : "Search planets, systems, people...")"
+                                              Variant="Variant.Outlined" Adornment="Adornment.Start"
+                                              AdornmentIcon="@(_semanticSearch ? Icons.Material.Filled.AutoAwesome : Icons.Material.Filled.Search)"
+                                              Immediate="true" DebounceInterval="@(_semanticSearch ? 1000 : 600)"
+                                              OnDebounceIntervalElapsed="OnSearchChanged"
+                                              Clearable="true" OnClearButtonClick="ClearSearch" Margin="Margin.Dense"
+                                              Style="color:#e0e0f0;" />
+                                <MudSwitch Value="_semanticSearch" Color="Color.Tertiary" Size="Size.Small"
+                                           Label="AI Semantic Search" Style="color:rgba(255,255,255,0.5);margin:0;"
+                                           ValueChanged="OnSemanticToggle" T="bool" />
+                            </ChildContent>
+                            <ErrorContent>
+                                <MudAlert Severity="Severity.Warning" Dense="true" Class="my-1"
+                                          CloseIconClicked="() => _searchErrorBoundary?.Recover()">
+                                    Search temporarily unavailable — click to retry
+                                </MudAlert>
+                            </ErrorContent>
+                        </ErrorBoundary>
                     </div>
 
                     <MudExpansionPanels Dense="true" Elevation="0"
@@ -910,6 +922,7 @@
 @code {
     IJSObjectReference? _module;
     DotNetObjectReference<GalaxyMapUnified>? _dotNetRef;
+    ErrorBoundary? _searchErrorBoundary;
 
     // Data
     GalaxyOverviewDocument? _overview;
@@ -1078,14 +1091,19 @@
         if (!_d3Initialized && _geography is not null)
         {
             _d3Initialized = true;
-            _dotNetRef?.Dispose();
-            _dotNetRef = DotNetObjectReference.Create(this);
-            _module = await JS.InvokeAsync<IJSObjectReference>("import", "./js/galaxy-map-unified.js");
-            await _module.InvokeVoidAsync("initialize", "galaxy-map-root", _geography, _dotNetRef);
-            await _module.InvokeVoidAsync("setupPanelHoverListeners", "galaxy-map-panel");
-            await _module.InvokeVoidAsync("setupSearchResultHover");
-            if (_onlyWithBodies)
-                await _module.InvokeVoidAsync("setSystemFilter", true);
+            try
+            {
+                _dotNetRef?.Dispose();
+                _dotNetRef = DotNetObjectReference.Create(this);
+                _module = await JS.InvokeAsync<IJSObjectReference>("import", "./js/galaxy-map-unified.js");
+                await _module.InvokeVoidAsync("initialize", "galaxy-map-root", _geography, _dotNetRef);
+                await _module.InvokeVoidAsync("setupPanelHoverListeners", "galaxy-map-panel");
+                await _module.InvokeVoidAsync("setupSearchResultHover");
+                if (_onlyWithBodies)
+                    await _module.InvokeVoidAsync("setSystemFilter", true);
+            }
+            catch (ObjectDisposedException) { _d3Initialized = false; }
+            catch (JSDisconnectedException) { }
         }
     }
 
