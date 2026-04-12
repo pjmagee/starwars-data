@@ -269,8 +269,9 @@ export function initialize(containerId, overview, dotNetRef) {
         .curve(d3.curveCatmullRom.alpha(0.5));
     overview.tradeRoutes.forEach(route => {
         if (route.waypoints.length < 2) return;
+        const cont = (route.continuity || '').toLowerCase();
         const rg = routeLayer.append('g')
-            .attr('class', 'trade-route-group')
+            .attr('class', `trade-route-group${cont ? ` route-${cont}` : ''}`)
             .style('cursor', 'pointer')
             .datum(route);
 
@@ -1729,6 +1730,11 @@ export function toggleBackground(visible) {
 export function toggleTradeRoutes(visible) {
     if (!_state) return;
     _state.svg.select('.layer-routes').style('display', visible ? null : 'none');
+}
+
+export function toggleTradeRoutesByContinuity(continuity, visible) {
+    if (!_state) return;
+    _state.svg.selectAll(`.route-${continuity}`).style('display', visible ? null : 'none');
 }
 
 export function toggleNebulae(visible) {

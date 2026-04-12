@@ -86,6 +86,7 @@ public class GeoTradeRoute
 {
     public int Id { get; set; }
     public string Name { get; set; } = "";
+    public string? Continuity { get; set; }
     public List<GeoWaypoint> Waypoints { get; set; } = [];
 }
 
