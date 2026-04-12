@@ -116,8 +116,9 @@ export function initialize(containerId, overview, rawDotNetRef) {
 
     const svg = d3.select(container)
         .append('svg')
-        .attr('width', width)
-        .attr('height', height)
+        .style('width', '100%')
+        .style('height', '100%')
+        .style('display', 'block')
         .style('background', '#0a0a1a');
 
     const defs = svg.append('defs');

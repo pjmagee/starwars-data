@@ -15,10 +15,12 @@
 </HeadContent>
 
 <style>
-    /* Galaxy map needs edge-to-edge layout — remove MudMainContent padding and prevent scroll */
+    /* Galaxy map needs edge-to-edge layout — remove side/bottom padding but keep top for AppBar */
     .mud-main-content:has(.galaxy-map-container) {
         overflow: hidden;
-        padding: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        padding-bottom: 0 !important;
         background: #0a0a1a;
     }
     .galaxy-map-container {
