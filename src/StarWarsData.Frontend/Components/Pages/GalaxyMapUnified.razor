@@ -1,5 +1,4 @@
 @page "/galaxy-map"
-@rendermode InteractiveServer
 @using Microsoft.JSInterop
 @using WikiPage = StarWarsData.Models.Entities.Page
 @using StarWarsData.Models.Entities
@@ -16,9 +15,13 @@
 </HeadContent>
 
 <style>
-    /* Prevent the parent MudMainContent from scrolling to the footer on re-render */
+    /* Galaxy map needs edge-to-edge layout — remove side/bottom padding but keep top for AppBar */
     .mud-main-content:has(.galaxy-map-container) {
         overflow: hidden;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        padding-bottom: 0 !important;
+        background: #0a0a1a;
     }
     .galaxy-map-container {
         position: relative;
@@ -247,8 +250,17 @@
                     <MudIconButton Icon="@Icons.Material.Filled.ArrowBack" Size="Size.Small"
                                    Color="Color.Primary" OnClick="GoBack" />
                 }
-                <MudBreadcrumbs Items="_breadcrumbs" MaxItems="3"
-                                Style="padding:0;color:rgba(255,255,255,0.7);font-size:13px;" />
+                <MudTooltip Text="Back to galaxy overview">
+                    <MudIconButton Icon="@Icons.Material.Filled.Explore" Size="Size.Small"
+                                   OnClick="GoToOverview"
+                                   Disabled="@(_currentLevel == "overview")"
+                                   Style="color:rgba(255,255,255,0.7);" />
+                </MudTooltip>
+                @if (_breadcrumbs.Count > 1)
+                {
+                    <MudBreadcrumbs Items="_breadcrumbs.Skip(1).ToList()" MaxItems="3"
+                                    Style="padding:0;color:rgba(255,255,255,0.7);font-size:13px;" />
+                }
                 <MudSpacer />
                 <MudToggleGroup T="string" Value="_mode" ValueChanged="OnModeChanged" Size="Size.Small">
                     <MudToggleItem Value="@("explore")" Text="Explore" />
@@ -278,21 +290,25 @@
         <div class="galaxy-nav-panel @(_panelOpen ? "panel-open" : "")">
             <MudPaper Elevation="8" Class="pa-3" Style="background:rgba(15,15,35,0.93);backdrop-filter:blur(10px);min-width:0;">
                 <MudStack Row="false" Spacing="1">
-                    @* Keep MudTextField mounted across mode toggles — disposing+remounting races
-                       MudInput's first-render JS interop (DotNetObjectReference serialized after dispose). *@
+                    @* Defer MudTextField until the component is mounted to avoid the
+                       MudInput DotNetObjectReference dispose/remount race on navigation.
+                       Keep mounted across mode toggles via CSS d-none (not conditional removal). *@
                     @{ var exploreSearchClass = _mode == "explore" ? null : "d-none"; }
                     <div class="@exploreSearchClass">
-                        <MudTextField @bind-Value="_searchTerm"
-                                      Placeholder="@(_semanticSearch ? "e.g. planets destroyed during the Clone Wars" : "Search planets, systems, people...")"
-                                      Variant="Variant.Outlined" Adornment="Adornment.Start"
-                                      AdornmentIcon="@(_semanticSearch ? Icons.Material.Filled.AutoAwesome : Icons.Material.Filled.Search)"
-                                      Immediate="true" DebounceInterval="@(_semanticSearch ? 1000 : 600)"
-                                      OnDebounceIntervalElapsed="OnSearchChanged"
-                                      Clearable="true" OnClearButtonClick="ClearSearch" Margin="Margin.Dense"
-                                      Style="color:#e0e0f0;" />
-                        <MudSwitch Value="_semanticSearch" Color="Color.Tertiary" Size="Size.Small"
-                                   Label="AI Semantic Search" Style="color:rgba(255,255,255,0.5);margin:0;"
-                                   ValueChanged="OnSemanticToggle" T="bool" />
+                        @if (_mounted)
+                        {
+                            <MudTextField @bind-Value="_searchTerm"
+                                          Placeholder="@(_semanticSearch ? "e.g. planets destroyed during the Clone Wars" : "Search planets, systems, people...")"
+                                          Variant="Variant.Outlined" Adornment="Adornment.Start"
+                                          AdornmentIcon="@(_semanticSearch ? Icons.Material.Filled.AutoAwesome : Icons.Material.Filled.Search)"
+                                          Immediate="true" DebounceInterval="@(_semanticSearch ? 1000 : 600)"
+                                          OnDebounceIntervalElapsed="OnSearchChanged"
+                                          Clearable="true" OnClearButtonClick="ClearSearch" Margin="Margin.Dense"
+                                          Style="color:#e0e0f0;" />
+                            <MudSwitch Value="_semanticSearch" Color="Color.Tertiary" Size="Size.Small"
+                                       Label="AI Semantic Search" Style="color:rgba(255,255,255,0.5);margin:0;"
+                                       ValueChanged="OnSemanticToggle" T="bool" />
+                        }
                     </div>
 
                     <MudExpansionPanels Dense="true" Elevation="0"
@@ -371,10 +387,13 @@
                                     </MudStack>
                                 </TitleContent>
                                 <ChildContent>
-                                    <MudTextField @bind-Value="_sectorSearch" Placeholder="Filter sectors..."
-                                                  Variant="Variant.Outlined" Margin="Margin.Dense"
-                                                  Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
-                                                  Immediate="true" Style="color:#e0e0f0;margin-bottom:6px;" />
+                                    @if (_mounted)
+                                    {
+                                        <MudTextField @bind-Value="_sectorSearch" Placeholder="Filter sectors..."
+                                                      Variant="Variant.Outlined" Margin="Margin.Dense"
+                                                      Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                                                      Immediate="true" Style="color:#e0e0f0;margin-bottom:6px;" />
+                                    }
                                     <MudStack Row="true" Spacing="1" Class="flex-wrap" Style="max-height:200px;overflow-y:auto;">
                                         @foreach (var sec in FilteredSectors)
                                         {
@@ -910,6 +929,7 @@
 @code {
     IJSObjectReference? _module;
     DotNetObjectReference<GalaxyMapUnified>? _dotNetRef;
+    bool _mounted;
 
     // Data
     GalaxyOverviewDocument? _overview;
@@ -937,7 +957,7 @@
     string _cellLabel = "";
     string _regionLabel = "";
     string _sectorLabel = "";
-    List<MudBlazor.BreadcrumbItem> _breadcrumbs = [new("", null, disabled: false, icon: Icons.Material.Filled.Explore)];
+    List<MudBlazor.BreadcrumbItem> _breadcrumbs = [new("", null, disabled: true, icon: Icons.Material.Filled.Explore)];
     bool _onlyWithBodies = true;
     bool _semanticSearch;
     bool _searchLoading;
@@ -1075,17 +1095,28 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        if (firstRender && !_mounted)
+        {
+            _mounted = true;
+            StateHasChanged();
+        }
+
         if (!_d3Initialized && _geography is not null)
         {
             _d3Initialized = true;
-            _dotNetRef?.Dispose();
-            _dotNetRef = DotNetObjectReference.Create(this);
-            _module = await JS.InvokeAsync<IJSObjectReference>("import", "./js/galaxy-map-unified.js");
-            await _module.InvokeVoidAsync("initialize", "galaxy-map-root", _geography, _dotNetRef);
-            await _module.InvokeVoidAsync("setupPanelHoverListeners", "galaxy-map-panel");
-            await _module.InvokeVoidAsync("setupSearchResultHover");
-            if (_onlyWithBodies)
-                await _module.InvokeVoidAsync("setSystemFilter", true);
+            try
+            {
+                _dotNetRef?.Dispose();
+                _dotNetRef = DotNetObjectReference.Create(this);
+                _module = await JS.InvokeAsync<IJSObjectReference>("import", "./js/galaxy-map-unified.js");
+                await _module.InvokeVoidAsync("initialize", "galaxy-map-root", _geography, _dotNetRef);
+                await _module.InvokeVoidAsync("setupPanelHoverListeners", "galaxy-map-panel");
+                await _module.InvokeVoidAsync("setupSearchResultHover");
+                if (_onlyWithBodies)
+                    await _module.InvokeVoidAsync("setSystemFilter", true);
+            }
+            catch (ObjectDisposedException) { _d3Initialized = false; }
+            catch (JSDisconnectedException) { }
         }
     }
 
@@ -1211,16 +1242,17 @@
     // ══════════ EXPLORE: Navigation ══════════
 
     async Task GoBack() { if (_module is not null) await _module.InvokeVoidAsync("goBack"); }
+    async Task GoToOverview() { if (_module is not null) await _module.InvokeVoidAsync("goToOverview"); }
 
     void UpdateBreadcrumbs()
     {
-        _breadcrumbs = [new("", null, disabled: _currentLevel == "overview", icon: Icons.Material.Filled.Explore)];
+        _breadcrumbs = [new("", null, disabled: true, icon: Icons.Material.Filled.Explore)];
         if (!string.IsNullOrEmpty(_regionLabel))
-            _breadcrumbs.Add(new(_regionLabel, null, disabled: _currentLevel is not "region", icon: Icons.Material.Filled.Map));
+            _breadcrumbs.Add(new(_regionLabel, null, disabled: true, icon: Icons.Material.Filled.Map));
         if (!string.IsNullOrEmpty(_cellLabel))
-            _breadcrumbs.Add(new($"Grid {_cellLabel}", null, disabled: _currentLevel is not "cell", icon: Icons.Material.Filled.GridOn));
+            _breadcrumbs.Add(new($"Grid {_cellLabel}", null, disabled: true, icon: Icons.Material.Filled.GridOn));
         if (!string.IsNullOrEmpty(_sectorLabel))
-            _breadcrumbs.Add(new(_sectorLabel, null, disabled: _currentLevel is not "sector", icon: Icons.Material.Filled.Grain));
+            _breadcrumbs.Add(new(_sectorLabel, null, disabled: true, icon: Icons.Material.Filled.Grain));
         if (_currentLevel == "system")
             _breadcrumbs.Add(new(_currentLabel, null, disabled: true, icon: Icons.Material.Filled.Star));
     }

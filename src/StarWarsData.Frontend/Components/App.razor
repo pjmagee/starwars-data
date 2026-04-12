@@ -222,7 +222,17 @@
         </script>
     </head>
     <body>
-        <Routes @rendermode="InteractiveServerNoPrerender" />
+        @* ErrorBoundary catches MudBlazor MudInput ObjectDisposedException that occurs
+           when navigating between pages — MudInput.OnAfterRenderAsync races with disposal
+           of DotNetObjectReference during Blazor's component teardown/remount cycle. *@
+        <ErrorBoundary @ref="_routeErrorBoundary">
+            <ChildContent>
+                <Routes @rendermode="InteractiveServerNoPrerender" />
+            </ChildContent>
+            <ErrorContent>
+                <Routes @rendermode="InteractiveServerNoPrerender" />
+            </ErrorContent>
+        </ErrorBoundary>
         <script src="_framework/blazor.web.js"></script>
         <script src=@Assets["_content/MudBlazor/MudBlazor.min.js"]></script>
         <script src=@Assets["_content/MudBlazor.Markdown/MudBlazor.Markdown.min.js"]></script>
@@ -233,4 +243,12 @@
 
 @code {
     private static readonly InteractiveServerRenderMode InteractiveServerNoPrerender = new(prerender: false);
+    private ErrorBoundary? _routeErrorBoundary;
+
+    protected override void OnParametersSet()
+    {
+        // Auto-recover from MudBlazor MudInput dispose race — the ErrorBoundary
+        // catches the ObjectDisposedException and re-renders Routes immediately.
+        _routeErrorBoundary?.Recover();
+    }
 }

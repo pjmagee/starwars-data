@@ -65,8 +65,8 @@
                         @foreach (var example in FilteredExamples)
                         {
                             var prompt = example;
-                            <MudItem xs="12" sm="6" md="4">
-                                <MudPaper Outlined="true" Class="pa-3 cursor-pointer mud-clickable" @onclick="() => UseExample(prompt)">
+                            <MudItem xs="12" sm="6" md="4" Class="d-flex">
+                                <MudPaper Outlined="true" Class="pa-3 cursor-pointer mud-clickable flex-grow-1" @onclick="() => UseExample(prompt)">
                                     <MudText Typo="Typo.body2">@prompt</MudText>
                                 </MudPaper>
                             </MudItem>

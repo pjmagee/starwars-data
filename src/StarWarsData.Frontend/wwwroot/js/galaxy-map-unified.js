@@ -80,7 +80,18 @@ const BG_URL = '/galaxy.png';
 
 let _state = null;
 
-export function initialize(containerId, overview, dotNetRef) {
+/** Wrap a DotNetObjectReference so invokeMethodAsync silently no-ops after circuit disconnect. */
+function guardRef(ref) {
+    return {
+        invokeMethodAsync(...args) {
+            try { return ref.invokeMethodAsync(...args); }
+            catch { return Promise.resolve(); }
+        }
+    };
+}
+
+export function initialize(containerId, overview, rawDotNetRef) {
+    const dotNetRef = guardRef(rawDotNetRef);
     const container = document.getElementById(containerId);
     if (!container) return;
     container.querySelectorAll(':scope > svg, :scope > .galaxy-tooltip').forEach(el => el.remove());
@@ -105,8 +116,9 @@ export function initialize(containerId, overview, dotNetRef) {
 
     const svg = d3.select(container)
         .append('svg')
-        .attr('width', width)
-        .attr('height', height)
+        .style('width', '100%')
+        .style('height', '100%')
+        .style('display', 'block')
         .style('background', '#0a0a1a');
 
     const defs = svg.append('defs');
@@ -1458,6 +1470,13 @@ function getPlanetColor(cls) {
 
 export function goBack() {
     if (_state && _state.goBack) _state.goBack();
+}
+
+export function goToOverview() {
+    if (_state && _state.goBack) {
+        // goBack repeatedly until we're at overview
+        while (_state.getCurrentLevel() !== 'overview') _state.goBack();
+    }
 }
 
 export function navigateToCell(col, row) {
