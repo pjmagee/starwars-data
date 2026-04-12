@@ -80,7 +80,18 @@ const BG_URL = '/galaxy.png';
 
 let _state = null;
 
-export function initialize(containerId, overview, dotNetRef) {
+/** Wrap a DotNetObjectReference so invokeMethodAsync silently no-ops after circuit disconnect. */
+function guardRef(ref) {
+    return {
+        invokeMethodAsync(...args) {
+            try { return ref.invokeMethodAsync(...args); }
+            catch { return Promise.resolve(); }
+        }
+    };
+}
+
+export function initialize(containerId, overview, rawDotNetRef) {
+    const dotNetRef = guardRef(rawDotNetRef);
     const container = document.getElementById(containerId);
     if (!container) return;
     container.querySelectorAll(':scope > svg, :scope > .galaxy-tooltip').forEach(el => el.remove());
