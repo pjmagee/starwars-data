@@ -15,9 +15,13 @@
 </HeadContent>
 
 <style>
-    /* Prevent the parent MudMainContent from scrolling and hide white background bleed */
+    /* Prevent scrolling and ensure dark background covers the entire layout behind the map */
     .mud-main-content:has(.galaxy-map-container) {
         overflow: hidden;
+        background: #0a0a1a;
+    }
+    .mud-layout:has(.galaxy-map-container),
+    .mud-drawer-container:has(.galaxy-map-container) {
         background: #0a0a1a;
     }
     .galaxy-map-container {
