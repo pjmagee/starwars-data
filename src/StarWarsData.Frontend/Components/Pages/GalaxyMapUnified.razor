@@ -953,7 +953,7 @@
     string _cellLabel = "";
     string _regionLabel = "";
     string _sectorLabel = "";
-    List<MudBlazor.BreadcrumbItem> _breadcrumbs = [new("", null, disabled: false, icon: Icons.Material.Filled.Explore)];
+    List<MudBlazor.BreadcrumbItem> _breadcrumbs = [new("", null, disabled: true, icon: Icons.Material.Filled.Explore)];
     bool _onlyWithBodies = true;
     bool _semanticSearch;
     bool _searchLoading;
@@ -1242,13 +1242,13 @@
 
     void UpdateBreadcrumbs()
     {
-        _breadcrumbs = [new("", null, disabled: _currentLevel == "overview", icon: Icons.Material.Filled.Explore)];
+        _breadcrumbs = [new("", null, disabled: true, icon: Icons.Material.Filled.Explore)];
         if (!string.IsNullOrEmpty(_regionLabel))
-            _breadcrumbs.Add(new(_regionLabel, null, disabled: _currentLevel is not "region", icon: Icons.Material.Filled.Map));
+            _breadcrumbs.Add(new(_regionLabel, null, disabled: true, icon: Icons.Material.Filled.Map));
         if (!string.IsNullOrEmpty(_cellLabel))
-            _breadcrumbs.Add(new($"Grid {_cellLabel}", null, disabled: _currentLevel is not "cell", icon: Icons.Material.Filled.GridOn));
+            _breadcrumbs.Add(new($"Grid {_cellLabel}", null, disabled: true, icon: Icons.Material.Filled.GridOn));
         if (!string.IsNullOrEmpty(_sectorLabel))
-            _breadcrumbs.Add(new(_sectorLabel, null, disabled: _currentLevel is not "sector", icon: Icons.Material.Filled.Grain));
+            _breadcrumbs.Add(new(_sectorLabel, null, disabled: true, icon: Icons.Material.Filled.Grain));
         if (_currentLevel == "system")
             _breadcrumbs.Add(new(_currentLabel, null, disabled: true, icon: Icons.Material.Filled.Star));
     }
