@@ -50,15 +50,15 @@
         </MudAlert>
     }
 
-    @* ── Collapsible filters ── *@
-    @if (!_filtersCollapsed)
-    {
-        @* Keep the era filter mounted at all times — MudSelect contains MudInput whose
-           first-render JS interop races with disposal when toggled via @if (see
-           feedback_razor_gotchas.md). Hide via CSS instead. *@
-        var eraPanelHidden = _eras is null || CurrentCalendar != Calendar.Galactic;
+    @* Era filter MUST stay mounted at all times — it contains MudSelects whose internal
+       MudInput first-render JS interop races with disposal (see feedback_razor_gotchas.md).
+       Toggle visibility with CSS, not @if. Hidden when filters collapsed, on the real-world
+       calendar, or before eras have loaded. *@
+    @{
+        var eraPanelHidden = _filtersCollapsed || _eras is null || CurrentCalendar != Calendar.Galactic;
         var eraPanelClass = eraPanelHidden ? "pa-2 d-none" : "pa-2";
-        <MudPaper Elevation="0" Class="@eraPanelClass">
+    }
+    <MudPaper Elevation="0" Class="@eraPanelClass">
             <MudText Typo="Typo.subtitle2" Class="mb-2">Filter by Era</MudText>
 
             @* ── Range picker: sets a contiguous chip selection in one step ── *@
@@ -96,8 +96,11 @@
                     <MudChip Value="@era.Name" Color="Color.Primary" T="string">@label</MudChip>
                 }
             </MudChipSet>
-        </MudPaper>
+    </MudPaper>
 
+    @* ── Category filter + load button (safe to @if — no MudInputs here) ── *@
+    @if (!_filtersCollapsed)
+    {
         @if (ShowCategoryFilter && _categories is not null)
         {
             <MudPaper Elevation="0" Class="pa-2">
