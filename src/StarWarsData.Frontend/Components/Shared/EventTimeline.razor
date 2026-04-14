@@ -53,19 +53,50 @@
     @* ── Collapsible filters ── *@
     @if (!_filtersCollapsed)
     {
-        @if (_eras is not null && CurrentCalendar == Calendar.Galactic)
-        {
-            <MudPaper Elevation="0" Class="pa-2">
-                <MudText Typo="Typo.subtitle2" Class="mb-2">Filter by Era</MudText>
-                <MudChipSet T="string" @bind-SelectedValues="_selectedEraNames" SelectionMode="SelectionMode.MultiSelection" CheckMark="true" Variant="Variant.Text">
-                    @foreach (var era in _eras)
+        @* Keep the era filter mounted at all times — MudSelect contains MudInput whose
+           first-render JS interop races with disposal when toggled via @if (see
+           feedback_razor_gotchas.md). Hide via CSS instead. *@
+        var eraPanelHidden = _eras is null || CurrentCalendar != Calendar.Galactic;
+        var eraPanelClass = eraPanelHidden ? "pa-2 d-none" : "pa-2";
+        <MudPaper Elevation="0" Class="@eraPanelClass">
+            <MudText Typo="Typo.subtitle2" Class="mb-2">Filter by Era</MudText>
+
+            @* ── Range picker: sets a contiguous chip selection in one step ── *@
+            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-3" Wrap="Wrap.Wrap">
+                <MudSelect T="string" Value="_fromEraName" ValueChanged="OnFromEraChanged"
+                           Label="From era" Dense="true" Margin="Margin.Dense"
+                           Variant="Variant.Outlined" Clearable="true" Style="min-width: 220px;">
+                    @foreach (var era in OrderedEras())
                     {
-                        var label = $"{era.Name} ({FormatYear(era.StartYear, era.StartDemarcation)}–{FormatYear(era.EndYear, era.EndDemarcation)})";
-                        <MudChip Value="@era.Name" Color="Color.Primary" T="string">@label</MudChip>
+                        <MudSelectItem T="string" Value="@era.Name">@era.Name</MudSelectItem>
                     }
-                </MudChipSet>
-            </MudPaper>
-        }
+                </MudSelect>
+                <MudIcon Icon="@Icons.Material.Filled.ArrowForward" Size="Size.Small" Color="Color.Secondary" />
+                <MudSelect T="string" Value="_toEraName" ValueChanged="OnToEraChanged"
+                           Label="To era" Dense="true" Margin="Margin.Dense"
+                           Variant="Variant.Outlined" Clearable="true" Style="min-width: 220px;">
+                    @foreach (var era in OrderedEras())
+                    {
+                        <MudSelectItem T="string" Value="@era.Name">@era.Name</MudSelectItem>
+                    }
+                </MudSelect>
+                <MudButton Size="Size.Small" Variant="Variant.Text" OnClick="ClearEraSelection"
+                           Disabled="@(!_selectedEraNames.Any())">Clear</MudButton>
+                @if (_selectedEraNames.Any() && !IsContiguousSelection())
+                {
+                    <MudChip T="string" Size="Size.Small" Color="Color.Secondary" Variant="Variant.Text">Custom</MudChip>
+                }
+            </MudStack>
+
+            <MudChipSet T="string" SelectedValues="_selectedEraNames" SelectedValuesChanged="OnEraChipsChanged"
+                        SelectionMode="SelectionMode.MultiSelection" CheckMark="true" Variant="Variant.Text">
+                @foreach (var era in _eras ?? [])
+                {
+                    var label = $"{era.Name} ({FormatYear(era.StartYear, era.StartDemarcation)}–{FormatYear(era.EndYear, era.EndDemarcation)})";
+                    <MudChip Value="@era.Name" Color="Color.Primary" T="string">@label</MudChip>
+                }
+            </MudChipSet>
+        </MudPaper>
 
         @if (ShowCategoryFilter && _categories is not null)
         {
@@ -259,6 +290,8 @@
 
     private IReadOnlyCollection<string> _selectedCategories = new List<string>();
     private IReadOnlyCollection<string> _selectedEraNames = new List<string>();
+    private string? _fromEraName;
+    private string? _toEraName;
     private Dictionary<string, string> _templateColorMap = new(StringComparer.OrdinalIgnoreCase);
 
     private int _pages = 1;
@@ -282,6 +315,15 @@
 
     [Parameter] public string? Category { get; set; }
     [Parameter] public bool ShowCategoryFilter { get; set; } = true;
+
+    // ── Anchor ceiling (Design-014 Phase 2) ──
+    // When set, all timeline queries are clamped to this range even if the era filter
+    // would otherwise span wider. Era From/To + chips still work, but only inside the
+    // ceiling. Supplied by the /timeline/{nodeId} page.
+    [Parameter] public float? AnchorYearFrom { get; set; }
+    [Parameter] public Demarcation? AnchorFromDemarcation { get; set; }
+    [Parameter] public float? AnchorYearTo { get; set; }
+    [Parameter] public Demarcation? AnchorToDemarcation { get; set; }
 
     /// <summary>
     /// When set, locks this component to a specific calendar (Galactic or Real) regardless
@@ -422,6 +464,9 @@
             {
                 var visibleEras = new HashSet<string>(_eras.Select(e => e.Name));
                 _selectedEraNames = _selectedEraNames.Where(n => visibleEras.Contains(n)).ToList();
+                if (_fromEraName is not null && !visibleEras.Contains(_fromEraName)) _fromEraName = null;
+                if (_toEraName is not null && !visibleEras.Contains(_toEraName)) _toEraName = null;
+                SyncFromToFromChips();
             }
 
             if (_selectedCategories.Any())
@@ -470,12 +515,21 @@
         catch { }
     }
 
+    private float? _lastAnchorFrom;
+    private float? _lastAnchorTo;
+
     protected override async Task OnParametersSetAsync()
     {
         if (!_templateColorMap.Any())
             await InitializeColorMapping();
 
+        var anchorChanged = AnchorYearFrom != _lastAnchorFrom || AnchorYearTo != _lastAnchorTo;
+        _lastAnchorFrom = AnchorYearFrom;
+        _lastAnchorTo = AnchorYearTo;
+
         if (!string.IsNullOrEmpty(Category))
+            await LoadInitialData();
+        else if (anchorChanged && _selectedCategories.Any())
             await LoadInitialData();
     }
 
@@ -572,7 +626,7 @@
 
         AddGlobalFilters(q);
 
-        var (yearFrom, fromDem, yearTo, toDem) = GetEraYearRange();
+        var (yearFrom, fromDem, yearTo, toDem) = GetEffectiveYearRange();
         if (yearFrom.HasValue && fromDem.HasValue && yearTo.HasValue && toDem.HasValue)
         {
             q.Add("YearFrom", yearFrom.Value.ToString());
@@ -620,6 +674,130 @@
     }
 
     static double ToLinear(float year, Demarcation dem) => dem == Demarcation.Bby ? -year : year;
+
+    // Intersects the era-derived range with the anchor ceiling. Anchor alone if no
+    // eras selected; eras alone if no anchor; intersection when both are present.
+    private (float? yearFrom, Demarcation? fromDem, float? yearTo, Demarcation? toDem) GetEffectiveYearRange()
+    {
+        var (eraFrom, eraFromDem, eraTo, eraToDem) = GetEraYearRange();
+        var anchorSet = AnchorYearFrom.HasValue && AnchorFromDemarcation.HasValue && AnchorYearTo.HasValue && AnchorToDemarcation.HasValue;
+
+        if (!anchorSet) return (eraFrom, eraFromDem, eraTo, eraToDem);
+
+        var aFromLin = ToLinear(AnchorYearFrom!.Value, AnchorFromDemarcation!.Value);
+        var aToLin = ToLinear(AnchorYearTo!.Value, AnchorToDemarcation!.Value);
+        if (aFromLin > aToLin) (aFromLin, aToLin) = (aToLin, aFromLin);
+
+        if (eraFrom is null) return (AnchorYearFrom, AnchorFromDemarcation, AnchorYearTo, AnchorToDemarcation);
+
+        var eFromLin = ToLinear(eraFrom.Value, eraFromDem!.Value);
+        var eToLin = ToLinear(eraTo!.Value, eraToDem!.Value);
+        if (eFromLin > eToLin) (eFromLin, eToLin) = (eToLin, eFromLin);
+
+        var fromLin = Math.Max(aFromLin, eFromLin);
+        var toLin = Math.Min(aToLin, eToLin);
+
+        static (float year, Demarcation dem) FromLinear(double lin) =>
+            lin < 0 ? ((float)(-lin), Demarcation.Bby) : ((float)lin, Demarcation.Aby);
+
+        var (fy, fd) = FromLinear(fromLin);
+        var (ty, td) = FromLinear(toLin);
+        return (fy, fd, ty, td);
+    }
+
+    private IEnumerable<Era> OrderedEras() =>
+        _eras is null ? [] : _eras.OrderBy(e => ToLinear(e.StartYear, e.StartDemarcation));
+
+    private void OnFromEraChanged(string? value)
+    {
+        _fromEraName = value;
+        ApplyFromToRange();
+    }
+
+    private void OnToEraChanged(string? value)
+    {
+        _toEraName = value;
+        ApplyFromToRange();
+    }
+
+    private void ApplyFromToRange()
+    {
+        if (_eras is null) return;
+
+        var ordered = OrderedEras().ToList();
+
+        if (_fromEraName is null && _toEraName is null)
+        {
+            _selectedEraNames = new List<string>();
+            return;
+        }
+
+        var fromIdx = _fromEraName is null ? 0 : ordered.FindIndex(e => e.Name == _fromEraName);
+        var toIdx = _toEraName is null ? ordered.Count - 1 : ordered.FindIndex(e => e.Name == _toEraName);
+
+        if (fromIdx < 0 || toIdx < 0) return;
+        if (fromIdx > toIdx) (fromIdx, toIdx) = (toIdx, fromIdx);
+
+        _selectedEraNames = ordered.GetRange(fromIdx, toIdx - fromIdx + 1).Select(e => e.Name).ToList();
+    }
+
+    private void OnEraChipsChanged(IReadOnlyCollection<string> selected)
+    {
+        _selectedEraNames = selected;
+        SyncFromToFromChips();
+    }
+
+    // If the chip selection is a contiguous run, reflect its endpoints in From/To.
+    // Otherwise blank them out — the "Custom" pill surfaces that state in the UI.
+    private void SyncFromToFromChips()
+    {
+        if (_eras is null || _selectedEraNames.Count == 0)
+        {
+            _fromEraName = null;
+            _toEraName = null;
+            return;
+        }
+
+        var ordered = OrderedEras().ToList();
+        var selectedIdx = ordered
+            .Select((e, i) => (e, i))
+            .Where(t => _selectedEraNames.Contains(t.e.Name))
+            .Select(t => t.i)
+            .OrderBy(i => i)
+            .ToList();
+
+        var contiguous = selectedIdx.Count == selectedIdx[^1] - selectedIdx[0] + 1;
+        if (contiguous)
+        {
+            _fromEraName = ordered[selectedIdx[0]].Name;
+            _toEraName = ordered[selectedIdx[^1]].Name;
+        }
+        else
+        {
+            _fromEraName = null;
+            _toEraName = null;
+        }
+    }
+
+    private bool IsContiguousSelection()
+    {
+        if (_eras is null || _selectedEraNames.Count == 0) return true;
+        var ordered = OrderedEras().ToList();
+        var idx = ordered
+            .Select((e, i) => (e, i))
+            .Where(t => _selectedEraNames.Contains(t.e.Name))
+            .Select(t => t.i)
+            .OrderBy(i => i)
+            .ToList();
+        return idx.Count == idx[^1] - idx[0] + 1;
+    }
+
+    private void ClearEraSelection()
+    {
+        _fromEraName = null;
+        _toEraName = null;
+        _selectedEraNames = new List<string>();
+    }
 
     private void AddGlobalFilters(System.Collections.Specialized.NameValueCollection query)
     {

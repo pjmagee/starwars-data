@@ -1,0 +1,139 @@
+@page "/timeline/{NodeId:int}"
+@using StarWarsData.Models.Queries
+@using StarWarsData.Frontend.Services
+@inject IHttpClientFactory HttpClientFactory
+@inject NavigationManager Navigation
+
+<PageTitle>@(_anchor is null ? "Timeline" : $"Timeline during {_anchor.Name}") — Star Wars Data</PageTitle>
+<HeadContent>
+    <meta name="description" content="Timeline of Star Wars events during a specific entity's lifecycle — filtered to events within its lifespan." />
+</HeadContent>
+
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-4 px-4">
+
+    @if (_loading)
+    {
+        <MudProgressLinear Indeterminate="true" Color="Color.Primary" Class="my-4" />
+    }
+    else if (_notFound)
+    {
+        <MudAlert Severity="Severity.Warning" Class="my-4">
+            This node has no temporal lifecycle data — there's no anchored timeline to show.
+            <MudLink Href="/timeline" Class="ml-2">Back to full timeline</MudLink>
+        </MudAlert>
+    }
+    else if (_anchor is not null)
+    {
+        @* ── Header: back-link + title + range ── *@
+        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-2">
+            <MudIconButton Icon="@Icons.Material.Filled.ArrowBack" Size="Size.Small"
+                           Href="@($"/knowledge-graph?focus={NodeId}")" Color="Color.Default" />
+            <MudText Typo="Typo.h5">Timeline during @_anchor.Name</MudText>
+            @if (_anchor.WikiUrl is not null)
+            {
+                <MudTooltip Text="Open on Wookieepedia">
+                    <MudIconButton Icon="@Icons.Material.Filled.OpenInNew" Size="Size.Small"
+                                   Href="@_anchor.WikiUrl" Target="_blank" Color="Color.Primary" />
+                </MudTooltip>
+            }
+            <MudTooltip Text="View in Graph Explorer">
+                <MudIconButton Icon="@Icons.Material.Filled.Hub" Size="Size.Small"
+                               Href="@($"/graph-explorer/{NodeId}")" Color="Color.Secondary" />
+            </MudTooltip>
+        </MudStack>
+
+        @if (_selectedDimension is not null)
+        {
+            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-4" Wrap="Wrap.Wrap">
+                @if (_anchor.Dimensions.Count > 1)
+                {
+                    <MudChipSet T="string" SelectedValue="_selectedDimension.Key" SelectedValueChanged="OnDimensionChanged"
+                                SelectionMode="SelectionMode.SingleSelection" CheckMark="false" Variant="Variant.Filled">
+                        @foreach (var d in _anchor.Dimensions)
+                        {
+                            <MudChip Value="@d.Key" T="string" Color="Color.Primary">@d.Label</MudChip>
+                        }
+                    </MudChipSet>
+                }
+                else
+                {
+                    <MudChip T="string" Color="Color.Primary" Variant="Variant.Filled" Size="Size.Small">
+                        @_selectedDimension.Label
+                    </MudChip>
+                }
+                <MudText Typo="Typo.body2" Color="Color.Secondary">
+                    @FormatYear(_selectedDimension.YearFrom, _selectedDimension.FromDemarcation) –
+                    @FormatYear(_selectedDimension.YearTo, _selectedDimension.ToDemarcation)
+                    · @_anchor.Continuity
+                </MudText>
+            </MudStack>
+
+            <EventTimeline @key="_selectedDimension.Key"
+                           ShowCategoryFilter="true"
+                           CalendarMode="Calendar.Galactic"
+                           AnchorYearFrom="_selectedDimension.YearFrom"
+                           AnchorFromDemarcation="_selectedDimension.FromDemarcation"
+                           AnchorYearTo="_selectedDimension.YearTo"
+                           AnchorToDemarcation="_selectedDimension.ToDemarcation" />
+        }
+    }
+
+</MudContainer>
+
+@code {
+    [Parameter] public int NodeId { get; set; }
+
+    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+    private NodeAnchor? _anchor;
+    private NodeAnchorDimension? _selectedDimension;
+    private bool _loading = true;
+    private bool _notFound;
+    private int _lastLoadedNodeId = -1;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (NodeId == _lastLoadedNodeId) return;
+        _lastLoadedNodeId = NodeId;
+        await LoadAnchor();
+    }
+
+    private async Task LoadAnchor()
+    {
+        _loading = true;
+        _notFound = false;
+        _anchor = null;
+        _selectedDimension = null;
+
+        try
+        {
+            var resp = await Http.GetAsync($"Timeline/anchor/{NodeId}");
+            if (resp.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                _notFound = true;
+                return;
+            }
+            resp.EnsureSuccessStatusCode();
+            _anchor = await resp.Content.ReadFromJsonAsync<NodeAnchor>();
+            _selectedDimension = _anchor?.Dimensions.FirstOrDefault(d => d.Key == _anchor.DefaultDimension)
+                                 ?? _anchor?.Dimensions.FirstOrDefault();
+            if (_anchor is null || _selectedDimension is null) _notFound = true;
+        }
+        catch
+        {
+            _notFound = true;
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+
+    private void OnDimensionChanged(string? key)
+    {
+        if (_anchor is null || key is null) return;
+        var next = _anchor.Dimensions.FirstOrDefault(d => d.Key == key);
+        if (next is not null) _selectedDimension = next;
+    }
+
+    private static string FormatYear(int year, Demarcation dem) => $"{year} {dem.ToString().ToUpper()}";
+}

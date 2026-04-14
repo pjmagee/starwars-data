@@ -429,4 +429,80 @@ public class TimelineService
 
         return new BsonDocumentFilterDefinition<TimelineEvent>(expr);
     }
+
+    /// <summary>
+    /// Look up a knowledge-graph node's temporal anchor for the /timeline/{nodeId} route.
+    /// Returns null when the node has no usable range (StartYear/EndYear both null).
+    /// See Design-014 Phase 2.
+    /// </summary>
+    public async Task<NodeAnchor?> GetNodeAnchorAsync(int nodeId, CancellationToken ct = default)
+    {
+        var nodes = _timelineEventsDb.GetCollection<GraphNode>(Collections.KgNodes);
+        var node = await nodes.Find(n => n.PageId == nodeId).FirstOrDefaultAsync(ct);
+        if (node is null)
+            return null;
+
+        var dimensions = BuildAnchorDimensions(node);
+        if (dimensions.Count == 0)
+            return null;
+
+        return new NodeAnchor
+        {
+            Id = node.PageId,
+            Name = node.Name,
+            Type = node.Type,
+            Continuity = node.Continuity,
+            ImageUrl = node.ImageUrl,
+            WikiUrl = node.WikiUrl,
+            Dimensions = dimensions,
+            DefaultDimension = dimensions[0].Key,
+        };
+    }
+
+    /// <summary>
+    /// v1: emits a single "default" dimension from node.StartYear/EndYear, labelled per node type.
+    /// If only one of the two is known (e.g. government with "Founded" but no "Dissolved"),
+    /// the missing bound falls back to the other — yielding a single-year window rather than
+    /// a 404. Data-extraction gaps are common in the infobox ETL; surfacing the node is
+    /// more useful than hiding it. Multi-dimension breakdown is Phase 2.1 — see Design-014.
+    /// </summary>
+    static List<NodeAnchorDimension> BuildAnchorDimensions(GraphNode node)
+    {
+        if (node.StartYear is null && node.EndYear is null)
+            return [];
+
+        var fromYear = node.StartYear ?? node.EndYear!.Value;
+        var toYear = node.EndYear ?? node.StartYear!.Value;
+
+        var fromAbs = Math.Abs(fromYear);
+        var fromDem = fromYear < 0 ? Demarcation.Bby : Demarcation.Aby;
+        var toAbs = Math.Abs(toYear);
+        var toDem = toYear < 0 ? Demarcation.Bby : Demarcation.Aby;
+
+        return
+        [
+            new NodeAnchorDimension
+            {
+                Key = "default",
+                Label = LabelForType(node.Type),
+                YearFrom = fromAbs,
+                YearTo = toAbs,
+                FromDemarcation = fromDem,
+                ToDemarcation = toDem,
+                FromText = node.StartDateText,
+                ToText = node.EndDateText,
+            },
+        ];
+    }
+
+    static string LabelForType(string type) =>
+        type switch
+        {
+            "Conflict" or "Battle" or "War" or "Campaign" or "Mission" => "Hostilities",
+            "Government" or "Polity" or "Empire" => "Reign",
+            "Organization" or "Organisation" or "Company" => "Active period",
+            "Character" => "Lifetime",
+            "Treaty" or "Law" or "Election" => "In effect",
+            _ => "Lifecycle",
+        };
 }

@@ -68,4 +68,15 @@ public class TimelineController : ControllerBase
     {
         return await _timelineService.GetTimelineCategories();
     }
+
+    /// <summary>
+    /// Resolves a knowledge-graph node's temporal anchor for the /timeline/{nodeId} page.
+    /// 404 when the node has no usable lifecycle range. See Design-014 Phase 2.
+    /// </summary>
+    [HttpGet("anchor/{nodeId:int}")]
+    public async Task<ActionResult<NodeAnchor>> GetNodeAnchor(int nodeId, CancellationToken ct = default)
+    {
+        var anchor = await _timelineService.GetNodeAnchorAsync(nodeId, ct);
+        return anchor is null ? NotFound() : Ok(anchor);
+    }
 }

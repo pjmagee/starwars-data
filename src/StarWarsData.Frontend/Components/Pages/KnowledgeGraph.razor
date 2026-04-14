@@ -234,6 +234,13 @@
                                             <MudIconButton Icon="@Icons.Material.Filled.Hub" Size="Size.Small"
                                                            Href="@($"/graph-explorer/{context.Id}")" Color="Color.Secondary" />
                                         </MudTooltip>
+                                        @if (context.StartYear.HasValue || context.EndYear.HasValue)
+                                        {
+                                            <MudTooltip Text="@($"View timeline during {context.Name}")">
+                                                <MudIconButton Icon="@Icons.Material.Filled.Timeline" Size="Size.Small"
+                                                               Href="@($"/timeline/{context.Id}")" Color="Color.Tertiary" />
+                                            </MudTooltip>
+                                        }
                                     </MudStack>
 
                                     @* ── Temporal Facets ── *@
