@@ -80,11 +80,15 @@ const BG_URL = '/galaxy.png';
 
 let _state = null;
 
-/** Wrap a DotNetObjectReference so invokeMethodAsync silently no-ops after circuit disconnect. */
+/** Wrap a DotNetObjectReference so invokeMethodAsync silently no-ops after circuit disconnect.
+    Must swallow both synchronous throws (ObjectDisposedException at the JS-interop boundary)
+    AND asynchronous rejections (SignalR "Cannot send data if the connection is not in the
+    'Connected' State" once the circuit drops). The original implementation only caught the
+    sync path, leaving hover/drag handlers spewing unhandled rejections after disconnect. */
 function guardRef(ref) {
     return {
         invokeMethodAsync(...args) {
-            try { return ref.invokeMethodAsync(...args); }
+            try { return Promise.resolve(ref.invokeMethodAsync(...args)).catch(() => undefined); }
             catch { return Promise.resolve(); }
         }
     };
