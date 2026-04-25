@@ -87,8 +87,22 @@ On the deploy host, set `KEYCLOAK_ADMIN_SECRET` in the shell, then `docker compo
 
 This workflow targets **Aspire 13.2** (current as of 2026-04-25). The `aspire publish` / `aspire do prepare-<env>` / `aspire deploy` commands are all marked **Preview** in the CLI help. Behavior may shift in future versions — always check `aspire <command> --help` before relying on a flag, and use `mcp__aspire__search_docs` / `get_doc` to verify against current Aspire docs.
 
+## CI publishing pipeline
+
+[.github/workflows/deploy.yml](../../.github/workflows/deploy.yml) (the `Build & Publish` workflow) runs on every push to `main`:
+
+1. Builds the solution + runs the unit-test tier.
+2. `aspire do push` — builds and pushes container images to `ghcr.io/pjmagee/starwars-data` (versioned via GitVersion semVer + a `latest` tag).
+3. `aspire publish -e Production` — emits `docker-compose.yaml` + an **unfilled** `.env.Production` template into `./aspire-output/`. **No secrets are passed to this step**, by design: the public-repo artifact is downloadable by any logged-in GitHub user, so the workflow must never produce a filled env file. A subsequent grep guard fails the build if the artifact ever contains text matching an OpenAI key or a populated `Parameters__mongo_password=…`, in case Aspire's `publish` contract changes.
+4. Uploads the `release` artifact (compose + template) and pushes a `vX.Y.Z` git tag.
+
+The deploy host is responsible for materializing real values into `.env.Production` from its own secret store before `docker compose --env-file .env.Production up -d`.
+
+### History — never use `prepare-starwars` in CI
+
+The workflow originally ran `aspire do prepare-starwars -e Production` with `Parameters__openapi`, `Parameters__mongo_user`, and `Parameters__mongo_password` injected from GitHub Actions secrets. This produced a **filled** `.env.Production` (containing the live OpenAI key and Mongo credentials) and uploaded it as the `release` artifact. Because the repository is public and Actions artifacts inherit the workflow run's audience, those credentials were downloadable by any authenticated GitHub user for the artifact's 30-day retention window. The secrets were rotated; the workflow now uses `publish` (template only). Do not reintroduce `prepare-starwars` or `deploy` in any CI step that produces an uploaded artifact.
+
 ## Out of scope / not done
 
-- **CI publishing pipeline.** The repo does not yet have a GitHub Actions workflow that runs `aspire publish` and pushes images to ghcr.io. The `AddContainerRegistry("ghcr", "ghcr.io", "pjmagee/starwars-data")` wiring + `CONTAINER_IMAGE_TAG` env var are in place for it; the workflow itself is a future task.
-- **`aspire deploy` end-to-end.** Tested only through `prepare-starwars`. The full `deploy` path that calls `docker compose up` against the deploy host hasn't been exercised from this machine.
+- **`aspire deploy` end-to-end.** Tested only through `prepare-starwars` locally. The full `deploy` path that calls `docker compose up` against the deploy host hasn't been exercised from this machine.
 - **Per-environment user-secrets.** All operators today share one user-secrets store on the dev machine. If multiple environments need different secrets locally, the right pattern is per-environment `appsettings.{Environment}.json` files in the AppHost project (which Aspire respects via `-e <env>`), not multiple user-secret stores.
