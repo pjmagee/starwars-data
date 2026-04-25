@@ -37,7 +37,7 @@ public class GalaxyMapUnifiedController(GalaxyMapReadService readService, MapSer
     /// When both are omitted the full set is returned.
     /// </summary>
     [HttpGet("years")]
-    [ResponseCache(Duration = 300)]
+    [ResponseCache(Duration = 300, VaryByQueryKeys = ["from", "to"])]
     public async Task<ActionResult<List<GalaxyYearDocument>>> GetYears([FromQuery] int? from = null, [FromQuery] int? to = null, CancellationToken ct = default)
     {
         var fromYear = from ?? int.MinValue;
@@ -81,7 +81,7 @@ public class GalaxyMapUnifiedController(GalaxyMapReadService readService, MapSer
 
     /// <summary>Systems within a viewport bounding box, lazy-loaded as the user pans/zooms.</summary>
     [HttpGet("systems")]
-    [ResponseCache(Duration = 120, VaryByQueryKeys = ["continuity"])]
+    [ResponseCache(Duration = 120, VaryByQueryKeys = ["continuity", "minCol", "maxCol", "minRow", "maxRow"])]
     public async Task<ActionResult<GalaxyGeographySystems>> GetSystems(
         [FromQuery] int minCol,
         [FromQuery] int maxCol,

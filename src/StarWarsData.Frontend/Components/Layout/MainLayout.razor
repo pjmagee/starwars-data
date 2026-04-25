@@ -25,6 +25,11 @@
         <MudImage Src="img/galaxy-logo.svg" Alt="Star Wars Data" Width="32" Height="32" Class="ml-2" />
         @* Title hidden below lg (< 1280px) — at md (960–1279) the AppBar is too cramped once filters are in. *@
         <MudText Typo="Typo.h5" Class="ml-2 d-none d-lg-flex">Star Wars Data</MudText>
+        <MudTooltip Text="This site is in active development. If you see an issue, please report it on GitHub.">
+            <MudChip T="string" Size="Size.Small" Variant="Variant.Filled" Color="Color.Warning"
+                     Href="https://github.com/pjmagee/starwars-data/issues" Target="_blank"
+                     Class="ml-2" Style="font-weight:600;letter-spacing:0.5px;">BETA</MudChip>
+        </MudTooltip>
         <MudSpacer/>
         <ContinuityFilter />
         @* Desktop-only secondary controls (lg and up): individual icon buttons *@

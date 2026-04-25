@@ -353,7 +353,7 @@ public class GraphRAGToolkit
     public async Task<LineageDto> GetLineage(
         [Description("The PageId of the starting entity (from search_entities)")] int entityId,
         [Description(
-            "Relationship label to follow (e.g. 'apprentice_of', 'parent_of', 'successor_of'). Must be a forward label stored in kg.edges — use list_relationship_labels to discover valid values."
+            "Relationship label to follow (e.g. 'apprentice_of', 'parent_of', 'successor_of'). Must be a forward label stored in kg.edges — use get_relationship_types(entityId) to see the labels actually present on this entity, or describe_relationship_labels for type-level introspection."
         )]
             string label,
         [Description("'forward' walks along the stored edge direction; 'reverse' walks against it. See tool description for per-label examples.")] string direction = "forward",
@@ -595,8 +595,13 @@ public class GraphRAGToolkit
 
     [Description(
         """
-            List all relationship labels in the knowledge graph with usage counts.
-            Helps choose label filters for get_entity_relationships and traverse_graph.
+            List all relationship labels in the knowledge graph with global usage counts.
+            Returns label + count only — NO entity-type pairing info.
+
+            For most cases prefer describe_relationship_labels (KGAnalytics): it also returns
+            fromTypes/toTypes/description, which is what you actually need to choose a label
+            for a count_*/group_* query. Use THIS tool only when you genuinely need the
+            top-N most-used labels in the graph as a discovery overview.
             """
     )]
     public async Task<List<LabelCountDto>> ListRelationshipLabels([Description("Max results (default 50)")] int limit = 50)

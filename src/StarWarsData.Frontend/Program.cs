@@ -15,7 +15,26 @@ using StarWarsData.ServiceDefaults;
 var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 
-builder.Services.AddRazorComponents().AddInteractiveServerComponents();
+// Blazor Interactive Server runs all UI over a SignalR circuit. The default
+// MaximumReceiveMessageSize is 32 KB — any JSInterop call that pushes a larger
+// payload (e.g. our 117 KB galaxy geography handed to D3) closes the circuit
+// with "Connection closed with an error" and the JS function never runs even
+// though C# reports the await as successful. We bump it generously and also
+// give long-running JS calls a sensible timeout window.
+builder
+    .Services.AddRazorComponents()
+    .AddInteractiveServerComponents(options =>
+    {
+        options.DetailedErrors = builder.Environment.IsDevelopment();
+        options.JSInteropDefaultCallTimeout = TimeSpan.FromMinutes(1);
+    })
+    .AddHubOptions(options =>
+    {
+        options.MaximumReceiveMessageSize = 10 * 1024 * 1024; // 10 MB
+        options.ClientTimeoutInterval = TimeSpan.FromMinutes(2);
+        options.HandshakeTimeout = TimeSpan.FromSeconds(30);
+        options.KeepAliveInterval = TimeSpan.FromSeconds(15);
+    });
 
 // builder.Services.AddTransient<IClaimsTransformation, KeycloakRolesClaimsTransformation>();
 

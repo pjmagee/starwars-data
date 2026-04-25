@@ -97,7 +97,7 @@ function guardRef(ref) {
 export function initialize(containerId, overview, rawDotNetRef) {
     const dotNetRef = guardRef(rawDotNetRef);
     const container = document.getElementById(containerId);
-    if (!container) return;
+    if (!container) return false;
     container.querySelectorAll(':scope > svg, :scope > .galaxy-tooltip').forEach(el => el.remove());
 
     const width = container.clientWidth || 1200;
@@ -1459,6 +1459,15 @@ export function initialize(containerId, overview, rawDotNetRef) {
         cellW, cellH, cols, rows, startCol, startRow, colX, rowY, regionCellMap, overview,
         currentYearData: null, selectedLens: 'All',
     };
+    return true;
+}
+
+// Lets C# verify the JS function actually executed. Blazor's SignalR layer
+// can report InvokeVoidAsync as "successful" when the circuit dropped mid-call
+// and the JS function never ran. C# checks this after init; if false, retries.
+export function verifyInitialized(containerId) {
+    const c = document.getElementById(containerId);
+    return !!(c && c.querySelector(':scope > svg'));
 }
 
 function getPlanetColor(cls) {

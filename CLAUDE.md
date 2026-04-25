@@ -23,6 +23,26 @@ dotnet run --project src/StarWarsData.Frontend
 dotnet run --project src/StarWarsData.Admin
 ```
 
+### Publish & Deploy
+
+The AppHost defines a Docker Compose environment named `starwars` (`AddDockerComposeEnvironment("starwars")` in [src/StarWarsData.AppHost/Program.cs](src/StarWarsData.AppHost/Program.cs)). Three CLI commands operate on it — pick by what you need:
+
+```bash
+# Template only — emits docker-compose.yaml + UNFILLED .env. Hand to CI.
+aspire publish --apphost src/StarWarsData.AppHost/StarWarsData.AppHost.csproj
+
+# Full bake — emits docker-compose.yaml + FILLED .env.<env> + container images.
+# Resolves parameter values from user-secrets / Parameters__* env vars / appsettings.
+aspire do prepare-starwars -e Production \
+  --apphost src/StarWarsData.AppHost/StarWarsData.AppHost.csproj \
+  --non-interactive
+
+# Same as `prepare`, then runs `docker compose up` against the host.
+aspire deploy -e Production --apphost src/StarWarsData.AppHost/StarWarsData.AppHost.csproj
+```
+
+Output lands in `src/StarWarsData.AppHost/aspire-output/` (gitignored). All parameter values for `prepare`/`deploy` resolve from the AppHost's user-secrets store — set them once with `dotnet user-secrets set "Parameters:<name>" <value> --project src/StarWarsData.AppHost`. **Do not** rely on shell env vars like `STARWARS_OPENAI_KEY` for AppHost parameters; those are runtime-only for the API service. See [eng/design/017-aspire-publish-deploy-workflow.md](eng/design/017-aspire-publish-deploy-workflow.md) for the full rationale, parameter resolution order, and the empty-string-user-secret gotcha.
+
 ### Aspire MCP
 
 When the AppHost is running, use the **Aspire MCP server** (`mcp__aspire__*`) to interact with the running application:

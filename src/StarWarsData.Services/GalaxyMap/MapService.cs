@@ -733,12 +733,14 @@ public class MapService
             list.Add((e.ToId, e.ToName));
         }
 
-        // Load celestial body nodes for class + continuity
+        // Load celestial body nodes for class + continuity. Restrict to type=CelestialBody so
+        // orbited_by edges that resolve to other types (Character, Species, generic concept
+        // articles like /wiki/Planet) don't appear as planets in the system view.
         var allBodyIds = systemBodies.Values.SelectMany(l => l.Select(b => b.toId)).Distinct().ToList();
         var bodyNodes =
             allBodyIds.Count > 0
                 ? await _nodes
-                    .Find(Builders<GraphNode>.Filter.In(n => n.PageId, allBodyIds))
+                    .Find(Builders<GraphNode>.Filter.And(Builders<GraphNode>.Filter.In(n => n.PageId, allBodyIds), Builders<GraphNode>.Filter.Eq(n => n.Type, KgNodeTypes.CelestialBody)))
                     .Project(Builders<GraphNode>.Projection.Include(n => n.PageId).Include(n => n.Name).Include(n => n.Continuity).Include("properties.Class").Include("properties.Titles"))
                     .ToListAsync()
                 : [];
@@ -768,6 +770,10 @@ public class MapService
             {
                 foreach (var (toId, toName) in bodies)
                 {
+                    // Only include bodies that resolve to a real CelestialBody KG node. Edges
+                    // that point to generic concept articles (e.g. Hoth system → /wiki/Planet),
+                    // unmodeled pages, or wrong-type targets get filtered out here so the map
+                    // never shows a body labeled "planets" or "gas giant".
                     if (bodyLookup.TryGetValue(toId, out var info))
                         celestialBodies.Add(
                             new GeoCelestialBody
@@ -778,8 +784,6 @@ public class MapService
                                 Continuity = info.cont,
                             }
                         );
-                    else
-                        celestialBodies.Add(new GeoCelestialBody { Id = toId, Name = toName });
                 }
             }
 

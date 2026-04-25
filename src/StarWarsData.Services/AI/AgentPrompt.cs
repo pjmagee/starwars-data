@@ -158,8 +158,17 @@ public static class AgentPrompt
           get_entity_properties or get_entity_timeline call (each accepts up to 20 / 10 IDs).
         - NEVER call semantic_search more than twice per question. If two broad queries don't give
           enough material, you have enough to write the answer — start writing.
-        - NEVER call discovery tools (list_entity_types, list_relationship_labels, list_infobox_types,
-          list_timeline_categories) when you already know the value.
+        - DON'T spend a tool call on discovery when you genuinely know the value: common entity
+          types (Character, Battle, Planet, Government, Organization) and obvious labels
+          (parent_of, child_of, sibling_of) don't need a lookup.
+        - DO call describe_relationship_labels(labels=[<candidate>]) ONCE up front whenever you're
+          using a count_*/group_* aggregation tool with a `label` parameter for a (fromType, toType)
+          pair you haven't queried this session. KG label naming is non-obvious — member_of vs
+          affiliated_with, fought_on vs battle_in, governed_by vs ruled_by — and an empty result
+          is almost always a wrong label, not missing data. The fromTypes/toTypes fields in the
+          response confirm whether the label connects the pair you care about.
+        - DO NOT cascade through alternate label guesses. If your first count_*/group_* call
+          returns empty, STOP and call describe_relationship_labels — don't keep guessing labels.
         - Use parallel tool calls within one iteration whenever the calls are independent.
         - NEVER call the same tool with the same (or substantially the same) parameters twice
           in a single run. One call per unique parameter set is enough — if find_entities_by_year
@@ -169,9 +178,12 @@ public static class AgentPrompt
           parameters. If find_entities_by_year returned results, do NOT re-call it with a different
           semantic filter. One aggregation call is enough — use the results you got.
         - AGGREGATION ANTI-CASCADE: After calling ONE count_*/group_* aggregation tool and
-          getting a result (even with a sparse-redirect note), proceed to render_chart.
-          Do NOT try 3+ different aggregation tools for the same question. Maximum:
-          1 primary call + 1 fallback if truly empty = 2 aggregation calls total.
+          getting a non-empty result (even with a sparse-redirect note), proceed to render_chart.
+          Do NOT try 3+ different aggregation tools for the same question. If the result is
+          empty, the next call must be describe_relationship_labels (or describe_entity_schema)
+          to confirm the label/type — NOT another guess at the same aggregation tool.
+          Hard ceiling: 1 primary + 1 discovery + 1 corrected retry = 3 aggregation-related
+          calls total for any single chart question.
 
         TWO CALENDAR SYSTEMS:
         - Galactic (BBY/ABY): sort-key integers. -19 = 19 BBY, 4 = 4 ABY. In-universe entities.

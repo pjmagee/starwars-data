@@ -222,17 +222,19 @@
         </script>
     </head>
     <body>
-        @* ErrorBoundary catches MudBlazor MudInput ObjectDisposedException that occurs
+        @* LoggingErrorBoundary catches MudBlazor MudInput ObjectDisposedException that occurs
            when navigating between pages — MudInput.OnAfterRenderAsync races with disposal
-           of DotNetObjectReference during Blazor's component teardown/remount cycle. *@
-        <ErrorBoundary @ref="_routeErrorBoundary">
+           of DotNetObjectReference during Blazor's component teardown/remount cycle.
+           The subclass logs each exception with the current URL so it lands in Aspire
+           structured logs instead of being swallowed. *@
+        <LoggingErrorBoundary @ref="_routeErrorBoundary">
             <ChildContent>
                 <Routes @rendermode="InteractiveServerNoPrerender" />
             </ChildContent>
             <ErrorContent>
                 <Routes @rendermode="InteractiveServerNoPrerender" />
             </ErrorContent>
-        </ErrorBoundary>
+        </LoggingErrorBoundary>
         <script src="_framework/blazor.web.js"></script>
         <script src=@Assets["_content/MudBlazor/MudBlazor.min.js"]></script>
         <script src=@Assets["_content/MudBlazor.Markdown/MudBlazor.Markdown.min.js"]></script>
@@ -243,7 +245,7 @@
 
 @code {
     private static readonly InteractiveServerRenderMode InteractiveServerNoPrerender = new(prerender: false);
-    private ErrorBoundary? _routeErrorBoundary;
+    private LoggingErrorBoundary? _routeErrorBoundary;
 
     protected override void OnParametersSet()
     {

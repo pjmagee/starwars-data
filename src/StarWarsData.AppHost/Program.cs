@@ -1,19 +1,24 @@
 using Projects;
 
 var builder = DistributedApplication.CreateBuilder(args);
-var openApiKey = Environment.GetEnvironmentVariable("STARWARS_OPENAI_KEY") ?? "default-key";
-var openApi = builder.AddParameter(name: "openapi", value: openApiKey, secret: true);
 
-// External self-hosted Mongo server: parameterize credentials & host for secret management
-var mongoUser = builder.AddParameter("mongo-user", value: "admin");
-var mongoPassword = builder.AddParameter("mongo-password", value: "password", secret: true);
-var mongoHost = builder.AddParameter("mongo-host", value: "192.168.1.102");
-var mongoPort = builder.AddParameter("mongo-port", value: "27018");
+// All secret/env-varying values resolve from (in order):
+//   1. env vars `Parameters__<name>` (double underscore, dashes → underscores)
+//   2. user secrets / appsettings under `Parameters:<name>`
+//   3. Aspire dashboard prompt at run, or `aspire publish`/`prepare`/`deploy` prompt
+// Set locally with: dotnet user-secrets set "Parameters:<name>" <value> --project src/StarWarsData.AppHost
+var openApi = builder.AddParameter("openapi", secret: true);
+var mongoUser = builder.AddParameter("mongo-user");
+var mongoPassword = builder.AddParameter("mongo-password", secret: true);
+var mongoHost = builder.AddParameter("mongo-host");
+var mongoPort = builder.AddParameter("mongo-port");
 
 var starwarsDb = builder.AddParameter("starwars-db", value: "starwars-dev");
 
-// Keycloak service-account credentials for GDPR user deletion
-var keycloakAdminSecret = builder.AddParameter("keycloak-admin-secret", value: Environment.GetEnvironmentVariable("KEYCLOAK_ADMIN_SECRET") ?? "", secret: true);
+// Keycloak service-account credentials for GDPR user deletion.
+// Default is empty — the real value is injected at deploy time via the host's
+// KEYCLOAK_ADMIN_SECRET env var (see ConfigureComposeFile below).
+var keycloakAdminSecret = builder.AddParameter("keycloak-admin-secret", value: "", secret: true);
 
 var apiService = builder
     .AddProject<StarWarsData_ApiService>("apiservice")

@@ -57,7 +57,16 @@ public class KGAnalyticsToolkit
         """
             Count entities of one type connected to each entity of another type via a relationship label.
             Example: 'Deadliest wars by battles' → entityType='War', relatedType='Battle', label='battle_in'.
-            Call list_relationship_labels and list_entity_types first to discover valid values.
+
+            LABEL VALIDATION: An empty result almost always means the label doesn't connect this
+            type pair, NOT that data is missing. Before calling, if you haven't confirmed the
+            label connects (entityType, relatedType) this session, call
+            describe_relationship_labels(labels=[<candidate>]) and check fromTypes/toTypes.
+            Common gotchas: Organization↔Character uses affiliated_with (not member_of for most
+            orgs); Battle↔War uses battle_in (not part_of); CelestialBody↔Government uses
+            governed_by (not ruled_by). If your first call returns [], call
+            describe_relationship_labels next — never just guess another label.
+
             Best for: Bar, Pie, Donut, Rose, StackedBar charts.
             """
     )]
@@ -389,8 +398,14 @@ public class KGAnalyticsToolkit
               'Planets grouped by governing faction'  → sourceType='CelestialBody', label='governed_by'
 
             Best for: Bar, Pie, Donut charts where the X-axis is a named entity (faction, war,
-            planet, species, etc). Call describe_relationship_labels first if you're unsure
-            which edge label a field has been normalized to.
+            planet, species, etc).
+
+            LABEL VALIDATION: Same rule as count_related_entities — KG label naming is
+            non-obvious (member_of vs affiliated_with, governed_by vs ruled_by). If you haven't
+            confirmed the label is the right one for this sourceType this session, call
+            describe_relationship_labels(labels=[<candidate>]) first and check fromTypes. If your
+            first call returns [], call describe_relationship_labels next — never just guess
+            another label.
             """
     )]
     public async Task<List<NamedCountDto>> GroupEntitiesByConnection(
@@ -427,11 +442,20 @@ public class KGAnalyticsToolkit
 
     [Description(
         """
-            Get detailed info about relationship labels: which entity types they connect, their
-            reverse labels, descriptions, and usage counts.
-            ESSENTIAL discovery tool: call this BEFORE analytics queries to understand which labels
-            connect which types and in which direction.
-            Without arguments, returns the top labels by usage.
+            CANONICAL label-discovery tool. Returns each label's fromTypes, toTypes, reverse,
+            description, and usage count — enough to confirm whether a label connects the two
+            entity types you intend to query.
+
+            Use this before any count_*/group_* call whose `label` parameter is a guess. The
+            response's fromTypes/toTypes fields are the source of truth — if your candidate label
+            isn't in there for the pair you care about, the count would have returned [].
+
+            Pass `labels=[<candidate>]` to validate a specific guess. Omit `labels` only when you
+            need a top-N overview of what exists — usually wasteful; prefer the targeted form.
+
+            This is strictly more informative than list_relationship_labels (GraphRAG) — that one
+            returns label + count only, with no type-pair info. Prefer this tool unless you only
+            need the global label count.
             """
     )]
     public async Task<List<RelationshipLabelDto>> DescribeRelationshipLabels(
