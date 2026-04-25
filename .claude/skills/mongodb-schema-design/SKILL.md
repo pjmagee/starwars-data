@@ -1,9 +1,13 @@
 ---
-name: mongodb-schema-design
 description: MongoDB schema design patterns and anti-patterns. Use when designing data models, reviewing schemas, migrating from SQL, or troubleshooting performance issues caused by schema problems. Triggers on "design schema", "embed vs reference", "MongoDB data model", "schema review", "unbounded arrays", "one-to-many", "tree structure", "16MB limit", "schema validation", "JSON Schema", "time series", "schema migration", "polymorphic", "TTL", "data lifecycle", "archive", "index explosion", "unnecessary indexes", "approximation pattern", "document versioning".
 license: Apache-2.0
+metadata:
+    github-path: skills/mongodb-schema-design
+    github-ref: refs/tags/v1.1.0
+    github-repo: https://github.com/mongodb/agent-skills
+    github-tree-sha: 0831c2786ff0a1821bc8a38b0a0a439d1f547b40
+name: mongodb-schema-design
 ---
-
 # MongoDB Schema Design
 
 Data modeling patterns and anti-patterns for MongoDB, maintained by MongoDB. Bad schema is the root cause of most MongoDB performance and cost issues—queries and indexes cannot fix a fundamentally wrong model.

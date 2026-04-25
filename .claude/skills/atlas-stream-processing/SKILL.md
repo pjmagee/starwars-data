@@ -1,11 +1,14 @@
 ---
-name: atlas-stream-processing
-description: "Manages MongoDB Atlas Stream Processing (ASP) workflows. Handles workspace provisioning, data source/sink connections, processor lifecycle operations, debugging diagnostics, and tier sizing. Supports Kafka, Atlas clusters, S3, HTTPS, and Lambda integrations for streaming data workloads and event processing. NOT for general MongoDB queries or Atlas cluster management. Requires MongoDB MCP Server with Atlas API credentials."
+description: Manages MongoDB Atlas Stream Processing (ASP) workflows. Handles workspace provisioning, data source/sink connections, processor lifecycle operations, debugging diagnostics, and tier sizing. Supports Kafka, Atlas clusters, S3, HTTPS, and Lambda integrations for streaming data workloads and event processing. NOT for general MongoDB queries or Atlas cluster management. Requires MongoDB MCP Server with Atlas API credentials.
 metadata:
-  version: 1.0.0
-  user-invocable: "true"
+    github-path: skills/atlas-stream-processing
+    github-ref: refs/tags/v1.1.0
+    github-repo: https://github.com/mongodb/agent-skills
+    github-tree-sha: 8a249a342a00f7c6dc476d10088ed5c3c4628e79
+    user-invocable: "true"
+    version: 1.0.0
+name: atlas-stream-processing
 ---
-
 # MongoDB Atlas Streams
 
 Build, operate, and debug Atlas Stream Processing (ASP) pipelines using four MCP tools from the MongoDB MCP Server.

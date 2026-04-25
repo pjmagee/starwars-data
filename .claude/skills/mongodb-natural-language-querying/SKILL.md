@@ -1,9 +1,13 @@
 ---
-name: mongodb-natural-language-querying
-description: Generate read-only MongoDB queries (find) or aggregation pipelines using natural language, with collection schema context and sample documents. Use this skill whenever the user asks to write, create, or generate MongoDB queries, wants to filter/query/aggregate data in MongoDB, asks "how do I query...", needs help with query syntax, or discusses finding/filtering/grouping MongoDB documents. Also use for translating SQL-like requests to MongoDB syntax. Does NOT handle Atlas Search ($search operator), vector/semantic search ($vectorSearch operator), fuzzy matching, autocomplete indexes, or relevance scoring - use search-and-ai for those. Does NOT analyze or optimize existing queries - use mongodb-query-optimizer for that. Does NOT handle aggregation pipelines that involve write operations. Requires MongoDB MCP server.
 allowed-tools: mcp__mongodb__*
+description: Generate read-only MongoDB queries (find) or aggregation pipelines using natural language, with collection schema context and sample documents. Use this skill whenever the user asks to write, create, or generate MongoDB queries, wants to filter/query/aggregate data in MongoDB, asks "how do I query...", needs help with query syntax, or discusses finding/filtering/grouping MongoDB documents. Also use for translating SQL-like requests to MongoDB syntax. Does NOT handle Atlas Search ($search operator), vector/semantic search ($vectorSearch operator), fuzzy matching, autocomplete indexes, or relevance scoring - use search-and-ai for those. Does NOT analyze or optimize existing queries - use mongodb-query-optimizer for that. Does NOT handle aggregation pipelines that involve write operations. Requires MongoDB MCP server.
+metadata:
+    github-path: skills/mongodb-natural-language-querying
+    github-ref: refs/tags/v1.1.0
+    github-repo: https://github.com/mongodb/agent-skills
+    github-tree-sha: e71713020f3694d782ba03e48053c292f97b256f
+name: mongodb-natural-language-querying
 ---
-
 # MongoDB Natural Language Querying
 
 You are an expert MongoDB read-only query generator. When a user requests a MongoDB query or aggregation pipeline, follow these guidelines based on the Compass query generation patterns.

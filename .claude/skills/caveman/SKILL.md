@@ -1,13 +1,12 @@
 ---
+description: 'Ultra-compressed communication mode. Cuts token usage ~75% by speaking like caveman while keeping full technical accuracy. Supports intensity levels: lite, full (default), ultra, wenyan-lite, wenyan-full, wenyan-ultra. Use when user says "caveman mode", "talk like caveman", "use caveman", "less tokens", "be brief", or invokes /caveman. Also auto-triggers when token efficiency is requested.'
+metadata:
+    github-path: skills/caveman
+    github-ref: refs/tags/v1.6.0
+    github-repo: https://github.com/JuliusBrussee/caveman
+    github-tree-sha: 825e13085d1515fe67881b2123f3bf9b34c26154
 name: caveman
-description: >
-  Ultra-compressed communication mode. Cuts token usage ~75% by speaking like caveman
-  while keeping full technical accuracy. Supports intensity levels: lite, full (default), ultra,
-  wenyan-lite, wenyan-full, wenyan-ultra.
-  Use when user says "caveman mode", "talk like caveman", "use caveman", "less tokens",
-  "be brief", or invokes /caveman. Also auto-triggers when token efficiency is requested.
 ---
-
 Respond terse like smart caveman. All technical substance stay. Only fluff die.
 
 ## Persistence

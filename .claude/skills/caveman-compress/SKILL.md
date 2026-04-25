@@ -1,12 +1,12 @@
 ---
+description: 'Compress natural language memory files (CLAUDE.md, todos, preferences) into caveman format to save input tokens. Preserves all technical substance, code, URLs, and structure. Compressed version overwrites the original file. Human-readable backup saved as FILE.original.md. Trigger: /caveman:compress <filepath> or "compress memory file"'
+metadata:
+    github-path: caveman-compress
+    github-ref: refs/tags/v1.6.0
+    github-repo: https://github.com/JuliusBrussee/caveman
+    github-tree-sha: c58e4ecb3f2748626d43c54479e67a4c0fe46f3d
 name: caveman-compress
-description: >
-  Compress natural language memory files (CLAUDE.md, todos, preferences) into caveman format
-  to save input tokens. Preserves all technical substance, code, URLs, and structure.
-  Compressed version overwrites the original file. Human-readable backup saved as FILE.original.md.
-  Trigger: /caveman:compress <filepath> or "compress memory file"
 ---
-
 # Caveman Compress
 
 ## Purpose

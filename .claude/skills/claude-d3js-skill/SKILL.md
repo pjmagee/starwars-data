@@ -1,11 +1,15 @@
 ---
+date_added: "2026-02-27"
+description: This skill provides guidance for creating sophisticated, interactive data visualisations using d3.js.
+metadata:
+    github-path: skills/claude-d3js-skill
+    github-ref: refs/tags/v10.6.0
+    github-repo: https://github.com/sickn33/antigravity-awesome-skills
+    github-tree-sha: 3f8d038267f9be2bb1a8718b20841313504e3c5e
 name: claude-d3js-skill
-description: "This skill provides guidance for creating sophisticated, interactive data visualisations using d3.js."
 risk: unknown
 source: community
-date_added: "2026-02-27"
 ---
-
 # D3.js Visualisation
 
 ## Overview
@@ -821,3 +825,8 @@ Contains boilerplate templates:
 These templates work with vanilla JavaScript, React, Vue, Svelte, or any other JavaScript environment. Adapt them as needed for your specific framework.
 
 To use these resources, read the relevant files when detailed guidance is needed for specific visualisation types or patterns.
+
+## Limitations
+- Use this skill only when the task clearly matches the scope described above.
+- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
+- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.

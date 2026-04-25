@@ -195,9 +195,8 @@ Use the attached MCP servers and skills for domain-specific guidance instead of 
 - **MediaWiki MCP** (`mcp__mediawiki-mcp-server__*`) — Search and fetch Wookieepedia pages directly.
 - **OpenAI Developer Docs** (`mcp__openaiDeveloperDocs__*`) — Search OpenAI API docs and specs.
 
-**Skills** (invoke with `/skill-name`):
+**Skills** (invoke with `/skill-name`). Installed and managed via `gh skill install <repo> <skill> --agent claude-code --scope project` (run `gh skill update --all` to pull upstream changes):
 
-- `/mudblazor` — MudBlazor component guidance for Blazor UI work.
 - `/claude-d3js-skill` — D3.js interactive visualization guidance.
 - `/microsoft-agent-framework` — Microsoft Agent Framework (M.E.AI, Agents.AI) guidance for the AI pipeline.
 - `/mongodb-natural-language-querying` — Generate MongoDB queries/aggregations from natural language.

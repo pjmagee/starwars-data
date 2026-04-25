@@ -1,8 +1,12 @@
 ---
-name: mongodb-mcp-setup
 description: Guide users through configuring key MongoDB MCP server options. Use this skill when a user has the MongoDB MCP server installed but hasn't configured the required environment variables, or when they ask about connecting to MongoDB/Atlas and don't have the credentials set up.
+metadata:
+    github-path: skills/mongodb-mcp-setup
+    github-ref: refs/tags/v1.1.0
+    github-repo: https://github.com/mongodb/agent-skills
+    github-tree-sha: b9e0b34ec6dd6d07259f2fb1ab8dedcaf0028684
+name: mongodb-mcp-setup
 ---
-
 # MongoDB MCP Server Setup
 
 This skill guides users through configuring the MongoDB MCP server for use with an agentic client.

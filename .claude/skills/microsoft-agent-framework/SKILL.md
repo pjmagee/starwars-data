@@ -1,8 +1,12 @@
 ---
+description: Create, update, refactor, explain, or review Microsoft Agent Framework solutions using shared guidance plus language-specific references for .NET and Python.
+metadata:
+    github-path: skills/microsoft-agent-framework
+    github-ref: refs/heads/main
+    github-repo: https://github.com/github/awesome-copilot
+    github-tree-sha: f4174d2e96154c2cc78f89b4756c6ae9ac9ce778
 name: microsoft-agent-framework
-description: 'Create, update, refactor, explain, or review Microsoft Agent Framework solutions using shared guidance plus language-specific references for .NET and Python.'
 ---
-
 # Microsoft Agent Framework
 
 Use this skill when working with applications, agents, workflows, or migrations built on Microsoft Agent Framework.

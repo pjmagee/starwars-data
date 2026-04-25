@@ -1,8 +1,12 @@
 ---
+description: Ensure .NET/C# code meets best practices for the solution/project.
+metadata:
+    github-path: skills/dotnet-best-practices
+    github-ref: refs/heads/main
+    github-repo: https://github.com/github/awesome-copilot
+    github-tree-sha: 348f6a99189c92bae1654b58f77904a0734b1e34
 name: dotnet-best-practices
-description: 'Ensure .NET/C# code meets best practices for the solution/project.'
 ---
-
 # .NET/C# Best Practices
 
 Your task is to ensure .NET/C# code in ${selection} meets the best practices specific to this solution/project. This includes:

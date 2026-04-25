@@ -1,12 +1,12 @@
 ---
+description: 'Ultra-compressed code review comments. Cuts noise from PR feedback while preserving the actionable signal. Each comment is one line: location, problem, fix. Use when user says "review this PR", "code review", "review the diff", "/review", or invokes /caveman-review. Auto-triggers when reviewing pull requests.'
+metadata:
+    github-path: skills/caveman-review
+    github-ref: refs/tags/v1.6.0
+    github-repo: https://github.com/JuliusBrussee/caveman
+    github-tree-sha: 2147719da5f81255dbf960d6ce46d5a7ee9d0860
 name: caveman-review
-description: >
-  Ultra-compressed code review comments. Cuts noise from PR feedback while preserving
-  the actionable signal. Each comment is one line: location, problem, fix. Use when user
-  says "review this PR", "code review", "review the diff", "/review", or invokes
-  /caveman-review. Auto-triggers when reviewing pull requests.
 ---
-
 Write code review comments terse and actionable. One line per finding. Location, problem, fix. No throat-clearing.
 
 ## Rules

@@ -1,11 +1,12 @@
 ---
+description: 'Quick-reference card for all caveman modes, skills, and commands. One-shot display, not a persistent mode. Trigger: /caveman-help, "caveman help", "what caveman commands", "how do I use caveman".'
+metadata:
+    github-path: skills/caveman-help
+    github-ref: refs/tags/v1.6.0
+    github-repo: https://github.com/JuliusBrussee/caveman
+    github-tree-sha: 0456947ac9539b1f8cba536f3b7a19d7a0f4eb91
 name: caveman-help
-description: >
-  Quick-reference card for all caveman modes, skills, and commands.
-  One-shot display, not a persistent mode. Trigger: /caveman-help,
-  "caveman help", "what caveman commands", "how do I use caveman".
 ---
-
 # Caveman Help
 
 Display this reference card when invoked. One-shot — do NOT change mode, write flag files, or persist anything. Output in caveman style.
@@ -49,6 +50,8 @@ export CAVEMAN_DEFAULT_MODE=ultra
 ```json
 { "defaultMode": "lite" }
 ```
+
+Set `"off"` to disable auto-activation on session start. User can still activate manually with `/caveman`.
 
 Resolution: env var > config file > `full`.
 
