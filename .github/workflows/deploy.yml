@@ -72,23 +72,35 @@ jobs:
         env:
           CONTAINER_IMAGE_TAG: latest
 
-      # Resolves parameter values from:
-      #   1. Parameters__* env vars below (3 secrets)
-      #   2. appsettings.Production.json (mongo-host, mongo-port, starwars-db)
-      #   3. inline defaults in Program.cs (keycloak-admin-secret = "")
-      # Filled .env.Production lands in ./aspire-output/ and is uploaded as the release artifact.
-      - name: Prepare deployment artifacts (filled .env.Production)
+      # `aspire publish` emits docker-compose.yaml + an UNFILLED .env.Production template
+      # (just placeholder keys, no values). Secrets stay out of the runner environment
+      # entirely. The deploy host is responsible for materializing real values from its
+      # own secret store before `docker compose --env-file .env.Production up -d`.
+      # See eng/design/017-aspire-publish-deploy-workflow.md for the full contract.
+      - name: Publish deployment artifacts (template only, no secrets)
         run: |
-          aspire do prepare-starwars \
+          aspire publish \
             -e Production \
             --apphost src/StarWarsData.AppHost/StarWarsData.AppHost.csproj \
             --non-interactive \
             --output-path ./aspire-output
         env:
           CONTAINER_IMAGE_TAG: ${{ steps.version.outputs.semVer }}
-          Parameters__openapi:        ${{ secrets.STARWARS_OPENAI_KEY }}
-          Parameters__mongo_user:     ${{ secrets.MONGO_USER }}
-          Parameters__mongo_password: ${{ secrets.MONGO_PASSWORD }}
+
+      # Defense in depth: fail loudly if anything in the output looks like a real OpenAI
+      # key or a non-empty Mongo credential, in case Aspire's `publish` contract changes
+      # in a future release. We'd rather break the build than ship a leaked artifact.
+      - name: Verify artifact contains no secrets
+        run: |
+          set -euo pipefail
+          if grep -REn 'sk-[A-Za-z0-9_-]{20,}' ./aspire-output/; then
+            echo "::error::aspire-output appears to contain an OpenAI key — refusing to upload."
+            exit 1
+          fi
+          if grep -REn '^Parameters__mongo_password=.+' ./aspire-output/; then
+            echo "::error::aspire-output appears to contain a populated mongo_password — refusing to upload."
+            exit 1
+          fi
 
       - name: Upload deployment artifacts
         uses: actions/upload-artifact@v4
