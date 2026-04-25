@@ -1,6 +1,11 @@
+using Microsoft.Extensions.Configuration;
 using Projects;
 
 var builder = DistributedApplication.CreateBuilder(args);
+
+// AppHost is a developer-only tool — load user-secrets in every environment (not just Development)
+// so `aspire do prepare-starwars -e Production` can resolve secret parameters from the dev secret store.
+builder.Configuration.AddUserSecrets(typeof(Program).Assembly, optional: true);
 
 // All secret/env-varying values resolve from (in order):
 //   1. env vars `Parameters__<name>` (double underscore, dashes → underscores)
@@ -13,7 +18,8 @@ var mongoPassword = builder.AddParameter("mongo-password", secret: true);
 var mongoHost = builder.AddParameter("mongo-host");
 var mongoPort = builder.AddParameter("mongo-port");
 
-var starwarsDb = builder.AddParameter("starwars-db", value: "starwars-dev");
+// Resolves from appsettings.{Environment}.json: starwars-dev (Development) / starwars-prod (Production).
+var starwarsDb = builder.AddParameter("starwars-db");
 
 // Keycloak service-account credentials for GDPR user deletion.
 // Default is empty — the real value is injected at deploy time via the host's
@@ -24,6 +30,7 @@ var apiService = builder
     .AddProject<StarWarsData_ApiService>("apiservice")
     .WithExternalHttpEndpoints()
     .WithEnvironment("Settings__OpenAiKey", openApi)
+    .WithEnvironment("Settings__DatabaseName", starwarsDb)
     .WithEnvironment("Settings__HangfireEnabled", "true")
     .WithEnvironment("Settings__KeycloakAdminClientSecret", keycloakAdminSecret);
 
@@ -54,6 +61,7 @@ var admin = builder
     .AddProject<StarWarsData_Admin>("admin")
     .WithExternalHttpEndpoints()
     .WithEnvironment("Settings__OpenAiKey", openApi)
+    .WithEnvironment("Settings__DatabaseName", starwarsDb)
     .WithEnvironment("Settings__HangfireEnabled", "true")
     .WithReference(mongo)
     .WaitFor(mongo)
@@ -281,7 +289,6 @@ builder
         env["APISERVICE_HOST_PORT"] = new() { Name = "APISERVICE_HOST_PORT", DefaultValue = "9080" };
         env["ADMIN_HOST_PORT"] = new() { Name = "ADMIN_HOST_PORT", DefaultValue = "9082" };
         env["DASHBOARD_HOST_PORT"] = new() { Name = "DASHBOARD_HOST_PORT", DefaultValue = "18888" };
-        env["STARWARS_DB"] = new() { Name = "STARWARS_DB", DefaultValue = "starwars-dev" };
     })
     .ConfigureComposeFile(static compose =>
     {
@@ -294,14 +301,8 @@ builder
 
             service.Labels["net.unraid.docker.managed"] = "composeman";
 
-            // Inject database name from STARWARS_DB for services that use MongoDB
-            if (name is "apiservice" or "admin")
-            {
-                service.Environment ??= [];
-                service.Environment["Settings__DatabaseName"] = "${STARWARS_DB:-starwars-dev}";
-            }
-
-            // Inject Keycloak admin secret for GDPR user deletion
+            // Keycloak admin secret is injected at deploy time via the host's KEYCLOAK_ADMIN_SECRET env var
+            // (rather than via the AppHost parameter system, so it never lands in the published .env).
             if (name is "apiservice")
             {
                 service.Environment ??= [];
@@ -326,6 +327,10 @@ builder
                     service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:${ADMIN_PORT}]";
                     break;
                 case "starwars-dashboard":
+                    // Dashboard is on the internal LAN only — never exposed via Cloudflare Tunnel —
+                    // so anonymous access is acceptable and avoids needing OIDC config in the compose env.
+                    service.Environment ??= [];
+                    service.Environment["ASPIRE_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS"] = "true";
                     service.Labels["net.unraid.docker.icon"] = "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/dashboard.png";
                     service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:18888]";
                     break;

@@ -16,7 +16,7 @@ Compounding that, the three Aspire CLI commands in this space — `aspire publis
 Three commands operate on the Docker Compose environment resource (`AddDockerComposeEnvironment("starwars")` in [src/StarWarsData.AppHost/Program.cs](../../src/StarWarsData.AppHost/Program.cs)):
 
 | Command | Output | Parameter resolution | Builds images? | Deploys? |
-|---------|--------|----------------------|----------------|----------|
+| --- | --- | --- | --- | --- |
 | `aspire publish` | `docker-compose.yaml` + **unfilled** `.env` template | None — placeholders only | No | No |
 | `aspire do prepare-starwars -e <env>` | `docker-compose.yaml` + **filled** `.env.<env>` + container images | Full chain (env vars → user-secrets → appsettings → prompt) | Yes | No |
 | `aspire deploy -e <env>` | Same as `prepare`, then `docker compose up` | Full chain | Yes | Yes |
@@ -29,12 +29,16 @@ All three respect the `-e | --environment <name>` flag, which sets `DOTNET_ENVIR
 
 For any `builder.AddParameter("name")` call, Aspire resolves the value at publish/prepare/deploy time in this order:
 
-1. **Environment variable** `Parameters__<name>` (double underscore separator, dashes in the parameter name become single underscores: `mongo-password` → `Parameters__mongo_password`).
-2. **AppHost configuration** — `appsettings.json`, `appsettings.{Environment}.json`, **user-secrets** (the AppHost project's own user-secrets store), or any other `IConfiguration` source under the `Parameters:<name>` key.
-3. **Inline default** — if `AddParameter("name", value: "...")` was used in code.
+1. **`AddParameter("name", value: "...")` inline** — if `value:` is supplied, it **wins** over everything else. It is treated as the *resolved* value, not a fallback. Don't use `value:` if you want config sources to drive the parameter.
+2. **Environment variable** `Parameters__<name>` (double underscore separator, dashes in the parameter name become single underscores: `mongo-password` → `Parameters__mongo_password`).
+3. **AppHost configuration** — `appsettings.json`, `appsettings.{Environment}.json`, **user-secrets** (the AppHost project's own user-secrets store, *but see caveat below*), or any other `IConfiguration` source under the `Parameters:<name>` key.
 4. **Interactive prompt** — Aspire dashboard at run time, or CLI prompt at publish/prepare/deploy time. Fails with a hard error in `--non-interactive` mode.
 
-**Empty string is not "having a value."** A user-secret of `""` does *not* satisfy `AddParameter("name", secret: true)` — Aspire treats it as missing and the prepare step fails with `Parameter resource could not be used because configuration key 'Parameters:<name>' is missing and the Parameter has no default value`. If the parameter genuinely should default to empty, use `AddParameter("name", value: "", secret: true)` so the inline default kicks in.
+**Empty string is not "having a value."** A user-secret or env var of `""` does *not* satisfy `AddParameter("name", secret: true)` — Aspire treats it as missing and the prepare step fails with `Parameter resource could not be used because configuration key 'Parameters:<name>' is missing and the Parameter has no default value`. If the parameter genuinely should default to empty, use `AddParameter("name", value: "", secret: true)` so the inline default kicks in.
+
+**User-secrets are loaded only in `Development` by default.** Standard .NET behavior: `AddUserSecrets()` registers itself only when `DOTNET_ENVIRONMENT=Development`. The AppHost's [Program.cs](../../src/StarWarsData.AppHost/Program.cs) explicitly calls `builder.Configuration.AddUserSecrets(typeof(Program).Assembly, optional: true)` so secrets resolve in *all* environments — including `aspire do prepare-starwars -e Production` runs from a developer machine. Without this line, local Production prepares fail unless every secret is supplied via `Parameters__*` env vars.
+
+**Deployment state cache.** Aspire writes resolved parameter values to `~/.aspire/deployments/<hash>/<environment>.json` after every successful prepare/publish/deploy. **The cache is read on subsequent runs and overrides current config sources** — meaning if you change a parameter's source (move it from `value:` to user-secrets, or change an `appsettings.Production.json` value), the cached value sticks until you delete the file. When debugging "why is this still resolving to the old value," check `~/.aspire/deployments/` first.
 
 ## Decisions
 

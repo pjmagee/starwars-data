@@ -63,20 +63,32 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push container images (versioned)
-        run: aspire do push --project src/StarWarsData.AppHost/StarWarsData.AppHost.csproj
+        run: aspire do push --apphost src/StarWarsData.AppHost/StarWarsData.AppHost.csproj
         env:
           CONTAINER_IMAGE_TAG: ${{ steps.version.outputs.semVer }}
 
       - name: Build and push container images (latest)
-        run: aspire do push --project src/StarWarsData.AppHost/StarWarsData.AppHost.csproj
+        run: aspire do push --apphost src/StarWarsData.AppHost/StarWarsData.AppHost.csproj
         env:
           CONTAINER_IMAGE_TAG: latest
 
-      - name: Publish Docker Compose artifacts
+      # Resolves parameter values from:
+      #   1. Parameters__* env vars below (3 secrets)
+      #   2. appsettings.Production.json (mongo-host, mongo-port, starwars-db)
+      #   3. inline defaults in Program.cs (keycloak-admin-secret = "")
+      # Filled .env.Production lands in ./aspire-output/ and is uploaded as the release artifact.
+      - name: Prepare deployment artifacts (filled .env.Production)
         run: |
-          aspire publish \
-            --project src/StarWarsData.AppHost/StarWarsData.AppHost.csproj \
+          aspire do prepare-starwars \
+            -e Production \
+            --apphost src/StarWarsData.AppHost/StarWarsData.AppHost.csproj \
+            --non-interactive \
             --output-path ./aspire-output
+        env:
+          CONTAINER_IMAGE_TAG: ${{ steps.version.outputs.semVer }}
+          Parameters__openapi:        ${{ secrets.STARWARS_OPENAI_KEY }}
+          Parameters__mongo_user:     ${{ secrets.MONGO_USER }}
+          Parameters__mongo_password: ${{ secrets.MONGO_PASSWORD }}
 
       - name: Upload deployment artifacts
         uses: actions/upload-artifact@v4
