@@ -38,7 +38,7 @@ The wiki infobox extraction is the **canonical truth foundation**. Holocron poli
 ### Permitted (v1)
 
 - **Add** a property when the infobox doesn't have one. Pre-flight: `kg.nodes[pageId].properties[fieldPath]` must be missing or empty.
-- **Add** an edge when no edge with the same `(fromId, toId, label)` exists. Pre-flight: must NOT exist in `kg.edges` AND must NOT be Active in `kg.edge_enrichments`.
+- **Add** an edge when **no edge already connects the two nodes** — regardless of label or direction. Pre-flight checks an unordered node-pair key (`min(a,b)-max(a,b)`) against both `kg.edges` and Active `kg.edge_enrichments`. The original v1 only checked the `(fromId, toId, label)` tuple, but that allowed the agent to add `member_of` next to an existing `affiliated_with` between the same pair (Obi-Wan → Galactic Republic, observed 2026-04-26 dev test) — semantically duplicate, visually two parallel lines in the graph viewer, double-counted in aggregations. The unordered-pair rule prevents that. Edge cases where two distinct labels between the same pair are legitimate (e.g. `Anakin married_to Padmé` AND a hypothetical second-label) should come from the wiki infobox via Phase 1, not from Holocron.
 - **Augment** a list-valued property with new items, deduped against the existing list. Pre-flight: each proposed item must not already appear in `kg.nodes[pageId].properties[fieldPath]` (case-insensitive).
 - **FillGap** a null sub-property on an existing entity — the canonical example is filling `kg.edges[(from, to, label)].fromYear` when it's `null`. Pre-flight: the targeted sub-property must currently be `null` in the base collection.
 

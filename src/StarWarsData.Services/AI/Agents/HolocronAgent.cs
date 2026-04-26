@@ -486,8 +486,12 @@ public sealed class HolocronAgent
 
             - Never propose a value that contradicts the infobox. If the property already has a
               value, do not touch it.
-            - Never propose a duplicate edge. If a relationship already exists between two nodes
-              with the given label, do not propose it again.
+            - Never propose a NEW edge between two nodes that are ALREADY connected by ANY
+              edge — even if your proposed label is different. The relationship is already
+              represented; a second edge with a synonym or near-synonym label (e.g. proposing
+              `member_of` next to an existing `affiliated_with` between the same pair) creates
+              visual clutter and double-counts the same fact. The pre-flight will reject it.
+              Use FillGap instead if the existing edge is missing temporal bounds you can fill.
             - Every proposal MUST cite at least one piece of evidence — either a sourcePageId
               (another KG node's PageId) or a chunkId (a wiki article chunk id) — with an excerpt
               taken verbatim from the source.
@@ -648,7 +652,16 @@ public sealed class HolocronAgent
     {
         // Snapshot the universe once: the source node we already have, plus
         // existing edges and Active edge enrichments for duplicate detection.
+        //
+        // We track TWO key sets per source: (a) the (from, to, label) tuple — used by
+        // FillGap to confirm the targeted edge exists; (b) the unordered node-pair —
+        // used by Add to reject ANY edge between the same two nodes regardless of label
+        // or direction. The unordered pair is the load-bearing rule against semantic
+        // duplicates: the agent had a habit of proposing `member_of` next to an existing
+        // `affiliated_with` between the same pair (different label = passed the v1 check
+        // but produced two parallel edges in the graph viewer). See Design-018 v1 policy.
         var existingEdgeKeys = context.OutgoingEdges.Concat(context.IncomingEdges).Select(e => EdgeKey(e.FromId, e.ToId, e.Label)).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var existingNodePairs = context.OutgoingEdges.Concat(context.IncomingEdges).Select(e => NodePairKey(e.FromId, e.ToId)).ToHashSet(StringComparer.OrdinalIgnoreCase);
         var existingActiveEdgeEnrichments = await _edgeEnrichments
             .Find(
                 Builders<EdgeEnrichment>.Filter.Eq(e => e.Status, EnrichmentStatus.Active)
@@ -656,6 +669,7 @@ public sealed class HolocronAgent
             )
             .ToListAsync(ct);
         var enrichmentEdgeKeys = existingActiveEdgeEnrichments.Select(e => EdgeKey(e.FromId, e.ToId, e.Label)).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var enrichmentNodePairs = existingActiveEdgeEnrichments.Select(e => NodePairKey(e.FromId, e.ToId)).ToHashSet(StringComparer.OrdinalIgnoreCase);
 
         // Validate chunk citations once: pull every chunkId mentioned across all proposals
         // and confirm they exist in search.chunks. Node and edge evidence types are distinct
@@ -726,7 +740,7 @@ public sealed class HolocronAgent
                 evidenceFailures++;
                 continue;
             }
-            if (!IsEdgeProposalValid(context, prop, existingEdgeKeys, enrichmentEdgeKeys))
+            if (!IsEdgeProposalValid(context, prop, existingEdgeKeys, existingNodePairs, enrichmentEdgeKeys, enrichmentNodePairs))
                 continue;
 
             var operation = ParseOperation(prop.Operation) ?? EnrichmentOperation.Add;
@@ -829,7 +843,14 @@ public sealed class HolocronAgent
         };
     }
 
-    static bool IsEdgeProposalValid(HolocronContext context, HolocronEdgeProposal prop, HashSet<string> existingEdgeKeys, HashSet<string> enrichmentEdgeKeys)
+    static bool IsEdgeProposalValid(
+        HolocronContext context,
+        HolocronEdgeProposal prop,
+        HashSet<string> existingEdgeKeys,
+        HashSet<string> existingNodePairs,
+        HashSet<string> enrichmentEdgeKeys,
+        HashSet<string> enrichmentNodePairs
+    )
     {
         if (prop.FromId <= 0 || prop.ToId <= 0 || string.IsNullOrWhiteSpace(prop.Label))
             return false;
@@ -840,13 +861,20 @@ public sealed class HolocronAgent
             return false;
 
         var key = EdgeKey(prop.FromId, prop.ToId, prop.Label);
+        var pair = NodePairKey(prop.FromId, prop.ToId);
         var op = ParseOperation(prop.Operation);
 
         return op switch
         {
-            // Add: edge must NOT exist in kg.edges and must NOT be Active in kg.edge_enrichments.
-            EnrichmentOperation.Add => !existingEdgeKeys.Contains(key) && !enrichmentEdgeKeys.Contains(key),
-            // FillGap: edge MUST exist, and at least one targeted bound must currently be null.
+            // Add: NO edge may already exist between this pair of nodes — regardless of
+            // label or direction. This is stricter than the original (fromId, toId, label)
+            // tuple check because semantically-equivalent labels (e.g. `member_of` vs
+            // `affiliated_with` between the same pair) produce visual clutter in the graph
+            // viewer and double-count the same relationship in aggregations.
+            EnrichmentOperation.Add => !existingNodePairs.Contains(pair) && !enrichmentNodePairs.Contains(pair),
+            // FillGap: edge MUST exist with this exact label, and at least one targeted
+            // bound must currently be null. Same-label requirement here is intentional —
+            // FillGap targets a specific existing edge.
             EnrichmentOperation.FillGap => existingEdgeKeys.Contains(key)
                 && (prop.FromYear.HasValue || prop.ToYear.HasValue)
                 && context
@@ -858,6 +886,13 @@ public sealed class HolocronAgent
     }
 
     static string EdgeKey(int from, int to, string label) => $"{from}-{to}-{label.ToLowerInvariant()}";
+
+    /// <summary>
+    /// Direction-agnostic node-pair key: <c>min(a,b)-max(a,b)</c>. Two edges with the
+    /// same pair of endpoints (in either direction) collapse to the same key. Used by
+    /// the Add-edge pre-flight to reject any edge between an already-connected pair.
+    /// </summary>
+    static string NodePairKey(int a, int b) => a < b ? $"{a}-{b}" : $"{b}-{a}";
 
     static EnrichmentOperation? ParseOperation(string op) => Enum.TryParse<EnrichmentOperation>(op, ignoreCase: true, out var v) ? v : null;
 
