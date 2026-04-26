@@ -1,7 +1,7 @@
 # Design: Knowledge Graph — Per-Type Node Builders
 
-**Status:** Proposal
-**Date:** 2026-04-06
+**Status:** Implemented (2026-04-26). Every `KgNodeTypes` constant has its own `INodeBuilder` under `NodeBuilders/Types/`. `InfoboxGraphService` is a coordinator with an explicit registry — no monolithic generic loop, no fallback default. Type-specific extraction logic (per-type-specific behaviour beyond the shared field loop) lands incrementally per builder.
+**Date:** 2026-04-06 (proposal); 2026-04-26 (full decomposition landed)
 **Companion docs:** [002-ai-agent-toolkits.md](../adr/002-ai-agent-toolkits.md)
 
 ## Problem
@@ -90,3 +90,69 @@ The risk is in edge cases where the generic loop's ordering matters (e.g. tempor
 - Changing the `GraphNode` or `RelationshipEdge` models
 - Changing `FieldSemantics` or `TemplateFields` — these remain the field-level metadata, consumed by builders
 - Adding new node types or template mappings
+
+## Implementation (2026-04-26)
+
+Landed on branch `refactor/kg-per-type-node-builders`. Pure structural move — no behaviour change. The brittle monolithic generic loop in the original `InfoboxGraphService.BuildGraphAsync` is gone; per-page extraction is now dispatched through an explicit per-type registry.
+
+### Layout
+
+| File | Role |
+| --- | --- |
+| `NodeBuilders/INodeBuilder.cs` | Builder contract: `NodeType` + `Build(NodeBuilderContext)` |
+| `NodeBuilders/NodeBuilderContext.cs` | Per-page input record (PageId, infobox data items, definition, lookups) |
+| `NodeBuilders/NodeBuilderResult.cs` | `(GraphNode, IReadOnlyList<RelationshipEdge>)` output |
+| `NodeBuilders/NodeBuilderBase.cs` | Default `Build()` (shared field loop) + protected helpers (temporal parsing, link resolution, primary-link extraction, facet ordering, label normalisation) + `OnRelationshipExtracted` and `OnFinalize` virtual hooks |
+| `NodeBuilders/Types/<X>NodeBuilder.cs` | One file per `KgNodeTypes` constant — 44 type-specific builders + `UnknownNodeBuilder` (fallback) |
+| `KnowledgeGraph/InfoboxGraphService.cs` | Coordinator: page iteration, builder dispatch, post-processing (edge filtering, dedup, lineage closures, indexes, bidir view, label registry). 0 monolithic logic remaining |
+
+### Registered builders (45 total)
+
+```text
+People         Character, Person, Family, Species
+Geography      CelestialBody, Location, City, Structure, System, Sector, Region, Nebula
+Politics       Government, Organization, Military
+Events         Battle, War, Campaign, Mission, Duel, Election, Event, Treaty, Era, Year
+Vehicles       Starship, StarshipClass, SpaceStation, Vehicle, AirVehicle, GroundVehicle, TradeRoute
+Things         Weapon, Lightsaber, Device, Artifact, Droid
+Qualifier      TitleOrPosition, ForcePower, LightsaberForm
+Media          Book, Movie, Comic, Game
+Fallback       Unknown
+```
+
+### Dispatch
+
+`InfoboxGraphService` constructor calls `RegisterAllBuilders()` which hand-lists every builder — explicit, no reflection. Per-page dispatch is one line:
+
+```csharp
+var builder = _builders.GetValueOrDefault(context.Type, _unknownBuilder);
+var result = builder.Build(context);
+```
+
+Pages whose template type isn't a recognised `KgNodeTypes` constant fall back to `UnknownNodeBuilder`, which behaves identically to the generic field loop in the base.
+
+### Type-specific behaviour today
+
+Only `TradeRouteNodeBuilder` overrides `OnRelationshipExtracted` to emit ordered `{label}Ids` waypoint sequences. Every other type currently inherits the base `Build()` unchanged. Specific behaviour for the design's identified types (Battle belligerent grouping, Government institutional lifecycle, System orbital hierarchy, CelestialBody destruction events, Character lifecycle chain) lands incrementally — the per-type files give each one a stable home for that work without disturbing siblings.
+
+### How to add type-specific behaviour to a builder
+
+1. Pick the `<Type>NodeBuilder.cs` file.
+2. Override one of the protected virtual hooks:
+   - `OnRelationshipExtracted` — runs after primary-link extraction for each relationship field. Use this to emit additional type-specific properties (the TradeRoute waypoint pattern).
+   - `OnFinalize` — runs after the node + edges are fully assembled. Use this to mutate either before they're handed to the coordinator.
+   - Override `Build` outright if the generic field loop is wrong for this type. Rare.
+3. No registration change needed — the constructor already wires every type.
+
+### How to add a new node type
+
+1. Add the constant to `KgNodeTypes`.
+2. Create `NodeBuilders/Types/<X>NodeBuilder.cs` (5 lines: namespace + class + `NodeType` override).
+3. Add a single `RegisterBuilder(new XNodeBuilder())` line to `RegisterAllBuilders()` in `InfoboxGraphService`.
+4. No DI changes needed — builders are stateless and constructed inline.
+
+### Verification
+
+- Solution builds clean: `dotnet build src/StarWarsData.slnx` — 0 warnings, 0 errors.
+- Unit tests pass: 67/67 (`dotnet test --project src/StarWarsData.Tests --filter "TestCategory=Unit"`).
+- Integration tests pass: 62/62 (`dotnet test --project src/StarWarsData.Tests --filter "TestCategory=Integration"`).
