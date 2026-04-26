@@ -8,6 +8,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using StarWarsData.Models;
 using StarWarsData.Models.Entities;
+using StarWarsData.Services.KnowledgeGraph.Definitions;
 
 namespace StarWarsData.Services.AI.Agents;
 
@@ -55,10 +56,21 @@ public sealed class HolocronAgent
     readonly IMongoCollection<NodeEnrichment> _enrichments;
     readonly IMongoCollection<EdgeEnrichment> _edgeEnrichments;
     readonly IMongoCollection<HolocronEvent> _events;
+    readonly IMongoCollection<RelationshipLabel> _labels;
     readonly IChatClient _chatClient;
     readonly SemanticSearchService? _semanticSearch;
     readonly ILogger<HolocronAgent> _logger;
     readonly SettingsOptions _settings;
+
+    /// <summary>
+    /// Canonical edge-label vocabulary built once at construction from
+    /// <see cref="InfoboxDefinitionRegistry.AllLabelDefinitions"/>. Pre-flight rejects
+    /// any Add-edge proposal whose label isn't in this set, so the agent can't invent
+    /// new synonyms (e.g. <c>employs</c> vs <c>hires</c> vs <c>employer_of</c>). The
+    /// registry is derived from <c>FieldSemantics</c> — the curated mapping from
+    /// infobox field names to canonical edge labels.
+    /// </summary>
+    readonly HashSet<string> _knownLabels;
 
     public HolocronAgent(IMongoClient mongoClient, IOptions<SettingsOptions> settings, IChatClient chatClient, ILogger<HolocronAgent> logger, SemanticSearchService? semanticSearch = null)
     {
@@ -70,9 +82,12 @@ public sealed class HolocronAgent
         _enrichments = db.GetCollection<NodeEnrichment>(Collections.KgEnrichments);
         _edgeEnrichments = db.GetCollection<EdgeEnrichment>(Collections.KgEdgeEnrichments);
         _events = db.GetCollection<HolocronEvent>(Collections.KgEvents);
+        _labels = db.GetCollection<RelationshipLabel>(Collections.KgLabels);
         _chatClient = chatClient;
         _semanticSearch = semanticSearch;
         _logger = logger;
+
+        _knownLabels = InfoboxDefinitionRegistry.AllLabelDefinitions().Select(d => d.Label).ToHashSet(StringComparer.OrdinalIgnoreCase);
     }
 
     // ── Public API ─────────────────────────────────────────────────────────
@@ -420,7 +435,21 @@ public sealed class HolocronAgent
             }
         }
 
-        return new HolocronContext(node, outEdges, inEdges, neighbourNodes, allChunks);
+        // Canonical edge-label vocabulary scoped to this node's type. Top-K by usage so
+        // the agent sees what other nodes of the same type actually use, biasing it
+        // toward consistent labels rather than synonyms. Fall back to top labels overall
+        // if this type is too narrow (e.g. a rare type with no observed labels yet).
+        var labelsForType = await _labels.Find(Builders<RelationshipLabel>.Filter.AnyEq(l => l.FromTypes, node.Type)).SortByDescending(l => l.UsageCount).Limit(25).ToListAsync(ct);
+        if (labelsForType.Count < 5)
+        {
+            // Augment with overall top labels so the agent always has a working vocabulary.
+            var overall = await _labels.Find(Builders<RelationshipLabel>.Filter.Empty).SortByDescending(l => l.UsageCount).Limit(25 - labelsForType.Count).ToListAsync(ct);
+            var seen = labelsForType.Select(l => l.Label).ToHashSet(StringComparer.OrdinalIgnoreCase);
+            labelsForType.AddRange(overall.Where(l => !seen.Contains(l.Label)));
+        }
+        var canonicalLabels = labelsForType.Select(l => new HolocronLabelSummary(l.Label, l.Reverse, l.Description, l.UsageCount)).ToList();
+
+        return new HolocronContext(node, outEdges, inEdges, neighbourNodes, allChunks, canonicalLabels);
     }
 
     // ── LLM call ──────────────────────────────────────────────────────────
@@ -492,6 +521,13 @@ public sealed class HolocronAgent
               `member_of` next to an existing `affiliated_with` between the same pair) creates
               visual clutter and double-counts the same fact. The pre-flight will reject it.
               Use FillGap instead if the existing edge is missing temporal bounds you can fill.
+            - Edge labels MUST come from the canonical list provided in the user prompt under
+              "Canonical edge labels". Do NOT invent new labels. Do NOT coin synonyms. If the
+              relationship you want to express maps to one of the existing labels, use that
+              label exactly as written. If no canonical label fits the relationship, emit
+              nothing for that edge — Holocron does not introduce new vocabulary; that's
+              the wiki's job (via FieldSemantics → Phase 1). The pre-flight will reject any
+              label not in the canonical set.
             - Every proposal MUST cite at least one piece of evidence — either a sourcePageId
               (another KG node's PageId) or a chunkId (a wiki article chunk id) — with an excerpt
               taken verbatim from the source.
@@ -555,7 +591,31 @@ public sealed class HolocronAgent
         }
         sb.Append('\n');
 
-        sb.Append("## Existing outgoing edges (do NOT propose duplicates)\n\n");
+        sb.Append("## Canonical edge labels (you MUST pick from this list — never invent or coin synonyms)\n\n");
+        if (context.CanonicalLabels.Count == 0)
+        {
+            sb.Append("(label registry empty — do NOT propose any edges this run)\n");
+        }
+        else
+        {
+            sb.Append("Each line: `label` (reverse: `reverse_label`) [N uses] — description\n");
+            foreach (var l in context.CanonicalLabels)
+            {
+                sb.AppendFormat(
+                    "- `{0}` (reverse: `{1}`) [{2} uses] — {3}\n",
+                    l.Label,
+                    string.IsNullOrEmpty(l.Reverse) ? "—" : l.Reverse,
+                    l.UsageCount,
+                    string.IsNullOrEmpty(l.Description) ? "(no description)" : l.Description
+                );
+            }
+            sb.AppendLine();
+            sb.AppendLine("If your intended relationship is conceptually identical to one of these labels, USE that label.");
+            sb.AppendLine("Examples of synonym pitfalls — `member_of` ≈ `affiliated_with`, `led` ≈ `commanded`, `employs` ≈ `hires` ≈ `employer_of`. Pick the canonical form.");
+        }
+        sb.Append('\n');
+
+        sb.Append("## Existing outgoing edges (do NOT propose ANY new edge between an already-connected pair)\n\n");
         if (context.OutgoingEdges.Count == 0)
         {
             sb.Append("(none)\n");
@@ -680,7 +740,14 @@ public sealed class HolocronAgent
             .Concat(batch.EdgeProposals.SelectMany(p => p.Evidence.Select(e => (e.ChunkId, e.SourcePageId))))
             .ToList();
 
-        var citedChunkIds = allEvidenceCitations.Select(c => c.ChunkId).Where(id => !string.IsNullOrEmpty(id)).Distinct().ToList();
+        // Filter chunk IDs to well-formed 24-char ObjectId hex strings before the Mongo
+        // lookup. ArticleChunk.Id has [BsonRepresentation(BsonType.ObjectId)], so the
+        // driver converts each string to ObjectId during Filter.In serialization — a
+        // malformed value (the agent has been observed emitting 25-char strings)
+        // throws a FormatException that crashes the whole enhancement. Treat malformed
+        // chunkIds as evidence-validation failures the same way we'd treat a non-existent
+        // chunkId: drop the proposal silently downstream.
+        var citedChunkIds = allEvidenceCitations.Select(c => c.ChunkId).Where(id => !string.IsNullOrEmpty(id) && ObjectId.TryParse(id, out _)).Distinct().ToList();
         var validChunkIds =
             citedChunkIds.Count == 0 ? new HashSet<string>() : new HashSet<string>(await _chunks.Find(Builders<ArticleChunk>.Filter.In(c => c.Id, citedChunkIds!)).Project(c => c.Id).ToListAsync(ct));
 
@@ -843,7 +910,7 @@ public sealed class HolocronAgent
         };
     }
 
-    static bool IsEdgeProposalValid(
+    bool IsEdgeProposalValid(
         HolocronContext context,
         HolocronEdgeProposal prop,
         HashSet<string> existingEdgeKeys,
@@ -854,6 +921,22 @@ public sealed class HolocronAgent
     {
         if (prop.FromId <= 0 || prop.ToId <= 0 || string.IsNullOrWhiteSpace(prop.Label))
             return false;
+
+        // Label must be in the canonical registry — no inventing synonyms. The agent's
+        // prompt teaches this rule but the validator is the load-bearing safety net.
+        // FillGap targets an existing edge so its label is already canonical by construction;
+        // we still re-check Add proposals which are the riskier path.
+        if (!_knownLabels.Contains(prop.Label))
+        {
+            _logger.LogInformation(
+                "HolocronAgent: rejecting edge proposal — label `{Label}` is not in the canonical registry. Proposed: {FromId} -> {ToId} ({Operation})",
+                prop.Label,
+                prop.FromId,
+                prop.ToId,
+                prop.Operation
+            );
+            return false;
+        }
 
         // The enriched edge must touch the node we're enhancing — otherwise the agent
         // is overstepping (it should only enhance the node it was asked to).
@@ -961,10 +1044,18 @@ public sealed class HolocronAgent
         List<RelationshipEdge> OutgoingEdges,
         List<RelationshipEdge> IncomingEdges,
         List<HolocronNeighbourSummary> Neighbours,
-        List<HolocronChunkSummary> Chunks
+        List<HolocronChunkSummary> Chunks,
+        List<HolocronLabelSummary> CanonicalLabels
     );
 
     sealed record HolocronNeighbourSummary(int PageId, string Name, string Type, int? StartYear, int? EndYear);
+
+    /// <summary>
+    /// Edge-label vocabulary surfaced to the agent. Top-K from <c>kg.labels</c>
+    /// where <c>fromTypes</c> contains the target node's type, sorted by usage count.
+    /// The agent must pick a label from this list — pre-flight rejects anything else.
+    /// </summary>
+    sealed record HolocronLabelSummary(string Label, string Reverse, string Description, int UsageCount);
 
     sealed record HolocronChunkSummary(string Id, int PageId, string Title, string Heading, string Section, string Text, ChunkOrigin Origin);
 
