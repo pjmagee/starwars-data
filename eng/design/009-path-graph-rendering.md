@@ -114,7 +114,7 @@ When `Descriptor.PathData` is present, `BuildGraphFromPath()` constructs a `Rela
 
 `"render_path"` added to the tool name check and falls through to the same `"graph"` visualization type as `"render_graph"` (both produce `GraphDescriptor`).
 
-#### 9. Agent system prompt (AgentPrompt.cs)
+#### 9. Agent system prompt (AskAIAgent.cs — historically AgentPrompt.cs)
 
 Updated guidance:
 

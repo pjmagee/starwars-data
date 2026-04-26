@@ -17,7 +17,7 @@ The framework was *not* enforcing any meaningful budget. `Microsoft.Extensions.A
 
 ## Root causes
 
-1. **No code-level budget.** The "10-call limit" lived only in [AgentPrompt.cs:22](../../src/StarWarsData.Services/AI/AgentPrompt.cs#L22) as natural language with no enforcement, and the framework's own `MaximumIterationsPerRequest` was at its default 40. The model had ~7× more headroom than intended.
+1. **No code-level budget.** The "10-call limit" lived only in the AskAI agent's prompt template (then in `AgentPrompt.cs`, now inlined into [AskAIAgent.cs](../../src/StarWarsData.Services/AI/Agents/AskAIAgent.cs)) as natural language with no enforcement, and the framework's own `MaximumIterationsPerRequest` was at its default 40. The model had ~7× more headroom than intended.
 2. **Tool surface too large.** ComponentToolkit + DataExplorerToolkit + GraphRAGToolkit + KGAnalyticsToolkit + keyword_search + 3 MCP tools ≈ ~47 functions in one registry. More tools → noisier pattern-matching → more "one more lookup" loops, especially on lore questions where no single tool answers.
 3. **System prompt was 265 lines.** Routing rules, anti-patterns, and per-tool examples were buried in one giant block. Attention dilution: the model glossed over the efficiency rule because it was line 22 of 265.
 4. **Per-tool guidance lived in the wrong place.** OpenAI/Anthropic function-calling sends each tool's `description` field with the schema at decision time. Putting routing rules in the system prompt instead of the tool descriptions hides them at the moment they matter.
@@ -66,7 +66,7 @@ Each tool's `[Description]` attribute is sent to the model with the function sch
 
 ### 4. System prompt trimmed
 
-[AgentPrompt.cs](../../src/StarWarsData.Services/AI/AgentPrompt.cs) shrunk from 265 lines to ~55. What stayed:
+The AskAI agent's prompt template (now inlined into [AskAIAgent.cs](../../src/StarWarsData.Services/AI/Agents/AskAIAgent.cs); originally `AgentPrompt.cs`) shrunk from 265 lines to ~55. What stayed:
 
 - Identity, safety, message-metadata convention
 - The cross-cutting hard rules: budget, no fabrication, render-tool stop condition, mobileSummary requirement

@@ -8,6 +8,7 @@ using MongoDB.Driver;
 using OpenAI;
 using StarWarsData.Models;
 using StarWarsData.Services;
+using StarWarsData.Services.AI.Agents;
 
 namespace StarWarsData.Tests.Infrastructure;
 
@@ -150,7 +151,7 @@ public static class AgentFixture
         {
             ChatOptions = new ChatOptions
             {
-                Instructions = AgentPrompt.GetInstructions(DatabaseName),
+                Instructions = AskAIAgent.BuildInstructions(DatabaseName),
                 Tools = Tools,
                 Temperature = 0f,
             },
