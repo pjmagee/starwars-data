@@ -62,8 +62,26 @@ public class SettingsOptions
     /// <summary>Max 1-hop neighbours included in the agent's context window per enhancement call.</summary>
     public int HolocronMaxNeighborsForContext { get; set; } = 10;
 
-    /// <summary>Max article-chunk excerpts included in the agent's context window per enhancement call.</summary>
-    public int HolocronMaxChunksForContext { get; set; } = 5;
+    /// <summary>
+    /// Article-chunk budget split across three sources. The total = own + linking + vector
+    /// is the number of chunk excerpts the agent sees per enhancement call. Tune to balance
+    /// context richness against token cost.
+    /// </summary>
+    public int HolocronOwnPageChunks { get; set; } = 3;
+
+    /// <summary>
+    /// How many chunks to pull from pages that LINK TO the target node (top-K incoming-edge
+    /// sources, filtered to chunks where the target's name appears). Surfaces what *other*
+    /// pages say about the target.
+    /// </summary>
+    public int HolocronLinkingPageChunks { get; set; } = 5;
+
+    /// <summary>
+    /// How many vector-similar chunks to pull from across the corpus (excluding the target's
+    /// own page). Surfaces tangentially-related passages the link graph might not catch.
+    /// Requires <c>SemanticSearchService</c> to be registered in DI; degrades to 0 otherwise.
+    /// </summary>
+    public int HolocronVectorChunks { get; set; } = 5;
 
     /// <summary>Max length (chars) of a chunk excerpt included in the prompt before truncation.</summary>
     public int HolocronMaxChunkExcerptLength { get; set; } = 600;

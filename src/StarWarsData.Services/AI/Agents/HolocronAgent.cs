@@ -56,10 +56,11 @@ public sealed class HolocronAgent
     readonly IMongoCollection<EdgeEnrichment> _edgeEnrichments;
     readonly IMongoCollection<HolocronEvent> _events;
     readonly IChatClient _chatClient;
+    readonly SemanticSearchService? _semanticSearch;
     readonly ILogger<HolocronAgent> _logger;
     readonly SettingsOptions _settings;
 
-    public HolocronAgent(IMongoClient mongoClient, IOptions<SettingsOptions> settings, IChatClient chatClient, ILogger<HolocronAgent> logger)
+    public HolocronAgent(IMongoClient mongoClient, IOptions<SettingsOptions> settings, IChatClient chatClient, ILogger<HolocronAgent> logger, SemanticSearchService? semanticSearch = null)
     {
         _settings = settings.Value;
         var db = mongoClient.GetDatabase(_settings.DatabaseName);
@@ -70,6 +71,7 @@ public sealed class HolocronAgent
         _edgeEnrichments = db.GetCollection<EdgeEnrichment>(Collections.KgEdgeEnrichments);
         _events = db.GetCollection<HolocronEvent>(Collections.KgEvents);
         _chatClient = chatClient;
+        _semanticSearch = semanticSearch;
         _logger = logger;
     }
 
@@ -312,8 +314,16 @@ public sealed class HolocronAgent
     // ── Context gathering ─────────────────────────────────────────────────
 
     /// <summary>
-    /// Pull the target node, a token-budgeted set of 1-hop neighbours, and a sample of article
-    /// chunks for the source page. Returns null if the node doesn't exist.
+    /// Pull the target node, 1-hop neighbours, and article chunks from three sources:
+    /// (1) the target's own page, (2) pages that link to the target with passages mentioning
+    /// it by name, and (3) vector-similar chunks from across the corpus. Returns null if
+    /// the node doesn't exist.
+    ///
+    /// The three-source split is the difference between "the agent confirms what the wiki
+    /// already says about this node" (own-page only) and "the agent surfaces what *other*
+    /// pages say *about* this node" (linking + vector). Without (2) and (3), the agent
+    /// has no access to cross-references the wiki has but the infobox didn't capture.
+    /// See Design-018 "Cross-page context gathering".
     /// </summary>
     async Task<HolocronContext?> BuildContextAsync(int pageId, CancellationToken ct)
     {
@@ -337,15 +347,80 @@ public sealed class HolocronAgent
                     .Project(n => new HolocronNeighbourSummary(n.PageId, n.Name, n.Type, n.StartYear, n.EndYear))
                     .ToListAsync(ct);
 
-        var maxChunks = Math.Max(1, _settings.HolocronMaxChunksForContext);
-        var chunks = await _chunks
-            .Find(Builders<ArticleChunk>.Filter.Eq(c => c.PageId, pageId))
-            .SortBy(c => c.ChunkIndex)
-            .Limit(maxChunks)
-            .Project(c => new HolocronChunkSummary(c.Id, c.PageId, c.Title, c.Heading, c.Section, c.Text))
-            .ToListAsync(ct);
+        var allChunks = new List<HolocronChunkSummary>();
 
-        return new HolocronContext(node, outEdges, inEdges, neighbourNodes, chunks);
+        // Source 1 — own-page chunks (highest authority for what the wiki asserts about
+        // the target itself; already part of the canonical infobox-derived view).
+        var ownLimit = Math.Max(0, _settings.HolocronOwnPageChunks);
+        if (ownLimit > 0)
+        {
+            var ownChunks = await _chunks
+                .Find(Builders<ArticleChunk>.Filter.Eq(c => c.PageId, pageId))
+                .SortBy(c => c.ChunkIndex)
+                .Limit(ownLimit)
+                .Project(c => new HolocronChunkSummary(c.Id, c.PageId, c.Title, c.Heading, c.Section, c.Text, ChunkOrigin.OwnPage))
+                .ToListAsync(ct);
+            allChunks.AddRange(ownChunks);
+        }
+
+        // Source 2 — linking-page chunks. For each top incoming-edge source, pull chunks
+        // where the target's name appears as a substring. This is what makes the cross-page
+        // story work: when enhancing Yoda, we want chunks from Padmé's page that mention
+        // Yoda, not just Yoda's own page.
+        var linkingLimit = Math.Max(0, _settings.HolocronLinkingPageChunks);
+        if (linkingLimit > 0 && inEdges.Count > 0 && !string.IsNullOrWhiteSpace(node.Name))
+        {
+            // Top-K linking pages by edge weight; cap at linkingLimit so we don't fan out further.
+            var linkingPageIds = inEdges.Select(e => e.FromId).Distinct().Take(linkingLimit).ToList();
+            var perPageLimit = Math.Max(1, linkingLimit / Math.Max(1, linkingPageIds.Count)) + 1;
+
+            // Case-insensitive substring match on the chunk text. MongoSafe-escape the name in case
+            // it contains regex metachars (e.g. "Obi-Wan", "R2-D2").
+            var nameRegex = new BsonRegularExpression(System.Text.RegularExpressions.Regex.Escape(node.Name), "i");
+            var linkingFilter = Builders<ArticleChunk>.Filter.In(c => c.PageId, linkingPageIds) & Builders<ArticleChunk>.Filter.Regex(c => c.Text, nameRegex);
+            var linkingChunks = await _chunks
+                .Find(linkingFilter)
+                .SortBy(c => c.PageId)
+                .ThenBy(c => c.ChunkIndex)
+                .Limit(linkingLimit * perPageLimit) // small overshoot — we'll take linkingLimit total below
+                .Project(c => new HolocronChunkSummary(c.Id, c.PageId, c.Title, c.Heading, c.Section, c.Text, ChunkOrigin.LinkingPage))
+                .ToListAsync(ct);
+
+            // Take at most `perPageLimit` chunks per source page so one verbose article doesn't crowd out others.
+            var groupedByPage = linkingChunks.GroupBy(c => c.PageId).SelectMany(g => g.Take(perPageLimit)).Take(linkingLimit).ToList();
+            allChunks.AddRange(groupedByPage);
+        }
+
+        // Source 3 — vector-similar chunks. SemanticSearchService is registered in API but
+        // optional in Admin (the Hangfire job path). When unavailable, just skip — we still
+        // have own + linking coverage.
+        var vectorLimit = Math.Max(0, _settings.HolocronVectorChunks);
+        if (vectorLimit > 0 && _semanticSearch is not null && !string.IsNullOrWhiteSpace(node.Name))
+        {
+            // Compose a focused query — name + type biases the vector search toward chunks
+            // discussing the target itself rather than the type's category broadly.
+            var query = $"{node.Name} ({node.Type})";
+            try
+            {
+                // Over-fetch a bit then filter out the target's own page (which is already in
+                // source 1) and any pages we already covered in source 2.
+                var coveredPageIds = allChunks.Select(c => c.PageId).ToHashSet();
+                coveredPageIds.Add(pageId);
+
+                var hits = await _semanticSearch.SearchAsync(query, types: null, continuity: null, realm: null, limit: vectorLimit * 3, minScore: 0.0);
+                var vectorChunks = hits.Where(h => !coveredPageIds.Contains(h.PageId) && !string.IsNullOrEmpty(h.ChunkId))
+                    .Take(vectorLimit)
+                    .Select(h => new HolocronChunkSummary(h.ChunkId, h.PageId, h.Title, h.Heading, h.Section, h.Text, ChunkOrigin.VectorSimilar))
+                    .ToList();
+                allChunks.AddRange(vectorChunks);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, "HolocronAgent: vector search failed for PageId={PageId} ({Name}); continuing with own-page + linking-page chunks only.", pageId, node.Name);
+            }
+        }
+
+        return new HolocronContext(node, outEdges, inEdges, neighbourNodes, allChunks);
     }
 
     // ── LLM call ──────────────────────────────────────────────────────────
@@ -417,6 +492,11 @@ public sealed class HolocronAgent
               (another KG node's PageId) or a chunkId (a wiki article chunk id) — with an excerpt
               taken verbatim from the source.
             - Cite from the article chunks and neighbour nodes provided. Do not invent sources.
+            - The chunks come from THREE sources, listed in the user prompt under labelled sections:
+              (1) the target's own page — high authority for what the wiki already asserts about it,
+              (2) pages that LINK TO the target — best source for missing relationships and cross-references,
+              (3) vector-similar passages from across the corpus — useful when they mention the target
+                  by name, otherwise prefer (1) and (2).
             - When unsure or evidence is weak, emit nothing. Quality over quantity.
             - You may propose 0 enrichments. An empty result is correct when nothing is missing.
 
@@ -519,22 +599,45 @@ public sealed class HolocronAgent
         sb.Append("## Article chunks (your primary evidence source — cite chunkId in evidence)\n\n");
         if (context.Chunks.Count == 0)
         {
-            sb.Append("(no chunks for this page yet — proceed with neighbours only or emit nothing)\n");
+            sb.Append("(no chunks available — proceed with neighbours only or emit nothing)\n");
         }
         else
         {
-            foreach (var c in context.Chunks)
-            {
-                sb.AppendFormat("### chunkId: {0}  (section: {1})\n", c.Id, string.IsNullOrEmpty(c.Section) ? c.Heading : c.Section);
-                sb.AppendLine(Truncate(c.Text, _settings.HolocronMaxChunkExcerptLength));
-                sb.AppendLine();
-            }
+            // Group chunks by origin so the agent can weight evidence appropriately.
+            // Same target/page authority hierarchy: target's own page > linking page > vector-similar.
+            RenderChunkSection(sb, "Target's own page (highest authority for what the wiki asserts about this entity)", context.Chunks.Where(c => c.Origin == ChunkOrigin.OwnPage));
+            RenderChunkSection(
+                sb,
+                "Pages that link to this entity (what *other* articles say *about* it — best source for missing relationships and context)",
+                context.Chunks.Where(c => c.Origin == ChunkOrigin.LinkingPage)
+            );
+            RenderChunkSection(sb, "Vector-similar passages from across the corpus (use cautiously — may be tangentially related)", context.Chunks.Where(c => c.Origin == ChunkOrigin.VectorSimilar));
         }
 
         sb.AppendLine("---");
         sb.AppendLine("Now produce the JSON proposal batch. Remember: only Add / Augment / FillGap, every proposal cites real evidence, do not contradict the infobox.");
+        sb.AppendLine("Prefer evidence from the target's own page or linking pages. Vector-similar chunks are useful when they directly mention the target by name.");
 
         return sb.ToString();
+    }
+
+    /// <summary>
+    /// Render one labelled chunk block in the user prompt, with chunkId + page context for citation.
+    /// Produces no output when the source has no chunks (avoids empty headers cluttering the prompt).
+    /// </summary>
+    void RenderChunkSection(StringBuilder sb, string heading, IEnumerable<HolocronChunkSummary> chunks)
+    {
+        var list = chunks.ToList();
+        if (list.Count == 0)
+            return;
+
+        sb.AppendFormat("### {0}\n\n", heading);
+        foreach (var c in list)
+        {
+            sb.AppendFormat("**chunkId: {0}** (PageId={1}, page=\"{2}\", section: {3})\n", c.Id, c.PageId, c.Title, string.IsNullOrEmpty(c.Section) ? c.Heading : c.Section);
+            sb.AppendLine(Truncate(c.Text, _settings.HolocronMaxChunkExcerptLength));
+            sb.AppendLine();
+        }
     }
 
     static string Truncate(string s, int max) => s.Length > max ? s[..max] + "…" : s;
@@ -828,7 +931,20 @@ public sealed class HolocronAgent
 
     sealed record HolocronNeighbourSummary(int PageId, string Name, string Type, int? StartYear, int? EndYear);
 
-    sealed record HolocronChunkSummary(string Id, int PageId, string Title, string Heading, string Section, string Text);
+    sealed record HolocronChunkSummary(string Id, int PageId, string Title, string Heading, string Section, string Text, ChunkOrigin Origin);
+
+    /// <summary>
+    /// Where a context chunk came from. Surfaced in the user prompt so the agent
+    /// can weight its evidence — own-page text is highest authority for what the
+    /// wiki asserts about the target; linking-page text shows the target from
+    /// other perspectives; vector-similar can be tangential.
+    /// </summary>
+    enum ChunkOrigin
+    {
+        OwnPage,
+        LinkingPage,
+        VectorSimilar,
+    }
 
     /// <summary>Top-level structured-output target — the LLM emits exactly this shape.</summary>
     public sealed record HolocronProposalsBatch(

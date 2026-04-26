@@ -88,7 +88,7 @@ public class SemanticSearchService
             "$project",
             new BsonDocument
             {
-                { MongoFields.Id, 0 },
+                { MongoFields.Id, 1 }, // include chunk _id so callers can cite it (HolocronAgent evidence)
                 { ArticleChunkBsonFields.PageId, 1 },
                 { ArticleChunkBsonFields.Title, 1 },
                 { "heading", 1 },
@@ -109,6 +109,7 @@ public class SemanticSearchService
         return docs.Where(d => d.Contains("score") && d["score"].AsDouble >= minScore)
             .Select(d => new SearchHit
             {
+                ChunkId = d.Contains(MongoFields.Id) ? d[MongoFields.Id].AsObjectId.ToString() : "",
                 PageId = d[ArticleChunkBsonFields.PageId].AsInt32,
                 Title = d[ArticleChunkBsonFields.Title].AsString,
                 Heading = d.Contains("heading") && !d["heading"].IsBsonNull ? d["heading"].AsString : "",

@@ -95,6 +95,11 @@ builder
             .Build();
     })
     .AddScoped<StarWarsData.Services.AI.Agents.SuggestionAgent>()
+    // SemanticSearchService is needed by the daily Holocron pass for vector-similar chunk
+    // gathering. It's optional (HolocronAgent has a nullable injection) so its absence
+    // wouldn't break the agent — but since we already have IEmbeddingGenerator wired below
+    // for ArticleChunkingService, registering it costs nothing and unlocks vector context.
+    .AddSingleton<StarWarsData.Services.SemanticSearchService>()
     .AddScoped<StarWarsData.Services.AI.Agents.HolocronAgent>()
     .AddSingleton<JobToggleService>()
     .AddSingleton<PageDownloader>()

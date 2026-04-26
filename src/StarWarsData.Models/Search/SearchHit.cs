@@ -6,6 +6,8 @@ namespace StarWarsData.Models.Entities;
 /// </summary>
 public class SearchHit
 {
+    /// <summary>The matching chunk's <c>_id</c> in <c>search.chunks</c>. Empty for keyword-search hits where chunk identity isn't tracked.</summary>
+    public string ChunkId { get; set; } = "";
     public int PageId { get; set; }
     public string Title { get; set; } = "";
     public string Heading { get; set; } = "";
