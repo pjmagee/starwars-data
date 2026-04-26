@@ -367,53 +367,65 @@
                                             }
                                             else if (_expandedNodeEnrichments is { Count: > 0 })
                                             {
-                                                <MudStack Spacing="2">
-                                                    @foreach (var en in _expandedNodeEnrichments)
-                                                    {
-                                                        <MudPaper Outlined="true" Class="pa-2" Style="border-color: var(--mud-palette-secondary); border-left-width: 3px;">
-                                                            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-1">
-                                                                <MudChip T="string" Size="Size.Small" Color="Color.Secondary" Variant="Variant.Filled">@en.Operation</MudChip>
-                                                                <MudText HtmlTag="span" Typo="Typo.body2" Style="font-weight:600; text-transform:capitalize;">@FormatPropertyKey(en.FieldPath)</MudText>
-                                                                @if (en.AppliedAt.HasValue)
-                                                                {
-                                                                    <MudText HtmlTag="span" Typo="Typo.caption" Color="Color.Secondary">@en.AppliedAt.Value.ToLocalTime().ToString("yyyy-MM-dd")</MudText>
-                                                                }
-                                                            </MudStack>
-                                                            @if (en.Values is { Count: > 0 })
-                                                            {
-                                                                <MudText Typo="Typo.body2" Class="mb-1">@string.Join(", ", en.Values)</MudText>
-                                                            }
-                                                            <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-2">@en.Claim</MudText>
+                                                @* Same MudSimpleTable layout as the Phase 1 Attributes table, with two extra
+                                                     stacked elements on the value cell: the agent's claim (caption, secondary
+                                                     colour) and the evidence excerpts (collapsible link). The "Op" chip in the
+                                                     field cell distinguishes Add (whole new property) from Augment (extra values
+                                                     on a Phase 1 list). Matching styling to the Phase 1 table — per user feedback:
+                                                     Phase 2 should look like a peer of Phase 1, not a different visual category. *@
+                                                <MudSimpleTable Dense="true" Bordered="true" Striped="true" Style="font-size:13px;">
+                                                    <tbody>
+                                                        @foreach (var en in _expandedNodeEnrichments)
+                                                        {
+                                                            <tr>
+                                                                <td style="font-weight:600; white-space:nowrap; width:1%; padding:4px 8px; vertical-align:top; text-transform:capitalize;">
+                                                                    <MudChip T="string" Size="Size.Small" Color="Color.Secondary" Variant="Variant.Filled" Class="mr-1">@en.Operation</MudChip>
+                                                                    @FormatPropertyKey(en.FieldPath)
+                                                                </td>
+                                                                <td style="padding:4px 8px;">
+                                                                    @if (en.Values is { Count: > 0 })
+                                                                    {
+                                                                        <MudText Typo="Typo.body2">@string.Join(", ", en.Values)</MudText>
+                                                                    }
+                                                                    <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mt-1" Style="display:block; font-style:italic;">@en.Claim</MudText>
 
-                                                            @if (en.Evidence is { Count: > 0 })
-                                                            {
-                                                                <MudText Typo="Typo.caption" Style="display:block; font-weight:600;">
-                                                                    @($"Evidence ({en.Evidence.Count})")
-                                                                </MudText>
-                                                                @foreach (var ev in en.Evidence)
-                                                                {
-                                                                    <div style="border-left: 2px solid var(--mud-palette-divider); padding-left:8px; margin-top:4px;">
-                                                                        @if (ev.SourcePageId.HasValue)
+                                                                    @if (en.Evidence is { Count: > 0 })
+                                                                    {
+                                                                        var enrichmentId = en.Id;
+                                                                        var isExpanded = _expandedEnrichmentEvidence.Contains(enrichmentId);
+                                                                        <MudButton Size="Size.Small" Variant="Variant.Text" Color="Color.Secondary" Class="mt-1 px-1"
+                                                                                   StartIcon="@(isExpanded ? Icons.Material.Filled.ExpandLess : Icons.Material.Filled.ExpandMore)"
+                                                                                   OnClick="@(() => ToggleEnrichmentEvidence(enrichmentId))">
+                                                                            @($"{(isExpanded ? "Hide" : "Show")} {en.Evidence.Count} source{(en.Evidence.Count == 1 ? "" : "s")}")
+                                                                        </MudButton>
+                                                                        @if (isExpanded)
                                                                         {
-                                                                            <MudLink Href="@($"/graph-explorer/{ev.SourcePageId.Value}")" Underline="Underline.Hover" Typo="Typo.caption">
-                                                                                @(ev.SourcePageName ?? $"PageId {ev.SourcePageId}")
+                                                                            @foreach (var ev in en.Evidence)
+                                                                            {
+                                                                                <div style="border-left:2px solid var(--mud-palette-secondary); padding-left:8px; margin-top:4px;">
+                                                                                    @if (ev.SourcePageId.HasValue)
+                                                                                    {
+                                                                                        <MudLink Href="@($"/graph-explorer/{ev.SourcePageId.Value}")" Underline="Underline.Hover" Typo="Typo.caption">
+                                                                                            @(ev.SourcePageName ?? $"PageId {ev.SourcePageId}")
+                                                                                        </MudLink>
+                                                                                    }
+                                                                                    <MudText Typo="Typo.caption" Style="display:block; font-style:italic;">"@ev.Excerpt"</MudText>
+                                                                                </div>
+                                                                            }
+                                                                            <MudLink Href="@($"/holocron?pageId={context.Id}")" Typo="Typo.caption" Class="mt-1" Style="display:block;">
+                                                                                See full Holocron entry →
                                                                             </MudLink>
                                                                         }
-                                                                        <MudText Typo="Typo.caption" Style="display:block; font-style:italic;">"@ev.Excerpt"</MudText>
-                                                                    </div>
-                                                                }
-                                                            }
-
-                                                            <MudLink Href="@($"/holocron?pageId={context.Id}")" Typo="Typo.caption" Class="mt-2" Style="display:block;">
-                                                                See full Holocron entry →
-                                                            </MudLink>
-                                                        </MudPaper>
-                                                    }
-                                                </MudStack>
+                                                                    }
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </MudSimpleTable>
                                             }
                                             else
                                             {
-                                                <MudText Typo="Typo.body2" Color="Color.Secondary">No Holocron enhancements yet — run the agent on this node from the Graph Explorer.</MudText>
+                                                <MudText Typo="Typo.body2" Color="Color.Secondary">No Holocron enhancements yet — click "Enhance with Holocron" above to run the agent on this node.</MudText>
                                             }
                                         </MudItem>
                                     </MudGrid>
@@ -720,6 +732,16 @@
     // Renders in the Holocron-added attributes panel beside the Phase 1 attributes table.
     private List<EntityNodeEnrichmentRow>? _expandedNodeEnrichments;
     private bool _expandedNodeEnrichmentsLoading;
+
+    // Per-enrichment evidence-toggle state. Empty by default → claim only renders, evidence
+    // hidden behind a "Show N sources" link. Mirrors the Holocron Log row-expand pattern.
+    private readonly HashSet<string> _expandedEnrichmentEvidence = new();
+
+    private void ToggleEnrichmentEvidence(string enrichmentId)
+    {
+        if (!_expandedEnrichmentEvidence.Add(enrichmentId))
+            _expandedEnrichmentEvidence.Remove(enrichmentId);
+    }
 
     // Holocron in-flight: tracked by PageId so the right row's button shows the spinner while
     // the agent runs. Null when no enhance is in progress. Other rows' buttons stay disabled
