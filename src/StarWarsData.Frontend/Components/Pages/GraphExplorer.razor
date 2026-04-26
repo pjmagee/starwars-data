@@ -82,16 +82,37 @@
         <MudPaper Class="pa-3 mb-4" Outlined="true">
             <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
                 <MudText Typo="Typo.h6">@_selectedEntityName</MudText>
-                @if (_loadingLabels)
-                {
-                    <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Info" />
-                }
-                else if (_availableLabels is not { Count: > 0 })
-                {
-                    <MudText Typo="Typo.caption" Color="Color.Warning">
-                        No relationship labels found for this entity.
-                    </MudText>
-                }
+                <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                    @* Holocron enhancement is admin-only — gates the LLM cost while we evaluate. *@
+                    <AuthorizeView Roles="admin" Context="auth">
+                        <MudTooltip Text="Run the Holocron agent on this node — gathers context, calls the LLM, writes evidence-backed enrichments to kg.enrichments / kg.edge_enrichments.">
+                            <MudButton Variant="Variant.Outlined" Color="Color.Tertiary" Size="Size.Small"
+                                       StartIcon="@Icons.Material.Filled.AutoFixHigh"
+                                       Disabled="_holocronRunning"
+                                       OnClick="EnhanceWithHolocron">
+                                @if (_holocronRunning)
+                                {
+                                    <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" />
+                                    <span>Enhancing…</span>
+                                }
+                                else
+                                {
+                                    <span>Enhance with Holocron</span>
+                                }
+                            </MudButton>
+                        </MudTooltip>
+                    </AuthorizeView>
+                    @if (_loadingLabels)
+                    {
+                        <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Info" />
+                    }
+                    else if (_availableLabels is not { Count: > 0 })
+                    {
+                        <MudText Typo="Typo.caption" Color="Color.Warning">
+                            No relationship labels found for this entity.
+                        </MudText>
+                    }
+                </MudStack>
             </MudStack>
         </MudPaper>
     }
@@ -169,7 +190,60 @@
     // Navigation
     private List<(int Id, string Name)> _history = [];
 
+    // Holocron enhancement (admin-only — POST /api/holocron/enhance/{pageId})
+    private bool _holocronRunning;
+
     private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
+
+    private async Task EnhanceWithHolocron()
+    {
+        if (_selectedEntityId <= 0 || _holocronRunning)
+            return;
+
+        _holocronRunning = true;
+        try
+        {
+            var response = await Api.PostAsync($"api/holocron/enhance/{_selectedEntityId}", content: null);
+            if (response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
+            {
+                Snackbar.Add("Holocron is disabled in Settings. Set Settings.HolocronEnabled = true to run.", Severity.Warning);
+                return;
+            }
+            if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+            {
+                Snackbar.Add("Holocron enhancement requires admin role.", Severity.Error);
+                return;
+            }
+            if (!response.IsSuccessStatusCode)
+            {
+                Snackbar.Add($"Holocron call failed ({(int)response.StatusCode} {response.ReasonPhrase}).", Severity.Error);
+                return;
+            }
+
+            var summary = await response.Content.ReadFromJsonAsync<HolocronEnhanceResult>();
+            if (summary is null)
+            {
+                Snackbar.Add("Holocron returned an empty response.", Severity.Warning);
+                return;
+            }
+
+            var msg = summary.EnrichmentsCreated == 0 && summary.EvidenceFailures == 0
+                ? $"{_selectedEntityName}: nothing to enrich (agent emitted no proposals)."
+                : $"{_selectedEntityName}: {summary.EnrichmentsCreated} enrichment(s) written, {summary.EvidenceFailures} evidence failure(s).";
+            Snackbar.Add(msg, summary.EnrichmentsCreated > 0 ? Severity.Success : Severity.Info);
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Holocron call errored: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _holocronRunning = false;
+        }
+    }
+
+    /// <summary>Mirror of <c>StarWarsData.Services.AI.Agents.NodeEnhancementSummary</c> for response deserialisation.</summary>
+    private sealed record HolocronEnhanceResult(int PageId, int EnrichmentsCreated, int EvidenceFailures);
 
     private void AppendGlobalFilters(System.Collections.Specialized.NameValueCollection query)
     {
