@@ -377,13 +377,77 @@ These are pending decisions that block detailed implementation but not the high-
 
 This design lands in stages, each on its own branch:
 
-1. **Stage A** (`feature/agents-folder-refactor`): structural refactor of existing agents into `Services/AI/Agents/`. No behaviour change. Zero risk.
-2. **Stage B** (`feature/holocron-skeleton`): new collections (`kg.enrichments`, `kg.edge_enrichments`, `kg.events`), Mongo views, schema validators, Mongo migration scripts, `HolocronAgent` skeleton with a stub `EnhanceNodeAsync`. The view is created but no enrichments exist yet — every consumer that opts in sees the unenriched node.
-3. **Stage C** (`feature/holocron-enhancement-logic`): the actual LLM-driven enhancement logic, toolkit, prompt, Hangfire schedule. First real enrichments land in `starwars-dev`.
-4. **Stage D** (`feature/holocron-changelog-ui`): API endpoint over `kg.events`, Frontend page, navigation.
-5. **Stages E1–E9** (per-consumer migration PRs): one per consumer, in the order tabulated above.
+1. **Stage A** ✅ shipped — structural refactor of existing agents into `Services/AI/Agents/`. Commit `5aea4644f5..e9a0637bc3` on `main`.
+2. **Stage B** ✅ shipped on branch `feature/holocron-skeleton` — collections + views + validators + skeleton class.
+3. **v1 policy lockdown** ✅ shipped on same branch — Refine forbidden, FillGap added.
+4. **Stage C** ✅ shipped on same branch — LLM pipeline, Hangfire schedule, manual admin endpoints, per-node Enhance button on Graph Explorer.
+5. **Stage D** ✅ shipped on same branch — Holocron Log page at `/holocron`, paginated, public read, expandable evidence.
+6. **Cross-page context gathering** 🔴 **REQUIRED — CURRENT GAP** — see "Cross-page context" section below. The agent currently only reads the target page's own chunks; it must also read content from linking pages and vector-similar passages.
+7. **Stages E1–E9** (per-consumer migration PRs) ⏳ none done — `kg.nodes.enriched` and `kg.edges.enriched` views are created but no read consumer points at them yet, so existing UI doesn't show enrichments.
 
-Stages A and B are precondition gates; C–E run in parallel once they land.
+Branch `feature/holocron-skeleton` carries Stages B+v1+C+D as 7 stacked commits — not yet merged to main.
+
+## Cross-page context gathering — open work
+
+Surfaced during the first end-to-end test (2026-04-26, Yoda PageId=452890). The current `BuildContextAsync` in `HolocronAgent` only reads chunks from the target page itself:
+
+```csharp
+var chunks = await _chunks
+    .Find(Builders<ArticleChunk>.Filter.Eq(c => c.PageId, pageId))  // <-- target only
+    .SortBy(c => c.ChunkIndex)
+    .Limit(maxChunks)
+    .ToListAsync(ct);
+```
+
+So when enhancing Yoda, the agent saw "Padmé Amidala" and "Jedi High Council" only as `(PageId, Name, Type, StartYear, EndYear)` summaries — never the actual content of those pages. Every enrichment was sourced from Yoda's own article. That's strictly less than the user's mental model: the agent should also be reading what *other* pages say *about* the target.
+
+### Proposed fix (next implementation step)
+
+Two complementary chunk-fetching strategies, both bounded by the existing `HolocronMaxChunksForContext`:
+
+1. **Cross-corpus vector search** — embed the target's name + key infobox fields, vector-search `search.chunks` (excluding the target's own page) for top-K most relevant chunks. Pulls in passages from any page that talks about the node, even if there's no direct edge yet. Uses the existing `SemanticSearchService`.
+2. **Linking-page chunks** — for each top-K incoming-edge source page, pull the first 1–2 chunks where the target's name appears (text search). Cheaper than vector; pairs naturally with the existing edge graph.
+
+Suggested split of the existing budget: 3 own-page + 5 linking-page + 5 vector. Stays bounded; significantly more material for the agent to draw on.
+
+### Why this matters
+
+The whole point of Holocron is to find connections the wiki has but the infobox didn't capture. Most of those connections live in *other articles' prose* — "Anakin's relationship with Padmé" is described in Padmé's article, the Battle of Geonosis article, the Episode II article, etc. Reading only the target's own page misses the cross-references the agent is supposed to surface.
+
+## Implementation notes / lessons learned
+
+### OpenAI strict-output schema rejects shared `$ref` deeper than top-level
+
+Caught during the first end-to-end test. The `.NET JsonSchemaExporter` emits a `$ref` to a shared `definitions` entry whenever a record type is referenced from multiple places. OpenAI's strict structured-output mode rejects refs deeper than the top-level `$defs`:
+
+```text
+HTTP 400 (invalid_request_error: invalid_json_schema)
+Invalid schema for response_format 'holocron_proposals': In context=
+('properties', 'edgeProposals', 'items', 'properties', 'evidence', 'items'),
+reference can only point to definitions defined at the top level of the schema.
+```
+
+**Rule of thumb**: when defining records used as `ChatResponseFormat.ForJsonSchema<T>()` payloads, **never share a child record across two collection-typed properties**. Duplicate the record (e.g. `NodeProposalEvidence` + `EdgeProposalEvidence`) so the generator inlines each copy. Common helpers can still operate over a tuple/interface projection.
+
+### `HolocronEnabled` not forwarded by AppHost
+
+The AppHost only forwards a curated set of `Settings__*` env vars to the API child process (`OpenAiKey`, `DatabaseName`, `HangfireEnabled`, `KeycloakAdminClientSecret`). For the kill switch to work via the AppHost's user-secrets, we'd need to add `WithEnvironment("Settings__HolocronEnabled", ...)` to the apiservice + admin chains. Until then, `Settings:HolocronEnabled` must be set on the **API service's own** user-secrets (`UserSecretsId` was added to its csproj as part of the Stage C fix).
+
+### Schema validators caveat
+
+The Mongo `$jsonSchema` validators on `kg.enrichments` / `kg.edge_enrichments` / `kg.events` are in `moderate / warn` mode. They log violations but don't reject documents. Once the agent's output stabilises, promote to `error`.
+
+## Verified output (2026-04-26 dev test)
+
+Single-node enhance on Yoda (PageId=452890) produced 2 valid enrichments + 1 evidence failure (dropped — invalid chunk citation):
+
+| Type | Detail |
+| --- | --- |
+| Node enrichment | `properties.occupations += "Jedi Grand Master"` with chunk evidence + reasoning |
+| Edge enrichment | `Yoda --led--> Jedi High Council` (Add), `toYear: -19` (Order 66), `weight: 0.91` |
+| Events | 2 × `EnrichmentCreated`, `triggeredBy: "manual"`, `agentVersion: "holocron-v1.0.0"`, `modelId: "gpt-5.4"` |
+
+The Holocron Log page renders both correctly, with clickable node links, full evidence excerpts, agent reasoning, and proposed-value JSON. The pre-flight validator dropped the third proposal because its cited chunkId didn't resolve to a real `search.chunks._id`.
 
 ## Verification
 
