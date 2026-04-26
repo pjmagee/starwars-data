@@ -39,10 +39,12 @@ public class RelationshipGraphController(KnowledgeGraphQueryService kg) : Contro
 
     /// <summary>
     /// Per-edge rows for a node, projected from the node's perspective with Phase 2 annotation
-    /// context inline. Backs the relationships table on the Knowledge Graph node-detail panel.
+    /// context inline. Backs the virtualised relationships table on the Knowledge Graph
+    /// node-detail panel — a single fetch returns up to <c>limit</c> rows and the table
+    /// virtualises rendering, so high-degree nodes (Anakin: 671 edges) scroll smoothly.
     /// </summary>
     [HttpGet("edges/{pageId:int}")]
-    public Task<EntityEdgesResult> GetEdges(int pageId, [FromQuery] int limit = 50, CancellationToken ct = default) => kg.GetEdgesForEntityAsync(pageId, limit, ct);
+    public Task<EntityEdgesResult> GetEdges(int pageId, [FromQuery] int limit = 500, CancellationToken ct = default) => kg.GetEdgesForEntityAsync(pageId, limit, ct);
 
     [HttpGet("temporal-nodes")]
     public Task<BrowseTemporalNodesResult> BrowseTemporalNodes(

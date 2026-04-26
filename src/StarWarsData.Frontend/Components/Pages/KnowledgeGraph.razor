@@ -390,7 +390,12 @@
                                         <MudText Typo="Typo.body2" Color="Color.Secondary">No relationships found.</MudText>
                                     }
 
-                                    @* ── Edges table — per-edge view with Phase 2 annotation context inline ── *@
+                                    @* ── Edges table — virtualised per-edge view with Phase 2 annotation context inline.
+                                         Virtualize=true keeps high-degree nodes (Anakin: 671 edges) scrolling smoothly without
+                                         server-side pagination. ItemSize is the average row height in px and feeds the virtualiser's
+                                         viewport calculation; bumped above the default 50px because annotation rows can wrap to
+                                         multiple lines (description text). FixedHeader keeps the column headers visible while
+                                         the body scrolls. ── *@
                                     @if (_expandedEdgesLoading)
                                     {
                                         <MudProgressLinear Indeterminate="true" Color="Color.Info" Style="max-width:400px;" Class="mt-3" />
@@ -400,73 +405,75 @@
                                         <MudText Typo="Typo.subtitle2" Class="mt-4 mb-1">
                                             <MudIcon Icon="@Icons.Material.Filled.AccountTree" Size="Size.Small" Class="mr-1" />
                                             Edges
-                                            @if (_expandedEdgesTotal > _expandedEdges.Count)
-                                            {
-                                                <MudText HtmlTag="span" Typo="Typo.caption" Color="Color.Secondary" Class="ml-2">showing @_expandedEdges.Count of @_expandedEdgesTotal</MudText>
-                                            }
+                                            <MudText HtmlTag="span" Typo="Typo.caption" Color="Color.Secondary" Class="ml-2">
+                                                @(_expandedEdgesTotal > _expandedEdges.Count
+                                                    ? $"showing {_expandedEdges.Count} of {_expandedEdgesTotal}"
+                                                    : $"{_expandedEdges.Count}")
+                                            </MudText>
                                         </MudText>
-                                        <MudSimpleTable Dense="true" Bordered="true" Striped="true" Hover="true" Style="font-size:13px;" Class="mb-2">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width:1%;">Dir</th>
-                                                    <th>Label</th>
-                                                    <th>Target</th>
-                                                    <th>Years</th>
-                                                    <th>Holocron context</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var edge in _expandedEdges)
-                                                {
+                                        <MudTable T="EntityEdgeRow" Items="_expandedEdges" Virtualize="true" FixedHeader="true" Height="520px"
+                                                  ItemSize="64f" OverscanCount="6"
+                                                  Dense="true" Hover="true" Striped="true" Bordered="true" Class="mb-2"
+                                                  Style="font-size:13px;"
+                                                  RowStyleFunc="@(static (EntityEdgeRow e, int _) => e.IsHolocronOnly ? "background-color: var(--mud-palette-secondary-hover);" : "")">
+                                            <HeaderContent>
+                                                <MudTh Style="width:1%;">Dir</MudTh>
+                                                <MudTh>Label</MudTh>
+                                                <MudTh>Target</MudTh>
+                                                <MudTh>Years</MudTh>
+                                                <MudTh>Holocron context</MudTh>
+                                            </HeaderContent>
+                                            @* `Context="edge"` disambiguates from the outer MudTable's ChildRowContent context (which is the
+                                                 currently-expanded TemporalNodeDto). Without it, Razor can't tell which `context` the inner
+                                                 RowTemplate refers to. *@
+                                            <RowTemplate Context="edge">
+                                                @{
                                                     var hasAnnotation = !string.IsNullOrWhiteSpace(edge.Role) || !string.IsNullOrWhiteSpace(edge.Qualifier) || !string.IsNullOrWhiteSpace(edge.Description);
-                                                    var rowStyle = edge.IsHolocronOnly ? "background-color: var(--mud-palette-secondary-hover);" : null;
-                                                    <tr style="@rowStyle">
-                                                        <td style="white-space:nowrap;">
-                                                            <MudIcon Icon="@(edge.Direction == "out" ? Icons.Material.Filled.ArrowOutward : Icons.Material.Filled.SubdirectoryArrowLeft)" Size="Size.Small" Color="@(edge.Direction == "out" ? Color.Tertiary : Color.Info)" />
-                                                        </td>
-                                                        <td style="white-space:nowrap;">
-                                                            <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="@(edge.IsHolocronOnly ? Color.Secondary : Color.Info)">
-                                                                @FormatPropertyKey(edge.Label)
-                                                                @if (hasAnnotation && !edge.IsHolocronOnly)
-                                                                {
-                                                                    <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background-color: var(--mud-palette-secondary); margin-left:6px; vertical-align:middle;"></span>
-                                                                }
-                                                            </MudChip>
-                                                        </td>
-                                                        <td>
-                                                            <MudLink Href="@($"/graph-explorer/{edge.OtherId}")" Underline="Underline.Hover">@edge.OtherName</MudLink>
-                                                            @if (!string.IsNullOrEmpty(edge.OtherType))
-                                                            {
-                                                                <MudText HtmlTag="span" Typo="Typo.caption" Color="Color.Secondary" Class="ml-2">(@edge.OtherType)</MudText>
-                                                            }
-                                                            @if (!string.IsNullOrEmpty(edge.Phase1Qualifier))
-                                                            {
-                                                                <MudText Typo="Typo.caption" Color="Color.Default" Style="display:block;">@edge.Phase1Qualifier</MudText>
-                                                            }
-                                                        </td>
-                                                        <td style="white-space:nowrap;">@FormatYearRange(edge.FromYear, edge.ToYear)</td>
-                                                        <td>
-                                                            @if (edge.IsHolocronOnly)
-                                                            {
-                                                                <MudChip T="string" Size="Size.Small" Variant="Variant.Filled" Color="Color.Secondary" Class="mr-1">Holocron-added</MudChip>
-                                                            }
-                                                            @if (!string.IsNullOrWhiteSpace(edge.Role))
-                                                            {
-                                                                <MudText HtmlTag="span" Typo="Typo.body2"><b>@edge.Role</b></MudText>
-                                                            }
-                                                            @if (!string.IsNullOrWhiteSpace(edge.Qualifier))
-                                                            {
-                                                                <MudText HtmlTag="span" Typo="Typo.caption" Color="Color.Secondary" Class="ml-2">@edge.Qualifier</MudText>
-                                                            }
-                                                            @if (!string.IsNullOrWhiteSpace(edge.Description))
-                                                            {
-                                                                <MudText Typo="Typo.caption" Style="display:block;">@edge.Description</MudText>
-                                                            }
-                                                        </td>
-                                                    </tr>
                                                 }
-                                            </tbody>
-                                        </MudSimpleTable>
+                                                <MudTd Style="white-space:nowrap;">
+                                                    <MudIcon Icon="@(edge.Direction == "out" ? Icons.Material.Filled.ArrowOutward : Icons.Material.Filled.SubdirectoryArrowLeft)" Size="Size.Small" Color="@(edge.Direction == "out" ? Color.Tertiary : Color.Info)" />
+                                                </MudTd>
+                                                <MudTd Style="white-space:nowrap;">
+                                                    <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="@(edge.IsHolocronOnly ? Color.Secondary : Color.Info)">
+                                                        @FormatPropertyKey(edge.Label)
+                                                        @if (hasAnnotation && !edge.IsHolocronOnly)
+                                                        {
+                                                            <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background-color: var(--mud-palette-secondary); margin-left:6px; vertical-align:middle;"></span>
+                                                        }
+                                                    </MudChip>
+                                                </MudTd>
+                                                <MudTd>
+                                                    <MudLink Href="@($"/graph-explorer/{edge.OtherId}")" Underline="Underline.Hover">@edge.OtherName</MudLink>
+                                                    @if (!string.IsNullOrEmpty(edge.OtherType))
+                                                    {
+                                                        <MudText HtmlTag="span" Typo="Typo.caption" Color="Color.Secondary" Class="ml-2">(@edge.OtherType)</MudText>
+                                                    }
+                                                    @if (!string.IsNullOrEmpty(edge.Phase1Qualifier))
+                                                    {
+                                                        <MudText Typo="Typo.caption" Color="Color.Default" Style="display:block;">@edge.Phase1Qualifier</MudText>
+                                                    }
+                                                </MudTd>
+                                                <MudTd Style="white-space:nowrap;">@FormatYearRange(edge.FromYear, edge.ToYear)</MudTd>
+                                                <MudTd>
+                                                    @if (edge.IsHolocronOnly)
+                                                    {
+                                                        <MudChip T="string" Size="Size.Small" Variant="Variant.Filled" Color="Color.Secondary" Class="mr-1">Holocron-added</MudChip>
+                                                    }
+                                                    @if (!string.IsNullOrWhiteSpace(edge.Role))
+                                                    {
+                                                        <MudText HtmlTag="span" Typo="Typo.body2"><b>@edge.Role</b></MudText>
+                                                    }
+                                                    @if (!string.IsNullOrWhiteSpace(edge.Qualifier))
+                                                    {
+                                                        <MudText HtmlTag="span" Typo="Typo.caption" Color="Color.Secondary" Class="ml-2">@edge.Qualifier</MudText>
+                                                    }
+                                                    @if (!string.IsNullOrWhiteSpace(edge.Description))
+                                                    {
+                                                        <MudText Typo="Typo.caption" Style="display:block;">@edge.Description</MudText>
+                                                    }
+                                                </MudTd>
+                                            </RowTemplate>
+                                        </MudTable>
                                     }
                                 </MudItem>
                             </MudGrid>
@@ -894,7 +901,7 @@
         // independent endpoints. The chip view stays useful as a fast scan even before the
         // edges table finishes loading.
         var labelsTask = Api.GetFromJsonAsync<EntityLabelsResult>($"api/RelationshipGraph/labels/{nodeId}");
-        var edgesTask = Api.GetFromJsonAsync<EntityEdgesResult>($"api/RelationshipGraph/edges/{nodeId}?limit=50");
+        var edgesTask = Api.GetFromJsonAsync<EntityEdgesResult>($"api/RelationshipGraph/edges/{nodeId}?limit=500");
 
         try
         {
