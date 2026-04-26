@@ -131,6 +131,68 @@ public class EntityEdgesResult
     public int Total { get; init; }
 }
 
+/// <summary>
+/// Phase 2 attribute enrichment for a single node — the claim, the proposed values, the
+/// agent's reasoning, and the verbatim evidence excerpts. Powers the dedicated
+/// "Holocron-added attributes" panel on the Knowledge Graph node-detail panel; Phase 1
+/// attributes (the infobox-derived ones) render separately and are not mixed in.
+/// Mirrors the per-enrichment shape on the <c>/holocron</c> log detail page so the two
+/// surfaces tell the same provenance story.
+/// </summary>
+public class EntityNodeEnrichmentRowDto
+{
+    public string Id { get; init; } = string.Empty;
+    public string FieldPath { get; init; } = string.Empty;
+
+    /// <summary>"Add" or "Augment" — node enrichments are property-only in v1; FillGap/Annotate are edge-only.</summary>
+    public string Operation { get; init; } = string.Empty;
+
+    /// <summary>The agent-proposed values. Single-element list for scalar properties; multiple for list-valued ones.</summary>
+    public List<string> Values { get; init; } = [];
+
+    /// <summary>One-sentence statement of what the agent is asserting about the node.</summary>
+    public string Claim { get; init; } = string.Empty;
+
+    /// <summary>Free-form summary of the agent's reasoning. Optional.</summary>
+    public string? LlmReasoning { get; init; }
+
+    public List<EntityEnrichmentEvidenceDto> Evidence { get; init; } = [];
+
+    /// <summary><c>holocron-vX.Y.Z</c> stamp from the agent that produced this enrichment.</summary>
+    public string AgentVersion { get; init; } = string.Empty;
+    public string ModelId { get; init; } = string.Empty;
+
+    /// <summary>When the agent applied this enrichment. Surfaced as a relative timestamp in the panel.</summary>
+    public DateTime? AppliedAt { get; init; }
+}
+
+public class EntityEnrichmentEvidenceDto
+{
+    /// <summary>The KG node whose article supplied the excerpt. Null for chunks not tied to a specific node.</summary>
+    public int? SourcePageId { get; init; }
+
+    /// <summary>Resolved name for <see cref="SourcePageId"/>. Null when the page is unknown or deleted.</summary>
+    public string? SourcePageName { get; init; }
+
+    /// <summary>The article-chunk id (search.chunks._id) that the agent cited. Null when only the page was cited.</summary>
+    public string? ChunkId { get; init; }
+
+    /// <summary>Verbatim excerpt the agent attached as evidence. Truncated server-side to 1KB.</summary>
+    public string Excerpt { get; init; } = string.Empty;
+
+    public double? RelevanceScore { get; init; }
+}
+
+/// <summary>Top-level response for <c>GET /api/RelationshipGraph/node-enrichments/{pageId}</c>.</summary>
+public class EntityNodeEnrichmentsResult
+{
+    public int NodeId { get; init; }
+    public string NodeName { get; init; } = string.Empty;
+
+    /// <summary>All Active hash-matched node enrichments for this entity, newest first.</summary>
+    public List<EntityNodeEnrichmentRowDto> Enrichments { get; init; } = [];
+}
+
 public class EntityLabelsResult
 {
     /// <summary>Entity type (Character, Battle, Organization, ...). Empty if unknown.</summary>

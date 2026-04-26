@@ -46,6 +46,15 @@ public class RelationshipGraphController(KnowledgeGraphQueryService kg) : Contro
     [HttpGet("edges/{pageId:int}")]
     public Task<EntityEdgesResult> GetEdges(int pageId, [FromQuery] int limit = 500, CancellationToken ct = default) => kg.GetEdgesForEntityAsync(pageId, limit, ct);
 
+    /// <summary>
+    /// All Active node-property enrichments for an entity with full claim + evidence detail.
+    /// Powers the dedicated "Holocron-added attributes" panel beside the Attributes table
+    /// on the Knowledge Graph node-detail panel. Phase 2 contributions are surfaced separately
+    /// from the Phase 1 infobox so users can see exactly what the agent added and why.
+    /// </summary>
+    [HttpGet("node-enrichments/{pageId:int}")]
+    public Task<EntityNodeEnrichmentsResult> GetNodeEnrichments(int pageId, CancellationToken ct = default) => kg.GetNodeEnrichmentsAsync(pageId, ct);
+
     [HttpGet("temporal-nodes")]
     public Task<BrowseTemporalNodesResult> BrowseTemporalNodes(
         [FromQuery] string? type = null,

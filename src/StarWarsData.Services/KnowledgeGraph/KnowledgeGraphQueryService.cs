@@ -42,6 +42,14 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
     readonly IMongoCollection<EdgeEnrichment> _edgeEnrichments = mongoClient.GetDatabase(settings.Value.DatabaseName).GetCollection<EdgeEnrichment>(Collections.KgEdgeEnrichments);
 
     /// <summary>
+    /// Active node-property enrichments. Used by <see cref="GetNodeEnrichmentsAsync"/>
+    /// to power the dedicated "Holocron-added attributes" panel — Phase 2 contributions
+    /// to a node's properties are surfaced separately from the Phase 1 infobox attributes,
+    /// with their full claim + evidence visible.
+    /// </summary>
+    readonly IMongoCollection<NodeEnrichment> _nodeEnrichments = mongoClient.GetDatabase(settings.Value.DatabaseName).GetCollection<NodeEnrichment>(Collections.KgEnrichments);
+
+    /// <summary>
     /// Parses a continuity filter string into a <see cref="Continuity"/> value for querying.
     /// Returns <c>null</c> for "Both" and "Unknown" since those mean "no filter" — no documents
     /// in the KG have <c>continuity: "Both"</c>.
@@ -51,51 +59,25 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
 
     /// <summary>
     /// Project a <see cref="GraphNode"/> read through <c>kg.nodes.enriched</c> into a
-    /// <see cref="TemporalNodeDto"/>, merging Phase 2 property enrichments into <c>Properties</c>
-    /// and emitting markers so the UI can highlight Phase 2 contributions per Design-019.
+    /// <see cref="TemporalNodeDto"/>. Properties stays Phase 1-only — the Knowledge Graph
+    /// node-detail panel renders Phase 2 enrichments in their own dedicated section
+    /// (claim + evidence) rather than merging them into the attribute rows. Per
+    /// user feedback during Stage E1: merging gave no place to show evidence, so
+    /// Phase 2 lives separately. <see cref="TemporalNodeDto.EnrichmentMarkers"/>
+    /// is still populated for any future caller that wants a quick "which fields
+    /// have active enrichments" signal without a second round-trip.
     /// </summary>
     private static TemporalNodeDto BuildTemporalNodeDto(GraphNode n)
     {
-        // Clone Properties so we don't mutate the source dictionary on the GraphNode (it's shared
-        // with subsequent reads via Mongo driver caching).
-        var mergedProps = n.Properties.ToDictionary(kvp => kvp.Key, kvp => new List<string>(kvp.Value), StringComparer.OrdinalIgnoreCase);
-        var markers = new List<EnrichmentMarkerDto>();
-
-        if (n.Enrichments is { Count: > 0 })
-        {
-            foreach (var enrichment in n.Enrichments)
-            {
-                // Strip "properties." prefix (the agent's pre-flight accepts both forms; the merged
-                // view shouldn't care).
-                var key = enrichment.FieldPath.StartsWith("properties.", StringComparison.OrdinalIgnoreCase) ? enrichment.FieldPath["properties.".Length..] : enrichment.FieldPath;
-
-                var values = ExtractStringValues(enrichment.Value);
-                if (values.Count == 0)
-                    continue;
-
-                if (enrichment.Operation == EnrichmentOperation.Add)
+        var markers = n.Enrichments is { Count: > 0 }
+            ? n
+                .Enrichments.Select(e =>
                 {
-                    // Add: the property has no Phase 1 entry — surface the agent's values as a new row.
-                    if (!mergedProps.ContainsKey(key))
-                        mergedProps[key] = values;
-                    else
-                        // Defensive fallback: if Phase 1 wrote the field after the enrichment was created,
-                        // append rather than overwrite. The staleness sweep should have caught this; this
-                        // branch is just to avoid losing data.
-                        mergedProps[key].AddRange(values.Where(v => !mergedProps[key].Contains(v, StringComparer.OrdinalIgnoreCase)));
-                }
-                else if (enrichment.Operation == EnrichmentOperation.Augment)
-                {
-                    // Augment: append values not already present in the Phase 1 list.
-                    if (mergedProps.TryGetValue(key, out var existing))
-                        existing.AddRange(values.Where(v => !existing.Contains(v, StringComparer.OrdinalIgnoreCase)));
-                    else
-                        mergedProps[key] = values;
-                }
-
-                markers.Add(new EnrichmentMarkerDto(key, enrichment.Operation.ToString()));
-            }
-        }
+                    var key = e.FieldPath.StartsWith("properties.", StringComparison.OrdinalIgnoreCase) ? e.FieldPath["properties.".Length..] : e.FieldPath;
+                    return new EnrichmentMarkerDto(key, e.Operation.ToString());
+                })
+                .ToList()
+            : [];
 
         return new TemporalNodeDto
         {
@@ -109,27 +91,10 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             EndYear = n.EndYear,
             StartDateText = n.StartDateText,
             EndDateText = n.EndDateText,
-            Properties = mergedProps,
+            Properties = n.Properties,
             TemporalFacets = n.TemporalFacets,
             EnrichmentMarkers = markers,
         };
-    }
-
-    /// <summary>
-    /// Coerce an enrichment <c>value</c> (BsonString, BsonArray, or a single document with a
-    /// representable string form) into a list of strings for property-row rendering. Non-string
-    /// payloads (e.g. temporal facet docs) return empty — those operations don't surface in
-    /// the property table.
-    /// </summary>
-    private static List<string> ExtractStringValues(BsonValue value)
-    {
-        if (value is null || value.IsBsonNull)
-            return [];
-        if (value.IsString)
-            return [value.AsString];
-        if (value.IsBsonArray)
-            return value.AsBsonArray.Where(v => v.IsString).Select(v => v.AsString).ToList();
-        return [];
     }
 
     public async Task<List<string>> GetEntityTypesAsync(CancellationToken ct)
@@ -577,6 +542,94 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
     }
 
     private sealed record EdgeRowBuild(string Label, string Direction, int OtherId, string OtherName, int? FromYear, int? ToYear, string? Phase1Qualifier, string OriginalKey, bool IsHolocronOnly);
+
+    /// <summary>
+    /// All Active hash-matched node-property enrichments for a single entity, with cited-page
+    /// names resolved in one batched lookup so the panel renders without per-row round-trips.
+    /// Mirrors the per-enrichment shape on the <c>/holocron</c> log detail endpoint —
+    /// claim, reasoning, evidence excerpts — but bulk-fetched per node so the Knowledge Graph
+    /// node-detail panel can show all Phase 2 attribute additions at once.
+    /// </summary>
+    public async Task<EntityNodeEnrichmentsResult> GetNodeEnrichmentsAsync(int pageId, CancellationToken ct)
+    {
+        var nodeNameTask = _nodes.Find(n => n.PageId == pageId).Project(n => n.Name).FirstOrDefaultAsync(ct);
+
+        // Active enrichments only — superseded/stale/rejected don't surface. The hash filter
+        // happens via the kg.nodes.enriched view in BrowseTemporalNodesAsync; here we trust
+        // Active to be hash-matched too (the staleness sweep flips them to Stale on mismatch).
+        var enrichmentsTask = _nodeEnrichments
+            .Find(Builders<NodeEnrichment>.Filter.Eq(e => e.PageId, pageId) & Builders<NodeEnrichment>.Filter.Eq(e => e.Status, EnrichmentStatus.Active))
+            .SortByDescending(e => e.AppliedAt)
+            .ToListAsync(ct);
+
+        await Task.WhenAll(nodeNameTask, enrichmentsTask);
+        var nodeName = nodeNameTask.Result ?? string.Empty;
+        var enrichments = enrichmentsTask.Result;
+
+        if (enrichments.Count == 0)
+            return new EntityNodeEnrichmentsResult { NodeId = pageId, NodeName = nodeName };
+
+        // Batch-resolve cited page names so the panel can show "Anakin Skywalker" rather than
+        // "PageId 452390" on the evidence cards.
+        var citedPageIds = enrichments.SelectMany(e => e.Evidence).Where(ev => ev.SourcePageId > 0).Select(ev => ev.SourcePageId).Distinct().ToList();
+        var nameByPageId =
+            citedPageIds.Count == 0
+                ? new Dictionary<int, string>()
+                : await _nodes
+                    .Find(Builders<GraphNode>.Filter.In(n => n.PageId, citedPageIds))
+                    .Project(n => new { n.PageId, n.Name })
+                    .ToListAsync(ct)
+                    .ContinueWith(t => t.Result.ToDictionary(x => x.PageId, x => x.Name), ct);
+
+        var rows = enrichments
+            .Select(e => new EntityNodeEnrichmentRowDto
+            {
+                Id = e.Id,
+                FieldPath = e.FieldPath.StartsWith("properties.", StringComparison.OrdinalIgnoreCase) ? e.FieldPath["properties.".Length..] : e.FieldPath,
+                Operation = e.Operation.ToString(),
+                Values = ExtractStringValues(e.Value),
+                Claim = e.Claim,
+                LlmReasoning = e.LlmReasoning,
+                Evidence = e
+                    .Evidence.Select(ev => new EntityEnrichmentEvidenceDto
+                    {
+                        SourcePageId = ev.SourcePageId > 0 ? ev.SourcePageId : null,
+                        SourcePageName = ev.SourcePageId > 0 && nameByPageId.TryGetValue(ev.SourcePageId, out var n) ? n : null,
+                        ChunkId = ev.ChunkId,
+                        Excerpt = ev.Excerpt,
+                        RelevanceScore = ev.RelevanceScore,
+                    })
+                    .ToList(),
+                AgentVersion = e.AgentVersion,
+                ModelId = e.ModelId,
+                AppliedAt = e.AppliedAt,
+            })
+            .ToList();
+
+        return new EntityNodeEnrichmentsResult
+        {
+            NodeId = pageId,
+            NodeName = nodeName,
+            Enrichments = rows,
+        };
+    }
+
+    /// <summary>
+    /// Coerce an enrichment <c>value</c> (BsonString, BsonArray, or a single document with a
+    /// representable string form) into a list of strings. Non-string payloads (e.g. temporal
+    /// facet docs) return empty — those operations don't surface in the property table or
+    /// the Phase 2 attributes panel.
+    /// </summary>
+    private static List<string> ExtractStringValues(BsonValue value)
+    {
+        if (value is null || value.IsBsonNull)
+            return [];
+        if (value.IsString)
+            return [value.AsString];
+        if (value.IsBsonArray)
+            return value.AsBsonArray.Where(v => v.IsString).Select(v => v.AsString).ToList();
+        return [];
+    }
 
     public async Task<BrowseTemporalNodesResult> BrowseTemporalNodesAsync(
         string? type,
