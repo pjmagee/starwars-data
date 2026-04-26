@@ -25,8 +25,18 @@ public sealed record KgNodeDetailDto(
     List<KgTemporalFacetDto>? TemporalFacets,
     string? ImageUrl,
     string? WikiUrl,
-    string? Error = null
+    string? Error = null,
+    List<KgEnrichmentSummaryDto>? Enrichments = null
 );
+
+/// <summary>
+/// Lightweight projection of an active Holocron enrichment surfaced alongside the base
+/// node properties. The full evidence + reasoning live in <c>kg.enrichments</c> and can
+/// be fetched via <c>GET /api/holocron/enrichments/{id}</c> or the Holocron Log page —
+/// this DTO carries just enough for the AI agent to weave the value into a response
+/// without bloating tool payloads with verbatim chunk excerpts.
+/// </summary>
+public sealed record KgEnrichmentSummaryDto(string Id, string FieldPath, string Operation, string Value, string Claim, int EvidenceCount);
 
 public sealed record EntityTimelineDto(
     int? PageId,

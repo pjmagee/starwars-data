@@ -85,4 +85,16 @@ public class GraphNode
 
     [BsonElement("processedAt")]
     public DateTime ProcessedAt { get; set; }
+
+    /// <summary>
+    /// Active Holocron enrichments joined into this node when read through the
+    /// <c>kg.nodes.enriched</c> view. Always <c>null</c> when read from the base
+    /// <c>kg.nodes</c> collection — Phase 1 never writes this field. Consumers that
+    /// want to surface agent additions read through the enriched view; consumers that
+    /// want canonical infobox-only data read the base collection. See
+    /// <c>eng/design/018-kg-enrichments-architecture.md</c>.
+    /// </summary>
+    [BsonElement("enrichments")]
+    [BsonIgnoreIfNull]
+    public List<NodeEnrichment>? Enrichments { get; set; }
 }

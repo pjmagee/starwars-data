@@ -32,12 +32,38 @@ public class GraphRAGToolkit
         _kg = kg;
         _search = search;
         var db = mongoClient.GetDatabase(databaseName);
-        _nodesCollection = db.GetCollection<GraphNode>(Collections.KgNodes);
+        // Read through the enriched view so node fetches surface active Holocron enrichments
+        // alongside the base infobox-derived properties. The view is a left-join — nodes with
+        // no enrichments come back with Enrichments == null/empty (no extra cost). See
+        // eng/design/018-kg-enrichments-architecture.md (Stage E1 — GraphRAGToolkit migration).
+        _nodesCollection = db.GetCollection<GraphNode>(Collections.KgNodesEnriched);
         _galaxyYears = db.GetCollection<GalaxyYearDocument>(Collections.GalaxyYears);
         _galaxyYearsRaw = db.GetCollection<BsonDocument>(Collections.GalaxyYears);
     }
 
     static KgTemporalFacetDto ToFacetDto(Models.Entities.TemporalFacet f, bool includeOrder = false) => new(f.Field, f.Semantic, f.Calendar, f.Year, f.Text, includeOrder ? f.Order : null);
+
+    /// <summary>
+    /// Compact projection of <see cref="Models.Entities.NodeEnrichment"/> into the
+    /// per-tool DTO. Returns <c>null</c> when there are no active enrichments so empty
+    /// arrays don't bloat the agent's context. The full evidence + reasoning live in
+    /// <c>kg.enrichments</c> and can be fetched via the Holocron API.
+    /// </summary>
+    static List<KgEnrichmentSummaryDto>? ToEnrichmentSummaries(List<Models.Entities.NodeEnrichment>? enrichments)
+    {
+        if (enrichments is null || enrichments.Count == 0)
+            return null;
+        return enrichments
+            .Select(e => new KgEnrichmentSummaryDto(
+                Id: e.Id,
+                FieldPath: e.FieldPath,
+                Operation: e.Operation.ToString(),
+                Value: e.Value.IsBsonArray ? string.Join(", ", e.Value.AsBsonArray.Select(v => v.ToString())) : e.Value.ToString() ?? string.Empty,
+                Claim: e.Claim,
+                EvidenceCount: e.Evidence?.Count ?? 0
+            ))
+            .ToList();
+    }
 
     static KgNodeDto ToNodeDto(GraphNode n) =>
         new(
@@ -134,6 +160,16 @@ public class GraphRAGToolkit
             loop, once per entity, is the most expensive mistake the agent can make and is
             ALWAYS wrong. If you need 8 character profiles, that is ONE call with 8 IDs, not 8
             calls with 1 ID each.
+
+            HOLOCRON ENRICHMENTS: Each result may include an `enrichments` array of agent-added
+            facts (Add / Augment / FillGap operations) that AREN'T in the canonical infobox-derived
+            `properties`. Each entry has a one-sentence `claim`, the proposed `value`, and an
+            `evidenceCount`. These come from the Holocron AI agent and are evidence-backed but
+            secondary to `properties` (the wiki infobox is the canonical truth foundation). When
+            answering, you may use enrichment values to enrich a response, but mark them as
+            "agent-derived" or "noted by the Holocron" if the user is asking a precision question.
+            Full evidence + reasoning is at /holocron in the UI; cite values from `properties`
+            preferentially when both have the same field.
             """
     )]
     public async Task<List<KgNodeDetailDto>> GetEntityProperties([Description("Comma-separated PageIds (e.g. '12345' or '12345,67890,11111'). Max 20.")] string entityIds)
@@ -166,7 +202,8 @@ public class GraphRAGToolkit
                 EndYear: node.EndYear,
                 TemporalFacets: node.TemporalFacets.Select(f => ToFacetDto(f, includeOrder: true)).ToList(),
                 ImageUrl: node.ImageUrl,
-                WikiUrl: node.WikiUrl
+                WikiUrl: node.WikiUrl,
+                Enrichments: ToEnrichmentSummaries(node.Enrichments)
             ))
             .ToList();
     }
