@@ -58,6 +58,24 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var c) && c is Continuity.Canon or Continuity.Legends ? c : null;
 
     /// <summary>
+    /// Filter that matches the query against the canonical <c>name</c> OR any value in the
+    /// infobox <c>properties.Titles</c> alias list. Wookieepedia stores entities under their
+    /// canonical-article name ("Darth Sidious") while the alternate names sit in
+    /// <c>properties.Titles</c> (["Darth Sidious", "Sheev Palpatine"]). Without OR-matching
+    /// Titles, typing "Sheev" or "Palpatine" returns nothing — the user has to know the
+    /// canon-article title. Mongo's regex on an array field matches if any element matches,
+    /// so the regex against <c>properties.Titles</c> covers all aliases at once.
+    ///
+    /// Used by every search-by-name code path (BrowseAsync, BrowseTemporalNodesAsync,
+    /// SearchAsync) so the behaviour is consistent across pages.
+    /// </summary>
+    private static FilterDefinition<GraphNode> NameOrTitleFilter(string q)
+    {
+        var queryRegex = MongoSafe.Regex(q);
+        return Builders<GraphNode>.Filter.Or(Builders<GraphNode>.Filter.Regex(n => n.Name, queryRegex), Builders<GraphNode>.Filter.Regex("properties.Titles", queryRegex));
+    }
+
+    /// <summary>
     /// Project a <see cref="GraphNode"/> read through <c>kg.nodes.enriched</c> into a
     /// <see cref="TemporalNodeDto"/>. Properties stays Phase 1-only — the Knowledge Graph
     /// node-detail panel renders Phase 2 enrichments in their own dedicated section
@@ -119,7 +137,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         if (!string.IsNullOrWhiteSpace(type))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Type, type));
         if (!string.IsNullOrWhiteSpace(q))
-            filters.Add(Builders<GraphNode>.Filter.Regex(n => n.Name, MongoSafe.Regex(q)));
+            filters.Add(NameOrTitleFilter(q));
         if (ParseContinuityFilter(continuity) is { } cont)
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
         if (realm is not null && Enum.TryParse<Realm>(realm, true, out var r))
@@ -153,17 +171,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
 
     public async Task<List<EntitySearchDto>> SearchAsync(string q, string? type, string? continuity, string? realm, CancellationToken ct)
     {
-        // Match the query against the canonical name OR any value in the infobox Titles
-        // alias list. Wookieepedia stores entities under their canonical-article name
-        // ("Darth Sidious") while the alternate names sit in properties.Titles
-        // (e.g. ["Darth Sidious", "Sheev Palpatine"]). Without OR-matching Titles, typing
-        // "Sheev" returns nothing — only the name field is canonical, but users search
-        // by whatever alias they remember. Mongo's regex on an array field matches if
-        // any element matches, so a regex against `properties.Titles` covers all aliases.
-        var queryRegex = MongoSafe.Regex(q);
-        var nameOrTitle = Builders<GraphNode>.Filter.Or(Builders<GraphNode>.Filter.Regex(n => n.Name, queryRegex), Builders<GraphNode>.Filter.Regex("properties.Titles", queryRegex));
-
-        var filters = new List<FilterDefinition<GraphNode>> { nameOrTitle };
+        var filters = new List<FilterDefinition<GraphNode>> { NameOrTitleFilter(q) };
 
         if (!string.IsNullOrWhiteSpace(type))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Type, type));
@@ -677,7 +685,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         if (!string.IsNullOrWhiteSpace(type))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Type, type));
         if (!string.IsNullOrWhiteSpace(q))
-            filters.Add(Builders<GraphNode>.Filter.Regex(n => n.Name, MongoSafe.Regex(q)));
+            filters.Add(NameOrTitleFilter(q));
         if (ParseContinuityFilter(continuity) is { } cont)
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, cont));
         if (realm is not null && Enum.TryParse<Realm>(realm, true, out var r))
