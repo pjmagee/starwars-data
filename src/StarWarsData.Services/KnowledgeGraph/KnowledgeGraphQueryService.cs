@@ -12,12 +12,34 @@ namespace StarWarsData.Services;
 /// <summary>
 /// Read-only query service for the knowledge graph (kg.nodes + kg.edges).
 /// Powers the Graph Explorer page, Knowledge Graph page, and render_graph tool.
+///
+/// Stage E1 (Design-019): the node-detail panel reads through <c>kg.nodes.enriched</c>
+/// + <c>kg.edge_enrichments</c> so Phase 2 Holocron data surfaces alongside Phase 1
+/// infobox data. The <c>$lookup</c> in the view stays cheap because each node's
+/// enrichment list is small (single-digit counts), and the labels endpoint runs an
+/// extra targeted aggregation against <c>kg.edge_enrichments</c> only when the node
+/// actually has Phase 2 edges.
 /// </summary>
 public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<SettingsOptions> settings)
 {
     readonly IMongoCollection<GraphNode> _nodes = mongoClient.GetDatabase(settings.Value.DatabaseName).GetCollection<GraphNode>(Collections.KgNodes);
 
+    /// <summary>
+    /// Enriched read view — base <c>kg.nodes</c> joined with active hash-matched node
+    /// enrichments. Used by <see cref="BrowseTemporalNodesAsync"/> so the Knowledge Graph
+    /// page can surface Phase 2 markers; other queries that don't need provenance keep
+    /// reading from the cheaper base collection via <see cref="_nodes"/>.
+    /// </summary>
+    readonly IMongoCollection<GraphNode> _nodesEnriched = mongoClient.GetDatabase(settings.Value.DatabaseName).GetCollection<GraphNode>(Collections.KgNodesEnriched);
+
     readonly IMongoCollection<RelationshipEdge> _edges = mongoClient.GetDatabase(settings.Value.DatabaseName).GetCollection<RelationshipEdge>(Collections.KgEdges);
+
+    /// <summary>
+    /// Active edge enrichments (Holocron-added or annotated edges). Used by
+    /// <see cref="GetLabelsForEntityAsync"/> to split the relationship-label list into
+    /// Phase 1 / Phase 2-only / Phase 1+2-overlay buckets per Design-019.
+    /// </summary>
+    readonly IMongoCollection<EdgeEnrichment> _edgeEnrichments = mongoClient.GetDatabase(settings.Value.DatabaseName).GetCollection<EdgeEnrichment>(Collections.KgEdgeEnrichments);
 
     /// <summary>
     /// Parses a continuity filter string into a <see cref="Continuity"/> value for querying.
@@ -26,6 +48,89 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
     /// </summary>
     private static Continuity? ParseContinuityFilter(string? continuity) =>
         continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var c) && c is Continuity.Canon or Continuity.Legends ? c : null;
+
+    /// <summary>
+    /// Project a <see cref="GraphNode"/> read through <c>kg.nodes.enriched</c> into a
+    /// <see cref="TemporalNodeDto"/>, merging Phase 2 property enrichments into <c>Properties</c>
+    /// and emitting markers so the UI can highlight Phase 2 contributions per Design-019.
+    /// </summary>
+    private static TemporalNodeDto BuildTemporalNodeDto(GraphNode n)
+    {
+        // Clone Properties so we don't mutate the source dictionary on the GraphNode (it's shared
+        // with subsequent reads via Mongo driver caching).
+        var mergedProps = n.Properties.ToDictionary(kvp => kvp.Key, kvp => new List<string>(kvp.Value), StringComparer.OrdinalIgnoreCase);
+        var markers = new List<EnrichmentMarkerDto>();
+
+        if (n.Enrichments is { Count: > 0 })
+        {
+            foreach (var enrichment in n.Enrichments)
+            {
+                // Strip "properties." prefix (the agent's pre-flight accepts both forms; the merged
+                // view shouldn't care).
+                var key = enrichment.FieldPath.StartsWith("properties.", StringComparison.OrdinalIgnoreCase) ? enrichment.FieldPath["properties.".Length..] : enrichment.FieldPath;
+
+                var values = ExtractStringValues(enrichment.Value);
+                if (values.Count == 0)
+                    continue;
+
+                if (enrichment.Operation == EnrichmentOperation.Add)
+                {
+                    // Add: the property has no Phase 1 entry — surface the agent's values as a new row.
+                    if (!mergedProps.ContainsKey(key))
+                        mergedProps[key] = values;
+                    else
+                        // Defensive fallback: if Phase 1 wrote the field after the enrichment was created,
+                        // append rather than overwrite. The staleness sweep should have caught this; this
+                        // branch is just to avoid losing data.
+                        mergedProps[key].AddRange(values.Where(v => !mergedProps[key].Contains(v, StringComparer.OrdinalIgnoreCase)));
+                }
+                else if (enrichment.Operation == EnrichmentOperation.Augment)
+                {
+                    // Augment: append values not already present in the Phase 1 list.
+                    if (mergedProps.TryGetValue(key, out var existing))
+                        existing.AddRange(values.Where(v => !existing.Contains(v, StringComparer.OrdinalIgnoreCase)));
+                    else
+                        mergedProps[key] = values;
+                }
+
+                markers.Add(new EnrichmentMarkerDto(key, enrichment.Operation.ToString()));
+            }
+        }
+
+        return new TemporalNodeDto
+        {
+            Id = n.PageId,
+            Name = n.Name,
+            Type = n.Type,
+            Continuity = n.Continuity.ToString(),
+            ImageUrl = n.ImageUrl,
+            WikiUrl = n.WikiUrl,
+            StartYear = n.StartYear,
+            EndYear = n.EndYear,
+            StartDateText = n.StartDateText,
+            EndDateText = n.EndDateText,
+            Properties = mergedProps,
+            TemporalFacets = n.TemporalFacets,
+            EnrichmentMarkers = markers,
+        };
+    }
+
+    /// <summary>
+    /// Coerce an enrichment <c>value</c> (BsonString, BsonArray, or a single document with a
+    /// representable string form) into a list of strings for property-row rendering. Non-string
+    /// payloads (e.g. temporal facet docs) return empty — those operations don't surface in
+    /// the property table.
+    /// </summary>
+    private static List<string> ExtractStringValues(BsonValue value)
+    {
+        if (value is null || value.IsBsonNull)
+            return [];
+        if (value.IsString)
+            return [value.AsString];
+        if (value.IsBsonArray)
+            return value.AsBsonArray.Where(v => v.IsString).Select(v => v.AsString).ToList();
+        return [];
+    }
 
     public async Task<List<string>> GetEntityTypesAsync(CancellationToken ct)
     {
@@ -178,11 +283,78 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         var labels = labelSet.OrderBy(s => s, StringComparer.OrdinalIgnoreCase).ToList();
         var defaults = DefaultLabelSelector.GetDefaults(entityType, labels);
 
+        // Phase 2 provenance split (Design-019). Pull this node's active edge enrichments
+        // and bucket the labels:
+        //  - HolocronOnly: label has a Holocron Add edge AND no base kg.edges entry with that
+        //    label between this node and the same neighbour. (Cheap proxy: Add operation +
+        //    label not already in `labels` from the Phase 1 query above. Adds appear as new
+        //    labels on this node since the base edge doesn't exist.)
+        //  - HolocronAnnotated: label has at least one Annotate or FillGap enrichment.
+        //
+        // Single-direction filter on the node — Annotate/FillGap target an existing edge so
+        // the operation must be one of {Annotate, FillGap}, regardless of direction. Add edges
+        // also need to be considered in both directions for the Holocron-only check.
+        var enrichmentFilter =
+            Builders<EdgeEnrichment>.Filter.Eq(e => e.Status, EnrichmentStatus.Active)
+            & (Builders<EdgeEnrichment>.Filter.Eq(e => e.FromId, pageId) | Builders<EdgeEnrichment>.Filter.Eq(e => e.ToId, pageId));
+
+        var enrichments = await _edgeEnrichments
+            .Find(enrichmentFilter)
+            .Project(e => new
+            {
+                e.FromId,
+                e.ToId,
+                e.Label,
+                e.Operation,
+            })
+            .ToListAsync(ct);
+
+        var holocronAnnotated = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var holocronOnly = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var en in enrichments)
+        {
+            // Map inbound enrichments through the same reverse-lookup as base edges so
+            // we expose them from the current node's perspective.
+            string? labelFromNode;
+            if (en.FromId == pageId)
+                labelFromNode = en.Label;
+            else if (reverseLookup.TryGetValue(en.Label, out var rev) && !string.IsNullOrEmpty(rev))
+                labelFromNode = rev;
+            else
+                labelFromNode = null; // No registered reverse — drop from this node's view.
+
+            if (labelFromNode is null)
+                continue;
+
+            if (en.Operation is EnrichmentOperation.Annotate or EnrichmentOperation.FillGap)
+            {
+                holocronAnnotated.Add(labelFromNode);
+            }
+            else if (en.Operation == EnrichmentOperation.Add)
+            {
+                // Phase 2-only when the label isn't already present in the base-edge label set.
+                // (If the base set has it, the same label exists from Phase 1 — render as Phase 1
+                // and let the annotated-overlay marker carry the Phase 2 signal instead.)
+                if (!labelSet.Contains(labelFromNode))
+                {
+                    holocronOnly.Add(labelFromNode);
+                    labels.Add(labelFromNode); // surface the new label so the chip actually renders
+                }
+            }
+        }
+
+        // Re-sort if Phase 2 added new labels.
+        if (holocronOnly.Count > 0)
+            labels = labels.OrderBy(s => s, StringComparer.OrdinalIgnoreCase).ToList();
+
         return new EntityLabelsResult
         {
             Type = entityType,
             Labels = labels,
             DefaultEnabled = defaults,
+            HolocronOnlyLabels = holocronOnly.OrderBy(s => s, StringComparer.OrdinalIgnoreCase).ToList(),
+            HolocronAnnotatedLabels = holocronAnnotated.OrderBy(s => s, StringComparer.OrdinalIgnoreCase).ToList(),
         };
     }
 
@@ -274,25 +446,13 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         };
         var sort = ascending ? Builders<GraphNode>.Sort.Ascending(sortField) : Builders<GraphNode>.Sort.Descending(sortField);
 
-        var items = await _nodes.Find(filter).Sort(sort).Skip((page - 1) * pageSize).Limit(pageSize).ToListAsync(ct);
+        // Read through the enriched view so each GraphNode carries its active hash-matched
+        // node enrichments (Phase 2 Holocron additions). The view's $lookup is filtered to
+        // status=Active and contentHash-matched, so .Enrichments is exactly the set the UI
+        // should mark as Phase 2. See Design-019.
+        var items = await _nodesEnriched.Find(filter).Sort(sort).Skip((page - 1) * pageSize).Limit(pageSize).ToListAsync(ct);
 
-        var dtos = items
-            .Select(n => new TemporalNodeDto
-            {
-                Id = n.PageId,
-                Name = n.Name,
-                Type = n.Type,
-                Continuity = n.Continuity.ToString(),
-                ImageUrl = n.ImageUrl,
-                WikiUrl = n.WikiUrl,
-                StartYear = n.StartYear,
-                EndYear = n.EndYear,
-                StartDateText = n.StartDateText,
-                EndDateText = n.EndDateText,
-                Properties = n.Properties,
-                TemporalFacets = n.TemporalFacets,
-            })
-            .ToList();
+        var dtos = items.Select(BuildTemporalNodeDto).ToList();
 
         return new BrowseTemporalNodesResult
         {

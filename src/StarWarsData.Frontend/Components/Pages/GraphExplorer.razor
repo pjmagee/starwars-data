@@ -83,8 +83,9 @@
             <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
                 <MudText Typo="Typo.h6">@_selectedEntityName</MudText>
                 <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
-                    @* Holocron enhancement is admin-only — gates the LLM cost while we evaluate. *@
-                    <AuthorizeView Roles="admin" Context="auth">
+                    @* Holocron enhancement is open to any authenticated user — bounded by Holocron's own
+                       pre-flight rules and pass-budget settings, so a public refresh button is safe. *@
+                    <AuthorizeView Context="auth">
                         <MudTooltip Text="Run the Holocron agent on this node — gathers context, calls the LLM, writes evidence-backed enrichments to kg.enrichments / kg.edge_enrichments.">
                             <MudButton Variant="Variant.Outlined" Color="Color.Tertiary" Size="Size.Small"
                                        StartIcon="@Icons.Material.Filled.AutoFixHigh"
@@ -190,7 +191,7 @@
     // Navigation
     private List<(int Id, string Name)> _history = [];
 
-    // Holocron enhancement (admin-only — POST /api/holocron/enhance/{pageId})
+    // Holocron enhancement (any authenticated user — POST /api/holocron/enhance/{pageId})
     private bool _holocronRunning;
 
     private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
@@ -207,11 +208,6 @@
             if (response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
             {
                 Snackbar.Add("Holocron is disabled in Settings. Set Settings.HolocronEnabled = true to run.", Severity.Warning);
-                return;
-            }
-            if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
-            {
-                Snackbar.Add("Holocron enhancement requires admin role.", Severity.Error);
                 return;
             }
             if (!response.IsSuccessStatusCode)

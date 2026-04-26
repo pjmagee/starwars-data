@@ -90,6 +90,21 @@ public class EntityLabelsResult
     /// prioritized for the node's entity type.
     /// </summary>
     public List<string> DefaultEnabled { get; init; } = [];
+
+    /// <summary>
+    /// Subset of <see cref="Labels"/> where every edge with that label between this node
+    /// and any neighbour came from a Holocron <c>Add</c> enrichment — there is NO base
+    /// <c>kg.edges</c> entry with this label. The UI renders these chips in
+    /// <c>Color.Secondary</c> to mark them as Phase 2-only. See Design-019.
+    /// </summary>
+    public List<string> HolocronOnlyLabels { get; init; } = [];
+
+    /// <summary>
+    /// Subset of <see cref="Labels"/> where at least one edge has a Holocron <c>Annotate</c>
+    /// or <c>FillGap</c> enrichment attached. The UI keeps the chip's primary colour but
+    /// adds a small secondary-colour dot to signal "Phase 1 with Phase 2 overlay".
+    /// </summary>
+    public List<string> HolocronAnnotatedLabels { get; init; } = [];
 }
 
 /// <summary>

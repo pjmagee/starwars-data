@@ -311,12 +311,30 @@
                                             <tbody>
                                                 @foreach (var kvp in context.Properties.OrderBy(p => p.Key))
                                                 {
-                                                    <tr>
+                                                    @* Phase 2 provenance lookup per Design-019:
+                                                         - Add operation → row tinted with secondary background (whole property is Holocron-only)
+                                                         - Augment      → trailing secondary chip on the values cell (Phase 1 list extended) *@
+                                                    var marker = context.EnrichmentMarkers.FirstOrDefault(m =>
+                                                        string.Equals(m.FieldPath, kvp.Key, StringComparison.OrdinalIgnoreCase));
+                                                    var rowStyle = marker?.Operation == "Add"
+                                                        ? "background-color: var(--mud-palette-secondary-hover);"
+                                                        : null;
+                                                    <tr style="@rowStyle">
                                                         <td style="font-weight:600; white-space:nowrap; width:1%; padding:4px 8px; vertical-align:top; text-transform:capitalize;">
                                                             @FormatPropertyKey(kvp.Key)
+                                                            @if (marker is not null)
+                                                            {
+                                                                <MudTooltip Text="@($"Holocron {marker.Operation.ToLowerInvariant()} — added by the AI agent. See /holocron for evidence.")">
+                                                                    <MudIcon Icon="@Icons.Material.Filled.AutoAwesome" Size="Size.Small" Color="Color.Secondary" Class="ml-1" Style="vertical-align:middle;" />
+                                                                </MudTooltip>
+                                                            }
                                                         </td>
                                                         <td style="padding:4px 8px;">
                                                             @string.Join(", ", kvp.Value)
+                                                            @if (marker?.Operation == "Augment")
+                                                            {
+                                                                <MudChip T="string" Size="Size.Small" Color="Color.Secondary" Variant="Variant.Filled" Class="ml-2">Holocron+</MudChip>
+                                                            }
                                                         </td>
                                                     </tr>
                                                 }
@@ -342,10 +360,28 @@
                                         <MudStack Row="true" Wrap="Wrap.Wrap" Spacing="1">
                                             @foreach (var label in _expandedLabels)
                                             {
-                                                <MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Outlined"
-                                                         Href="@($"/graph-explorer/{context.Id}")" Target="_self">
-                                                    @FormatPropertyKey(label)
-                                                </MudChip>
+                                                @* Phase 2 provenance for relationship chips per Design-019:
+                                                     - HolocronOnly      → secondary-coloured chip (Phase 2 added the relationship)
+                                                     - HolocronAnnotated → primary chip + secondary dot (Phase 1 with Phase 2 context overlay)
+                                                     - otherwise         → primary chip (Phase 1 only) *@
+                                                var phase2Only = _holocronOnlyLabels.Contains(label);
+                                                var annotated = _holocronAnnotatedLabels.Contains(label);
+                                                var chipColor = phase2Only ? Color.Secondary : Color.Info;
+                                                var chipTooltip = phase2Only
+                                                    ? "Added by the Holocron agent — no Phase 1 edge with this label exists."
+                                                    : annotated
+                                                        ? "Phase 1 relationship with Holocron context attached (role/qualifier/description)."
+                                                        : null;
+                                                <MudTooltip Text="@chipTooltip" Disabled="@(chipTooltip is null)">
+                                                    <MudChip T="string" Size="Size.Small" Color="@chipColor" Variant="Variant.Outlined"
+                                                             Href="@($"/graph-explorer/{context.Id}")" Target="_self">
+                                                        @FormatPropertyKey(label)
+                                                        @if (annotated && !phase2Only)
+                                                        {
+                                                            <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background-color: var(--mud-palette-secondary); margin-left:6px; vertical-align:middle;"></span>
+                                                        }
+                                                    </MudChip>
+                                                </MudTooltip>
                                             }
                                         </MudStack>
                                     }
@@ -509,6 +545,12 @@
     private int? _expandedNodeId;
     private List<string>? _expandedLabels;
     private bool _expandedLabelsLoading;
+
+    // Phase 2 provenance buckets for the relationship chips of the currently-expanded
+    // node. Populated alongside _expandedLabels — see ToggleDetails. Stored as HashSets
+    // for O(1) chip-rendering lookups in the foreach loop. See Design-019.
+    private HashSet<string> _holocronOnlyLabels = new(StringComparer.OrdinalIgnoreCase);
+    private HashSet<string> _holocronAnnotatedLabels = new(StringComparer.OrdinalIgnoreCase);
 
     // Multi-selection: persist across pages by tracking selected ids, not row references
     private HashSet<TemporalNodeDto> _selectedItems = new();
@@ -746,11 +788,15 @@
         {
             _expandedNodeId = null;
             _expandedLabels = null;
+            _holocronOnlyLabels.Clear();
+            _holocronAnnotatedLabels.Clear();
             return;
         }
 
         _expandedNodeId = nodeId;
         _expandedLabels = null;
+        _holocronOnlyLabels.Clear();
+        _holocronAnnotatedLabels.Clear();
         _expandedLabelsLoading = true;
         StateHasChanged();
 
@@ -759,6 +805,11 @@
             var result = await Api.GetFromJsonAsync<EntityLabelsResult>(
                 $"api/RelationshipGraph/labels/{nodeId}");
             _expandedLabels = result?.Labels ?? [];
+            if (result is not null)
+            {
+                _holocronOnlyLabels = new HashSet<string>(result.HolocronOnlyLabels ?? [], StringComparer.OrdinalIgnoreCase);
+                _holocronAnnotatedLabels = new HashSet<string>(result.HolocronAnnotatedLabels ?? [], StringComparer.OrdinalIgnoreCase);
+            }
         }
         catch
         {

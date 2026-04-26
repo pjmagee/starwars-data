@@ -40,16 +40,15 @@ public class HolocronController(HolocronAgent agent, IMongoClient mongoClient, I
     /// the caller has explicitly chosen this node. Returns a summary of how many
     /// enrichments were created and how many proposals failed evidence validation.
     ///
-    /// Requires the caller to be an admin (<c>X-User-Roles</c> contains <c>admin</c>).
-    /// Honours <see cref="SettingsOptions.HolocronEnabled"/> as a kill switch — when
-    /// false, returns 503 without contacting the LLM.
+    /// Open to any authenticated caller — the operation is bounded by Holocron's own
+    /// pre-flight rules (canonical labels only, no parallel edges, evidence required)
+    /// and the agent's pass-budget settings, so a public refresh-button doesn't open
+    /// any new abuse vectors. The kill switch <see cref="SettingsOptions.HolocronEnabled"/>
+    /// returns 503 when off.
     /// </summary>
     [HttpPost("enhance/{pageId:int}")]
     public async Task<ActionResult<NodeEnhancementSummary>> EnhanceNode(int pageId, CancellationToken ct)
     {
-        if (!IsAdmin())
-            return Forbid();
-
         if (!settings.Value.HolocronEnabled)
             return StatusCode(503, new { error = "Holocron is disabled (Settings.HolocronEnabled = false)." });
 
@@ -227,6 +226,4 @@ public class HolocronController(HolocronAgent agent, IMongoClient mongoClient, I
                 RelevanceScore: ev.RelevanceScore
             ))
             .ToList();
-
-    bool IsAdmin() => Request.Headers["X-User-Roles"].FirstOrDefault()?.Split(',', StringSplitOptions.TrimEntries).Contains("admin", StringComparer.OrdinalIgnoreCase) ?? false;
 }

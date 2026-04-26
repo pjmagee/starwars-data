@@ -395,7 +395,12 @@ This design lands in stages, each on its own branch:
 4. **Stage C** ✅ shipped on same branch — LLM pipeline, Hangfire schedule, manual admin endpoints, per-node Enhance button on Graph Explorer.
 5. **Stage D** ✅ shipped on same branch — Holocron Log page at `/holocron`, paginated, public read, expandable evidence.
 6. **Cross-page context gathering** 🔴 **REQUIRED — CURRENT GAP** — see "Cross-page context" section below. The agent currently only reads the target page's own chunks; it must also read content from linking pages and vector-similar passages.
-7. **Stages E1–E9** (per-consumer migration PRs) ⏳ none done — `kg.nodes.enriched` and `kg.edges.enriched` views are created but no read consumer points at them yet, so existing UI doesn't show enrichments.
+7. **Stages E1–E9** (per-consumer migration PRs) ⏳ in progress —
+   - **Stage E1** ⏳ in progress — `KnowledgeGraphQueryService` swaps to `kg.nodes.enriched` + `kg.edges.enriched`, and the `/knowledge-graph` page renders Phase 1 vs Phase 2 with distinct chip/row styling. UI provenance pattern documented in [Design-019](019-kg-enrichment-ui-provenance.md) and reused by E2–E9.
+   - **Stage E2** (Graph Explorer d3 viewer) — deferred until after E1 lands, same provenance pattern but applied to edge stroke colour + hover tooltips for `role`/`qualifier`/`description`.
+   - **Stages E3–E9** — Galaxy Map, Timeline, GraphRAG/KGAnalytics/RelationshipAnalyst toolkits, ChartToolKit. Apply the visual contract from Design-019 once E1 has validated it.
+
+   Edge enrichments view (`kg.edges.enriched`) currently has zero C# consumers; the first reader lands as part of Stage E1.
 
 Branch `feature/holocron-skeleton` carries Stages B+v1+C+D as 7 stacked commits — not yet merged to main.
 

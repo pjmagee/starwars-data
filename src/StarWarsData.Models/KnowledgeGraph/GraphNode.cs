@@ -7,7 +7,13 @@ namespace StarWarsData.Models.Entities;
 /// A node in the knowledge graph. Represents a single entity (character, planet, ship, etc.)
 /// with scalar properties and typed relationships to other nodes.
 /// Built deterministically from infobox data — no LLM needed.
+///
+/// <see cref="BsonIgnoreExtraElementsAttribute"/> tolerates the <c>_enrichmentCount</c>
+/// computed field added by the <c>kg.nodes.enriched</c> view (migration 0010); without it,
+/// reads through that view throw a <c>FormatException</c>. Stage E1 readers route through
+/// the enriched view.
 /// </summary>
+[BsonIgnoreExtraElements]
 public class GraphNode
 {
     /// <summary>PageId — matches the _id in the Pages collection.</summary>
