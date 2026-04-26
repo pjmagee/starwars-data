@@ -20,10 +20,15 @@
         it only fills gaps and adds missing context.
     </MudText>
 
-    @* ── Filter card ── *@
+    @* ── Filter card ──
+         Three filters mirror the Knowledge Graph page's scoping vocabulary so the two
+         pages share a mental model: Event type (audit-trail-specific) + Node search
+         (by name, via the same EntitySearchDto endpoint) + Node type. Continuity /
+         Realm flow through the global filter bar — the node search respects them so
+         duplicating those toggles here would be redundant. *@
     <MudPaper Outlined="true" Class="pa-3 mb-3">
         <MudGrid Spacing="2">
-            <MudItem xs="12" sm="6" md="4">
+            <MudItem xs="12" sm="6" md="3">
                 <MudSelect T="string" @bind-Value="_eventTypeFilter" Variant="Variant.Outlined" Margin="Margin.Dense"
                            @bind-Value:after="ReloadAsync" Clearable="true" Placeholder="All event types"
                            Label="Event type">
@@ -34,10 +39,29 @@
                 </MudSelect>
             </MudItem>
             <MudItem xs="12" sm="6" md="4">
-                <MudNumericField T="int?" @bind-Value="_pageIdFilter" Label="Filter by PageId" Variant="Variant.Outlined" Margin="Margin.Dense"
-                                 Placeholder="e.g. 12345" @bind-Value:after="ReloadAsync" Clearable="true" />
+                @* Search-by-name autocomplete replaces the old numeric PageId field. The user
+                     finds the node by its display name (e.g. "Anakin Skywalker") and the
+                     selected entity's id becomes the filter — no need to know the underlying
+                     PageId. ToStringFunc renders the name + type so duplicates are distinguishable. *@
+                <MudAutocomplete T="EntitySearchDto" @bind-Value="_selectedNode" @bind-Value:after="ReloadAsync"
+                                 SearchFunc="SearchNodesAsync"
+                                 ToStringFunc="@(e => e is null ? string.Empty : $"{e.Name}{(string.IsNullOrEmpty(e.Type) ? string.Empty : $" ({e.Type})")}")"
+                                 ResetValueOnEmptyText="true" Clearable="true" CoerceText="false"
+                                 ShowProgressIndicator="true" DebounceInterval="250"
+                                 Variant="Variant.Outlined" Margin="Margin.Dense"
+                                 Label="Filter by node" Placeholder="Search nodes by name..." />
             </MudItem>
-            <MudItem xs="12" sm="12" md="4">
+            <MudItem xs="12" sm="6" md="3">
+                <MudSelect T="string" @bind-Value="_nodeTypeFilter" Variant="Variant.Outlined" Margin="Margin.Dense"
+                           @bind-Value:after="ReloadAsync" Clearable="true" Placeholder="All node types"
+                           Label="Node type">
+                    @foreach (var type in _nodeTypes)
+                    {
+                        <MudSelectItem T="string" Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="2">
                 <MudStack Row="true" AlignItems="AlignItems.Center" Class="h-100">
                     <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Refresh"
                                OnClick="ReloadAsync" Disabled="_loading">Refresh</MudButton>
@@ -56,7 +80,7 @@
     else if (_eventsPage is null || _eventsPage.Items.Count == 0)
     {
         <MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Class="my-4">
-            @if (_pageIdFilter.HasValue || !string.IsNullOrEmpty(_eventTypeFilter))
+            @if (_selectedNode is not null || !string.IsNullOrEmpty(_eventTypeFilter) || !string.IsNullOrEmpty(_nodeTypeFilter))
             {
                 <span>No Holocron events match the current filters.</span>
             }
@@ -214,7 +238,9 @@
 
     bool _loading;
     string? _eventTypeFilter;
-    int? _pageIdFilter;
+    EntitySearchDto? _selectedNode;
+    string? _nodeTypeFilter;
+    List<string> _nodeTypes = [];
     int _currentPage = 1;
     HolocronEventsPage? _eventsPage;
 
@@ -224,7 +250,22 @@
 
     HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
 
-    protected override async Task OnInitializedAsync() => await LoadAsync(_currentPage);
+    protected override async Task OnInitializedAsync()
+    {
+        // Fetch the entity-types list once (shared with the Knowledge Graph page) for the
+        // Node type dropdown, in parallel with the first page of events.
+        var typesTask = Api.GetFromJsonAsync<List<string>>("api/RelationshipGraph/entity-types");
+        var loadTask = LoadAsync(_currentPage);
+        try
+        {
+            _nodeTypes = await typesTask ?? [];
+        }
+        catch
+        {
+            _nodeTypes = [];
+        }
+        await loadTask;
+    }
 
     Task ReloadAsync()
     {
@@ -233,6 +274,32 @@
     }
 
     Task GoToPageAsync(int page) => LoadAsync(page);
+
+    /// <summary>
+    /// MudAutocomplete searcher — hits /api/RelationshipGraph/search which returns
+    /// matching nodes for a free-text query. Empty input → no results (MudAutocomplete
+    /// shows the placeholder). Returns up to 30 candidates ranked by name.
+    /// </summary>
+    async Task<IEnumerable<EntitySearchDto>> SearchNodesAsync(string? value, CancellationToken ct)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            return [];
+        try
+        {
+            var qs = System.Web.HttpUtility.ParseQueryString(string.Empty);
+            qs["q"] = value;
+            // Respect global continuity/realm filters so the autocomplete narrows to what's
+            // actually surfaced elsewhere on the page.
+            // (The events themselves are continuity-agnostic — they record agent actions —
+            // but scoping the search keeps the dropdown aligned with the user's mental model.)
+            var results = await Api.GetFromJsonAsync<List<EntitySearchDto>>($"api/RelationshipGraph/search?{qs}", ct);
+            return results ?? [];
+        }
+        catch
+        {
+            return [];
+        }
+    }
 
     async Task LoadAsync(int page)
     {
@@ -245,8 +312,10 @@
             query["pageSize"] = PageSize.ToString();
             if (!string.IsNullOrEmpty(_eventTypeFilter))
                 query["eventType"] = _eventTypeFilter;
-            if (_pageIdFilter is { } pid && pid > 0)
-                query["pageId"] = pid.ToString();
+            if (_selectedNode is { Id: > 0 } node)
+                query["pageId"] = node.Id.ToString();
+            if (!string.IsNullOrEmpty(_nodeTypeFilter))
+                query["nodeType"] = _nodeTypeFilter;
 
             var url = $"api/holocron/events?{query}";
             _eventsPage = await Api.GetFromJsonAsync<HolocronEventsPage>(url);

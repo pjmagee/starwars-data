@@ -69,6 +69,7 @@ public class HolocronController(HolocronAgent agent, IMongoClient mongoClient, I
         [FromQuery] int pageSize = 20,
         [FromQuery] string? eventType = null,
         [FromQuery] int? pageId = null,
+        [FromQuery] string? nodeType = null,
         [FromQuery] DateTime? from = null,
         [FromQuery] DateTime? to = null,
         CancellationToken ct = default
@@ -83,7 +84,35 @@ public class HolocronController(HolocronAgent agent, IMongoClient mongoClient, I
         if (!string.IsNullOrWhiteSpace(eventType) && Enum.TryParse<HolocronEventType>(eventType, ignoreCase: true, out var parsed))
             filters.Add(Builders<HolocronEvent>.Filter.Eq(e => e.EventType, parsed));
         if (pageId is { } pid && pid > 0)
-            filters.Add(Builders<HolocronEvent>.Filter.Eq(e => e.PageId, pid));
+        {
+            // Match events where the entity is the subject (pageId) OR where it's either endpoint
+            // of an edge enrichment (fromId / toId). Edge enrichments don't populate pageId, so a
+            // strict pageId match would hide edge events for the queried entity — bad UX.
+            filters.Add(
+                Builders<HolocronEvent>.Filter.Or(
+                    Builders<HolocronEvent>.Filter.Eq(e => e.PageId, pid),
+                    Builders<HolocronEvent>.Filter.Eq(e => e.FromId, pid),
+                    Builders<HolocronEvent>.Filter.Eq(e => e.ToId, pid)
+                )
+            );
+        }
+        if (!string.IsNullOrWhiteSpace(nodeType))
+        {
+            // Resolve the type → pageIds via kg.nodes, then filter events to those whose
+            // subject (pageId/fromId/toId) lands in the set. The events collection is bounded
+            // (audit trail, low cardinality), so an $in on the pageIds — even thousands of them —
+            // performs fine. Empty result if the type matches no nodes.
+            var pageIdsOfType = await Nodes.Find(Builders<GraphNode>.Filter.Eq(n => n.Type, nodeType)).Project(n => n.PageId).ToListAsync(ct);
+            if (pageIdsOfType.Count == 0)
+                return Ok(new HolocronEventsPage([], 0, page, pageSize));
+            filters.Add(
+                Builders<HolocronEvent>.Filter.Or(
+                    Builders<HolocronEvent>.Filter.In(e => e.PageId, pageIdsOfType),
+                    Builders<HolocronEvent>.Filter.In(e => e.FromId, pageIdsOfType),
+                    Builders<HolocronEvent>.Filter.In(e => e.ToId, pageIdsOfType)
+                )
+            );
+        }
         if (from.HasValue)
             filters.Add(Builders<HolocronEvent>.Filter.Gte(e => e.OccurredAt, from.Value));
         if (to.HasValue)
