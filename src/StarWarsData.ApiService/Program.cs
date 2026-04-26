@@ -92,6 +92,7 @@ builder
     .AddSingleton<SemanticSearchService>()
     .AddSingleton<KeywordSearchService>()
     .AddSingleton<StarWarsData.Services.Suggestions.SuggestionService>()
+    .AddSingleton<HolocronAgent>()
     .AddScoped<ChatSessionService>()
     .AddSingleton<GraphRAGToolkit>(sp =>
     {

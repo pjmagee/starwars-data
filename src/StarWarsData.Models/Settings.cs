@@ -104,6 +104,21 @@ public static class Collections
     public const string KgCrawlState = "kg.crawl_state";
     public const string KgBatchJobs = "kg.batch_jobs";
     public const string KgLabels = "kg.labels";
+
+    // ── Knowledge graph enrichments (Phase 2 — Holocron agent) ──
+    // Append-only agent additions to the KG, joined into the *.enriched views at read time.
+    // Phase 1 (InfoboxGraphService) NEVER touches these collections — separation of writers.
+    // See eng/design/018-kg-enrichments-architecture.md.
+    public const string KgEnrichments = "kg.enrichments";
+    public const string KgEdgeEnrichments = "kg.edge_enrichments";
+    public const string KgEvents = "kg.events";
+
+    // ── Knowledge graph enriched read views ──
+    // Mongo views that left-join the base collections with active enrichments.
+    // Read-only — created via Mongo migration 0010, not by the AppHost.
+    public const string KgNodesEnriched = "kg.nodes.enriched";
+    public const string KgEdgesEnriched = "kg.edges.enriched";
+
     public const string SearchChunks = "search.chunks";
 
     // ── AI-generated content ──

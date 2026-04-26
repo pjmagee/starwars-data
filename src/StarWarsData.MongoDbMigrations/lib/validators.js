@@ -89,8 +89,125 @@ const nodeValidator = {
   },
 };
 
+// ── Phase 2: Holocron enrichments ─────────────────────────────────────────
+// See eng/design/018-kg-enrichments-architecture.md.
+
+const ENRICHMENT_STATUS_ENUM = ["Active", "Superseded", "Stale", "Rejected"];
+const ENRICHMENT_OPERATION_ENUM = ["Add", "Refine", "Augment"];
+const HOLOCRON_EVENT_TYPE_ENUM = [
+  "EnrichmentCreated",
+  "EdgeEnrichmentCreated",
+  "EnrichmentSuperseded",
+  "EnrichmentMarkedStale",
+  "EnrichmentRejected",
+  "EnrichmentOrphaned",
+  "HolocronPassStarted",
+  "HolocronPassCompleted",
+];
+
+const evidenceItemSchema = {
+  bsonType: "object",
+  required: ["excerpt"],
+  properties: {
+    sourcePageId:   { bsonType: ["int", "null"] },
+    chunkId:        { bsonType: ["string", "null"] },
+    excerpt:        { bsonType: "string", maxLength: 1000 },
+    relevanceScore: { bsonType: ["double", "null"] },
+  },
+};
+
+const nodeEnrichmentValidator = {
+  $jsonSchema: {
+    bsonType: "object",
+    required: [
+      "_id", "pageId", "fieldPath", "operation", "value",
+      "claim", "evidence", "contentHashAtCreation",
+      "status", "createdAt", "agentVersion", "modelId",
+    ],
+    properties: {
+      _id:                   { bsonType: "objectId" },
+      pageId:                { bsonType: "int", minimum: 1 },
+      fieldPath:             { bsonType: "string", minLength: 1 },
+      operation:             { enum: ENRICHMENT_OPERATION_ENUM },
+      value:                 {}, // any BSON shape — depends on fieldPath
+      claim:                 { bsonType: "string", minLength: 1 },
+      evidence:              { bsonType: "array", items: evidenceItemSchema, minItems: 1 },
+      llmReasoning:          { bsonType: ["string", "null"] },
+      contentHashAtCreation: { bsonType: "string", minLength: 1 },
+      status:                { enum: ENRICHMENT_STATUS_ENUM },
+      supersededBy:          { bsonType: ["objectId", "null"] },
+      createdAt:             { bsonType: "date" },
+      appliedAt:             { bsonType: ["date", "null"] },
+      agentVersion:          { bsonType: "string", minLength: 1 },
+      modelId:               { bsonType: "string" },
+    },
+  },
+};
+
+const edgeEnrichmentValidator = {
+  $jsonSchema: {
+    bsonType: "object",
+    required: [
+      "_id", "fromId", "toId", "label", "operation", "value",
+      "claim", "evidence", "contentHashAtCreation",
+      "status", "createdAt", "agentVersion", "modelId",
+    ],
+    properties: {
+      _id:                   { bsonType: "objectId" },
+      fromId:                { bsonType: "int", minimum: 1 },
+      toId:                  { bsonType: "int", minimum: 1 },
+      label:                 { bsonType: "string", minLength: 1 },
+      operation:             { enum: ENRICHMENT_OPERATION_ENUM },
+      value:                 { bsonType: "object" },
+      claim:                 { bsonType: "string", minLength: 1 },
+      evidence:              { bsonType: "array", items: evidenceItemSchema, minItems: 1 },
+      llmReasoning:          { bsonType: ["string", "null"] },
+      contentHashAtCreation: { bsonType: "string", minLength: 1 },
+      status:                { enum: ENRICHMENT_STATUS_ENUM },
+      supersededBy:          { bsonType: ["objectId", "null"] },
+      createdAt:             { bsonType: "date" },
+      appliedAt:             { bsonType: ["date", "null"] },
+      agentVersion:          { bsonType: "string", minLength: 1 },
+      modelId:               { bsonType: "string" },
+    },
+  },
+};
+
+const holocronEventValidator = {
+  $jsonSchema: {
+    bsonType: "object",
+    required: ["_id", "eventType", "summary", "triggeredBy", "occurredAt", "agentVersion"],
+    properties: {
+      _id:          { bsonType: "objectId" },
+      eventType:    { enum: HOLOCRON_EVENT_TYPE_ENUM },
+      enrichmentId: { bsonType: ["objectId", "null"] },
+      pageId:       { bsonType: ["int", "null"] },
+      fieldPath:    { bsonType: ["string", "null"] },
+      fromId:       { bsonType: ["int", "null"] },
+      toId:         { bsonType: ["int", "null"] },
+      label:        { bsonType: ["string", "null"] },
+      summary:      { bsonType: "string", minLength: 1 },
+      triggeredBy:  { bsonType: "string", minLength: 1 },
+      occurredAt:   { bsonType: "date" },
+      agentVersion: { bsonType: "string", minLength: 1 },
+    },
+  },
+};
+
 // Support both require() (Node.js, utils) and load() (mongosh migrations)
 if (typeof module !== "undefined") {
-  module.exports = { edgeValidator, nodeValidator };
+  module.exports = {
+    edgeValidator,
+    nodeValidator,
+    nodeEnrichmentValidator,
+    edgeEnrichmentValidator,
+    holocronEventValidator,
+  };
 }
-globalThis.__validators = { edgeValidator, nodeValidator };
+globalThis.__validators = {
+  edgeValidator,
+  nodeValidator,
+  nodeEnrichmentValidator,
+  edgeEnrichmentValidator,
+  holocronEventValidator,
+};

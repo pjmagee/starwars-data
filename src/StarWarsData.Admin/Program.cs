@@ -95,6 +95,7 @@ builder
             .Build();
     })
     .AddScoped<StarWarsData.Services.AI.Agents.SuggestionAgent>()
+    .AddScoped<StarWarsData.Services.AI.Agents.HolocronAgent>()
     .AddSingleton<JobToggleService>()
     .AddSingleton<PageDownloader>()
     .AddSingleton<IEmbeddingGenerator<string, Embedding<float>>>(sp => sp.GetRequiredService<OpenAIClient>().GetEmbeddingClient("text-embedding-3-small").AsIEmbeddingGenerator());
