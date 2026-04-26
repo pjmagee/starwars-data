@@ -95,8 +95,11 @@ const nodeValidator = {
 const ENRICHMENT_STATUS_ENUM = ["Active", "Superseded", "Stale", "Rejected"];
 // v1 policy (Design-018): infobox is canonical truth. Agent only adds —
 // no Refine. Add (new value), Augment (append to list, deduped),
-// FillGap (fill null sub-property of existing entity).
-const ENRICHMENT_OPERATION_ENUM = ["Add", "Augment", "FillGap"];
+// FillGap (fill null sub-property of existing entity), Annotate (attach
+// role/qualifier/description context to an existing edge without creating
+// a parallel edge — the compromise to "no synonym edges between connected
+// pairs" rule).
+const ENRICHMENT_OPERATION_ENUM = ["Add", "Augment", "FillGap", "Annotate"];
 const HOLOCRON_EVENT_TYPE_ENUM = [
   "EnrichmentCreated",
   "EdgeEnrichmentCreated",

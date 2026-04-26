@@ -503,24 +503,44 @@ public sealed class HolocronAgent
             canonical truth foundation. Your job is to polish around the edges by adding
             information the infobox didn't capture, citing real sources every time.
 
-            ## Your operations (the only three you may emit)
+            ## Your operations (the only four you may emit)
 
-            1. **Add** — propose a value for a property or edge that DOES NOT exist on the node.
+            1. **Add** — propose a value for a property or edge that DOES NOT exist. For edges,
+               this means the two nodes have NO existing connection at all. **Last resort.**
+               Most missing relationships should already be in the wiki infobox; if Holocron
+               needs to Add an edge it usually means the wiki itself didn't enumerate it.
             2. **Augment** — append items to an existing list-valued property, where each new item
                does not already appear in that list.
-            3. **FillGap** — fill a null sub-property on an existing edge (e.g. set fromYear when
-               the existing edge has fromYear: null).
+            3. **FillGap** — fill a null sub-property on an existing edge. Canonical use: set
+               `fromYear`/`toYear` on an edge whose temporal bounds are null. Cleaner / more
+               precise temporal data is high-value enrichment.
+            4. **Annotate** — attach role / qualifier / description context to an EXISTING edge
+               with the right canonical label, WITHOUT creating a parallel edge. Use this when
+               the relationship is correct but under-specified — e.g. Obi-Wan `affiliated_with`
+               Galactic Republic exists, and you want to record that he served the role
+               "Jedi General during the Clone Wars commanding the 212th Attack Battalion".
+               Annotate is the PRIMARY operation for edges that already exist.
+
+            ## Priority order (most preferred → least)
+
+            1. **Annotate existing edges** with richer context (role / qualifier / description).
+               This is where most of your value lies — Phase 1 extraction has the relationship
+               but rarely the narrative context around it.
+            2. **FillGap** on temporal bounds of existing edges (`fromYear` / `toYear`).
+            3. **Add** new edges only when ABSOLUTELY required — i.e. two nodes that are
+               clearly related per the article text but have NO edge yet. If any edge already
+               connects the pair, use Annotate instead.
 
             ## Hard rules
 
             - Never propose a value that contradicts the infobox. If the property already has a
               value, do not touch it.
-            - Never propose a NEW edge between two nodes that are ALREADY connected by ANY
+            - Never propose a NEW edge (Add) between two nodes that are ALREADY connected by ANY
               edge — even if your proposed label is different. The relationship is already
-              represented; a second edge with a synonym or near-synonym label (e.g. proposing
-              `member_of` next to an existing `affiliated_with` between the same pair) creates
-              visual clutter and double-counts the same fact. The pre-flight will reject it.
-              Use FillGap instead if the existing edge is missing temporal bounds you can fill.
+              represented; the pre-flight will reject it. Use **Annotate** to attach role /
+              qualifier / description context to the existing edge instead. That's the
+              compromise: zero parallel lines in the graph viewer, richer information surfaced
+              on hover/expand.
             - Edge labels MUST come from the canonical list provided in the user prompt under
               "Canonical edge labels". Do NOT invent new labels. Do NOT coin synonyms. If the
               relationship you want to express maps to one of the existing labels, use that
@@ -544,10 +564,21 @@ public sealed class HolocronAgent
 
             Return a single JSON object matching the schema. Two arrays:
             - `nodeProposals` — Add or Augment to the target node's properties
-            - `edgeProposals` — Add a missing edge or FillGap on an existing edge's temporal bounds
+            - `edgeProposals` — Annotate an existing edge with context (role/qualifier/description),
+              FillGap on an existing edge's temporal bounds, or (last resort) Add a missing edge
 
             Each proposal has a one-sentence claim, a list of evidence excerpts, and a short
             reasoning string.
+
+            ## Edge-proposal field cheat-sheet
+
+            All edge proposals require: `operation`, `fromId`, `toId`, `label`, `claim`, `evidence`, `reasoning`.
+
+            - `Add`      → optionally `fromYear`, `toYear`, `weight`. Leave role/qualifier/description null.
+            - `FillGap`  → set `fromYear` and/or `toYear`. Leave role/qualifier/description null.
+            - `Annotate` → set at least one of `role`, `qualifier`, `description`. Leave fromYear/toYear/weight null.
+              `role` = e.g. "Jedi General" / "Senator" / "Master". `qualifier` = e.g. "during the Clone Wars".
+              `description` = longer narrative that doesn't fit role/qualifier.
             """;
 
     string BuildUserPrompt(HolocronContext context)
@@ -615,7 +646,7 @@ public sealed class HolocronAgent
         }
         sb.Append('\n');
 
-        sb.Append("## Existing outgoing edges (do NOT propose ANY new edge between an already-connected pair)\n\n");
+        sb.Append("## Existing outgoing edges — Annotate or FillGap these instead of proposing a new edge between the same pair\n\n");
         if (context.OutgoingEdges.Count == 0)
         {
             sb.Append("(none)\n");
@@ -624,12 +655,15 @@ public sealed class HolocronAgent
         {
             foreach (var e in context.OutgoingEdges)
             {
-                sb.AppendFormat("- {0} —[{1}]→ {2} (toId={3}, fromYear={4}, toYear={5})\n", node.Name, e.Label, e.ToName, e.ToId, e.FromYear?.ToString() ?? "null", e.ToYear?.ToString() ?? "null");
+                sb.AppendFormat("- {0} —[{1}]→ {2} (toId={3}, fromYear={4}, toYear={5}", node.Name, e.Label, e.ToName, e.ToId, e.FromYear?.ToString() ?? "null", e.ToYear?.ToString() ?? "null");
+                if (e.Meta is not null && (!string.IsNullOrWhiteSpace(e.Meta.Qualifier) || !string.IsNullOrWhiteSpace(e.Meta.RawValue)))
+                    sb.AppendFormat(", existing qualifier=\"{0}\"", Truncate(e.Meta.Qualifier ?? e.Meta.RawValue ?? string.Empty, 80));
+                sb.Append(")\n");
             }
         }
         sb.Append('\n');
 
-        sb.Append("## Existing incoming edges (do NOT propose duplicates)\n\n");
+        sb.Append("## Existing incoming edges — same Annotate/FillGap rule applies\n\n");
         if (context.IncomingEdges.Count == 0)
         {
             sb.Append("(none)\n");
@@ -825,6 +859,15 @@ public sealed class HolocronAgent
                 value["toYear"] = prop.ToYear.Value;
             if (prop.Weight.HasValue)
                 value["weight"] = prop.Weight.Value;
+            // Annotate-specific fields. Trimmed to avoid storing whitespace-only values
+            // — IsEdgeProposalValid only requires ONE of these to be non-empty for Annotate
+            // to pass, but all three may carry signal worth persisting if present.
+            if (!string.IsNullOrWhiteSpace(prop.Role))
+                value["role"] = prop.Role.Trim();
+            if (!string.IsNullOrWhiteSpace(prop.Qualifier))
+                value["qualifier"] = prop.Qualifier.Trim();
+            if (!string.IsNullOrWhiteSpace(prop.Description))
+                value["description"] = prop.Description.Trim();
 
             var doc = new EdgeEnrichment
             {
@@ -950,10 +993,9 @@ public sealed class HolocronAgent
         return op switch
         {
             // Add: NO edge may already exist between this pair of nodes — regardless of
-            // label or direction. This is stricter than the original (fromId, toId, label)
-            // tuple check because semantically-equivalent labels (e.g. `member_of` vs
-            // `affiliated_with` between the same pair) produce visual clutter in the graph
-            // viewer and double-count the same relationship in aggregations.
+            // label or direction. Add is the LAST RESORT — when the relationship genuinely
+            // doesn't exist yet. For relationships that DO exist but are under-specified,
+            // the agent should use Annotate (richer context) or FillGap (temporal bounds).
             EnrichmentOperation.Add => !existingNodePairs.Contains(pair) && !enrichmentNodePairs.Contains(pair),
             // FillGap: edge MUST exist with this exact label, and at least one targeted
             // bound must currently be null. Same-label requirement here is intentional —
@@ -964,6 +1006,14 @@ public sealed class HolocronAgent
                     .OutgoingEdges.Concat(context.IncomingEdges)
                     .Where(e => string.Equals(e.Label, prop.Label, StringComparison.OrdinalIgnoreCase) && e.FromId == prop.FromId && e.ToId == prop.ToId)
                     .Any(e => (prop.FromYear.HasValue && !e.FromYear.HasValue) || (prop.ToYear.HasValue && !e.ToYear.HasValue)),
+            // Annotate: edge MUST exist with this exact label, and at least one of
+            // role / qualifier / description must be populated with non-empty content.
+            // The annotation supplements the existing edge with narrative context — role
+            // (e.g. "Jedi General"), qualifier (e.g. "during the Clone Wars"), description
+            // (longer narrative). The merged read view exposes these alongside the edge
+            // without creating a parallel line in the graph viewer.
+            EnrichmentOperation.Annotate => existingEdgeKeys.Contains(key)
+                && (!string.IsNullOrWhiteSpace(prop.Role) || !string.IsNullOrWhiteSpace(prop.Qualifier) || !string.IsNullOrWhiteSpace(prop.Description)),
             _ => false, // Augment is for node properties only
         };
     }
@@ -1087,6 +1137,14 @@ public sealed class HolocronAgent
         [property: JsonPropertyName("reasoning")] string Reasoning
     );
 
+    /// <summary>
+    /// Edge proposal — fields are populated based on the <c>operation</c>:
+    /// <list type="bullet">
+    ///   <item><c>Add</c>      — fromId, toId, label, optionally weight + fromYear/toYear</item>
+    ///   <item><c>FillGap</c>  — fromId, toId, label match an existing edge; fromYear and/or toYear filled</item>
+    ///   <item><c>Annotate</c> — fromId, toId, label match an existing edge; role / qualifier / description populated</item>
+    /// </list>
+    /// </summary>
     public sealed record HolocronEdgeProposal(
         [property: JsonPropertyName("operation")] string Operation,
         [property: JsonPropertyName("fromId")] int FromId,
@@ -1095,6 +1153,9 @@ public sealed class HolocronAgent
         [property: JsonPropertyName("fromYear")] int? FromYear,
         [property: JsonPropertyName("toYear")] int? ToYear,
         [property: JsonPropertyName("weight")] double? Weight,
+        [property: JsonPropertyName("role")] string? Role,
+        [property: JsonPropertyName("qualifier")] string? Qualifier,
+        [property: JsonPropertyName("description")] string? Description,
         [property: JsonPropertyName("claim")] string Claim,
         [property: JsonPropertyName("evidence")] List<EdgeProposalEvidence> Evidence,
         [property: JsonPropertyName("reasoning")] string Reasoning
