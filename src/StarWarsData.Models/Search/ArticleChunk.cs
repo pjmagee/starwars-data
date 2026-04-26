@@ -58,6 +58,17 @@ public class ArticleChunk
     [BsonElement("embedding")]
     public float[] Embedding { get; set; } = [];
 
+    /// <summary>
+    /// Wookieepedia URLs this chunk's article links to via <c>&lt;a href&gt;</c> tags
+    /// in the rendered HTML stored in <see cref="Text"/>. Deduped, case-sensitive (URLs
+    /// are case-sensitive on Fandom). Multikey-indexed via the
+    /// <c>0012-extract-chunk-links</c> migration so the Holocron agent can efficiently
+    /// answer "which chunks reference page X" — the canonical "what-links-here" signal,
+    /// stronger than infobox-edge ancestry or vector similarity.
+    /// </summary>
+    [BsonElement("links")]
+    public List<string> Links { get; set; } = [];
+
     [BsonElement("createdAt")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

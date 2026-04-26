@@ -230,6 +230,7 @@ public partial class ArticleChunkingService
                             Continuity = continuity,
                             Realm = realm,
                             Embedding = vec,
+                            Links = ExtractWikiLinks(chunks[i].text),
                         }
                     );
                 }
@@ -501,6 +502,28 @@ public partial class ArticleChunkingService
         _logger.LogInformation("Vector search index created on chunks collection");
     }
 
+    /// <summary>
+    /// Pulls every Wookieepedia <c>&lt;a href="..."&gt;</c> URL out of a chunk's HTML and
+    /// dedupes the result. Stored on <see cref="ArticleChunk.Links"/> with a multikey index
+    /// so the Holocron agent can answer "which chunks reference this entity's wiki page" in
+    /// O(log N) — the canonical "what links here" signal, exact and prose-aware.
+    ///
+    /// Scoped to <c>starwars.fandom.com/wiki/</c> URLs to keep the index size bounded;
+    /// other absolute hrefs (external citations, Wikipedia, etc.) aren't useful here.
+    /// </summary>
+    public static List<string> ExtractWikiLinks(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return [];
+        var seen = new HashSet<string>(StringComparer.Ordinal);
+        foreach (Match m in WikiLinkRegex().Matches(text))
+        {
+            if (m.Groups.Count > 1 && m.Groups[1].Success)
+                seen.Add(m.Groups[1].Value);
+        }
+        return [.. seen];
+    }
+
     static bool IsQuotaOrRateLimit(Exception ex) =>
         ex.Message.Contains("429", StringComparison.Ordinal)
         || ex.Message.Contains("insufficient_quota", StringComparison.OrdinalIgnoreCase)
@@ -526,4 +549,12 @@ public partial class ArticleChunkingService
 
     [GeneratedRegex(@"\n{3,}")]
     private static partial Regex ExcessiveWhitespaceRegex();
+
+    /// <summary>
+    /// Captures the URL inside <c>&lt;a href="https://starwars.fandom.com/wiki/..."&gt;</c>.
+    /// Stops at the closing quote — chunks routinely contain hundreds of these in
+    /// "Appearances" sections so the regex must be quote-bounded for cheap iteration.
+    /// </summary>
+    [GeneratedRegex("href=\"(https://starwars\\.fandom\\.com/wiki/[^\"]+)\"")]
+    private static partial Regex WikiLinkRegex();
 }

@@ -380,31 +380,33 @@ public sealed class HolocronAgent
             allChunks.AddRange(ownChunks);
         }
 
-        // Source 2 — linking-page chunks. For each top incoming-edge source, pull chunks
-        // where the target's name appears as a substring. This is what makes the cross-page
-        // story work: when enhancing Yoda, we want chunks from Padmé's page that mention
-        // Yoda, not just Yoda's own page.
+        // Source 2 — wiki-backlink chunks. The chunk corpus stores the raw HTML for
+        // each article, so the target's `wikiUrl` appears verbatim as
+        // `<a href="...">` wherever another article wikilinks to this entity.
+        // That's the strongest "this article is talking about that page" signal —
+        // exact, prose-aware, no infobox-edge prerequisite.
+        //
+        // Querying the URL with a regex over `Text` would scan all 800K+ chunks
+        // (no index supports arbitrary substring regex), so we use the indexed
+        // `Links` multikey field populated by ArticleChunkingService and the
+        // 0012-extract-chunk-links migration. `Links` is the deduped set of
+        // `<a href>` URLs extracted at chunk-write time; an equality lookup on
+        // the multikey index is O(log N).
         var linkingLimit = Math.Max(0, _settings.HolocronLinkingPageChunks);
-        if (linkingLimit > 0 && inEdges.Count > 0 && !string.IsNullOrWhiteSpace(node.Name))
+        if (linkingLimit > 0 && !string.IsNullOrWhiteSpace(node.WikiUrl))
         {
-            // Top-K linking pages by edge weight; cap at linkingLimit so we don't fan out further.
-            var linkingPageIds = inEdges.Select(e => e.FromId).Distinct().Take(linkingLimit).ToList();
-            var perPageLimit = Math.Max(1, linkingLimit / Math.Max(1, linkingPageIds.Count)) + 1;
+            var backlinkFilter = Builders<ArticleChunk>.Filter.AnyEq(c => c.Links, node.WikiUrl) & Builders<ArticleChunk>.Filter.Ne(c => c.PageId, pageId);
+            const int perPageLimit = 2;
 
-            // Case-insensitive substring match on the chunk text. MongoSafe-escape the name in case
-            // it contains regex metachars (e.g. "Obi-Wan", "R2-D2").
-            var nameRegex = new BsonRegularExpression(System.Text.RegularExpressions.Regex.Escape(node.Name), "i");
-            var linkingFilter = Builders<ArticleChunk>.Filter.In(c => c.PageId, linkingPageIds) & Builders<ArticleChunk>.Filter.Regex(c => c.Text, nameRegex);
-            var linkingChunks = await _chunks
-                .Find(linkingFilter)
+            var backlinkChunks = await _chunks
+                .Find(backlinkFilter)
                 .SortBy(c => c.PageId)
                 .ThenBy(c => c.ChunkIndex)
-                .Limit(linkingLimit * perPageLimit) // small overshoot — we'll take linkingLimit total below
+                .Limit(linkingLimit * 3) // over-fetch so the per-page cap spreads across multiple articles
                 .Project(c => new HolocronChunkSummary(c.Id, c.PageId, c.Title, c.Heading, c.Section, c.Text, ChunkOrigin.LinkingPage))
                 .ToListAsync(ct);
 
-            // Take at most `perPageLimit` chunks per source page so one verbose article doesn't crowd out others.
-            var groupedByPage = linkingChunks.GroupBy(c => c.PageId).SelectMany(g => g.Take(perPageLimit)).Take(linkingLimit).ToList();
+            var groupedByPage = backlinkChunks.GroupBy(c => c.PageId).SelectMany(g => g.Take(perPageLimit)).Take(linkingLimit).ToList();
             allChunks.AddRange(groupedByPage);
         }
 
