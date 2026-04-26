@@ -14,19 +14,32 @@ namespace StarWarsData.Services.AI.Agents;
 /// recorded in <c>kg.events</c> as an immutable audit log, which the Stage D
 /// changelog UI will paginate over.
 ///
-/// **Contract** (see <c>eng/design/018-kg-enrichments-architecture.md</c>):
+/// **v1 policy** (see <c>eng/design/018-kg-enrichments-architecture.md</c>) —
+/// the wiki infobox is the canonical truth foundation. Holocron polishes around
+/// the edges; it adds, it never contradicts:
+///
 /// <list type="bullet">
-///   <item>Never writes to <c>kg.nodes</c> or <c>kg.edges</c> — those belong to Phase 1.</item>
-///   <item>Every enrichment carries at least one evidence excerpt with a real source citation.</item>
-///   <item>Active enrichments stamp <c>contentHashAtCreation</c> from the source node; the
-///         post-Phase-1 staleness sweep flips mismatched ones to <see cref="EnrichmentStatus.Stale"/>
-///         rather than deleting them.</item>
-///   <item><see cref="EnrichmentOperation.Refine"/> proposals (correcting an existing infobox
-///         value) are surfaced as suggestions only — never auto-applied.</item>
+///   <item><b>Permitted operations</b>: <see cref="EnrichmentOperation.Add"/> (new field / new edge),
+///         <see cref="EnrichmentOperation.Augment"/> (append to a list, deduped against existing values),
+///         <see cref="EnrichmentOperation.FillGap"/> (fill a null sub-property like <c>edge.fromYear</c>).</item>
+///   <item><b>Forbidden</b>: changing an existing non-null value (no Refine — the enum doesn't even include it).</item>
+///   <item><b>Forbidden</b>: writing to <c>kg.nodes</c> / <c>kg.edges</c> — those belong to Phase 1.</item>
+///   <item><b>Forbidden</b>: mutating identity fields (<c>pageId</c> / <c>name</c> / <c>type</c> / <c>wikiUrl</c>).</item>
 /// </list>
 ///
-/// **Stage B** (this file): skeleton with stub method bodies. The collections are real;
-/// the views are real; the LLM enhancement logic ships in Stage C.
+/// **Pre-flight checks** (load-bearing, enforced in C# before any insert):
+/// <list type="bullet">
+///   <item><see cref="EnrichmentOperation.Add"/> property — <c>kg.nodes[pageId].properties[fieldPath]</c> must be missing or empty.</item>
+///   <item><see cref="EnrichmentOperation.Add"/> edge — <c>(fromId, toId, label)</c> must NOT exist in <c>kg.edges</c> AND must NOT be Active in <c>kg.edge_enrichments</c>.</item>
+///   <item><see cref="EnrichmentOperation.Augment"/> — each proposed list item must not already appear in the existing list (case-insensitive).</item>
+///   <item><see cref="EnrichmentOperation.FillGap"/> — the targeted sub-property must currently be <c>null</c> in the base collection.</item>
+///   <item>All operations — at least one <see cref="EnrichmentEvidence"/> with a real <c>sourcePageId</c> or <c>chunkId</c>.</item>
+///   <item>All operations — stamp <c>contentHashAtCreation</c> from the source node so the post-Phase-1 staleness
+///         sweep can flip mismatches to <see cref="EnrichmentStatus.Stale"/> instead of letting them go silent.</item>
+/// </list>
+///
+/// **Stage B** (this file): skeleton with stub method bodies. The collections, views, and
+/// validators are real; the LLM call, context-gathering, and pre-flight enforcement land in Stage C.
 /// </summary>
 public sealed class HolocronAgent
 {

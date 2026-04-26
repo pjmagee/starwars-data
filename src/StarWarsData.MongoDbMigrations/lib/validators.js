@@ -93,7 +93,10 @@ const nodeValidator = {
 // See eng/design/018-kg-enrichments-architecture.md.
 
 const ENRICHMENT_STATUS_ENUM = ["Active", "Superseded", "Stale", "Rejected"];
-const ENRICHMENT_OPERATION_ENUM = ["Add", "Refine", "Augment"];
+// v1 policy (Design-018): infobox is canonical truth. Agent only adds —
+// no Refine. Add (new value), Augment (append to list, deduped),
+// FillGap (fill null sub-property of existing entity).
+const ENRICHMENT_OPERATION_ENUM = ["Add", "Augment", "FillGap"];
 const HOLOCRON_EVENT_TYPE_ENUM = [
   "EnrichmentCreated",
   "EdgeEnrichmentCreated",

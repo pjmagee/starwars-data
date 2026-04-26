@@ -31,12 +31,40 @@ We need a separation: Phase 1 owns the canonical infobox-derived view of the KG;
 5. **Stale enrichments are detectable.** When the underlying infobox node changes, enrichments tied to the old content get flagged for re-evaluation, not silently invalidated.
 6. **No race conditions between writers.** Phase 1 (`InfoboxGraphService`), Phase 6 (`RelationshipGraphBuilderService`), and Phase 2 (Holocron) operate on disjoint collections — they cannot clobber each other.
 
+## v1 policy: what Holocron will and won't do
+
+The wiki infobox extraction is the **canonical truth foundation**. Holocron polishes around the edges — it adds, it never contradicts. The policy below resolves what would otherwise be open questions about precedence, conflict, and review.
+
+### Permitted (v1)
+
+- **Add** a property when the infobox doesn't have one. Pre-flight: `kg.nodes[pageId].properties[fieldPath]` must be missing or empty.
+- **Add** an edge when no edge with the same `(fromId, toId, label)` exists. Pre-flight: must NOT exist in `kg.edges` AND must NOT be Active in `kg.edge_enrichments`.
+- **Augment** a list-valued property with new items, deduped against the existing list. Pre-flight: each proposed item must not already appear in `kg.nodes[pageId].properties[fieldPath]` (case-insensitive).
+- **FillGap** a null sub-property on an existing entity — the canonical example is filling `kg.edges[(from, to, label)].fromYear` when it's `null`. Pre-flight: the targeted sub-property must currently be `null` in the base collection.
+
+### Forbidden (v1)
+
+- **No Refine.** Holocron never proposes a value when one already exists. The enum doesn't even include the operation. If a future version needs corrections-with-review, it lands as a separate decision and a re-introduced enum value, not a quiet escalation of v1 semantics.
+- **No type / name / pageId / wikiUrl mutations.** Those are Phase 1's identity layer.
+- **No removal.** Holocron never marks an existing infobox value as "wrong" or hides it. Disagreement gets logged in `kg.events` for human review but does not affect the read view.
+
+### Why this works
+
+If the infobox is wrong, the fix lands via a Wookieepedia edit — that's the source of truth, and it flows back through Phase 1 the next day. Holocron doesn't try to be a second opinion against the wiki; it tries to be the missing context the wiki didn't have room for. Every read consumer can therefore treat infobox values as authoritative and Holocron values as additive context, with no precedence resolution at the merge layer.
+
+### Implications
+
+- The "Temporal precedence" risk in the Risks section disappears — there's no precedence question because conflict is impossible by construction.
+- The merged view's `source` flag is binary: a property is either `infobox` (came from `kg.nodes`) or `holocron` (came from a v1-permitted operation). No third category for "agent-corrected".
+- Pre-flight checks in `EnhanceNodeAsync` (Stage C) are the load-bearing safety net. The agent prompt teaches the policy, but C# code enforces it before any insert into `kg.enrichments` / `kg.edge_enrichments`.
+
 ## Non-goals
 
 - **Full event sourcing.** Nodes are not projections of events; they remain documents. We add an append-only audit log (`kg.events`) for transparency, not for replay.
 - **Per-property version history.** Enrichments supersede each other (`status: superseded`); we do not keep a full diff history beyond the event log.
 - **Modifying canonical fields.** Holocron does not change `pageId`, `name`, `type`, or `wikiUrl`. Those remain Phase 1's domain.
 - **Synchronous read-time LLM calls.** Enrichments are pre-computed and stored. The read path is pure Mongo.
+- **Refine operations.** See "v1 policy — forbidden" above. Treated as a separate future decision, not a quiet v2 expansion.
 
 ## Architecture overview
 
@@ -95,10 +123,12 @@ One document per `(pageId, fieldPath)` enhancement.
   _id: ObjectId,
   pageId: 12345,                          // links back to kg.nodes._id
   fieldPath: "properties.affiliations",   // dotted path inside kg.nodes
-  operation: "add" | "refine" | "augment",
-  // - "add"     : property/facet didn't exist in infobox; agent created it
-  // - "refine"  : property existed but agent narrowed/corrected it
-  // - "augment" : property existed and agent appended additional values
+  operation: "Add" | "Augment" | "FillGap",
+  // - "Add"     : field didn't exist in infobox; agent created it
+  // - "Augment" : field exists as a list; agent appended new items (deduped against existing values)
+  // - "FillGap" : field exists but a sub-property is null (e.g. an existing temporal facet
+  //               with year=null); agent fills only the null sub-property
+  // Refine (changing an existing non-null value) is forbidden in v1 — see "v1 policy" below
   value: <any>,                           // the enrichment payload
   claim: "Anakin Skywalker's birthplace was Tatooine, in the village of Mos Espa.",
   evidence: [
@@ -139,9 +169,11 @@ Same shape as `kg.enrichments` but keyed by edge identity.
   fromId: 12345,
   toId: 67890,
   label: "apprentice_of",
-  operation: "add" | "refine",
-  // - "add"    : agent proposes a new edge that doesn't exist in kg.edges
-  // - "refine" : agent narrows an existing edge (temporal bounds, weight, qualifier)
+  operation: "Add" | "FillGap",
+  // - "Add"     : agent proposes a NEW edge that doesn't exist in kg.edges
+  //              and isn't already an Active enrichment in kg.edge_enrichments
+  // - "FillGap" : edge exists in kg.edges but fromYear / toYear is null;
+  //              agent fills only the null sub-property
   value: { fromYear?, toYear?, weight?, meta?, ... },
   claim: "...",
   evidence: [...],
@@ -301,15 +333,7 @@ Each migration PR is small (a `Collections.X` constant swap plus prompt/policy a
 
 ### Medium severity
 
-**4. Temporal precedence policy.** A Character has `Born = "22 BBY"` from the infobox. Holocron narrows it to `"22 BBY (3:14 ABY galactic standard, per Coruscant Reference)"` from a novel chunk. What wins?
-
-**Policy: infobox always wins on specific values; Holocron only fills gaps or adds new facets.** Concretely:
-
-- Holocron `add` operations (no infobox value present) → applied.
-- Holocron `refine` operations (infobox value present) → tagged but not applied; surfaced in the changelog as a suggested correction for human review.
-- Holocron `augment` operations (extending a list) → applied with `source: "holocron"` per element.
-
-This protects the canonical timeline; corrections happen via wiki edits flowing back through Phase 1.
+**4. Temporal precedence — resolved by v1 policy below.** Originally framed as a precedence question ("infobox 22 BBY vs Holocron 22 BBY (3:14 ABY) — which wins?"). The v1 policy resolves it categorically: Holocron never proposes a value when one exists, so the conflict cannot occur. See the v1 policy section below.
 
 **5. Index alignment on the enriched view.** Mongo views can use base-collection indexes only when the `$lookup` doesn't disturb the leading-key prefix. `KGAnalyticsToolkit`'s aggregations rely heavily on `ix_temporal_semantic_year`. Need `explain()` after the view is in place. The same risk was present for `kg.edges.bidir` and worked out — strong precedent.
 
@@ -346,7 +370,7 @@ These are pending decisions that block detailed implementation but not the high-
 - Implementation of the Holocron agent itself (separate design doc, Stage B–C of the rollout).
 - Frontend changelog page (separate design doc, Stage D).
 - Edge enrichment for the LLM-batch `RelationshipGraphBuilderService` — Phase 6's edges are already provenance-tagged via `sourcePageId` and don't need a second enrichment layer.
-- User-facing approval workflow for `refine` operations. The temporal precedence policy says these are surfaced but not applied; building a UI to accept/reject them is future work.
+- User-facing approval workflow for corrections. v1 forbids Refine entirely (see "v1 policy"); a review UI for proposed corrections only matters if and when Refine is reintroduced.
 - Automated rollback. If Holocron writes a bad batch of enrichments, manual `kg.enrichments.updateMany({status: "rejected"})` is the answer for now. A "rollback agentVersion X" workflow can come later.
 
 ## Migration sequencing
