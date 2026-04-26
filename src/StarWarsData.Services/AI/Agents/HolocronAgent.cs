@@ -555,26 +555,19 @@ public sealed class HolocronAgent
         var enrichmentEdgeKeys = existingActiveEdgeEnrichments.Select(e => EdgeKey(e.FromId, e.ToId, e.Label)).ToHashSet(StringComparer.OrdinalIgnoreCase);
 
         // Validate chunk citations once: pull every chunkId mentioned across all proposals
-        // and confirm they exist in search.chunks.
-        var citedChunkIds = batch
-            .NodeProposals.SelectMany(p => p.Evidence)
-            .Concat(batch.EdgeProposals.SelectMany(p => p.Evidence))
-            .Select(ev => ev.ChunkId)
-            .Where(id => !string.IsNullOrEmpty(id))
-            .Distinct()
+        // and confirm they exist in search.chunks. Node and edge evidence types are distinct
+        // (see schema-gen rationale on the records); project both to a common (chunkId, pageId)
+        // shape so the lookup batches across them.
+        var allEvidenceCitations = batch
+            .NodeProposals.SelectMany(p => p.Evidence.Select(e => (e.ChunkId, e.SourcePageId)))
+            .Concat(batch.EdgeProposals.SelectMany(p => p.Evidence.Select(e => (e.ChunkId, e.SourcePageId))))
             .ToList();
+
+        var citedChunkIds = allEvidenceCitations.Select(c => c.ChunkId).Where(id => !string.IsNullOrEmpty(id)).Distinct().ToList();
         var validChunkIds =
             citedChunkIds.Count == 0 ? new HashSet<string>() : new HashSet<string>(await _chunks.Find(Builders<ArticleChunk>.Filter.In(c => c.Id, citedChunkIds!)).Project(c => c.Id).ToListAsync(ct));
 
-        // Same for sourcePageId citations.
-        var citedPageIds = batch
-            .NodeProposals.SelectMany(p => p.Evidence)
-            .Concat(batch.EdgeProposals.SelectMany(p => p.Evidence))
-            .Select(ev => ev.SourcePageId)
-            .Where(id => id is not null and not 0)
-            .Select(id => id!.Value)
-            .Distinct()
-            .ToList();
+        var citedPageIds = allEvidenceCitations.Select(c => c.SourcePageId).Where(id => id is not null and not 0).Select(id => id!.Value).Distinct().ToList();
         var validPageIds =
             citedPageIds.Count == 0 ? new HashSet<int>() : new HashSet<int>(await _nodes.Find(Builders<GraphNode>.Filter.In(n => n.PageId, citedPageIds)).Project(n => n.PageId).ToListAsync(ct));
 
@@ -585,7 +578,7 @@ public sealed class HolocronAgent
 
         foreach (var prop in batch.NodeProposals)
         {
-            if (!ValidateEvidence(prop.Evidence, validPageIds, validChunkIds))
+            if (!ValidateNodeEvidence(prop.Evidence, validPageIds, validChunkIds))
             {
                 evidenceFailures++;
                 continue;
@@ -600,7 +593,7 @@ public sealed class HolocronAgent
                 Operation = ParseOperation(prop.Operation) ?? EnrichmentOperation.Add,
                 Value = ToBsonValue(prop.Values),
                 Claim = prop.Claim,
-                Evidence = MapEvidence(prop.Evidence),
+                Evidence = MapNodeEvidence(prop.Evidence),
                 LlmReasoning = prop.Reasoning,
                 ContentHashAtCreation = context.Node.ContentHash!,
                 Status = EnrichmentStatus.Active,
@@ -625,7 +618,7 @@ public sealed class HolocronAgent
 
         foreach (var prop in batch.EdgeProposals)
         {
-            if (!ValidateEvidence(prop.Evidence, validPageIds, validChunkIds))
+            if (!ValidateEdgeEvidence(prop.Evidence, validPageIds, validChunkIds))
             {
                 evidenceFailures++;
                 continue;
@@ -657,7 +650,7 @@ public sealed class HolocronAgent
                 Operation = operation,
                 Value = value,
                 Claim = prop.Claim,
-                Evidence = MapEvidence(prop.Evidence),
+                Evidence = MapEdgeEvidence(prop.Evidence),
                 LlmReasoning = prop.Reasoning,
                 ContentHashAtCreation = $"{fromHash}|{toHash}",
                 Status = EnrichmentStatus.Active,
@@ -691,9 +684,15 @@ public sealed class HolocronAgent
         return (nodeInserts.Count + edgeInserts.Count, evidenceFailures);
     }
 
-    static bool ValidateEvidence(List<HolocronEvidenceItem> evidence, HashSet<int> validPageIds, HashSet<string> validChunkIds)
+    static bool ValidateNodeEvidence(List<NodeProposalEvidence> evidence, HashSet<int> validPageIds, HashSet<string> validChunkIds) =>
+        ValidateEvidence(evidence?.Select(e => (e.SourcePageId, e.ChunkId)), validPageIds, validChunkIds);
+
+    static bool ValidateEdgeEvidence(List<EdgeProposalEvidence> evidence, HashSet<int> validPageIds, HashSet<string> validChunkIds) =>
+        ValidateEvidence(evidence?.Select(e => (e.SourcePageId, e.ChunkId)), validPageIds, validChunkIds);
+
+    static bool ValidateEvidence(IEnumerable<(int? SourcePageId, string? ChunkId)>? evidence, HashSet<int> validPageIds, HashSet<string> validChunkIds)
     {
-        if (evidence is null || evidence.Count == 0)
+        if (evidence is null)
             return false;
         // At least ONE evidence item must resolve to a real source.
         foreach (var ev in evidence)
@@ -759,16 +758,18 @@ public sealed class HolocronAgent
 
     static EnrichmentOperation? ParseOperation(string op) => Enum.TryParse<EnrichmentOperation>(op, ignoreCase: true, out var v) ? v : null;
 
-    static List<EnrichmentEvidence> MapEvidence(List<HolocronEvidenceItem> evidence) =>
-        evidence
-            .Select(e => new EnrichmentEvidence
-            {
-                SourcePageId = e.SourcePageId ?? 0,
-                ChunkId = e.ChunkId,
-                Excerpt = string.IsNullOrEmpty(e.Excerpt) ? string.Empty : (e.Excerpt.Length > 1000 ? e.Excerpt[..1000] : e.Excerpt),
-                RelevanceScore = e.RelevanceScore,
-            })
-            .ToList();
+    static List<EnrichmentEvidence> MapNodeEvidence(List<NodeProposalEvidence> evidence) => evidence.Select(e => BuildEvidence(e.SourcePageId, e.ChunkId, e.Excerpt, e.RelevanceScore)).ToList();
+
+    static List<EnrichmentEvidence> MapEdgeEvidence(List<EdgeProposalEvidence> evidence) => evidence.Select(e => BuildEvidence(e.SourcePageId, e.ChunkId, e.Excerpt, e.RelevanceScore)).ToList();
+
+    static EnrichmentEvidence BuildEvidence(int? sourcePageId, string? chunkId, string excerpt, double? relevanceScore) =>
+        new()
+        {
+            SourcePageId = sourcePageId ?? 0,
+            ChunkId = chunkId,
+            Excerpt = string.IsNullOrEmpty(excerpt) ? string.Empty : (excerpt.Length > 1000 ? excerpt[..1000] : excerpt),
+            RelevanceScore = relevanceScore,
+        };
 
     static BsonValue ToBsonValue(List<string> values) => values.Count == 1 ? new BsonString(values[0]) : new BsonArray(values);
 
@@ -840,7 +841,7 @@ public sealed class HolocronAgent
         [property: JsonPropertyName("fieldPath")] string FieldPath,
         [property: JsonPropertyName("values")] List<string> Values,
         [property: JsonPropertyName("claim")] string Claim,
-        [property: JsonPropertyName("evidence")] List<HolocronEvidenceItem> Evidence,
+        [property: JsonPropertyName("evidence")] List<NodeProposalEvidence> Evidence,
         [property: JsonPropertyName("reasoning")] string Reasoning
     );
 
@@ -853,11 +854,24 @@ public sealed class HolocronAgent
         [property: JsonPropertyName("toYear")] int? ToYear,
         [property: JsonPropertyName("weight")] double? Weight,
         [property: JsonPropertyName("claim")] string Claim,
-        [property: JsonPropertyName("evidence")] List<HolocronEvidenceItem> Evidence,
+        [property: JsonPropertyName("evidence")] List<EdgeProposalEvidence> Evidence,
         [property: JsonPropertyName("reasoning")] string Reasoning
     );
 
-    public sealed record HolocronEvidenceItem(
+    // Two distinct evidence record types so the JSON schema generator inlines each
+    // copy rather than emitting a shared $ref. OpenAI's strict structured-output mode
+    // rejects refs deeper than the top-level $defs, and a shared evidence type would
+    // produce a $ref at properties.{node|edge}Proposals.items.properties.evidence.items
+    // (depth 6, far beyond the depth-1 limit). Keeping the shapes identical preserves
+    // the rest of the validation + mapping logic — see MapNodeEvidence / MapEdgeEvidence.
+    public sealed record NodeProposalEvidence(
+        [property: JsonPropertyName("sourcePageId")] int? SourcePageId,
+        [property: JsonPropertyName("chunkId")] string? ChunkId,
+        [property: JsonPropertyName("excerpt")] string Excerpt,
+        [property: JsonPropertyName("relevanceScore")] double? RelevanceScore
+    );
+
+    public sealed record EdgeProposalEvidence(
         [property: JsonPropertyName("sourcePageId")] int? SourcePageId,
         [property: JsonPropertyName("chunkId")] string? ChunkId,
         [property: JsonPropertyName("excerpt")] string Excerpt,
