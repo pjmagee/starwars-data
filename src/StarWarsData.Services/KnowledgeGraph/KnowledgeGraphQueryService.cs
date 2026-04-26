@@ -153,7 +153,17 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
 
     public async Task<List<EntitySearchDto>> SearchAsync(string q, string? type, string? continuity, string? realm, CancellationToken ct)
     {
-        var filters = new List<FilterDefinition<GraphNode>> { Builders<GraphNode>.Filter.Regex(n => n.Name, MongoSafe.Regex(q)) };
+        // Match the query against the canonical name OR any value in the infobox Titles
+        // alias list. Wookieepedia stores entities under their canonical-article name
+        // ("Darth Sidious") while the alternate names sit in properties.Titles
+        // (e.g. ["Darth Sidious", "Sheev Palpatine"]). Without OR-matching Titles, typing
+        // "Sheev" returns nothing — only the name field is canonical, but users search
+        // by whatever alias they remember. Mongo's regex on an array field matches if
+        // any element matches, so a regex against `properties.Titles` covers all aliases.
+        var queryRegex = MongoSafe.Regex(q);
+        var nameOrTitle = Builders<GraphNode>.Filter.Or(Builders<GraphNode>.Filter.Regex(n => n.Name, queryRegex), Builders<GraphNode>.Filter.Regex("properties.Titles", queryRegex));
+
+        var filters = new List<FilterDefinition<GraphNode>> { nameOrTitle };
 
         if (!string.IsNullOrWhiteSpace(type))
             filters.Add(Builders<GraphNode>.Filter.Eq(n => n.Type, type));
