@@ -358,6 +358,226 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         };
     }
 
+    /// <summary>
+    /// Returns one row per edge touching the entity, projected from the entity's perspective
+    /// (incoming edges have already been mapped to their forward-equivalent label via
+    /// FieldSemantics.Relationships, so the caller doesn't need to reason about direction).
+    /// Each row carries Phase 2 annotation context inline (role / qualifier / description from
+    /// active Holocron Annotate enrichments) and a flag for Phase 2-only Add edges. See
+    /// Design-019 for the rendering contract on the Knowledge Graph node-detail panel.
+    ///
+    /// Sorted Holocron-rich first (Add edges, then annotated rows), then alphabetically by
+    /// the other entity's name. Capped at <paramref name="limit"/> rows.
+    /// </summary>
+    public async Task<EntityEdgesResult> GetEdgesForEntityAsync(int pageId, int limit, CancellationToken ct)
+    {
+        if (limit <= 0)
+            limit = 50;
+
+        var nodeNameTask = _nodes.Find(n => n.PageId == pageId).Project(n => n.Name).FirstOrDefaultAsync(ct);
+
+        // Pull base edges in parallel — descend by weight so the most-load-bearing relationships
+        // make the cap when it bites.
+        var outgoingTask = _edges.Find(e => e.FromId == pageId).SortByDescending(e => e.Weight).ToListAsync(ct);
+        var incomingTask = _edges.Find(e => e.ToId == pageId).SortByDescending(e => e.Weight).ToListAsync(ct);
+        var enrichmentsTask = _edgeEnrichments
+            .Find(
+                Builders<EdgeEnrichment>.Filter.Eq(e => e.Status, EnrichmentStatus.Active)
+                    & (Builders<EdgeEnrichment>.Filter.Eq(e => e.FromId, pageId) | Builders<EdgeEnrichment>.Filter.Eq(e => e.ToId, pageId))
+            )
+            .ToListAsync(ct);
+
+        await Task.WhenAll(nodeNameTask, outgoingTask, incomingTask, enrichmentsTask);
+        var nodeName = nodeNameTask.Result ?? string.Empty;
+        var outgoing = outgoingTask.Result;
+        var incoming = incomingTask.Result;
+        var enrichments = enrichmentsTask.Result;
+
+        if (string.IsNullOrEmpty(nodeName))
+            return new EntityEdgesResult { NodeId = pageId };
+
+        var reverseLookup = FieldSemantics.Relationships.Values.DistinctBy(d => d.Label).ToDictionary(d => d.Label, d => d.Reverse, StringComparer.OrdinalIgnoreCase);
+
+        // Working row carrier — keeps the original edge key for enrichment lookup separate from
+        // the display label (which may be the reverse-mapped form for inbound edges).
+        var rows = new List<EdgeRowBuild>();
+
+        foreach (var e in outgoing)
+        {
+            rows.Add(
+                new EdgeRowBuild(
+                    Label: e.Label,
+                    Direction: "out",
+                    OtherId: e.ToId,
+                    OtherName: e.ToName,
+                    FromYear: e.FromYear,
+                    ToYear: e.ToYear,
+                    Phase1Qualifier: PickPhase1Qualifier(e.Meta),
+                    OriginalKey: EdgeKey(e.FromId, e.ToId, e.Label),
+                    IsHolocronOnly: false
+                )
+            );
+        }
+
+        foreach (var e in incoming)
+        {
+            // Skip inbound edges whose label has no registered reverse — without a known reverse
+            // we can't present them coherently from this node's perspective.
+            if (!reverseLookup.TryGetValue(e.Label, out var rev) || string.IsNullOrEmpty(rev))
+                continue;
+            rows.Add(
+                new EdgeRowBuild(
+                    Label: rev,
+                    Direction: "in",
+                    OtherId: e.FromId,
+                    OtherName: e.FromName,
+                    FromYear: e.FromYear,
+                    ToYear: e.ToYear,
+                    Phase1Qualifier: PickPhase1Qualifier(e.Meta),
+                    OriginalKey: EdgeKey(e.FromId, e.ToId, e.Label),
+                    IsHolocronOnly: false
+                )
+            );
+        }
+
+        // Build the existing-edge key set from the base data so we can detect Phase 2-only Adds.
+        var existingEdgeKeys = outgoing.Select(e => EdgeKey(e.FromId, e.ToId, e.Label)).Concat(incoming.Select(e => EdgeKey(e.FromId, e.ToId, e.Label))).ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+        // Bucket enrichments: Annotates get attached to existing rows; Add ones with no base
+        // edge become brand-new Phase 2-only rows; FillGap is currently surfaced through the
+        // edge-row temporal columns only when we read from the merged view (deferred — see Design-019).
+        var annotationByKey = new Dictionary<string, EdgeEnrichment>(StringComparer.OrdinalIgnoreCase);
+        foreach (var en in enrichments)
+        {
+            var key = EdgeKey(en.FromId, en.ToId, en.Label);
+            if (en.Operation == EnrichmentOperation.Annotate)
+            {
+                annotationByKey[key] = en;
+            }
+            else if (en.Operation == EnrichmentOperation.Add && !existingEdgeKeys.Contains(key))
+            {
+                // Phase 2-only edge — derive direction + display label as if it were a base edge.
+                if (en.FromId == pageId)
+                {
+                    rows.Add(
+                        new EdgeRowBuild(
+                            Label: en.Label,
+                            Direction: "out",
+                            OtherId: en.ToId,
+                            OtherName: string.Empty,
+                            FromYear: TryGetInt(en.Value, "fromYear"),
+                            ToYear: TryGetInt(en.Value, "toYear"),
+                            Phase1Qualifier: null,
+                            OriginalKey: key,
+                            IsHolocronOnly: true
+                        )
+                    );
+                }
+                else if (reverseLookup.TryGetValue(en.Label, out var addReverse) && !string.IsNullOrEmpty(addReverse))
+                {
+                    rows.Add(
+                        new EdgeRowBuild(
+                            Label: addReverse,
+                            Direction: "in",
+                            OtherId: en.FromId,
+                            OtherName: string.Empty,
+                            FromYear: TryGetInt(en.Value, "fromYear"),
+                            ToYear: TryGetInt(en.Value, "toYear"),
+                            Phase1Qualifier: null,
+                            OriginalKey: key,
+                            IsHolocronOnly: true
+                        )
+                    );
+                }
+            }
+        }
+
+        // Resolve target names for any Holocron-only Adds (the enrichment doc doesn't carry them)
+        // and target types for every row in a single batched lookup.
+        var allOtherIds = rows.Select(r => r.OtherId).Distinct().ToList();
+        var nodeInfos =
+            allOtherIds.Count == 0
+                ? []
+                : await _nodes
+                    .Find(Builders<GraphNode>.Filter.In(n => n.PageId, allOtherIds))
+                    .Project(n => new
+                    {
+                        n.PageId,
+                        n.Name,
+                        n.Type,
+                    })
+                    .ToListAsync(ct);
+        var nameByPageId = nodeInfos.ToDictionary(x => x.PageId, x => x.Name);
+        var typeByPageId = nodeInfos.ToDictionary(x => x.PageId, x => x.Type);
+
+        // Project to DTOs, attaching annotation context where present.
+        var dtos = rows.Select(r =>
+            {
+                annotationByKey.TryGetValue(r.OriginalKey, out var ann);
+                return new EntityEdgeRowDto
+                {
+                    Label = r.Label,
+                    Direction = r.Direction,
+                    OtherId = r.OtherId,
+                    OtherName = string.IsNullOrEmpty(r.OtherName) ? nameByPageId.GetValueOrDefault(r.OtherId, $"#{r.OtherId}") : r.OtherName,
+                    OtherType = typeByPageId.GetValueOrDefault(r.OtherId, string.Empty),
+                    FromYear = r.FromYear,
+                    ToYear = r.ToYear,
+                    Phase1Qualifier = r.Phase1Qualifier,
+                    IsHolocronOnly = r.IsHolocronOnly,
+                    Role = TryGetString(ann?.Value, "role"),
+                    Qualifier = TryGetString(ann?.Value, "qualifier"),
+                    Description = TryGetString(ann?.Value, "description"),
+                };
+            })
+            .ToList();
+
+        // Sort: Holocron-only first (the brand-new edges), then annotated Phase 1, then by name.
+        var sorted = dtos.OrderByDescending(r => r.IsHolocronOnly)
+            .ThenByDescending(r => r.Role is not null || r.Qualifier is not null || r.Description is not null)
+            .ThenBy(r => r.Label, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(r => r.OtherName, StringComparer.OrdinalIgnoreCase)
+            .Take(limit)
+            .ToList();
+
+        return new EntityEdgesResult
+        {
+            NodeId = pageId,
+            NodeName = nodeName,
+            Edges = sorted,
+            Total = dtos.Count,
+        };
+    }
+
+    private static string EdgeKey(int from, int to, string label) => $"{from}-{to}-{label.ToLowerInvariant()}";
+
+    private static string? PickPhase1Qualifier(EdgeMeta? meta)
+    {
+        if (meta is null)
+            return null;
+        if (!string.IsNullOrWhiteSpace(meta.Qualifier))
+            return meta.Qualifier;
+        if (!string.IsNullOrWhiteSpace(meta.RawValue))
+            return meta.RawValue;
+        return null;
+    }
+
+    private static string? TryGetString(BsonValue? value, string field)
+    {
+        if (value is null || !value.IsBsonDocument)
+            return null;
+        return value.AsBsonDocument.TryGetValue(field, out var v) && v.IsString && !string.IsNullOrWhiteSpace(v.AsString) ? v.AsString : null;
+    }
+
+    private static int? TryGetInt(BsonValue? value, string field)
+    {
+        if (value is null || !value.IsBsonDocument)
+            return null;
+        return value.AsBsonDocument.TryGetValue(field, out var v) && v.IsInt32 ? v.AsInt32 : null;
+    }
+
+    private sealed record EdgeRowBuild(string Label, string Direction, int OtherId, string OtherName, int? FromYear, int? ToYear, string? Phase1Qualifier, string OriginalKey, bool IsHolocronOnly);
+
     public async Task<BrowseTemporalNodesResult> BrowseTemporalNodesAsync(
         string? type,
         string? q,

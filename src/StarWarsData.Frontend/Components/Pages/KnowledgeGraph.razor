@@ -389,6 +389,85 @@
                                     {
                                         <MudText Typo="Typo.body2" Color="Color.Secondary">No relationships found.</MudText>
                                     }
+
+                                    @* ── Edges table — per-edge view with Phase 2 annotation context inline ── *@
+                                    @if (_expandedEdgesLoading)
+                                    {
+                                        <MudProgressLinear Indeterminate="true" Color="Color.Info" Style="max-width:400px;" Class="mt-3" />
+                                    }
+                                    else if (_expandedEdges is { Count: > 0 })
+                                    {
+                                        <MudText Typo="Typo.subtitle2" Class="mt-4 mb-1">
+                                            <MudIcon Icon="@Icons.Material.Filled.AccountTree" Size="Size.Small" Class="mr-1" />
+                                            Edges
+                                            @if (_expandedEdgesTotal > _expandedEdges.Count)
+                                            {
+                                                <MudText HtmlTag="span" Typo="Typo.caption" Color="Color.Secondary" Class="ml-2">showing @_expandedEdges.Count of @_expandedEdgesTotal</MudText>
+                                            }
+                                        </MudText>
+                                        <MudSimpleTable Dense="true" Bordered="true" Striped="true" Hover="true" Style="font-size:13px;" Class="mb-2">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:1%;">Dir</th>
+                                                    <th>Label</th>
+                                                    <th>Target</th>
+                                                    <th>Years</th>
+                                                    <th>Holocron context</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var edge in _expandedEdges)
+                                                {
+                                                    var hasAnnotation = !string.IsNullOrWhiteSpace(edge.Role) || !string.IsNullOrWhiteSpace(edge.Qualifier) || !string.IsNullOrWhiteSpace(edge.Description);
+                                                    var rowStyle = edge.IsHolocronOnly ? "background-color: var(--mud-palette-secondary-hover);" : null;
+                                                    <tr style="@rowStyle">
+                                                        <td style="white-space:nowrap;">
+                                                            <MudIcon Icon="@(edge.Direction == "out" ? Icons.Material.Filled.ArrowOutward : Icons.Material.Filled.SubdirectoryArrowLeft)" Size="Size.Small" Color="@(edge.Direction == "out" ? Color.Tertiary : Color.Info)" />
+                                                        </td>
+                                                        <td style="white-space:nowrap;">
+                                                            <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="@(edge.IsHolocronOnly ? Color.Secondary : Color.Info)">
+                                                                @FormatPropertyKey(edge.Label)
+                                                                @if (hasAnnotation && !edge.IsHolocronOnly)
+                                                                {
+                                                                    <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background-color: var(--mud-palette-secondary); margin-left:6px; vertical-align:middle;"></span>
+                                                                }
+                                                            </MudChip>
+                                                        </td>
+                                                        <td>
+                                                            <MudLink Href="@($"/graph-explorer/{edge.OtherId}")" Underline="Underline.Hover">@edge.OtherName</MudLink>
+                                                            @if (!string.IsNullOrEmpty(edge.OtherType))
+                                                            {
+                                                                <MudText HtmlTag="span" Typo="Typo.caption" Color="Color.Secondary" Class="ml-2">(@edge.OtherType)</MudText>
+                                                            }
+                                                            @if (!string.IsNullOrEmpty(edge.Phase1Qualifier))
+                                                            {
+                                                                <MudText Typo="Typo.caption" Color="Color.Default" Style="display:block;">@edge.Phase1Qualifier</MudText>
+                                                            }
+                                                        </td>
+                                                        <td style="white-space:nowrap;">@FormatYearRange(edge.FromYear, edge.ToYear)</td>
+                                                        <td>
+                                                            @if (edge.IsHolocronOnly)
+                                                            {
+                                                                <MudChip T="string" Size="Size.Small" Variant="Variant.Filled" Color="Color.Secondary" Class="mr-1">Holocron-added</MudChip>
+                                                            }
+                                                            @if (!string.IsNullOrWhiteSpace(edge.Role))
+                                                            {
+                                                                <MudText HtmlTag="span" Typo="Typo.body2"><b>@edge.Role</b></MudText>
+                                                            }
+                                                            @if (!string.IsNullOrWhiteSpace(edge.Qualifier))
+                                                            {
+                                                                <MudText HtmlTag="span" Typo="Typo.caption" Color="Color.Secondary" Class="ml-2">@edge.Qualifier</MudText>
+                                                            }
+                                                            @if (!string.IsNullOrWhiteSpace(edge.Description))
+                                                            {
+                                                                <MudText Typo="Typo.caption" Style="display:block;">@edge.Description</MudText>
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </MudSimpleTable>
+                                    }
                                 </MudItem>
                             </MudGrid>
                         </MudPaper>
@@ -551,6 +630,12 @@
     // for O(1) chip-rendering lookups in the foreach loop. See Design-019.
     private HashSet<string> _holocronOnlyLabels = new(StringComparer.OrdinalIgnoreCase);
     private HashSet<string> _holocronAnnotatedLabels = new(StringComparer.OrdinalIgnoreCase);
+
+    // Per-edge rows for the currently-expanded node (relationships drill-down table).
+    // Fetched lazily on row-expand alongside the labels. Cap is server-controlled (default 50).
+    private List<EntityEdgeRow>? _expandedEdges;
+    private int _expandedEdgesTotal;
+    private bool _expandedEdgesLoading;
 
     // Multi-selection: persist across pages by tracking selected ids, not row references
     private HashSet<TemporalNodeDto> _selectedItems = new();
@@ -790,6 +875,8 @@
             _expandedLabels = null;
             _holocronOnlyLabels.Clear();
             _holocronAnnotatedLabels.Clear();
+            _expandedEdges = null;
+            _expandedEdgesTotal = 0;
             return;
         }
 
@@ -797,13 +884,21 @@
         _expandedLabels = null;
         _holocronOnlyLabels.Clear();
         _holocronAnnotatedLabels.Clear();
+        _expandedEdges = null;
+        _expandedEdgesTotal = 0;
         _expandedLabelsLoading = true;
+        _expandedEdgesLoading = true;
         StateHasChanged();
+
+        // Fetch labels (chip summary) and edges (drill-down table) in parallel — same node,
+        // independent endpoints. The chip view stays useful as a fast scan even before the
+        // edges table finishes loading.
+        var labelsTask = Api.GetFromJsonAsync<EntityLabelsResult>($"api/RelationshipGraph/labels/{nodeId}");
+        var edgesTask = Api.GetFromJsonAsync<EntityEdgesResult>($"api/RelationshipGraph/edges/{nodeId}?limit=50");
 
         try
         {
-            var result = await Api.GetFromJsonAsync<EntityLabelsResult>(
-                $"api/RelationshipGraph/labels/{nodeId}");
+            var result = await labelsTask;
             _expandedLabels = result?.Labels ?? [];
             if (result is not null)
             {
@@ -819,7 +914,38 @@
         {
             _expandedLabelsLoading = false;
         }
+
+        try
+        {
+            var edges = await edgesTask;
+            _expandedEdges = edges?.Edges ?? [];
+            _expandedEdgesTotal = edges?.Total ?? 0;
+        }
+        catch
+        {
+            _expandedEdges = [];
+            _expandedEdgesTotal = 0;
+        }
+        finally
+        {
+            _expandedEdgesLoading = false;
+        }
     }
+
+    private static string FormatYearRange(int? fromYear, int? toYear)
+    {
+        if (!fromYear.HasValue && !toYear.HasValue)
+            return "—";
+        var f = fromYear.HasValue ? FormatYear(fromYear.Value) : "?";
+        var t = toYear.HasValue ? FormatYear(toYear.Value) : "?";
+        return f == t ? f : $"{f} → {t}";
+    }
+
+    private static string FormatYear(int year) => year < 0 ? $"{-year} BBY" : year > 0 ? $"{year} ABY" : "0 BBY/ABY";
+
+    public sealed record EntityEdgeRow(string Label, string Direction, int OtherId, string OtherName, string OtherType, int? FromYear, int? ToYear, string? Phase1Qualifier, bool IsHolocronOnly, string? Role, string? Qualifier, string? Description);
+
+    public sealed record EntityEdgesResult(int NodeId, string NodeName, List<EntityEdgeRow> Edges, int Total);
 
     private void OnYearInputChanged()
     {

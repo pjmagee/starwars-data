@@ -76,6 +76,61 @@ public class RelationshipGraphEdge
 /// "default enabled" labels (the subset the UI should turn on initially for
 /// that node's entity type to avoid noisy graphs).
 /// </summary>
+/// <summary>
+/// One edge touching a single node, projected from the node's point of view (incoming
+/// edges have already been mapped to their forward equivalent via FieldSemantics, so
+/// the caller doesn't need to reason about direction). Carries Phase 2 annotation
+/// context inline when present — see Design-019. Used by the Knowledge Graph node-detail
+/// panel's relationships table.
+/// </summary>
+public class EntityEdgeRowDto
+{
+    public string Label { get; init; } = string.Empty;
+
+    /// <summary>"out" when the source is the queried node, "in" otherwise.</summary>
+    public string Direction { get; init; } = "out";
+
+    /// <summary>The OTHER entity in the relationship (not the queried node).</summary>
+    public int OtherId { get; init; }
+
+    public string OtherName { get; init; } = string.Empty;
+    public string OtherType { get; init; } = string.Empty;
+
+    /// <summary>Edge temporal bounds, surfaced for the years column.</summary>
+    public int? FromYear { get; init; }
+    public int? ToYear { get; init; }
+
+    /// <summary>Phase 1 edge metadata qualifier (e.g. "informal apprentice"). Carried separately from Phase 2 annotations.</summary>
+    public string? Phase1Qualifier { get; init; }
+
+    // ── Phase 2 (Holocron) annotation fields — null when no enrichment touches this edge ──
+
+    /// <summary>True when the edge has NO Phase 1 record — created by a Holocron Add enrichment.</summary>
+    public bool IsHolocronOnly { get; init; }
+
+    /// <summary>Holocron Annotate role (e.g. "Jedi General"). Null when no Annotate enrichment exists.</summary>
+    public string? Role { get; init; }
+
+    /// <summary>Holocron Annotate qualifier (e.g. "during the Clone Wars").</summary>
+    public string? Qualifier { get; init; }
+
+    /// <summary>Holocron Annotate longer-form description.</summary>
+    public string? Description { get; init; }
+}
+
+/// <summary>Top-level response for <c>GET /api/RelationshipGraph/edges/{nodeId}</c>.</summary>
+public class EntityEdgesResult
+{
+    public int NodeId { get; init; }
+    public string NodeName { get; init; } = string.Empty;
+
+    /// <summary>All distinct edges (deduped per direction) up to the per-call cap, sorted by Holocron-richness then weight.</summary>
+    public List<EntityEdgeRowDto> Edges { get; init; } = [];
+
+    /// <summary>Total edges that touch this node before truncation. UI shows "showing X of Y" when greater.</summary>
+    public int Total { get; init; }
+}
+
 public class EntityLabelsResult
 {
     /// <summary>Entity type (Character, Battle, Organization, ...). Empty if unknown.</summary>
