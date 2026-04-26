@@ -1,6 +1,7 @@
 using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 using StarWarsData.Services;
+using StarWarsData.Services.AI.Agents;
 
 namespace StarWarsData.Admin.Controllers;
 
@@ -475,6 +476,38 @@ public class AdminController(
         {
             return Conflict(new { error = ex.Message });
         }
+    }
+
+    // === Holocron (Phase 2 KG enrichment agent) ===
+
+    [HttpPost("holocron/run-daily-pass")]
+    public ActionResult<string> EnqueueHolocronDailyPass()
+    {
+        try
+        {
+            if (IsJobAlreadyActive(typeof(StarWarsData.Services.AI.Agents.HolocronAgent), nameof(StarWarsData.Services.AI.Agents.HolocronAgent.RunDailyPassAsync)))
+                return Conflict(new { error = "Holocron daily pass already running" });
+            var jobId = BackgroundJob.Enqueue<StarWarsData.Services.AI.Agents.HolocronAgent>(a => a.RunDailyPassAsync(CancellationToken.None));
+            return Ok(new { jobId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+    }
+
+    [HttpPost("holocron/enhance/{pageId:int}")]
+    public async Task<ActionResult<NodeEnhancementSummary>> EnhanceNode(int pageId, [FromServices] StarWarsData.Services.AI.Agents.HolocronAgent holocron, CancellationToken ct)
+    {
+        var summary = await holocron.EnhanceNodeAsync(pageId, "manual", ct);
+        return Ok(summary);
+    }
+
+    [HttpPost("holocron/staleness-sweep")]
+    public async Task<ActionResult<StalenessSweepSummary>> RunStalenessSweep([FromServices] StarWarsData.Services.AI.Agents.HolocronAgent holocron, CancellationToken ct)
+    {
+        var summary = await holocron.RunStalenessSweepAsync(ct);
+        return Ok(summary);
     }
 
     // === OpenAI Status ===

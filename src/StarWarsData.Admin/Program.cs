@@ -191,6 +191,11 @@ if (hangfireEnabled)
     RecurringJob.AddOrUpdate<ArticleChunkingService>("daily-article-chunking", s => s.ProcessAllAsync(CancellationToken.None), Cron.Daily(5));
 
     RecurringJob.AddOrUpdate<StarWarsData.Services.AI.Agents.SuggestionAgent>("refresh-ask-suggestions", s => s.GenerateAsync(CancellationToken.None), Cron.Weekly(DayOfWeek.Sunday, 3));
+
+    // Phase 2 Holocron daily pass — runs after Phase 1 (4am infobox-graph) and ArticleChunking (5am)
+    // so it sees the freshest hashes for staleness detection and the freshest chunks for context.
+    // The agent itself short-circuits when SettingsOptions.HolocronEnabled is false.
+    RecurringJob.AddOrUpdate<StarWarsData.Services.AI.Agents.HolocronAgent>("daily-holocron-pass", a => a.RunDailyPassAsync(CancellationToken.None), Cron.Daily(6));
 }
 
 app.MapControllers();

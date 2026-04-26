@@ -44,6 +44,30 @@ public class SettingsOptions
     /// </summary>
     public int GraphBuilderBatchSize { get; set; } = 100;
 
+    // ── Holocron agent (Phase 2 — Design-018) ──
+
+    /// <summary>
+    /// Master switch for the Holocron daily pass. Default <c>false</c> — opt-in for safety.
+    /// When disabled, <see cref="StarWarsData.Services.AI.Agents.HolocronAgent.RunDailyPassAsync"/>
+    /// returns immediately without scheduling LLM calls.
+    /// </summary>
+    public bool HolocronEnabled { get; set; } = false;
+
+    /// <summary>The model used for Holocron enhancement calls. Reasoning-capable model recommended.</summary>
+    public string HolocronModel { get; set; } = "gpt-5.4";
+
+    /// <summary>Number of nodes to enhance per daily pass. Kept low while we observe behaviour on dev.</summary>
+    public int HolocronNodesPerPass { get; set; } = 10;
+
+    /// <summary>Max 1-hop neighbours included in the agent's context window per enhancement call.</summary>
+    public int HolocronMaxNeighborsForContext { get; set; } = 10;
+
+    /// <summary>Max article-chunk excerpts included in the agent's context window per enhancement call.</summary>
+    public int HolocronMaxChunksForContext { get; set; } = 5;
+
+    /// <summary>Max length (chars) of a chunk excerpt included in the prompt before truncation.</summary>
+    public int HolocronMaxChunkExcerptLength { get; set; } = 600;
+
     // ── Database ──
     // All app data + Hangfire live in one database.
     // Hangfire collections are namespaced via its Prefix option (default "hangfire").
