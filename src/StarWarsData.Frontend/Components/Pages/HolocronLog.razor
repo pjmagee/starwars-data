@@ -1,0 +1,377 @@
+@page "/holocron"
+@inject IHttpClientFactory HttpClientFactory
+@inject NavigationManager Navigation
+@inject ISnackbar Snackbar
+
+<PageTitle>Holocron Log — Star Wars Data</PageTitle>
+<HeadContent>
+    <meta name="description" content="Audit trail of every change the Holocron AI agent has made to the Star Wars knowledge graph — claims, evidence, citations, and reasoning for each enrichment." />
+</HeadContent>
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="my-4 px-4">
+
+    <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-2">
+        <MudIcon Icon="@Icons.Material.Filled.AutoStories" Size="Size.Large" Color="Color.Tertiary" />
+        <MudText Typo="Typo.h4">Holocron Log</MudText>
+    </MudStack>
+    <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-4">
+        The Holocron AI agent enhances knowledge-graph nodes with information drawn from related pages and article chunks.
+        Every change is recorded here with the evidence and reasoning behind it. The agent never overwrites infobox values —
+        it only fills gaps and adds missing context.
+    </MudText>
+
+    @* ── Filter card ── *@
+    <MudPaper Outlined="true" Class="pa-3 mb-3">
+        <MudGrid Spacing="2">
+            <MudItem xs="12" sm="6" md="4">
+                <MudSelect T="string" @bind-Value="_eventTypeFilter" Variant="Variant.Outlined" Margin="Margin.Dense"
+                           @bind-Value:after="ReloadAsync" Clearable="true" Placeholder="All event types"
+                           Label="Event type">
+                    @foreach (var type in EventTypes)
+                    {
+                        <MudSelectItem T="string" Value="@type">@FormatEventType(type)</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudNumericField T="int?" @bind-Value="_pageIdFilter" Label="Filter by PageId" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                 Placeholder="e.g. 12345" @bind-Value:after="ReloadAsync" Clearable="true" />
+            </MudItem>
+            <MudItem xs="12" sm="12" md="4">
+                <MudStack Row="true" AlignItems="AlignItems.Center" Class="h-100">
+                    <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Refresh"
+                               OnClick="ReloadAsync" Disabled="_loading">Refresh</MudButton>
+                </MudStack>
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+
+    @if (_loading && _eventsPage is null)
+    {
+        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="pa-8">
+            <MudProgressCircular Size="Size.Medium" Indeterminate="true" Color="Color.Primary" />
+            <MudText Typo="Typo.body1" Color="Color.Secondary">Loading Holocron Log…</MudText>
+        </MudStack>
+    }
+    else if (_eventsPage is null || _eventsPage.Items.Count == 0)
+    {
+        <MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Class="my-4">
+            @if (_pageIdFilter.HasValue || !string.IsNullOrEmpty(_eventTypeFilter))
+            {
+                <span>No Holocron events match the current filters.</span>
+            }
+            else
+            {
+                <span>The Holocron hasn't made any changes yet. Once the agent runs, its work will appear here.</span>
+            }
+        </MudAlert>
+    }
+    else
+    {
+        <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-2">
+            @($"{_eventsPage.Total} event{(_eventsPage.Total == 1 ? "" : "s")} — page {_eventsPage.Page} of {Math.Max(1, (int)Math.Ceiling((double)_eventsPage.Total / _eventsPage.PageSize))}")
+        </MudText>
+
+        <MudStack Spacing="2">
+            @foreach (var evt in _eventsPage.Items)
+            {
+                <MudPaper Outlined="true" Class="pa-3">
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-2">
+                        <MudChip T="string" Size="Size.Small" Variant="Variant.Filled" Color="@EventColor(evt.EventType)">@FormatEventType(evt.EventType)</MudChip>
+                        <MudText Typo="Typo.caption" Color="Color.Secondary">@evt.OccurredAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</MudText>
+                        @if (!string.IsNullOrEmpty(evt.TriggeredBy))
+                        {
+                            <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Default">@evt.TriggeredBy</MudChip>
+                        }
+                        <MudSpacer />
+                        @if (evt.PageId is { } pid && pid > 0)
+                        {
+                            <MudLink Href="@($"/graph-explorer/{pid}")" Underline="Underline.Hover">
+                                <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
+                                    <MudIcon Icon="@Icons.Material.Filled.Hub" Size="Size.Small" />
+                                    <MudText Typo="Typo.body2">@(evt.NodeName ?? $"PageId {pid}")</MudText>
+                                </MudStack>
+                            </MudLink>
+                        }
+                        else if (evt.FromId is { } fid && evt.ToId is { } tid)
+                        {
+                            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
+                                <MudLink Href="@($"/graph-explorer/{fid}")" Underline="Underline.Hover">@(evt.FromName ?? $"PageId {fid}")</MudLink>
+                                <MudIcon Icon="@Icons.Material.Filled.ArrowForward" Size="Size.Small" Color="Color.Secondary" />
+                                <MudText Typo="Typo.body2" Color="Color.Secondary">@evt.Label</MudText>
+                                <MudIcon Icon="@Icons.Material.Filled.ArrowForward" Size="Size.Small" Color="Color.Secondary" />
+                                <MudLink Href="@($"/graph-explorer/{tid}")" Underline="Underline.Hover">@(evt.ToName ?? $"PageId {tid}")</MudLink>
+                            </MudStack>
+                        }
+                    </MudStack>
+
+                    <MudText Typo="Typo.body2" Class="mb-1">@evt.Summary</MudText>
+
+                    @if (!string.IsNullOrEmpty(evt.EnrichmentId))
+                    {
+                        <MudButton Size="Size.Small" Variant="Variant.Text" Color="Color.Tertiary"
+                                   StartIcon="@(IsExpanded(evt.Id) ? Icons.Material.Filled.ExpandLess : Icons.Material.Filled.ExpandMore)"
+                                   OnClick="@(() => ToggleDetailAsync(evt))">
+                            @(IsExpanded(evt.Id) ? "Hide evidence" : "Show evidence & reasoning")
+                        </MudButton>
+
+                        @if (IsExpanded(evt.Id))
+                        {
+                            <MudPaper Outlined="true" Class="pa-3 mt-2" Style="background-color: var(--mud-palette-background-grey);">
+                                @if (_loadingDetail.Contains(evt.Id))
+                                {
+                                    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                                        <MudProgressCircular Size="Size.Small" Indeterminate="true" />
+                                        <MudText Typo="Typo.body2" Color="Color.Secondary">Loading detail…</MudText>
+                                    </MudStack>
+                                }
+                                else if (_detailById.TryGetValue(evt.EnrichmentId!, out var detail))
+                                {
+                                    <MudText Typo="Typo.subtitle2" Class="mb-1">Claim</MudText>
+                                    <MudText Typo="Typo.body2" Class="mb-3">@detail.Claim</MudText>
+
+                                    <MudText Typo="Typo.subtitle2" Class="mb-1">
+                                        @($"Evidence ({detail.Evidence.Count} source{(detail.Evidence.Count == 1 ? "" : "s")})")
+                                    </MudText>
+                                    @foreach (var ev in detail.Evidence)
+                                    {
+                                        <MudPaper Outlined="true" Class="pa-2 mb-2" Style="background-color: var(--mud-palette-surface);">
+                                            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1" Class="mb-1">
+                                                @if (ev.SourcePageId is { } evPid && evPid > 0)
+                                                {
+                                                    <MudLink Href="@($"/graph-explorer/{evPid}")" Underline="Underline.Hover">
+                                                        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
+                                                            <MudIcon Icon="@Icons.Material.Filled.Article" Size="Size.Small" />
+                                                            <MudText Typo="Typo.body2">@(ev.SourcePageName ?? $"PageId {evPid}")</MudText>
+                                                        </MudStack>
+                                                    </MudLink>
+                                                }
+                                                @if (!string.IsNullOrEmpty(ev.ChunkId))
+                                                {
+                                                    <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Default">chunk: @ev.ChunkId</MudChip>
+                                                }
+                                                @if (ev.RelevanceScore.HasValue)
+                                                {
+                                                    <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Info">
+                                                        @($"score {ev.RelevanceScore.Value:0.00}")
+                                                    </MudChip>
+                                                }
+                                            </MudStack>
+                                            <MudText Typo="Typo.body2" Style="font-style: italic;">"@ev.Excerpt"</MudText>
+                                        </MudPaper>
+                                    }
+
+                                    @if (!string.IsNullOrWhiteSpace(detail.LlmReasoning))
+                                    {
+                                        <MudText Typo="Typo.subtitle2" Class="mb-1">Agent reasoning</MudText>
+                                        <MudText Typo="Typo.body2" Class="mb-3">@detail.LlmReasoning</MudText>
+                                    }
+
+                                    <MudText Typo="Typo.subtitle2" Class="mb-1">Proposed value</MudText>
+                                    <pre style="white-space: pre-wrap; background: var(--mud-palette-surface); padding: 8px; border-radius: 4px; font-size: 12px;">@detail.ValueJson</pre>
+
+                                    <MudStack Row="true" Spacing="2" Class="mt-2">
+                                        <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Default">@detail.Operation</MudChip>
+                                        <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="@StatusColor(detail.Status)">@detail.Status</MudChip>
+                                        <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Default">@detail.AgentVersion</MudChip>
+                                    </MudStack>
+                                }
+                                else
+                                {
+                                    <MudText Typo="Typo.body2" Color="Color.Error">Detail unavailable.</MudText>
+                                }
+                            </MudPaper>
+                        }
+                    }
+                </MudPaper>
+            }
+        </MudStack>
+
+        @* ── Pager ── *@
+        <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.Center" Spacing="2" Class="mt-4">
+            <MudButton Disabled="_eventsPage.Page <= 1 || _loading"
+                       OnClick="@(() => GoToPageAsync(_eventsPage.Page - 1))"
+                       StartIcon="@Icons.Material.Filled.ChevronLeft">Previous</MudButton>
+            <MudText Typo="Typo.body2">
+                @($"Page {_eventsPage.Page} of {Math.Max(1, (int)Math.Ceiling((double)_eventsPage.Total / _eventsPage.PageSize))}")
+            </MudText>
+            <MudButton Disabled="_eventsPage.Page * _eventsPage.PageSize >= _eventsPage.Total || _loading"
+                       OnClick="@(() => GoToPageAsync(_eventsPage.Page + 1))"
+                       EndIcon="@Icons.Material.Filled.ChevronRight">Next</MudButton>
+        </MudStack>
+    }
+</MudContainer>
+
+@code {
+    static readonly string[] EventTypes =
+    [
+        "EnrichmentCreated", "EdgeEnrichmentCreated", "EnrichmentSuperseded",
+        "EnrichmentMarkedStale", "EnrichmentRejected", "EnrichmentOrphaned",
+        "HolocronPassStarted", "HolocronPassCompleted",
+    ];
+
+    const int PageSize = 20;
+
+    bool _loading;
+    string? _eventTypeFilter;
+    int? _pageIdFilter;
+    int _currentPage = 1;
+    HolocronEventsPage? _eventsPage;
+
+    readonly HashSet<string> _expandedEventIds = new();
+    readonly HashSet<string> _loadingDetail = new();
+    readonly Dictionary<string, HolocronEnrichmentDetail> _detailById = new();
+
+    HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
+
+    protected override async Task OnInitializedAsync() => await LoadAsync(_currentPage);
+
+    Task ReloadAsync()
+    {
+        _currentPage = 1;
+        return LoadAsync(_currentPage);
+    }
+
+    Task GoToPageAsync(int page) => LoadAsync(page);
+
+    async Task LoadAsync(int page)
+    {
+        _loading = true;
+        StateHasChanged();
+        try
+        {
+            var query = System.Web.HttpUtility.ParseQueryString(string.Empty);
+            query["page"] = page.ToString();
+            query["pageSize"] = PageSize.ToString();
+            if (!string.IsNullOrEmpty(_eventTypeFilter))
+                query["eventType"] = _eventTypeFilter;
+            if (_pageIdFilter is { } pid && pid > 0)
+                query["pageId"] = pid.ToString();
+
+            var url = $"api/holocron/events?{query}";
+            _eventsPage = await Api.GetFromJsonAsync<HolocronEventsPage>(url);
+            _currentPage = _eventsPage?.Page ?? page;
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Failed to load Holocron Log: {ex.Message}", Severity.Error);
+            _eventsPage = null;
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+
+    bool IsExpanded(string eventId) => _expandedEventIds.Contains(eventId);
+
+    async Task ToggleDetailAsync(HolocronEvent evt)
+    {
+        if (string.IsNullOrEmpty(evt.EnrichmentId))
+            return;
+        if (_expandedEventIds.Contains(evt.Id))
+        {
+            _expandedEventIds.Remove(evt.Id);
+            return;
+        }
+        _expandedEventIds.Add(evt.Id);
+
+        if (_detailById.ContainsKey(evt.EnrichmentId))
+            return;
+
+        _loadingDetail.Add(evt.Id);
+        try
+        {
+            var detail = await Api.GetFromJsonAsync<HolocronEnrichmentDetail>($"api/holocron/enrichments/{evt.EnrichmentId}");
+            if (detail is not null)
+                _detailById[evt.EnrichmentId] = detail;
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Failed to load enrichment detail: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _loadingDetail.Remove(evt.Id);
+        }
+    }
+
+    static string FormatEventType(string raw) =>
+        raw switch
+        {
+            "EnrichmentCreated" => "Enrichment created",
+            "EdgeEnrichmentCreated" => "Edge enrichment created",
+            "EnrichmentSuperseded" => "Superseded",
+            "EnrichmentMarkedStale" => "Marked stale",
+            "EnrichmentRejected" => "Rejected",
+            "EnrichmentOrphaned" => "Orphaned",
+            "HolocronPassStarted" => "Pass started",
+            "HolocronPassCompleted" => "Pass completed",
+            _ => raw,
+        };
+
+    static Color EventColor(string eventType) =>
+        eventType switch
+        {
+            "EnrichmentCreated" or "EdgeEnrichmentCreated" => Color.Success,
+            "EnrichmentSuperseded" => Color.Info,
+            "EnrichmentMarkedStale" or "EnrichmentOrphaned" => Color.Warning,
+            "EnrichmentRejected" => Color.Error,
+            "HolocronPassStarted" or "HolocronPassCompleted" => Color.Default,
+            _ => Color.Default,
+        };
+
+    static Color StatusColor(string status) =>
+        status switch
+        {
+            "Active" => Color.Success,
+            "Superseded" => Color.Info,
+            "Stale" => Color.Warning,
+            "Rejected" => Color.Error,
+            _ => Color.Default,
+        };
+
+    // ── DTOs (mirror the API records) ────────────────────────────────────
+
+    public sealed record HolocronEventsPage(List<HolocronEvent> Items, int Total, int Page, int PageSize);
+
+    public sealed record HolocronEvent(
+        string Id,
+        string EventType,
+        string Summary,
+        DateTime OccurredAt,
+        int? PageId,
+        string? NodeName,
+        string? FieldPath,
+        int? FromId,
+        int? ToId,
+        string? FromName,
+        string? ToName,
+        string? Label,
+        string? EnrichmentId,
+        string TriggeredBy,
+        string AgentVersion);
+
+    public sealed record HolocronEnrichmentDetail(
+        string Id,
+        string Kind,
+        int? PageId,
+        string? FieldPath,
+        int? FromId,
+        int? ToId,
+        string? Label,
+        string Operation,
+        string ValueJson,
+        string Claim,
+        List<HolocronEvidence> Evidence,
+        string? LlmReasoning,
+        string Status,
+        DateTime CreatedAt,
+        string AgentVersion,
+        string ModelId,
+        string? NodeName,
+        string? FromName,
+        string? ToName);
+
+    public sealed record HolocronEvidence(int? SourcePageId, string? SourcePageName, string? ChunkId, string Excerpt, double? RelevanceScore);
+}
