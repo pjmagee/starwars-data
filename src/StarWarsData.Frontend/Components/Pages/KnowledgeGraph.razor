@@ -241,6 +241,27 @@
                                                                Href="@($"/timeline/{context.Id}")" Color="Color.Tertiary" />
                                             </MudTooltip>
                                         }
+                                        @* Holocron enhance — open to any authenticated user. After completion the panel
+                                             re-fetches labels + edges + node-enrichments for the current node, so newly
+                                             written enrichments appear without requiring the user to collapse + re-expand. *@
+                                        <AuthorizeView Context="auth">
+                                            <MudTooltip Text="Run the Holocron agent on this node — gathers context, calls the LLM, writes evidence-backed enrichments. Refreshes this panel when complete.">
+                                                <MudButton Variant="Variant.Outlined" Color="Color.Tertiary" Size="Size.Small"
+                                                           StartIcon="@Icons.Material.Filled.AutoFixHigh"
+                                                           Disabled="@(_holocronRunningForNodeId.HasValue)"
+                                                           OnClick="@(() => EnhanceWithHolocron(context.Id, context.Name))">
+                                                    @if (_holocronRunningForNodeId == context.Id)
+                                                    {
+                                                        <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" />
+                                                        <span>Enhancing…</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>Enhance with Holocron</span>
+                                                    }
+                                                </MudButton>
+                                            </MudTooltip>
+                                        </AuthorizeView>
                                     </MudStack>
 
                                     @* ── Temporal Facets ── *@
@@ -700,6 +721,12 @@
     private List<EntityNodeEnrichmentRow>? _expandedNodeEnrichments;
     private bool _expandedNodeEnrichmentsLoading;
 
+    // Holocron in-flight: tracked by PageId so the right row's button shows the spinner while
+    // the agent runs. Null when no enhance is in progress. Other rows' buttons stay disabled
+    // (via _holocronRunningForNodeId.HasValue) so the user can't queue parallel enhances —
+    // each call is single-node and synchronous server-side.
+    private int? _holocronRunningForNodeId;
+
     // Multi-selection: persist across pages by tracking selected ids, not row references
     private HashSet<TemporalNodeDto> _selectedItems = new();
 
@@ -1012,6 +1039,74 @@
             _expandedNodeEnrichmentsLoading = false;
         }
     }
+
+    /// <summary>
+    /// POST /api/holocron/enhance/{pageId} for the row's node, then re-fetch labels +
+    /// edges + node-enrichments so the panel reflects the new state. Public to any
+    /// authenticated user — the agent's own pre-flight rules and pass-budget settings
+    /// bound the cost. Disabled when another enhance is already in flight (single-node,
+    /// synchronous server-side; queueing parallel calls would just hold connections open).
+    /// </summary>
+    private async Task EnhanceWithHolocron(int nodeId, string nodeName)
+    {
+        if (_holocronRunningForNodeId.HasValue)
+            return;
+
+        _holocronRunningForNodeId = nodeId;
+        StateHasChanged();
+        try
+        {
+            var response = await Api.PostAsync($"api/holocron/enhance/{nodeId}", content: null);
+            if (response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
+            {
+                Snackbar.Add("Holocron is disabled in Settings. Set Settings.HolocronEnabled = true to run.", Severity.Warning);
+                return;
+            }
+            if (!response.IsSuccessStatusCode)
+            {
+                Snackbar.Add($"Holocron call failed ({(int)response.StatusCode} {response.ReasonPhrase}).", Severity.Error);
+                return;
+            }
+
+            var summary = await response.Content.ReadFromJsonAsync<HolocronEnhanceResult>();
+            if (summary is null)
+            {
+                Snackbar.Add("Holocron returned an empty response.", Severity.Warning);
+                return;
+            }
+
+            var msg = summary.EnrichmentsCreated == 0 && summary.EvidenceFailures == 0
+                ? $"{nodeName}: nothing to enrich (agent emitted no proposals)."
+                : $"{nodeName}: {summary.EnrichmentsCreated} enrichment(s) written, {summary.EvidenceFailures} evidence failure(s).";
+            Snackbar.Add(msg, summary.EnrichmentsCreated > 0 ? Severity.Success : Severity.Info);
+
+            // Refresh the panel data for THIS node if it's still the expanded one. We re-toggle
+            // the same id (collapse → expand) rather than try to surgically merge new data, so
+            // labels/edges/node-enrichments all come back consistent with the post-enhance state.
+            if (_expandedNodeId == nodeId)
+            {
+                await ToggleDetails(nodeId); // collapse
+                await ToggleDetails(nodeId); // re-expand → triggers parallel re-fetch
+            }
+            else
+            {
+                // Row collapsed by the time the agent finished — leave a nudge for the user.
+                Snackbar.Add($"Expand {nodeName} to see the new enrichments.", Severity.Info);
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Holocron call errored: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _holocronRunningForNodeId = null;
+            StateHasChanged();
+        }
+    }
+
+    /// <summary>Mirror of the API's <c>NodeEnhancementSummary</c> for response deserialisation.</summary>
+    private sealed record HolocronEnhanceResult(int PageId, int EnrichmentsCreated, int EvidenceFailures);
 
     private static string FormatYearRange(int? fromYear, int? toYear)
     {
