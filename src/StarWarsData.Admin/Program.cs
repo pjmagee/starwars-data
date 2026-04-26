@@ -94,7 +94,7 @@ builder
             .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
             .Build();
     })
-    .AddScoped<StarWarsData.Services.Suggestions.SuggestionAgentService>()
+    .AddScoped<StarWarsData.Services.AI.Agents.SuggestionAgent>()
     .AddSingleton<JobToggleService>()
     .AddSingleton<PageDownloader>()
     .AddSingleton<IEmbeddingGenerator<string, Embedding<float>>>(sp => sp.GetRequiredService<OpenAIClient>().GetEmbeddingClient("text-embedding-3-small").AsIEmbeddingGenerator());
@@ -189,7 +189,7 @@ if (hangfireEnabled)
 
     RecurringJob.AddOrUpdate<ArticleChunkingService>("daily-article-chunking", s => s.ProcessAllAsync(CancellationToken.None), Cron.Daily(5));
 
-    RecurringJob.AddOrUpdate<StarWarsData.Services.Suggestions.SuggestionAgentService>("refresh-ask-suggestions", s => s.GenerateAsync(CancellationToken.None), Cron.Weekly(DayOfWeek.Sunday, 3));
+    RecurringJob.AddOrUpdate<StarWarsData.Services.AI.Agents.SuggestionAgent>("refresh-ask-suggestions", s => s.GenerateAsync(CancellationToken.None), Cron.Weekly(DayOfWeek.Sunday, 3));
 }
 
 app.MapControllers();

@@ -466,9 +466,9 @@ public class AdminController(
     {
         try
         {
-            if (IsJobAlreadyActive(typeof(StarWarsData.Services.Suggestions.SuggestionAgentService), nameof(StarWarsData.Services.Suggestions.SuggestionAgentService.GenerateAsync)))
+            if (IsJobAlreadyActive(typeof(StarWarsData.Services.AI.Agents.SuggestionAgent), nameof(StarWarsData.Services.AI.Agents.SuggestionAgent.GenerateAsync)))
                 return Conflict(new { error = "Ask suggestions refresh already running" });
-            var jobId = BackgroundJob.Enqueue<StarWarsData.Services.Suggestions.SuggestionAgentService>(s => s.GenerateAsync(CancellationToken.None));
+            var jobId = BackgroundJob.Enqueue<StarWarsData.Services.AI.Agents.SuggestionAgent>(s => s.GenerateAsync(CancellationToken.None));
             return Ok(new { jobId });
         }
         catch (InvalidOperationException ex)

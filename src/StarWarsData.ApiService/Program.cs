@@ -14,6 +14,7 @@ using OpenAI;
 using StarWarsData.Models;
 using StarWarsData.ServiceDefaults;
 using StarWarsData.Services;
+using StarWarsData.Services.AI.Agents;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -133,84 +134,8 @@ builder
             }
         }
     )
-    .AddSingleton<AIAgent>(sp =>
-    {
-        var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
-        var openAiClient = sp.GetRequiredService<OpenAIClient>();
-        var mcpClient = sp.GetKeyedService<McpClient>("mongodb-mcp");
-        var componentToolkit = new ComponentToolkit();
-        var mongoClient = sp.GetRequiredService<IMongoClient>();
-        var dataExplorer = new DataExplorerToolkit(mongoClient, sp.GetRequiredService<IOptions<SettingsOptions>>());
-
-        // Wiki text search — registered directly as a tool so the model sees it
-        // (UseAIContextProviders does not reliably surface tools via AGUI streaming)
-        var pagesCollection = mongoClient.GetDatabase(settings.DatabaseName).GetCollection<BsonDocument>(Collections.Pages);
-        var wikiSearchProvider = new StarWarsWikiSearchProvider(pagesCollection, sp.GetRequiredService<ILoggerFactory>());
-
-        var graphRAG = sp.GetRequiredService<GraphRAGToolkit>();
-        var kgAnalytics = new KGAnalyticsToolkit(sp.GetRequiredService<KnowledgeGraphQueryService>(), mongoClient, settings.DatabaseName);
-
-        var tools = new List<AITool>();
-        tools.AddRange(componentToolkit.AsAIFunctions());
-        tools.AddRange(dataExplorer.AsAIFunctions());
-        tools.AddRange(graphRAG.AsAIFunctions());
-        tools.AddRange(kgAnalytics.AsAIFunctions());
-        tools.Add(
-            AIFunctionFactory.Create(
-                (string query, CancellationToken ct) => wikiSearchProvider.SearchAsync(query, ct),
-                "keyword_search",
-                """
-                Keyword search over wiki page titles and content. Fast, no AI cost.
-                Best for exact name lookups. For why/how/explain questions, use semantic_search instead.
-                """
-            )
-        );
-        if (mcpClient is not null)
-        {
-            var allowedMcpTools = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "find", "aggregate", "count" };
-            var mcpTools = mcpClient.ListToolsAsync().GetAwaiter().GetResult();
-            tools.AddRange(mcpTools.Select(t => t.WithName(t.Name.Replace('-', '_'))).Where(t => allowedMcpTools.Contains(t.Name)).Cast<AITool>());
-        }
-
-        var instructions = AgentPrompt.GetInstructions(settings.DatabaseName);
-
-        // BYOK chat client — wraps the server OpenAI client and swaps to user's key when available
-        var byokClient = sp.GetRequiredService<ByokChatClient>();
-
-        // Explicit function-invocation wiring with a hard iteration cap. Default is 40, which
-        // is far too generous for this app — see eng/design/012-ai-agent-tool-call-efficiency.md.
-        // We also opt out of the agent's auto-wrapping (UseProvidedChatClientAsIs = true) so the
-        // settings configured here are the ones that actually run.
-        var chatClient = new ChatClientBuilder(byokClient)
-            .UseFunctionInvocation(configure: c =>
-            {
-                c.MaximumIterationsPerRequest = 12;
-                c.AllowConcurrentInvocation = true;
-            })
-            .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
-            .Build();
-
-        // Lightweight classifier client for topic guardrail (always uses server key)
-        var classifierClient = new ChatClientBuilder(openAiClient.GetResponsesClient().AsIChatClient("gpt-5.4-mini")).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build();
-
-        var aiStatus = sp.GetRequiredService<OpenAiStatusService>();
-        var loggerFactory = sp.GetRequiredService<ILoggerFactory>();
-        var guardrailLogger = loggerFactory.CreateLogger("StarWarsTopicGuardrail");
-        var budgetLogger = loggerFactory.CreateLogger("ToolCallBudget");
-
-        var agentOptions = new ChatClientAgentOptions
-        {
-            ChatOptions = new ChatOptions { Instructions = instructions, Tools = tools },
-            UseProvidedChatClientAsIs = true,
-        };
-
-        return chatClient
-            .AsAIAgent(agentOptions)
-            .AsBuilder()
-            .UseToolCallBudget(softWarnAt: 10, hardLimit: 15, logger: budgetLogger)
-            .UseStarWarsTopicGuardrail(classifierClient, aiStatus, guardrailLogger)
-            .Build();
-    });
+    .AddSingleton<AskAIAgent>()
+    .AddSingleton<AIAgent>(sp => sp.GetRequiredService<AskAIAgent>().Build());
 
 builder.Services.AddCors(options =>
 {

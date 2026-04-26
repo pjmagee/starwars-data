@@ -8,26 +8,20 @@ using MongoDB.Driver;
 using StarWarsData.Models;
 using StarWarsData.Models.Entities;
 
-namespace StarWarsData.Services.Suggestions;
+namespace StarWarsData.Services.AI.Agents;
 
 /// <summary>
-/// Uses an AI agent with KG tools to explore the knowledge graph and generate
-/// dynamic Ask page example questions. Replaces the template-based
-/// <c>SuggestionGenerator</c> — the agent discovers entities, relationships,
-/// temporal patterns, and property values on its own and produces naturally
-/// phrased, grammatically correct prompts grounded in real KG data.
+/// Background agent that explores the knowledge graph with the GraphRAG + KGAnalytics
+/// toolkits and produces dynamic example questions for the Ask page. Replaces the
+/// template-based <c>SuggestionGenerator</c> — the agent discovers entities,
+/// relationships, temporal patterns, and property values on its own and produces
+/// naturally phrased, grammatically correct prompts grounded in real KG data.
 ///
-/// Runs as a weekly Hangfire recurring job. The agent is given the full
-/// GraphRAG + KGAnalytics toolkits (~30 tools) and asked to produce ~6
-/// suggestions per (mode × continuity × realm) bucket (28 buckets total).
+/// Runs as a weekly Hangfire recurring job (registered in <c>StarWarsData.Admin</c>
+/// Program.cs). The agent is given ~30 tools and asked to produce ~6 suggestions
+/// per (mode × continuity × realm) bucket (28 buckets total).
 /// </summary>
-public sealed class SuggestionAgentService(
-    IMongoClient mongoClient,
-    IOptions<SettingsOptions> options,
-    KnowledgeGraphQueryService kgService,
-    IChatClient chatClient,
-    ILogger<SuggestionAgentService> logger
-)
+public sealed class SuggestionAgent(IMongoClient mongoClient, IOptions<SettingsOptions> options, KnowledgeGraphQueryService kgService, IChatClient chatClient, ILogger<SuggestionAgent> logger)
 {
     readonly IMongoDatabase _db = mongoClient.GetDatabase(options.Value.DatabaseName);
 
@@ -47,7 +41,7 @@ public sealed class SuggestionAgentService(
 
     public async Task GenerateAsync(CancellationToken ct = default)
     {
-        logger.LogInformation("SuggestionAgentService: starting weekly refresh…");
+        logger.LogInformation("SuggestionAgent: starting weekly refresh…");
 
         // Build the toolkits — same ones the Ask agent uses, minus semantic_search
         // (requires an embedding generator not registered in Admin).
@@ -64,14 +58,14 @@ public sealed class SuggestionAgentService(
 
         foreach (var (continuity, realm, bucketLabel) in Buckets)
         {
-            logger.LogInformation("SuggestionAgentService: generating suggestions for {Bucket}…", bucketLabel);
+            logger.LogInformation("SuggestionAgent: generating suggestions for {Bucket}…", bucketLabel);
 
             try
             {
                 var suggestions = await GenerateBucketAsync(tools, continuity, realm, bucketLabel, ct);
                 all.AddRange(suggestions);
                 logger.LogInformation(
-                    "SuggestionAgentService: {Bucket} produced {Count} suggestions across {Modes} modes.",
+                    "SuggestionAgent: {Bucket} produced {Count} suggestions across {Modes} modes.",
                     bucketLabel,
                     suggestions.Count,
                     suggestions.Select(s => s.Mode).Distinct().Count()
@@ -79,7 +73,7 @@ public sealed class SuggestionAgentService(
             }
             catch (Exception ex)
             {
-                logger.LogWarning(ex, "SuggestionAgentService: failed to generate suggestions for {Bucket}; continuing with other buckets.", bucketLabel);
+                logger.LogWarning(ex, "SuggestionAgent: failed to generate suggestions for {Bucket}; continuing with other buckets.", bucketLabel);
             }
         }
 
@@ -88,7 +82,7 @@ public sealed class SuggestionAgentService(
 
         if (deduped.Count == 0)
         {
-            logger.LogWarning("SuggestionAgentService: produced zero suggestions; leaving existing cache intact.");
+            logger.LogWarning("SuggestionAgent: produced zero suggestions; leaving existing cache intact.");
             return;
         }
 
@@ -104,7 +98,7 @@ public sealed class SuggestionAgentService(
             .Select(g => $"{g.Key.Continuity}/{g.Key.Realm}/{g.Key.Mode}={g.Count()}");
 
         logger.LogInformation(
-            "SuggestionAgentService: wrote {Count} suggestions across {Buckets} buckets.\n  {Summary}",
+            "SuggestionAgent: wrote {Count} suggestions across {Buckets} buckets.\n  {Summary}",
             deduped.Count,
             deduped.GroupBy(s => (s.Continuity, s.Realm, s.Mode)).Count(),
             string.Join(", ", summary)
@@ -276,7 +270,7 @@ public sealed class SuggestionAgentService(
         if (string.IsNullOrWhiteSpace(text))
         {
             var finishReason = response.FinishReason?.ToString() ?? "null";
-            logger.LogWarning("SuggestionAgentService: empty response from formatting phase. FinishReason={FinishReason}", finishReason);
+            logger.LogWarning("SuggestionAgent: empty response from formatting phase. FinishReason={FinishReason}", finishReason);
             return results;
         }
 
@@ -294,7 +288,7 @@ public sealed class SuggestionAgentService(
                 var mode = item.Mode.Trim().ToLowerInvariant();
                 if (!Modes.Contains(mode))
                 {
-                    logger.LogDebug("SuggestionAgentService: skipping suggestion with unknown mode '{Mode}'.", mode);
+                    logger.LogDebug("SuggestionAgent: skipping suggestion with unknown mode '{Mode}'.", mode);
                     continue;
                 }
 
@@ -315,7 +309,7 @@ public sealed class SuggestionAgentService(
         }
         catch (JsonException ex)
         {
-            logger.LogWarning(ex, "SuggestionAgentService: failed to deserialize structured response. Text: {Text}", text[..Math.Min(200, text.Length)]);
+            logger.LogWarning(ex, "SuggestionAgent: failed to deserialize structured response. Text: {Text}", text[..Math.Min(200, text.Length)]);
         }
 
         return results;
