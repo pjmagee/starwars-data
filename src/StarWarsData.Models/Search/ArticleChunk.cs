@@ -69,6 +69,16 @@ public class ArticleChunk
     [BsonElement("links")]
     public List<string> Links { get; set; } = [];
 
+    /// <summary>
+    /// SHA256 hex digest of <see cref="Text"/> at chunk-write time. Used by the Holocron
+    /// async pipeline (Design-020) to detect chunk-content changes between enrichment
+    /// runs — when re-enhancing a node, chunks whose hash matches the per-(node, chunk)
+    /// ledger entry are skipped, so unchanged content is never re-processed.
+    /// Backfilled across the existing corpus by migration 0013-chunk-content-hash.
+    /// </summary>
+    [BsonElement("contentHash")]
+    public string ContentHash { get; set; } = string.Empty;
+
     [BsonElement("createdAt")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

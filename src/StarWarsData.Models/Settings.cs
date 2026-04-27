@@ -155,6 +155,12 @@ public static class Collections
     public const string KgEdgeEnrichments = "kg.edge_enrichments";
     public const string KgEvents = "kg.events";
 
+    // ── Holocron async pipeline (Design-020) ──
+    // Job lifecycle + per-(node, chunk) processing ledger powering change-aware re-runs.
+    // Same separation-of-writers rule — Phase 1 never touches these.
+    public const string KgEnrichmentJobs = "kg.enrichment_jobs";
+    public const string KgNodeProcessedChunks = "kg.node_processed_chunks";
+
     // ── Knowledge graph enriched read views ──
     // Mongo views that left-join the base collections with active enrichments.
     // Read-only — created via Mongo migration 0010, not by the AppHost.

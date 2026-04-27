@@ -231,6 +231,7 @@ public partial class ArticleChunkingService
                             Realm = realm,
                             Embedding = vec,
                             Links = ExtractWikiLinks(chunks[i].text),
+                            ContentHash = ComputeContentHash(chunks[i].text),
                         }
                     );
                 }
@@ -500,6 +501,19 @@ public partial class ArticleChunkingService
 
         await _chunks.SearchIndexes.CreateOneAsync(model, ct);
         _logger.LogInformation("Vector search index created on chunks collection");
+    }
+
+    /// <summary>
+    /// Stable SHA256 hex digest of a chunk's text. Stored on <see cref="ArticleChunk.ContentHash"/>
+    /// at write time and consulted by the Holocron async pipeline (Design-020) to skip
+    /// re-processing of unchanged chunks across enhancement runs. Empty input hashes to a
+    /// stable empty-string-of-utf8 digest — that's fine; the chunker shouldn't be writing
+    /// empty chunks in the first place but the function must be total.
+    /// </summary>
+    public static string ComputeContentHash(string text)
+    {
+        var bytes = System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(text ?? string.Empty));
+        return Convert.ToHexString(bytes).ToLowerInvariant();
     }
 
     /// <summary>
