@@ -71,4 +71,17 @@ public sealed class NodeEnrichment
 
     [BsonElement("modelId")]
     public string ModelId { get; set; } = string.Empty;
+
+    /// <summary>
+    /// The <c>kg.enrichment_jobs._id</c> that produced this enrichment. Empty for
+    /// rows written by the legacy synchronous path (<c>HolocronAgent.EnhanceNodeAsync</c>
+    /// / scheduled daily-pass) so they're exempt from the partial unique constraint.
+    /// Populated by Design-020's async pipeline on every Apply write — combined with
+    /// the partial unique index <c>{jobId, pageId, fieldPath}</c> from migration 0014,
+    /// this makes Apply replays idempotent (a partial-Apply crash + resume can't
+    /// duplicate enrichments).
+    /// </summary>
+    [BsonElement("jobId")]
+    [BsonIgnoreIfNull]
+    public string? JobId { get; set; }
 }

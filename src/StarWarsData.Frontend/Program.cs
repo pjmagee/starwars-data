@@ -164,6 +164,36 @@ app.UseAntiforgery();
 app.UseStaticFiles();
 
 app.UseAuthentication();
+
+// Dev-only auto-auth bypass: when running locally (Environment=Development) and
+// no real Keycloak principal arrived from cookies, inject a synthetic authenticated
+// user so AuthorizeView gates open without forcing the dev to round-trip through
+// Keycloak just to click an admin-y button. Production / staging are untouched —
+// the real OIDC flow remains the only way in.
+//
+// The principal carries the same claim shape the real login produces
+// (`preferred_username`, `roles`) so downstream code (the X-User-Id DelegatingHandler,
+// Keycloak roles transformation) doesn't need a special case.
+if (app.Environment.IsDevelopment())
+{
+    app.Use(
+        async (ctx, next) =>
+        {
+            if (ctx.User?.Identity?.IsAuthenticated != true)
+            {
+                var identity = new ClaimsIdentity(
+                    new[] { new Claim(ClaimTypes.NameIdentifier, "dev-local-user"), new Claim("preferred_username", "dev"), new Claim("roles", "admin") },
+                    authenticationType: "DevAuthBypass",
+                    nameType: "preferred_username",
+                    roleType: "roles"
+                );
+                ctx.User = new ClaimsPrincipal(identity);
+            }
+            await next();
+        }
+    );
+}
+
 app.UseAuthorization();
 
 app.MapStaticAssets();

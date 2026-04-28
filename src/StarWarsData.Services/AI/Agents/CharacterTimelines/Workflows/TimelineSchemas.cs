@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace StarWarsData.Services.Executors;
+namespace StarWarsData.Services.AI.Agents.CharacterTimelines.Workflows;
 
 /// <summary>
 /// Internal transport type used between workflow executors (Batch → Consolidator → Review).

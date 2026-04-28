@@ -1,3 +1,4 @@
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace StarWarsData.Models.Entities;
@@ -8,6 +9,7 @@ namespace StarWarsData.Models.Entities;
 /// qualifier (the text inside parentheses) or a raw source string. Edges
 /// without a qualifier leave this null so the document stays compact.
 /// </summary>
+[BsonIgnoreExtraElements]
 public sealed class EdgeMeta
 {
     /// <summary>
@@ -31,4 +33,19 @@ public sealed class EdgeMeta
     /// </summary>
     [BsonElement("order"), BsonIgnoreIfNull]
     public int? Order { get; set; }
+
+    /// <summary>
+    /// How the edge's <see cref="RelationshipEdge.FromYear"/> /
+    /// <see cref="RelationshipEdge.ToYear"/> were determined. Distinguishes hard
+    /// infobox-supplied bounds from soft lifecycle-fallback derivations so
+    /// Holocron's FillGap pre-flight and the query-time merge layers can refine
+    /// the soft ones without overwriting the hard ones. Absent (= Unknown) when
+    /// both bounds are null or provenance pre-dates Design-021.
+    /// Stored as the enum case-name string to match the convention on
+    /// <c>EnrichmentStatus</c> / <c>EnrichmentOperation</c> — readable in
+    /// mongosh and matched verbatim by Migration 0015's retroactive tagging.
+    /// </summary>
+    [BsonElement("boundsSource"), BsonIgnoreIfDefault]
+    [BsonRepresentation(BsonType.String)]
+    public EdgeBoundsSource BoundsSource { get; set; }
 }

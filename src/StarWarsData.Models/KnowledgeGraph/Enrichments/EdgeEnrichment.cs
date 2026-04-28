@@ -79,4 +79,14 @@ public sealed class EdgeEnrichment
 
     [BsonElement("modelId")]
     public string ModelId { get; set; } = string.Empty;
+
+    /// <summary>
+    /// The <c>kg.enrichment_jobs._id</c> that produced this edge enrichment. Empty for
+    /// rows from the legacy synchronous path so they're exempt from the partial unique
+    /// constraint <c>{jobId, fromId, toId, label}</c> created by migration 0014.
+    /// Combined with that index, an Apply replay is a no-op via duplicate-key.
+    /// </summary>
+    [BsonElement("jobId")]
+    [BsonIgnoreIfNull]
+    public string? JobId { get; set; }
 }

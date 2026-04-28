@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using StarWarsData.Models.Entities;
 using StarWarsData.Models.Queries;
 using StarWarsData.Services;
+using StarWarsData.Services.AI.Agents.CharacterTimelines;
 
 namespace StarWarsData.ApiService.Controllers;
 

@@ -116,6 +116,24 @@ public class EntityEdgeRowDto
 
     /// <summary>Holocron Annotate longer-form description.</summary>
     public string? Description { get; init; }
+
+    /// <summary>
+    /// When the most recent Holocron enrichment touched this edge (Apply step's write
+    /// timestamp). Null when no Holocron enrichment exists. The relationships table
+    /// renders this as a relative "X ago" caption alongside the role/qualifier.
+    /// </summary>
+    public DateTime? HolocronAppliedAt { get; init; }
+
+    /// <summary>
+    /// Job that produced the most recent Holocron enrichment on this edge. Empty for
+    /// pre-Phase-B rows from the legacy synchronous path. Used to deep-link the row
+    /// to <c>/holocron/jobs/{pageId}</c> so users can pivot from "this edge has a
+    /// Holocron note" to "show me the run that produced it".
+    /// </summary>
+    public string? HolocronJobId { get; init; }
+
+    /// <summary>Agent version stamp on the most recent Holocron enrichment (e.g. <c>holocron-v1.0.0</c>).</summary>
+    public string? HolocronAgentVersion { get; init; }
 }
 
 /// <summary>Top-level response for <c>GET /api/RelationshipGraph/edges/{nodeId}</c>.</summary>

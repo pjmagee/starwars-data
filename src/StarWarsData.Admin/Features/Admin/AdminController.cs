@@ -2,6 +2,7 @@ using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 using StarWarsData.Services;
 using StarWarsData.Services.AI.Agents;
+using StarWarsData.Services.AI.Agents.CharacterTimelines;
 
 namespace StarWarsData.Admin.Controllers;
 
@@ -476,6 +477,68 @@ public class AdminController(
         {
             return Conflict(new { error = ex.Message });
         }
+    }
+
+    [HttpPost("openai/sync-spend")]
+    public ActionResult<string> EnqueueOpenAiSpendSync()
+    {
+        try
+        {
+            // Clear stale scheduled retries from prior failed attempts. Hangfire's default
+            // AutomaticRetry queues 10 retries on exception, and the nightly cron means a
+            // missed run is automatically retried within 24h — so accumulated retries are
+            // just noise that would block the conflict guard below. Only true active work
+            // (Processing/Enqueued) blocks a manual re-trigger.
+            DeleteScheduledJobs(typeof(OpenAiSpendSyncService), nameof(OpenAiSpendSyncService.SyncAsync));
+            if (IsJobAlreadyProcessing(typeof(OpenAiSpendSyncService), nameof(OpenAiSpendSyncService.SyncAsync)))
+                return Conflict(new { error = "OpenAI spend sync already running" });
+            var jobId = BackgroundJob.Enqueue<OpenAiSpendSyncService>(s => s.SyncAsync(CancellationToken.None));
+            return Ok(new { jobId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+    }
+
+    void DeleteScheduledJobs(Type type, string methodName)
+    {
+        try
+        {
+            var monitoring = JobStorage.Current.GetMonitoringApi();
+            foreach (var (id, scheduled) in monitoring.ScheduledJobs(0, 100))
+            {
+                var job = scheduled.Job;
+                if (job?.Type == type && job.Method?.Name == methodName)
+                    BackgroundJob.Delete(id);
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "Failed to delete stale scheduled jobs for {Type}.{Method}", type.Name, methodName);
+        }
+    }
+
+    bool IsJobAlreadyProcessing(Type type, string methodName)
+    {
+        try
+        {
+            var monitoring = JobStorage.Current.GetMonitoringApi();
+            foreach (var q in monitoring.Queues())
+            {
+                foreach (var kv in monitoring.ProcessingJobs(0, 100))
+                    if (kv.Value.Job?.Type == type && kv.Value.Job.Method?.Name == methodName)
+                        return true;
+                foreach (var kv in monitoring.EnqueuedJobs(q.Name, 0, 100))
+                    if (kv.Value.Job?.Type == type && kv.Value.Job.Method?.Name == methodName)
+                        return true;
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "Failed to inspect existing jobs; proceeding with enqueue");
+        }
+        return false;
     }
 
     // === Holocron (Phase 2 KG enrichment agent) ===

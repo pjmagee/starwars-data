@@ -397,7 +397,8 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                     ToYear: e.ToYear,
                     Phase1Qualifier: PickPhase1Qualifier(e.Meta),
                     OriginalKey: EdgeKey(e.FromId, e.ToId, e.Label),
-                    IsHolocronOnly: false
+                    IsHolocronOnly: false,
+                    BoundsSource: e.Meta?.BoundsSource ?? EdgeBoundsSource.Unknown
                 )
             );
         }
@@ -418,7 +419,8 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                     ToYear: e.ToYear,
                     Phase1Qualifier: PickPhase1Qualifier(e.Meta),
                     OriginalKey: EdgeKey(e.FromId, e.ToId, e.Label),
-                    IsHolocronOnly: false
+                    IsHolocronOnly: false,
+                    BoundsSource: e.Meta?.BoundsSource ?? EdgeBoundsSource.Unknown
                 )
             );
         }
@@ -427,15 +429,30 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         var existingEdgeKeys = outgoing.Select(e => EdgeKey(e.FromId, e.ToId, e.Label)).Concat(incoming.Select(e => EdgeKey(e.FromId, e.ToId, e.Label))).ToHashSet(StringComparer.OrdinalIgnoreCase);
 
         // Bucket enrichments: Annotates get attached to existing rows; Add ones with no base
-        // edge become brand-new Phase 2-only rows; FillGap is currently surfaced through the
-        // edge-row temporal columns only when we read from the merged view (deferred — see Design-019).
+        // edge become brand-new Phase 2-only rows; FillGap rows overlay refined temporal
+        // bounds onto matching base rows (Design-021).
+        // For each (fromId, toId, label) keep the MOST RECENTLY applied enrichment so the
+        // "last updated" timestamp on the row reflects the freshest Holocron touch. We also
+        // index Adds the same way so Holocron-only rows can carry their own timestamps.
         var annotationByKey = new Dictionary<string, EdgeEnrichment>(StringComparer.OrdinalIgnoreCase);
+        var fillGapByKey = new Dictionary<string, EdgeEnrichment>(StringComparer.OrdinalIgnoreCase);
+        var enrichmentByKey = new Dictionary<string, EdgeEnrichment>(StringComparer.OrdinalIgnoreCase);
         foreach (var en in enrichments)
         {
             var key = EdgeKey(en.FromId, en.ToId, en.Label);
+            // Track latest enrichment per key regardless of operation — drives the timestamp
+            // shown on each row (whichever enrichment touched the edge most recently wins).
+            if (!enrichmentByKey.TryGetValue(key, out var prev) || (en.AppliedAt ?? en.CreatedAt) > (prev.AppliedAt ?? prev.CreatedAt))
+                enrichmentByKey[key] = en;
             if (en.Operation == EnrichmentOperation.Annotate)
             {
-                annotationByKey[key] = en;
+                if (!annotationByKey.TryGetValue(key, out var existing) || (en.AppliedAt ?? en.CreatedAt) > (existing.AppliedAt ?? existing.CreatedAt))
+                    annotationByKey[key] = en;
+            }
+            else if (en.Operation == EnrichmentOperation.FillGap)
+            {
+                if (!fillGapByKey.TryGetValue(key, out var existing) || (en.AppliedAt ?? en.CreatedAt) > (existing.AppliedAt ?? existing.CreatedAt))
+                    fillGapByKey[key] = en;
             }
             else if (en.Operation == EnrichmentOperation.Add && !existingEdgeKeys.Contains(key))
             {
@@ -475,6 +492,27 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             }
         }
 
+        // FillGap overlay (Design-021) — for each base row whose key has a FillGap
+        // enrichment, refine the bound when the existing one is null OR Phase-5-derived
+        // (Lifecycle / Unknown). Hard infobox-sourced bounds are never overwritten.
+        for (int i = 0; i < rows.Count; i++)
+        {
+            var r = rows[i];
+            if (r.IsHolocronOnly)
+                continue;
+            if (!fillGapByKey.TryGetValue(r.OriginalKey, out var fg))
+                continue;
+            // Conservative: only Lifecycle-tagged bounds are refinable. Unknown
+            // means un-migrated — treat as hard until Migration 0015 runs.
+            var refinable = r.BoundsSource is EdgeBoundsSource.Lifecycle;
+            var fillFrom = TryGetInt(fg.Value, "fromYear");
+            var fillTo = TryGetInt(fg.Value, "toYear");
+            var newFromYear = (r.FromYear is null || refinable) && fillFrom.HasValue ? fillFrom : r.FromYear;
+            var newToYear = (r.ToYear is null || refinable) && fillTo.HasValue ? fillTo : r.ToYear;
+            if (newFromYear != r.FromYear || newToYear != r.ToYear)
+                rows[i] = r with { FromYear = newFromYear, ToYear = newToYear };
+        }
+
         // Resolve target names for any Holocron-only Adds (the enrichment doc doesn't carry them)
         // and target types for every row in a single batched lookup.
         var allOtherIds = rows.Select(r => r.OtherId).Distinct().ToList();
@@ -497,6 +535,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         var dtos = rows.Select(r =>
             {
                 annotationByKey.TryGetValue(r.OriginalKey, out var ann);
+                enrichmentByKey.TryGetValue(r.OriginalKey, out var latest);
                 return new EntityEdgeRowDto
                 {
                     Label = r.Label,
@@ -511,6 +550,9 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                     Role = TryGetString(ann?.Value, "role"),
                     Qualifier = TryGetString(ann?.Value, "qualifier"),
                     Description = TryGetString(ann?.Value, "description"),
+                    HolocronAppliedAt = latest?.AppliedAt ?? latest?.CreatedAt,
+                    HolocronJobId = string.IsNullOrEmpty(latest?.JobId) ? null : latest.JobId,
+                    HolocronAgentVersion = string.IsNullOrEmpty(latest?.AgentVersion) ? null : latest.AgentVersion,
                 };
             })
             .ToList();
@@ -559,7 +601,37 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         return value.AsBsonDocument.TryGetValue(field, out var v) && v.IsInt32 ? v.AsInt32 : null;
     }
 
-    private sealed record EdgeRowBuild(string Label, string Direction, int OtherId, string OtherName, int? FromYear, int? ToYear, string? Phase1Qualifier, string OriginalKey, bool IsHolocronOnly);
+    /// <summary>
+    /// Read <c>meta.boundsSource</c> off a raw <c>kg.edges</c> BSON document. Returns
+    /// <see cref="EdgeBoundsSource.Unknown"/> when the field is absent (legacy edges from
+    /// before Design-021 or edges with both bounds null). Accepts either the stringly-typed
+    /// enum value (the Mongo C# driver default for enums) or the underlying int representation.
+    /// </summary>
+    private static EdgeBoundsSource ReadBoundsSource(BsonDocument edge)
+    {
+        if (!edge.TryGetValue(RelationshipEdgeBsonFields.Meta, out var metaVal) || !metaVal.IsBsonDocument)
+            return EdgeBoundsSource.Unknown;
+        if (!metaVal.AsBsonDocument.TryGetValue(RelationshipEdgeBsonFields.MetaBoundsSource, out var srcVal))
+            return EdgeBoundsSource.Unknown;
+        if (srcVal.IsString && Enum.TryParse<EdgeBoundsSource>(srcVal.AsString, ignoreCase: true, out var parsed))
+            return parsed;
+        if (srcVal.IsInt32)
+            return (EdgeBoundsSource)srcVal.AsInt32;
+        return EdgeBoundsSource.Unknown;
+    }
+
+    private sealed record EdgeRowBuild(
+        string Label,
+        string Direction,
+        int OtherId,
+        string OtherName,
+        int? FromYear,
+        int? ToYear,
+        string? Phase1Qualifier,
+        string OriginalKey,
+        bool IsHolocronOnly,
+        EdgeBoundsSource BoundsSource = EdgeBoundsSource.Unknown
+    );
 
     /// <summary>
     /// All Active hash-matched node-property enrichments for a single entity, with cited-page
@@ -737,11 +809,41 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         };
         var sort = ascending ? Builders<GraphNode>.Sort.Ascending(sortField) : Builders<GraphNode>.Sort.Descending(sortField);
 
-        // Read through the enriched view so each GraphNode carries its active hash-matched
-        // node enrichments (Phase 2 Holocron additions). The view's $lookup is filtered to
-        // status=Active and contentHash-matched, so .Enrichments is exactly the set the UI
-        // should mark as Phase 2. See Design-019.
-        var items = await _nodesEnriched.Find(filter).Sort(sort).Skip((page - 1) * pageSize).Limit(pageSize).ToListAsync(ct);
+        // Two-phase fetch: paginate against base kg.nodes (fast, indexed), then bulk-fetch
+        // node enrichments for ONLY the returned page's PageIds. This is ~3500× faster than
+        // querying the kg.nodes.enriched view, because the view's $lookup uses $expr with
+        // outer-doc variables — Mongo can't push the consumer's $match through that, so all
+        // 166K rows get joined before filter+sort+skip+limit applies. Direct kg.nodes is
+        // ~2 ms for a paginated query; the view is ~7 s. The bulk enrichment lookup adds
+        // ~5 ms (indexed by pageId + status), so total is ~10 ms.
+        //
+        // Same staleness logic the view enforces is applied in C#: only attach enrichments
+        // whose contentHashAtCreation matches the node's current contentHash, OR where
+        // either side is empty (stub-node case — see HolocronAgent.RunStalenessSweepAsync
+        // for the same conservative policy).
+        var items = await _nodes.Find(filter).Sort(sort).Skip((page - 1) * pageSize).Limit(pageSize).ToListAsync(ct);
+
+        if (items.Count > 0)
+        {
+            var pageIds = items.Select(n => n.PageId).ToList();
+            var enrichments = await _nodeEnrichments
+                .Find(Builders<NodeEnrichment>.Filter.In(e => e.PageId, pageIds) & Builders<NodeEnrichment>.Filter.Eq(e => e.Status, EnrichmentStatus.Active))
+                .SortByDescending(e => e.CreatedAt)
+                .ToListAsync(ct);
+            var byPageId = enrichments.GroupBy(e => e.PageId).ToDictionary(g => g.Key, g => g.ToList());
+            foreach (var node in items)
+            {
+                if (!byPageId.TryGetValue(node.PageId, out var matched))
+                    continue;
+                var live = matched
+                    .Where(e =>
+                        string.IsNullOrEmpty(e.ContentHashAtCreation) || string.IsNullOrEmpty(node.ContentHash) || string.Equals(e.ContentHashAtCreation, node.ContentHash, StringComparison.Ordinal)
+                    )
+                    .ToList();
+                if (live.Count > 0)
+                    node.Enrichments = live;
+            }
+        }
 
         var dtos = items.Select(BuildTemporalNodeDto).ToList();
 
@@ -909,7 +1011,27 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         }
 
         var visited = new HashSet<int> { pageId };
-        var allEdges = new List<(int from, string fromName, int to, string toName, string label, double weight, int? fromYear, int? toYear)>();
+        // Tuple carries both the display-form (from/to/label, possibly flipped to read from the
+        // focal node's perspective) AND the natural-form (origFrom/origTo/origLabel) so we can
+        // look up Holocron edge enrichments by the natural key after the BFS finishes.
+        // boundsSource preserves Phase 5's provenance tag (Design-021) so the merge step can
+        // overlay FillGap enrichments onto soft (Lifecycle/Unknown) bounds without touching
+        // hard (Infobox) ones.
+        var allEdges =
+            new List<(
+                int from,
+                string fromName,
+                int to,
+                string toName,
+                string label,
+                double weight,
+                int? fromYear,
+                int? toYear,
+                int origFrom,
+                int origTo,
+                string origLabel,
+                EdgeBoundsSource boundsSource
+            )>();
         var frontier = new HashSet<int> { pageId };
 
         var truncated = false;
@@ -949,6 +1071,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             {
                 var toId = e[RelationshipEdgeBsonFields.ToId].AsInt32;
                 var fromId = e[RelationshipEdgeBsonFields.FromId].AsInt32;
+                var origLabel = e[RelationshipEdgeBsonFields.Label].AsString;
                 // Realm filter is already applied server-side via outRealmFilter.
                 allEdges.Add(
                     (
@@ -956,10 +1079,15 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                         e[RelationshipEdgeBsonFields.FromName].AsString,
                         toId,
                         e[RelationshipEdgeBsonFields.ToName].AsString,
-                        e[RelationshipEdgeBsonFields.Label].AsString,
+                        origLabel,
                         e.Contains(RelationshipEdgeBsonFields.Weight) ? e[RelationshipEdgeBsonFields.Weight].ToDouble() : 0.8,
                         e.Contains(RelationshipEdgeBsonFields.FromYear) && !e[RelationshipEdgeBsonFields.FromYear].IsBsonNull ? e[RelationshipEdgeBsonFields.FromYear].AsInt32 : null,
-                        e.Contains(RelationshipEdgeBsonFields.ToYear) && !e[RelationshipEdgeBsonFields.ToYear].IsBsonNull ? e[RelationshipEdgeBsonFields.ToYear].AsInt32 : null
+                        e.Contains(RelationshipEdgeBsonFields.ToYear) && !e[RelationshipEdgeBsonFields.ToYear].IsBsonNull ? e[RelationshipEdgeBsonFields.ToYear].AsInt32 : null,
+                        // Outgoing pass — display tuple equals natural tuple, no flip.
+                        fromId,
+                        toId,
+                        origLabel,
+                        ReadBoundsSource(e)
                     )
                 );
 
@@ -994,7 +1122,12 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                         displayLabel,
                         e.Contains(RelationshipEdgeBsonFields.Weight) ? e[RelationshipEdgeBsonFields.Weight].ToDouble() : 0.8,
                         e.Contains(RelationshipEdgeBsonFields.FromYear) && !e[RelationshipEdgeBsonFields.FromYear].IsBsonNull ? e[RelationshipEdgeBsonFields.FromYear].AsInt32 : null,
-                        e.Contains(RelationshipEdgeBsonFields.ToYear) && !e[RelationshipEdgeBsonFields.ToYear].IsBsonNull ? e[RelationshipEdgeBsonFields.ToYear].AsInt32 : null
+                        e.Contains(RelationshipEdgeBsonFields.ToYear) && !e[RelationshipEdgeBsonFields.ToYear].IsBsonNull ? e[RelationshipEdgeBsonFields.ToYear].AsInt32 : null,
+                        // Inbound pass — track natural-form key so enrichment lookup matches kg.edge_enrichments.
+                        origFromId,
+                        origToId,
+                        origLabel,
+                        ReadBoundsSource(e)
                     )
                 );
 
@@ -1009,6 +1142,98 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
 
         // Filter edges to only include those where both endpoints are in the visited set
         var filteredEdges = allEdges.Where(e => visited.Contains(e.from) && visited.Contains(e.to)).DistinctBy(e => (e.from, e.to, e.label)).ToList();
+
+        // ─── Holocron edge-enrichment merge ───────────────────────────────────
+        // Pull all Active FillGap + Add enrichments touching ANY visited node, then:
+        //   1. FillGap → overlay value.fromYear/toYear onto the matching base edge when
+        //      its current bound is null (FillGap by design only fills nulls).
+        //   2. Add → synthesise a new edge tuple when the (origFrom, origTo, origLabel)
+        //      pair has no base edge in the result set AND both endpoints are visited.
+        // Re-apply the temporal filter in C# afterwards because (a) FillGap-overlaid edges
+        // need re-evaluation (the DB filter passed them on null bounds — they may now fall
+        // outside the window) and (b) synthesised Add edges never touched the DB filter.
+        if (visited.Count > 0)
+        {
+            var holocronEnrichments = await _edgeEnrichments
+                .Find(
+                    Builders<EdgeEnrichment>.Filter.Eq(e => e.Status, EnrichmentStatus.Active)
+                        & (Builders<EdgeEnrichment>.Filter.In(e => e.FromId, visited) | Builders<EdgeEnrichment>.Filter.In(e => e.ToId, visited))
+                        & Builders<EdgeEnrichment>.Filter.In(e => e.Operation, new[] { EnrichmentOperation.FillGap, EnrichmentOperation.Add })
+                )
+                .ToListAsync(ct);
+
+            // Index by natural (FromId, ToId, Label) — keep the most recently applied per key
+            // when multiple enrichments touch the same edge (rare but possible across job runs).
+            var enrichmentByKey = new Dictionary<(int, int, string), EdgeEnrichment>();
+            foreach (var en in holocronEnrichments)
+            {
+                var key = (en.FromId, en.ToId, en.Label);
+                if (!enrichmentByKey.TryGetValue(key, out var prev) || (en.AppliedAt ?? en.CreatedAt) > (prev.AppliedAt ?? prev.CreatedAt))
+                    enrichmentByKey[key] = en;
+            }
+
+            // 1. FillGap overlay — mutate filteredEdges in-place via index walk. Refine when
+            //    the existing bound is null OR Phase-5-derived (Lifecycle/Unknown). Hard
+            //    Infobox-sourced bounds are preserved unchanged. See Design-021.
+            for (int i = 0; i < filteredEdges.Count; i++)
+            {
+                var row = filteredEdges[i];
+                if (!enrichmentByKey.TryGetValue((row.origFrom, row.origTo, row.origLabel), out var en))
+                    continue;
+                if (en.Operation != EnrichmentOperation.FillGap)
+                    continue;
+
+                // Conservative: only Lifecycle-tagged bounds are refinable. Unknown
+                // means un-migrated — treat as hard until Migration 0015 runs.
+                var refinable = row.boundsSource is EdgeBoundsSource.Lifecycle;
+                var fillFrom = TryGetInt(en.Value, "fromYear");
+                var fillTo = TryGetInt(en.Value, "toYear");
+                var newFromYear = (row.fromYear is null || refinable) && fillFrom.HasValue ? fillFrom : row.fromYear;
+                var newToYear = (row.toYear is null || refinable) && fillTo.HasValue ? fillTo : row.toYear;
+                if (newFromYear != row.fromYear || newToYear != row.toYear)
+                {
+                    filteredEdges[i] = (row.from, row.fromName, row.to, row.toName, row.label, row.weight, newFromYear, newToYear, row.origFrom, row.origTo, row.origLabel, EdgeBoundsSource.Holocron);
+                }
+            }
+
+            // 2. Add synthesis — new edges that have no base row. Skip when either endpoint
+            //    isn't visited (we don't bring in phantom nodes; the BFS sets the bounds).
+            var existingTriples = filteredEdges.Select(e => (e.origFrom, e.origTo, e.origLabel)).ToHashSet();
+            foreach (var en in holocronEnrichments)
+            {
+                if (en.Operation != EnrichmentOperation.Add)
+                    continue;
+                if (!visited.Contains(en.FromId) || !visited.Contains(en.ToId))
+                    continue;
+                if (existingTriples.Contains((en.FromId, en.ToId, en.Label)))
+                    continue;
+
+                var addFromYear = TryGetInt(en.Value, "fromYear");
+                var addToYear = TryGetInt(en.Value, "toYear");
+                var addWeight = TryGetInt(en.Value, "weight") is int w ? (double)w : 0.8;
+
+                // Resolve display names from the node map (built below at line ~1064 — use
+                // the in-scope `_nodes` collection lookup-by-Id we'll do inline here).
+                filteredEdges.Add((en.FromId, string.Empty, en.ToId, string.Empty, en.Label, addWeight, addFromYear, addToYear, en.FromId, en.ToId, en.Label, EdgeBoundsSource.Holocron));
+            }
+
+            // 3. Re-apply temporal filter in C# — only when active. FillGap may have moved an
+            //    edge's interval out of the window (DB pass let nulls through); Add edges
+            //    never touched the DB filter at all.
+            if (yearFrom.HasValue || yearTo.HasValue)
+            {
+                bool Overlaps(int? edgeFrom, int? edgeTo)
+                {
+                    // Same overlap test as the DB filter (recall-biased: nulls treated as ±∞).
+                    if (yearTo.HasValue && edgeFrom.HasValue && edgeFrom.Value > yearTo.Value)
+                        return false;
+                    if (yearFrom.HasValue && edgeTo.HasValue && edgeTo.Value < yearFrom.Value)
+                        return false;
+                    return true;
+                }
+                filteredEdges = filteredEdges.Where(e => Overlaps(e.fromYear, e.toYear)).ToList();
+            }
+        }
 
         var rootNode = await _nodes.Find(n => n.PageId == pageId).FirstOrDefaultAsync(ct);
         var nodeIds = visited.ToList();

@@ -1,0 +1,347 @@
+@*
+    Live progress dialog for the Holocron enhancement workflow (Design-020).
+    Mirrors the Character Timelines page's stepper + activity log UX, but
+    shaped around HolocronJobStatus instead of GenerationStage.
+
+    Lifecycle:
+      1. Caller passes a pageId + nodeName, opens via DialogService.
+      2. Dialog GETs /api/holocron/jobs/{pageId}/status first. If a non-terminal
+         status comes back, we re-attach to the running job and poll without
+         re-POSTing. Otherwise we POST /api/holocron/jobs/enhance/{pageId} to
+         kick off a fresh run. (The server-side 409 path is still a safety net
+         — concurrent dialog opens can't double-fire because of it.)
+      3. Polls GET /api/holocron/jobs/{pageId}/status every PollIntervalMs
+         until the stage is Completed or Failed, or the user closes the dialog.
+      4. Closing the dialog while a run is in flight cancels POLLING only —
+         the workflow keeps running. Re-opening re-attaches via the status
+         pre-check.
+*@
+
+@using System.Net
+@using System.Net.Http.Json
+@using StarWarsData.Models.Entities
+
+<MudDialog>
+    <TitleContent>
+        <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center" Style="width:100%">
+            <MudIcon Icon="@Icons.Material.Filled.AutoAwesome" />
+            <MudText Typo="Typo.h6" Style="flex:1">Enhancing @NodeName with Holocron</MudText>
+            <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small" OnClick="Close" aria-label="close" />
+        </MudStack>
+    </TitleContent>
+    <DialogContent>
+        @if (_status is null)
+        {
+            <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center" Class="my-4">
+                <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+                <MudText Typo="Typo.body2">Queueing enhancement...</MudText>
+            </MudStack>
+        }
+        else
+        {
+            <MudStack Spacing="2" Class="my-2">
+                @foreach (var stage in _stages)
+                {
+                    var state = GetState(stage);
+                    <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+                        @if (state == StageState.Done)
+                        {
+                            <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Success" Size="Size.Small" />
+                        }
+                        else if (state == StageState.Active)
+                        {
+                            <MudProgressCircular Indeterminate="true" Color="Color.Primary" Style="width:20px;height:20px" />
+                        }
+                        else if (state == StageState.Failed)
+                        {
+                            <MudIcon Icon="@Icons.Material.Filled.Error" Color="Color.Error" Size="Size.Small" />
+                        }
+                        else
+                        {
+                            <MudIcon Icon="@Icons.Material.Outlined.Circle" Color="Color.Default" Size="Size.Small" />
+                        }
+                        <MudText Typo="Typo.body2"
+                                 Color="@(state == StageState.Active ? Color.Primary : state == StageState.Done ? Color.Success : state == StageState.Failed ? Color.Error : Color.Default)">
+                            @StageLabel(stage)
+                        </MudText>
+                    </MudStack>
+                }
+            </MudStack>
+
+            <MudProgressLinear Value="@StageProgress(_status.Stage)"
+                               Color="@(_status.Stage == HolocronJobStatus.Failed ? Color.Error : _status.Stage == HolocronJobStatus.Completed ? Color.Success : Color.Primary)"
+                               Striped="@(_status.Stage is not (HolocronJobStatus.Completed or HolocronJobStatus.Failed))"
+                               Size="Size.Medium" Class="mt-3 mb-2" />
+
+            @if (_status.TotalSteps > 0)
+            {
+                <MudProgressLinear Value="@SubStepProgress(_status)" Color="Color.Secondary" Size="Size.Small" Class="mb-2" Rounded="true" />
+            }
+
+            <MudText Typo="Typo.caption" Color="Color.Secondary">@_status.Message</MudText>
+
+            @if (_status.ProposalsExtracted > 0 || _status.EnrichmentsApplied > 0)
+            {
+                <MudStack Row="true" Spacing="2" Class="mt-2">
+                    <MudChip T="string" Size="Size.Small" Color="Color.Info" Icon="@Icons.Material.Filled.Lightbulb">@_status.ProposalsExtracted proposed</MudChip>
+                    <MudChip T="string" Size="Size.Small" Color="Color.Success" Icon="@Icons.Material.Filled.Check">@_status.EnrichmentsApplied applied</MudChip>
+                </MudStack>
+            }
+
+            @if (_status.ActivityLog.Count > 0)
+            {
+                <MudExpansionPanels Class="mt-3" Elevation="0">
+                    <MudExpansionPanel Text="@($"Activity log ({_status.ActivityLog.Count} events)")" Expanded="false">
+                        <div style="max-height:280px; overflow-y:auto">
+                            <MudStack Spacing="0">
+                                @foreach (var entry in _status.ActivityLog.AsEnumerable().Reverse().Take(80))
+                                {
+                                    <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center"
+                                              Class="px-2 py-1" Style="border-bottom:1px solid var(--mud-palette-divider)">
+                                        <MudIcon Icon="@CategoryIcon(entry.Category)" Size="Size.Small" Color="@CategoryColor(entry.Category)" />
+                                        <MudText Typo="Typo.caption" Style="font-family:monospace; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">
+                                            @entry.Summary
+                                        </MudText>
+                                        <MudText Typo="Typo.caption" Color="Color.Secondary" Style="flex-shrink:0">
+                                            @entry.Timestamp.ToString("HH:mm:ss")
+                                        </MudText>
+                                    </MudStack>
+                                }
+                            </MudStack>
+                        </div>
+                    </MudExpansionPanel>
+                </MudExpansionPanels>
+            }
+
+            @if (_status.Stage == HolocronJobStatus.Failed)
+            {
+                <MudAlert Severity="Severity.Error" Dense="true" Class="mt-3">@(_status.Error ?? _status.Message)</MudAlert>
+            }
+        }
+    </DialogContent>
+    <DialogActions>
+        @if (_status?.Stage is HolocronJobStatus.Completed or HolocronJobStatus.Failed)
+        {
+            <MudButton OnClick="Close" Color="Color.Primary" Variant="Variant.Filled">Close</MudButton>
+        }
+        else
+        {
+            <MudText Typo="Typo.caption" Color="Color.Secondary" Class="ml-3" Style="flex:1">
+                Closing leaves the job running in the background — re-open from any node card.
+            </MudText>
+            <MudButton OnClick="Close" Variant="Variant.Text">Close (run in background)</MudButton>
+        }
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] private IMudDialogInstance MudDialog { get; set; } = null!;
+
+    [Parameter, EditorRequired] public int PageId { get; set; }
+    [Parameter, EditorRequired] public string NodeName { get; set; } = string.Empty;
+
+    [Inject] private IHttpClientFactory HttpClientFactory { get; set; } = null!;
+    [Inject] private ISnackbar Snackbar { get; set; } = null!;
+
+    /// <summary>Polled at 1.5s — the workflow stages turn over fast on small nodes (~10-15s end-to-end for 18 chunks).</summary>
+    const int PollIntervalMs = 1500;
+
+    /// <summary>Cap polls at ~16 minutes (480 × 2s) — covers Sidious-class runs without going truly indefinite.</summary>
+    const int MaxPolls = 640;
+
+    HolocronStatusResponse? _status;
+    CancellationTokenSource _cts = new();
+
+    HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
+
+    static readonly HolocronJobStatus[] _stages =
+    {
+        HolocronJobStatus.Queued,
+        HolocronJobStatus.Discovering,
+        HolocronJobStatus.Bundling,
+        HolocronJobStatus.Extracting,
+        HolocronJobStatus.Consolidating,
+        HolocronJobStatus.Applying,
+        HolocronJobStatus.Completed,
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Pre-check: is there already a non-terminal run for this node? If so, re-attach
+        // (poll-only) instead of POSTing a fresh kickoff. This keeps re-opens cheap and
+        // makes the close-and-reopen UX feel instantaneous when the workflow is in flight.
+        try
+        {
+            var existing = await TryGetStatusAsync(_cts.Token);
+            var alreadyRunning = existing is not null && existing.Stage is not (HolocronJobStatus.Completed or HolocronJobStatus.Failed);
+
+            if (alreadyRunning)
+            {
+                _status = existing;
+                StateHasChanged();
+            }
+            else
+            {
+                var kickoff = await Api.PostAsync($"api/holocron/jobs/enhance/{PageId}", content: null, _cts.Token);
+                if (kickoff.StatusCode == HttpStatusCode.ServiceUnavailable)
+                {
+                    Snackbar.Add("Holocron is disabled in Settings (HolocronEnabled = false).", Severity.Warning);
+                    MudDialog.Close();
+                    return;
+                }
+                // 409 = a run started between our pre-check and the POST. Treat as join, same as the
+                // pre-check path — fall through into polling.
+                if (kickoff.StatusCode != HttpStatusCode.Conflict && !kickoff.IsSuccessStatusCode)
+                {
+                    Snackbar.Add($"Holocron kickoff failed ({(int)kickoff.StatusCode} {kickoff.ReasonPhrase}).", Severity.Error);
+                    MudDialog.Close();
+                    return;
+                }
+            }
+
+            for (int i = 0; i < MaxPolls && !_cts.IsCancellationRequested; i++)
+            {
+                _status = await TryGetStatusAsync(_cts.Token);
+                StateHasChanged();
+                if (_status is null)
+                    break;
+                if (_status.Stage is HolocronJobStatus.Completed or HolocronJobStatus.Failed)
+                    break;
+                await Task.Delay(PollIntervalMs, _cts.Token);
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            // Dialog closed mid-poll — the workflow keeps running server-side.
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Holocron progress error: {ex.Message}", Severity.Error);
+        }
+    }
+
+    /// <summary>
+    /// GET the latest status. Returns null on 404 (no job ever) or any transport error
+    /// — the caller treats null as "no live run found" and falls back to POSTing a kickoff.
+    /// </summary>
+    async Task<HolocronStatusResponse?> TryGetStatusAsync(CancellationToken ct)
+    {
+        try
+        {
+            var resp = await Api.GetAsync($"api/holocron/jobs/{PageId}/status", ct);
+            if (resp.StatusCode == HttpStatusCode.NotFound)
+                return null;
+            if (!resp.IsSuccessStatusCode)
+                return null;
+            return await resp.Content.ReadFromJsonAsync<HolocronStatusResponse>(cancellationToken: ct);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Close the dialog. Stops POLLING (cancels <see cref="_cts"/>) but leaves the workflow
+    /// running server-side — re-opening the dialog re-attaches via the status pre-check.
+    /// </summary>
+    void Close()
+    {
+        _cts.Cancel();
+        MudDialog.Close(_status);
+    }
+
+    StageState GetState(HolocronJobStatus stage)
+    {
+        if (_status is null)
+            return StageState.Pending;
+        if (_status.Stage == HolocronJobStatus.Failed)
+            return stage == _status.Stage ? StageState.Failed : StageState.Pending;
+
+        var currentIdx = Array.IndexOf(_stages, _status.Stage);
+        var stageIdx = Array.IndexOf(_stages, stage);
+        if (stageIdx < currentIdx) return StageState.Done;
+        if (stageIdx == currentIdx) return _status.Stage == HolocronJobStatus.Completed ? StageState.Done : StageState.Active;
+        return StageState.Pending;
+    }
+
+    static string StageLabel(HolocronJobStatus stage) => stage switch
+    {
+        HolocronJobStatus.Queued => "Queued for execution",
+        HolocronJobStatus.Discovering => "Discovering backlink chunks",
+        HolocronJobStatus.Bundling => "Bundling chunks into batches",
+        HolocronJobStatus.Extracting => "Extracting proposals (one LLM call per batch)",
+        HolocronJobStatus.Consolidating => "Consolidating proposals + pre-flight checks",
+        HolocronJobStatus.Applying => "Writing enrichments + audit events + ledger",
+        HolocronJobStatus.Completed => "Complete",
+        HolocronJobStatus.Failed => "Failed",
+        _ => stage.ToString(),
+    };
+
+    static int StageProgress(HolocronJobStatus stage) => stage switch
+    {
+        HolocronJobStatus.Queued => 5,
+        HolocronJobStatus.Discovering => 15,
+        HolocronJobStatus.Bundling => 25,
+        HolocronJobStatus.Extracting => 65,
+        HolocronJobStatus.Consolidating => 85,
+        HolocronJobStatus.Applying => 95,
+        HolocronJobStatus.Completed => 100,
+        HolocronJobStatus.Failed => 100,
+        _ => 0,
+    };
+
+    static int SubStepProgress(HolocronStatusResponse s) => s.TotalSteps <= 0 ? 0 : (int)((double)s.CurrentStep / s.TotalSteps * 100);
+
+    static string CategoryIcon(string category) => category switch
+    {
+        "Discovery" => Icons.Material.Filled.TravelExplore,
+        "Bundling" => Icons.Material.Filled.Inventory,
+        "Extraction" => Icons.Material.Filled.AutoAwesome,
+        "Consolidation" => Icons.Material.Filled.Compress,
+        "Apply" => Icons.Material.Filled.Save,
+        _ => Icons.Material.Filled.Circle,
+    };
+
+    static Color CategoryColor(string category) => category switch
+    {
+        "Discovery" => Color.Info,
+        "Bundling" => Color.Secondary,
+        "Extraction" => Color.Primary,
+        "Consolidation" => Color.Tertiary,
+        "Apply" => Color.Success,
+        _ => Color.Default,
+    };
+
+    enum StageState { Pending, Active, Done, Failed }
+
+    public sealed record HolocronStatusResponse(
+        string? JobId,
+        int PageId,
+        string? NodeName,
+        HolocronJobStatus Stage,
+        string Message,
+        string? Error,
+        DateTime StartedAt,
+        DateTime? CompletedAt,
+        int CurrentStep,
+        int TotalSteps,
+        string? CurrentItem,
+        int ProposalsExtracted,
+        int EnrichmentsApplied,
+        List<HolocronActivityLogEntry> ActivityLog
+    );
+
+    public sealed class HolocronActivityLogEntry
+    {
+        public DateTime Timestamp { get; set; }
+        public string Category { get; set; } = string.Empty;
+        public string EntryType { get; set; } = string.Empty;
+        public string Summary { get; set; } = string.Empty;
+        public object? Detail { get; set; }
+    }
+}

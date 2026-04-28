@@ -1,5 +1,5 @@
 using StarWarsData.Models.Entities;
-using StarWarsData.Services;
+using StarWarsData.Services.AI.Agents.CharacterTimelines;
 
 namespace StarWarsData.Tests.Unit;
 

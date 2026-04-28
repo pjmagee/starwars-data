@@ -4,6 +4,7 @@
 @inject NavigationManager Navigation
 @inject ISnackbar Snackbar
 @inject GlobalFilterService GlobalFilterService
+@inject IDialogService DialogService
 @implements IDisposable
 
 <PageTitle>Graph Explorer — Star Wars Data</PageTitle>
@@ -86,15 +87,14 @@
                     @* Holocron enhancement is open to any authenticated user — bounded by Holocron's own
                        pre-flight rules and pass-budget settings, so a public refresh button is safe. *@
                     <AuthorizeView Context="auth">
-                        <MudTooltip Text="Run the Holocron agent on this node — gathers context, calls the LLM, writes evidence-backed enrichments to kg.enrichments / kg.edge_enrichments.">
+                        <MudTooltip Text="@(_holocronRunning ? "Re-open the live progress modal for the in-flight Holocron run on this node." : "Run the Holocron agent on this node — gathers context, calls the LLM, writes evidence-backed enrichments to kg.enrichments / kg.edge_enrichments.")">
                             <MudButton Variant="Variant.Outlined" Color="Color.Tertiary" Size="Size.Small"
                                        StartIcon="@Icons.Material.Filled.AutoFixHigh"
-                                       Disabled="_holocronRunning"
                                        OnClick="EnhanceWithHolocron">
                                 @if (_holocronRunning)
                                 {
                                     <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" />
-                                    <span>Enhancing…</span>
+                                    <span>Enhancing… (view)</span>
                                 }
                                 else
                                 {
@@ -191,42 +191,51 @@
     // Navigation
     private List<(int Id, string Name)> _history = [];
 
-    // Holocron enhancement (any authenticated user — POST /api/holocron/enhance/{pageId})
+    // Holocron enhancement — POST /api/holocron/jobs/enhance/{pageId} (Design-020 async pipeline),
+    // then poll /api/holocron/jobs/{pageId}/status until terminal.
     private bool _holocronRunning;
 
     private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
 
+    /// <summary>
+    /// Opens <see cref="StarWarsData.Frontend.Components.Shared.HolocronProgressDialog"/>,
+    /// which pre-checks status and either re-attaches to a live run or POSTs a fresh
+    /// kickoff. Re-clicking while a run is in flight re-opens the modal — the dialog
+    /// itself is responsible for not double-firing the kickoff. After the dialog closes,
+    /// the graph is refreshed only if the run reached a terminal state during the session.
+    /// </summary>
     private async Task EnhanceWithHolocron()
     {
-        if (_selectedEntityId <= 0 || _holocronRunning)
+        if (_selectedEntityId <= 0)
             return;
 
         _holocronRunning = true;
+        StateHasChanged();
         try
         {
-            var response = await Api.PostAsync($"api/holocron/enhance/{_selectedEntityId}", content: null);
-            if (response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
+            var parameters = new DialogParameters<StarWarsData.Frontend.Components.Shared.HolocronProgressDialog>
             {
-                Snackbar.Add("Holocron is disabled in Settings. Set Settings.HolocronEnabled = true to run.", Severity.Warning);
-                return;
-            }
-            if (!response.IsSuccessStatusCode)
+                { x => x.PageId, _selectedEntityId },
+                { x => x.NodeName, _selectedEntityName },
+            };
+            var options = new DialogOptions
             {
-                Snackbar.Add($"Holocron call failed ({(int)response.StatusCode} {response.ReasonPhrase}).", Severity.Error);
-                return;
-            }
+                CloseOnEscapeKey = true,
+                BackdropClick = true,
+                MaxWidth = MaxWidth.Medium,
+                FullWidth = true,
+            };
+            var dialog = await DialogService.ShowAsync<StarWarsData.Frontend.Components.Shared.HolocronProgressDialog>($"Enhance {_selectedEntityName}", parameters, options);
+            var result = await dialog.Result;
 
-            var summary = await response.Content.ReadFromJsonAsync<HolocronEnhanceResult>();
-            if (summary is null)
+            // Only re-fetch the graph when the run reached a terminal state during this
+            // dialog session — if the user closed mid-run the workflow keeps running and
+            // the graph would just show stale data anyway.
+            if (result is { Canceled: false, Data: StarWarsData.Frontend.Components.Shared.HolocronProgressDialog.HolocronStatusResponse status }
+                && status.Stage is HolocronJobStatus.Completed)
             {
-                Snackbar.Add("Holocron returned an empty response.", Severity.Warning);
-                return;
+                await LoadGraph();
             }
-
-            var msg = summary.EnrichmentsCreated == 0 && summary.EvidenceFailures == 0
-                ? $"{_selectedEntityName}: nothing to enrich (agent emitted no proposals)."
-                : $"{_selectedEntityName}: {summary.EnrichmentsCreated} enrichment(s) written, {summary.EvidenceFailures} evidence failure(s).";
-            Snackbar.Add(msg, summary.EnrichmentsCreated > 0 ? Severity.Success : Severity.Info);
         }
         catch (Exception ex)
         {
@@ -235,11 +244,9 @@
         finally
         {
             _holocronRunning = false;
+            StateHasChanged();
         }
     }
-
-    /// <summary>Mirror of <c>StarWarsData.Services.AI.Agents.NodeEnhancementSummary</c> for response deserialisation.</summary>
-    private sealed record HolocronEnhanceResult(int PageId, int EnrichmentsCreated, int EvidenceFailures);
 
     private void AppendGlobalFilters(System.Collections.Specialized.NameValueCollection query)
     {

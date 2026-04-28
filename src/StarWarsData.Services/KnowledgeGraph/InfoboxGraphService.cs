@@ -244,6 +244,8 @@ public class InfoboxGraphService
             var hasSrc = nodeLifecycleMap.TryGetValue(edge.FromId, out var src);
             var hasTgt = nodeLifecycleMap.TryGetValue(edge.ToId, out var tgt);
 
+            var derived = false;
+
             if (hasSrc && hasTgt && src.start.HasValue && tgt.start.HasValue)
             {
                 var from = Math.Max(src.start.Value, tgt.start.Value);
@@ -260,6 +262,7 @@ public class InfoboxGraphService
                     edge.FromYear = from;
                     edge.ToYear = to;
                     derivedCount++;
+                    derived = true;
                 }
             }
             else if (hasSrc && src.start.HasValue && !hasTgt)
@@ -267,12 +270,24 @@ public class InfoboxGraphService
                 edge.FromYear = src.start.Value;
                 edge.ToYear = src.end;
                 derivedCount++;
+                derived = true;
             }
             else if (hasTgt && tgt.start.HasValue && !hasSrc)
             {
                 edge.FromYear = tgt.start.Value;
                 edge.ToYear = tgt.end;
                 derivedCount++;
+                derived = true;
+            }
+
+            // Tag provenance (Design-021). Lifecycle-fallback bounds are soft upper bounds —
+            // Holocron's FillGap is allowed to refine these with chunk-cited evidence, but
+            // not infobox-supplied ones. NodeBuilderBase already stamps Infobox at write time;
+            // here we stamp Lifecycle on the fallback path. Materialise Meta if it was null.
+            if (derived)
+            {
+                edge.Meta ??= new EdgeMeta();
+                edge.Meta.BoundsSource = EdgeBoundsSource.Lifecycle;
             }
         }
 

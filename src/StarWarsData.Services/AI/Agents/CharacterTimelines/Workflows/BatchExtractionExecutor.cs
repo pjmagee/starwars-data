@@ -8,7 +8,7 @@ using MongoDB.Driver;
 using StarWarsData.Models;
 using StarWarsData.Models.Entities;
 
-namespace StarWarsData.Services.Executors;
+namespace StarWarsData.Services.AI.Agents.CharacterTimelines.Workflows;
 
 /// <summary>
 /// Processes page batches with one LLM call per batch, extracting timeline events.

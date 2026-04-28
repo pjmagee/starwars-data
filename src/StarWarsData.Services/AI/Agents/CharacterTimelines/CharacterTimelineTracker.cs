@@ -1,7 +1,7 @@
 using System.Collections.Concurrent;
 using StarWarsData.Models.Entities;
 
-namespace StarWarsData.Services;
+namespace StarWarsData.Services.AI.Agents.CharacterTimelines;
 
 /// <summary>
 /// Singleton tracker for character timeline generation progress.

@@ -1,0 +1,333 @@
+@page "/holocron/jobs"
+@inject IHttpClientFactory HttpClientFactory
+@inject NavigationManager Navigation
+@inject ISnackbar Snackbar
+@implements IDisposable
+@using System.Net.Http.Json
+@using StarWarsData.Models.Entities
+
+<PageTitle>Holocron Jobs — Star Wars Data</PageTitle>
+<HeadContent>
+    <meta name="description" content="All in-flight and recent Holocron AI enhancement runs across the Star Wars knowledge graph. Live progress, status, and per-run statistics." />
+</HeadContent>
+
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-4 px-4">
+
+    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-4">
+        <MudIcon Icon="@Icons.Material.Filled.AutoAwesome" Size="Size.Large" Color="Color.Tertiary" />
+        <MudStack Spacing="0">
+            <MudText Typo="Typo.h5">Holocron Jobs</MudText>
+            <MudText Typo="Typo.body2" Color="Color.Secondary">
+                Background enhancement runs across all nodes — live progress for in-flight jobs and recent history.
+            </MudText>
+        </MudStack>
+    </MudStack>
+
+    @* ── Active jobs ─────────────────────────────────────────────────────────── *@
+    <MudPaper Outlined="true" Class="pa-4 mb-4">
+        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-3">
+            <MudIcon Icon="@Icons.Material.Filled.PlayCircle" Color="Color.Primary" />
+            <MudText Typo="Typo.h6">In-flight</MudText>
+            <MudSpacer />
+            @if (_active is not null)
+            {
+                <MudText Typo="Typo.caption" Color="Color.Secondary">@_active.Count active</MudText>
+            }
+        </MudStack>
+
+        @if (_active is null)
+        {
+            <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center" Class="my-2">
+                <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+                <MudText Typo="Typo.body2" Color="Color.Secondary">Loading active jobs...</MudText>
+            </MudStack>
+        }
+        else if (_active.Count == 0)
+        {
+            <MudText Typo="Typo.body2" Color="Color.Secondary">
+                No active jobs. Visit a node's Knowledge Graph row and click <strong>Enhance with Holocron</strong> to kick off a run.
+            </MudText>
+        }
+        else
+        {
+            <MudTable T="HolocronActiveRow" Items="_active" Dense="true" Hover="true" Bordered="false"
+                      OnRowClick="@(args => args.Item is not null ? GoToNodePage(args.Item.PageId) : Task.CompletedTask)">
+                <HeaderContent>
+                    <MudTh Style="width:130px">Stage</MudTh>
+                    <MudTh>Node</MudTh>
+                    <MudTh Style="width:200px">Progress</MudTh>
+                    <MudTh Style="width:200px">Message</MudTh>
+                    <MudTh Style="width:120px">Started</MudTh>
+                    <MudTh Style="width:80px">Proposed</MudTh>
+                    <MudTh Style="width:80px">Applied</MudTh>
+                </HeaderContent>
+                <RowTemplate Context="row">
+                    <MudTd>
+                        <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
+                            <MudProgressCircular Indeterminate="true" Size="Size.Small" Color="Color.Primary" Style="width:14px;height:14px" />
+                            <MudChip T="string" Size="Size.Small" Color="@StageColor(row.Stage)">@row.Stage</MudChip>
+                        </MudStack>
+                    </MudTd>
+                    <MudTd>
+                        <MudLink Href="@($"/graph-explorer/{row.PageId}")" Underline="Underline.Hover" @onclick:stopPropagation>@(row.NodeName ?? $"PageId {row.PageId}")</MudLink>
+                    </MudTd>
+                    <MudTd>
+                        @if (row.TotalSteps > 0)
+                        {
+                            <MudStack Spacing="0">
+                                <MudText Typo="Typo.caption" Color="Color.Secondary">@row.CurrentStep / @row.TotalSteps</MudText>
+                                <MudProgressLinear Value="@(row.TotalSteps == 0 ? 0 : (int)((double)row.CurrentStep / row.TotalSteps * 100))" Size="Size.Small" Color="Color.Primary" />
+                            </MudStack>
+                        }
+                        else
+                        {
+                            <MudText Typo="Typo.caption" Color="Color.Secondary">—</MudText>
+                        }
+                    </MudTd>
+                    <MudTd>
+                        <MudTooltip Text="@row.Message">
+                            <MudText Typo="Typo.caption" Color="Color.Secondary" Style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px;display:block;">@row.Message</MudText>
+                        </MudTooltip>
+                    </MudTd>
+                    <MudTd>
+                        <MudText Typo="Typo.caption" Color="Color.Secondary">@FormatRelative(row.StartedAt)</MudText>
+                    </MudTd>
+                    <MudTd>@row.ProposalsExtracted</MudTd>
+                    <MudTd>
+                        <MudText Typo="Typo.body2" Color="@(row.EnrichmentsApplied > 0 ? Color.Success : Color.Default)">@row.EnrichmentsApplied</MudText>
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+        }
+    </MudPaper>
+
+    @* ── Recent history ─────────────────────────────────────────────────────── *@
+    <MudPaper Outlined="true" Class="pa-4">
+        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-3">
+            <MudIcon Icon="@Icons.Material.Filled.History" />
+            <MudText Typo="Typo.h6">Recent runs</MudText>
+            <MudSpacer />
+            <MudSelect T="string" Value="_statusFilter" ValueChanged="OnStatusFilterChanged" Label="Status" Dense="true" Variant="Variant.Outlined" Style="width:150px">
+                <MudSelectItem T="string" Value="@(string.Empty)">All</MudSelectItem>
+                <MudSelectItem T="string" Value="@(HolocronJobStatus.Completed.ToString())">Completed</MudSelectItem>
+                <MudSelectItem T="string" Value="@(HolocronJobStatus.Failed.ToString())">Failed</MudSelectItem>
+            </MudSelect>
+        </MudStack>
+
+        @if (_history is null)
+        {
+            <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center" Class="my-2">
+                <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+                <MudText Typo="Typo.body2" Color="Color.Secondary">Loading history...</MudText>
+            </MudStack>
+        }
+        else if (_history.Items.Count == 0)
+        {
+            <MudText Typo="Typo.body2" Color="Color.Secondary">No runs yet.</MudText>
+        }
+        else
+        {
+            <MudTable T="HolocronJobRow" Items="_history.Items" Dense="true" Hover="true" Bordered="false"
+                      OnRowClick="@(args => args.Item is not null ? GoToNodePage(args.Item.PageId) : Task.CompletedTask)">
+                <HeaderContent>
+                    <MudTh Style="width:120px">Status</MudTh>
+                    <MudTh>Node</MudTh>
+                    <MudTh Style="width:140px">Started</MudTh>
+                    <MudTh Style="width:90px">Duration</MudTh>
+                    <MudTh Style="width:90px">Chunks</MudTh>
+                    <MudTh Style="width:80px">Proposed</MudTh>
+                    <MudTh Style="width:80px">Applied</MudTh>
+                    <MudTh Style="width:90px">Trigger</MudTh>
+                </HeaderContent>
+                <RowTemplate Context="job">
+                    <MudTd>
+                        <MudChip T="string" Size="Size.Small" Color="@StatusColor(job.Status)">@job.Status</MudChip>
+                    </MudTd>
+                    <MudTd>
+                        <MudLink Href="@($"/graph-explorer/{job.PageId}")" Underline="Underline.Hover" @onclick:stopPropagation>@job.NodeName</MudLink>
+                    </MudTd>
+                    <MudTd>
+                        <MudText Typo="Typo.caption" Color="Color.Secondary">@FormatRelative(job.StartedAt ?? job.CreatedAt)</MudText>
+                    </MudTd>
+                    <MudTd>@FormatDuration(job)</MudTd>
+                    <MudTd>
+                        <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
+                            <MudText Typo="Typo.body2">@job.ChunksProcessedNew</MudText>
+                            @if (job.ChunksSkippedUnchanged > 0)
+                            {
+                                <MudTooltip Text="@($"{job.ChunksSkippedUnchanged} chunks skipped (unchanged)")">
+                                    <MudText Typo="Typo.caption" Color="Color.Secondary">+@job.ChunksSkippedUnchanged</MudText>
+                                </MudTooltip>
+                            }
+                        </MudStack>
+                    </MudTd>
+                    <MudTd>@job.ProposalsExtracted</MudTd>
+                    <MudTd>
+                        <MudText Typo="Typo.body2" Color="@(job.EnrichmentsApplied > 0 ? Color.Success : Color.Default)">@job.EnrichmentsApplied</MudText>
+                    </MudTd>
+                    <MudTd>
+                        <MudText Typo="Typo.caption" Color="Color.Secondary">@job.TriggeredBy</MudText>
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+
+            @if (_history.Total > _history.PageSize)
+            {
+                <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mt-3">
+                    <MudIconButton Icon="@Icons.Material.Filled.ChevronLeft" Disabled="@(_page <= 1)" OnClick="@(() => ChangePage(_page - 1))" />
+                    <MudText Typo="Typo.caption" Color="Color.Secondary">
+                        Page @_page of @((int)Math.Ceiling((double)_history.Total / _history.PageSize)) · @_history.Total total
+                    </MudText>
+                    <MudIconButton Icon="@Icons.Material.Filled.ChevronRight" Disabled="@(_page * _history.PageSize >= _history.Total)" OnClick="@(() => ChangePage(_page + 1))" />
+                </MudStack>
+            }
+        }
+    </MudPaper>
+</MudContainer>
+
+@code {
+    HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
+
+    List<HolocronActiveRow>? _active;
+    HolocronJobsPageResponse? _history;
+    string _statusFilter = string.Empty;
+    int _page = 1;
+    const int PageSize = 25;
+
+    CancellationTokenSource _cts = new();
+    Task? _pollTask;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await RefreshAsync();
+        _pollTask = PollLoopAsync(_cts.Token);
+    }
+
+    /// <summary>
+    /// Poll the active list at 1.5s while in-flight runs exist (so the stage chips animate
+    /// near-real-time), 5s otherwise. The history list refreshes on the same cadence so
+    /// freshly-completed runs drop into the table within a couple of ticks.
+    /// </summary>
+    async Task PollLoopAsync(CancellationToken ct)
+    {
+        while (!ct.IsCancellationRequested)
+        {
+            await Task.Delay(_active is { Count: > 0 } ? 1500 : 5000, ct);
+            if (ct.IsCancellationRequested) break;
+            await RefreshAsync();
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    async Task RefreshAsync()
+    {
+        try
+        {
+            _active = await Api.GetFromJsonAsync<List<HolocronActiveRow>>("api/holocron/jobs/active", _cts.Token) ?? [];
+            var qs = $"page={_page}&pageSize={PageSize}";
+            if (!string.IsNullOrEmpty(_statusFilter))
+                qs += $"&status={_statusFilter}";
+            _history = await Api.GetFromJsonAsync<HolocronJobsPageResponse>($"api/holocron/jobs?{qs}", _cts.Token);
+        }
+        catch (OperationCanceledException) { }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Failed to load jobs: {ex.Message}", Severity.Warning);
+        }
+    }
+
+    Task GoToNodePage(int pageId)
+    {
+        Navigation.NavigateTo($"/holocron/jobs/{pageId}");
+        return Task.CompletedTask;
+    }
+
+    async Task OnStatusFilterChanged(string value)
+    {
+        _statusFilter = value ?? string.Empty;
+        _page = 1;
+        await RefreshAsync();
+    }
+
+    async Task ChangePage(int page)
+    {
+        _page = Math.Max(1, page);
+        await RefreshAsync();
+    }
+
+    public void Dispose()
+    {
+        _cts.Cancel();
+        try { _pollTask?.Wait(TimeSpan.FromSeconds(1)); } catch { }
+        _cts.Dispose();
+    }
+
+    static Color StageColor(HolocronJobStatus stage) => stage switch
+    {
+        HolocronJobStatus.Queued => Color.Default,
+        HolocronJobStatus.Discovering => Color.Info,
+        HolocronJobStatus.Bundling => Color.Secondary,
+        HolocronJobStatus.Extracting => Color.Primary,
+        HolocronJobStatus.Consolidating => Color.Tertiary,
+        HolocronJobStatus.Applying => Color.Warning,
+        HolocronJobStatus.Completed => Color.Success,
+        HolocronJobStatus.Failed => Color.Error,
+        _ => Color.Default,
+    };
+
+    static Color StatusColor(HolocronJobStatus status) => status switch
+    {
+        HolocronJobStatus.Completed => Color.Success,
+        HolocronJobStatus.Failed => Color.Error,
+        HolocronJobStatus.Queued => Color.Default,
+        _ => Color.Primary,
+    };
+
+    static string FormatRelative(DateTime dt)
+    {
+        var diff = DateTime.UtcNow - dt;
+        if (diff.TotalSeconds < 60) return $"{(int)diff.TotalSeconds}s ago";
+        if (diff.TotalMinutes < 60) return $"{(int)diff.TotalMinutes}m ago";
+        if (diff.TotalHours < 24) return $"{(int)diff.TotalHours}h ago";
+        if (diff.TotalDays < 30) return $"{(int)diff.TotalDays}d ago";
+        return dt.ToString("yyyy-MM-dd");
+    }
+
+    static string FormatDuration(HolocronJobRow job)
+    {
+        if (job.StartedAt is null) return "—";
+        var end = job.CompletedAt ?? DateTime.UtcNow;
+        var d = end - job.StartedAt.Value;
+        if (d.TotalSeconds < 60) return $"{d.TotalSeconds:0.0}s";
+        if (d.TotalMinutes < 60) return $"{d.TotalMinutes:0.0}m";
+        return $"{d.TotalHours:0.0}h";
+    }
+
+    public sealed record HolocronActiveRow(string? JobId, int PageId, string? NodeName, HolocronJobStatus Stage, string Message, DateTime StartedAt, int CurrentStep, int TotalSteps, int ProposalsExtracted, int EnrichmentsApplied);
+
+    public sealed record HolocronJobsPageResponse(List<HolocronJobRow> Items, int Total, int Page, int PageSize);
+
+    public sealed record HolocronJobRow(
+        string Id,
+        int PageId,
+        string NodeName,
+        HolocronJobStatus Status,
+        string TriggeredBy,
+        string AgentVersion,
+        string ModelId,
+        DateTime CreatedAt,
+        DateTime? StartedAt,
+        DateTime? CompletedAt,
+        int ChunksDiscovered,
+        int ChunksProcessedNew,
+        int ChunksSkippedUnchanged,
+        int TotalBatches,
+        int CompletedBatches,
+        int ProposalsExtracted,
+        int EnrichmentsApplied,
+        int DuplicatesDropped,
+        int EvidenceFailures,
+        int PreflightRejects,
+        string? Error
+    );
+}

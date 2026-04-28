@@ -18,8 +18,16 @@ public sealed class MongoCheckpointStore : ICheckpointStore<JsonElement>
     private readonly IMongoCollection<BsonDocument> _collection;
 
     public MongoCheckpointStore(IMongoClient mongoClient, string databaseName)
+        : this(mongoClient, databaseName, Collections.GenaiCharacterCheckpoints) { }
+
+    /// <summary>
+    /// Construct against an explicit checkpoint collection — used by the Holocron
+    /// async pipeline (Design-020) to keep its checkpoints in
+    /// <see cref="Collections.GenaiHolocronCheckpoints"/> separate from character timeline runs.
+    /// </summary>
+    public MongoCheckpointStore(IMongoClient mongoClient, string databaseName, string collectionName)
     {
-        _collection = mongoClient.GetDatabase(databaseName).GetCollection<BsonDocument>(Collections.GenaiCharacterCheckpoints);
+        _collection = mongoClient.GetDatabase(databaseName).GetCollection<BsonDocument>(collectionName);
 
         // Ensure index on sessionId for fast lookups
         _collection.Indexes.CreateOne(new CreateIndexModel<BsonDocument>(Builders<BsonDocument>.IndexKeys.Ascending("sessionId")));

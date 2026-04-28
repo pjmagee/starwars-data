@@ -1,0 +1,701 @@
+@page "/holocron/jobs/{PageId:int}"
+@inject IHttpClientFactory HttpClientFactory
+@inject ISnackbar Snackbar
+@inject NavigationManager Navigation
+@inject IDialogService DialogService
+@implements IDisposable
+@using System.Net
+@using System.Net.Http.Json
+@using StarWarsData.Models.Entities
+
+<PageTitle>Holocron Jobs · @(_nodeName ?? PageId.ToString())</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-4 px-4">
+
+    @* ── Header ─────────────────────────────────────────────────────────────── *@
+    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-4">
+        <MudIconButton Icon="@Icons.Material.Filled.ArrowBack" OnClick="@(() => Navigation.NavigateTo($"/graph-explorer/{PageId}"))" />
+        <MudIcon Icon="@Icons.Material.Filled.AutoAwesome" Size="Size.Large" />
+        <MudStack Spacing="0">
+            <MudText Typo="Typo.h5">Holocron Jobs</MudText>
+            <MudText Typo="Typo.body2" Color="Color.Secondary">
+                @(_nodeName ?? $"PageId {PageId}") · enhancement run history + live progress
+            </MudText>
+        </MudStack>
+        <MudSpacer />
+        <AuthorizeView>
+            <MudTooltip Text="Kick off a new Holocron enhancement run. Returns immediately — progress shown below.">
+                <MudButton Variant="Variant.Filled" Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.AutoFixHigh"
+                           Disabled="@(_active is not null)" OnClick="StartRun">
+                    @(_active is not null ? "Run in progress..." : "Run enhancement")
+                </MudButton>
+            </MudTooltip>
+        </AuthorizeView>
+    </MudStack>
+
+    @* ── Active run ─────────────────────────────────────────────────────────── *@
+    @if (_active is not null)
+    {
+        <MudPaper Outlined="true" Class="pa-4 mb-4">
+            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-3">
+                <MudIcon Icon="@Icons.Material.Filled.PlayCircle" Color="Color.Primary" />
+                <MudText Typo="Typo.h6">Run in progress</MudText>
+                <MudSpacer />
+                <MudText Typo="Typo.caption" Color="Color.Secondary">started @FormatRelative(_active.StartedAt)</MudText>
+            </MudStack>
+
+            @* Stage stepper *@
+            <MudStack Spacing="2" Class="mb-3">
+                @foreach (var stage in _stages)
+                {
+                    var state = GetState(stage, _active.Stage);
+                    <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+                        @if (state == StageState.Done)
+                        {
+                            <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Success" Size="Size.Small" />
+                        }
+                        else if (state == StageState.Active)
+                        {
+                            <MudProgressCircular Indeterminate="true" Color="Color.Primary" Style="width:20px;height:20px" />
+                        }
+                        else if (state == StageState.Failed)
+                        {
+                            <MudIcon Icon="@Icons.Material.Filled.Error" Color="Color.Error" Size="Size.Small" />
+                        }
+                        else
+                        {
+                            <MudIcon Icon="@Icons.Material.Outlined.Circle" Color="Color.Default" Size="Size.Small" />
+                        }
+                        <MudText Typo="Typo.body2"
+                                 Color="@(state == StageState.Active ? Color.Primary : state == StageState.Done ? Color.Success : state == StageState.Failed ? Color.Error : Color.Default)">
+                            @StageLabel(stage)
+                        </MudText>
+                    </MudStack>
+                }
+            </MudStack>
+
+            <MudProgressLinear Value="@StageProgress(_active.Stage)" Color="Color.Primary" Striped="true" Size="Size.Medium" Class="mb-2" />
+            <MudText Typo="Typo.caption" Color="Color.Secondary">@_active.Message</MudText>
+
+            @if (_active.ProposalsExtracted > 0 || _active.EnrichmentsApplied > 0)
+            {
+                <MudStack Row="true" Spacing="2" Class="mt-2">
+                    <MudChip T="string" Size="Size.Small" Color="Color.Info" Icon="@Icons.Material.Filled.Lightbulb">@_active.ProposalsExtracted proposed</MudChip>
+                    <MudChip T="string" Size="Size.Small" Color="Color.Success" Icon="@Icons.Material.Filled.Check">@_active.EnrichmentsApplied applied</MudChip>
+                </MudStack>
+            }
+
+            @if (_active.ActivityLog.Count > 0)
+            {
+                <MudExpansionPanels Class="mt-3" Elevation="0">
+                    <MudExpansionPanel Text="@($"Activity log ({_active.ActivityLog.Count} events)")" Expanded="true">
+                        <div style="max-height:320px; overflow-y:auto">
+                            <MudStack Spacing="0">
+                                @foreach (var entry in _active.ActivityLog.AsEnumerable().Reverse().Take(120))
+                                {
+                                    <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center" Class="px-2 py-1"
+                                              Style="border-bottom:1px solid var(--mud-palette-divider)">
+                                        <MudIcon Icon="@CategoryIcon(entry.Category)" Size="Size.Small" Color="@CategoryColor(entry.Category)" />
+                                        <MudText Typo="Typo.caption"
+                                                 Style="font-family:monospace; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">
+                                            @entry.Summary
+                                        </MudText>
+                                        <MudText Typo="Typo.caption" Color="Color.Secondary" Style="flex-shrink:0">
+                                            @entry.Timestamp.ToString("HH:mm:ss")
+                                        </MudText>
+                                    </MudStack>
+                                }
+                            </MudStack>
+                        </div>
+                    </MudExpansionPanel>
+                </MudExpansionPanels>
+            }
+        </MudPaper>
+    }
+
+    @* ── Applied changes ─────────────────────────────────────────────────────── *@
+    <MudPaper Outlined="true" Class="pa-4 mb-4">
+        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-3">
+            <MudIcon Icon="@Icons.Material.Filled.AutoFixHigh" />
+            <MudText Typo="Typo.h6">Applied changes</MudText>
+            <MudSpacer />
+            @if (_enrichments is not null)
+            {
+                <MudText Typo="Typo.caption" Color="Color.Secondary">@_enrichments.Count active enrichment(s)</MudText>
+            }
+        </MudStack>
+
+        @if (_enrichments is null)
+        {
+            <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center" Class="my-2">
+                <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+                <MudText Typo="Typo.body2" Color="Color.Secondary">Loading enrichments...</MudText>
+            </MudStack>
+        }
+        else if (_enrichments.Count == 0)
+        {
+            <MudText Typo="Typo.body2" Color="Color.Secondary">
+                No active Holocron enrichments for this node yet. Run an enhancement above to get started.
+            </MudText>
+        }
+        else
+        {
+            <MudTable T="HolocronEnrichmentRow" Items="_enrichments" Dense="true" Hover="true" Bordered="false" Breakpoint="Breakpoint.Sm"
+                      OnRowClick="@(args => args.Item is not null ? ToggleEvidence(args.Item) : Task.CompletedTask)">
+                <HeaderContent>
+                    <MudTh Style="width:40px"></MudTh>
+                    <MudTh Style="width:80px">Kind</MudTh>
+                    <MudTh Style="width:100px">Operation</MudTh>
+                    <MudTh>Target</MudTh>
+                    <MudTh>Claim</MudTh>
+                    <MudTh Style="width:80px">Evidence</MudTh>
+                    <MudTh Style="width:140px">Last updated</MudTh>
+                    <MudTh Style="width:80px">Run</MudTh>
+                </HeaderContent>
+                <RowTemplate Context="row">
+                    <MudTd>
+                        <MudIcon Icon="@(_expandedEnrichmentId == row.Id ? Icons.Material.Filled.ExpandLess : Icons.Material.Filled.ExpandMore)" Size="Size.Small" />
+                    </MudTd>
+                    <MudTd>
+                        <MudChip T="string" Size="Size.Small" Color="@(row.Kind == "edge" ? Color.Primary : Color.Tertiary)" Variant="Variant.Outlined">@row.Kind</MudChip>
+                    </MudTd>
+                    <MudTd>
+                        <MudChip T="string" Size="Size.Small" Color="@OperationColor(row.Operation)">@row.Operation</MudChip>
+                    </MudTd>
+                    <MudTd>
+                        @if (row.Kind == "edge")
+                        {
+                            <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
+                                @if (row.FromId == PageId)
+                                {
+                                    <MudText Typo="Typo.caption" Color="Color.Secondary">[@row.Label] →</MudText>
+                                    <MudLink Href="@($"/graph-explorer/{row.ToId}")" Underline="Underline.Hover" @onclick:stopPropagation>@row.ToName</MudLink>
+                                }
+                                else
+                                {
+                                    <MudLink Href="@($"/graph-explorer/{row.FromId}")" Underline="Underline.Hover" @onclick:stopPropagation>@row.FromName</MudLink>
+                                    <MudText Typo="Typo.caption" Color="Color.Secondary">→ [@row.Label]</MudText>
+                                }
+                            </MudStack>
+                        }
+                        else
+                        {
+                            <MudText Typo="Typo.body2" Style="font-family:monospace">@row.FieldPath</MudText>
+                        }
+                    </MudTd>
+                    <MudTd>
+                        <MudTooltip Text="@row.Claim">
+                            <MudText Typo="Typo.body2" Style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:380px;display:block;">@row.Claim</MudText>
+                        </MudTooltip>
+                    </MudTd>
+                    <MudTd>
+                        <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Icon="@Icons.Material.Filled.Source">@row.EvidenceCount</MudChip>
+                    </MudTd>
+                    <MudTd>
+                        <MudTooltip Text="@($"Applied {row.AppliedAt:yyyy-MM-dd HH:mm} UTC by {row.AgentVersion}")">
+                            <MudText Typo="Typo.caption" Color="Color.Secondary">@FormatRelative(row.AppliedAt)</MudText>
+                        </MudTooltip>
+                    </MudTd>
+                    <MudTd>
+                        @if (!string.IsNullOrEmpty(row.JobId))
+                        {
+                            <MudTooltip Text="@($"From job {row.JobId}")">
+                                <span @onclick:stopPropagation="true">
+                                    <MudIconButton Icon="@Icons.Material.Filled.OpenInNew" Size="Size.Small"
+                                                   Href="@($"/holocron/jobs/{PageId}#run-{row.JobId}")" />
+                                </span>
+                            </MudTooltip>
+                        }
+                    </MudTd>
+                </RowTemplate>
+                <ChildRowContent Context="row">
+                    @if (_expandedEnrichmentId == row.Id)
+                    {
+                        <MudTr>
+                            <MudTd colspan="8" Style="background-color: var(--mud-palette-background-grey); padding: 16px;">
+                                @if (_loadingEvidenceFor == row.Id)
+                                {
+                                    <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+                                        <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+                                        <MudText Typo="Typo.body2" Color="Color.Secondary">Loading evidence excerpts...</MudText>
+                                    </MudStack>
+                                }
+                                else if (_expandedDetail is null)
+                                {
+                                    <MudText Typo="Typo.body2" Color="Color.Error">Failed to load evidence.</MudText>
+                                }
+                                else
+                                {
+                                    <MudStack Spacing="2">
+                                        @* ── Reasoning summary if present ── *@
+                                        @if (!string.IsNullOrWhiteSpace(_expandedDetail.LlmReasoning))
+                                        {
+                                            <MudStack Spacing="1">
+                                                <MudText Typo="Typo.caption" Color="Color.Secondary" Style="font-weight:600;letter-spacing:0.05em;">AGENT REASONING</MudText>
+                                                <MudText Typo="Typo.body2" Style="font-style:italic;">@_expandedDetail.LlmReasoning</MudText>
+                                            </MudStack>
+                                        }
+
+                                        @* ── Full claim ── *@
+                                        <MudStack Spacing="1">
+                                            <MudText Typo="Typo.caption" Color="Color.Secondary" Style="font-weight:600;letter-spacing:0.05em;">CLAIM</MudText>
+                                            <MudText Typo="Typo.body2">@_expandedDetail.Claim</MudText>
+                                        </MudStack>
+
+                                        @* ── Evidence list ── *@
+                                        <MudStack Spacing="1">
+                                            <MudText Typo="Typo.caption" Color="Color.Secondary" Style="font-weight:600;letter-spacing:0.05em;">
+                                                EVIDENCE (@_expandedDetail.Evidence.Count)
+                                            </MudText>
+                                            @foreach (var ev in _expandedDetail.Evidence)
+                                            {
+                                                <MudPaper Outlined="true" Class="pa-3" Style="background-color: var(--mud-palette-surface);">
+                                                    <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center" Class="mb-1">
+                                                        <MudIcon Icon="@Icons.Material.Filled.Article" Size="Size.Small" Color="Color.Info" />
+                                                        @if (ev.SourcePageId.HasValue && !string.IsNullOrEmpty(ev.SourcePageName))
+                                                        {
+                                                            <MudLink Href="@($"/graph-explorer/{ev.SourcePageId}")" Underline="Underline.Hover">
+                                                                <MudText Typo="Typo.body2" Style="font-weight:500;">@ev.SourcePageName</MudText>
+                                                            </MudLink>
+                                                        }
+                                                        else if (ev.SourcePageId.HasValue)
+                                                        {
+                                                            <MudText Typo="Typo.body2" Color="Color.Secondary">PageId @ev.SourcePageId</MudText>
+                                                        }
+                                                        @if (!string.IsNullOrEmpty(ev.ChunkId))
+                                                        {
+                                                            <MudText Typo="Typo.caption" Color="Color.Secondary" Style="font-family:monospace;">chunk @ev.ChunkId.Substring(0, Math.Min(8, ev.ChunkId.Length))</MudText>
+                                                        }
+                                                        @if (ev.RelevanceScore.HasValue)
+                                                        {
+                                                            <MudSpacer />
+                                                            <MudChip T="string" Size="Size.Small" Variant="Variant.Text" Color="Color.Secondary">@ev.RelevanceScore.Value.ToString("0.00")</MudChip>
+                                                        }
+                                                    </MudStack>
+                                                    <MudText Typo="Typo.body2" Color="Color.Secondary" Style="font-style:italic;line-height:1.5;">"@ev.Excerpt"</MudText>
+                                                </MudPaper>
+                                            }
+                                        </MudStack>
+                                    </MudStack>
+                                }
+                            </MudTd>
+                        </MudTr>
+                    }
+                </ChildRowContent>
+            </MudTable>
+        }
+    </MudPaper>
+
+    @* ── History table ───────────────────────────────────────────────────────── *@
+    <MudPaper Outlined="true" Class="pa-4">
+        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-3">
+            <MudIcon Icon="@Icons.Material.Filled.History" />
+            <MudText Typo="Typo.h6">Run history</MudText>
+            <MudSpacer />
+            @if (_history is not null)
+            {
+                <MudText Typo="Typo.caption" Color="Color.Secondary">@_history.Count run(s)</MudText>
+            }
+        </MudStack>
+
+        @if (_history is null)
+        {
+            <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center" Class="my-2">
+                <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+                <MudText Typo="Typo.body2" Color="Color.Secondary">Loading history...</MudText>
+            </MudStack>
+        }
+        else if (_history.Count == 0)
+        {
+            <MudText Typo="Typo.body2" Color="Color.Secondary">
+                No runs recorded yet for this node. Click <strong>Run enhancement</strong> above to kick one off.
+            </MudText>
+        }
+        else
+        {
+            <MudTable T="HolocronJobRow" Items="_history" Dense="true" Hover="true" Bordered="false">
+                <HeaderContent>
+                    <MudTh>Status</MudTh>
+                    <MudTh>Started</MudTh>
+                    <MudTh>Duration</MudTh>
+                    <MudTh>Chunks</MudTh>
+                    <MudTh>Proposed</MudTh>
+                    <MudTh>Applied</MudTh>
+                    <MudTh>Trigger</MudTh>
+                </HeaderContent>
+                <RowTemplate Context="job">
+                    <MudTd>
+                        <MudChip T="string" Size="Size.Small" Color="@StatusColor(job.Status)">@job.Status</MudChip>
+                    </MudTd>
+                    <MudTd>@FormatRelative(job.StartedAt ?? job.CreatedAt)</MudTd>
+                    <MudTd>@FormatDuration(job)</MudTd>
+                    <MudTd>
+                        @job.ChunksProcessedNew new
+                        @if (job.ChunksSkippedUnchanged > 0)
+                        {
+                            <MudText Typo="Typo.caption" Color="Color.Secondary" Inline="true">(@job.ChunksSkippedUnchanged unchanged)</MudText>
+                        }
+                    </MudTd>
+                    <MudTd>@job.ProposalsExtracted</MudTd>
+                    <MudTd>
+                        <MudText Typo="Typo.body2" Color="@(job.EnrichmentsApplied > 0 ? Color.Success : Color.Default)">
+                            @job.EnrichmentsApplied
+                        </MudText>
+                    </MudTd>
+                    <MudTd>
+                        <MudText Typo="Typo.caption" Color="Color.Secondary">@job.TriggeredBy</MudText>
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+        }
+    </MudPaper>
+</MudContainer>
+
+@code {
+    [Parameter] public int PageId { get; set; }
+
+    HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
+
+    string? _nodeName;
+    HolocronStatusResponse? _active;
+    List<HolocronJobRow>? _history;
+    List<HolocronEnrichmentRow>? _enrichments;
+    string? _expandedEnrichmentId;
+    string? _loadingEvidenceFor;
+    HolocronEnrichmentDetail? _expandedDetail;
+    CancellationTokenSource _cts = new();
+    Task? _pollTask;
+
+    static readonly HolocronJobStatus[] _stages =
+    {
+        HolocronJobStatus.Queued,
+        HolocronJobStatus.Discovering,
+        HolocronJobStatus.Bundling,
+        HolocronJobStatus.Extracting,
+        HolocronJobStatus.Consolidating,
+        HolocronJobStatus.Applying,
+        HolocronJobStatus.Completed,
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        await RefreshAsync();
+        _pollTask = PollLoopAsync(_cts.Token);
+    }
+
+    /// <summary>
+    /// Poll active status + refresh history while the page is mounted. Polls every 1.5s
+    /// when a run is active (so the stepper updates near-real-time), 5s otherwise (so
+    /// a freshly-completed run drops into the history within a couple of ticks).
+    /// </summary>
+    async Task PollLoopAsync(CancellationToken ct)
+    {
+        while (!ct.IsCancellationRequested)
+        {
+            await Task.Delay(_active is not null ? 1500 : 5000, ct);
+            if (ct.IsCancellationRequested) break;
+            await RefreshAsync();
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    async Task RefreshAsync()
+    {
+        try
+        {
+            // Live status — null/404 means "no entry in tracker, no rows in kg.enrichment_jobs".
+            var statusResp = await Api.GetAsync($"api/holocron/jobs/{PageId}/status", _cts.Token);
+            if (statusResp.IsSuccessStatusCode)
+            {
+                var status = await statusResp.Content.ReadFromJsonAsync<HolocronStatusResponse>(cancellationToken: _cts.Token);
+                _active = status?.Stage is HolocronJobStatus.Completed or HolocronJobStatus.Failed ? null : status;
+            }
+            else if (statusResp.StatusCode == HttpStatusCode.NotFound)
+            {
+                _active = null;
+            }
+
+            // History — pageSize 50 is plenty per node (one node rarely runs more than a handful of times a day).
+            var page = await Api.GetFromJsonAsync<HolocronJobsPageResponse>($"api/holocron/jobs?pageId={PageId}&pageSize=50", _cts.Token);
+            _history = page?.Items ?? [];
+
+            // Applied changes — every active enrichment touching this node, sorted newest first.
+            _enrichments = await Api.GetFromJsonAsync<List<HolocronEnrichmentRow>>($"api/holocron/jobs/{PageId}/enrichments", _cts.Token) ?? [];
+
+            // Resolve node name from whatever we've got — live status, then most recent
+            // history row, then fall back to the page-id placeholder. A node with zero runs
+            // gets the placeholder (the dialog/header still works).
+            _nodeName = _active?.NodeName ?? _history.FirstOrDefault()?.NodeName ?? _nodeName;
+        }
+        catch (OperationCanceledException) { }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Holocron jobs refresh error: {ex.Message}", Severity.Warning);
+        }
+    }
+
+    async Task StartRun()
+    {
+        try
+        {
+            var resp = await Api.PostAsync($"api/holocron/jobs/enhance/{PageId}", content: null);
+            if (resp.StatusCode == HttpStatusCode.ServiceUnavailable)
+            {
+                Snackbar.Add("Holocron is disabled in Settings (HolocronEnabled = false).", Severity.Warning);
+                return;
+            }
+            if (resp.StatusCode == HttpStatusCode.Conflict)
+            {
+                Snackbar.Add("Enhancement already in progress for this node.", Severity.Info);
+                return;
+            }
+            if (!resp.IsSuccessStatusCode)
+            {
+                Snackbar.Add($"Holocron kickoff failed ({(int)resp.StatusCode} {resp.ReasonPhrase}).", Severity.Error);
+                return;
+            }
+            await RefreshAsync();
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Holocron call errored: {ex.Message}", Severity.Error);
+        }
+    }
+
+    public void Dispose()
+    {
+        _cts.Cancel();
+        try { _pollTask?.Wait(TimeSpan.FromSeconds(1)); } catch { }
+        _cts.Dispose();
+    }
+
+    /// <summary>
+    /// Toggle the row's evidence-detail panel. On expand, lazy-fetches the full
+    /// enrichment record (including evidence excerpts with source-page names already
+    /// resolved server-side) via <c>GET /api/holocron/enrichments/{id}</c>. We don't
+    /// inline evidence in the list endpoint because high-degree nodes can carry hundreds
+    /// of evidence excerpts per enrichment; lazy-fetch keeps the initial page payload small.
+    /// </summary>
+    async Task ToggleEvidence(HolocronEnrichmentRow row)
+    {
+        if (_expandedEnrichmentId == row.Id)
+        {
+            // Collapse
+            _expandedEnrichmentId = null;
+            _expandedDetail = null;
+            return;
+        }
+
+        _expandedEnrichmentId = row.Id;
+        _loadingEvidenceFor = row.Id;
+        _expandedDetail = null;
+        StateHasChanged();
+
+        try
+        {
+            _expandedDetail = await Api.GetFromJsonAsync<HolocronEnrichmentDetail>($"api/holocron/enrichments/{row.Id}", _cts.Token);
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Failed to load evidence: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _loadingEvidenceFor = null;
+        }
+    }
+
+    static StageState GetState(HolocronJobStatus stage, HolocronJobStatus current)
+    {
+        if (current == HolocronJobStatus.Failed)
+            return stage == current ? StageState.Failed : StageState.Pending;
+        var currentIdx = Array.IndexOf(_stages, current);
+        var stageIdx = Array.IndexOf(_stages, stage);
+        if (stageIdx < currentIdx) return StageState.Done;
+        if (stageIdx == currentIdx) return current == HolocronJobStatus.Completed ? StageState.Done : StageState.Active;
+        return StageState.Pending;
+    }
+
+    static string StageLabel(HolocronJobStatus stage) => stage switch
+    {
+        HolocronJobStatus.Queued => "Queued for execution",
+        HolocronJobStatus.Discovering => "Discovering backlink chunks",
+        HolocronJobStatus.Bundling => "Bundling chunks into batches",
+        HolocronJobStatus.Extracting => "Extracting proposals (one LLM call per batch)",
+        HolocronJobStatus.Consolidating => "Consolidating proposals + pre-flight checks",
+        HolocronJobStatus.Applying => "Writing enrichments + audit events + ledger",
+        HolocronJobStatus.Completed => "Complete",
+        HolocronJobStatus.Failed => "Failed",
+        _ => stage.ToString(),
+    };
+
+    static int StageProgress(HolocronJobStatus stage) => stage switch
+    {
+        HolocronJobStatus.Queued => 5,
+        HolocronJobStatus.Discovering => 15,
+        HolocronJobStatus.Bundling => 25,
+        HolocronJobStatus.Extracting => 65,
+        HolocronJobStatus.Consolidating => 85,
+        HolocronJobStatus.Applying => 95,
+        HolocronJobStatus.Completed => 100,
+        HolocronJobStatus.Failed => 100,
+        _ => 0,
+    };
+
+    static Color StatusColor(HolocronJobStatus status) => status switch
+    {
+        HolocronJobStatus.Completed => Color.Success,
+        HolocronJobStatus.Failed => Color.Error,
+        HolocronJobStatus.Queued => Color.Default,
+        _ => Color.Primary,
+    };
+
+    static Color OperationColor(string op) => op switch
+    {
+        "Annotate" => Color.Info,
+        "FillGap" => Color.Warning,
+        "Add" => Color.Success,
+        "Augment" => Color.Tertiary,
+        _ => Color.Default,
+    };
+
+    static string CategoryIcon(string category) => category switch
+    {
+        "Discovery" => Icons.Material.Filled.TravelExplore,
+        "Bundling" => Icons.Material.Filled.Inventory,
+        "Extraction" => Icons.Material.Filled.AutoAwesome,
+        "Consolidation" => Icons.Material.Filled.Compress,
+        "Apply" => Icons.Material.Filled.Save,
+        _ => Icons.Material.Filled.Circle,
+    };
+
+    static Color CategoryColor(string category) => category switch
+    {
+        "Discovery" => Color.Info,
+        "Bundling" => Color.Secondary,
+        "Extraction" => Color.Primary,
+        "Consolidation" => Color.Tertiary,
+        "Apply" => Color.Success,
+        _ => Color.Default,
+    };
+
+    static string FormatRelative(DateTime dt)
+    {
+        var diff = DateTime.UtcNow - dt;
+        if (diff.TotalSeconds < 60) return $"{(int)diff.TotalSeconds}s ago";
+        if (diff.TotalMinutes < 60) return $"{(int)diff.TotalMinutes}m ago";
+        if (diff.TotalHours < 24) return $"{(int)diff.TotalHours}h ago";
+        return dt.ToString("yyyy-MM-dd HH:mm");
+    }
+
+    static string FormatDuration(HolocronJobRow job)
+    {
+        if (job.StartedAt is null) return "—";
+        var end = job.CompletedAt ?? DateTime.UtcNow;
+        var d = end - job.StartedAt.Value;
+        if (d.TotalSeconds < 60) return $"{d.TotalSeconds:0.0}s";
+        if (d.TotalMinutes < 60) return $"{d.TotalMinutes:0.0}m";
+        return $"{d.TotalHours:0.0}h";
+    }
+
+    enum StageState { Pending, Active, Done, Failed }
+
+    public sealed record HolocronStatusResponse(
+        string? JobId,
+        int PageId,
+        string? NodeName,
+        HolocronJobStatus Stage,
+        string Message,
+        string? Error,
+        DateTime StartedAt,
+        DateTime? CompletedAt,
+        int CurrentStep,
+        int TotalSteps,
+        string? CurrentItem,
+        int ProposalsExtracted,
+        int EnrichmentsApplied,
+        List<HolocronActivityLogEntry> ActivityLog
+    );
+
+    public sealed class HolocronActivityLogEntry
+    {
+        public DateTime Timestamp { get; set; }
+        public string Category { get; set; } = string.Empty;
+        public string EntryType { get; set; } = string.Empty;
+        public string Summary { get; set; } = string.Empty;
+        public object? Detail { get; set; }
+    }
+
+    public sealed record HolocronJobsPageResponse(List<HolocronJobRow> Items, int Total, int Page, int PageSize);
+
+    public sealed record HolocronJobRow(
+        string Id,
+        int PageId,
+        string NodeName,
+        HolocronJobStatus Status,
+        string TriggeredBy,
+        string AgentVersion,
+        string ModelId,
+        DateTime CreatedAt,
+        DateTime? StartedAt,
+        DateTime? CompletedAt,
+        int ChunksDiscovered,
+        int ChunksProcessedNew,
+        int ChunksSkippedUnchanged,
+        int TotalBatches,
+        int CompletedBatches,
+        int ProposalsExtracted,
+        int EnrichmentsApplied,
+        int DuplicatesDropped,
+        int EvidenceFailures,
+        int PreflightRejects,
+        string? Error
+    );
+
+    /// <summary>Mirror of API <c>HolocronNodeEnrichmentDto</c>.</summary>
+    public sealed record HolocronEnrichmentRow(
+        string Id,
+        string Kind,
+        string Operation,
+        string Status,
+        int? FromId,
+        string? FromName,
+        int? ToId,
+        string? ToName,
+        string? Label,
+        string? FieldPath,
+        string ValueJson,
+        string Claim,
+        int EvidenceCount,
+        DateTime AppliedAt,
+        string? JobId,
+        string AgentVersion
+    );
+
+    /// <summary>Mirror of API <c>HolocronEnrichmentDetailDto</c> — full detail with evidence + agent reasoning.</summary>
+    public sealed record HolocronEnrichmentDetail(
+        string Id,
+        string Kind,
+        int? PageId,
+        string? FieldPath,
+        int? FromId,
+        int? ToId,
+        string? Label,
+        string Operation,
+        string ValueJson,
+        string Claim,
+        List<HolocronEvidenceItem> Evidence,
+        string? LlmReasoning,
+        string Status,
+        DateTime CreatedAt,
+        string AgentVersion,
+        string ModelId,
+        string? NodeName,
+        string? FromName,
+        string? ToName
+    );
+
+    /// <summary>Mirror of API <c>HolocronEvidenceDto</c>.</summary>
+    public sealed record HolocronEvidenceItem(int? SourcePageId, string? SourcePageName, string? ChunkId, string Excerpt, double? RelevanceScore);
+}

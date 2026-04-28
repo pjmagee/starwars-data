@@ -46,7 +46,7 @@ namespace StarWarsData.Services.AI.Agents;
 public sealed class HolocronAgent
 {
     /// <summary>Bumped on every meaningful change to the enhancement prompt or schema. Stamped onto every enrichment + event.</summary>
-    public const string AgentVersion = "holocron-v1.0.0";
+    public const string AgentVersion = "holocron-v1.1.0";
 
     static readonly JsonSerializerOptions JsonOpts = new() { PropertyNameCaseInsensitive = true };
 
@@ -210,6 +210,14 @@ public sealed class HolocronAgent
                 nodeEvents.Add(BuildStaleEvent(en, HolocronEventType.EnrichmentOrphaned, "page_deleted"));
                 orphaned++;
             }
+            else if (string.IsNullOrEmpty(currentHash) || string.IsNullOrEmpty(en.ContentHashAtCreation))
+            {
+                // Stub-node case (~0.05% of kg.nodes): Phase 1 couldn't compute a hash because
+                // the raw page had no infobox.Data. We can't tell whether the source has changed,
+                // so we deliberately don't flip these to Stale — better to surface a possibly-stale
+                // enrichment than to discard ones we can't verify. When Phase 1 eventually downloads
+                // the full page, this branch stops firing and the normal comparison takes over.
+            }
             else if (!string.Equals(currentHash, en.ContentHashAtCreation, StringComparison.Ordinal))
             {
                 nodeUpdates.Add(BuildStaleUpdate<NodeEnrichment>(en.Id));
@@ -233,6 +241,11 @@ public sealed class HolocronAgent
                 edgeUpdates.Add(BuildStaleUpdate<EdgeEnrichment>(en.Id));
                 edgeEvents.Add(BuildStaleEdgeEvent(en, HolocronEventType.EnrichmentOrphaned, "endpoint_deleted"));
                 orphaned++;
+            }
+            else if (string.IsNullOrEmpty(fromHash) || string.IsNullOrEmpty(toHash) || string.IsNullOrEmpty(en.ContentHashAtCreation))
+            {
+                // Stub-endpoint case — at least one side has no Phase 1 hash. Same conservative
+                // policy as node enrichments: don't flip to Stale, just skip the staleness check.
             }
             else
             {
@@ -456,6 +469,65 @@ public sealed class HolocronAgent
         return new HolocronContext(node, outEdges, inEdges, neighbourNodes, allChunks, canonicalLabels);
     }
 
+    // ── Async pipeline integration (Design-020) ───────────────────────────
+
+    /// <summary>
+    /// Run one extractor batch from the async workflow pipeline. Builds a
+    /// <see cref="HolocronContext"/> from the snapshot DTOs supplied by the
+    /// pipeline (so the workflow doesn't need to import private records) and
+    /// calls the same prompt + structured-output path the synchronous
+    /// <see cref="EnhanceNodeAsync"/> uses. Returns the raw
+    /// <see cref="HolocronProposalsBatch"/> — apply / pre-flight is the
+    /// pipeline's responsibility (see HolocronConsolidatorExecutor +
+    /// HolocronApplyExecutor).
+    /// </summary>
+    public Task<HolocronProposalsBatch?> CallLlmForBatchAsync(
+        Holocron.HolocronNodeSnapshot node,
+        List<RelationshipEdge> outEdges,
+        List<RelationshipEdge> inEdges,
+        IReadOnlyList<Holocron.HolocronNeighbour> neighbours,
+        IReadOnlyList<Holocron.HolocronCanonicalLabel> canonicalLabels,
+        IReadOnlyList<Holocron.HolocronChunkPayload> ownPageChunks,
+        IReadOnlyList<Holocron.HolocronChunkPayload> batchChunks,
+        CancellationToken ct = default
+    )
+    {
+        // Build a transient GraphNode the prompt builder can consume. Identity +
+        // properties + temporal facets — that's all BuildUserPrompt actually reads.
+        var graphNode = new GraphNode
+        {
+            PageId = node.PageId,
+            Name = node.Name,
+            Type = node.Type,
+            ContentHash = node.ContentHash,
+            WikiUrl = node.WikiUrl,
+            Continuity = node.Continuity,
+            Realm = node.Realm,
+            StartYear = node.StartYear,
+            EndYear = node.EndYear,
+            Properties = node.Properties,
+            TemporalFacets = node
+                .TemporalFacets.Select(f => new TemporalFacet
+                {
+                    Semantic = f.Semantic,
+                    Calendar = f.Calendar,
+                    Year = f.Year,
+                    Text = f.Text,
+                })
+                .ToList(),
+        };
+
+        var neighbourSummaries = neighbours.Select(n => new HolocronNeighbourSummary(n.PageId, n.Name, n.Type, n.StartYear, n.EndYear)).ToList();
+        var labelSummaries = canonicalLabels.Select(l => new HolocronLabelSummary(l.Label, l.Reverse, l.Description, l.UsageCount)).ToList();
+        var chunks = ownPageChunks
+            .Select(c => new HolocronChunkSummary(c.ChunkId, c.PageId, c.Title, c.Heading, c.Section, c.Text, ChunkOrigin.OwnPage))
+            .Concat(batchChunks.Select(c => new HolocronChunkSummary(c.ChunkId, c.PageId, c.Title, c.Heading, c.Section, c.Text, ChunkOrigin.LinkingPage)))
+            .ToList();
+
+        var context = new HolocronContext(graphNode, outEdges, inEdges, neighbourSummaries, chunks, labelSummaries);
+        return CallLlmForProposalsAsync(context, ct);
+    }
+
     // ── LLM call ──────────────────────────────────────────────────────────
 
     async Task<HolocronProposalsBatch?> CallLlmForProposalsAsync(HolocronContext context, CancellationToken ct)
@@ -519,9 +591,21 @@ public sealed class HolocronAgent
                role / qualifier / description context worth attaching. Reference (fromId, toId,
                label) verbatim from that list and supply at least one of role / qualifier /
                description.
-            2. `fillGapEdges` — for each edge in the user prompt's "Edges with null temporal
-               bounds — FillGap candidates" list, fill in `fromYear` and/or `toYear` if the
-               chunks let you cite a year. Reference (fromId, toId, label) from that list.
+            2. `fillGapEdges` — for each edge in the user prompt's "Edges with refinable
+               temporal bounds — FillGap candidates" list, supply `fromYear` and/or `toYear`
+               if the chunks let you cite a year. Bounds can be:
+                 • null — fill with a chunk-cited year if you find one.
+                 • marked `[lifecycle, refinable]` — these were derived from the endpoints'
+                   lifespans (e.g. a character's birth/death years used as a relationship
+                   bound) and are typically too broad. You may overwrite them with a
+                   tighter, chunk-cited year. Example: an `apprentice_of` edge with
+                   `fromYear=-41 [lifecycle, refinable]` is asserting the apprenticeship
+                   started at the apprentice's birth — almost certainly wrong; refine it.
+                 • marked `[infobox, hard]` or `[unknown, hard]` — do NOT propose a year.
+                   `[infobox, hard]` means the wiki stated this directly; `[unknown, hard]`
+                   means we don't know the provenance and the safe assumption is hard.
+                   Use `annotateEdges` for context instead.
+               Reference (fromId, toId, label) verbatim from the candidate list.
             3. `nodeProposals` — append a new value or fill a missing property on the target
                node. The server decides Add (no existing values) vs Augment (existing list)
                based on the current state — you just give the field path and the values you
@@ -559,8 +643,127 @@ public sealed class HolocronAgent
               (1) the target's own page — high authority for what the wiki asserts about the entity,
               (2) pages that LINK TO the target — best source for missing relationship context,
               (3) vector-similar passages — useful when they mention the target by name.
+            - **One Annotate per edge.** Pack role + qualifier + description into a single
+              annotateEdges item per (fromId, toId, label). Don't emit two items for the
+              same edge — only the most-evidence one survives consolidation anyway.
             - When unsure or evidence is weak, emit nothing. Quality over quantity.
             - All four arrays may be empty. An empty result is correct when nothing is missing.
+
+            ## Continuity discipline
+
+            The target node carries a `Continuity:` line (Canon or Legends). Treat it as a
+            firewall: a Canon node should only be enriched from Canon-sourced chunks, and
+            vice versa. Backlink chunks are not pre-filtered by continuity — you must skip
+            any chunk whose source page is from the OPPOSITE continuity from the target.
+            Strong signals a chunk is Legends: mentions of the Expanded Universe, the New
+            Jedi Order book series, characters who appeared only pre-2014 (Mara Jade, Galen
+            Marek, Jacen Solo, etc.), or articles tagged as Legends in their Title. Strong
+            signals a chunk is Canon: post-2014 publications, references to The Mandalorian,
+            Ahsoka, Rebels, sequel-trilogy events, or High Republic media. When ambiguous,
+            skip — don't enrich across the continuity line.
+
+            ## Reasoning rubrics
+
+            **Direct vs indirect evidence.** A chunk that explicitly states the fact is the
+            gold standard ("Anakin's apprenticeship to Sidious began at Mustafar in 19 BBY").
+            A chunk that *implies* the fact is also valid evidence — but cite the chunk and
+            explain the inference in `reasoning`. Example: a chunk that says "as Darth Vader,
+            Anakin commanded Sidious's forces from 19 BBY onward" implies the apprentice_of
+            relationship was active by 19 BBY, even though it doesn't use the word
+            "apprentice." Don't infer beyond what the chunk supports.
+
+            **Conflicting evidence.** If two chunks disagree (e.g. one says "early Clone
+            Wars," another says "late Clone Wars"), prefer in this order:
+              (1) the target's own page over a backlink,
+              (2) the chunk citing a specific year over a vague era,
+              (3) the more recent / Canon source over Legends or older.
+            If you can't reconcile and both are equally credible, **skip** — emit nothing
+            for that edge rather than picking arbitrarily.
+
+            **Specificity ladder.** Prefer the more specific claim when both are supported.
+            "Affiliated with the Jedi High Council" beats "Affiliated with the Jedi Order"
+            if both are evidenced. "Jedi General" beats "Jedi" as a role.
+
+            **Weak evidence.** A single chunk that mentions the entity in passing without
+            saying anything new is not evidence — it's filler. Only annotate when the chunk
+            adds context that isn't already on the existing edge or in the infobox.
+
+            ## Era reference (BBY = Before the Battle of Yavin, ABY = After)
+
+            When a chunk uses an era name, you may translate to year ranges for FillGap:
+              • Old Republic Era → −1000+ BBY (very rare in modern corpus; usually skip)
+              • High Republic Era → ~−500 to −100 BBY
+              • Fall of the Jedi / Prequels → ~−32 to −19 BBY
+              • Clone Wars → −22 to −19 BBY
+              • Reign of the Empire / Imperial Era → −19 to 0 BBY
+              • Age of Rebellion / Galactic Civil War → 0 to 4 ABY
+              • New Republic Era → 4 to ~28 ABY
+              • Rise of the First Order / Sequel Trilogy → ~28 to 35 ABY
+            Specific anchors: Battle of Naboo = 32 BBY, Geonosis = 22 BBY, Order 66 / Mustafar
+            = 19 BBY, Yavin = 0 BBY, Hoth = 3 ABY, Endor = 4 ABY, Battle of Jakku = 5 ABY,
+            Starkiller Base = 34 ABY, Battle of Exegol = 35 ABY.
+
+            For FillGap, prefer a specific anchor over an era range. "After Order 66" =
+            `fromYear: -19`. "During the Clone Wars" with no other detail = a range; emit
+            only one bound (the side you can pin) rather than guessing.
+
+            ## Worked examples
+
+            ### Annotate (good)
+            Existing edge: `Anakin Skywalker —[married_to]→ Padmé Amidala`
+            Chunk excerpt: "On Naboo in 22 BBY, Anakin secretly wed Padmé in defiance of the
+            Jedi Code, hiding the union from the Council until his fall."
+            Output:
+            ```json
+            {
+              "fromId": 452390, "toId": 449421, "label": "married_to",
+              "qualifier": "secret marriage on Naboo, 22 BBY",
+              "description": "Anakin and Padmé married in secret on Naboo, hiding the union from the Jedi Order until Anakin's fall to the dark side.",
+              "claim": "Anakin and Padmé were secretly married despite the Jedi Code's prohibition on attachment.",
+              "evidence": [{"chunkId": "...", "excerpt": "On Naboo in 22 BBY, Anakin secretly wed Padmé"}],
+              "reasoning": "Chunk explicitly cites the marriage, location, and secrecy."
+            }
+            ```
+
+            ### Annotate (bad — emit nothing)
+            Existing edge: `Anakin Skywalker —[knew]→ Mace Windu`
+            Chunk excerpt: "Anakin sat in the Council chamber, glancing across at Mace Windu."
+            Why skip: the chunk only confirms they were in the same room, which the existing
+            edge already implies. No role, qualifier, or new description to add.
+
+            ### FillGap (good)
+            Candidate: `Anakin Skywalker —[apprentice_of]→ Darth Sidious  (fromYear=-41 [lifecycle, refinable], toYear=4 [lifecycle, refinable])`
+            Chunk excerpt: "On Mustafar in 19 BBY, Sidious dubbed his fallen disciple
+            'Darth Vader' — the Sith apprenticeship beginning that day."
+            Output:
+            ```json
+            {
+              "fromId": 452390, "toId": 452582, "label": "apprentice_of",
+              "fromYear": -19,
+              "claim": "The Sith apprenticeship of Anakin to Sidious began at Mustafar in 19 BBY when Anakin was renamed Darth Vader.",
+              "evidence": [{"chunkId": "...", "excerpt": "On Mustafar in 19 BBY, Sidious dubbed his fallen disciple 'Darth Vader'"}],
+              "reasoning": "The lifecycle bound -41 BBY is Anakin's birth year — too broad. Mustafar (19 BBY) is the canonical start of the Sith apprenticeship; toYear -41/4 already covers his death so leave it."
+            }
+            ```
+
+            ### FillGap (indirect evidence — also good)
+            Candidate: `Anakin Skywalker —[led]→ 501st Legion  (fromYear=-41 [lifecycle, refinable], toYear=null)`
+            Chunk excerpt: "At Christophsis (22 BBY), General Skywalker led the 501st in
+            their first major engagement of the Clone Wars."
+            Output:
+            ```json
+            {
+              "fromId": 452390, "toId": 9876, "label": "led",
+              "fromYear": -22,
+              "claim": "Anakin commanded the 501st Legion from at least 22 BBY (their first major engagement at Christophsis).",
+              "evidence": [{"chunkId": "...", "excerpt": "At Christophsis (22 BBY), General Skywalker led the 501st"}],
+              "reasoning": "Chunk doesn't say when leadership began but establishes -22 BBY as a lower bound. The Clone Wars start in -22 BBY supports this."
+            }
+            ```
+
+            ### Add (rare — last resort)
+            Pair has NO entry in either candidate list. Chunk explicitly establishes a new
+            relationship using a canonical label. Most runs produce zero AddEdges.
 
             ## Field cheat-sheet
 
@@ -570,7 +773,8 @@ public sealed class HolocronAgent
             - `fillGapEdges` items: `fromId`, `toId`, `label`, plus AT LEAST ONE of
               `fromYear`, `toYear`. Plus `claim`, `evidence`, `reasoning`.
             - `addEdges` items: `fromId`, `toId`, `label`, optionally `fromYear`, `toYear`,
-              `weight`. Plus `claim`, `evidence`, `reasoning`.
+              `weight` (omit unless a chunk explicitly justifies it; default 1.0). Plus
+              `claim`, `evidence`, `reasoning`.
             - `nodeProposals` items: `fieldPath`, `values` (list), `claim`, `evidence`,
               `reasoning`.
             """;
@@ -677,15 +881,18 @@ public sealed class HolocronAgent
         }
         sb.Append('\n');
 
-        // FillGap candidates: subset where at least one temporal bound is null. Pre-flight
-        // requires the same — surfacing them as a focused list reduces the chance of the
-        // agent proposing a fill on an edge that already has both bounds.
-        var fillGapCandidates = allEdges.Where(e => !e.FromYear.HasValue || !e.ToYear.HasValue).ToList();
-        sb.Append("## Edges with null temporal bounds — FillGap candidates (use these for the `fillGapEdges` array)\n\n");
-        sb.Append("Pick `fromId`, `toId`, `label` verbatim from this list. Fill in `fromYear` and/or `toYear` only when the chunks let you cite a specific year — never guess.\n\n");
+        // FillGap candidates: edges where AT LEAST ONE bound is refinable. A bound is
+        // refinable when (a) it's null, or (b) it carries a Lifecycle / Unknown
+        // BoundsSource (Phase 5 lifecycle-fallback derivation, soft upper bound — see
+        // Design-021). Bounds tagged Infobox are hard and excluded.
+        var fillGapCandidates = allEdges.Where(IsFillGapCandidate).ToList();
+        sb.Append("## Edges with refinable temporal bounds — FillGap candidates (use these for the `fillGapEdges` array)\n\n");
+        sb.Append(
+            "Pick `fromId`, `toId`, `label` verbatim from this list. Fill / refine `fromYear` and/or `toYear` only when the chunks let you cite a specific year — never guess. Bounds marked `[infobox, hard]` are evidence-backed by the wiki and must NOT be touched; use Annotate for context instead.\n\n"
+        );
         if (fillGapCandidates.Count == 0)
         {
-            sb.Append("(every edge already has both temporal bounds — FillGap has nothing to do this run)\n");
+            sb.Append("(every edge has hard infobox-supplied bounds — FillGap has nothing to do this run)\n");
         }
         else
         {
@@ -694,17 +901,15 @@ public sealed class HolocronAgent
                 var fromName = e.FromId == node.PageId ? node.Name : e.FromName;
                 var toName = e.ToId == node.PageId ? node.Name : e.ToName;
                 sb.AppendFormat(
-                    "- fromId={0} ({1}) —[{2}]→ toId={3} ({4})  (fromYear={5}, toYear={6}; fill {7})\n",
+                    "- fromId={0} ({1}) —[{2}]→ toId={3} ({4})  (fromYear={5}, toYear={6}; {7})\n",
                     e.FromId,
                     fromName,
                     e.Label,
                     e.ToId,
                     toName,
-                    e.FromYear?.ToString() ?? "null",
-                    e.ToYear?.ToString() ?? "null",
-                    !e.FromYear.HasValue && !e.ToYear.HasValue ? "either or both"
-                        : !e.FromYear.HasValue ? "fromYear"
-                        : "toYear"
+                    FormatBoundForPrompt(e.FromYear, e.Meta?.BoundsSource),
+                    FormatBoundForPrompt(e.ToYear, e.Meta?.BoundsSource),
+                    DescribeFillScope(e)
                 );
             }
         }
@@ -1131,12 +1336,73 @@ public sealed class HolocronAgent
             return false;
         if (!prop.FromYear.HasValue && !prop.ToYear.HasValue)
             return false;
-        // At least one of the proposed bounds must be filling a NULL on the existing edge —
-        // we never let FillGap overwrite a non-null bound.
+        // At least one proposed bound must be applicable to the existing edge:
+        //   - filling a NULL bound, OR
+        //   - refining a Lifecycle/Unknown-sourced bound (Phase 5 lifecycle fallback,
+        //     soft upper bound — see Design-021).
+        // Bounds tagged Infobox are hard — never overwrite them.
         return context
             .OutgoingEdges.Concat(context.IncomingEdges)
             .Where(e => e.FromId == prop.FromId && e.ToId == prop.ToId && string.Equals(e.Label, prop.Label, StringComparison.OrdinalIgnoreCase))
-            .Any(e => (prop.FromYear.HasValue && !e.FromYear.HasValue) || (prop.ToYear.HasValue && !e.ToYear.HasValue));
+            .Any(e => (prop.FromYear.HasValue && IsBoundRefinable(e, isFrom: true)) || (prop.ToYear.HasValue && IsBoundRefinable(e, isFrom: false)));
+    }
+
+    /// <summary>
+    /// True when the targeted bound on <paramref name="edge"/> is either null or
+    /// explicitly tagged <see cref="EdgeBoundsSource.Lifecycle"/>. Untagged
+    /// (<see cref="EdgeBoundsSource.Unknown"/>) bounds with a non-null value are
+    /// treated as **hard**: we don't know how they were derived, so the safe
+    /// assumption is they came from the infobox and must not be overwritten.
+    /// Migration 0015 retroactively tags every existing edge so the Unknown
+    /// case shouldn't survive the next deploy. See Design-021.
+    /// </summary>
+    static bool IsBoundRefinable(RelationshipEdge edge, bool isFrom)
+    {
+        var existing = isFrom ? edge.FromYear : edge.ToYear;
+        if (!existing.HasValue)
+            return true;
+        var src = edge.Meta?.BoundsSource ?? EdgeBoundsSource.Unknown;
+        return src is EdgeBoundsSource.Lifecycle;
+    }
+
+    /// <summary>True when <paramref name="edge"/> has at least one refinable bound (null or Lifecycle/Unknown).</summary>
+    static bool IsFillGapCandidate(RelationshipEdge edge) => IsBoundRefinable(edge, isFrom: true) || IsBoundRefinable(edge, isFrom: false);
+
+    /// <summary>
+    /// Format a single bound for the FillGap candidate list, annotating its provenance so
+    /// the agent can tell hard infobox bounds from soft lifecycle-derived ones.
+    /// </summary>
+    static string FormatBoundForPrompt(int? year, EdgeBoundsSource? source)
+    {
+        if (!year.HasValue)
+            return "null";
+        return (source ?? EdgeBoundsSource.Unknown) switch
+        {
+            EdgeBoundsSource.Infobox => $"{year.Value} [infobox, hard]",
+            EdgeBoundsSource.Lifecycle => $"{year.Value} [lifecycle, refinable]",
+            EdgeBoundsSource.Holocron => $"{year.Value} [holocron]",
+            // Unknown = un-migrated edge from before Design-021. Treat as hard until
+            // Migration 0015 / next Phase 5 run gives it an explicit tag.
+            _ => $"{year.Value} [unknown, hard]",
+        };
+    }
+
+    /// <summary>
+    /// Compact "what's fillable on this edge" hint for the prompt — translates the bound
+    /// states into a short instruction so the agent doesn't have to reason about the
+    /// matrix of (null vs lifecycle vs infobox) × (from vs to) cases itself.
+    /// </summary>
+    static string DescribeFillScope(RelationshipEdge edge)
+    {
+        var fromRefinable = IsBoundRefinable(edge, isFrom: true);
+        var toRefinable = IsBoundRefinable(edge, isFrom: false);
+        return (fromRefinable, toRefinable) switch
+        {
+            (true, true) => "fill or refine either or both",
+            (true, false) => "fill or refine fromYear only",
+            (false, true) => "fill or refine toYear only",
+            _ => "(unreachable — both bounds hard)",
+        };
     }
 
     bool IsAddEdgeValid(HolocronContext context, AddEdgeProposal prop, HashSet<string> existingNodePairs, HashSet<string> enrichmentNodePairs)

@@ -244,6 +244,24 @@ public abstract partial class NodeBuilderBase : INodeBuilder
 
                 var targetPageId = ResolveLinkTarget(href, content, ctx.WikiUrlToPageId);
 
+                // Materialise Meta whenever ANY of qualifier, rawValue, order, or a parsed
+                // year exist — the year-carrying case is what gives the edge its
+                // BoundsSource = Infobox provenance tag (Design-021). Without this, edges
+                // that came in with infobox-supplied years but no qualifier would skip Meta
+                // entirely and lose their tag, making them indistinguishable from the
+                // Phase 5 lifecycle-fallback path.
+                var hasInfoboxYear = pl.FromYear.HasValue || pl.ToYear.HasValue;
+                var meta =
+                    pl.Qualifier is null && pl.RawValue == content && !hasInfoboxYear
+                        ? null
+                        : new EdgeMeta
+                        {
+                            Qualifier = pl.Qualifier,
+                            RawValue = pl.RawValue != content ? pl.RawValue : null,
+                            Order = pl.Order,
+                            BoundsSource = hasInfoboxYear ? EdgeBoundsSource.Infobox : EdgeBoundsSource.Unknown,
+                        };
+
                 edges.Add(
                     new RelationshipEdge
                     {
@@ -261,15 +279,7 @@ public abstract partial class NodeBuilderBase : INodeBuilder
                         Continuity = ctx.Continuity,
                         FromYear = pl.FromYear,
                         ToYear = pl.ToYear,
-                        Meta =
-                            pl.Qualifier is null && pl.RawValue == content
-                                ? null
-                                : new EdgeMeta
-                                {
-                                    Qualifier = pl.Qualifier,
-                                    RawValue = pl.RawValue != content ? pl.RawValue : null,
-                                    Order = pl.Order,
-                                },
+                        Meta = meta,
                     }
                 );
             }

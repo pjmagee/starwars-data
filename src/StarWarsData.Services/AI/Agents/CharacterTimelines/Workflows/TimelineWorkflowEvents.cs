@@ -1,6 +1,6 @@
 using Microsoft.Agents.AI.Workflows;
 
-namespace StarWarsData.Services.Executors;
+namespace StarWarsData.Services.AI.Agents.CharacterTimelines.Workflows;
 
 // ── Custom WorkflowEvent types emitted by timeline executors ──────────────
 // Consumed via StreamingRun.WatchStreamAsync() and bridged to the tracker.

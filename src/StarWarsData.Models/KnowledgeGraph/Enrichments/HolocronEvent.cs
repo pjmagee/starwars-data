@@ -64,4 +64,14 @@ public sealed class HolocronEvent
 
     [BsonElement("agentVersion")]
     public string AgentVersion { get; set; } = string.Empty;
+
+    /// <summary>
+    /// The <c>kg.enrichment_jobs._id</c> that emitted this event. Empty for events
+    /// from the legacy synchronous path. Used together with the partial unique
+    /// index <c>{jobId, enrichmentId}</c> from migration 0014 to make Apply replays
+    /// idempotent for the audit log alongside the enrichment collections.
+    /// </summary>
+    [BsonElement("jobId")]
+    [BsonIgnoreIfNull]
+    public string? JobId { get; set; }
 }

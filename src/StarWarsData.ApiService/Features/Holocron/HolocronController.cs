@@ -5,6 +5,7 @@ using MongoDB.Driver;
 using StarWarsData.Models;
 using StarWarsData.Models.Entities;
 using StarWarsData.Services.AI.Agents;
+using StarWarsData.Services.AI.Agents.Holocron;
 
 namespace StarWarsData.ApiService.Features.Holocron;
 
@@ -12,48 +13,313 @@ namespace StarWarsData.ApiService.Features.Holocron;
 /// Public-read / admin-write surface for the Holocron agent.
 ///
 /// <list type="bullet">
-///   <item><c>POST /api/holocron/enhance/{pageId}</c> — admin only. Synchronous single-node
-///         enhancement. Honours <see cref="SettingsOptions.HolocronEnabled"/> as a kill switch.</item>
-///   <item><c>GET /api/holocron/events</c> — public. Paginated audit log for the Holocron Log page.</item>
-///   <item><c>GET /api/holocron/enrichments/{id}</c> — public. Full enrichment detail (claim, evidence,
-///         reasoning) for the row-expand view.</item>
+///   <item><c>POST /api/holocron/jobs/enhance/{pageId}</c> — kicks off an async enhancement
+///         workflow (Design-020). Returns 202 with the new job id. The workflow runs
+///         in-process via <see cref="HolocronEnhancementService"/>; client polls the
+///         status endpoint for live progress.</item>
+///   <item><c>GET /api/holocron/jobs/{pageId}/status</c> — live progress for the
+///         currently-running (or just-completed) enhancement of this node, including
+///         the per-stage activity log streamed from the workflow.</item>
+///   <item><c>GET /api/holocron/jobs/active</c> — list of nodes currently being enhanced.</item>
+///   <item><c>GET /api/holocron/jobs</c> — paginated history from <c>kg.enrichment_jobs</c>.</item>
+///   <item><c>GET /api/holocron/jobs/last-completed/{pageId}</c> — most recent completed
+///         job for a node (powers the "last processed: X minutes ago" caption).</item>
+///   <item><c>GET /api/holocron/events</c> — paginated audit log (Holocron Log page).</item>
+///   <item><c>GET /api/holocron/enrichments/{id}</c> — full enrichment detail.</item>
 /// </list>
 ///
-/// The agent always stamps <c>triggeredBy: "manual"</c> on events from the enhance endpoint
-/// so the changelog distinguishes button-clicks from scheduled-pass output.
+/// All workflow runs stamp <c>triggeredBy: "manual"</c> on the job-doc and downstream
+/// events, distinguishing user-initiated runs from scheduled passes.
 /// </summary>
 [ApiController]
 [Route("api/holocron")]
 [Produces("application/json")]
-public class HolocronController(HolocronAgent agent, IMongoClient mongoClient, IOptions<SettingsOptions> settings) : ControllerBase
+public class HolocronController : ControllerBase
 {
-    readonly IMongoDatabase _db = mongoClient.GetDatabase(settings.Value.DatabaseName);
+    readonly HolocronAgent _agent;
+    readonly HolocronJobService _jobService;
+    readonly HolocronEnhancementTracker _tracker;
+    readonly IServiceScopeFactory _scopeFactory;
+    readonly ILogger<HolocronController> _logger;
+    readonly IOptions<SettingsOptions> _settings;
+    readonly IMongoDatabase _db;
+
+    public HolocronController(
+        HolocronAgent agent,
+        HolocronJobService jobService,
+        HolocronEnhancementTracker tracker,
+        IServiceScopeFactory scopeFactory,
+        ILogger<HolocronController> logger,
+        IMongoClient mongoClient,
+        IOptions<SettingsOptions> settings
+    )
+    {
+        _agent = agent;
+        _jobService = jobService;
+        _tracker = tracker;
+        _scopeFactory = scopeFactory;
+        _logger = logger;
+        _settings = settings;
+        _db = mongoClient.GetDatabase(settings.Value.DatabaseName);
+    }
+
     IMongoCollection<HolocronEvent> Events => _db.GetCollection<HolocronEvent>(Collections.KgEvents);
     IMongoCollection<NodeEnrichment> NodeEnrichments => _db.GetCollection<NodeEnrichment>(Collections.KgEnrichments);
     IMongoCollection<EdgeEnrichment> EdgeEnrichments => _db.GetCollection<EdgeEnrichment>(Collections.KgEdgeEnrichments);
     IMongoCollection<GraphNode> Nodes => _db.GetCollection<GraphNode>(Collections.KgNodes);
 
-    // ── Admin-only: trigger enhancement for one node ──────────────────────
+    // ── Async enhancement kickoff ─────────────────────────────────────────
 
     /// <summary>
-    /// Synchronous single-node enhancement. Bypasses the daily-pass selection logic —
-    /// the caller has explicitly chosen this node. Returns a summary of how many
-    /// enrichments were created and how many proposals failed evidence validation.
+    /// Kicks off a Holocron enhancement workflow for one node and returns immediately.
+    /// The workflow runs in-process via <see cref="HolocronEnhancementService"/> on a
+    /// fresh DI scope; clients poll <c>/jobs/{pageId}/status</c> for progress.
     ///
-    /// Open to any authenticated caller — the operation is bounded by Holocron's own
-    /// pre-flight rules (canonical labels only, no parallel edges, evidence required)
-    /// and the agent's pass-budget settings, so a public refresh-button doesn't open
-    /// any new abuse vectors. The kill switch <see cref="SettingsOptions.HolocronEnabled"/>
-    /// returns 503 when off.
+    /// Honours <see cref="SettingsOptions.HolocronEnabled"/> as a kill switch (503 when
+    /// off). Returns 409 if a non-terminal run already exists for this node — the
+    /// per-page invariant from Design-020.
     /// </summary>
-    [HttpPost("enhance/{pageId:int}")]
-    public async Task<ActionResult<NodeEnhancementSummary>> EnhanceNode(int pageId, CancellationToken ct)
+    [HttpPost("jobs/enhance/{pageId:int}")]
+    public async Task<IActionResult> EnhanceNode(int pageId, CancellationToken ct)
     {
-        if (!settings.Value.HolocronEnabled)
+        if (!_settings.Value.HolocronEnabled)
             return StatusCode(503, new { error = "Holocron is disabled (Settings.HolocronEnabled = false)." });
 
-        var summary = await agent.EnhanceNodeAsync(pageId, "manual", ct);
-        return Ok(summary);
+        if (_tracker.IsRunning(pageId))
+            return Conflict(new { error = "Enhancement already in progress for this node." });
+
+        var node = await Nodes.Find(n => n.PageId == pageId).Project(n => new { n.PageId, n.Name }).FirstOrDefaultAsync(ct);
+        if (node is null)
+            return NotFound(new { error = $"Node {pageId} not found." });
+
+        var job = await _jobService.EnqueueOrGetActiveAsync(pageId, node.Name, "manual", HolocronAgent.AgentVersion, _settings.Value.HolocronModel, ct);
+
+        if (!_tracker.TryStart(pageId, node.Name, job.Id))
+            return Conflict(new { error = "Enhancement already in progress for this node." });
+
+        // Fire-and-forget on a fresh DI scope. Same pattern as
+        // CharacterTimelinesController.Generate — `Task.Run` with scope makes the
+        // controller return 202 immediately while the workflow runs in the background.
+        _ = Task.Run(async () =>
+        {
+            using var scope = _scopeFactory.CreateScope();
+            var service = scope.ServiceProvider.GetRequiredService<HolocronEnhancementService>();
+            try
+            {
+                await service.RunAsync(job.Id, pageId, "manual", _tracker, CancellationToken.None);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Holocron pipeline failed — JobId={JobId} PageId={PageId}", job.Id, pageId);
+                _tracker.Fail(pageId, ex.Message);
+                await _jobService.FailAsync(job.Id, ex.Message, CancellationToken.None);
+            }
+        });
+
+        return Accepted(
+            new
+            {
+                jobId = job.Id,
+                pageId,
+                status = job.Status.ToString(),
+            }
+        );
+    }
+
+    // ── Status / list endpoints ───────────────────────────────────────────
+
+    /// <summary>
+    /// Live status for the most recent run of <paramref name="pageId"/>. Returns the
+    /// in-memory tracker entry if one exists (fastest path), else falls back to
+    /// the most recent <c>kg.enrichment_jobs</c> row.
+    /// </summary>
+    [HttpGet("jobs/{pageId:int}/status")]
+    public async Task<ActionResult<HolocronStatusDto>> GetStatus(int pageId, CancellationToken ct)
+    {
+        var live = _tracker.GetStatus(pageId);
+        if (live is not null)
+        {
+            return Ok(
+                new HolocronStatusDto(
+                    JobId: live.JobId,
+                    PageId: pageId,
+                    NodeName: live.NodeName,
+                    Stage: live.Stage,
+                    Message: live.Message,
+                    Error: live.Error,
+                    StartedAt: live.StartedAt,
+                    CompletedAt: live.Stage is HolocronJobStatus.Completed or HolocronJobStatus.Failed ? DateTime.UtcNow : null,
+                    CurrentStep: live.CurrentStep,
+                    TotalSteps: live.TotalSteps,
+                    CurrentItem: live.CurrentItem,
+                    ProposalsExtracted: live.ProposalsExtracted,
+                    EnrichmentsApplied: live.EnrichmentsApplied,
+                    ActivityLog: live.ActivityLog
+                )
+            );
+        }
+
+        // Fall back to the most recent persisted job for this page.
+        var jobs = await _jobService.ListAsync(new HolocronJobQuery(PageId: pageId, PageSize: 1), ct);
+        var latest = jobs.Items.FirstOrDefault();
+        if (latest is null)
+            return NotFound();
+
+        return Ok(
+            new HolocronStatusDto(
+                JobId: latest.Id,
+                PageId: latest.PageId,
+                NodeName: latest.NodeName,
+                Stage: latest.Status,
+                Message: latest.Status == HolocronJobStatus.Failed && !string.IsNullOrEmpty(latest.Error) ? latest.Error : latest.Status.ToString(),
+                Error: latest.Error,
+                StartedAt: latest.StartedAt ?? latest.CreatedAt,
+                CompletedAt: latest.CompletedAt,
+                CurrentStep: 0,
+                TotalSteps: 0,
+                CurrentItem: null,
+                ProposalsExtracted: latest.ProposalsExtracted,
+                EnrichmentsApplied: latest.EnrichmentsApplied,
+                ActivityLog: []
+            )
+        );
+    }
+
+    /// <summary>List of currently-active enhancement runs (anything not in a terminal state).</summary>
+    [HttpGet("jobs/active")]
+    public ActionResult<List<HolocronActiveDto>> GetActive() =>
+        Ok(
+            _tracker
+                .GetActiveStatuses()
+                .Select(a => new HolocronActiveDto(
+                    JobId: a.Status.JobId,
+                    PageId: a.PageId,
+                    NodeName: a.Status.NodeName,
+                    Stage: a.Status.Stage,
+                    Message: a.Status.Message,
+                    StartedAt: a.Status.StartedAt,
+                    CurrentStep: a.Status.CurrentStep,
+                    TotalSteps: a.Status.TotalSteps,
+                    ProposalsExtracted: a.Status.ProposalsExtracted,
+                    EnrichmentsApplied: a.Status.EnrichmentsApplied
+                ))
+                .ToList()
+        );
+
+    /// <summary>Paginated job history from <c>kg.enrichment_jobs</c>.</summary>
+    [HttpGet("jobs")]
+    public async Task<ActionResult<HolocronJobsPage>> ListJobs(
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 20,
+        [FromQuery] HolocronJobStatus? status = null,
+        [FromQuery] int? pageId = null,
+        CancellationToken ct = default
+    )
+    {
+        var query = new HolocronJobQuery(Statuses: status.HasValue ? [status.Value] : null, PageId: pageId, Page: page, PageSize: pageSize);
+        var result = await _jobService.ListAsync(query, ct);
+        return Ok(result);
+    }
+
+    /// <summary>Most recent completed job for a node — drives the "last processed N ago" caption.</summary>
+    [HttpGet("jobs/last-completed/{pageId:int}")]
+    public async Task<ActionResult<HolocronJob>> GetLastCompleted(int pageId, CancellationToken ct)
+    {
+        var job = await _jobService.GetLastCompletedForNodeAsync(pageId, ct);
+        if (job is null)
+            return NotFound();
+        return Ok(job);
+    }
+
+    /// <summary>
+    /// Unified list of every Holocron enrichment touching <paramref name="pageId"/> —
+    /// node-property enrichments where the node IS the subject, plus edge enrichments
+    /// where the node is either endpoint. Used by <c>/holocron/jobs/{pageId}</c>'s
+    /// "Applied changes" section so users can see WHAT the agent did, not just that
+    /// runs happened. Sorted newest-first; status defaults to Active but accepts
+    /// <c>?includeStale=true</c> to surface superseded entries too.
+    /// </summary>
+    [HttpGet("jobs/{pageId:int}/enrichments")]
+    public async Task<ActionResult<List<HolocronNodeEnrichmentDto>>> GetNodeEnrichments(int pageId, [FromQuery] bool includeStale = false, CancellationToken ct = default)
+    {
+        var statusFilter = includeStale ? Builders<NodeEnrichment>.Filter.Empty : Builders<NodeEnrichment>.Filter.Eq(e => e.Status, EnrichmentStatus.Active);
+        var edgeStatusFilter = includeStale ? Builders<EdgeEnrichment>.Filter.Empty : Builders<EdgeEnrichment>.Filter.Eq(e => e.Status, EnrichmentStatus.Active);
+
+        var nodeRowsTask = NodeEnrichments
+            .Find(Builders<NodeEnrichment>.Filter.Eq(e => e.PageId, pageId) & statusFilter)
+            .SortByDescending(e => e.AppliedAt)
+            .ThenByDescending(e => e.CreatedAt)
+            .ToListAsync(ct);
+        var edgeRowsTask = EdgeEnrichments
+            .Find((Builders<EdgeEnrichment>.Filter.Eq(e => e.FromId, pageId) | Builders<EdgeEnrichment>.Filter.Eq(e => e.ToId, pageId)) & edgeStatusFilter)
+            .SortByDescending(e => e.AppliedAt)
+            .ThenByDescending(e => e.CreatedAt)
+            .ToListAsync(ct);
+
+        await Task.WhenAll(nodeRowsTask, edgeRowsTask);
+        var nodeRows = nodeRowsTask.Result;
+        var edgeRows = edgeRowsTask.Result;
+
+        // Resolve all referenced node names (edges' from/to) in one shot so each row
+        // can render `Anakin Skywalker -[affiliated_with]-> Jedi Order` directly.
+        var endpointIds = edgeRows.SelectMany(e => new[] { e.FromId, e.ToId }).Distinct().ToList();
+        var nameByPageId =
+            endpointIds.Count == 0
+                ? new Dictionary<int, string>()
+                : (await Nodes.Find(Builders<GraphNode>.Filter.In(n => n.PageId, endpointIds)).Project(n => new { n.PageId, n.Name }).ToListAsync(ct)).ToDictionary(x => x.PageId, x => x.Name);
+
+        var rows = new List<HolocronNodeEnrichmentDto>();
+
+        foreach (var e in nodeRows)
+        {
+            rows.Add(
+                new HolocronNodeEnrichmentDto(
+                    Id: e.Id,
+                    Kind: "node",
+                    Operation: e.Operation.ToString(),
+                    Status: e.Status.ToString(),
+                    FromId: null,
+                    FromName: null,
+                    ToId: null,
+                    ToName: null,
+                    Label: null,
+                    FieldPath: e.FieldPath,
+                    ValueJson: e.Value.ToJson(),
+                    Claim: e.Claim,
+                    EvidenceCount: e.Evidence.Count,
+                    AppliedAt: e.AppliedAt ?? e.CreatedAt,
+                    JobId: string.IsNullOrEmpty(e.JobId) ? null : e.JobId,
+                    AgentVersion: e.AgentVersion
+                )
+            );
+        }
+
+        foreach (var e in edgeRows)
+        {
+            rows.Add(
+                new HolocronNodeEnrichmentDto(
+                    Id: e.Id,
+                    Kind: "edge",
+                    Operation: e.Operation.ToString(),
+                    Status: e.Status.ToString(),
+                    FromId: e.FromId,
+                    FromName: nameByPageId.GetValueOrDefault(e.FromId, $"#{e.FromId}"),
+                    ToId: e.ToId,
+                    ToName: nameByPageId.GetValueOrDefault(e.ToId, $"#{e.ToId}"),
+                    Label: e.Label,
+                    FieldPath: null,
+                    ValueJson: e.Value.ToJson(),
+                    Claim: e.Claim,
+                    EvidenceCount: e.Evidence.Count,
+                    AppliedAt: e.AppliedAt ?? e.CreatedAt,
+                    JobId: string.IsNullOrEmpty(e.JobId) ? null : e.JobId,
+                    AgentVersion: e.AgentVersion
+                )
+            );
+        }
+
+        // Mixed sort by timestamp so node + edge enrichments interleave correctly.
+        return Ok(rows.OrderByDescending(r => r.AppliedAt).ToList());
     }
 
     // ── Public: paginated audit log ───────────────────────────────────────
@@ -256,3 +522,64 @@ public class HolocronController(HolocronAgent agent, IMongoClient mongoClient, I
             ))
             .ToList();
 }
+
+/// <summary>Live or persisted status for one Holocron run, returned by <c>GET /jobs/{pageId}/status</c>.</summary>
+public sealed record HolocronStatusDto(
+    string? JobId,
+    int PageId,
+    string? NodeName,
+    HolocronJobStatus Stage,
+    string Message,
+    string? Error,
+    DateTime StartedAt,
+    DateTime? CompletedAt,
+    int CurrentStep,
+    int TotalSteps,
+    string? CurrentItem,
+    int ProposalsExtracted,
+    int EnrichmentsApplied,
+    List<HolocronActivityLogEntry> ActivityLog
+);
+
+/// <summary>One row in the active-runs list returned by <c>GET /jobs/active</c>.</summary>
+public sealed record HolocronActiveDto(
+    string? JobId,
+    int PageId,
+    string? NodeName,
+    HolocronJobStatus Stage,
+    string Message,
+    DateTime StartedAt,
+    int CurrentStep,
+    int TotalSteps,
+    int ProposalsExtracted,
+    int EnrichmentsApplied
+);
+
+/// <summary>
+/// One row in the unified node + edge enrichment list returned by
+/// <c>GET /jobs/{pageId}/enrichments</c>. Powers the "Applied changes" section
+/// on the per-node Holocron jobs page.
+///
+/// <see cref="Kind"/> is <c>"node"</c> for property enrichments (FieldPath populated)
+/// or <c>"edge"</c> for relationship enrichments (FromId/ToId/Label populated). The
+/// frontend switches rendering on Kind so node-prop and edge rows can sit in the
+/// same time-sorted list without needing two separate fetches.
+/// </summary>
+public sealed record HolocronNodeEnrichmentDto(
+    string Id,
+    string Kind,
+    string Operation,
+    string Status,
+    int? FromId,
+    string? FromName,
+    int? ToId,
+    string? ToName,
+    string? Label,
+    string? FieldPath,
+    string ValueJson,
+    string Claim,
+    int EvidenceCount,
+    DateTime AppliedAt,
+    string? JobId,
+    string AgentVersion
+);

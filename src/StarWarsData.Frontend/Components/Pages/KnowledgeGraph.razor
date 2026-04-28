@@ -1,6 +1,7 @@
 @page "/knowledge-graph"
 @inject IHttpClientFactory HttpClientFactory
 @inject ISnackbar Snackbar
+@inject IDialogService DialogService
 @inject GlobalFilterService GlobalFilterService
 @inject NavigationManager Navigation
 @inject IJSRuntime JS
@@ -245,15 +246,14 @@
                                              re-fetches labels + edges + node-enrichments for the current node, so newly
                                              written enrichments appear without requiring the user to collapse + re-expand. *@
                                         <AuthorizeView Context="auth">
-                                            <MudTooltip Text="Run the Holocron agent on this node — gathers context, calls the LLM, writes evidence-backed enrichments. Refreshes this panel when complete.">
+                                            <MudTooltip Text="@(_holocronRunningForNodeId == context.Id ? "Re-open the live progress modal for the in-flight Holocron run on this node." : "Run the Holocron agent on this node — gathers context, calls the LLM, writes evidence-backed enrichments. Refreshes this panel when complete.")">
                                                 <MudButton Variant="Variant.Outlined" Color="Color.Tertiary" Size="Size.Small"
                                                            StartIcon="@Icons.Material.Filled.AutoFixHigh"
-                                                           Disabled="@(_holocronRunningForNodeId.HasValue)"
                                                            OnClick="@(() => EnhanceWithHolocron(context.Id, context.Name))">
                                                     @if (_holocronRunningForNodeId == context.Id)
                                                     {
                                                         <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" />
-                                                        <span>Enhancing…</span>
+                                                        <span>Enhancing… (view)</span>
                                                     }
                                                     else
                                                     {
@@ -262,6 +262,17 @@
                                                 </MudButton>
                                             </MudTooltip>
                                         </AuthorizeView>
+                                        @* Deep-link to the per-node Holocron history page — visible to ALL users
+                                            (even anonymous), so anyone curious about what the agent did on a node
+                                            can browse the run history + see any in-flight workflow.
+                                            Mirrors the Character Timeline per-character page pattern. *@
+                                        <MudTooltip Text="Open the per-node Holocron history page — see all past runs and any workflow currently in progress.">
+                                            <MudButton Variant="Variant.Text" Color="Color.Default" Size="Size.Small"
+                                                       StartIcon="@Icons.Material.Filled.History"
+                                                       Href="@($"/holocron/jobs/{context.Id}")">
+                                                Holocron history
+                                            </MudButton>
+                                        </MudTooltip>
                                     </MudStack>
 
                                     @* ── Temporal Facets ── *@
@@ -554,6 +565,22 @@
                                                     @if (!string.IsNullOrWhiteSpace(edge.Description))
                                                     {
                                                         <MudText Typo="Typo.caption" Style="display:block;">@edge.Description</MudText>
+                                                    }
+                                                    @if (edge.HolocronAppliedAt.HasValue)
+                                                    {
+                                                        var tooltip = $"Applied {edge.HolocronAppliedAt:yyyy-MM-dd HH:mm} UTC by {edge.HolocronAgentVersion ?? "(unknown agent)"}";
+                                                        <MudTooltip Text="@tooltip">
+                                                            <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center" Class="mt-1">
+                                                                <MudIcon Icon="@Icons.Material.Outlined.Schedule" Size="Size.Small" Color="Color.Secondary" />
+                                                                <MudText Typo="Typo.caption" Color="Color.Secondary">last updated @FormatRelativeTime(edge.HolocronAppliedAt.Value)</MudText>
+                                                                @if (!string.IsNullOrEmpty(edge.HolocronJobId))
+                                                                {
+                                                                    <MudLink Href="@($"/holocron/jobs/{_expandedNodeId}")" Underline="Underline.Hover">
+                                                                        <MudText Typo="Typo.caption" Color="Color.Tertiary">view run</MudText>
+                                                                    </MudLink>
+                                                                }
+                                                            </MudStack>
+                                                        </MudTooltip>
                                                     }
                                                 </MudTd>
                                             </RowTemplate>
@@ -1063,57 +1090,57 @@
     }
 
     /// <summary>
-    /// POST /api/holocron/enhance/{pageId} for the row's node, then re-fetch labels +
-    /// edges + node-enrichments so the panel reflects the new state. Public to any
-    /// authenticated user — the agent's own pre-flight rules and pass-budget settings
-    /// bound the cost. Disabled when another enhance is already in flight (single-node,
-    /// synchronous server-side; queueing parallel calls would just hold connections open).
+    /// Opens <see cref="StarWarsData.Frontend.Components.Shared.HolocronProgressDialog"/>,
+    /// which kicks off POST /api/holocron/jobs/enhance/{pageId} and polls
+    /// /api/holocron/jobs/{pageId}/status until terminal — rendering a stepper of the
+    /// 7 workflow stages plus an activity feed bridged from the workflow events
+    /// (mirrors the Character Timelines progress UX). When the dialog closes, refreshes
+    /// the panel data so the new enrichments surface inline. Public to any authenticated
+    /// user — the agent's own pre-flight rules and pass-budget settings bound the cost.
     /// </summary>
     private async Task EnhanceWithHolocron(int nodeId, string nodeName)
     {
-        if (_holocronRunningForNodeId.HasValue)
-            return;
-
+        // Re-clicking while a run is in flight re-opens the modal — the dialog itself
+        // pre-checks status and re-attaches without firing a new POST. The previous
+        // "no-op if already running" guard made the button feel broken when users
+        // closed the modal mid-run and wanted to peek at progress again.
         _holocronRunningForNodeId = nodeId;
         StateHasChanged();
         try
         {
-            var response = await Api.PostAsync($"api/holocron/enhance/{nodeId}", content: null);
-            if (response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
+            var parameters = new DialogParameters<StarWarsData.Frontend.Components.Shared.HolocronProgressDialog>
             {
-                Snackbar.Add("Holocron is disabled in Settings. Set Settings.HolocronEnabled = true to run.", Severity.Warning);
-                return;
-            }
-            if (!response.IsSuccessStatusCode)
+                { x => x.PageId, nodeId },
+                { x => x.NodeName, nodeName },
+            };
+            // CloseOnEscapeKey + BackdropClick = true so the user can dismiss the modal
+            // any way they like — closing only stops polling, the workflow keeps running.
+            var options = new DialogOptions
             {
-                Snackbar.Add($"Holocron call failed ({(int)response.StatusCode} {response.ReasonPhrase}).", Severity.Error);
-                return;
+                CloseOnEscapeKey = true,
+                BackdropClick = true,
+                MaxWidth = MaxWidth.Medium,
+                FullWidth = true,
+            };
+            var dialog = await DialogService.ShowAsync<StarWarsData.Frontend.Components.Shared.HolocronProgressDialog>($"Enhance {nodeName}", parameters, options);
+            var result = await dialog.Result;
+
+            // Determine whether the run actually finished. The dialog returns the latest
+            // HolocronStatusResponse (or null on early-close before the first poll). Only
+            // refresh the panel when the run reached a terminal state during this dialog
+            // session — otherwise the run is still in flight server-side.
+            var finished = false;
+            if (result is { Canceled: false, Data: StarWarsData.Frontend.Components.Shared.HolocronProgressDialog.HolocronStatusResponse status })
+            {
+                finished = status.Stage is HolocronJobStatus.Completed or HolocronJobStatus.Failed;
             }
 
-            var summary = await response.Content.ReadFromJsonAsync<HolocronEnhanceResult>();
-            if (summary is null)
+            if (finished && _expandedNodeId == nodeId)
             {
-                Snackbar.Add("Holocron returned an empty response.", Severity.Warning);
-                return;
-            }
-
-            var msg = summary.EnrichmentsCreated == 0 && summary.EvidenceFailures == 0
-                ? $"{nodeName}: nothing to enrich (agent emitted no proposals)."
-                : $"{nodeName}: {summary.EnrichmentsCreated} enrichment(s) written, {summary.EvidenceFailures} evidence failure(s).";
-            Snackbar.Add(msg, summary.EnrichmentsCreated > 0 ? Severity.Success : Severity.Info);
-
-            // Refresh the panel data for THIS node if it's still the expanded one. We re-toggle
-            // the same id (collapse → expand) rather than try to surgically merge new data, so
-            // labels/edges/node-enrichments all come back consistent with the post-enhance state.
-            if (_expandedNodeId == nodeId)
-            {
-                await ToggleDetails(nodeId); // collapse
-                await ToggleDetails(nodeId); // re-expand → triggers parallel re-fetch
-            }
-            else
-            {
-                // Row collapsed by the time the agent finished — leave a nudge for the user.
-                Snackbar.Add($"Expand {nodeName} to see the new enrichments.", Severity.Info);
+                // Refresh the panel: collapse → expand re-fetches labels/edges/node-enrichments
+                // in parallel, so the new enrichments surface inline.
+                await ToggleDetails(nodeId);
+                await ToggleDetails(nodeId);
             }
         }
         catch (Exception ex)
@@ -1127,8 +1154,8 @@
         }
     }
 
-    /// <summary>Mirror of the API's <c>NodeEnhancementSummary</c> for response deserialisation.</summary>
-    private sealed record HolocronEnhanceResult(int PageId, int EnrichmentsCreated, int EvidenceFailures);
+    /// <summary>Mirror of the API's <c>HolocronStatusDto</c> for response deserialisation.</summary>
+    private sealed record HolocronStatusResponse(string? JobId, int PageId, string? NodeName, string Stage, string Message, string? Error, int CurrentStep, int TotalSteps, int ProposalsExtracted, int EnrichmentsApplied);
 
     private static string FormatYearRange(int? fromYear, int? toYear)
     {
@@ -1141,7 +1168,34 @@
 
     private static string FormatYear(int year) => year < 0 ? $"{-year} BBY" : year > 0 ? $"{year} ABY" : "0 BBY/ABY";
 
-    public sealed record EntityEdgeRow(string Label, string Direction, int OtherId, string OtherName, string OtherType, int? FromYear, int? ToYear, string? Phase1Qualifier, bool IsHolocronOnly, string? Role, string? Qualifier, string? Description);
+    /// <summary>Render a UTC timestamp as a coarse "X ago" string for the edge-row last-updated caption.</summary>
+    private static string FormatRelativeTime(DateTime utc)
+    {
+        var diff = DateTime.UtcNow - utc;
+        if (diff.TotalSeconds < 60) return $"{(int)diff.TotalSeconds}s ago";
+        if (diff.TotalMinutes < 60) return $"{(int)diff.TotalMinutes}m ago";
+        if (diff.TotalHours < 24) return $"{(int)diff.TotalHours}h ago";
+        if (diff.TotalDays < 30) return $"{(int)diff.TotalDays}d ago";
+        return utc.ToString("yyyy-MM-dd");
+    }
+
+    public sealed record EntityEdgeRow(
+        string Label,
+        string Direction,
+        int OtherId,
+        string OtherName,
+        string OtherType,
+        int? FromYear,
+        int? ToYear,
+        string? Phase1Qualifier,
+        bool IsHolocronOnly,
+        string? Role,
+        string? Qualifier,
+        string? Description,
+        DateTime? HolocronAppliedAt,
+        string? HolocronJobId,
+        string? HolocronAgentVersion
+    );
 
     public sealed record EntityEdgesResult(int NodeId, string NodeName, List<EntityEdgeRow> Edges, int Total);
 

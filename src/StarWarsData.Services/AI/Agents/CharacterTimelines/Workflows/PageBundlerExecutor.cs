@@ -2,7 +2,7 @@ using Microsoft.Agents.AI.Workflows;
 using Microsoft.Extensions.Logging;
 using StarWarsData.Models.Entities;
 
-namespace StarWarsData.Services.Executors;
+namespace StarWarsData.Services.AI.Agents.CharacterTimelines.Workflows;
 
 /// <summary>
 /// Pure C# executor (no LLM) that groups discovered pages into token-budget batches.

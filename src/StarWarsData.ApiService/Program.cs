@@ -15,6 +15,7 @@ using StarWarsData.Models;
 using StarWarsData.ServiceDefaults;
 using StarWarsData.Services;
 using StarWarsData.Services.AI.Agents;
+using StarWarsData.Services.AI.Agents.CharacterTimelines;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -91,9 +92,12 @@ builder
     .AddSingleton<KnowledgeGraphQueryService>()
     .AddSingleton<SemanticSearchService>()
     .AddSingleton<KeywordSearchService>()
+    .AddSingleton<OpenAiSpendQueryService>()
     .AddSingleton<StarWarsData.Services.Suggestions.SuggestionService>()
     .AddSingleton<HolocronAgent>()
     .AddSingleton<HolocronJobService>()
+    .AddSingleton<StarWarsData.Services.AI.Agents.Holocron.HolocronEnhancementTracker>()
+    .AddScoped<StarWarsData.Services.AI.Agents.Holocron.HolocronEnhancementService>()
     .AddScoped<ChatSessionService>()
     .AddSingleton<GraphRAGToolkit>(sp =>
     {

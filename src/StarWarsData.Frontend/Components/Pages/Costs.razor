@@ -1,0 +1,286 @@
+@page "/costs"
+@inject IHttpClientFactory HttpClientFactory
+@using System.Net.Http.Json
+
+<PageTitle>Running Costs — Star Wars Data</PageTitle>
+<HeadContent>
+    <meta name="description" content="What it costs to run Star Wars Data Explorer — live OpenAI spend, domain, hosting, and hardware." />
+</HeadContent>
+
+<MudContainer MaxWidth="MaxWidth.Medium" Class="py-8">
+    <MudStack Spacing="6">
+
+        <div>
+            <MudText Typo="Typo.h4" GutterBottom="true">Running Costs</MudText>
+            <MudText Typo="Typo.body1" Color="Color.Secondary">
+                Star Wars Data is a non-commercial fan project, but it isn't free to run. Below is an
+                honest breakdown of what it actually costs &mdash; live OpenAI spend pulled from the
+                billing API, plus the fixed costs of the domain and the hardware it runs on.
+                If you find the site useful, the
+                <MudLink Href="https://www.buymeacoffee.com/pjmagee" Target="_blank" Underline="Underline.Always">Buy Me a Coffee</MudLink>
+                button helps cover it.
+            </MudText>
+        </div>
+
+        <MudDivider />
+
+        @* ── OpenAI live spend tile ─────────────────────────────────────────────── *@
+        <div>
+            <MudText Typo="Typo.h5" GutterBottom="true">OpenAI API spend</MudText>
+            <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-3">
+                Pulled from <MudLink Href="https://platform.openai.com/docs/api-reference/usage/costs" Target="_blank" Underline="Underline.Hover">OpenAI's Costs API</MudLink>
+                via a nightly sync. Figures are estimates with up to ~24h lag &mdash; the final invoice can differ slightly.
+            </MudText>
+
+            @if (_summary is null)
+            {
+                <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+                    <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+                    <MudText Typo="Typo.body2" Color="Color.Secondary">Loading spend data…</MudText>
+                </MudStack>
+            }
+            else if (_summary.TotalCentsLast90Days == 0)
+            {
+                <MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Dense="true">
+                    No spend data has been synced yet. Check back tomorrow.
+                </MudAlert>
+            }
+            else
+            {
+                <MudGrid Spacing="3">
+                    <MudItem xs="12" sm="6">
+                        <MudPaper Class="pa-4" Elevation="2" Style="height: 100%;">
+                            <MudStack Spacing="1">
+                                <MudText Typo="Typo.overline" Color="Color.Secondary">Last 30 days</MudText>
+                                <MudText Typo="Typo.h4" Style="font-weight: 600;">
+                                    @FormatMoney(_summary.TotalCentsLast30Days, _summary.Currency)
+                                </MudText>
+                                <MudText Typo="Typo.caption" Color="Color.Secondary">
+                                    @if (_summary.LastSyncedAt is { } ts)
+                                    {
+                                        <span>Last synced @ts.ToString("yyyy-MM-dd HH:mm") UTC</span>
+                                    }
+                                </MudText>
+                            </MudStack>
+                        </MudPaper>
+                    </MudItem>
+
+                    <MudItem xs="12" sm="6">
+                        <MudPaper Class="pa-4" Elevation="2" Style="height: 100%;">
+                            <MudStack Spacing="1">
+                                <MudText Typo="Typo.overline" Color="Color.Secondary">Last 90 days</MudText>
+                                <MudText Typo="Typo.h4" Style="font-weight: 600;">
+                                    @FormatMoney(_summary.TotalCentsLast90Days, _summary.Currency)
+                                </MudText>
+                                <MudText Typo="Typo.caption" Color="Color.Secondary">
+                                    Approximate ~@FormatMoney(_summary.TotalCentsLast90Days / 3, _summary.Currency)/month average
+                                </MudText>
+                            </MudStack>
+                        </MudPaper>
+                    </MudItem>
+                </MudGrid>
+
+                @if (_summary.DailyLast30.Count > 0)
+                {
+                    <MudPaper Class="pa-4 mt-4" Elevation="2">
+                        <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Class="mb-2">Daily spend (last 30 days)</MudText>
+                        <div style="display: grid; grid-template-columns: repeat(@_summary.DailyLast30.Count, 1fr); gap: 2px; align-items: end; height: 80px;">
+                            @{
+                                var maxCents = Math.Max(1, _summary.DailyLast30.Max(d => d.Cents));
+                            }
+                            @foreach (var d in _summary.DailyLast30)
+                            {
+                                var height = (int)(d.Cents * 100.0 / maxCents);
+                                var tip = $"{d.Date}: {FormatMoney(d.Cents, _summary.Currency)}";
+                                <MudTooltip Text="@tip">
+                                    <div style="@($"height: {height}%; background: var(--mud-palette-primary); min-height: 1px;")"></div>
+                                </MudTooltip>
+                            }
+                        </div>
+                        <MudStack Row="true" Justify="Justify.SpaceBetween" Class="mt-2">
+                            <MudText Typo="Typo.caption" Color="Color.Secondary">@_summary.DailyLast30.First().Date</MudText>
+                            <MudText Typo="Typo.caption" Color="Color.Secondary">@_summary.DailyLast30.Last().Date</MudText>
+                        </MudStack>
+                    </MudPaper>
+                }
+
+                @if (_summary.ByLineItemLast30.Count > 0)
+                {
+                    <MudPaper Class="pa-4 mt-4" Elevation="2">
+                        <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Class="mb-2">Breakdown by line item (last 30 days)</MudText>
+                        <MudSimpleTable Dense="true" Hover="true">
+                            <thead>
+                                <tr>
+                                    <th>Line item</th>
+                                    <th style="text-align: right;">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var li in _summary.ByLineItemLast30.Take(15))
+                                {
+                                    <tr>
+                                        <td><MudText Typo="Typo.body2">@li.Name</MudText></td>
+                                        <td style="text-align: right;">
+                                            <MudText Typo="Typo.body2">@FormatMoney(li.Cents, _summary.Currency)</MudText>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </MudSimpleTable>
+                    </MudPaper>
+                }
+            }
+        </div>
+
+        <MudDivider />
+
+        @* ── Fixed costs ───────────────────────────────────────────────────────── *@
+        <div>
+            <MudText Typo="Typo.h5" GutterBottom="true">Fixed costs</MudText>
+
+            <MudGrid Spacing="3">
+                <MudItem xs="12" sm="6">
+                    <MudPaper Class="pa-4" Elevation="2" Style="height: 100%;">
+                        <MudStack Spacing="2">
+                            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                                <MudIcon Icon="@Icons.Material.Filled.Language" Color="Color.Primary" />
+                                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;">Domain</MudText>
+                            </MudStack>
+                            <MudText Typo="Typo.body2">
+                                <strong>swdata.ai</strong> &mdash; £80 / year. The <code>.ai</code> TLD is
+                                considerably more expensive than the average domain (~10× a typical
+                                <code>.com</code>) but it makes sense given the project's focus.
+                            </MudText>
+                        </MudStack>
+                    </MudPaper>
+                </MudItem>
+            </MudGrid>
+        </div>
+
+        <MudDivider />
+
+        @* ── Self-hosted infrastructure ────────────────────────────────────────── *@
+        <div>
+            <MudText Typo="Typo.h5" GutterBottom="true">Self-hosted infrastructure</MudText>
+            <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-3">
+                The whole stack &mdash; API, frontend, MongoDB Atlas Local (Community Edition with
+                semantic vector search), Keycloak, Hangfire workers &mdash; runs on a single Unraid
+                server in my home, alongside dozens of other services. The marginal cost to host
+                Star Wars Data is essentially the incremental electricity it draws.
+            </MudText>
+
+            <MudGrid Spacing="3">
+                <MudItem xs="12" sm="6">
+                    <MudPaper Class="pa-4" Elevation="2" Style="height: 100%;">
+                        <MudStack Spacing="2">
+                            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                                <MudIcon Icon="@Icons.Material.Filled.Memory" Color="Color.Secondary" />
+                                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;">Hardware</MudText>
+                            </MudStack>
+                            <MudList Dense="true" T="string">
+                                <MudListItem Icon="@Icons.Material.Filled.Circle" IconSize="Size.Small">
+                                    <MudText Typo="Typo.body2"><strong>CPU</strong> &mdash; Intel® Core™ Ultra 9 285K @@ 5346 MHz (24 cores)</MudText>
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Circle" IconSize="Size.Small">
+                                    <MudText Typo="Typo.body2"><strong>RAM</strong> &mdash; 94 GiB</MudText>
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Circle" IconSize="Size.Small">
+                                    <MudText Typo="Typo.body2">
+                                        <strong>OS</strong> &mdash;
+                                        <MudLink Href="https://unraid.net" Target="_blank" Underline="Underline.Hover">Unraid OS</MudLink>
+                                        (lifetime licence, one-off cost)
+                                    </MudText>
+                                </MudListItem>
+                            </MudList>
+                        </MudStack>
+                    </MudPaper>
+                </MudItem>
+
+                <MudItem xs="12" sm="6">
+                    <MudPaper Class="pa-4" Elevation="2" Style="height: 100%;">
+                        <MudStack Spacing="2">
+                            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                                <MudIcon Icon="@Icons.Material.Filled.Storage" Color="Color.Tertiary" />
+                                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;">Database</MudText>
+                            </MudStack>
+                            <MudText Typo="Typo.body2">
+                                <MudLink Href="https://www.mongodb.com/docs/atlas/cli/current/atlas-cli-deploy-local/" Target="_blank" Underline="Underline.Hover">MongoDB Atlas Local</MudLink>
+                                (Community Edition) running in a container on the same host. Includes
+                                Atlas Search and Vector Search &mdash; the semantic search and
+                                embedding-based retrieval features run entirely on local hardware.
+                                <strong>£0/month.</strong>
+                            </MudText>
+                        </MudStack>
+                    </MudPaper>
+                </MudItem>
+            </MudGrid>
+        </div>
+
+        <MudDivider />
+
+        @* ── CTA ──────────────────────────────────────────────────────────────── *@
+        <MudPaper Class="pa-4" Elevation="2" Style="text-align: center;">
+            <MudStack Spacing="2" AlignItems="AlignItems.Center">
+                <MudText Typo="Typo.h6">Want to help?</MudText>
+                <MudText Typo="Typo.body2" Color="Color.Secondary">
+                    Donations cover the OpenAI bill and the domain renewal &mdash; everything else is donated time and hardware.
+                </MudText>
+                <MudButton
+                    Variant="Variant.Filled"
+                    Color="Color.Warning"
+                    Href="https://www.buymeacoffee.com/pjmagee"
+                    Target="_blank"
+                    StartIcon="@Icons.Material.Filled.Coffee">
+                    Buy Me a Coffee
+                </MudButton>
+                <MudText Typo="Typo.caption" Color="Color.Secondary">
+                    Or contribute on
+                    <MudLink Href="https://github.com/pjmagee/starwars-data" Target="_blank" Underline="Underline.Always">GitHub</MudLink> &mdash; the project is open source.
+                </MudText>
+            </MudStack>
+        </MudPaper>
+
+    </MudStack>
+</MudContainer>
+
+@code {
+    HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
+    OpenAiSummaryDto? _summary;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _summary = await Api.GetFromJsonAsync<OpenAiSummaryDto>("api/costs/openai-summary");
+        }
+        catch
+        {
+            _summary = new OpenAiSummaryDto(0, 0, "usd", null, [], []);
+        }
+    }
+
+    static string FormatMoney(long cents, string currency)
+    {
+        var amount = cents / 100m;
+        var symbol = currency.ToLowerInvariant() switch
+        {
+            "usd" => "$",
+            "gbp" => "£",
+            "eur" => "€",
+            _ => currency.ToUpperInvariant() + " ",
+        };
+        return $"{symbol}{amount:N2}";
+    }
+
+    public sealed record OpenAiSummaryDto(
+        long TotalCentsLast30Days,
+        long TotalCentsLast90Days,
+        string Currency,
+        DateTime? LastSyncedAt,
+        IReadOnlyList<DailySpendDto> DailyLast30,
+        IReadOnlyList<LineItemDto> ByLineItemLast30);
+
+    public sealed record DailySpendDto(string Date, long Cents, IReadOnlyList<LineItemDto> LineItems);
+
+    public sealed record LineItemDto(string Name, long Cents);
+}

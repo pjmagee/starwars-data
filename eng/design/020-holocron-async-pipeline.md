@@ -3,7 +3,7 @@
 Status: in progress
 Date: 2026-04-27
 Author: Patrick Magee
-Cross-refs: [Design-018 — KG enrichments architecture](018-kg-enrichments-architecture.md), [Design-019 — KG enrichment UI provenance](019-kg-enrichment-ui-provenance.md)
+Cross-refs: [Design-018 — KG enrichments architecture](018-kg-enrichments-architecture.md), [Design-019 — KG enrichment UI provenance](019-kg-enrichment-ui-provenance.md), [ADR-006 — long-running AI workflow pipelines](../adr/006-long-running-ai-workflow-pipelines.md)
 
 ## Problem
 
@@ -193,20 +193,32 @@ completes in seconds with `enrichmentsApplied: 0` and a clear breakdown.
 
 ### Async kickoff
 
+The pipeline runs **in the API process**, not Admin. Same pattern as
+`CharacterTimelinesController.Generate` — the controller creates a job-doc + a
+tracker entry, kicks off `Task.Run` on a fresh DI scope, returns 202
+immediately. Hangfire is *not* used here (it's recurring-job infrastructure;
+the Holocron pipeline is one-shot per request).
+
 ```
 POST /api/holocron/jobs/enhance/{pageId}
-  → if a Queued/Running job already exists for this pageId, return that one
-  → else: create job doc with status=Queued, enqueue via Hangfire
-  → respond 202 Accepted with { jobId, status }
+  → if HolocronEnhancementTracker.IsRunning(pageId) → 409 Conflict
+  → HolocronJobService.EnqueueOrGetActiveAsync(...) creates the job doc (Queued)
+  → Task.Run on a fresh DI scope:
+       HolocronEnhancementService.RunAsync(jobId, pageId, "manual", tracker, ct)
+  → respond 202 Accepted with { jobId, pageId, status }
 
-GET /api/holocron/jobs/{jobId}
-  → returns the full job doc
+GET /api/holocron/jobs/{pageId}/status
+  → live status — tracker entry first, falls back to most recent job doc
+  → returns HolocronStatusDto (stage, message, currentStep/totalSteps, activityLog…)
 
-GET /api/holocron/jobs?status=Running&nodeId=...
-  → paginated list with filters
+GET /api/holocron/jobs/active
+  → list of in-flight runs from the tracker singleton
 
-GET /api/holocron/jobs/last-processed/{pageId}
-  → returns the most recent Completed job for this node, or null
+GET /api/holocron/jobs?status=Completed&pageId=…&page=…
+  → paginated history from kg.enrichment_jobs
+
+GET /api/holocron/jobs/last-completed/{pageId}
+  → most recent Completed job for this node (drives "last processed N ago" caption)
 ```
 
 ### UI: `/holocron/jobs`
@@ -228,19 +240,84 @@ the button when a Completed job exists for that node.
 
 | Phase | Scope | LOC est | Status |
 |---|---|---|---|
-| A | `kg.enrichment_jobs` + `kg.node_processed_chunks` schemas, `chunk.contentHash` field + extractor + migration 0013 backfill, `HolocronJobService` (create/update/get/list) | ~400 | Pending |
-| B | 5 executors + workflow wiring + Hangfire kickoff + skip-if-unchanged logic | ~1200 | Pending |
-| C | `/holocron/jobs` page + last-processed caption on Enhance button | ~300 | Pending |
+| A | `kg.enrichment_jobs` + `kg.node_processed_chunks` schemas, `chunk.contentHash` field + extractor + migration 0013 backfill, `HolocronJobService` (create/update/get/list) | ~750 | ✅ Shipped (`05e8039544`) |
+| B | 5 Microsoft.Agents.AI.Workflows executors + `HolocronEnhancementService` orchestrator + `HolocronEnhancementTracker` + `Task.Run` kickoff in API + status/list endpoints + skip-if-unchanged logic | ~1800 | ✅ Shipped |
+| C | `/holocron/jobs` global list page + per-node `/holocron/jobs/{pageId}` page (stepper + activity log + history table + applied-changes table with expandable evidence) + `HolocronProgressDialog` inline-watch + `Enhance with Holocron` button rewire + `Holocron history` deep-link in KG node-detail panel + sidebar nav link + dev-only auth bypass for localhost | ~1100 | ✅ Shipped |
 
 Phase A unblocks the rest. Each phase ships as one commit on the branch.
+
+## Phase B + C ship summary (post-Phase-A delta)
+
+**Backend** ([src/StarWarsData.Services/AI/Agents/Holocron/](../../src/StarWarsData.Services/AI/Agents/Holocron/)):
+- `HolocronWorkflowEvents.cs` — 8 custom `WorkflowEvent` types bridged to the tracker activity log.
+- `HolocronWorkflowState.cs` — serializable state DTOs: `HolocronNodeSnapshot`, `HolocronChunkRef` (no Text — keeps checkpoint under Mongo's 16 MB doc limit; see "Lessons learned"), `HolocronChunkPayload` (Text-bearing, used at LLM-call time only), `HolocronBatch`, `HolocronRawProposalSet`, `HolocronConsolidatedProposals`.
+- `HolocronEnhancementTracker.cs` — singleton tracker mirroring `CharacterTimelineTracker`.
+- `HolocronEnhancementService.cs` — orchestrator: `WorkflowBuilder.AddEdge` chain, `MongoCheckpointStore` resume-if-possible, `await using StreamingRun`, `ExecutorFailedEvent` + `WorkflowErrorEvent` capture, event-bridging.
+- `Workflows/HolocronContextDiscoveryExecutor.cs` — soft-warns on null `contentHash` (handles ~0.05% stub kg.nodes) and projects backlink chunks to refs server-side.
+- `Workflows/HolocronBundlerExecutor.cs` — bundles refs by `TextLength` budget (~40K chars/batch).
+- `Workflows/HolocronProposalExtractorExecutor.cs` — LLM per batch via `HolocronAgent.CallLlmForBatchAsync`; rehydrates text per-batch from `search.chunks`; checkpoints to `genai.holocron_progress` after every LLM call.
+- `Workflows/HolocronConsolidatorExecutor.cs` — cross-batch dedup; **merges evidence across duplicates** (deduped by chunkId/sourcePageId) instead of discarding it.
+- `Workflows/HolocronApplyExecutor.cs` — stamps `JobId` on every `NodeEnrichment`/`EdgeEnrichment`/`HolocronEvent`; bulk-write tolerant of E11000 duplicate-key (replay safety).
+
+**Service-layer additions**:
+- [`HolocronAgent.CallLlmForBatchAsync`](../../src/StarWarsData.Services/AI/Agents/HolocronAgent.cs) — public entry point for the workflow's per-batch LLM call. Accepts state-shaped DTOs.
+- `HolocronAgent.RunStalenessSweepAsync` — tolerates empty hashes (skip comparison rather than auto-flag stub-node enrichments stale).
+- [`MongoCheckpointStore`](../../src/StarWarsData.Services/Shared/MongoCheckpointStore.cs) — constructor parameterised to accept a collection name. Holocron uses `genai.holocron_checkpoints`.
+- [`KnowledgeGraphQueryService.BrowseTemporalNodesAsync`](../../src/StarWarsData.Services/KnowledgeGraph/KnowledgeGraphQueryService.cs) — refactored from view-read to two-phase (paginate base `kg.nodes`, then bulk-fetch enrichments by PageIds). 50-80× speedup on paginated list (was 7s, now ~100ms).
+- [`KnowledgeGraphQueryService.GetEdgesForEntityAsync`](../../src/StarWarsData.Services/KnowledgeGraph/KnowledgeGraphQueryService.cs) — picks most recent enrichment per `(fromId, toId, label)`, surfaces `HolocronAppliedAt` + `HolocronJobId` + `HolocronAgentVersion` on each `EntityEdgeRowDto`.
+- Same shape applied to `CharacterTimelineService` for consistency.
+
+**API endpoints** (in [HolocronController.cs](../../src/StarWarsData.ApiService/Features/Holocron/HolocronController.cs)):
+- `POST /api/holocron/jobs/enhance/{pageId}` — async kickoff, 202 + jobId.
+- `GET /api/holocron/jobs/{pageId}/status` — live status (tracker first, falls back to most recent job-doc).
+- `GET /api/holocron/jobs/active` — list of all non-terminal runs from the tracker singleton.
+- `GET /api/holocron/jobs?status=&pageId=&page=&pageSize=` — paginated history from `kg.enrichment_jobs`.
+- `GET /api/holocron/jobs/last-completed/{pageId}` — drives "last processed N ago" caption.
+- `GET /api/holocron/jobs/{pageId}/enrichments` — unified list of node + edge enrichments touching this node.
+
+**Models / migrations**:
+- [`Settings.cs`](../../src/StarWarsData.Models/Settings.cs) — added `Collections.GenaiHolocronCheckpoints` + `GenaiHolocronProgress`.
+- [`HolocronJob.cs`](../../src/StarWarsData.Models/KnowledgeGraph/Holocron/HolocronJob.cs) — `[JsonConverter(typeof(JsonStringEnumConverter))]` on `HolocronJobStatus` (per-type, not global — see lessons learned).
+- [`NodeEnrichment.cs`](../../src/StarWarsData.Models/KnowledgeGraph/Enrichments/NodeEnrichment.cs), [`EdgeEnrichment.cs`](../../src/StarWarsData.Models/KnowledgeGraph/Enrichments/EdgeEnrichment.cs), [`HolocronEvent.cs`](../../src/StarWarsData.Models/KnowledgeGraph/Enrichments/HolocronEvent.cs) — added `JobId` field.
+- [Migration 0014](../../src/StarWarsData.MongoDbMigrations/migrations/0014-holocron-jobid-unique-indexes.js) — partial unique indexes `{jobId, pageId, fieldPath}` / `{jobId, fromId, toId, label}` / `{jobId, enrichmentId}` with `partialFilterExpression: {jobId: {$type: "string", $gt: ""}}`. Replay safety for partial-Apply crashes. Applied to `starwars-dev`; **not yet applied to prod**.
+
+**Frontend** ([src/StarWarsData.Frontend/Components/](../../src/StarWarsData.Frontend/Components/)):
+- `Pages/HolocronJobsList.razor` — global `/holocron/jobs` page: in-flight section (live polling at 1.5s) + paginated recent runs with status filter.
+- `Pages/HolocronNodeJobs.razor` — per-node `/holocron/jobs/{pageId}` page: header, run-enhancement button, active-run stepper, run history table, **applied changes** table with expandable rows that lazy-fetch full evidence detail via `/api/holocron/enrichments/{id}`.
+- `Shared/HolocronProgressDialog.razor` — quick inline progress for the existing Knowledge Graph row Enhance button.
+- `Pages/KnowledgeGraph.razor` — Enhance button rewired to dialog, "Holocron history" deep-link added, edge rows now carry `HolocronAppliedAt` + tooltip + "view run" link.
+- `Pages/GraphExplorer.razor` — Enhance button rewired to async polling.
+- `Layout/NavMenu.razor` — added "Holocron Jobs" link beneath "Holocron Log".
+- `Program.cs` — dev-only middleware that injects a synthetic `dev` admin principal in `IsDevelopment()` so localhost doesn't need a Keycloak round-trip.
+
+**Tests** ([src/StarWarsData.Tests/Integration/HolocronJobIdUniqueIndexTests.cs](../../src/StarWarsData.Tests/Integration/HolocronJobIdUniqueIndexTests.cs)) — 5 Integration-tier tests covering migration 0014's partial-unique-index behaviour.
+
+## Lessons learned (load-bearing — bake into future Holocron-shaped work)
+
+1. **Microsoft.Agents.AI.Workflows checkpoints have a hard 16 MB ceiling.** State you push via `context.QueueStateUpdateAsync` is serialised to JSON and stored as a single `genai.*_checkpoints` Mongo document at every superstep boundary. Heavy data (chunk text, page bodies, large arrays) explodes that doc. Fix: store **references** in workflow state and lazy-rehydrate per-batch via indexed lookups. Anakin (2,520 chunks × ~6 KB text each = ~15 MB) blew past 16 MB before the `HolocronChunkRef` refactor; post-fix, Anakin's checkpoint is ~510 KB.
+
+2. **Two-layer durability: framework checkpoint + per-LLM-call Mongo doc.** Framework checkpoints fire only at superstep boundaries (`OnCheckpointingAsync` is called *between* executors, not within). For long-running per-batch work, an in-executor process kill loses everything since the last superstep. Add a per-iteration MongoDB write keyed by `pageId` (`genai.holocron_progress` for Holocron, `genai.character_progress` for Timeline). On resume, the executor reads it back and skips already-processed batches.
+
+3. **Don't read paginated through Mongo views with `$lookup` + `$expr` outer-doc vars.** The `kg.nodes.enriched` view used `let: {nodeHash: '$contentHash'}` with `$expr` matching on it — Mongo's optimizer can't push the consumer's `$match`/`$sort`/`$skip` through that. The view runs the lookup against all 166K rows before any pagination clause applies. Per-query cost: ~7 s. Fix: paginate base `kg.nodes` (indexed, ~2 ms) then bulk-fetch enrichments by `PageId IN (page-ids)` (~5 ms). 50–80× speedup.
+
+4. **`JsonStringEnumConverter` via `AddJsonOptions` is global.** It affects every enum on every controller. Frontend `HttpClient` deserialisers that expect numbers will explode on the new strings. The Timeline page broke for ~10 minutes because of this. Fix: apply `[JsonConverter(typeof(JsonStringEnumConverter))]` per-type on the specific enum that needs string serialisation — surgical, no blast radius.
+
+5. **Mongo partial filter expressions don't support `$ne`.** Migration 0014's first cut used `{jobId: {$exists: true, $ne: ""}}` and was rejected with "Expression not supported in partial index: $not". Allowed operators: `$exists`, `$eq`, `$gt`/`gte`/`lt`/`lte`, `$type`, `$and`, `$or`. The "non-empty string" predicate is `{$type: "string", $gt: ""}`.
+
+6. **`kg.nodes.contentHash` is null for ~0.05% of nodes** (82 of 166K). Cause: `raw.pages.infobox` reduces to `{Template: "..."}` with no `Data` — wiki download succeeded but infobox parse produced nothing usable. Phase 1 can't compute a hash from empty data. Code paths that *require* `contentHash` should soft-handle this: `HolocronContextDiscoveryExecutor` now logs a warning and proceeds with empty-string hash; `HolocronAgent.RunStalenessSweepAsync` skips the comparison when either side's hash is empty (don't auto-flip stub-node enrichments to Stale).
+
+7. **Per-batch dedup loses evidence if you only keep the canonical proposal.** The first cut of `HolocronConsolidatorExecutor` grouped Annotates by `(fromId, toId, label)` and kept the one with the most evidence. For a high-degree node like Anakin (1,016 raw → 6 applied), each surviving enrichment had 1–2 evidence excerpts despite being supported by ~169 distinct backlink chunks. Fix: **merge evidence arrays across all duplicates** (deduped by chunkId or `page:{sourcePageId}` fallback), so each surviving enrichment carries the union of every chunk that supported the claim.
+
+8. **Apply isn't strictly idempotent without external help.** A process kill *after* `kg.enrichments.InsertManyAsync` but *before* the workflow's Completed transition causes a resumed run to re-execute Apply and re-insert. Fix: stamp `JobId` on every enrichment/event; partial unique index `(jobId, identity-fields)` rejects duplicates with E11000 on replay; bulk-write helper catches the error code and treats it as a silent success.
+
+9. **`<AuthorizeView>`-gated buttons need an auth path even for dev.** Pre-fix, the Enhance button was invisible in dev because we hadn't signed in to Keycloak. Adding a dev-only auth-bypass middleware in `Program.cs` (gated on `app.Environment.IsDevelopment()`) injects a synthetic `dev` admin principal so all `AuthorizeView` blocks render uniformly on localhost. Production untouched.
 
 ## Risks
 
 1. **Cost runaway.** A high-degree node like Sidious produces ~170 batches at
    ~$0.01/batch ≈ $1.70 per enhance. Mitigation: per-job `maxBatches` cap
    (configurable, default unlimited but warns above 200), and per-day budget
-   check before kicking off scheduled passes. Document this in the daily-pass
-   Hangfire job.
+   check before kicking off scheduled passes.
 2. **Mid-job page edits.** A linking article gets re-chunked while the job is
    running → `chunkId` changes mid-flight. Mitigation: Discovery snapshots the
    chunk set in workflow state at the start; later stages don't re-query.
@@ -252,9 +329,12 @@ Phase A unblocks the rest. Each phase ships as one commit on the branch.
    duplicates are *near-duplicates* with the same intent. If this becomes a
    visible problem, add an LLM-based merge step (small extra call to pick
    between two competing claims).
-4. **Hangfire dashboard already exists** — make sure the new jobs don't
-   pollute it. Use a dedicated queue (`holocron`) so the existing Hangfire
-   stats stay clean.
+4. **API process kill mid-extraction.** A redeploy or OOM during batch 47/170
+   would replay 46 successful LLM calls if we only relied on the framework's
+   superstep-boundary checkpoint. Mitigation: per-LLM-call MongoDB progress in
+   `genai.holocron_progress` (saved after every batch by the extractor) — same
+   pattern as Character Timeline's `genai.character_progress`. The resumed run
+   skips already-processed batches and rehydrates accumulated proposals.
 
 ## Open questions
 
@@ -526,23 +606,33 @@ _processed.Indexes.CreateMany([
   unchanged chunks.
 - The 4 other executors.
 
-### Phase B preview (concretely, for handoff continuity)
+### Phase B implementation (Microsoft.Agents.AI.Workflows in API process)
+
+The pipeline mirrors `CharacterTimelineService.GenerateTimelineAsync` exactly —
+five `Executor<string, string>` classes wired with `WorkflowBuilder.AddEdge`,
+`MongoCheckpointStore`-backed checkpointing, fire-and-forget `Task.Run` from the
+API controller. **It runs in the API process, not Admin.** Hangfire is a
+recurring-job mechanism; this is a one-shot per-request workflow with
+resume-on-failure semantics, which is what the Workflows framework provides.
 
 | File | Purpose |
 |---|---|
-| `src/StarWarsData.Services/AI/Agents/Holocron/HolocronEnhanceJob.cs` | Hangfire job entry-point; orchestrates the 5 executors |
-| `src/StarWarsData.Services/AI/Agents/Holocron/Workflows/HolocronContextDiscoveryExecutor.cs` | Pure C# — backlink fetch + skip-if-unchanged filter |
-| `src/StarWarsData.Services/AI/Agents/Holocron/Workflows/HolocronBundlerExecutor.cs` | Pure C# — bundle into ~40K-char batches |
-| `src/StarWarsData.Services/AI/Agents/Holocron/Workflows/HolocronProposalExtractorExecutor.cs` | LLM per-batch — reuses `HolocronProposalsBatch` schema; checkpoints to `kg.enrichment_jobs.completedBatches` |
-| `src/StarWarsData.Services/AI/Agents/Holocron/Workflows/HolocronConsolidatorExecutor.cs` | Pure C# — dedupe + pre-flight |
-| `src/StarWarsData.Services/AI/Agents/Holocron/Workflows/HolocronApplyExecutor.cs` | Pure C# — write enrichments + events + ProcessedChunk records |
-| `src/StarWarsData.ApiService/Features/Holocron/HolocronJobsController.cs` | NEW — `POST /jobs/enhance/{pageId}`, `GET /jobs/{id}`, `GET /jobs?status=...` |
-| `src/StarWarsData.AppHost/Program.cs` | Register `holocron` Hangfire queue |
+| `src/StarWarsData.Services/AI/Agents/Holocron/HolocronWorkflowEvents.cs` | Custom `WorkflowEvent` types bridged to the tracker for the activity log |
+| `src/StarWarsData.Services/AI/Agents/Holocron/HolocronWorkflowState.cs` | Serializable state DTOs (`HolocronNodeSnapshot`, `HolocronChunkPayload`, `HolocronBatch`, raw + consolidated proposal sets) |
+| `src/StarWarsData.Services/AI/Agents/Holocron/HolocronEnhancementTracker.cs` | Singleton tracker for live polling — mirrors `CharacterTimelineTracker` |
+| `src/StarWarsData.Services/AI/Agents/Holocron/HolocronEnhancementService.cs` | Orchestrator: `WorkflowBuilder`, checkpoint manager, event-bridging |
+| `src/StarWarsData.Services/AI/Agents/Holocron/Workflows/HolocronContextDiscoveryExecutor.cs` | Stage 1 — backlink fetch + skip-if-unchanged filter, mirrors instance state to checkpoint |
+| `src/StarWarsData.Services/AI/Agents/Holocron/Workflows/HolocronBundlerExecutor.cs` | Stage 2 — bundle into ~40K-char batches |
+| `src/StarWarsData.Services/AI/Agents/Holocron/Workflows/HolocronProposalExtractorExecutor.cs` | Stage 3 — LLM per-batch via `HolocronAgent.CallLlmForBatchAsync`; per-LLM-call Mongo progress in `genai.holocron_progress` |
+| `src/StarWarsData.Services/AI/Agents/Holocron/Workflows/HolocronConsolidatorExecutor.cs` | Stage 4 — cross-batch dedupe + pre-flight (canonical labels, no parallel pairs, evidence required) |
+| `src/StarWarsData.Services/AI/Agents/Holocron/Workflows/HolocronApplyExecutor.cs` | Stage 5 — writes enrichments + events + ProcessedChunk ledger records |
+| `src/StarWarsData.ApiService/Features/Holocron/HolocronController.cs` | Updated — `POST /jobs/enhance/{pageId}`, `GET /jobs/{pageId}/status`, `GET /jobs/active`, `GET /jobs`, `GET /jobs/last-completed/{pageId}` |
+| `src/StarWarsData.Models/Settings.cs` | Added `Collections.GenaiHolocronCheckpoints` + `Collections.GenaiHolocronProgress` |
+| `src/StarWarsData.Services/Shared/MongoCheckpointStore.cs` | Constructor parameterised to accept a collection name (Holocron uses its own) |
 
-Phase B keeps the existing synchronous `POST /api/holocron/enhance/{pageId}`
-endpoint as a thin wrapper that immediately enqueues a job and returns the
-jobId — backwards-compatible with the Knowledge Graph "Enhance" button
-(which already polls). The button copy gets updated in Phase C.
+The KnowledgeGraph page's existing "Enhance with Holocron" button needs a
+small client-side rewire to use the new endpoint shape. That, plus the
+`/holocron/jobs` page itself, is Phase C.
 
 ### Phase C preview
 

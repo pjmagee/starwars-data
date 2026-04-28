@@ -4,7 +4,7 @@ using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Logging;
 using StarWarsData.Models.Entities;
 
-namespace StarWarsData.Services.Executors;
+namespace StarWarsData.Services.AI.Agents.CharacterTimelines.Workflows;
 
 /// <summary>
 /// Reviews all accumulated events from the extraction stage.

@@ -9,9 +9,9 @@ using MongoDB.Driver;
 using StarWarsData.Models;
 using StarWarsData.Models.Entities;
 using StarWarsData.Models.Queries;
-using StarWarsData.Services.Executors;
+using StarWarsData.Services.AI.Agents.CharacterTimelines.Workflows;
 
-namespace StarWarsData.Services;
+namespace StarWarsData.Services.AI.Agents.CharacterTimelines;
 
 /// <summary>
 /// ETL service that uses a Microsoft Agent Framework sequential workflow to build
@@ -195,44 +195,64 @@ public class CharacterTimelineService
         //    See Microsoft.Agents.AI.Workflows 1.0.0-rc5 checkpointing guide.
         var existingCheckpoints = (await checkpointStore.RetrieveIndexAsync(sessionId)).ToList();
 
-        StreamingRun streamingRun;
-        if (existingCheckpoints.Count > 0)
-        {
-            var latest = existingCheckpoints[^1];
-            _logger.LogInformation(
-                "Resuming timeline workflow for PageId={PageId} from checkpoint {CheckpointId} ({CheckpointCount} total)",
-                characterPageId,
-                latest.CheckpointId,
-                existingCheckpoints.Count
-            );
-            tracker?.Update(characterPageId, GenerationStage.Discovering, $"Resuming from checkpoint ({existingCheckpoints.Count} saved)...");
-            streamingRun = await InProcessExecution.ResumeStreamingAsync(workflow, latest, checkpointManager, ct);
-        }
-        else
-        {
-            _logger.LogInformation("Starting fresh timeline workflow for PageId={PageId}", characterPageId);
-            streamingRun = await InProcessExecution.RunStreamingAsync(workflow, characterPageId.ToString(), checkpointManager, sessionId, ct);
-        }
+        // `await using` — StreamingRun is IAsyncDisposable. The official Agent
+        // Framework checkpoint samples (CheckpointAndRehydrate / CheckpointAndResume)
+        // use this pattern; without it the run's execution resources aren't released
+        // until GC fires.
+        await using StreamingRun streamingRun =
+            existingCheckpoints.Count > 0
+                ? await ResumeStreamingRunAsync(workflow, existingCheckpoints[^1], checkpointManager, characterPageId, existingCheckpoints.Count, tracker, ct)
+                : await StartStreamingRunAsync(workflow, characterPageId, checkpointManager, sessionId, ct);
 
-        // ── Consume streaming events and bridge to tracker ──────────────────
+        // ── Consume streaming events, bridge to tracker, and capture failures ──
+        // The framework emits ExecutorFailedEvent + WorkflowErrorEvent on per-stage
+        // exceptions but does not always re-throw on stream completion — the official
+        // samples observe both events. We capture the first failure so we can throw
+        // it after the stream closes, while preserving the checkpoints (a retry can
+        // resume from the last good superstep instead of starting from scratch).
         string? responseText = null;
+        Exception? firstFailure = null;
         await foreach (var evt in streamingRun.WatchStreamAsync(ct))
         {
-            if (evt is WorkflowOutputEvent outputEvent)
+            switch (evt)
             {
-                responseText = outputEvent.As<string>();
-            }
+                case WorkflowOutputEvent outputEvent:
+                    responseText = outputEvent.As<string>();
+                    if (tracker is not null)
+                        BridgeEventToTracker(tracker, characterPageId, evt);
+                    break;
 
-            // Bridge custom workflow events to the tracker's activity log
-            if (tracker is not null)
-                BridgeEventToTracker(tracker, characterPageId, evt);
+                case ExecutorFailedEvent failed:
+                    var failMsg = $"Executor '{failed.ExecutorId}' failed: {failed.Data}";
+                    _logger.LogError("Timeline workflow PageId={PageId} — {Msg}", characterPageId, failMsg);
+                    firstFailure ??= new InvalidOperationException(failMsg);
+                    break;
+
+                case WorkflowErrorEvent error:
+                    var errMsg = error.Data?.ToString() ?? "Unknown workflow error";
+                    _logger.LogError("Timeline workflow PageId={PageId} — workflow error: {Msg}", characterPageId, errMsg);
+                    firstFailure ??= new InvalidOperationException(errMsg);
+                    break;
+
+                default:
+                    if (tracker is not null)
+                        BridgeEventToTracker(tracker, characterPageId, evt);
+                    break;
+            }
         }
 
-        // ── Once the workflow stream is consumed, always clear checkpoints. ──
-        // If post-workflow processing (parsing, saving) fails, the next attempt must start
-        // fresh — resuming from the final checkpoint would replay the same broken LLM output
-        // in an infinite loop. Checkpoints are only useful for mid-workflow recovery (e.g.
-        // crash during batch extraction), not for retrying post-workflow logic.
+        if (firstFailure is not null)
+        {
+            // Mid-workflow executor failure — keep checkpoints so a retry resumes
+            // from the last good superstep. Don't run post-workflow parse logic.
+            throw firstFailure;
+        }
+
+        // ── Workflow stream completed cleanly — clear checkpoints. ──
+        // If post-workflow processing (parsing, saving) fails, the next attempt must
+        // start fresh — resuming from the final checkpoint would replay the same broken
+        // LLM output in an infinite loop. Checkpoints are only useful for mid-workflow
+        // recovery (e.g. crash during batch extraction), not for retrying post-workflow logic.
         await checkpointStore.ClearSessionAsync(sessionId);
 
         if (string.IsNullOrWhiteSpace(responseText))
@@ -286,6 +306,27 @@ public class CharacterTimelineService
         tracker?.Complete(characterPageId, $"Done! {events.Count} events from {sources.Count} sources");
 
         _logger.LogInformation("Stored timeline for {Title}: {EventCount} events from {SourceCount} source pages", character.Title, events.Count, sources.Count);
+    }
+
+    private async Task<StreamingRun> StartStreamingRunAsync(Workflow workflow, int characterPageId, CheckpointManager checkpointManager, string sessionId, CancellationToken ct)
+    {
+        _logger.LogInformation("Starting fresh timeline workflow for PageId={PageId}", characterPageId);
+        return await InProcessExecution.RunStreamingAsync(workflow, characterPageId.ToString(), checkpointManager, sessionId, ct);
+    }
+
+    private async Task<StreamingRun> ResumeStreamingRunAsync(
+        Workflow workflow,
+        CheckpointInfo latest,
+        CheckpointManager checkpointManager,
+        int characterPageId,
+        int total,
+        CharacterTimelineTracker? tracker,
+        CancellationToken ct
+    )
+    {
+        _logger.LogInformation("Resuming timeline workflow for PageId={PageId} from checkpoint {CheckpointId} ({CheckpointCount} total)", characterPageId, latest.CheckpointId, total);
+        tracker?.Update(characterPageId, GenerationStage.Discovering, $"Resuming from checkpoint ({total} saved)...");
+        return await InProcessExecution.ResumeStreamingAsync(workflow, latest, checkpointManager, ct);
     }
 
     /// <summary>

@@ -24,4 +24,6 @@ public static class RelationshipEdgeBsonFields
     public const string CreatedAt = "createdAt";
     public const string FromYear = "fromYear";
     public const string ToYear = "toYear";
+    public const string Meta = "meta";
+    public const string MetaBoundsSource = "boundsSource";
 }

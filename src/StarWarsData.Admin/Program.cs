@@ -17,6 +17,7 @@ using StarWarsData.Admin.Components;
 using StarWarsData.Models;
 using StarWarsData.ServiceDefaults;
 using StarWarsData.Services;
+using StarWarsData.Services.AI.Agents.CharacterTimelines;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -114,6 +115,21 @@ builder.Services.AddHttpClient<PageDownloader>(
     }
 );
 
+// OpenAI's /v1/organization/costs endpoint is slow (multi-second responses, especially
+// with bucket_width=1d + group_by=line_item over 90 days). The Aspire ServiceDefaults
+// standard resilience handler has a 10s per-attempt cap that kills the call, so we
+// opt this client out and rely on our own 60s HttpClient timeout. Daily idempotent
+// background job — losing a single retry to upstream slowness is fine.
+#pragma warning disable EXTEXP0001
+builder
+    .Services.AddHttpClient<OpenAiSpendSyncService>(client =>
+    {
+        client.Timeout = TimeSpan.FromSeconds(60);
+        client.DefaultRequestHeaders.Add("User-Agent", "StarWarsData/1.0");
+    })
+    .RemoveAllResilienceHandlers();
+#pragma warning restore EXTEXP0001
+
 var hangfireEnabled = builder.Configuration.GetSection("Settings").GetValue<bool>("HangfireEnabled", true);
 
 builder.Services.AddHangfire(
@@ -163,6 +179,7 @@ if (hangfireEnabled)
         ("check-graph-batches", "*/5 * * * *", "Check OpenAI batch status every 5 min", false),
         ("daily-article-chunking", "0 5 * * *", "Daily article chunking at 05:00 UTC", true),
         ("refresh-ask-suggestions", "0 3 * * 0", "Weekly AI-generated Ask page example questions (Sundays 03:00 UTC)", true),
+        ("daily-openai-spend-sync", "30 4 * * *", "Daily OpenAI billing/spend sync at 04:30 UTC", true),
     };
 
     foreach (var (id, cron, desc, enabled) in defaultJobs)
@@ -201,6 +218,10 @@ if (hangfireEnabled)
     // so it sees the freshest hashes for staleness detection and the freshest chunks for context.
     // The agent itself short-circuits when SettingsOptions.HolocronEnabled is false.
     RecurringJob.AddOrUpdate<StarWarsData.Services.AI.Agents.HolocronAgent>("daily-holocron-pass", a => a.RunDailyPassAsync(CancellationToken.None), Cron.Daily(6));
+
+    // OpenAI organisation spend sync (powers the public /costs page). Skips silently
+    // when Settings.OpenAiAdminKey is unset, so dev environments don't error nightly.
+    RecurringJob.AddOrUpdate<OpenAiSpendSyncService>("daily-openai-spend-sync", s => s.SyncAsync(CancellationToken.None), "30 4 * * *");
 }
 
 app.MapControllers();

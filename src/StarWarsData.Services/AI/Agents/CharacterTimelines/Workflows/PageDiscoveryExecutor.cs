@@ -8,7 +8,7 @@ using StarWarsData.Models;
 using StarWarsData.Models.Entities;
 using StarWarsData.Models.Queries;
 
-namespace StarWarsData.Services.Executors;
+namespace StarWarsData.Services.AI.Agents.CharacterTimelines.Workflows;
 
 /// <summary>
 /// Pure C# executor (no LLM) that queries MongoDB to discover all pages

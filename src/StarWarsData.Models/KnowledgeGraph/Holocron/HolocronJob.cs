@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -107,7 +108,14 @@ public sealed class HolocronJob
 /// terminal state (<see cref="Completed"/> or <see cref="Failed"/>) it does not transition
 /// again. The intermediate states map 1:1 to the 5-executor pipeline so the UI can show
 /// "what is the agent doing right now".
+///
+/// Serialized as the case-name string on the JSON wire (e.g. <c>"Completed"</c>) so
+/// status responses are self-describing for the polling UI and external consumers.
+/// Applied per-type rather than globally so other API enums keep their existing
+/// integer-form serialization (the Frontend's HttpClient JSON options don't have a
+/// matching converter for global string-form enums).
 /// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum HolocronJobStatus
 {
     /// <summary>Created via API; awaiting a Hangfire worker.</summary>

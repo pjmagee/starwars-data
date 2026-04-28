@@ -13,6 +13,13 @@ builder.Configuration.AddUserSecrets(typeof(Program).Assembly, optional: true);
 //   3. Aspire dashboard prompt at run, or `aspire publish`/`prepare`/`deploy` prompt
 // Set locally with: dotnet user-secrets set "Parameters:<name>" <value> --project src/StarWarsData.AppHost
 var openApi = builder.AddParameter("openapi", secret: true);
+
+// Org-scoped OpenAI Admin API key (sk-admin-…) for the Admin app's nightly billing sync.
+// Read-only billing scope — never goes to apiservice or frontend. Resolves from user-secrets:
+//   dotnet user-secrets set "Parameters:openai-admin-key" sk-admin-... --project src/StarWarsData.AppHost
+// If unset, Aspire prompts at AppHost startup. The Admin sync silently no-ops when the value
+// is empty, so leaving it blank is safe in dev environments without a billing key.
+var openApiAdmin = builder.AddParameter("openai-admin-key", secret: true);
 var mongoUser = builder.AddParameter("mongo-user");
 var mongoPassword = builder.AddParameter("mongo-password", secret: true);
 var mongoHost = builder.AddParameter("mongo-host");
@@ -61,6 +68,7 @@ var admin = builder
     .AddProject<StarWarsData_Admin>("admin")
     .WithExternalHttpEndpoints()
     .WithEnvironment("Settings__OpenAiKey", openApi)
+    .WithEnvironment("Settings__OpenAiAdminKey", openApiAdmin)
     .WithEnvironment("Settings__DatabaseName", starwarsDb)
     .WithEnvironment("Settings__HangfireEnabled", "true")
     .WithReference(mongo)
@@ -261,6 +269,19 @@ var admin = builder
             Method = HttpMethod.Post,
             Description = "AI agent explores the knowledge graph and generates Ask page example questions. Runs weekly (Sundays 03:00 UTC).",
             IconName = "LightbulbFilament",
+            IsHighlighted = false,
+        }
+    )
+    // ── Operational: OpenAI billing sync ──
+    .WithHttpCommand(
+        path: "/api/admin/openai/sync-spend",
+        displayName: "Sync OpenAI Spend",
+        commandOptions: new HttpCommandOptions
+        {
+            Method = HttpMethod.Post,
+            Description =
+                "Pulls the last 90 days of OpenAI org spend from /v1/organization/costs and upserts admin.spend_daily (powers the public /costs page). Runs daily 04:30 UTC; trigger here to refresh on demand. Requires Settings.OpenAiAdminKey.",
+            IconName = "Money",
             IsHighlighted = false,
         }
     );

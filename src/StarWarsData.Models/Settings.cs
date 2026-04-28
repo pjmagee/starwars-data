@@ -25,6 +25,16 @@ public class SettingsOptions
 
     public string OpenAiKey { get; set; } = null!;
 
+    /// <summary>
+    /// Org-scoped OpenAI Admin API key (sk-admin-…) used by the Admin app's nightly
+    /// spend sync to call <c>/v1/organization/costs</c>. Distinct from <see cref="OpenAiKey"/>
+    /// (the project key used for inference) — admin keys are read-only billing scope and
+    /// must never be shipped to ApiService or Frontend. Optional: when null/empty the
+    /// nightly sync exits silently and the public /api/costs endpoint serves whatever
+    /// data is already cached.
+    /// </summary>
+    public string? OpenAiAdminKey { get; set; }
+
     public string OpenAiModel { get; set; } = "gpt-5.4-mini";
 
     /// <summary>
@@ -174,6 +184,20 @@ public static class Collections
     public const string GenaiCharacterCheckpoints = "genai.character_checkpoints";
     public const string GenaiCharacterProgress = "genai.character_progress";
 
+    /// <summary>
+    /// Workflow checkpoint store for the Holocron async pipeline. Same shape as
+    /// <see cref="GenaiCharacterCheckpoints"/> — written by <c>MongoCheckpointStore</c>
+    /// during a Holocron run, cleared on successful completion.
+    /// </summary>
+    public const string GenaiHolocronCheckpoints = "genai.holocron_checkpoints";
+
+    /// <summary>
+    /// Per-batch progress for <c>HolocronProposalExtractorExecutor</c>. Survives mid-extraction
+    /// process restarts (e.g. an API redeploy mid-run) so the resumed run skips already-processed
+    /// batches and accumulated proposals are preserved.
+    /// </summary>
+    public const string GenaiHolocronProgress = "genai.holocron_progress";
+
     // ── Chat ──
     public const string ChatSessions = "chat.sessions";
     public const string UserSettings = "chat.user_settings";
@@ -187,6 +211,13 @@ public static class Collections
 
     // ── Admin ──
     public const string JobToggles = "admin.job_toggles";
+
+    /// <summary>
+    /// One document per UTC day, populated by the nightly OpenAI spend sync.
+    /// Read-only at runtime — the public /api/costs endpoint reads from here.
+    /// Keyed by ISO-8601 date string (e.g. "2026-04-27"); rolling 90-day window.
+    /// </summary>
+    public const string SpendDaily = "admin.spend_daily";
 
     // ── Dynamically generated Ask page suggestions ──
     public const string SuggestionsExamples = "suggestions.examples";
