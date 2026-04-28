@@ -244,23 +244,20 @@ public abstract partial class NodeBuilderBase : INodeBuilder
 
                 var targetPageId = ResolveLinkTarget(href, content, ctx.WikiUrlToPageId);
 
-                // Materialise Meta whenever ANY of qualifier, rawValue, order, or a parsed
-                // year exist — the year-carrying case is what gives the edge its
-                // BoundsSource = Infobox provenance tag (Design-021). Without this, edges
-                // that came in with infobox-supplied years but no qualifier would skip Meta
-                // entirely and lose their tag, making them indistinguishable from the
-                // Phase 5 lifecycle-fallback path.
+                // Materialise Meta on every emitted edge. SourceFieldLabel stamping
+                // (Design-024 Phase A) needs Meta to exist on every row so per-type
+                // OnFinalize overrides can branch on the originating field name without
+                // string-matching the Evidence text. The year-carrying case is what
+                // gives the edge its BoundsSource = Infobox provenance tag (Design-021).
                 var hasInfoboxYear = pl.FromYear.HasValue || pl.ToYear.HasValue;
-                var meta =
-                    pl.Qualifier is null && pl.RawValue == content && !hasInfoboxYear
-                        ? null
-                        : new EdgeMeta
-                        {
-                            Qualifier = pl.Qualifier,
-                            RawValue = pl.RawValue != content ? pl.RawValue : null,
-                            Order = pl.Order,
-                            BoundsSource = hasInfoboxYear ? EdgeBoundsSource.Infobox : EdgeBoundsSource.Unknown,
-                        };
+                var meta = new EdgeMeta
+                {
+                    Qualifier = pl.Qualifier,
+                    RawValue = pl.RawValue != content ? pl.RawValue : null,
+                    Order = pl.Order,
+                    BoundsSource = hasInfoboxYear ? EdgeBoundsSource.Infobox : EdgeBoundsSource.Unknown,
+                    SourceFieldLabel = label,
+                };
 
                 edges.Add(
                     new RelationshipEdge
@@ -310,6 +307,7 @@ public abstract partial class NodeBuilderBase : INodeBuilder
                         Evidence = $"Infobox field '{label}' (fallback)",
                         SourcePageId = ctx.PageId,
                         Continuity = ctx.Continuity,
+                        Meta = new EdgeMeta { SourceFieldLabel = label },
                     }
                 );
             }

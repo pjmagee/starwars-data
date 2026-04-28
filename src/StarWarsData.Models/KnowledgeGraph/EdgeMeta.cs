@@ -35,6 +35,19 @@ public sealed class EdgeMeta
     public int? Order { get; set; }
 
     /// <summary>
+    /// The originating infobox field label this edge was extracted from
+    /// (e.g. <c>"Affiliation(s)"</c>, <c>"commanders1"</c>, <c>"Sector capital"</c>).
+    /// Stamped by the generic <c>NodeBuilderBase.Build</c> loop on every edge it
+    /// emits so per-type <c>OnFinalize</c> overrides can branch on the source
+    /// field cleanly — particularly Pattern B (per-side index encoding) and
+    /// Pattern C (field-alias collapse) from Design-024. The human-readable
+    /// <see cref="RelationshipEdge.Evidence"/> string is preserved for audit;
+    /// this field is the structured counterpart for programmatic dispatch.
+    /// </summary>
+    [BsonElement("sourceFieldLabel"), BsonIgnoreIfNull]
+    public string? SourceFieldLabel { get; set; }
+
+    /// <summary>
     /// How the edge's <see cref="RelationshipEdge.FromYear"/> /
     /// <see cref="RelationshipEdge.ToYear"/> were determined. Distinguishes hard
     /// infobox-supplied bounds from soft lifecycle-fallback derivations so
@@ -48,4 +61,16 @@ public sealed class EdgeMeta
     [BsonElement("boundsSource"), BsonIgnoreIfDefault]
     [BsonRepresentation(BsonType.String)]
     public EdgeBoundsSource BoundsSource { get; set; }
+
+    /// <summary>
+    /// 1-based belligerent side index for conflict-style relationships
+    /// (Battle, Mission, Duel, War, Campaign, Event). Stamped by per-type
+    /// <c>OnFinalize</c> overrides (Design-024 Phase B, Pattern B) when the
+    /// edge originates from a numbered field (<c>commanders1..4</c>,
+    /// <c>ppl1..4</c>, <c>unit1..4</c>, <c>side1..4</c>). Lets multi-belligerent
+    /// queries answer "who commanded the Separatists at Geonosis" without
+    /// joining through <c>belligerent</c> edges to identify the side.
+    /// </summary>
+    [BsonElement("sideIndex"), BsonIgnoreIfNull]
+    public int? SideIndex { get; set; }
 }

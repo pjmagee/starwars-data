@@ -67,10 +67,19 @@ public class InfoboxGraphService
         RegisterBuilder(new RegionNodeBuilder());
         RegisterBuilder(new NebulaNodeBuilder());
 
+        // Geography / Astronomy (additional)
+        RegisterBuilder(new StarNodeBuilder());
+        RegisterBuilder(new PlantNodeBuilder());
+
         // Politics / Military
         RegisterBuilder(new GovernmentNodeBuilder());
         RegisterBuilder(new OrganizationNodeBuilder());
-        RegisterBuilder(new MilitaryNodeBuilder());
+        RegisterBuilder(new CompanyNodeBuilder());
+        // The previous MilitaryNodeBuilder used KgNodeTypes.Military ("Military")
+        // which never matched any corpus row — actual type is "Military_unit".
+        // Replaced by MilitaryUnitNodeBuilder during the typed-NodeBuilders cleanup.
+        RegisterBuilder(new MilitaryUnitNodeBuilder());
+        RegisterBuilder(new FleetNodeBuilder());
 
         // Events / Conflict
         RegisterBuilder(new BattleNodeBuilder());
@@ -87,10 +96,12 @@ public class InfoboxGraphService
         // Vehicles / Ships
         RegisterBuilder(new StarshipNodeBuilder());
         RegisterBuilder(new StarshipClassNodeBuilder());
+        RegisterBuilder(new IndividualShipNodeBuilder());
         RegisterBuilder(new SpaceStationNodeBuilder());
         RegisterBuilder(new VehicleNodeBuilder());
         RegisterBuilder(new AirVehicleNodeBuilder());
         RegisterBuilder(new GroundVehicleNodeBuilder());
+        RegisterBuilder(new RepulsorliftVehicleNodeBuilder());
         RegisterBuilder(new TradeRouteNodeBuilder());
 
         // Things
@@ -99,17 +110,40 @@ public class InfoboxGraphService
         RegisterBuilder(new DeviceNodeBuilder());
         RegisterBuilder(new ArtifactNodeBuilder());
         RegisterBuilder(new DroidNodeBuilder());
+        RegisterBuilder(new DroidSeriesNodeBuilder());
+        RegisterBuilder(new SubstanceNodeBuilder());
+        RegisterBuilder(new FoodNodeBuilder());
+        RegisterBuilder(new ClothingNodeBuilder());
+        RegisterBuilder(new ArmorNodeBuilder());
 
         // Qualifier nodes
         RegisterBuilder(new TitleOrPositionNodeBuilder());
         RegisterBuilder(new ForcePowerNodeBuilder());
         RegisterBuilder(new LightsaberFormNodeBuilder());
 
-        // Media (real-world)
+        // Media — narrative
         RegisterBuilder(new BookNodeBuilder());
+        RegisterBuilder(new ShortStoryNodeBuilder());
+        RegisterBuilder(new AudiobookNodeBuilder());
         RegisterBuilder(new MovieNodeBuilder());
         RegisterBuilder(new ComicNodeBuilder());
+        RegisterBuilder(new ComicStoryNodeBuilder());
+        RegisterBuilder(new ComicCollectionNodeBuilder());
         RegisterBuilder(new GameNodeBuilder());
+        RegisterBuilder(new AdventureNodeBuilder());
+        RegisterBuilder(new ExpansionPackNodeBuilder());
+
+        // Media — periodicals + reference
+        // Phase C: per-type overrides for book-shaped types (ISBN normalisation)
+        // and TelevisionEpisode (Timeline-suffix collapse, Guest star promotion).
+        RegisterBuilder(new ReferenceBookNodeBuilder());
+        RegisterBuilder(new ComicBookNodeBuilder());
+        RegisterBuilder(new ComicMagazineNodeBuilder());
+        RegisterBuilder(new MagazineIssueNodeBuilder());
+        RegisterBuilder(new MagazineArticleNodeBuilder());
+        RegisterBuilder(new ReferenceMagazineNodeBuilder());
+        RegisterBuilder(new TelevisionEpisodeNodeBuilder());
+        RegisterBuilder(new IuMediaNodeBuilder());
 
         // Catch-all for unrecognised template types
         RegisterBuilder(_unknownBuilder);
@@ -127,6 +161,14 @@ public class InfoboxGraphService
 
         var wikiUrlToPageId = await BuildWikiUrlLookupAsync(ct);
         _logger.LogInformation("InfoboxGraph: {Count} wiki URL → PageId mappings", wikiUrlToPageId.Count);
+
+        // Per Design-024 Phase A: per-type OnFinalize overrides need to know the KG node
+        // type of every edge target so they can apply source × target-type relabel rules
+        // (e.g. Affiliation: Character → TitleOrPosition becomes has_role). Build a
+        // PageId → NodeType lookup in a single pre-pass so the dict is available to the
+        // first builder invocation.
+        var nodeTypeByPageId = await BuildNodeTypeByPageIdLookupAsync(ct);
+        _logger.LogInformation("InfoboxGraph: {Count} pageId → NodeType mappings", nodeTypeByPageId.Count);
 
         var filter = Builders<Page>.Filter.Ne(p => p.Infobox, null);
         var totalPages = await _pages.CountDocumentsAsync(filter, cancellationToken: ct);
@@ -154,7 +196,7 @@ public class InfoboxGraphService
         {
             foreach (var doc in cursor.Current)
             {
-                if (TryBuildContext(doc, wikiUrlToPageId, out var context))
+                if (TryBuildContext(doc, wikiUrlToPageId, nodeTypeByPageId, out var context))
                 {
                     var builder = _builders.GetValueOrDefault(context.Type, _unknownBuilder);
                     var result = builder.Build(context);
@@ -391,7 +433,7 @@ public class InfoboxGraphService
     /// Returns false (and a default context) for pages that cannot be processed
     /// — currently never happens, but keeps the dispatch loop linear.
     /// </summary>
-    static bool TryBuildContext(BsonDocument doc, IReadOnlyDictionary<string, int> wikiUrlToPageId, out NodeBuilderContext context)
+    static bool TryBuildContext(BsonDocument doc, IReadOnlyDictionary<string, int> wikiUrlToPageId, IReadOnlyDictionary<int, string> nodeTypeByPageId, out NodeBuilderContext context)
     {
         var pageId = doc[MongoFields.Id].AsInt32;
         var title = doc[PageBsonFields.Title].AsString;
@@ -435,7 +477,8 @@ public class InfoboxGraphService
             ImageUrl: imageUrl,
             DataItems: dataItems,
             Definition: definition,
-            WikiUrlToPageId: wikiUrlToPageId
+            WikiUrlToPageId: wikiUrlToPageId,
+            NodeTypeByPageId: nodeTypeByPageId
         );
         return true;
     }
@@ -700,6 +743,44 @@ public class InfoboxGraphService
 
                 if (title is not null)
                     lookup.TryAdd(title, pageId);
+            }
+        }
+
+        return lookup;
+    }
+
+    /// <summary>
+    /// Build a lookup from PageId → KG node type by projecting the infobox template
+    /// from each page that has one. Resolves the same way <see cref="TryBuildContext"/>
+    /// does at the per-page level: <c>Template</c> is split on its last <c>:</c> and the
+    /// suffix is the type name (e.g. <c>"Template:Battle"</c> → <c>"Battle"</c>).
+    ///
+    /// Used by per-type <c>OnFinalize</c> overrides (Design-024 Phase A) to apply
+    /// source × target-type relabel rules. Pages without infoboxes are excluded — they
+    /// don't become KG nodes, so per-type rules can't target them.
+    /// </summary>
+    async Task<Dictionary<int, string>> BuildNodeTypeByPageIdLookupAsync(CancellationToken ct)
+    {
+        var lookup = new Dictionary<int, string>();
+
+        var filter = Builders<Page>.Filter.Ne(p => p.Infobox, null);
+        var cursor = await _pages.Find(filter).Project(Builders<Page>.Projection.Include(p => p.PageId).Include(PageBsonFields.InfoboxTemplate)).ToCursorAsync(ct);
+
+        while (await cursor.MoveNextAsync(ct))
+        {
+            foreach (var doc in cursor.Current)
+            {
+                var pageId = doc[MongoFields.Id].AsInt32;
+                if (!doc.Contains(PageBsonFields.Infobox))
+                    continue;
+                var infoboxDoc = doc[PageBsonFields.Infobox].AsBsonDocument;
+                var template = infoboxDoc.Contains(InfoboxBsonFields.Template) && !infoboxDoc[InfoboxBsonFields.Template].IsBsonNull ? infoboxDoc[InfoboxBsonFields.Template].AsString : null;
+                if (template is null)
+                    continue;
+                var idx = template.LastIndexOf(':');
+                var type = idx >= 0 ? template[(idx + 1)..] : template;
+                if (!string.IsNullOrEmpty(type))
+                    lookup[pageId] = type;
             }
         }
 

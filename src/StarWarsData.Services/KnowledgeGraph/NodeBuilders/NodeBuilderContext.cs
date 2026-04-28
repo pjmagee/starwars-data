@@ -19,6 +19,12 @@ namespace StarWarsData.Services.KnowledgeGraph.NodeBuilders;
 /// <param name="DataItems">Raw infobox <c>data</c> array — each entry is a <c>{label, values, links}</c> document.</param>
 /// <param name="Definition">Template-scoped semantic definition (which labels are properties / relationships / temporal).</param>
 /// <param name="WikiUrlToPageId">Lookup from wiki URL or title to PageId, used to resolve link targets.</param>
+/// <param name="NodeTypeByPageId">
+/// Lookup from PageId to KG node type (e.g. <c>Character</c>, <c>TitleOrPosition</c>).
+/// Built once per Phase 5 run from the same source query as <see cref="WikiUrlToPageId"/>;
+/// per-type <c>OnFinalize</c> overrides read it to apply source × target-type rules
+/// (Pattern A in Design-024) without an extra DB round-trip.
+/// </param>
 public sealed record NodeBuilderContext(
     int PageId,
     string Title,
@@ -30,5 +36,6 @@ public sealed record NodeBuilderContext(
     string? ImageUrl,
     BsonArray DataItems,
     InfoboxDefinition Definition,
-    IReadOnlyDictionary<string, int> WikiUrlToPageId
+    IReadOnlyDictionary<string, int> WikiUrlToPageId,
+    IReadOnlyDictionary<int, string> NodeTypeByPageId
 );

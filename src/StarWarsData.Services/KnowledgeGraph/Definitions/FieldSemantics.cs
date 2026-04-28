@@ -184,6 +184,15 @@ internal static class FieldSemantics
         "Number infected",
         "Number killed",
         "Cost",
+        // Title / Position (Design-024 Phase B — TitleOrPositionNodeBuilder)
+        "Powers",
+        "Term length",
+        // Phase C — ISBN normalisation (Book / ReferenceBook / ComicBook / MagazineIssue
+        // builders). The wiki template emits the primary ISBN with an empty Label, so
+        // it lands here under the canonical name "ISBN" via IsbnNormalizer post-pass.
+        "ISBN",
+        "ISBN2",
+        "ISBN3",
     };
 
     /// <summary>
@@ -320,8 +329,13 @@ internal static class FieldSemantics
         ["Places of worship"] = new("worshipped_at", "hosts_worship", "Places of worship", ["Structure"], "religion"),
         ["Pantheon"] = new("in_pantheon", "includes_deity", "Pantheon", ["Religion"], "religion"),
         ["Treatments"] = new("treated_by", "treats", "Treatments", ["Substance", "Device"], "medical"),
-        ["Culture"] = new("associated_culture", "culture_of", "Associated culture", ["CulturalGroup"], "cultural"),
-        ["Socio-cultural group(s)"] = new("associated_culture", "culture_of", "Socio-cultural group", ["CulturalGroup"], "cultural"),
+        // Design-024 Phase C (C7): the survey shows ~95% of Culture / Socio-cultural
+        // links resolve to Species or Religion, not CulturalGroup (which only has 34
+        // total nodes). Widening the Targets array stops the generic-loop link filter
+        // from silently dropping these as wrong-typed and keeps the dictionary honest
+        // about the data shape.
+        ["Culture"] = new("associated_culture", "culture_of", "Associated culture", ["Species", "Religion", "CulturalGroup"], "cultural"),
+        ["Socio-cultural group(s)"] = new("associated_culture", "culture_of", "Socio-cultural group", ["Species", "Religion", "CulturalGroup"], "cultural"),
 
         // ── Combat / conflict ──
         ["Place"] = new("took_place_at", "hosted_battle", "Location of conflict", ["CelestialBody", "Location", "City", "Structure"], "location"),
@@ -449,6 +463,58 @@ internal static class FieldSemantics
         ["Plant-based ingredients"] = new("has_ingredient", "used_in", "Plant ingredients", ["Plant"], "food"),
         ["Animal-based ingredients"] = new("has_ingredient", "used_in", "Animal ingredients", ["Species"], "food"),
         ["Awarded by"] = new("awarded_by", "awarded", "Awarding body", ["Organization"], "honors"),
+
+        // ── Design-024 Phase B additions ──
+        // Sector field-alias collapse (SectorNodeBuilder): wiki uses these distinct
+        // labels on Sector pages but the semantic relationship is uniform.
+        ["Sector capital"] = new("has_capital", "capital_of", "Sector capital", ["City", "CelestialBody"], "political"),
+        ["Subsectors"] = new("has_subsector", "parent_sector", "Subsectors of this sector", ["Sector"], "location"),
+        ["Stations"] = new("has_space_station", "orbits", "Space stations in this sector", ["SpaceStation"], "military"),
+        // Year typed-leader fields (YearNodeBuilder): Year pages list named leadership
+        // positions held during that year. Survey: 134 Chancellor, 43 Chief, 25 Head edges.
+        ["Chancellor"] = new("has_chancellor", "chancellor_of", "Chancellor in office", ["Character", "Person"], "political"),
+        ["Head"] = new("has_head", "head_of", "Head of state in office", ["Character", "Person"], "political"),
+        ["Chief"] = new("has_chief", "chief_of", "Chief of state in office", ["Character", "Person"], "political"),
+        // Source × target relabel seeds (CharacterNodeBuilder, DroidNodeBuilder,
+        // TitleOrPositionNodeBuilder). The keys are synthetic — they are NEVER
+        // matched against an infobox field (no template has a field literally
+        // named "__has_role"). Their purpose is to register the canonical label +
+        // reverse + description in FieldSemantics.Relationships so kg.labels
+        // exposes them with a meaningful entry once OnFinalize emits them. The
+        // leading "__" makes the synthetic origin obvious in mongosh.
+        // Labels already covered by existing entries (member_of via Members's
+        // reverse pair, owned_by via Owner(s), works_for via Companies) don't need
+        // a new seed — the existing description still applies.
+        ["__has_role"] = new("has_role", "held_by", "Role / position assigned to a character", ["TitleOrPosition"], "role"),
+        ["__member_of_family"] = new("member_of_family", "has_family_member", "Family membership", ["Family"], "family"),
+        ["__has_ethnicity"] = new("has_ethnicity", "ethnicity_of", "Ethnic / sub-species heritage", ["Species"], "cultural"),
+        ["__from_city"] = new("from_city", "origin_city_of", "City of origin", ["City"], "location"),
+        ["__serves_in_unit"] = new("serves_in", "has_member", "Military service — serves in unit / fleet", ["Military_unit", "Fleet"], "military"),
+        ["__position_in"] = new("position_in", "has_position", "Position-in-organization (TitleOrPosition only)", ["Organization", "Government"], "political"),
+
+        // ── Design-024 Phase C additions ──
+        // C1 — CelestialBody source-aware language relabel: planets don't speak,
+        // but they do "host" a language community.
+        ["__has_language"] = new("has_language", "language_of", "Primary language used on a celestial body / system", ["Language"], "cultural"),
+        // C2 — TelevisionEpisode promotions
+        ["Guest star(s)"] = new("featured_actor", "acted_in", "Guest-starring actor in a TV episode", ["Person", "Character"], "publication"),
+        ["Production company"] = new("produced_by", "produced", "Production company that made the work", ["Company"], "publication"),
+        // C4 — ReferenceMagazine "Featured" content
+        ["Featured"] = new("features", "featured_in", "Subject featured in a publication", ["Character", "Person", "Organization", "CelestialBody"], "publication"),
+        // C5 — IndividualShip / StarshipClass affiliation refinements
+        ["__assigned_to"] = new("assigned_to", "has_assignment", "Ship / unit assignment to a fleet or military unit", ["Military_unit", "Fleet"], "military"),
+        ["__designed_for"] = new("designed_for", "design_target_of", "Ship class designed for / by a species or religion", ["Species", "Religion"], "military"),
+        // C8 — Food: merge "Race" alias into Edible-by semantics, and add "Inedible by".
+        // "Race" maps to the same semantic as "Edible by" (the Wookieepedia field is
+        // an old synonym for the species that can eat the food).
+        ["Race"] = new("edible_by", "eats", "Species that can eat this food (alias for Edible by)", ["Species"], "food"),
+        ["Inedible by"] = new("not_edible_by", "cannot_eat", "Species for which the food is poisonous or otherwise unsafe", ["Species"], "food"),
+        // C9 — Character Yuuzhan Vong concepts (small but real). Promoted from
+        // unclassified silent-text to typed edges. Both are Religion-typed targets
+        // in the data — the Yuuzhan Vong domain/caste structure is part of their
+        // religious cosmology — so the Religion target list applies.
+        ["Domain"] = new("has_domain", "domain_of", "Yuuzhan Vong domain affiliation", ["Religion", "Organization"], "cultural"),
+        ["Caste"] = new("has_caste", "caste_of", "Yuuzhan Vong caste affiliation", ["Religion", "Organization"], "cultural"),
     };
 
     /// <summary>

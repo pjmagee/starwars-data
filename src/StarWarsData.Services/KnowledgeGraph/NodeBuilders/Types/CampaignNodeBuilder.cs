@@ -3,10 +3,13 @@ using StarWarsData.Models.Entities;
 namespace StarWarsData.Services.KnowledgeGraph.NodeBuilders.Types;
 
 /// <summary>
-/// <see cref="KgNodeTypes.Campaign"/> extraction. Sub-war operational arc.
-/// No type-specific logic yet.
+/// <see cref="KgNodeTypes.Campaign"/> extraction. Per-side encoding via
+/// <see cref="ConflictSideEncoder"/> — same pattern as
+/// <see cref="BattleNodeBuilder"/>. See Design-024 Pattern B.
 /// </summary>
 public sealed class CampaignNodeBuilder : NodeBuilderBase
 {
     public override string NodeType => KgNodeTypes.Campaign;
+
+    protected override void OnFinalize(NodeBuilderContext ctx, GraphNode node, List<RelationshipEdge> edges) => ConflictSideEncoder.StampSideIndex(ctx, edges);
 }
