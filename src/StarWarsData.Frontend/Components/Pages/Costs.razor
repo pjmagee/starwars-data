@@ -4,7 +4,7 @@
 
 <PageTitle>Running Costs — Star Wars Data</PageTitle>
 <HeadContent>
-    <meta name="description" content="What it costs to run Star Wars Data Explorer — live OpenAI spend, domain, hosting, and hardware." />
+    <meta name="description" content="What it costs to run Star Wars Data Explorer — live OpenAI spend, domain, and the self-hosted stack." />
 </HeadContent>
 
 <MudContainer MaxWidth="MaxWidth.Medium" Class="py-8">
@@ -13,12 +13,8 @@
         <div>
             <MudText Typo="Typo.h4" GutterBottom="true">Running Costs</MudText>
             <MudText Typo="Typo.body1" Color="Color.Secondary">
-                Star Wars Data is a non-commercial fan project, but it isn't free to run. Below is an
-                honest breakdown of what it actually costs &mdash; live OpenAI spend pulled from the
-                billing API, plus the fixed costs of the domain and the hardware it runs on.
-                If you find the site useful, the
-                <MudLink Href="https://www.buymeacoffee.com/pjmagee" Target="_blank" Underline="Underline.Always">Buy Me a Coffee</MudLink>
-                button helps cover it.
+                A non-commercial fan project, but not free to run. The breakdown below covers
+                live OpenAI API spend, the domain, and the self-hosted stack behind the rest.
             </MudText>
         </div>
 
@@ -29,7 +25,7 @@
             <MudText Typo="Typo.h5" GutterBottom="true">OpenAI API spend</MudText>
             <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-3">
                 Pulled from <MudLink Href="https://platform.openai.com/docs/api-reference/usage/costs" Target="_blank" Underline="Underline.Hover">OpenAI's Costs API</MudLink>
-                via a nightly sync. Figures are estimates with up to ~24h lag &mdash; the final invoice can differ slightly.
+                via a nightly sync. Estimates with ~24h lag.
             </MudText>
 
             @if (_summary is null)
@@ -84,17 +80,15 @@
                 {
                     <MudPaper Class="pa-4 mt-4" Elevation="2">
                         <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Class="mb-2">Daily spend (last 30 days)</MudText>
-                        <div style="display: grid; grid-template-columns: repeat(@_summary.DailyLast30.Count, 1fr); gap: 2px; align-items: end; height: 80px;">
-                            @{
-                                var maxCents = Math.Max(1, _summary.DailyLast30.Max(d => d.Cents));
-                            }
+                        @{
+                            var maxCents = Math.Max(1L, _summary.DailyLast30.Max(d => d.Cents));
+                        }
+                        <div style="display: flex; align-items: flex-end; gap: 2px; height: 80px;">
                             @foreach (var d in _summary.DailyLast30)
                             {
-                                var height = (int)(d.Cents * 100.0 / maxCents);
+                                var heightPct = Math.Max(2, (int)(d.Cents * 100.0 / maxCents));
                                 var tip = $"{d.Date}: {FormatMoney(d.Cents, _summary.Currency)}";
-                                <MudTooltip Text="@tip">
-                                    <div style="@($"height: {height}%; background: var(--mud-palette-primary); min-height: 1px;")"></div>
-                                </MudTooltip>
+                                <div title="@tip" style="@($"flex: 1; height: {heightPct}%; background: var(--mud-palette-primary); border-radius: 2px; opacity: {(d.Cents == 0 ? "0.25" : "1")};")"></div>
                             }
                         </div>
                         <MudStack Row="true" Justify="Justify.SpaceBetween" Class="mt-2">
@@ -147,9 +141,7 @@
                                 <MudText Typo="Typo.subtitle1" Style="font-weight: 600;">Domain</MudText>
                             </MudStack>
                             <MudText Typo="Typo.body2">
-                                <strong>swdata.ai</strong> &mdash; £80 / year. The <code>.ai</code> TLD is
-                                considerably more expensive than the average domain (~10× a typical
-                                <code>.com</code>) but it makes sense given the project's focus.
+                                <strong>swdata.ai</strong> &mdash; £80 / year.
                             </MudText>
                         </MudStack>
                     </MudPaper>
@@ -159,14 +151,12 @@
 
         <MudDivider />
 
-        @* ── Self-hosted infrastructure ────────────────────────────────────────── *@
+        @* ── Self-hosted stack ──────────────────────────────────────────────────── *@
         <div>
-            <MudText Typo="Typo.h5" GutterBottom="true">Self-hosted infrastructure</MudText>
+            <MudText Typo="Typo.h5" GutterBottom="true">Self-hosted</MudText>
             <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-3">
-                The whole stack &mdash; API, frontend, MongoDB Atlas Local (Community Edition with
-                semantic vector search), Keycloak, Hangfire workers &mdash; runs on a single Unraid
-                server in my home, alongside dozens of other services. The marginal cost to host
-                Star Wars Data is essentially the incremental electricity it draws.
+                The application stack runs on self-hosted infrastructure, so beyond the OpenAI
+                API and the domain there are no recurring cloud charges.
             </MudText>
 
             <MudGrid Spacing="3">
@@ -174,24 +164,14 @@
                     <MudPaper Class="pa-4" Elevation="2" Style="height: 100%;">
                         <MudStack Spacing="2">
                             <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
-                                <MudIcon Icon="@Icons.Material.Filled.Memory" Color="Color.Secondary" />
-                                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;">Hardware</MudText>
+                                <MudIcon Icon="@Icons.Material.Filled.Dns" Color="Color.Secondary" />
+                                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;">Platform</MudText>
                             </MudStack>
-                            <MudList Dense="true" T="string">
-                                <MudListItem Icon="@Icons.Material.Filled.Circle" IconSize="Size.Small">
-                                    <MudText Typo="Typo.body2"><strong>CPU</strong> &mdash; Intel® Core™ Ultra 9 285K @@ 5346 MHz (24 cores)</MudText>
-                                </MudListItem>
-                                <MudListItem Icon="@Icons.Material.Filled.Circle" IconSize="Size.Small">
-                                    <MudText Typo="Typo.body2"><strong>RAM</strong> &mdash; 94 GiB</MudText>
-                                </MudListItem>
-                                <MudListItem Icon="@Icons.Material.Filled.Circle" IconSize="Size.Small">
-                                    <MudText Typo="Typo.body2">
-                                        <strong>OS</strong> &mdash;
-                                        <MudLink Href="https://unraid.net" Target="_blank" Underline="Underline.Hover">Unraid OS</MudLink>
-                                        (lifetime licence, one-off cost)
-                                    </MudText>
-                                </MudListItem>
-                            </MudList>
+                            <MudText Typo="Typo.body2">
+                                <MudLink Href="https://unraid.net" Target="_blank" Underline="Underline.Hover">Unraid OS</MudLink>
+                                running the container workloads, fronted by Cloudflare for TLS and DDoS protection.
+                                Sign-in uses standards-based OIDC.
+                            </MudText>
                         </MudStack>
                     </MudPaper>
                 </MudItem>
@@ -205,10 +185,41 @@
                             </MudStack>
                             <MudText Typo="Typo.body2">
                                 <MudLink Href="https://www.mongodb.com/docs/atlas/cli/current/atlas-cli-deploy-local/" Target="_blank" Underline="Underline.Hover">MongoDB Atlas Local</MudLink>
-                                (Community Edition) running in a container on the same host. Includes
-                                Atlas Search and Vector Search &mdash; the semantic search and
-                                embedding-based retrieval features run entirely on local hardware.
-                                <strong>£0/month.</strong>
+                                (Community Edition) with Atlas Search and Vector Search — semantic retrieval
+                                and embeddings run on the local instance, no managed-tier cost.
+                            </MudText>
+                        </MudStack>
+                    </MudPaper>
+                </MudItem>
+
+                <MudItem xs="12" sm="6">
+                    <MudPaper Class="pa-4" Elevation="2" Style="height: 100%;">
+                        <MudStack Spacing="2">
+                            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                                <MudIcon Icon="@Icons.Material.Filled.Code" Color="Color.Primary" />
+                                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;">Application</MudText>
+                            </MudStack>
+                            <MudText Typo="Typo.body2">
+                                .NET 10 with <MudLink Href="https://learn.microsoft.com/dotnet/aspire" Target="_blank" Underline="Underline.Hover">.NET Aspire</MudLink>
+                                orchestration, ASP.NET Core API, Blazor Interactive Server frontend
+                                (<MudLink Href="https://mudblazor.com" Target="_blank" Underline="Underline.Hover">MudBlazor</MudLink>),
+                                and <MudLink Href="https://www.hangfire.io" Target="_blank" Underline="Underline.Hover">Hangfire</MudLink> for background jobs.
+                            </MudText>
+                        </MudStack>
+                    </MudPaper>
+                </MudItem>
+
+                <MudItem xs="12" sm="6">
+                    <MudPaper Class="pa-4" Elevation="2" Style="height: 100%;">
+                        <MudStack Spacing="2">
+                            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                                <MudIcon Icon="@Icons.Material.Filled.AutoAwesome" Color="Color.Warning" />
+                                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;">AI</MudText>
+                            </MudStack>
+                            <MudText Typo="Typo.body2">
+                                OpenAI models via <MudLink Href="https://learn.microsoft.com/dotnet/ai" Target="_blank" Underline="Underline.Hover">Microsoft.Extensions.AI</MudLink>
+                                and <MudLink Href="https://github.com/microsoft/Agents-for-net" Target="_blank" Underline="Underline.Hover">Microsoft.Agents.AI</MudLink>.
+                                Embeddings, chunking, and the agent toolchain account for the OpenAI spend above.
                             </MudText>
                         </MudStack>
                     </MudPaper>
@@ -221,9 +232,8 @@
         @* ── CTA ──────────────────────────────────────────────────────────────── *@
         <MudPaper Class="pa-4" Elevation="2" Style="text-align: center;">
             <MudStack Spacing="2" AlignItems="AlignItems.Center">
-                <MudText Typo="Typo.h6">Want to help?</MudText>
                 <MudText Typo="Typo.body2" Color="Color.Secondary">
-                    Donations cover the OpenAI bill and the domain renewal &mdash; everything else is donated time and hardware.
+                    Donations help cover the OpenAI API spend and domain renewal.
                 </MudText>
                 <MudButton
                     Variant="Variant.Filled"
@@ -234,8 +244,7 @@
                     Buy Me a Coffee
                 </MudButton>
                 <MudText Typo="Typo.caption" Color="Color.Secondary">
-                    Or contribute on
-                    <MudLink Href="https://github.com/pjmagee/starwars-data" Target="_blank" Underline="Underline.Always">GitHub</MudLink> &mdash; the project is open source.
+                    Source on <MudLink Href="https://github.com/pjmagee/starwars-data" Target="_blank" Underline="Underline.Always">GitHub</MudLink>.
                 </MudText>
             </MudStack>
         </MudPaper>

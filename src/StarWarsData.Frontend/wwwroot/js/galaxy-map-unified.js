@@ -98,7 +98,7 @@ export function initialize(containerId, overview, rawDotNetRef) {
     const dotNetRef = guardRef(rawDotNetRef);
     const container = document.getElementById(containerId);
     if (!container) return false;
-    container.querySelectorAll(':scope > svg, :scope > .galaxy-tooltip').forEach(el => el.remove());
+    container.querySelectorAll(':scope > svg, :scope > .galaxy-tooltip, :scope > .galaxy-empty-overlay').forEach(el => el.remove());
 
     const width = container.clientWidth || 1200;
     const height = container.clientHeight || 800;
@@ -163,6 +163,23 @@ export function initialize(containerId, overview, rawDotNetRef) {
         .style('z-index', '1000')
         .style('max-width', '280px');
 
+    // Empty-state overlay — HTML so it renders at a fixed screen size
+    // regardless of the SVG zoom transform applied to the drill-down content.
+    const emptyOverlay = d3.select(container).append('div')
+        .attr('class', 'galaxy-empty-overlay')
+        .style('position', 'absolute')
+        .style('top', '50%').style('left', '50%')
+        .style('transform', 'translate(-50%, -50%)')
+        .style('color', 'rgba(255,255,255,0.55)')
+        .style('font-size', '15px')
+        .style('font-style', 'italic')
+        .style('text-align', 'center')
+        .style('pointer-events', 'none')
+        .style('display', 'none');
+
+    function showEmptyMessage(msg) { emptyOverlay.text(msg).style('display', null); }
+    function hideEmptyMessage() { emptyOverlay.style('display', 'none'); }
+
     // Background
     bgLayer.append('image')
         .attr('href', BG_URL)
@@ -221,16 +238,7 @@ export function initialize(containerId, overview, rawDotNetRef) {
                 .attr('stroke', color).attr('stroke-opacity', 0.12).attr('stroke-width', 0.5);
         }
 
-        // Hidden label (kept for CSS selection but not displayed)
-        const avgX = region.cells.reduce((s, [c]) => s + colX(c) + cellW / 2, 0) / region.cells.length;
-        const avgY = region.cells.reduce((s, [, r]) => s + rowY(r) + cellH / 2, 0) / region.cells.length;
-        rg.append('text')
-            .attr('x', avgX).attr('y', avgY)
-            .attr('text-anchor', 'middle').attr('fill', color)
-            .attr('fill-opacity', 0).attr('font-size', '0')
-            .attr('class', 'region-label')
-            .style('pointer-events', 'none')
-            .text(region.name);
+        // Region name shown in the side info panel via OnRegionHovered — no in-SVG label.
 
         rg.on('mouseover', function () {
             if (currentLevel !== 'overview') return;
@@ -253,7 +261,6 @@ export function initialize(containerId, overview, rawDotNetRef) {
             const rg = d3.select(this);
             if (rg.attr('data-region') === regionName) {
                 const cells = rg.selectAll('.region-cell');
-                const label = rg.select('.region-label');
                 (function pulse() {
                     cells.transition('pulse').duration(1000)
                         .attr('fill-opacity', 0.18).attr('stroke-opacity', 0.4)
@@ -261,8 +268,6 @@ export function initialize(containerId, overview, rawDotNetRef) {
                         .attr('fill-opacity', 0.07).attr('stroke-opacity', 0.12)
                         .on('end', pulse);
                 })();
-                label.transition().duration(200)
-                    .attr('fill-opacity', 0.9).attr('font-size', `${cellW * 0.04}px`);
             }
         });
         dotNetRef.invokeMethodAsync('OnRegionHovered', regionName, cellCount, color);
@@ -272,9 +277,6 @@ export function initialize(containerId, overview, rawDotNetRef) {
         regionLayer.selectAll('.region-cell')
             .interrupt('pulse').transition().duration(300)
             .attr('fill-opacity', 0.07).attr('stroke-opacity', 0.12);
-        regionLayer.selectAll('.region-label')
-            .transition().duration(300)
-            .attr('fill-opacity', 0).attr('font-size', '0');
         dotNetRef.invokeMethodAsync('OnRegionUnhovered');
     }
 
@@ -569,7 +571,6 @@ export function initialize(containerId, overview, rawDotNetRef) {
             if (el.attr('data-region') === regionName) {
                 el.selectAll('.region-cell').transition().duration(400)
                     .attr('fill-opacity', 0.15).attr('stroke-opacity', 0.4).attr('stroke-width', 1);
-                el.select('.region-label').transition().duration(400).attr('fill-opacity', 0.7);
             } else {
                 el.transition().duration(400).style('opacity', 0.05);
             }
@@ -604,6 +605,7 @@ export function initialize(containerId, overview, rawDotNetRef) {
 
     function renderRegionSystems(systems, region) {
         contentLayer.selectAll('*').remove();
+        hideEmptyMessage();
 
         const cellSet = new Set(region.cells.map(([c, r]) => `${c},${r}`));
         const inRegion = systems.filter(s => cellSet.has(`${s.col},${s.row}`));
@@ -613,14 +615,7 @@ export function initialize(containerId, overview, rawDotNetRef) {
             : inRegion;
 
         if (bodyFilter.length === 0) {
-            const pts = region.cells.map(([col, row]) => [colX(col) + cellW / 2, rowY(row) + cellH / 2]);
-            const cx = pts.reduce((s, p) => s + p[0], 0) / pts.length;
-            const cy = pts.reduce((s, p) => s + p[1], 0) / pts.length;
-            contentLayer.append('text')
-                .attr('x', cx).attr('y', cy)
-                .attr('text-anchor', 'middle').attr('fill', 'rgba(255,255,255,0.4)')
-                .attr('font-size', '14px')
-                .text(onlyWithBodies ? 'No systems with planets here' : 'No systems in this region');
+            showEmptyMessage(onlyWithBodies ? 'No systems with planets here' : 'No systems in this region');
             return;
         }
 
@@ -784,7 +779,6 @@ export function initialize(containerId, overview, rawDotNetRef) {
         // Fade out cell indicators and click targets
         indicatorLayer.transition().duration(400).style('opacity', 0.1);
         cellLayer.transition().duration(400).style('opacity', 0).style('pointer-events', 'none');
-        regionLayer.selectAll('.region-label').transition().duration(400).attr('fill-opacity', 0);
 
         // Fetch systems for this cell
         try {
@@ -804,20 +798,14 @@ export function initialize(containerId, overview, rawDotNetRef) {
 
     function renderCellSystems(systems, col, row) {
         contentLayer.selectAll('*').remove();
+        hideEmptyMessage();
 
         const filtered = onlyWithBodies
             ? systems.filter(s => s.celestialBodies && s.celestialBodies.length > 0)
             : systems;
 
-        const cx = colX(col) + cellW / 2;
-        const cy = rowY(row) + cellH / 2;
-
         if (filtered.length === 0) {
-            contentLayer.append('text')
-                .attr('x', cx).attr('y', cy)
-                .attr('text-anchor', 'middle').attr('fill', 'rgba(255,255,255,0.4)')
-                .attr('font-size', '14px')
-                .text('No systems with planets here');
+            showEmptyMessage(onlyWithBodies ? 'No systems with planets here' : 'No systems in this cell');
             return;
         }
 
@@ -978,16 +966,10 @@ export function initialize(containerId, overview, rawDotNetRef) {
 
     function renderCellSystemsDirect(filtered, col, row) {
         contentLayer.selectAll('*').remove();
-
-        const cx = colX(col) + cellW / 2;
-        const cy = rowY(row) + cellH / 2;
+        hideEmptyMessage();
 
         if (filtered.length === 0) {
-            contentLayer.append('text')
-                .attr('x', cx).attr('y', cy)
-                .attr('text-anchor', 'middle').attr('fill', 'rgba(255,255,255,0.4)')
-                .attr('font-size', '14px')
-                .text('No systems with planets here');
+            showEmptyMessage(onlyWithBodies ? 'No systems with planets here' : 'No systems in this cell');
             return;
         }
 
@@ -1085,6 +1067,7 @@ export function initialize(containerId, overview, rawDotNetRef) {
 
     // === DRILL-DOWN: SYSTEM ===
     function drillIntoSystem(sys) {
+        hideEmptyMessage();
         currentLevel = 'system';
         currentSystemData = sys;
         dotNetRef.invokeMethodAsync('OnLevelChanged', 'system', sys.name);
@@ -1364,6 +1347,7 @@ export function initialize(containerId, overview, rawDotNetRef) {
         dotNetRef.invokeMethodAsync('OnSystemDeselected');
 
         contentLayer.selectAll('*').remove();
+        hideEmptyMessage();
 
         // Restore all region groups
         regionLayer.selectAll('.region-group')
@@ -1371,8 +1355,6 @@ export function initialize(containerId, overview, rawDotNetRef) {
         regionLayer.selectAll('.region-cell')
             .transition().duration(400)
             .attr('fill-opacity', 0.07).attr('stroke-opacity', 0.12).attr('stroke-width', 0.5);
-        regionLayer.selectAll('.region-label')
-            .transition().duration(400).attr('fill-opacity', 0.5);
 
         // Restore cell layer and indicator layer
         cellLayer.transition().duration(400).style('opacity', 1).style('pointer-events', 'auto');
@@ -1530,7 +1512,7 @@ export function drillIntoRegion(regionName) {
 
 export function dispose() {
     if (_state) {
-        _state.container.querySelectorAll(':scope > svg, :scope > .galaxy-tooltip').forEach(el => el.remove());
+        _state.container.querySelectorAll(':scope > svg, :scope > .galaxy-tooltip, :scope > .galaxy-empty-overlay').forEach(el => el.remove());
         _state = null;
     }
     Object.keys(regionColorMap).forEach(k => delete regionColorMap[k]);

@@ -10,17 +10,9 @@ All projects live under `src/` with the solution at `src/StarWarsData.slnx`. Req
 # Build everything
 dotnet build src/StarWarsData.slnx
 
-# Run the Aspire orchestrator (starts API + Frontend)
-dotnet run --project src/StarWarsData.AppHost
-
-# Run just the API
-dotnet run --project src/StarWarsData.ApiService
-
-# Run just the frontend
-dotnet run --project src/StarWarsData.Frontend
-
-# Run just the admin app
-dotnet run --project src/StarWarsData.Admin
+# Run the Aspire orchestrator (starts all components we need)
+dotnet run --project src/StarWarsData.AppHost 
+dotnet watch --project src/StarWarsData.AppHost 
 ```
 
 ### Publish & Deploy

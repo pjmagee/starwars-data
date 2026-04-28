@@ -3,5 +3,13 @@
     "chat.mcp.apps.enabled": true,
     "chat.mcp.discovery.enabled": {
         "claude-desktop": true
-    },
+    },                                                                                              
+    "chat.useClaudeHooks": true,
+    "chat.useClaudeMdFile": true,
+    "chat.subagents.allowInvocationsFromSubagents": true,
+    "claudeCode.autosave": true,
+    "claudeCode.enableNewConversationShortcut": true,
+    "claudeCode.initialPermissionMode": "bypassPermissions",
+    "claudeCode.useCtrlEnterToSend": true,
+    "claudeCode.disableLoginPrompt": true
 }
