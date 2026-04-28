@@ -46,7 +46,7 @@ namespace StarWarsData.Services.AI.Agents;
 public sealed class HolocronAgent
 {
     /// <summary>Bumped on every meaningful change to the enhancement prompt or schema. Stamped onto every enrichment + event.</summary>
-    public const string AgentVersion = "holocron-v1.2.0";
+    public const string AgentVersion = "holocron-v1.3.0";
 
     static readonly JsonSerializerOptions JsonOpts = new() { PropertyNameCaseInsensitive = true };
 
@@ -388,7 +388,7 @@ public sealed class HolocronAgent
                 .Find(Builders<ArticleChunk>.Filter.Eq(c => c.PageId, pageId))
                 .SortBy(c => c.ChunkIndex)
                 .Limit(ownLimit)
-                .Project(c => new HolocronChunkSummary(c.Id, c.PageId, c.Title, c.Heading, c.Section, c.Text, ChunkOrigin.OwnPage))
+                .Project(c => new HolocronChunkSummary(c.Id, c.PageId, c.Title, c.Heading, c.Section, c.Text, ChunkOrigin.OwnPage, c.Links))
                 .ToListAsync(ct);
             allChunks.AddRange(ownChunks);
         }
@@ -416,7 +416,7 @@ public sealed class HolocronAgent
                 .SortBy(c => c.PageId)
                 .ThenBy(c => c.ChunkIndex)
                 .Limit(linkingLimit * 3) // over-fetch so the per-page cap spreads across multiple articles
-                .Project(c => new HolocronChunkSummary(c.Id, c.PageId, c.Title, c.Heading, c.Section, c.Text, ChunkOrigin.LinkingPage))
+                .Project(c => new HolocronChunkSummary(c.Id, c.PageId, c.Title, c.Heading, c.Section, c.Text, ChunkOrigin.LinkingPage, c.Links))
                 .ToListAsync(ct);
 
             var groupedByPage = backlinkChunks.GroupBy(c => c.PageId).SelectMany(g => g.Take(perPageLimit)).Take(linkingLimit).ToList();
@@ -440,10 +440,16 @@ public sealed class HolocronAgent
                 coveredPageIds.Add(pageId);
 
                 var hits = await _semanticSearch.SearchAsync(query, types: null, continuity: null, realm: null, limit: vectorLimit * 3, minScore: 0.0);
-                var vectorChunks = hits.Where(h => !coveredPageIds.Contains(h.PageId) && !string.IsNullOrEmpty(h.ChunkId))
-                    .Take(vectorLimit)
-                    .Select(h => new HolocronChunkSummary(h.ChunkId, h.PageId, h.Title, h.Heading, h.Section, h.Text, ChunkOrigin.VectorSimilar))
-                    .ToList();
+                // SemanticSearchHit doesn't surface Links — re-fetch the chunks by id so
+                // the prompt can render their wiki-linked entities alongside text.
+                var hitChunkIds = hits.Where(h => !coveredPageIds.Contains(h.PageId) && !string.IsNullOrEmpty(h.ChunkId)).Take(vectorLimit).Select(h => h.ChunkId).ToList();
+                var vectorChunks =
+                    hitChunkIds.Count == 0
+                        ? new List<HolocronChunkSummary>()
+                        : await _chunks
+                            .Find(Builders<ArticleChunk>.Filter.In(c => c.Id, hitChunkIds))
+                            .Project(c => new HolocronChunkSummary(c.Id, c.PageId, c.Title, c.Heading, c.Section, c.Text, ChunkOrigin.VectorSimilar, c.Links))
+                            .ToListAsync(ct);
                 allChunks.AddRange(vectorChunks);
             }
             catch (Exception ex)
@@ -520,8 +526,8 @@ public sealed class HolocronAgent
         var neighbourSummaries = neighbours.Select(n => new HolocronNeighbourSummary(n.PageId, n.Name, n.Type, n.StartYear, n.EndYear)).ToList();
         var labelSummaries = canonicalLabels.Select(l => new HolocronLabelSummary(l.Label, l.Reverse, l.Description, l.UsageCount)).ToList();
         var chunks = ownPageChunks
-            .Select(c => new HolocronChunkSummary(c.ChunkId, c.PageId, c.Title, c.Heading, c.Section, c.Text, ChunkOrigin.OwnPage))
-            .Concat(batchChunks.Select(c => new HolocronChunkSummary(c.ChunkId, c.PageId, c.Title, c.Heading, c.Section, c.Text, ChunkOrigin.LinkingPage)))
+            .Select(c => new HolocronChunkSummary(c.ChunkId, c.PageId, c.Title, c.Heading, c.Section, c.Text, ChunkOrigin.OwnPage, c.Links))
+            .Concat(batchChunks.Select(c => new HolocronChunkSummary(c.ChunkId, c.PageId, c.Title, c.Heading, c.Section, c.Text, ChunkOrigin.LinkingPage, c.Links)))
             .ToList();
 
         var context = new HolocronContext(graphNode, outEdges, inEdges, neighbourSummaries, chunks, labelSummaries);
@@ -533,7 +539,14 @@ public sealed class HolocronAgent
     async Task<HolocronProposalsBatch?> CallLlmForProposalsAsync(HolocronContext context, CancellationToken ct)
     {
         var systemPrompt = BuildSystemPrompt();
-        var userPrompt = BuildUserPrompt(context);
+        // Resolve every wiki URL referenced by this batch's chunks to (PageId, Name, Type)
+        // via a single bulk lookup against kg.nodes. The resolved entities are surfaced
+        // inline per-chunk in the prompt so the agent can emit `addEdges` with concrete
+        // target PageIds (e.g. when a chunk says "she worked as a [[bounty hunter]]",
+        // the agent sees that "bounty hunter" resolves to PageId 456298 / TitleOrPosition
+        // and can propose `has_role` with that target — no need to invent property names).
+        var linkedEntities = await ResolveLinkedEntitiesAsync(context.Chunks, ct);
+        var userPrompt = BuildUserPrompt(context, linkedEntities);
 
         var messages = new List<ChatMessage> { new(ChatRole.System, systemPrompt), new(ChatRole.User, userPrompt) };
 
@@ -615,21 +628,133 @@ public sealed class HolocronAgent
               - [unknown, hard] — provenance unclear; treat as hard.
 
             ## nodeProposals — new property values on the target node
-            Append a value or fill a missing property on the target node, using the exact
-            infobox field path (the user prompt lists existing properties). The server
+            Append a value or fill a missing property on the target node. The server
             decides Add (no existing values) vs Augment (extend the list) — you just say
             "this field should contain these values" with evidence.
 
-            ## addEdges — a brand-new edge (structural last resort)
-            ONLY when the (fromId, toId) pair appears in NEITHER candidate list (Annotate
-            or FillGap), in EITHER direction, with ANY label. This is the only vector that
-            creates new graph topology, and most relationships are already captured by
-            Phase 1, so most runs produce zero addEdges. Two parallel edges between the
-            same pair are forbidden — use annotateEdges for context even if your intended
-            label differs from the existing one. addEdges labels MUST come from the user
-            prompt's "Canonical edge labels" vocabulary; do NOT invent synonyms (e.g.
-            `member_of` next to an existing `affiliated_with`). If no canonical label fits,
-            emit nothing.
+            See **Edges vs Properties** below for when to use this vector vs the edge
+            vectors. Most "I want to add information" instincts are actually edges.
+
+            **Hard rules for `fieldPath`:**
+
+            - `fieldPath` MUST appear verbatim in the user prompt's "Canonical property
+              fieldPaths" list. Use the exact casing shown. The consolidator rejects any
+              fieldPath that doesn't match — including case variants like
+              `affiliation` / `Affiliation` / `Affiliations`, invented names like
+              `has role` / `member of family` / `affiliated with`, AND fieldPaths that
+              are valid for OTHER templates but not this one (e.g. `Primary role(s)`
+              is a Starship free-text field, not a Character property — proposing it
+              on a Character page gets rejected).
+
+            ## addEdges — a brand-new edge to a DIFFERENT node
+            Use this when chunk text evidences a relationship to ANOTHER entity that
+            doesn't already have an edge to the target.
+
+            **How to find target PageIds:** every chunk in the user prompt is followed by
+            a "Wiki entities linked in this chunk's text" section listing the PageId,
+            Name, and Type of each wiki entity referenced inline. When chunk text says
+            "she worked as a [[bounty hunter]]", that "[[bounty hunter]]" link resolves
+            to (e.g.) PageId 456298 / Type=TitleOrPosition. Use that PageId as the
+            `toId` of an `addEdges` proposal with `label: "has_role"`. Same pattern for
+            `member_of → Religion node`, `serves_in → Military_unit node`, etc.
+
+            **This is also the answer to "but the target node didn't show up in
+            Annotate/FillGap candidates":** the existing-edges candidate lists only
+            cover edges that ALREADY exist. New edges to entities the chunk text
+            references (and that resolve via the inline link section) belong on
+            `addEdges`. Don't fall back to `nodeProposals` for relationships — properties
+            are flat strings, edges are how relationships are encoded.
+
+            **Hard rules:**
+
+            - The (fromId, toId) pair must NOT already appear in Annotate or FillGap
+              candidate lists in EITHER direction with ANY label. If it does, use
+              annotateEdges instead — two parallel edges between the same pair are
+              forbidden.
+            - The `label` MUST come from the user prompt's "Canonical edge labels"
+              vocabulary. Do NOT invent synonyms (`member_of` next to an existing
+              `affiliated_with`). If no canonical label fits, emit nothing for that
+              edge.
+            - The `toId` MUST be a real PageId — either from the chunks' "Wiki entities
+              linked in this chunk's text" sections, or from a neighbour you found in
+              the existing-edges lists. Don't hallucinate PageIds.
+
+            # Edges vs Properties — when to use which
+
+            The graph is fundamentally **entities (nodes)** and the **relationships
+            between them (edges)**. Properties are flat scalar attributes of a single
+            node. Most "I want to add information about X" instincts are actually
+            edges, not properties.
+
+            **Use an edge when the value:**
+
+              - is another meaningful entity (a person, place, organisation, role,
+                title, species, family, ship, battle, weapon, event…)
+              - is shared by many nodes — many characters share "Bounty hunter",
+                "Jedi Order", "Human", "Tatooine"
+              - is useful for traversal / pathfinding — "who else holds this role?
+                who else is in this faction?"
+              - has its own attributes — the role itself has a description, the
+                faction has its own members, the ship has its own specs
+              - can change over time — someone gains or loses a title, joins or
+                leaves a faction
+              - is something you want to reason over semantically — "did Anakin
+                and Asajj serve the same master?" only works if Sidious and Dooku
+                are nodes, not strings
+
+            **Use a property when the value:**
+
+              - is a flat scalar of the entity itself (height, eye colour, gender,
+                hair colour, classification, designation, mass)
+              - has no independent existence — "blue eyes" is not an entity; "180 cm"
+                is not an entity; "Force-sensitive" is an attribute, not an entity
+              - is a measurement, descriptor, or enum-like label that's stable for
+                the node and has no meaningful temporal semantics
+
+            **Strong test:** if you can imagine a wiki page existing for this value,
+            it's a node — emit an edge to it. "Bounty hunter" has a wiki page.
+            "Sith" has a wiki page. "Nightsisters" has a wiki page. "Blue eyes"
+            does not. "Force-sensitive" does not.
+
+            **The "Wiki entities linked in this chunk's text" section is your map.**
+            Every chunk lists the wiki entities referenced inline. When a chunk
+            says "Asajj worked as a [[bounty hunter]]" and the linked-entities
+            section resolves `[[bounty hunter]]` to
+            `(PageId 456298, Type=TitleOrPosition)`, that is a direct signal:
+            this is a node, emit `has_role → 456298`. The same goes for
+            `[[Confederacy of Independent Systems]]` → `member_of`/`affiliated_with`,
+            `[[Dathomir]]` → `homeworld`, `[[Dooku]]` → `apprentice_of`. Linked
+            entities are nodes by construction — they exist in the KG already.
+
+            # No double-encoding — one fact, one place
+
+            A single fact is encoded ONCE in its strongest form. The consolidator
+            cross-checks edges and properties in the same run and DROPS property
+            values that overlap with an edge target's name.
+
+              - If you propose `addEdges: has_role → Bounty hunter`, do NOT also
+                write "bounty hunter" / "Bounty hunter" into `Titles`, `Aliases`,
+                or any other property. The edge is the canonical store; the
+                duplicate property value gets dropped.
+              - If you propose `addEdges: member_of → Nightsisters`, do NOT also
+                write "Nightsister" into `Aliases` or any affiliation-flavoured
+                property.
+              - If two property fieldPaths cover the same concept (e.g. `Occupation`
+                and `Primary role(s)`), pick the ONE canonical for this node's
+                template — never write both. Most templates only allow one of them.
+              - **Aliases are alternate proper-noun NAMES, never role/title/faction
+                strings.** "Darth Tyranus" is an alias for Dooku. "Old Ben" is an
+                alias for Obi-Wan. "Bounty hunter", "Sith apprentice", "Nightsister",
+                "Black Sun", "Dark acolyte" are NOT aliases — they are roles,
+                affiliations, or species, encoded as edges. The consolidator
+                rejects any Aliases value that resolves to a TitleOrPosition,
+                Government, Organization, Religion, Species, Family, MilitaryUnit,
+                or CulturalGroup node.
+              - Descriptive epithets coined by combining a role with the
+                character's role-context ("The Bounty Hunter", "The Pale Witch",
+                "Queen of the Nightsisters") are NOT aliases either. Aliases must
+                be names that wikis and characters actually use to refer to the
+                person interchangeably.
 
             # Evidence rules (every proposal)
 
@@ -722,7 +847,47 @@ public sealed class HolocronAgent
             runs produce zero addEdges.
             """;
 
-    string BuildUserPrompt(HolocronContext context)
+    /// <summary>
+    /// One wiki entity surfaced inline alongside a chunk's text so the agent can target
+    /// it directly with <c>addEdges</c>. PageId and Type drive what edge label fits
+    /// (e.g. <c>has_role</c> for TitleOrPosition targets, <c>member_of</c> for Religion).
+    /// </summary>
+    sealed record LinkedEntity(int PageId, string Name, string Type);
+
+    /// <summary>
+    /// Bulk-resolve every wiki URL across <paramref name="chunks"/>'s <c>Links</c>
+    /// arrays to the matching <c>kg.nodes</c> row in a single round-trip. Returns a
+    /// case-insensitive URL → entity dictionary so per-chunk rendering can list the
+    /// linked entities inline.
+    /// </summary>
+    async Task<IReadOnlyDictionary<string, LinkedEntity>> ResolveLinkedEntitiesAsync(IReadOnlyList<HolocronChunkSummary> chunks, CancellationToken ct)
+    {
+        if (chunks is null || chunks.Count == 0)
+            return new Dictionary<string, LinkedEntity>();
+        var allUrls = chunks.Where(c => c.Links is not null).SelectMany(c => c.Links).Where(u => !string.IsNullOrEmpty(u)).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+        if (allUrls.Count == 0)
+            return new Dictionary<string, LinkedEntity>();
+        var nodes = await _nodes
+            .Find(Builders<GraphNode>.Filter.In(n => n.WikiUrl, allUrls))
+            .Project(n => new
+            {
+                n.PageId,
+                n.Name,
+                n.Type,
+                n.WikiUrl,
+            })
+            .ToListAsync(ct);
+        var dict = new Dictionary<string, LinkedEntity>(StringComparer.OrdinalIgnoreCase);
+        foreach (var n in nodes)
+        {
+            if (string.IsNullOrEmpty(n.WikiUrl))
+                continue;
+            dict[n.WikiUrl] = new LinkedEntity(n.PageId, n.Name, n.Type);
+        }
+        return dict;
+    }
+
+    string BuildUserPrompt(HolocronContext context, IReadOnlyDictionary<string, LinkedEntity>? linkedEntities = null)
     {
         var sb = new StringBuilder();
         var node = context.Node;
@@ -738,7 +903,7 @@ public sealed class HolocronAgent
         sb.Append("## Existing properties (from infobox — do NOT contradict)\n\n");
         if (node.Properties.Count == 0)
         {
-            sb.Append("(none — every property is a candidate for Add)\n");
+            sb.Append("(none populated)\n");
         }
         else
         {
@@ -748,6 +913,36 @@ public sealed class HolocronAgent
             }
         }
         sb.Append('\n');
+
+        // Canonical fieldPath inventory — same discipline as canonical edge labels.
+        // The agent MUST pick fieldPath verbatim from this list; the consolidator
+        // pre-flight rejects anything else (case-insensitive match). Suppresses
+        // the case-/plural-variant duplicates and the "edge label as fieldPath"
+        // mistake we saw in v1.1.0 (e.g. fieldPath: "has role" / "member of family").
+        // Template-scoped property allowlist. ForTemplate(node.Type).Properties
+        // is the intersection of the global FieldSemantics.Properties set with
+        // THIS template's actual fields. Without this we leak Starship-only
+        // fields like `Primary role(s)`, `Hull`, `Power plant`, `Sensor color`
+        // into Character prompts, and the agent picks them. Phase E in the
+        // consolidator does the matching template-scoped check.
+        var templateProperties = InfoboxDefinitionRegistry.ForTemplate(node.Type).Properties;
+        sb.AppendFormat("## Canonical property fieldPaths for template `{0}` (you MUST pick from this list — never invent or coin variants)\n\n", node.Type);
+        sb.Append(
+            "These are the only valid `fieldPath` values for `nodeProposals` on this template. Use the exact casing shown. Cross-template fields (e.g. Starship-only `Primary role(s)` on a Character) are pre-flight rejected.\n"
+        );
+        sb.Append("Most enrichments belong on the edge vectors, not here — see the Edges vs Properties section in your system instructions.\n\n");
+        if (templateProperties.Count == 0)
+        {
+            sb.Append("(no scalar properties allowed for this template — emit only edges and temporal annotations)\n\n");
+        }
+        else
+        {
+            foreach (var fieldPath in templateProperties.OrderBy(s => s, StringComparer.OrdinalIgnoreCase))
+            {
+                sb.AppendFormat("- `{0}`\n", fieldPath);
+            }
+            sb.Append('\n');
+        }
 
         sb.Append("## Existing temporal facets\n\n");
         if (node.TemporalFacets.Count == 0)
@@ -907,16 +1102,18 @@ public sealed class HolocronAgent
             // Vector-similar chunks only appear on the synchronous EnhanceNodeAsync path
             // (semantic search supplements own + linking); the async pipeline does not
             // surface them yet but that may change, so the renderer handles all three.
-            RenderChunkSection(sb, "Target's own page (highest authority for what the wiki asserts about this entity)", context.Chunks.Where(c => c.Origin == ChunkOrigin.OwnPage));
+            RenderChunkSection(sb, "Target's own page (highest authority for what the wiki asserts about this entity)", context.Chunks.Where(c => c.Origin == ChunkOrigin.OwnPage), linkedEntities);
             RenderChunkSection(
                 sb,
                 "Pages that link to this entity (what *other* articles say *about* it — best source for missing relationships and context)",
-                context.Chunks.Where(c => c.Origin == ChunkOrigin.LinkingPage)
+                context.Chunks.Where(c => c.Origin == ChunkOrigin.LinkingPage),
+                linkedEntities
             );
             RenderChunkSection(
                 sb,
                 "Vector-similar passages from across the corpus (use only when they directly mention the target by name)",
-                context.Chunks.Where(c => c.Origin == ChunkOrigin.VectorSimilar)
+                context.Chunks.Where(c => c.Origin == ChunkOrigin.VectorSimilar),
+                linkedEntities
             );
         }
 
@@ -934,7 +1131,7 @@ public sealed class HolocronAgent
     /// Render one labelled chunk block in the user prompt, with chunkId + page context for citation.
     /// Produces no output when the source has no chunks (avoids empty headers cluttering the prompt).
     /// </summary>
-    void RenderChunkSection(StringBuilder sb, string heading, IEnumerable<HolocronChunkSummary> chunks)
+    void RenderChunkSection(StringBuilder sb, string heading, IEnumerable<HolocronChunkSummary> chunks, IReadOnlyDictionary<string, LinkedEntity>? linkedEntities)
     {
         var list = chunks.ToList();
         if (list.Count == 0)
@@ -945,6 +1142,26 @@ public sealed class HolocronAgent
         {
             sb.AppendFormat("**chunkId: {0}** (PageId={1}, page=\"{2}\", section: {3})\n", c.Id, c.PageId, c.Title, string.IsNullOrEmpty(c.Section) ? c.Heading : c.Section);
             sb.AppendLine(Truncate(c.Text, _settings.HolocronMaxChunkExcerptLength));
+
+            // Surface the wiki-linked entities that appear inline in this chunk's text.
+            // The agent can use any of these PageIds as a target for `addEdges` proposals
+            // — e.g. when the chunk text mentions "[[bounty hunter]]" and that resolves
+            // to a TitleOrPosition node, the agent can emit `has_role` to that PageId
+            // instead of dumping the role-string into a property fieldPath.
+            if (c.Links is { Count: > 0 } && linkedEntities is not null)
+            {
+                var resolved = c.Links.Select(url => linkedEntities.TryGetValue(url, out var e) ? e : null).Where(e => e is not null && e.PageId != c.PageId).Cast<LinkedEntity>().ToList();
+                if (resolved.Count > 0)
+                {
+                    sb.AppendLine("Wiki entities linked in this chunk's text (use any of these PageIds as `addEdges` targets when the chunk evidences a relationship):");
+                    foreach (var e in resolved.Take(20))
+                    {
+                        sb.AppendFormat("  - PageId={0}, Name=\"{1}\", Type={2}\n", e.PageId, e.Name, e.Type);
+                    }
+                    if (resolved.Count > 20)
+                        sb.AppendFormat("  …(+ {0} more, omitted for brevity)\n", resolved.Count - 20);
+                }
+            }
             sb.AppendLine();
         }
     }
@@ -1461,7 +1678,7 @@ public sealed class HolocronAgent
     /// </summary>
     sealed record HolocronLabelSummary(string Label, string Reverse, string Description, int UsageCount);
 
-    sealed record HolocronChunkSummary(string Id, int PageId, string Title, string Heading, string Section, string Text, ChunkOrigin Origin);
+    sealed record HolocronChunkSummary(string Id, int PageId, string Title, string Heading, string Section, string Text, ChunkOrigin Origin, List<string> Links);
 
     /// <summary>
     /// Where a context chunk came from. Surfaced in the user prompt so the agent

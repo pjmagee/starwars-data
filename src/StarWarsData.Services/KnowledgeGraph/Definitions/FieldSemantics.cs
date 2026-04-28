@@ -455,7 +455,13 @@ internal static class FieldSemantics
         ["Organizer(s)"] = new("organized_by", "organized", "Organizer", ["Character", "Person", "Organization"], "sports"),
         ["Host(s)"] = new("hosted_by", "hosted", "Host", ["Character", "Person", "Organization"], "sports"),
         ["Songs"] = new("performs_song", "performed_by", "Songs performed", ["Music"], "music"),
-        ["Collaborations"] = new("collaborates_with", "collaborates_with", "Collaborators", ["Character", "Person"], "music"),
+        ["Collaborations"] = new(
+            "collaborates_with",
+            "collaborates_with",
+            "Music collaborators (band/musician/composer field — NOT for general character interactions)",
+            ["Character", "Person", "Band"],
+            "music"
+        ),
         ["Edible by"] = new("edible_by", "eats", "Edible by", ["Species"], "food"),
         ["Potable by"] = new("potable_by", "drinks", "Potable by", ["Species"], "food"),
         ["Dishes"] = new("has_dish", "part_of_cuisine", "Dishes", ["Food"], "food"),

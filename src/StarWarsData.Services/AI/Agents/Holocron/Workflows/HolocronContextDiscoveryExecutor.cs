@@ -183,7 +183,7 @@ internal sealed class HolocronContextDiscoveryExecutor : Executor<string, string
                     .Find(Builders<ArticleChunk>.Filter.Eq(c => c.PageId, _pageId))
                     .SortBy(c => c.ChunkIndex)
                     .Limit(ownLimit)
-                    .Project(c => new HolocronChunkPayload(c.Id, c.PageId, c.Title, c.Heading, c.Section, c.Text, c.ContentHash))
+                    .Project(c => new HolocronChunkPayload(c.Id, c.PageId, c.Title, c.Heading, c.Section, c.Text, c.ContentHash, c.Links))
                     .ToListAsync(ct);
 
         _tracker?.UpdateProgress(_pageId, HolocronJobStatus.Discovering, $"Discovering backlink chunks for {node.Name}...", currentStep: 2, totalSteps: 4, currentItem: node.Name);

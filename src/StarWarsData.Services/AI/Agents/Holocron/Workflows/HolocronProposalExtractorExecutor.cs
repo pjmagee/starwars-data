@@ -160,14 +160,36 @@ internal sealed class HolocronProposalExtractorExecutor : Executor<string, strin
 
             try
             {
-                // Rehydrate the text bodies for THIS batch only — workflow state carries
-                // refs (no text) to keep the framework checkpoint under Mongo's 16 MB doc
-                // limit. Bulk find by indexed _id is microseconds even for 50+ chunks.
+                // Rehydrate the text bodies AND wiki link arrays for THIS batch only —
+                // workflow state carries refs (no text, no links) to keep the framework
+                // checkpoint under Mongo's 16 MB doc limit. Bulk find by indexed _id is
+                // microseconds even for 50+ chunks. Links surface in the prompt so the
+                // agent can resolve mentioned entities to PageIds for addEdges proposals
+                // (e.g. "she worked as a [[bounty hunter]]" → resolved entity hint with
+                // PageId 456298 for the Bounty hunter TitleOrPosition node).
                 var batchIds = batch.Chunks.Select(c => c.ChunkId).ToList();
-                var fetched = await _chunks.Find(Builders<ArticleChunk>.Filter.In(c => c.Id, batchIds)).Project(c => new { c.Id, c.Text }).ToListAsync(ct);
+                var fetched = await _chunks
+                    .Find(Builders<ArticleChunk>.Filter.In(c => c.Id, batchIds))
+                    .Project(c => new
+                    {
+                        c.Id,
+                        c.Text,
+                        c.Links,
+                    })
+                    .ToListAsync(ct);
                 var textById = fetched.ToDictionary(f => f.Id, f => f.Text ?? string.Empty, StringComparer.Ordinal);
+                var linksById = fetched.ToDictionary(f => f.Id, f => f.Links ?? new List<string>(), StringComparer.Ordinal);
                 var batchPayloads = batch
-                    .Chunks.Select(r => new HolocronChunkPayload(r.ChunkId, r.PageId, r.Title, r.Heading, r.Section, textById.GetValueOrDefault(r.ChunkId, string.Empty), r.ContentHash))
+                    .Chunks.Select(r => new HolocronChunkPayload(
+                        r.ChunkId,
+                        r.PageId,
+                        r.Title,
+                        r.Heading,
+                        r.Section,
+                        textById.GetValueOrDefault(r.ChunkId, string.Empty),
+                        r.ContentHash,
+                        linksById.GetValueOrDefault(r.ChunkId, new List<string>())
+                    ))
                     .ToList();
 
                 var proposalsBatch = await _agent.CallLlmForBatchAsync(node, outEdges, inEdges, neighbours, canonicalLabels, ownPageChunks, batchPayloads, ct);

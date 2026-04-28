@@ -60,7 +60,7 @@ public sealed record HolocronCanonicalLabel(string Label, string Reverse, string
 /// <see cref="HolocronChunkRef"/> instead; the extractor rehydrates the text
 /// per-batch via a single <c>Find({_id: $in: [...]})</c>.
 /// </summary>
-public sealed record HolocronChunkPayload(string ChunkId, int PageId, string Title, string Heading, string Section, string Text, string ContentHash);
+public sealed record HolocronChunkPayload(string ChunkId, int PageId, string Title, string Heading, string Section, string Text, string ContentHash, List<string> Links);
 
 /// <summary>
 /// Lightweight chunk reference stored in workflow state in place of

@@ -60,6 +60,7 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
     /// <c>HolocronAgent</c> path.
     /// </summary>
     readonly HashSet<string> _knownLabels;
+    readonly Dictionary<string, HashSet<string>> _expectedTargetsByLabel;
 
     public HolocronConsolidatorExecutor(
         IMongoClient mongoClient,
@@ -80,6 +81,17 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
         _jobId = jobId;
         _tracker = tracker;
         _knownLabels = InfoboxDefinitionRegistry.AllLabelDefinitions().Select(d => d.Label).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        // Build a label → expected-target-types lookup so AddEdge validation can
+        // reject proposals where the actual target's type isn't in the declared
+        // Targets array (e.g. has_role with declared Targets=[TitleOrPosition]
+        // must reject `has_role → Darth Sidious` because Sidious is a Character).
+        // Multiple definitions may map to the same forward label (e.g. several
+        // Affiliation* fields all → affiliated_with); union their Targets so we
+        // accept any declared target type for that label.
+        _expectedTargetsByLabel = InfoboxDefinitionRegistry
+            .AllLabelDefinitions()
+            .GroupBy(d => d.Label, StringComparer.OrdinalIgnoreCase)
+            .ToDictionary(g => g.Key, g => g.SelectMany(d => d.ExpectedTargetTypes).ToHashSet(StringComparer.OrdinalIgnoreCase), StringComparer.OrdinalIgnoreCase);
     }
 
     IMongoCollection<GraphNode> Nodes => _mongoClient.GetDatabase(_settings.DatabaseName).GetCollection<GraphNode>(Collections.KgNodes);
@@ -194,6 +206,15 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
             .ToListAsync(ct);
         var enrichmentNodePairs = activeEdgeEnrichments.Select(e => NodePairKey(e.FromId, e.ToId)).ToHashSet(StringComparer.OrdinalIgnoreCase);
 
+        // Template-scoped allowed-properties set. The target node's Type is the
+        // template name; intersect with FieldSemantics.Properties so Phase E only
+        // accepts properties that are actually valid for THIS template. Without
+        // this, the agent could (and did) propose `Primary role(s)` (a Starship
+        // free-text field) on a Character page just because the global Properties
+        // flat-set contained it. ForTemplate(...) returns a per-template
+        // InfoboxDefinition; .Properties is the intersection we want.
+        var allowedProperties = InfoboxDefinitionRegistry.ForTemplate(node.Type).Properties;
+
         var preflightRejects = 0;
         var evidenceFailures = 0;
 
@@ -229,6 +250,19 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
             survivingFillGaps.Add(p);
         }
 
+        // Resolve target PageId → Type once for every Add proposal so we can enforce
+        // the canonical label's declared Targets (e.g. has_role must point at a
+        // TitleOrPosition node; if the agent picked a Character target the proposal
+        // is rejected). Single bulk lookup against kg.nodes — cheap.
+        var addEdgeTargetIds = dedupedAddEdges.Select(p => p.ToId).Where(id => id > 0).Distinct().ToList();
+        var addEdgeTargetTypes =
+            addEdgeTargetIds.Count == 0
+                ? new Dictionary<int, string>()
+                : (await Nodes.Find(Builders<GraphNode>.Filter.In(n => n.PageId, addEdgeTargetIds)).Project(n => new { n.PageId, n.Type }).ToListAsync(ct)).ToDictionary(
+                    n => n.PageId,
+                    n => n.Type ?? string.Empty
+                );
+
         var survivingAddEdges = new List<HolocronAddEdgeProposal>();
         foreach (var p in dedupedAddEdges)
         {
@@ -237,7 +271,7 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
                 evidenceFailures++;
                 continue;
             }
-            if (!IsAddEdgeValid(p, existingNodePairs, enrichmentNodePairs))
+            if (!IsAddEdgeValid(p, existingNodePairs, enrichmentNodePairs, addEdgeTargetTypes))
             {
                 preflightRejects++;
                 continue;
@@ -258,8 +292,119 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
                 preflightRejects++;
                 continue;
             }
+            // Canonical-fieldPath discipline (Phase E, template-scoped). The user
+            // prompt lists ONLY the property fieldPaths valid for the target node's
+            // template (intersection of the template's actual fields with the global
+            // semantic dictionary). Any proposal whose fieldPath isn't in that
+            // template-scoped set is rejected — case/plural variants
+            // (`affiliation` vs `Affiliation`), edge-label-as-fieldPath mistakes
+            // (`has role`, `member of`), AND cross-template leaks (`Primary role(s)`
+            // on a Character page when it's actually a Starship free-text field).
+            // Case-insensitive match — InfoboxDefinition.Properties is OrdinalIgnoreCase.
+            if (!allowedProperties.Contains(p.FieldPath))
+            {
+                preflightRejects++;
+                continue;
+            }
             survivingNodeProps.Add(p);
         }
+
+        // ── Phase G: cross-vector dedup ───────────────────────────────────────
+        // A single fact must be encoded ONCE in its strongest form. If the agent
+        // proposed an edge to "Bounty hunter" AND a property `Occupation: bounty
+        // hunter`, the edge wins; the property is the redundant duplicate. We
+        // walk surviving edges to collect target-node names, then drop any
+        // nodeProposal value that case-insensitively matches an edge target's
+        // name. If a proposal's values list empties out, drop the proposal.
+        //
+        // Phase G also applies an Aliases-specific blocklist: Aliases must be
+        // alternate proper-noun NAMES, never role/title/faction strings. We
+        // resolve each Aliases value against kg.nodes; any value that exists
+        // as a TitleOrPosition / Government / Organization / Religion / Species
+        // / MilitaryUnit node is rejected — those are entities, not aliases.
+        var allEdgeTargetIds = survivingAnnotates
+            .Select(p => p.ToId)
+            .Concat(survivingFillGaps.Select(p => p.ToId))
+            .Concat(survivingAddEdges.Select(p => p.ToId))
+            .Concat(survivingAnnotates.Select(p => p.FromId))
+            .Concat(survivingFillGaps.Select(p => p.FromId))
+            .Concat(survivingAddEdges.Select(p => p.FromId))
+            .Where(id => id > 0 && id != _pageId)
+            .Distinct()
+            .ToList();
+        var edgeTargetNames =
+            allEdgeTargetIds.Count == 0
+                ? new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+                : (await Nodes.Find(Builders<GraphNode>.Filter.In(n => n.PageId, allEdgeTargetIds)).Project(n => n.Name).ToListAsync(ct))
+                    .Where(n => !string.IsNullOrWhiteSpace(n))
+                    .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+        // Aliases blocklist — bulk-resolve every distinct Aliases value to see
+        // whether it exists in kg.nodes as a disqualifying type. Single query.
+        var aliasValuesToCheck = survivingNodeProps
+            .Where(p => string.Equals(p.FieldPath, "Aliases", StringComparison.OrdinalIgnoreCase))
+            .SelectMany(p => p.Values)
+            .Where(v => !string.IsNullOrWhiteSpace(v))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToList();
+        // Types that disqualify a value from being an Alias. Below-threshold
+        // types ("CulturalGroup", "FanOrganization") use string literals — the
+        // KgNodeTypes constant set only covers types with ≥100 nodes per its
+        // coverage rule.
+        var aliasBlockedTypes = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            KgNodeTypes.TitleOrPosition,
+            KgNodeTypes.Government,
+            KgNodeTypes.Organization,
+            KgNodeTypes.Religion,
+            KgNodeTypes.Species,
+            KgNodeTypes.MilitaryUnit,
+            KgNodeTypes.Family,
+            "CulturalGroup",
+            "FanOrganization",
+        };
+        var aliasBlocklist = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        if (aliasValuesToCheck.Count > 0)
+        {
+            var matches = await Nodes
+                .Find(Builders<GraphNode>.Filter.In(n => n.Name, aliasValuesToCheck) & Builders<GraphNode>.Filter.In(n => n.Type, aliasBlockedTypes))
+                .Project(n => n.Name)
+                .ToListAsync(ct);
+            foreach (var n in matches)
+                if (!string.IsNullOrWhiteSpace(n))
+                    aliasBlocklist.Add(n);
+        }
+
+        var crossVectorDropped = 0;
+        var dedupedSurvivingNodeProps = new List<HolocronNodeProposalPayload>();
+        foreach (var p in survivingNodeProps)
+        {
+            var isAliases = string.Equals(p.FieldPath, "Aliases", StringComparison.OrdinalIgnoreCase);
+            var keptValues = p
+                .Values.Where(v =>
+                {
+                    if (string.IsNullOrWhiteSpace(v))
+                        return false;
+                    if (edgeTargetNames.Contains(v))
+                        return false;
+                    if (isAliases && aliasBlocklist.Contains(v))
+                        return false;
+                    return true;
+                })
+                .ToList();
+            var droppedValues = p.Values.Count - keptValues.Count;
+            if (keptValues.Count == 0)
+            {
+                crossVectorDropped++;
+                continue;
+            }
+            if (droppedValues > 0)
+                dedupedSurvivingNodeProps.Add(p with { Values = keptValues });
+            else
+                dedupedSurvivingNodeProps.Add(p);
+        }
+        preflightRejects += crossVectorDropped;
+        survivingNodeProps = dedupedSurvivingNodeProps;
 
         var consolidated = new HolocronConsolidatedProposals(survivingAnnotates, survivingFillGaps, survivingAddEdges, survivingNodeProps, duplicatesDropped, preflightRejects, evidenceFailures);
 
@@ -364,7 +509,7 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
         return src is EdgeBoundsSource.Lifecycle;
     }
 
-    bool IsAddEdgeValid(HolocronAddEdgeProposal p, HashSet<string> existingNodePairs, HashSet<string> enrichmentNodePairs)
+    bool IsAddEdgeValid(HolocronAddEdgeProposal p, HashSet<string> existingNodePairs, HashSet<string> enrichmentNodePairs, IReadOnlyDictionary<int, string> targetTypes)
     {
         if (p.FromId <= 0 || p.ToId <= 0 || string.IsNullOrWhiteSpace(p.Label))
             return false;
@@ -372,6 +517,20 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
             return false;
         if (!_knownLabels.Contains(p.Label))
             return false;
+
+        // Type-constraint: if the canonical label declares specific target types, the
+        // actual target must match one of them. Catches `has_role → Character` and
+        // similar agent confusions where the label semantically demands a particular
+        // node type but the agent grabbed a wrong-typed entity from the linked-entities
+        // hint section. When Targets is empty (rare), skip the check — historical
+        // labels without declared Targets are permissive by design.
+        if (_expectedTargetsByLabel.TryGetValue(p.Label, out var expected) && expected.Count > 0)
+        {
+            var targetType = targetTypes.GetValueOrDefault(p.ToId, string.Empty);
+            if (string.IsNullOrEmpty(targetType) || !expected.Contains(targetType))
+                return false;
+        }
+
         var pair = NodePairKey(p.FromId, p.ToId);
         return !existingNodePairs.Contains(pair) && !enrichmentNodePairs.Contains(pair);
     }
