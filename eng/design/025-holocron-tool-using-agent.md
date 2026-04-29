@@ -1,9 +1,32 @@
 # Design-025: Holocron as a tool-using agent (vs. structured-output workflow)
 
-**Status:** Proposal
+**Status:** Superseded — pivot rejected. See [ADR-007](../adr/007-holocron-hardening-over-rewrite.md). Phase A.1 read tools shipped as a foundation but are not wired into any agent; the v1.x structured-output extractor was hardened instead via v1.4.0 → v1.7.0.
 **Date:** 2026-04-28
 **Author:** Patrick Magee + Claude
-**Related:** [Design-018 KG enrichments architecture](./018-kg-enrichments-architecture.md), [Design-020 Holocron async pipeline](./020-holocron-async-pipeline.md), [Design-021 Edge bound provenance](./021-edge-bound-provenance.md), [Design-023 Character roles as edges](./023-character-roles-as-edges.md), [Design-024 Typed NodeBuilders](./024-typed-node-builders.md), [ADR-006 Long-running AI workflow pipelines](../adr/006-long-running-ai-workflow-pipelines.md)
+**Related:** [Design-018 KG enrichments architecture](./018-kg-enrichments-architecture.md), [Design-020 Holocron async pipeline](./020-holocron-async-pipeline.md), [Design-021 Edge bound provenance](./021-edge-bound-provenance.md), [Design-023 Character roles as edges](./023-character-roles-as-edges.md), [Design-024 Typed NodeBuilders](./024-typed-node-builders.md), [ADR-006 Long-running AI workflow pipelines](../adr/006-long-running-ai-workflow-pipelines.md), [ADR-007 Hardening over rewriting](../adr/007-holocron-hardening-over-rewrite.md)
+
+## Outcome (added 2026-04-29)
+
+The pivot proposed below was tested against real audit data and **rejected**. The reality-check on Asajj Ventress and Ahsoka Tano showed v1.3.0's existing sieve had already absorbed most of the originally-documented failure modes (Aliases stuffing, wrong-target-type edges, fieldPath leaks, dup-pair Adds, hedge-claim hallucinations). The remaining failures were content / target-substitution hallucinations, which are prompt-engineering and semantic-verification concerns — not architectural pivot territory.
+
+**What shipped from this design:**
+
+- `Services/AI/Agents/Holocron/Tools/HolocronReadToolkit.cs` — the four read tools (`resolve_entity`, `find_canonical_label`, `check_existing_edges`, `get_template_schema`) plus `HolocronToolDtos.cs`. 14 unit + 11 integration tests cover them. **Not wired to any agent.**
+- `find_canonical_label` is a thin LINQ filter over `FieldSemantics.Relationships` — no synonym table. The `LabelSynonymTable` was prototyped, tested, then deleted after the architecture-wide pushback that this was over-engineering.
+
+**What did NOT ship:**
+
+- `propose_edge` / `propose_property` / `suggest_new_label` (the write tools).
+- The tool-using `AIAgent` factory.
+- The replacement of the v1.x structured-output extractor.
+- The `kg.label_suggestions` collection / vocabulary-growth UI.
+- Any cutover from the existing five-executor workflow.
+
+**What did the actual hardening look like?** See [ADR-007](../adr/007-holocron-hardening-over-rewrite.md) for the v1.4.0 → v1.7.0 trajectory: hedge-word regex, F5 fix (full-pair check against `kg.edges`), universal property blocklist, LLM evidence verifier as a new executor, top-K bump, `kg.holocron_audits` collection, system-prompt rewrite. Anakin canonical test now lands `apprentice_of → Sidious -19→4` and `Dark Lord of the Sith` Add with zero hallucinations in surviving output. The path that worked was iterating on the existing pipeline driven by per-proposal audit data, not replacing it.
+
+The diagnosis below — particularly the failure-mode catalogue and the per-failure-mode mapping — remains useful as a record of what was wrong with v1.2.x. The proposed architecture is documented for posterity but is no longer the plan.
+
+---
 
 ## TL;DR
 

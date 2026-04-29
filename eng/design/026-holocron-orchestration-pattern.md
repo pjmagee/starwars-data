@@ -1,9 +1,34 @@
 # Design-026: Holocron orchestration pattern — picking the right Microsoft Agent Framework shape
 
-**Status:** Proposal
+**Status:** Superseded — pivot rejected with [Design-025](./025-holocron-tool-using-agent.md). See [ADR-007](../adr/007-holocron-hardening-over-rewrite.md). The fan-out architecture below was not built; the v1.x sequential five-executor workflow was kept and a sixth stage (`HolocronEvidenceVerifierExecutor`) was inserted between consolidator and apply.
 **Date:** 2026-04-29
 **Author:** Patrick Magee + Claude
-**Related:** [Design-018 KG enrichments architecture](./018-kg-enrichments-architecture.md), [Design-020 Holocron async pipeline](./020-holocron-async-pipeline.md), [Design-025 Holocron tool-using agent](./025-holocron-tool-using-agent.md), [ADR-006 Long-running AI workflow pipelines](../adr/006-long-running-ai-workflow-pipelines.md)
+**Related:** [Design-018 KG enrichments architecture](./018-kg-enrichments-architecture.md), [Design-020 Holocron async pipeline](./020-holocron-async-pipeline.md), [Design-025 Holocron tool-using agent](./025-holocron-tool-using-agent.md), [ADR-006 Long-running AI workflow pipelines](../adr/006-long-running-ai-workflow-pipelines.md), [ADR-007 Hardening over rewriting](../adr/007-holocron-hardening-over-rewrite.md)
+
+## Outcome (added 2026-04-29)
+
+This design was a follow-on to [Design-025](./025-holocron-tool-using-agent.md). When the parent design's pivot was rejected (see [ADR-007](../adr/007-holocron-hardening-over-rewrite.md)), the orchestration choice in this document became moot — there is no tool-using agent to fan out, and the sequential workflow was demonstrably handling Anakin-class loads (~30 min wall-clock, 341 batches) with quality gains coming from the verifier and prompt rewrite, not from concurrency.
+
+**What shipped from this design:**
+
+- The verdict that **none of the five named multi-agent orchestrations** (Sequential / Concurrent / Handoff / Group Chat / Magentic) fits Holocron's workload shape stands. The v1.x workflow remains a custom `WorkflowBuilder` graph — not one of the named patterns.
+
+**What did NOT ship:**
+
+- Per-batch concurrent fan-out via multiple `AIAgentHostExecutor` instances.
+- The `HolocronAgentFactory` for binding tools to a per-batch agent.
+- The fan-out + fan-in barrier topology.
+- Concurrency cap in the bundler.
+
+**What did happen instead:**
+
+- **Sixth executor inserted, sequentially.** `HolocronEvidenceVerifierExecutor` (post-consolidator, pre-apply) — see [ADR-007](../adr/007-holocron-hardening-over-rewrite.md). It uses the `IChatClient` directly with structured-output verdicts, not an `AIAgentHostExecutor`.
+- **Per-proposal audit collection.** `kg.holocron_audits` lifts the rejection black box without needing tool-call traces — every proposal's outcome is durable per stage.
+- **Throughput is acceptable.** Anakin (2520 chunks / 341 batches) lands in ~30 minutes wall-clock with the new prompt and verifier. Concurrent fan-out would be a quality-neutral throughput optimisation; we don't need it yet.
+
+The pattern-fit analysis below remains useful as a record of *why* none of the named orchestrations fit Holocron — that conclusion is unchanged whether or not the agent uses tools. **Revisit this document only if Holocron's runtime becomes the binding constraint** (Sidious-class super-hubs taking >2 hours per run) or if the tool-using agent is later built and a fan-out becomes useful.
+
+---
 
 ## TL;DR
 

@@ -1,17 +1,50 @@
 # Design-028: Tri-view node/edge presentation + Holocron wipe
 
-**Status:** Proposal
+**Status:** Partially shipped — read-side bug fixes that prefigure the merged-view direction landed in Holocron v1.7.0 (commit 877bf2e2d8). The full tri-view UI (Original / Holocron / Merged tabs) and the wipe admin endpoint are still proposed.
 **Date:** 2026-04-29
 **Author:** Patrick Magee + Claude
 **Related:**
+
+- [ADR-007 — Hardening over rewriting](../adr/007-holocron-hardening-over-rewrite.md) (the v1.x trajectory referenced below)
 - [Design-018 — KG enrichments architecture](018-kg-enrichments-architecture.md) (storage contract)
 - [Design-019 — UI provenance for Phase 1 vs Phase 2](019-kg-enrichment-ui-provenance.md) (provenance markers — extended here)
 - [Design-020 — Holocron async pipeline](020-holocron-async-pipeline.md) (write path)
 - [Design-021 — Edge bound provenance](021-edge-bound-provenance.md) (`boundsSource` field)
 - [Design-024 — Typed NodeBuilders](024-typed-node-builders.md) (foundation regeneration)
-- [Design-025 — Holocron tool-using agent](025-holocron-tool-using-agent.md) (proposal types)
-- [Design-026 — Holocron orchestration pattern](026-holocron-orchestration-pattern.md) (Apply path)
+- [Design-025 — Holocron tool-using agent](025-holocron-tool-using-agent.md) (superseded — see ADR-007)
+- [Design-026 — Holocron orchestration pattern](026-holocron-orchestration-pattern.md) (superseded — see ADR-007)
 - [eng/docs/edge-labels-and-bidirectionality.md](../docs/edge-labels-and-bidirectionality.md) (background research)
+
+## Outcome (added 2026-04-29)
+
+Holocron v1.7.0 hardening (see [ADR-007](../adr/007-holocron-hardening-over-rewrite.md)) shipped **a subset of the read-side machinery this design depends on**, while the tri-view UI itself and the wipe admin operation remain unbuilt.
+
+**What landed:**
+
+- **Holocron Add edges now participate in graph-explorer BFS expansion.** The `KnowledgeGraphQueryService.QueryGraphAsync` post-BFS merge previously skipped Holocron Adds when one endpoint wasn't in `visited`; for pure-Holocron-only relationships (e.g. Anakin's `has_role → Dark Lord of the Sith`, where Phase 1 had no `has_role` edges to seed the BFS) this meant the edge never rendered. Fixed: when one endpoint is in `visited`, pull the missing endpoint into the result set (subject to `maxNodes`).
+- **Duplicate-chip dedup on the relationship-chip panel.** `GetLabelsForEntityAsync` was producing two `has_role` chips when two Holocron Adds shared a label, because the duplicate-check was against the base-edge `labelSet` (never updated). Fixed by switching to `labelSet.Add(label)` so the second Holocron Add hits the dedup.
+- **Continuity + realm filtering on the labels endpoint.** Added `continuity` + `realm` query params to `GetLabels` plus a `realm`/`universe` parameter alias on `QueryGraph` (Frontend was sending `realm=...` everywhere but the controllers bound `universe`, silently dropping the filter). The labels endpoint also gates the entity itself (Anakin is Canon → Legends-filtered queries return empty rather than the full unfiltered set).
+- **`reverseToForward` 1:1 → 1:N mapping.** Multiple forward labels collapse to the same reverse (e.g. `has_event` and `has_important_event` both → `happened_in`). The previous `DistinctBy(d.Reverse)` silently dropped all-but-one forward, so an Anakin filter on `happened_in` only matched whichever forward came first. Fixed to union every forward.
+
+These are all **read-side surface fixes** the tri-view design implicitly assumed worked. They don't compose into the tri-view tabs themselves — they were uncovered while debugging audit data on Anakin's run.
+
+**What did NOT ship:**
+
+- The three tabs (Original / Holocron / Merged) on selected-node and selected-edge expansion views.
+- `KgRowSource` enum + per-row source tags in `TemporalNodeDto`.
+- `GET /api/KnowledgeGraph/node/{pageId}?view=original|holocron|merged` view-param routing.
+- `POST /api/admin/holocron/wipe` and `/wipe/node/{pageId}` admin endpoints.
+- The `kg.events` `HolocronWiped` audit type.
+- The Aspire HTTP wipe commands.
+- Holocron-tab "Wipe for this node" header button and Holocron Log "Wipe global" type-to-confirm modal.
+
+The ETL contract this design relies on (Phase 1 owns `kg.nodes` / `kg.edges`; Phase 2 only writes `kg.enrichments` / `kg.edge_enrichments` / `kg.events` / `kg.node_processed_chunks`) is still enforced and the `kg.nodes.enriched` / `kg.edges.enriched` views (migration 0010) are still the merge layer. The wipe-safety property — "deleting Phase 2 collections never touches the foundation" — is unchanged.
+
+**One note on what changed under the design:** v1.6.0 added a new collection `kg.holocron_audits` (per-proposal audit trail). Any future "Wipe Holocron" implementation needs to include `kg.holocron_audits` in the collections-to-clear set per the wipe scope, alongside the four already enumerated.
+
+The design proper begins below; treat the §Migration path phases as the still-applicable plan for the unshipped UI work.
+
+---
 
 ## TL;DR
 
