@@ -1,6 +1,7 @@
 @page "/tables"
 @inject IHttpClientFactory HttpClientFactory
 @inject GlobalFilterService GlobalFilterService
+@inject PageContextService PageContext
 @implements IDisposable
 
 <PageTitle>Data Tables — Star Wars Data</PageTitle>
@@ -125,6 +126,15 @@ else
         GlobalFilterService.OnChange += OnGlobalFilterChanged;
         string[]? categories = (await Http.GetFromJsonAsync<string[]>("Categories"))!;
         _categories = categories.OrderBy(x => x).ToArray();
+        PublishPageContext();
+    }
+
+    private void PublishPageContext()
+    {
+        var extras = new Dictionary<string, string>(StringComparer.Ordinal);
+        if (!string.IsNullOrEmpty(_category)) extras["entityType"] = _category!;
+        if (!string.IsNullOrWhiteSpace(_searchText)) extras["search"] = _searchText!;
+        PageContext.Set(new PageContext(Page: "tables", Extras: extras));
     }
 
     private async void OnGlobalFilterChanged()
@@ -138,6 +148,7 @@ else
 
     public void Dispose()
     {
+        PageContext.Clear();
         GlobalFilterService.OnChange -= OnGlobalFilterChanged;
     }
 
@@ -185,6 +196,7 @@ else
         _category = arg;
         _searchText = null;
         _dynamicHeaders = [];
+        PublishPageContext();
 
         if (_grid is not null)
             await _grid.ReloadServerData();

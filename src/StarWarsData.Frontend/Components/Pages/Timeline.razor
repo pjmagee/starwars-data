@@ -1,4 +1,6 @@
 @page "/timeline"
+@inject PageContextService PageContext
+@implements IDisposable
 
 <PageTitle>Timeline — Star Wars Data</PageTitle>
 <HeadContent>
@@ -19,3 +21,12 @@
     </MudTabs>
 
 </MudContainer>
+
+@code {
+    protected override void OnInitialized()
+    {
+        PageContext.Set(new PageContext(Page: "timeline"));
+    }
+
+    public void Dispose() => PageContext.Clear();
+}

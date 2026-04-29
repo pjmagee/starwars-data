@@ -6,6 +6,7 @@
 @inject IHttpClientFactory HttpClientFactory
 @inject NavigationManager Navigation
 @inject GlobalFilterService GlobalFilterService
+@inject PageContextService PageContext
 @implements IDisposable
 
 <PageTitle>@GetPageTitle()</PageTitle>
@@ -677,6 +678,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         GlobalFilterService.OnChange += OnGlobalFilterChanged;
+        PublishPageContext();
     }
 
     protected override async Task OnParametersSetAsync()
@@ -685,6 +687,7 @@ else
         {
             StopActiveGenPolling();
             await LoadDetailPage();
+            PublishPageContext();
         }
         else
         {
@@ -695,11 +698,29 @@ else
 
             await LoadActiveGenerations();
             StartActiveGenPolling();
+            PublishPageContext();
+        }
+    }
+
+    private void PublishPageContext()
+    {
+        if (_characterInfo is { } c && PageId is int id)
+        {
+            PageContext.Set(new PageContext(
+                Page: "character-timelines",
+                Subject: c.Title,
+                SubjectKind: "Character",
+                SubjectId: id));
+        }
+        else
+        {
+            PageContext.Set(new PageContext(Page: "character-timelines"));
         }
     }
 
     public void Dispose()
     {
+        PageContext.Clear();
         GlobalFilterService.OnChange -= OnGlobalFilterChanged;
         _pollTimer?.Dispose();
         _activeGenPollTimer?.Dispose();

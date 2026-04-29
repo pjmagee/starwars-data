@@ -5,6 +5,7 @@
 @inject ISnackbar Snackbar
 @inject GlobalFilterService GlobalFilterService
 @inject IDialogService DialogService
+@inject PageContextService PageContext
 @implements IDisposable
 
 <PageTitle>Graph Explorer — Star Wars Data</PageTitle>
@@ -271,6 +272,22 @@
     {
         GlobalFilterService.OnChange += OnGlobalFilterChanged;
         await LoadEntityTypes();
+        PublishPageContext();
+    }
+
+    private void PublishPageContext()
+    {
+        if (_selectedEntityId > 0)
+        {
+            PageContext.Set(new PageContext(
+                Page: "graph-explorer",
+                Subject: _selectedEntityName,
+                SubjectId: _selectedEntityId));
+        }
+        else
+        {
+            PageContext.Set(new PageContext(Page: "graph-explorer"));
+        }
     }
 
     private async Task LoadEntityTypes()
@@ -293,6 +310,7 @@
             _selectedEntityId = PageId.Value;
             _selectedEntityName = $"Entity #{PageId.Value}";
             await LoadLabels();
+            PublishPageContext();
         }
     }
 
@@ -386,6 +404,7 @@
         _selectedLabels.Clear();
         _autoReduceDepth = true;
         _maxDepth = 1;
+        PublishPageContext();
 
         Navigation.NavigateTo($"/graph-explorer/{id}", replace: true);
 
@@ -598,6 +617,7 @@
 
     public void Dispose()
     {
+        PageContext.Clear();
         GlobalFilterService.OnChange -= OnGlobalFilterChanged;
     }
 }
