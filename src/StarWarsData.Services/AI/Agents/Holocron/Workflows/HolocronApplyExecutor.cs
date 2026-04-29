@@ -45,6 +45,7 @@ internal sealed class HolocronApplyExecutor : Executor<string, string>
     readonly ILogger _logger;
     readonly HolocronEnhancementTracker? _tracker;
     readonly HolocronJobService _jobService;
+    readonly HolocronAuditService _audit;
     readonly int _pageId;
     readonly string _jobId;
     readonly string _triggeredBy;
@@ -54,6 +55,7 @@ internal sealed class HolocronApplyExecutor : Executor<string, string>
         SettingsOptions settings,
         ILogger logger,
         HolocronJobService jobService,
+        HolocronAuditService audit,
         int pageId,
         string jobId,
         string triggeredBy,
@@ -65,6 +67,7 @@ internal sealed class HolocronApplyExecutor : Executor<string, string>
         _settings = settings;
         _logger = logger;
         _jobService = jobService;
+        _audit = audit;
         _pageId = pageId;
         _jobId = jobId;
         _triggeredBy = triggeredBy;
@@ -82,8 +85,11 @@ internal sealed class HolocronApplyExecutor : Executor<string, string>
         var node =
             await context.ReadStateAsync<HolocronNodeSnapshot>(HolocronContextDiscoveryExecutor.KeyNode, HolocronContextDiscoveryExecutor.Scope, ct)
             ?? throw new InvalidOperationException("HolocronApply: no node in Discovery state");
+        // Prefer the verifier's filtered set; fall back to the consolidator's output for
+        // resumes where the verifier hadn't checkpointed yet (e.g. mid-cutover restarts).
         var consolidated =
-            await context.ReadStateAsync<HolocronConsolidatedProposals>(HolocronConsolidatorExecutor.KeyConsolidated, HolocronConsolidatorExecutor.Scope, ct)
+            await context.ReadStateAsync<HolocronConsolidatedProposals>(HolocronEvidenceVerifierExecutor.KeyVerified, HolocronEvidenceVerifierExecutor.Scope, ct)
+            ?? await context.ReadStateAsync<HolocronConsolidatedProposals>(HolocronConsolidatorExecutor.KeyConsolidated, HolocronConsolidatorExecutor.Scope, ct)
             ?? new HolocronConsolidatedProposals([], [], [], [], 0, 0, 0);
         var newChunks = await context.ReadStateAsync<List<HolocronChunkRef>>(HolocronContextDiscoveryExecutor.KeyNewChunks, HolocronContextDiscoveryExecutor.Scope, ct) ?? [];
 
@@ -257,6 +263,42 @@ internal sealed class HolocronApplyExecutor : Executor<string, string>
                 edgeDupes,
                 eventDupes
             );
+        }
+
+        // ── 6.5. Mark applied audits ───────────────────────────────────────
+        // Every proposal that survived consolidation + verification and made it
+        // into the bulk writes above gets its audit row's outcome promoted from
+        // pending_verifier / verifier_accepted → applied. The natural-key map
+        // produced by the consolidator drives the lookup (no per-proposal Mongo
+        // round-trip per row).
+        if (consolidated.AuditIds is not null && consolidated.AuditIds.Count > 0)
+        {
+            var applied = new List<(string AuditId, string Outcome, string Reason)>();
+            foreach (var p in consolidated.AnnotateEdges)
+            {
+                var key = $"annotate|{p.FromId}|{p.ToId}|{p.Label.ToLowerInvariant()}";
+                if (consolidated.AuditIds.TryGetValue(key, out var id))
+                    applied.Add((id, "applied", $"Wrote Annotate enrichment for ({p.FromId}, {p.ToId}, {p.Label})"));
+            }
+            foreach (var p in consolidated.FillGapEdges)
+            {
+                var key = $"fillgap|{p.FromId}|{p.ToId}|{p.Label.ToLowerInvariant()}";
+                if (consolidated.AuditIds.TryGetValue(key, out var id))
+                    applied.Add((id, "applied", $"Wrote FillGap enrichment for ({p.FromId}, {p.ToId}, {p.Label}) fromYear={p.FromYear} toYear={p.ToYear}"));
+            }
+            foreach (var p in consolidated.AddEdges)
+            {
+                var key = $"add|{p.FromId}|{p.ToId}|{p.Label.ToLowerInvariant()}";
+                if (consolidated.AuditIds.TryGetValue(key, out var id))
+                    applied.Add((id, "applied", $"Wrote Add edge enrichment for ({p.FromId}, {p.ToId}, {p.Label})"));
+            }
+            foreach (var p in consolidated.NodeProposals)
+            {
+                var key = $"property|{p.FieldPath}";
+                if (consolidated.AuditIds.TryGetValue(key, out var id))
+                    applied.Add((id, "applied", $"Wrote {p.FieldPath} property enrichment with {p.Values.Count} values"));
+            }
+            await _audit.BulkUpdateOutcomeAsync(applied, stage: "apply", ct);
         }
 
         // ── 7. Record processed chunks (the ledger that drives skip-if-unchanged) ──

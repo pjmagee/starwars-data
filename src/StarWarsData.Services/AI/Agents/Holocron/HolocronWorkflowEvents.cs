@@ -66,6 +66,24 @@ public sealed class HolocronConsolidationCompleteEvent(HolocronConsolidationComp
 public sealed record HolocronConsolidationCompleteData(int RawProposals, int Consolidated, int DuplicatesDropped, int PreflightRejects, int EvidenceFailures);
 
 /// <summary>
+/// Emitted by <c>HolocronEvidenceVerifierExecutor</c> after the LLM second-pass
+/// verifies (or rejects) each surviving proposal's evidence. <c>VerifierRejects</c>
+/// is the count of proposals dropped because the cited chunk didn't directly
+/// support the claim.
+/// </summary>
+public sealed class HolocronVerificationCompleteEvent(HolocronVerificationCompleteData data) : WorkflowEvent(data);
+
+public sealed record HolocronVerificationCompleteData(int InputProposals, int Verified, int VerifierRejects, List<HolocronVerifierRejectData> SampleRejects);
+
+/// <summary>
+/// One verifier rejection surfaced to the activity log. <c>SampleRejects</c> on
+/// <see cref="HolocronVerificationCompleteData"/> caps the list at a handful so
+/// the UI doesn't drown in detail; full verdicts live in the model output and
+/// can be re-derived by re-running.
+/// </summary>
+public sealed record HolocronVerifierRejectData(string Id, string Subject, string Predicate, string Target, string Reason);
+
+/// <summary>
 /// Emitted by <c>HolocronApplyExecutor</c> with the final write summary. Last
 /// event of every successful run.
 /// </summary>

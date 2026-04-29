@@ -38,14 +38,26 @@ public sealed class HolocronEnhancementService
     readonly ILogger<HolocronEnhancementService> _logger;
     readonly HolocronAgent _agent;
     readonly HolocronJobService _jobService;
+    readonly HolocronVerifierService _verifier;
+    readonly HolocronAuditService _audit;
 
-    public HolocronEnhancementService(IMongoClient mongoClient, IOptions<SettingsOptions> settings, ILogger<HolocronEnhancementService> logger, HolocronAgent agent, HolocronJobService jobService)
+    public HolocronEnhancementService(
+        IMongoClient mongoClient,
+        IOptions<SettingsOptions> settings,
+        ILogger<HolocronEnhancementService> logger,
+        HolocronAgent agent,
+        HolocronJobService jobService,
+        HolocronVerifierService verifier,
+        HolocronAuditService audit
+    )
     {
         _mongoClient = mongoClient;
         _settings = settings.Value;
         _logger = logger;
         _agent = agent;
         _jobService = jobService;
+        _verifier = verifier;
+        _audit = audit;
     }
 
     /// <summary>
@@ -62,14 +74,16 @@ public sealed class HolocronEnhancementService
         var discovery = new HolocronContextDiscoveryExecutor(_mongoClient, _settings, _logger, _jobService, pageId, jobId, tracker);
         var bundler = new HolocronBundlerExecutor(_logger, _jobService, pageId, jobId, tracker);
         var extractor = new HolocronProposalExtractorExecutor(_agent, _logger, _jobService, _mongoClient, _settings.DatabaseName, pageId, jobId, tracker);
-        var consolidator = new HolocronConsolidatorExecutor(_mongoClient, _settings, _logger, _jobService, pageId, jobId, tracker);
-        var apply = new HolocronApplyExecutor(_mongoClient, _settings, _logger, _jobService, pageId, jobId, triggeredBy, tracker);
+        var consolidator = new HolocronConsolidatorExecutor(_mongoClient, _settings, _logger, _jobService, _audit, pageId, jobId, tracker);
+        var verifier = new HolocronEvidenceVerifierExecutor(_verifier, _logger, _jobService, _audit, pageId, jobId, tracker);
+        var apply = new HolocronApplyExecutor(_mongoClient, _settings, _logger, _jobService, _audit, pageId, jobId, triggeredBy, tracker);
 
         var workflow = new WorkflowBuilder(discovery)
             .AddEdge(discovery, bundler)
             .AddEdge(bundler, extractor)
             .AddEdge(extractor, consolidator)
-            .AddEdge(consolidator, apply)
+            .AddEdge(consolidator, verifier)
+            .AddEdge(verifier, apply)
             .WithOutputFrom(apply)
             .WithName($"HolocronEnhance-{pageId}")
             .Build(validateOrphans: true);
@@ -218,6 +232,17 @@ public sealed class HolocronEnhancementService
                 Category = "Consolidation",
                 EntryType = "consolidation_complete",
                 Summary = $"Consolidated {d.RawProposals} → {d.Consolidated} (dropped {d.DuplicatesDropped} dups, {d.PreflightRejects} pre-flight rejects, {d.EvidenceFailures} no-evidence)",
+                Detail = d,
+            },
+            HolocronVerificationCompleteEvent e when e.Data is HolocronVerificationCompleteData d => new HolocronActivityLogEntry
+            {
+                Timestamp = DateTime.UtcNow,
+                Category = "Verification",
+                EntryType = "verification_complete",
+                Summary =
+                    d.VerifierRejects == 0
+                        ? $"Verifier passed all {d.InputProposals} proposals."
+                        : $"Verifier accepted {d.Verified}/{d.InputProposals} ({d.VerifierRejects} rejected by evidence-quality check)",
                 Detail = d,
             },
             HolocronApplyCompleteEvent e when e.Data is HolocronApplyCompleteData d => new HolocronActivityLogEntry

@@ -69,8 +69,15 @@ public class SettingsOptions
     /// <summary>Number of nodes to enhance per daily pass. Kept low while we observe behaviour on dev.</summary>
     public int HolocronNodesPerPass { get; set; } = 10;
 
-    /// <summary>Max 1-hop neighbours included in the agent's context window per enhancement call.</summary>
-    public int HolocronMaxNeighborsForContext { get; set; } = 10;
+    /// <summary>
+    /// Max 1-hop neighbours included in the agent's context window per enhancement call.
+    /// Halved for outgoing/incoming each. Set high enough to capture every Lifecycle-tagged
+    /// edge for typical character-class nodes — Anakin v1.5.1 missed his
+    /// <c>apprentice_of → Sidious</c> FillGap because Sidious was 9th by weight and the
+    /// previous default of 10 (halfLimit=5) clipped it. 60 → halfLimit=30 covers Anakin's
+    /// 35 outgoing edges in full while staying bounded for Sidious-class super-hubs.
+    /// </summary>
+    public int HolocronMaxNeighborsForContext { get; set; } = 60;
 
     /// <summary>
     /// Article-chunk budget split across three sources. The total = own + linking + vector
@@ -170,6 +177,15 @@ public static class Collections
     // Same separation-of-writers rule — Phase 1 never touches these.
     public const string KgEnrichmentJobs = "kg.enrichment_jobs";
     public const string KgNodeProcessedChunks = "kg.node_processed_chunks";
+
+    /// <summary>
+    /// Per-proposal audit trail — one row per unique post-dedup proposal recorded by the
+    /// Holocron pipeline, capturing every stage's verdict (consolidator pre-flight,
+    /// verifier, apply) so we can answer "why was proposal X rejected?" without re-running.
+    /// Lifts the silent-rejection black box that bit Anakin's v1.5.2 run (122 unique →
+    /// 48 applied with no per-proposal record of why 74 were dropped).
+    /// </summary>
+    public const string KgHolocronAudits = "kg.holocron_audits";
 
     // ── Knowledge graph enriched read views ──
     // Mongo views that left-join the base collections with active enrichments.

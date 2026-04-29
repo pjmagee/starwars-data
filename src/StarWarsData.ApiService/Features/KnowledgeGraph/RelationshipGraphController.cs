@@ -35,7 +35,16 @@ public class RelationshipGraphController(KnowledgeGraphQueryService kg) : Contro
     ) => kg.SearchAsync(q, type, continuity, universe, ct);
 
     [HttpGet("labels/{pageId:int}")]
-    public Task<EntityLabelsResult> GetLabels(int pageId, CancellationToken ct) => kg.GetLabelsForEntityAsync(pageId, ct);
+    public Task<EntityLabelsResult> GetLabels(
+        int pageId,
+        [FromQuery] string? continuity = null,
+        // Accept both `realm` (canonical, what GlobalFilterService.GetRealmQueryParam emits)
+        // and `universe` (legacy alias). The other endpoints in this controller still bind
+        // `universe`; new clients should send `realm=` and we coalesce here so both work.
+        [FromQuery] string? realm = null,
+        [FromQuery] string? universe = null,
+        CancellationToken ct = default
+    ) => kg.GetLabelsForEntityAsync(pageId, continuity, realm ?? universe, ct);
 
     /// <summary>
     /// Per-edge rows for a node, projected from the node's perspective with Phase 2 annotation
@@ -96,10 +105,13 @@ public class RelationshipGraphController(KnowledgeGraphQueryService kg) : Contro
         [FromQuery] int maxDepth = 2,
         [FromQuery] string? continuity = null,
         [FromQuery] bool onlyRoot = false,
+        // `realm` is the canonical query-string key (matches GlobalFilterService.GetRealmQueryParam).
+        // `universe` is kept as a legacy alias so any external caller still works; coalesced below.
+        [FromQuery] string? realm = null,
         [FromQuery] string? universe = null,
         [FromQuery] int? yearFrom = null,
         [FromQuery] int? yearTo = null,
         [FromQuery] int maxNodes = 200,
         CancellationToken ct = default
-    ) => kg.QueryGraphAsync(pageId, labels, maxDepth, continuity, onlyRoot, universe, yearFrom, yearTo, maxNodes, ct);
+    ) => kg.QueryGraphAsync(pageId, labels, maxDepth, continuity, onlyRoot, realm ?? universe, yearFrom, yearTo, maxNodes, ct);
 }

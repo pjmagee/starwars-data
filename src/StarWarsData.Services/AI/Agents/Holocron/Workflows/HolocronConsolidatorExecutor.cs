@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Microsoft.Agents.AI.Workflows;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
@@ -61,12 +62,14 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
     /// </summary>
     readonly HashSet<string> _knownLabels;
     readonly Dictionary<string, HashSet<string>> _expectedTargetsByLabel;
+    readonly HolocronAuditService _audit;
 
     public HolocronConsolidatorExecutor(
         IMongoClient mongoClient,
         SettingsOptions settings,
         ILogger logger,
         HolocronJobService jobService,
+        HolocronAuditService audit,
         int pageId,
         string jobId,
         HolocronEnhancementTracker? tracker
@@ -77,6 +80,7 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
         _settings = settings;
         _logger = logger;
         _jobService = jobService;
+        _audit = audit;
         _pageId = pageId;
         _jobId = jobId;
         _tracker = tracker;
@@ -97,6 +101,36 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
     IMongoCollection<GraphNode> Nodes => _mongoClient.GetDatabase(_settings.DatabaseName).GetCollection<GraphNode>(Collections.KgNodes);
     IMongoCollection<ArticleChunk> Chunks => _mongoClient.GetDatabase(_settings.DatabaseName).GetCollection<ArticleChunk>(Collections.SearchChunks);
     IMongoCollection<EdgeEnrichment> EdgeEnrichments => _mongoClient.GetDatabase(_settings.DatabaseName).GetCollection<EdgeEnrichment>(Collections.KgEdgeEnrichments);
+    IMongoCollection<RelationshipEdge> Edges => _mongoClient.GetDatabase(_settings.DatabaseName).GetCollection<RelationshipEdge>(Collections.KgEdges);
+
+    /// <summary>
+    /// Hedge-word pattern surfacing the "I'm-not-actually-sure" tells the agent
+    /// produces when it's inferring a relationship from a co-appearance / cast
+    /// credit / link aggregation rather than a chunk that states the relationship.
+    /// Anakin / Asajj / Ahsoka runs (2026-04-29) catalogued these phrasings in real
+    /// hallucinations: "appears alongside Sidious in canon episode credits", "no
+    /// add edge is warranted", "described among bounty hunters in an appearances
+    /// context", "not supported strongly enough to add as a species edge", "if
+    /// supported by the source chunks". The system prompt already tells the agent
+    /// to skip; this regex is the post-hoc safety net for the calls that slip past.
+    /// Word boundaries kept loose because the surrounding prose varies.
+    /// </summary>
+    static readonly Regex HallucinationPattern = new(
+        @"appears? alongside|appears? with|appearances? context|appearance listings?|appearances? index|"
+            + @"linked entity list|linked from pages|as a linked entity|as a distinct linked entity|"
+            + @"no add edge is warranted|not warranted|not supported strongly|if supported by|if the source supports",
+        RegexOptions.IgnoreCase | RegexOptions.Compiled
+    );
+
+    static bool IsHedged(params string?[] texts)
+    {
+        foreach (var t in texts)
+        {
+            if (!string.IsNullOrEmpty(t) && HallucinationPattern.IsMatch(t))
+                return true;
+        }
+        return false;
+    }
 
     public override async ValueTask<string> HandleAsync(string message, IWorkflowContext context, CancellationToken ct = default)
     {
@@ -193,9 +227,24 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
 
         // (b) Edges already on the graph — keys for Annotate/FillGap target lookup
         // and unordered-pair set for Add rejection. Mirrors HolocronAgent.ApplyProposalsAsync.
+        //
+        // ⚠ outEdges / inEdges are top-K-by-weight from the discovery executor (typical K=5
+        // each). For high-degree nodes (Ahsoka has 231 Phase 1 edges; Anakin has thousands)
+        // the curated context misses most pairs. The Ahsoka v1.3.0 run staged duplicate Add
+        // edges for `species → Togruta` and `serves_in → 501st Legion` because both pairs
+        // already had Phase 1 edges that didn't make the top-K cut and so weren't in
+        // existingNodePairs. To make the F5 (Add-on-existing-pair) check authoritative we
+        // also query kg.edges for the full set of pairs touching _pageId.
         var existingEdges = outEdges.Concat(inEdges).ToList();
         var existingEdgeKeys = existingEdges.Select(e => $"{e.FromId}-{e.ToId}-{e.Label.ToLowerInvariant()}").ToHashSet(StringComparer.OrdinalIgnoreCase);
         var existingNodePairs = existingEdges.Select(e => NodePairKey(e.FromId, e.ToId)).ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+        var allTargetEdges = await Edges
+            .Find(Builders<RelationshipEdge>.Filter.Or(Builders<RelationshipEdge>.Filter.Eq(e => e.FromId, _pageId), Builders<RelationshipEdge>.Filter.Eq(e => e.ToId, _pageId)))
+            .Project(e => new { e.FromId, e.ToId })
+            .ToListAsync(ct);
+        foreach (var e in allTargetEdges)
+            existingNodePairs.Add(NodePairKey(e.FromId, e.ToId));
 
         // (c) Active edge enrichments touching the target — Add proposals must avoid these too.
         var activeEdgeEnrichments = await EdgeEnrichments
@@ -217,6 +266,7 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
 
         var preflightRejects = 0;
         var evidenceFailures = 0;
+        var auditIds = new Dictionary<string, string>(StringComparer.Ordinal);
 
         var survivingAnnotates = new List<HolocronAnnotateProposal>();
         foreach (var p in dedupedAnnotates)
@@ -224,13 +274,23 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
             if (!HasValidEvidence(p.Evidence, validPageIds, validChunkIds))
             {
                 evidenceFailures++;
+                await RecordAnnotateAuditAsync(p, "rejected_evidence", "Cited chunkId / sourcePageId not found", ct);
+                continue;
+            }
+            if (IsHedged(p.Claim, p.Reasoning, p.Description))
+            {
+                preflightRejects++;
+                await RecordAnnotateAuditAsync(p, "rejected_preflight_hedge", "Claim or reasoning contained hedge-word pattern (HolocronConsolidator.HallucinationPattern)", ct);
                 continue;
             }
             if (!IsAnnotateValid(p, existingEdgeKeys))
             {
                 preflightRejects++;
+                await RecordAnnotateAuditAsync(p, "rejected_preflight_other", "Failed IsAnnotateValid: missing target edge / fromId / label / context fields", ct);
                 continue;
             }
+            var auditId = await RecordAnnotateAuditAsync(p, "pending_verifier", string.Empty, ct);
+            auditIds[KeyAnnotate(p.FromId, p.ToId, p.Label)] = auditId;
             survivingAnnotates.Add(p);
         }
 
@@ -240,13 +300,23 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
             if (!HasValidEvidence(p.Evidence, validPageIds, validChunkIds))
             {
                 evidenceFailures++;
+                await RecordFillGapAuditAsync(p, "rejected_evidence", "Cited chunkId / sourcePageId not found", ct);
+                continue;
+            }
+            if (IsHedged(p.Claim, p.Reasoning))
+            {
+                preflightRejects++;
+                await RecordFillGapAuditAsync(p, "rejected_preflight_hedge", "Claim or reasoning contained hedge-word pattern", ct);
                 continue;
             }
             if (!IsFillGapValid(p, existingEdges))
             {
                 preflightRejects++;
+                await RecordFillGapAuditAsync(p, "rejected_preflight_other", "Failed IsFillGapValid: target edge missing or bound not refinable per Design-021", ct);
                 continue;
             }
+            var auditId = await RecordFillGapAuditAsync(p, "pending_verifier", string.Empty, ct);
+            auditIds[KeyFillGap(p.FromId, p.ToId, p.Label)] = auditId;
             survivingFillGaps.Add(p);
         }
 
@@ -269,13 +339,25 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
             if (!HasValidEvidence(p.Evidence, validPageIds, validChunkIds))
             {
                 evidenceFailures++;
+                await RecordAddAuditAsync(p, "rejected_evidence", "Cited chunkId / sourcePageId not found", ct);
+                continue;
+            }
+            if (IsHedged(p.Claim, p.Reasoning))
+            {
+                preflightRejects++;
+                await RecordAddAuditAsync(p, "rejected_preflight_hedge", "Claim or reasoning contained hedge-word pattern", ct);
                 continue;
             }
             if (!IsAddEdgeValid(p, existingNodePairs, enrichmentNodePairs, addEdgeTargetTypes))
             {
                 preflightRejects++;
+                var targetType = addEdgeTargetTypes.GetValueOrDefault(p.ToId, string.Empty);
+                var reason = AddEdgeRejectReason(p, existingNodePairs, enrichmentNodePairs, targetType);
+                await RecordAddAuditAsync(p, "rejected_preflight_" + reason.code, reason.message, ct);
                 continue;
             }
+            var auditId = await RecordAddAuditAsync(p, "pending_verifier", string.Empty, ct);
+            auditIds[KeyAdd(p.FromId, p.ToId, p.Label)] = auditId;
             survivingAddEdges.Add(p);
         }
 
@@ -285,27 +367,29 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
             if (!HasValidEvidence(p.Evidence, validPageIds, validChunkIds))
             {
                 evidenceFailures++;
+                await RecordPropertyAuditAsync(p, "rejected_evidence", "Cited chunkId / sourcePageId not found", ct);
+                continue;
+            }
+            if (IsHedged(p.Claim, p.Reasoning))
+            {
+                preflightRejects++;
+                await RecordPropertyAuditAsync(p, "rejected_preflight_hedge", "Claim or reasoning contained hedge-word pattern", ct);
                 continue;
             }
             if (string.IsNullOrWhiteSpace(p.FieldPath) || p.Values.Count == 0)
             {
                 preflightRejects++;
+                await RecordPropertyAuditAsync(p, "rejected_preflight_other", "Empty fieldPath or no values", ct);
                 continue;
             }
-            // Canonical-fieldPath discipline (Phase E, template-scoped). The user
-            // prompt lists ONLY the property fieldPaths valid for the target node's
-            // template (intersection of the template's actual fields with the global
-            // semantic dictionary). Any proposal whose fieldPath isn't in that
-            // template-scoped set is rejected — case/plural variants
-            // (`affiliation` vs `Affiliation`), edge-label-as-fieldPath mistakes
-            // (`has role`, `member of`), AND cross-template leaks (`Primary role(s)`
-            // on a Character page when it's actually a Starship free-text field).
-            // Case-insensitive match — InfoboxDefinition.Properties is OrdinalIgnoreCase.
             if (!allowedProperties.Contains(p.FieldPath))
             {
                 preflightRejects++;
+                await RecordPropertyAuditAsync(p, "rejected_preflight_fieldpath", $"fieldPath '{p.FieldPath}' not in template '{node.Type}' allow-list", ct);
                 continue;
             }
+            var auditId = await RecordPropertyAuditAsync(p, "pending_verifier", string.Empty, ct);
+            auditIds[KeyProperty(p.FieldPath)] = auditId;
             survivingNodeProps.Add(p);
         }
 
@@ -339,19 +423,21 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
                     .Where(n => !string.IsNullOrWhiteSpace(n))
                     .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
-        // Aliases blocklist — bulk-resolve every distinct Aliases value to see
-        // whether it exists in kg.nodes as a disqualifying type. Single query.
-        var aliasValuesToCheck = survivingNodeProps
-            .Where(p => string.Equals(p.FieldPath, "Aliases", StringComparison.OrdinalIgnoreCase))
-            .SelectMany(p => p.Values)
-            .Where(v => !string.IsNullOrWhiteSpace(v))
-            .Distinct(StringComparer.OrdinalIgnoreCase)
-            .ToList();
-        // Types that disqualify a value from being an Alias. Below-threshold
-        // types ("CulturalGroup", "FanOrganization") use string literals — the
-        // KgNodeTypes constant set only covers types with ≥100 nodes per its
-        // coverage rule.
-        var aliasBlockedTypes = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        // Universal property-value blocklist — extends the v1.3.0 Aliases-only check
+        // to every property fieldPath. Background: the Ahsoka v1.4.0 run produced
+        // a `Titles` Augment containing 5 values that resolve to TitleOrPosition /
+        // Religion nodes ("Jedi General", "Padawan", "Jedi Knight", "Jedi", "Fulcrum").
+        // The Aliases check would have dropped these; Titles, Occupation, Primary
+        // role(s) etc. let them through. Generalising means: any property value that
+        // already exists as a node of a blocked type is encoded as an edge instead,
+        // not a property string. False positives (legit codenames that happen to be
+        // TitleOrPosition nodes — "Fulcrum") get dropped here; that's accepted.
+        var propertyValuesToCheck = survivingNodeProps.SelectMany(p => p.Values).Where(v => !string.IsNullOrWhiteSpace(v)).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+        // Types that disqualify a string value from appearing as a property — the
+        // string IS another entity in the graph, so the proposal should have been
+        // an edge. Below-threshold types ("CulturalGroup", "FanOrganization") use
+        // string literals because KgNodeTypes only covers types with ≥100 nodes.
+        var nodeBlockedTypes = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
             KgNodeTypes.TitleOrPosition,
             KgNodeTypes.Government,
@@ -363,23 +449,22 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
             "CulturalGroup",
             "FanOrganization",
         };
-        var aliasBlocklist = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        if (aliasValuesToCheck.Count > 0)
+        var nodeBlocklist = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        if (propertyValuesToCheck.Count > 0)
         {
             var matches = await Nodes
-                .Find(Builders<GraphNode>.Filter.In(n => n.Name, aliasValuesToCheck) & Builders<GraphNode>.Filter.In(n => n.Type, aliasBlockedTypes))
+                .Find(Builders<GraphNode>.Filter.In(n => n.Name, propertyValuesToCheck) & Builders<GraphNode>.Filter.In(n => n.Type, nodeBlockedTypes))
                 .Project(n => n.Name)
                 .ToListAsync(ct);
             foreach (var n in matches)
                 if (!string.IsNullOrWhiteSpace(n))
-                    aliasBlocklist.Add(n);
+                    nodeBlocklist.Add(n);
         }
 
         var crossVectorDropped = 0;
         var dedupedSurvivingNodeProps = new List<HolocronNodeProposalPayload>();
         foreach (var p in survivingNodeProps)
         {
-            var isAliases = string.Equals(p.FieldPath, "Aliases", StringComparison.OrdinalIgnoreCase);
             var keptValues = p
                 .Values.Where(v =>
                 {
@@ -387,7 +472,7 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
                         return false;
                     if (edgeTargetNames.Contains(v))
                         return false;
-                    if (isAliases && aliasBlocklist.Contains(v))
+                    if (nodeBlocklist.Contains(v))
                         return false;
                     return true;
                 })
@@ -406,7 +491,33 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
         preflightRejects += crossVectorDropped;
         survivingNodeProps = dedupedSurvivingNodeProps;
 
-        var consolidated = new HolocronConsolidatedProposals(survivingAnnotates, survivingFillGaps, survivingAddEdges, survivingNodeProps, duplicatesDropped, preflightRejects, evidenceFailures);
+        // Reconcile auditIds with the post-Phase-G survivor set: any row that was originally
+        // pending_verifier but got dropped by Phase G (cross-vector dedup or universal-property
+        // blocklist) needs its audit outcome updated to rejected_preflight_blocklist.
+        var survivorPropertyKeys = survivingNodeProps.Select(p => KeyProperty(p.FieldPath)).ToHashSet(StringComparer.Ordinal);
+        var droppedKeys = auditIds.Keys.Where(k => k.StartsWith("property|", StringComparison.Ordinal) && !survivorPropertyKeys.Contains(k)).ToList();
+        foreach (var key in droppedKeys)
+        {
+            await _audit.UpdateOutcomeAsync(
+                auditIds[key],
+                stage: "consolidation_phaseG",
+                outcome: "rejected_preflight_blocklist",
+                reason: "Property value matched edge-target name or resolved to a blocked-type node (TitleOrPosition / Government / Organization / Religion / Species / MilitaryUnit / Family / CulturalGroup / FanOrganization)",
+                ct: ct
+            );
+            auditIds.Remove(key);
+        }
+
+        var consolidated = new HolocronConsolidatedProposals(
+            survivingAnnotates,
+            survivingFillGaps,
+            survivingAddEdges,
+            survivingNodeProps,
+            duplicatesDropped,
+            preflightRejects,
+            evidenceFailures,
+            auditIds
+        );
 
         await context.QueueStateUpdateAsync(KeyConsolidated, consolidated, Scope, ct);
 
@@ -552,4 +663,125 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
         string.IsNullOrEmpty(fieldPath) ? fieldPath
         : fieldPath.StartsWith("properties.", StringComparison.OrdinalIgnoreCase) ? fieldPath["properties.".Length..]
         : fieldPath;
+
+    // ── Audit helpers ──────────────────────────────────────────────────────
+
+    static string KeyAnnotate(int from, int to, string label) => $"annotate|{from}|{to}|{label.ToLowerInvariant()}";
+
+    static string KeyFillGap(int from, int to, string label) => $"fillgap|{from}|{to}|{label.ToLowerInvariant()}";
+
+    static string KeyAdd(int from, int to, string label) => $"add|{from}|{to}|{label.ToLowerInvariant()}";
+
+    static string KeyProperty(string fieldPath) => $"property|{fieldPath}";
+
+    (string code, string message) AddEdgeRejectReason(HolocronAddEdgeProposal p, HashSet<string> existingNodePairs, HashSet<string> enrichmentNodePairs, string targetType)
+    {
+        if (p.FromId <= 0 || p.ToId <= 0 || string.IsNullOrWhiteSpace(p.Label))
+            return ("other", "Invalid fromId / toId / label");
+        if (p.FromId != _pageId && p.ToId != _pageId)
+            return ("other", "Pair does not include focal node");
+        if (!_knownLabels.Contains(p.Label))
+            return ("other", $"Label '{p.Label}' not in canonical FieldSemantics vocabulary");
+        // Type-mismatch first — most actionable signal when the label has declared targets.
+        if (_expectedTargetsByLabel.TryGetValue(p.Label, out var expected) && expected.Count > 0 && !string.IsNullOrEmpty(targetType) && !expected.Contains(targetType))
+            return ("target_type", $"Target node type '{targetType}' not in label '{p.Label}' ExpectedTargetTypes [{string.Join(", ", expected)}]");
+        var pair = NodePairKey(p.FromId, p.ToId);
+        if (existingNodePairs.Contains(pair))
+            return ("dup_pair", "Pair already has a Phase 1 / cached edge — would create a parallel relationship");
+        if (enrichmentNodePairs.Contains(pair))
+            return ("dup_pair", "Pair already has an active Holocron edge enrichment");
+        return ("other", "Failed IsAddEdgeValid for an unclassified reason");
+    }
+
+    Task<string> RecordAnnotateAuditAsync(HolocronAnnotateProposal p, string outcome, string reason, CancellationToken ct) =>
+        _audit.RecordAsync(
+            new HolocronAudit
+            {
+                JobId = _jobId,
+                PageId = _pageId,
+                Kind = "annotate",
+                FromId = p.FromId,
+                ToId = p.ToId,
+                Label = p.Label,
+                Claim = p.Claim ?? string.Empty,
+                Reasoning = p.Reasoning,
+                Evidence = p.Evidence?.Select(BuildAuditEvidence).ToList() ?? [],
+                Outcome = outcome,
+                OutcomeReason = string.IsNullOrEmpty(reason) ? null : reason,
+                AgentVersion = HolocronAgent.AgentVersion,
+            },
+            ct
+        );
+
+    Task<string> RecordFillGapAuditAsync(HolocronFillGapProposal p, string outcome, string reason, CancellationToken ct) =>
+        _audit.RecordAsync(
+            new HolocronAudit
+            {
+                JobId = _jobId,
+                PageId = _pageId,
+                Kind = "fillgap",
+                FromId = p.FromId,
+                ToId = p.ToId,
+                Label = p.Label,
+                Claim = p.Claim ?? string.Empty,
+                Reasoning = p.Reasoning,
+                Evidence = p.Evidence?.Select(BuildAuditEvidence).ToList() ?? [],
+                FromYear = p.FromYear,
+                ToYear = p.ToYear,
+                Outcome = outcome,
+                OutcomeReason = string.IsNullOrEmpty(reason) ? null : reason,
+                AgentVersion = HolocronAgent.AgentVersion,
+            },
+            ct
+        );
+
+    Task<string> RecordAddAuditAsync(HolocronAddEdgeProposal p, string outcome, string reason, CancellationToken ct) =>
+        _audit.RecordAsync(
+            new HolocronAudit
+            {
+                JobId = _jobId,
+                PageId = _pageId,
+                Kind = "add",
+                FromId = p.FromId,
+                ToId = p.ToId,
+                Label = p.Label,
+                Claim = p.Claim ?? string.Empty,
+                Reasoning = p.Reasoning,
+                Evidence = p.Evidence?.Select(BuildAuditEvidence).ToList() ?? [],
+                FromYear = p.FromYear,
+                ToYear = p.ToYear,
+                Outcome = outcome,
+                OutcomeReason = string.IsNullOrEmpty(reason) ? null : reason,
+                AgentVersion = HolocronAgent.AgentVersion,
+            },
+            ct
+        );
+
+    Task<string> RecordPropertyAuditAsync(HolocronNodeProposalPayload p, string outcome, string reason, CancellationToken ct) =>
+        _audit.RecordAsync(
+            new HolocronAudit
+            {
+                JobId = _jobId,
+                PageId = _pageId,
+                Kind = "property",
+                FieldPath = p.FieldPath,
+                Values = p.Values?.ToList(),
+                Claim = p.Claim ?? string.Empty,
+                Reasoning = p.Reasoning,
+                Evidence = p.Evidence?.Select(BuildAuditEvidence).ToList() ?? [],
+                Outcome = outcome,
+                OutcomeReason = string.IsNullOrEmpty(reason) ? null : reason,
+                AgentVersion = HolocronAgent.AgentVersion,
+            },
+            ct
+        );
+
+    static EnrichmentEvidence BuildAuditEvidence(HolocronEvidencePayload e) =>
+        new()
+        {
+            SourcePageId = e.SourcePageId ?? 0,
+            ChunkId = e.ChunkId,
+            Excerpt = e.Excerpt ?? string.Empty,
+            RelevanceScore = e.RelevanceScore,
+        };
 }

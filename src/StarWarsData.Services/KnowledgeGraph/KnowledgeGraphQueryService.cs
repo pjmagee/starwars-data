@@ -209,20 +209,46 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
     /// this node's perspective coherently, and they remain visible on the source node's
     /// outgoing edges.
     /// </summary>
-    public async Task<EntityLabelsResult> GetLabelsForEntityAsync(int pageId, CancellationToken ct)
+    public async Task<EntityLabelsResult> GetLabelsForEntityAsync(int pageId, string? continuity = null, string? realm = null, CancellationToken ct = default)
     {
         var edgesRaw = _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges);
 
-        // Fetch the node type in parallel with the edge aggregations — we need it
-        // to compute default-enabled labels via DefaultLabelSelector.
-        var typeTask = _nodes.Find(n => n.PageId == pageId).Project(n => n.Type).FirstOrDefaultAsync(ct);
+        // Fetch the node alongside the edge aggregations — we need its type for
+        // DefaultLabelSelector and its continuity/realm for the gating below.
+        var nodeTask = _nodes.Find(n => n.PageId == pageId).FirstOrDefaultAsync(ct);
+
+        // Build an extra-clause set the edge aggregations can $match on. The kg.edges schema
+        // denormalises continuity, fromRealm, toRealm at Phase 5 ETL — push the global-filter
+        // values straight into the $match instead of post-filtering in C#. Unknown values
+        // always pass to preserve recall on legacy edges (matches QueryGraphAsync semantics).
+        var continuityBson = ParseContinuityFilter(continuity)?.ToString();
+        Realm? realmFilter = null;
+        if (!string.IsNullOrWhiteSpace(realm) && Enum.TryParse<Realm>(realm, true, out var rParsed))
+            realmFilter = rParsed;
+
+        BsonDocument BuildMatch(string idField)
+        {
+            var match = new BsonDocument(idField, pageId);
+            if (continuityBson is not null)
+                match[GraphNodeBsonFields.Continuity] = continuityBson;
+            if (realmFilter is not null)
+            {
+                // Outgoing query (idField=fromId): filter by toRealm. Inbound query (idField=toId):
+                // filter by fromRealm. Either way, the OPPOSITE end's realm tag is the gate
+                // because the entity's own realm is constant for this query.
+                var realmField = idField == RelationshipEdgeBsonFields.FromId ? RelationshipEdgeBsonFields.ToRealm : RelationshipEdgeBsonFields.FromRealm;
+                var accepted = new BsonArray { realmFilter.Value.ToString(), Realm.Unknown.ToString() };
+                match[realmField] = new BsonDocument("$in", accepted);
+            }
+            return match;
+        }
 
         // Distinct outgoing labels (entity as source)
         var outgoingTask = edgesRaw
             .Aggregate<BsonDocument>(
                 new[]
                 {
-                    new BsonDocument("$match", new BsonDocument(RelationshipEdgeBsonFields.FromId, pageId)),
+                    new BsonDocument("$match", BuildMatch(RelationshipEdgeBsonFields.FromId)),
                     new BsonDocument("$group", new BsonDocument(MongoFields.Id, "$" + RelationshipEdgeBsonFields.Label)),
                 }
             )
@@ -231,16 +257,39 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         // Distinct incoming labels (entity as target)
         var incomingTask = edgesRaw
             .Aggregate<BsonDocument>(
-                new[]
-                {
-                    new BsonDocument("$match", new BsonDocument(RelationshipEdgeBsonFields.ToId, pageId)),
-                    new BsonDocument("$group", new BsonDocument(MongoFields.Id, "$" + RelationshipEdgeBsonFields.Label)),
-                }
+                new[] { new BsonDocument("$match", BuildMatch(RelationshipEdgeBsonFields.ToId)), new BsonDocument("$group", new BsonDocument(MongoFields.Id, "$" + RelationshipEdgeBsonFields.Label)) }
             )
             .ToListAsync(ct);
 
-        await Task.WhenAll(typeTask, outgoingTask, incomingTask);
-        var entityType = typeTask.Result ?? string.Empty;
+        await Task.WhenAll(nodeTask, outgoingTask, incomingTask);
+        var node = nodeTask.Result;
+
+        // Continuity / realm gate — if the entity itself doesn't match the filter, return an
+        // empty result rather than the unfiltered set. Treat Unknown as "always passes" so
+        // legacy / unclassified nodes don't disappear when a filter is active.
+        if (node is not null)
+        {
+            if (continuityBson is not null && node.Continuity != Continuity.Unknown && node.Continuity.ToString() != continuityBson)
+                return new EntityLabelsResult
+                {
+                    Type = node.Type ?? string.Empty,
+                    Labels = [],
+                    DefaultEnabled = [],
+                    HolocronOnlyLabels = [],
+                    HolocronAnnotatedLabels = [],
+                };
+            if (realmFilter is not null && node.Realm != Realm.Unknown && node.Realm != realmFilter.Value)
+                return new EntityLabelsResult
+                {
+                    Type = node.Type ?? string.Empty,
+                    Labels = [],
+                    DefaultEnabled = [],
+                    HolocronOnlyLabels = [],
+                    HolocronAnnotatedLabels = [],
+                };
+        }
+
+        var entityType = node?.Type ?? string.Empty;
         var outgoing = outgoingTask.Result;
         var incoming = incomingTask.Result;
 
@@ -319,7 +368,14 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                 // Phase 2-only when the label isn't already present in the base-edge label set.
                 // (If the base set has it, the same label exists from Phase 1 — render as Phase 1
                 // and let the annotated-overlay marker carry the Phase 2 signal instead.)
-                if (!labelSet.Contains(labelFromNode))
+                //
+                // We mutate labelSet (not just the holocronOnly HashSet) so a second enrichment
+                // with the same label is correctly identified as a duplicate. Without this guard,
+                // two Holocron Add edges sharing a label (e.g. Anakin's `has_role → Dark Lord of
+                // the Sith` AND `has_role → Jedi General`) both append `has_role` to the labels
+                // list and the relationship-chip renderer produces a duplicate chip per
+                // occurrence. labelSet.Add returns true only the first time, gating both sides.
+                if (labelSet.Add(labelFromNode))
                 {
                     holocronOnly.Add(labelFromNode);
                     labels.Add(labelFromNode); // surface the new label so the chip actually renders
@@ -984,12 +1040,24 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         // Map of forward-label → reverse-label, used to rewrite inbound edges so they
         // render from the perspective of the currently-selected node.
         var forwardToReverse = FieldSemantics.Relationships.Values.DistinctBy(d => d.Label).ToDictionary(d => d.Label, d => d.Reverse, StringComparer.OrdinalIgnoreCase);
-        // Reverse lookup: reverse-label → forward-label, so if the client asks for
-        // "commanded" we query the DB for "commanded_by".
-        var reverseToForward = FieldSemantics
-            .Relationships.Values.DistinctBy(d => d.Reverse)
-            .Where(d => !string.IsNullOrEmpty(d.Reverse))
-            .ToDictionary(d => d.Reverse, d => d.Label, StringComparer.OrdinalIgnoreCase);
+        // Reverse lookup: reverse-label → ALL forward labels that share it. Multiple distinct
+        // forward labels can collapse onto a single reverse — e.g. both `has_event` (from
+        // the "Events" field) and `has_important_event` (from "Important events") use the
+        // reverse `happened_in`. The previous DistinctBy(d.Reverse) silently dropped all but
+        // one forward, so an Anakin filter on `happened_in` only matched whichever forward
+        // came first in dictionary order, missing real `has_event` inbound edges.
+        var reverseToForwards = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
+        foreach (var d in FieldSemantics.Relationships.Values)
+        {
+            if (string.IsNullOrEmpty(d.Reverse))
+                continue;
+            if (!reverseToForwards.TryGetValue(d.Reverse, out var fwds))
+            {
+                fwds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                reverseToForwards[d.Reverse] = fwds;
+            }
+            fwds.Add(d.Label);
+        }
 
         if (!string.IsNullOrWhiteSpace(labels))
         {
@@ -1001,12 +1069,17 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             {
                 // Outgoing: the label is stored as-is on the edge.
                 outgoingLabelFilter.Add(l);
-                // Inbound: look up the forward form. If the requested label is already a
-                // forward label, it will also map (e.g. commanded_by stays as commanded_by).
-                if (reverseToForward.TryGetValue(l, out var fwd))
-                    inboundLabelFilter.Add(fwd);
+                // Inbound: union every forward form that maps to this reverse. If the requested
+                // label IS a forward label (commanded_by stays commanded_by), include it too.
+                if (reverseToForwards.TryGetValue(l, out var fwds))
+                {
+                    foreach (var fwd in fwds)
+                        inboundLabelFilter.Add(fwd);
+                }
                 else
+                {
                     inboundLabelFilter.Add(l);
+                }
             }
         }
 
@@ -1196,24 +1269,57 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                 }
             }
 
-            // 2. Add synthesis — new edges that have no base row. Skip when either endpoint
-            //    isn't visited (we don't bring in phantom nodes; the BFS sets the bounds).
+            // 2. Add synthesis — surface Holocron-only edges. When at least one endpoint is
+            //    already in the BFS result set we add the edge AND, if needed, pull the other
+            //    endpoint into `visited` (subject to maxNodes) so Holocron-only relationships
+            //    propagate the graph at depth-1 from the focal node. Without this, pure
+            //    Holocron Adds like Anakin's `has_role → Dark Lord of the Sith` never render
+            //    because Phase 1 never produces an edge that reaches the target node, so it's
+            //    not in `visited`, so the Add gets dropped.
+            //
+            //    Apply the same label/continuity/realm filters here that the BFS used. Temporal
+            //    is re-applied below in step 3 (matches FillGap-overlaid edges).
             var existingTriples = filteredEdges.Select(e => (e.origFrom, e.origTo, e.origLabel)).ToHashSet();
             foreach (var en in holocronEnrichments)
             {
                 if (en.Operation != EnrichmentOperation.Add)
                     continue;
-                if (!visited.Contains(en.FromId) || !visited.Contains(en.ToId))
-                    continue;
                 if (existingTriples.Contains((en.FromId, en.ToId, en.Label)))
                     continue;
+
+                var fromVisited = visited.Contains(en.FromId);
+                var toVisited = visited.Contains(en.ToId);
+                if (!fromVisited && !toVisited)
+                    continue; // Neither endpoint reachable from the focal node — out of scope.
+
+                // Label filter: outbound match for forward direction, inbound match for reverse.
+                if (outgoingLabelFilter is not null && fromVisited && !outgoingLabelFilter.Contains(en.Label))
+                    continue;
+                if (outgoingLabelFilter is not null && !fromVisited && inboundLabelFilter is not null && !inboundLabelFilter.Contains(en.Label))
+                    continue;
+
+                // Bring in the missing endpoint if there's still room. Otherwise the edge is
+                // silently dropped — same recall-bias as Phase 1 BFS truncation at maxNodes.
+                if (!fromVisited)
+                {
+                    if (visited.Count >= maxNodes)
+                        continue;
+                    visited.Add(en.FromId);
+                }
+                if (!toVisited)
+                {
+                    if (visited.Count >= maxNodes)
+                        continue;
+                    visited.Add(en.ToId);
+                }
 
                 var addFromYear = TryGetInt(en.Value, "fromYear");
                 var addToYear = TryGetInt(en.Value, "toYear");
                 var addWeight = TryGetInt(en.Value, "weight") is int w ? (double)w : 0.8;
 
-                // Resolve display names from the node map (built below at line ~1064 — use
-                // the in-scope `_nodes` collection lookup-by-Id we'll do inline here).
+                // Display names get resolved alongside the BFS-discovered nodes a few lines
+                // below — `nodeMap` lookup fills them in. Pass empty here, the post-pass
+                // hydrates them.
                 filteredEdges.Add((en.FromId, string.Empty, en.ToId, string.Empty, en.Label, addWeight, addFromYear, addToYear, en.FromId, en.ToId, en.Label, EdgeBoundsSource.Holocron));
             }
 

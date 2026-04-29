@@ -97,6 +97,8 @@ builder
     .AddSingleton<HolocronAgent>()
     .AddSingleton<HolocronJobService>()
     .AddSingleton<StarWarsData.Services.AI.Agents.Holocron.HolocronEnhancementTracker>()
+    .AddSingleton<StarWarsData.Services.AI.Agents.Holocron.HolocronAuditService>()
+    .AddScoped<StarWarsData.Services.AI.Agents.Holocron.HolocronVerifierService>()
     .AddScoped<StarWarsData.Services.AI.Agents.Holocron.HolocronEnhancementService>()
     .AddScoped<ChatSessionService>()
     .AddSingleton<GraphRAGToolkit>(sp =>

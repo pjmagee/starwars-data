@@ -98,6 +98,18 @@ public sealed class HolocronJob
     [BsonElement("preflightRejects")]
     public int PreflightRejects { get; set; }
 
+    /// <summary>
+    /// Proposals dropped by the LLM evidence verifier (Design-025 follow-up). The
+    /// verifier runs after the consolidator and asks the model whether each cited
+    /// chunk excerpt directly supports the claim — catches target-substitution
+    /// hallucinations like "claim says 'commander', target is 'Clone Captain'"
+    /// that the structural pre-flight can't see. <c>0</c> for legacy rows / runs
+    /// without the verifier stage.
+    /// </summary>
+    [BsonElement("verifierRejects")]
+    [BsonIgnoreIfDefault]
+    public int VerifierRejects { get; set; }
+
     [BsonElement("error")]
     [BsonIgnoreIfNull]
     public string? Error { get; set; }
@@ -132,6 +144,9 @@ public enum HolocronJobStatus
 
     /// <summary>HolocronConsolidatorExecutor running — dedupe + pre-flight.</summary>
     Consolidating,
+
+    /// <summary>HolocronEvidenceVerifierExecutor running — LLM second-pass verifying each surviving proposal's evidence.</summary>
+    Verifying,
 
     /// <summary>HolocronApplyExecutor running — writes to kg.enrichments / kg.edge_enrichments / kg.events.</summary>
     Applying,

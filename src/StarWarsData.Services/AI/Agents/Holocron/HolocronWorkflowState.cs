@@ -137,6 +137,13 @@ public sealed record HolocronRawProposalSet(
 /// cross-batch deduplication + pre-flight rule application. The apply step
 /// writes these directly to <c>kg.enrichments</c> / <c>kg.edge_enrichments</c>.
 /// </summary>
+/// <param name="AuditIds">
+/// Natural-key → <c>kg.holocron_audits._id</c> lookup, populated by the consolidator
+/// after recording each surviving proposal. Downstream stages (verifier, apply) use
+/// this map to update the audit row's outcome without re-deriving keys. Keys are
+/// composed as <c>"kind|fromId|toId|label"</c> for edges and <c>"property|fieldPath"</c>
+/// for node properties — see <c>HolocronAuditKey</c> in the consolidator.
+/// </param>
 public sealed record HolocronConsolidatedProposals(
     List<HolocronAnnotateProposal> AnnotateEdges,
     List<HolocronFillGapProposal> FillGapEdges,
@@ -144,7 +151,8 @@ public sealed record HolocronConsolidatedProposals(
     List<HolocronNodeProposalPayload> NodeProposals,
     int DuplicatesDropped,
     int PreflightRejects,
-    int EvidenceFailures
+    int EvidenceFailures,
+    Dictionary<string, string>? AuditIds = null
 );
 
 /// <summary>
