@@ -143,7 +143,9 @@ builder
         }
     )
     .AddSingleton<AskAIAgent>()
-    .AddSingleton<AIAgent>(sp => sp.GetRequiredService<AskAIAgent>().Build());
+    .AddSingleton<CopilotAgent>()
+    .AddKeyedSingleton<AIAgent>("ask-ai", (sp, _) => sp.GetRequiredService<AskAIAgent>().Build())
+    .AddKeyedSingleton<AIAgent>("copilot", (sp, _) => sp.GetRequiredService<CopilotAgent>().Build());
 
 builder.Services.AddCors(options =>
 {
@@ -178,11 +180,14 @@ app.MapGet(
     }
 );
 
-// Rate limiting + BYOK detection middleware for /kernel/stream
+// Rate limiting + BYOK detection middleware for /kernel/stream and /copilot/stream.
+// Phase 1 shares the budget across both surfaces — see Design-022 Open questions.
 app.Use(
     async (context, next) =>
     {
-        if (context.Request.Path.StartsWithSegments("/kernel/stream") && context.Request.Method == "POST")
+        var isAgentEndpoint = (context.Request.Path.StartsWithSegments("/kernel/stream") || context.Request.Path.StartsWithSegments("/copilot/stream")) && context.Request.Method == "POST";
+
+        if (isAgentEndpoint)
         {
             var rateLimiter = context.RequestServices.GetRequiredService<AskRateLimiter>();
             var userSettings = context.RequestServices.GetRequiredService<UserSettingsService>();
@@ -227,5 +232,6 @@ app.Use(
     }
 );
 
-app.MapAGUI("/kernel/stream", app.Services.GetRequiredService<AIAgent>());
+app.MapAGUI("/kernel/stream", app.Services.GetRequiredKeyedService<AIAgent>("ask-ai"));
+app.MapAGUI("/copilot/stream", app.Services.GetRequiredKeyedService<AIAgent>("copilot"));
 app.Run();

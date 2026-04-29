@@ -110,7 +110,8 @@ builder
     .AddScoped<NavigationService>()
     .AddScoped<GlobalFilterService>()
     .AddScoped<ChatHistoryService>()
-    .AddScoped<LayoutService>();
+    .AddScoped<LayoutService>()
+    .AddScoped<PageContextService>();
 
 // Register a named HttpClient for the API service
 // SSE streaming is long-lived; the default 30s total timeout from StandardResilienceHandler kills it

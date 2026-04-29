@@ -219,6 +219,72 @@
             function swChatLoadOne(id) { return swChatLoad().find(x => x.id === id) || null; }
             function swChatDelete(id) { localStorage.setItem(_chatKey, JSON.stringify(swChatLoad().filter(x => x.id !== id))); }
             function swChatClear() { localStorage.removeItem(_chatKey); }
+
+            // Set target="_blank" + rel="noopener" on every <a> inside the given selector
+            // root. Used by the copilot sidebar after each streaming update so that both
+            // in-site KG links (/graph-explorer/{id}) and external Wookieepedia links
+            // open in a new tab — keeps the user's exploration context on the source page.
+            function swOpenLinksInNewTab(rootSelector) {
+                var root = document.querySelector(rootSelector);
+                if (!root) return;
+                var anchors = root.querySelectorAll('a:not([data-sw-newtab])');
+                anchors.forEach(function (a) {
+                    a.setAttribute('target', '_blank');
+                    var rel = (a.getAttribute('rel') || '').split(/\s+/).filter(Boolean);
+                    if (rel.indexOf('noopener') === -1) rel.push('noopener');
+                    if (rel.indexOf('noreferrer') === -1) rel.push('noreferrer');
+                    a.setAttribute('rel', rel.join(' '));
+                    a.setAttribute('data-sw-newtab', '1');
+                });
+            }
+
+            // Watch document text-selection and forward it to .NET so the copilot
+            // can inject [SELECTION: "..."] into the next user message. Skips
+            // selections inside the copilot drawer itself (the user reading their
+            // own chat shouldn't loop back into context). Debounced ~250ms because
+            // selectionchange fires on every cursor movement during a drag.
+            var _swSelectionDebounce = null;
+            var _swSelectionRef = null;
+            var _swSelectionLast = null;
+            function swRegisterSelectionWatcher(dotNetRef) {
+                _swSelectionRef = dotNetRef;
+                if (window._swSelectionRegistered) return;
+                window._swSelectionRegistered = true;
+                document.addEventListener('selectionchange', function () {
+                    if (_swSelectionDebounce) clearTimeout(_swSelectionDebounce);
+                    _swSelectionDebounce = setTimeout(function () {
+                        try {
+                            var sel = window.getSelection();
+                            var text = sel ? String(sel).trim() : '';
+
+                            // Don't capture selections inside the copilot itself.
+                            if (text && sel && sel.anchorNode) {
+                                var node = sel.anchorNode.nodeType === 3
+                                    ? sel.anchorNode.parentElement
+                                    : sel.anchorNode;
+                                if (node && node.closest && node.closest('#copilot-drawer, .copilot-container')) {
+                                    return;
+                                }
+                            }
+
+                            // Cap length so the envelope doesn't dwarf the user's question.
+                            if (text.length > 400) text = text.substring(0, 400) + '…';
+
+                            // Avoid spamming Blazor with identical updates.
+                            if (text === _swSelectionLast) return;
+                            _swSelectionLast = text;
+
+                            if (_swSelectionRef) {
+                                _swSelectionRef.invokeMethodAsync('OnSelectionChanged', text || null);
+                            }
+                        } catch { /* ignore */ }
+                    }, 250);
+                });
+            }
+            function swUnregisterSelectionWatcher() {
+                _swSelectionRef = null;
+                _swSelectionLast = null;
+            }
         </script>
     </head>
     <body>

@@ -7,6 +7,7 @@
 @inject StarWarsData.Frontend.Services.GlobalFilterService GlobalFilterService
 @inject IJSRuntime JS
 @inject LayoutService Layout
+@inject PageContextService PageContext
 @inject ILogger<GalaxyMapUnified> Logger
 @implements IAsyncDisposable
 
@@ -1113,6 +1114,7 @@
     {
         GlobalFilterService.OnChange += OnFilterChanged;
         await LoadData();
+        PublishPageContext();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -1235,6 +1237,7 @@
             if (_module is not null)
                 await _module.InvokeVoidAsync("clearTemporalLayers");
         }
+        PublishPageContext();
         StateHasChanged();
     }
 
@@ -1295,6 +1298,7 @@
     {
         _systemCache.TryGetValue(systemId, out _selectedSystem);
         if (_detailPage is null && _selectedSystem is not null) _ = LoadPageDetail(systemId);
+        PublishPageContext();
         InvokeAsync(StateHasChanged);
     }
 
@@ -1305,6 +1309,7 @@
     public void OnSystemDeselected()
     {
         _selectedSystem = null; _detailPage = null;
+        PublishPageContext();
         InvokeAsync(StateHasChanged);
     }
 
@@ -1436,10 +1441,14 @@
         _loadingDetails = true; StateHasChanged();
         try { _detailPage = await Http.GetFromJsonAsync<WikiPage>($"Pages/{pageId}"); }
         catch { _detailPage = null; }
-        finally { _loadingDetails = false; StateHasChanged(); }
+        finally { _loadingDetails = false; PublishPageContext(); StateHasChanged(); }
     }
 
-    void ClearDetailPanel() { _detailPage = null; _selectedSystem = null; }
+    void ClearDetailPanel()
+    {
+        _detailPage = null; _selectedSystem = null;
+        PublishPageContext();
+    }
 
     // ══════════ TIMELINE ══════════
 
@@ -1727,6 +1736,7 @@
     public async ValueTask DisposeAsync()
     {
         Layout.SetFullscreen(false);
+        PageContext.Clear();
         GlobalFilterService.OnChange -= OnFilterChanged;
         _autoplayTimer?.Dispose();
         if (_module is not null)
@@ -1735,5 +1745,70 @@
             catch (JSDisconnectedException) { } catch (ObjectDisposedException) { }
         }
         _dotNetRef?.Dispose();
+    }
+
+    // Build a snapshot of "what the user is looking at right now" and push to
+    // the copilot's PageContextService. Read at submit time by CopilotSidebar
+    // and injected as the [PAGE:][SUBJECT:][FACETS:] envelope on the next turn.
+    void PublishPageContext()
+    {
+        var extras = new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["mode"] = _mode,
+        };
+
+        if (_mode == "timeline")
+        {
+            extras["year"] = _year.ToString();
+            if (!string.Equals(_selectedLens, "All", StringComparison.Ordinal))
+                extras["lens"] = _selectedLens;
+        }
+
+        // Subject precedence: detail page > selected system > selected region.
+        // Detail-page wins because it's the most specific surface the user is
+        // reading (a planet's full infobox in the panel).
+        if (_detailPage is not null)
+        {
+            var kind = _detailPage.Infobox?.Template ?? "Page";
+            if (_selectedSystem is { Region: { } r }) extras["region"] = r;
+            if (_selectedSystem is { Sector: { } s }) extras["sector"] = s;
+            if (_selectedSystem is { Name: { } sysName }) extras["system"] = sysName;
+            PageContext.Set(new PageContext(
+                Page: "galaxy-map",
+                Subject: _detailPage.Title,
+                SubjectKind: kind,
+                SubjectId: _detailPage.PageId,
+                Extras: extras));
+            return;
+        }
+
+        if (_selectedSystem is not null)
+        {
+            if (_selectedSystem.Region is { } r) extras["region"] = r;
+            if (_selectedSystem.Sector is { } s) extras["sector"] = s;
+            PageContext.Set(new PageContext(
+                Page: "galaxy-map",
+                Subject: _selectedSystem.Name,
+                SubjectKind: "System",
+                SubjectId: _selectedSystem.Id,
+                Extras: extras));
+            return;
+        }
+
+        if (_selectedRegion is not null)
+        {
+            PageContext.Set(new PageContext(
+                Page: "galaxy-map",
+                Subject: _selectedRegion.Name,
+                SubjectKind: "Region",
+                Extras: extras));
+            return;
+        }
+
+        // No selection — publish a baseline page-only context so the sidebar
+        // still knows the user is on the map (different empty-state prompts).
+        PageContext.Set(new PageContext(
+            Page: "galaxy-map",
+            Extras: extras));
     }
 }

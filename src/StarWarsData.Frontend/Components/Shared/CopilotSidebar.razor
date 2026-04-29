@@ -1,0 +1,635 @@
+@using System.Text.Json
+@using System.Text.Json.Serialization
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+@using StarWarsData.Frontend.Components.Shared.Agui
+@using StarWarsData.Frontend.Services
+@inject IHttpClientFactory HttpClientFactory
+@inject GlobalFilterService GlobalFilterService
+@inject PageContextService PageContext
+@inject IJSRuntime JS
+@inject ILogger<CopilotSidebar> Logger
+@implements IDisposable
+
+@*
+    Right-hand copilot sidebar — text-first contextual chat.
+
+    Distinct from /ask:
+      - No render_* output (no charts, tables, graphs, infoboxes).
+      - No mode selection, no example-prompt grid, no session history persistence.
+      - Streams from /copilot/stream against the CopilotAgent (text-only toolkit).
+      - Reads PageContextService at submit time and injects a [PAGE:][SUBJECT:][FACETS:]
+        envelope alongside [CONTINUITY:].
+
+    See Design-022 for the full rationale.
+*@
+
+<div class="copilot-container">
+
+    @* ── Focus chip header — shows what the agent's currently grounded on. ── *@
+    <div class="copilot-header">
+        @if (PageContext.Current is { } ctx && !string.IsNullOrEmpty(ctx.Subject))
+        {
+            <MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Outlined"
+                     Icon="@Icons.Material.Filled.MyLocation"
+                     Style="font-size:11px;"
+                     Text="@($"{HumanizePage(ctx.Page)} · {ctx.Subject}")" />
+        }
+        else
+        {
+            <MudText Typo="Typo.caption" Color="Color.Secondary">
+                Copilot — ask about anything on the current page.
+            </MudText>
+        }
+        @if (!string.IsNullOrWhiteSpace(PageContext.CurrentSelection))
+        {
+            <MudTooltip Text="@($"Your highlighted text will be sent with your next question:\n\n{PageContext.CurrentSelection}")">
+                <MudChip T="string" Size="Size.Small" Color="Color.Tertiary" Variant="Variant.Outlined"
+                         Icon="@Icons.Material.Filled.FormatQuote"
+                         Style="font-size:11px;margin-left:4px;"
+                         Text="@($"Selected: {Truncate(PageContext.CurrentSelection!, 40)}")" />
+            </MudTooltip>
+        }
+    </div>
+
+    @* ── Conversation area ── *@
+    <div class="copilot-messages" @ref="_messagesContainer">
+
+        @if (_conversation.Count == 0 && !_loading)
+        {
+            <div class="pa-3">
+                <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-2">Try asking</MudText>
+                <MudStack Spacing="1">
+                    @foreach (var prompt in SuggestedPrompts())
+                    {
+                        var p = prompt;
+                        <MudPaper Outlined="true" Class="pa-2 cursor-pointer mud-clickable" @onclick="() => UseSuggestion(p)">
+                            <MudText Typo="Typo.caption">@p</MudText>
+                        </MudPaper>
+                    }
+                </MudStack>
+            </div>
+        }
+        else
+        {
+            <div class="pa-2">
+                @foreach (var msg in _conversation)
+                {
+                    @if (msg.Role == Role.User)
+                    {
+                        <div @key="msg.Id" class="copilot-msg copilot-msg-user mb-2">
+                            <MudPaper Elevation="0" Class="pa-2" Style="background:var(--mud-palette-background-grey); border-radius:10px;">
+                                <MudText Typo="Typo.body2" Style="white-space:pre-wrap">@msg.Text</MudText>
+                            </MudPaper>
+                        </div>
+                    }
+                    else if (msg.Role == Role.ToolBreadcrumb)
+                    {
+                        <div @key="msg.Id" class="copilot-msg copilot-msg-tool mb-1 ml-1">
+                            <div class="d-flex align-center gap-1" style="opacity:0.6">
+                                @if (msg.IsToolComplete)
+                                {
+                                    <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Success" Style="font-size:12px" />
+                                }
+                                else
+                                {
+                                    <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" Style="width:12px;height:12px" />
+                                }
+                                <MudText Typo="Typo.caption" Color="Color.Secondary" Style="font-size:11px;">@msg.Text</MudText>
+                            </div>
+                        </div>
+                    }
+                    else if (msg.Role == Role.Assistant)
+                    {
+                        <div @key="msg.Id" class="copilot-msg copilot-msg-assistant mb-2 ml-1">
+                            <MudPaper Elevation="0" Class="pa-2" Style="border-radius:10px;">
+                                <MudMarkdown Value="@(msg.Text ?? "")" />
+                            </MudPaper>
+                        </div>
+                    }
+                    else if (msg.Role == Role.Error)
+                    {
+                        <div @key="msg.Id" class="copilot-msg mb-2 ml-1">
+                            <MudAlert Severity="Severity.Error" Dense="true">@msg.Text</MudAlert>
+                        </div>
+                    }
+                }
+
+                @if (_loading)
+                {
+                    <div class="copilot-msg ml-1">
+                        <MudPaper Elevation="0" Class="pa-2 d-flex align-center gap-2" Style="background:transparent">
+                            <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" />
+                            <MudText Typo="Typo.caption" Color="Color.Secondary">Thinking…</MudText>
+                        </MudPaper>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    @* ── Input ── *@
+    <div class="copilot-input">
+        <EditForm Model="_model" OnValidSubmit="SubmitAsync">
+            <DataAnnotationsValidator />
+            <div class="d-flex gap-1 align-center pa-2">
+                <MudTextField @bind-Value="_model.Prompt"
+                              Placeholder="Ask about this page…"
+                              Variant="Variant.Outlined"
+                              Required="true"
+                              Immediate="true"
+                              FullWidth="true"
+                              Margin="Margin.Dense"
+                              Disabled="_loading"
+                              OnKeyDown="OnInputKeyDown"
+                              Sizing="InputSizing.Auto"
+                              MaxLines="4"
+                              Lines="1"
+                              Class="flex-grow-1" />
+                <MudIconButton ButtonType="ButtonType.Submit"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               Disabled="@_loading"
+                               Icon="@(_loading ? Icons.Material.Filled.HourglassEmpty : Icons.Material.Filled.Send)"
+                               Size="Size.Small" />
+            </div>
+        </EditForm>
+        @if (_conversation.Count > 0)
+        {
+            <div class="d-flex justify-end pr-2 pb-1">
+                <MudButton Size="Size.Small" Variant="Variant.Text" Color="Color.Secondary"
+                           StartIcon="@Icons.Material.Filled.Refresh"
+                           OnClick="ResetConversation">New conversation</MudButton>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .copilot-container {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        min-height: 0;
+    }
+    .copilot-header {
+        flex-shrink: 0;
+        padding: 8px 12px;
+        border-bottom: 1px solid var(--mud-palette-lines-default);
+    }
+    .copilot-messages {
+        flex: 1;
+        overflow-y: auto;
+        min-height: 0;
+    }
+    .copilot-input {
+        flex-shrink: 0;
+        border-top: 1px solid var(--mud-palette-lines-default);
+        background: var(--mud-palette-surface);
+    }
+</style>
+
+@code {
+
+    enum Role { User, Assistant, ToolBreadcrumb, Error }
+
+    sealed class Msg
+    {
+        public string Id { get; } = Guid.NewGuid().ToString("N");
+        public Role Role { get; set; }
+        public string? Text { get; set; }
+        public string? ToolCallId { get; set; }
+        public bool IsToolComplete { get; set; }
+    }
+
+    sealed class CopilotModel
+    {
+        [Required(ErrorMessage = "Please enter a question.")]
+        public string Prompt { get; set; } = string.Empty;
+    }
+
+    private readonly List<Msg> _conversation = [];
+    private readonly List<AguiMessage> _aguiMessages = [];
+
+    // Per-turn SSE state
+    private readonly Dictionary<string, Msg> _toolByCallId = [];
+    private readonly Dictionary<string, string> _toolNamesByCallId = [];
+    private readonly Dictionary<string, string> _toolArgsByCallId = [];
+    private Msg? _currentAssistantMsg;
+    private List<AguiToolCall> _pendingToolCalls = [];
+
+    private CopilotModel _model = new();
+    private bool _loading;
+    private ElementReference _messagesContainer;
+
+    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+
+    protected override void OnInitialized()
+    {
+        PageContext.OnChange += OnPageContextChanged;
+    }
+
+    public void Dispose()
+    {
+        PageContext.OnChange -= OnPageContextChanged;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        // After every render, retag any new <a> tags in the messages container so
+        // KG and Wookieepedia links open in a new tab — preserves the user's
+        // current page context. Idempotent: links already retagged carry a
+        // data-sw-newtab marker and are skipped. Quietly tolerate JS interop
+        // disconnects on first paint.
+        try
+        {
+            await JS.InvokeVoidAsync("swOpenLinksInNewTab", ".copilot-messages");
+        }
+        catch (Microsoft.JSInterop.JSDisconnectedException) { }
+        catch (TaskCanceledException) { }
+    }
+
+    private void OnPageContextChanged()
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    private async Task OnInputKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !e.ShiftKey && !_loading && !string.IsNullOrWhiteSpace(_model.Prompt))
+            await SubmitAsync();
+    }
+
+    private void UseSuggestion(string prompt)
+    {
+        _model.Prompt = prompt;
+        _ = InvokeAsync(SubmitAsync);
+    }
+
+    private void ResetConversation()
+    {
+        _conversation.Clear();
+        _aguiMessages.Clear();
+        _toolByCallId.Clear();
+        _toolNamesByCallId.Clear();
+        _toolArgsByCallId.Clear();
+        _model = new CopilotModel();
+        StateHasChanged();
+    }
+
+    private async Task SubmitAsync()
+    {
+        if (string.IsNullOrWhiteSpace(_model.Prompt) || _loading) return;
+
+        var userPrompt = _model.Prompt.Trim();
+        _model.Prompt = "";
+        _loading = true;
+        StateHasChanged();
+
+        _conversation.Add(new Msg { Role = Role.User, Text = userPrompt });
+
+        // Build envelope: [CONTINUITY:] [PAGE:][SUBJECT:][FACETS:] [SELECTION:]
+        var continuity = GlobalFilterService.GetContinuityQueryParam() ?? "Both";
+        var pageEnv = PageContext.Current?.ToEnvelope() ?? "";
+        var sel = PageContext.CurrentSelection;
+        var selPart = !string.IsNullOrWhiteSpace(sel)
+            ? $" [SELECTION: \"{EscapeForEnvelope(sel)}\"]"
+            : "";
+        var aguiContent = string.IsNullOrEmpty(pageEnv)
+            ? $"[CONTINUITY: {continuity}]{selPart} {userPrompt}"
+            : $"[CONTINUITY: {continuity}] {pageEnv}{selPart} {userPrompt}";
+
+        _aguiMessages.Add(new AguiMessage { Role = "user", Content = aguiContent });
+
+        // Reset per-turn SSE state
+        _toolByCallId.Clear();
+        _toolNamesByCallId.Clear();
+        _toolArgsByCallId.Clear();
+        _currentAssistantMsg = null;
+        _pendingToolCalls = [];
+
+        await ScrollToBottom();
+
+        var body = new { messages = _aguiMessages };
+        using var cts = new CancellationTokenSource(TimeSpan.FromMinutes(3));
+
+        try
+        {
+            using var request = new HttpRequestMessage(HttpMethod.Post, "copilot/stream")
+            {
+                Content = JsonContent.Create(body),
+            };
+            request.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("text/event-stream"));
+
+            using var response = await Http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cts.Token);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.TooManyRequests)
+            {
+                _conversation.Add(new Msg { Role = Role.Error, Text = "Rate limit reached. Try again in a few minutes." });
+                FinalizeTurn();
+                return;
+            }
+
+            if (!response.IsSuccessStatusCode)
+            {
+                _conversation.Add(new Msg { Role = Role.Error, Text = $"Request failed ({(int)response.StatusCode})." });
+                FinalizeTurn();
+                return;
+            }
+
+            await using var stream = await response.Content.ReadAsStreamAsync(cts.Token);
+
+            await foreach (var json in AguiSseReader.ReadEventsAsync(stream, cts.Token))
+            {
+                try
+                {
+                    using var doc = JsonDocument.Parse(json);
+                    var root = doc.RootElement;
+                    var eventType = root.TryGetProperty("type", out var t) ? t.GetString() : null;
+
+                    switch (eventType)
+                    {
+                        case "TOOL_CALL_START":
+                            HandleToolCallStart(root);
+                            break;
+                        case "TOOL_CALL_ARGS":
+                            HandleToolCallArgs(root);
+                            break;
+                        case "TOOL_CALL_END":
+                            HandleToolCallEnd(root);
+                            break;
+                        case "TOOL_CALL_RESULT":
+                            HandleToolCallResult(root);
+                            break;
+                        case "TEXT_MESSAGE_START":
+                            _currentAssistantMsg = new Msg { Role = Role.Assistant, Text = "" };
+                            _conversation.Add(_currentAssistantMsg);
+                            break;
+                        case "TEXT_MESSAGE_CONTENT":
+                        {
+                            var delta = root.TryGetProperty("delta", out var d) ? d.GetString() : null;
+                            if (delta is not null)
+                            {
+                                _currentAssistantMsg ??= AddNewAssistantMsg();
+                                _currentAssistantMsg.Text += delta;
+                            }
+                            break;
+                        }
+                        case "TEXT_MESSAGE_END":
+                            _currentAssistantMsg = null;
+                            break;
+                        case "RUN_ERROR":
+                        {
+                            var errorMsg = root.TryGetProperty("message", out var em) ? em.GetString() : "Unknown error";
+                            _conversation.Add(new Msg { Role = Role.Error, Text = errorMsg ?? "Unknown error" });
+                            Logger.LogError("RUN_ERROR from copilot agent: {Error}", errorMsg);
+                            break;
+                        }
+                    }
+                }
+                catch (JsonException) { }
+
+                StateHasChanged();
+                await ScrollToBottom();
+            }
+
+            FinalizeTurn();
+        }
+        catch (OperationCanceledException)
+        {
+            _conversation.Add(new Msg { Role = Role.Error, Text = "Request timed out." });
+        }
+        catch (Exception ex)
+        {
+            _conversation.Add(new Msg { Role = Role.Error, Text = $"Unexpected error: {ex.Message}" });
+        }
+        finally
+        {
+            _loading = false;
+            StateHasChanged();
+            await ScrollToBottom();
+        }
+    }
+
+    private Msg AddNewAssistantMsg()
+    {
+        var msg = new Msg { Role = Role.Assistant, Text = "" };
+        _conversation.Add(msg);
+        return msg;
+    }
+
+    private void HandleToolCallStart(JsonElement root)
+    {
+        var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
+        var toolName = root.TryGetProperty("toolCallName", out var tn) ? tn.GetString() : "tool";
+        if (callId is null) return;
+
+        _toolNamesByCallId[callId] = toolName ?? "tool";
+        _toolArgsByCallId[callId] = "";
+
+        var bc = new Msg
+        {
+            Role = Role.ToolBreadcrumb,
+            ToolCallId = callId,
+            Text = FriendlyToolName(toolName),
+            IsToolComplete = false,
+        };
+        _toolByCallId[callId] = bc;
+        _conversation.Add(bc);
+    }
+
+    private void HandleToolCallArgs(JsonElement root)
+    {
+        var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
+        if (callId is null) return;
+
+        var delta = root.TryGetProperty("delta", out var d) ? d.GetString() : null;
+        if (delta is null) return;
+
+        if (_toolArgsByCallId.TryGetValue(callId, out var existing))
+            _toolArgsByCallId[callId] = existing + delta;
+    }
+
+    private void HandleToolCallEnd(JsonElement root)
+    {
+        var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
+        if (callId is null) return;
+
+        if (_toolByCallId.TryGetValue(callId, out var bc))
+        {
+            bc.IsToolComplete = true;
+        }
+
+        // Track for AGUI replay (assistant tool_calls message + per-call tool result)
+        if (_toolNamesByCallId.TryGetValue(callId, out var name)
+            && _toolArgsByCallId.TryGetValue(callId, out var args))
+        {
+            _pendingToolCalls.Add(new AguiToolCall
+            {
+                Id = callId,
+                Function = new AguiFunction { Name = name, Arguments = args },
+            });
+        }
+    }
+
+    private void HandleToolCallResult(JsonElement root)
+    {
+        var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
+        if (callId is null) return;
+
+        // Capture content for AGUI replay; the breadcrumb itself doesn't expand
+        // (deliberate UX choice — the sidebar is for prose, not tool diving).
+        string? content = null;
+        if (root.TryGetProperty("content", out var contentEl))
+        {
+            content = contentEl.ValueKind == JsonValueKind.String
+                ? contentEl.GetString()
+                : contentEl.GetRawText();
+            if (content?.StartsWith("\"") == true)
+                content = JsonSerializer.Deserialize<string>(content);
+        }
+
+        // Stash on the tool name dict so FinalizeTurn can build the tool message.
+        // We hijack a separate dict to avoid the args/result collision.
+        _toolResultsByCallId[callId] = content ?? "";
+    }
+
+    private readonly Dictionary<string, string> _toolResultsByCallId = [];
+
+    private void FinalizeTurn()
+    {
+        if (_pendingToolCalls.Count > 0)
+        {
+            _aguiMessages.Add(new AguiMessage
+            {
+                Role = "assistant",
+                Content = "",
+                ToolCalls = [.. _pendingToolCalls],
+            });
+
+            foreach (var tc in _pendingToolCalls)
+            {
+                _aguiMessages.Add(new AguiMessage
+                {
+                    Role = "tool",
+                    ToolCallId = tc.Id,
+                    Content = _toolResultsByCallId.TryGetValue(tc.Id, out var r) ? r : "",
+                });
+            }
+
+            _pendingToolCalls = [];
+            _toolResultsByCallId.Clear();
+        }
+
+        var lastAssistant = _conversation.LastOrDefault(m => m.Role == Role.Assistant);
+        if (!string.IsNullOrWhiteSpace(lastAssistant?.Text))
+        {
+            var lastAgui = _aguiMessages.LastOrDefault();
+            if (lastAgui?.Role != "assistant" || lastAgui.ToolCalls is not null)
+            {
+                _aguiMessages.Add(new AguiMessage
+                {
+                    Role = "assistant",
+                    Content = lastAssistant.Text,
+                });
+            }
+        }
+    }
+
+    private async Task ScrollToBottom()
+    {
+        try
+        {
+            await Task.Delay(30);
+            await Task.Yield();
+        }
+        catch { }
+    }
+
+    private static string Truncate(string s, int max) => s.Length <= max ? s : s.Substring(0, max).TrimEnd() + "…";
+
+    // Make the user's selected text safe to drop inside [SELECTION: "..."] —
+    // collapse newlines (the envelope is one line per turn) and escape the
+    // closing bracket so the agent doesn't think the envelope ended early.
+    private static string EscapeForEnvelope(string text)
+    {
+        return text
+            .Replace("\r", " ")
+            .Replace("\n", " ")
+            .Replace("\"", "\\\"")
+            .Replace("]", "\\]");
+    }
+
+    private static string FriendlyToolName(string? name)
+    {
+        if (string.IsNullOrEmpty(name)) return "Using tool";
+        var words = name.Split('_', StringSplitOptions.RemoveEmptyEntries);
+        if (words.Length == 0) return name;
+        words[0] = char.ToUpper(words[0][0]) + words[0][1..];
+        return string.Join(' ', words);
+    }
+
+    private static string HumanizePage(string page) => page switch
+    {
+        "galaxy-map" => "Galaxy Map",
+        "timeline" => "Timeline",
+        "timeline-anchored" => "Timeline",
+        "graph-explorer" => "Graph Explorer",
+        "knowledge-graph" => "Knowledge Graph",
+        "search" => "Search",
+        "character-timelines" => "Character Timeline",
+        "tables" => "Data Table",
+        _ => page,
+    };
+
+    private string[] SuggestedPrompts()
+    {
+        var ctx = PageContext.Current;
+        if (ctx is null) return _genericPrompts;
+
+        return (ctx.Page, ctx.SubjectKind) switch
+        {
+            ("galaxy-map", "CelestialBody") => _planetPrompts,
+            ("galaxy-map", "System") => _systemPrompts,
+            ("galaxy-map", "Sector") or ("galaxy-map", "Region") => _regionPrompts,
+            ("galaxy-map", _) => _galaxyMapGenericPrompts,
+            _ => _genericPrompts,
+        };
+    }
+
+    private static readonly string[] _genericPrompts =
+    [
+        "What is this page showing?",
+        "Tell me something interesting about Star Wars.",
+        "What's the difference between Canon and Legends?",
+    ];
+
+    private static readonly string[] _planetPrompts =
+    [
+        "What battles happened on this planet?",
+        "Who has governed this world over time?",
+        "Which characters were born or died here?",
+        "What's the cultural significance of this planet?",
+    ];
+
+    private static readonly string[] _systemPrompts =
+    [
+        "What worlds make up this system?",
+        "Who has controlled this system?",
+        "What battles or events happened here?",
+    ];
+
+    private static readonly string[] _regionPrompts =
+    [
+        "What's the political history of this region?",
+        "Which factions have controlled this area?",
+        "Notable planets in this region?",
+    ];
+
+    private static readonly string[] _galaxyMapGenericPrompts =
+    [
+        "Tell me about this place.",
+        "What's the history here?",
+    ];
+}
