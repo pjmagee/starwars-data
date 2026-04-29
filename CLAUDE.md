@@ -15,6 +15,10 @@ dotnet run --project src/StarWarsData.AppHost
 dotnet watch --project src/StarWarsData.AppHost 
 ```
 
+### Running Aspire from an agent
+
+When an agent (worktree, `/loop`, background) needs to boot the AppHost, use `aspire run --isolated --detach` instead of `dotnet run --project src/StarWarsData.AppHost`. The developer almost certainly has the AppHost running already; isolated mode (Aspire 13.2+) gives the agent its own randomized ports and a private user-secrets store, so the two instances don't collide. Tear down with `aspire stop <id>` (find the id with `aspire ps`). Never use `--isolated` with `aspire publish`, `aspire do prepare-starwars`, or `aspire deploy` — those resolve `Parameters:*` from the project's user-secrets and an isolated store would silently produce empty `.env` files. Full guide: [eng/docs/aspire-isolated-mode-for-claude-code.md](eng/docs/aspire-isolated-mode-for-claude-code.md).
+
 ### Publish & Deploy
 
 The AppHost defines a Docker Compose environment named `starwars` (`AddDockerComposeEnvironment("starwars")` in [src/StarWarsData.AppHost/Program.cs](src/StarWarsData.AppHost/Program.cs)). Three CLI commands operate on it — pick by what you need:

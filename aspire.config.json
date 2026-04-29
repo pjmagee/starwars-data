@@ -1,5 +1,11 @@
 {
+  "$schema": "https://aspire.dev/reference/cli/configuration/schema.json",
   "appHost": {
     "path": "src/StarWarsData.AppHost/StarWarsData.AppHost.csproj"
+  },
+  "features": {
+    "defaultWatchEnabled": true,
+    "showAllTemplates": true,
+    "updateNotificationsEnabled": true
   }
 }
