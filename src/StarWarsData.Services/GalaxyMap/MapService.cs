@@ -374,6 +374,107 @@ public class MapService
         return true;
     }
 
+    // ══════════ DEEP-LINK LOCATE ══════════
+
+    /// <summary>
+    /// Resolve a KG node id to whatever the galaxy-map JS module needs to drill to it —
+    /// powers the <c>/galaxy-map/{PageId:int}</c> deep-link route.
+    /// Returns null when the pageId doesn't exist in <c>kg.nodes</c> at all; otherwise returns
+    /// a result with Kind set to the node's Type (or "Other" when the entity isn't placed
+    /// on the map). For CelestialBody nodes also follows one <c>in_system</c> edge to fill
+    /// SystemId so the frontend can drill to the body's parent system in one round trip.
+    /// </summary>
+    public async Task<MapLocateResult?> LocateAsync(int pageId, CancellationToken ct = default)
+    {
+        var node = await _nodes
+            .Find(n => n.PageId == pageId)
+            .Project(n => new
+            {
+                n.PageId,
+                n.Name,
+                n.Type,
+                n.Continuity,
+                n.Properties,
+            })
+            .FirstOrDefaultAsync(ct);
+        if (node is null)
+            return null;
+
+        var spatial = node.Type is KgNodeTypes.System or KgNodeTypes.CelestialBody or KgNodeTypes.Sector or KgNodeTypes.Region or KgNodeTypes.TradeRoute;
+
+        if (!spatial)
+        {
+            return new MapLocateResult
+            {
+                PageId = node.PageId,
+                Name = node.Name,
+                Kind = "Other",
+                Continuity = node.Continuity.ToString(),
+            };
+        }
+
+        int? systemId = null;
+        string? gridSquareSource = null;
+
+        if (node.Type == KgNodeTypes.CelestialBody)
+        {
+            var inSystem = await _edges
+                .Find(
+                    Builders<RelationshipEdge>.Filter.And(
+                        Builders<RelationshipEdge>.Filter.Eq(e => e.FromId, pageId),
+                        Builders<RelationshipEdge>.Filter.In(e => e.Label, new[] { "in_system", "system" })
+                    )
+                )
+                .Project(e => new { e.ToId })
+                .FirstOrDefaultAsync(ct);
+            systemId = inSystem?.ToId;
+
+            // Pull the grid square from the parent system, not the body itself —
+            // bodies don't typically carry a grid coord directly.
+            if (systemId is int sid)
+            {
+                var sysNode = await _nodes.Find(n => n.PageId == sid).Project(n => new { n.Properties }).FirstOrDefaultAsync(ct);
+                if (sysNode is not null && sysNode.Properties.TryGetValue("Grid square", out var sgs) && sgs.Count > 0)
+                    gridSquareSource = sgs[0];
+            }
+        }
+        else if (node.Type == KgNodeTypes.System)
+        {
+            if (node.Properties.TryGetValue("Grid square", out var ngs) && ngs.Count > 0)
+                gridSquareSource = ngs[0];
+        }
+
+        int? col = null,
+            row = null;
+        if (gridSquareSource is not null && TryParseGridSquare(gridSquareSource, out var c, out var r))
+        {
+            col = c;
+            row = r;
+        }
+
+        // For systems and bodies, surface the cached Region/Sector property so the frontend
+        // can update breadcrumb labels without a second round trip.
+        string? region = null,
+            sector = null;
+        if (node.Properties.TryGetValue("Region", out var rv) && rv.Count > 0)
+            region = rv[0];
+        if (node.Properties.TryGetValue("Sector", out var sv) && sv.Count > 0)
+            sector = sv[0];
+
+        return new MapLocateResult
+        {
+            PageId = node.PageId,
+            Name = node.Name,
+            Kind = node.Type,
+            Continuity = node.Continuity.ToString(),
+            SystemId = systemId,
+            Region = region,
+            Sector = sector,
+            Col = col,
+            Row = row,
+        };
+    }
+
     // ══════════ GEOGRAPHY (KG-backed) ══════════
 
     /// <summary>

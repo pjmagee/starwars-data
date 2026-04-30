@@ -1,9 +1,12 @@
 using System.ComponentModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.AI;
+using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using StarWarsData.Models;
 using StarWarsData.Models.Entities;
+using StarWarsData.Services.AI.RequestContext;
 
 namespace StarWarsData.Services;
 
@@ -24,13 +27,15 @@ public class GraphRAGToolkit
     readonly IMongoCollection<GraphNode> _nodesCollection;
     readonly IMongoCollection<GalaxyYearDocument> _galaxyYears;
     readonly IMongoCollection<BsonDocument> _galaxyYearsRaw;
+    readonly IHttpContextAccessor? _httpContextAccessor;
 
     const string ContinuityParamDescription = "Optional continuity filter: Canon, Legends, or omit for all";
 
-    public GraphRAGToolkit(KnowledgeGraphQueryService kg, SemanticSearchService search, IMongoClient mongoClient, string databaseName)
+    public GraphRAGToolkit(KnowledgeGraphQueryService kg, SemanticSearchService search, IMongoClient mongoClient, string databaseName, IHttpContextAccessor? httpContextAccessor = null)
     {
         _kg = kg;
         _search = search;
+        _httpContextAccessor = httpContextAccessor;
         var db = mongoClient.GetDatabase(databaseName);
         // Read through the enriched view so node fetches surface active Holocron enrichments
         // alongside the base infobox-derived properties. The view is a left-join — nodes with
@@ -109,7 +114,7 @@ public class GraphRAGToolkit
         [Description("Max results (default 10)")] int limit = 10
     )
     {
-        var results = await _kg.SearchNodesAsync(query, type, continuity, Math.Min(limit, 20));
+        var results = await _kg.SearchNodesAsync(query, type, ResolveContinuityArg(continuity), Math.Min(limit, 20));
         return results.Select(ToNodeDto).ToList();
     }
 
@@ -146,7 +151,7 @@ public class GraphRAGToolkit
         [Description("Max results (default 20)")] int limit = 20
     )
     {
-        var results = await _kg.FindNodesByYearAsync(year, type, yearEnd, continuity, semantic, limit);
+        var results = await _kg.FindNodesByYearAsync(year, type, yearEnd, ResolveContinuityArg(continuity), semantic, limit);
         return results.Select(ToNodeDto).ToList();
     }
 
@@ -264,7 +269,7 @@ public class GraphRAGToolkit
         [Description("Max edges to return (default 40, max 100)")] int limit = 40
     )
     {
-        var edges = await _kg.GetAllEdgesForEntityAsync(entityId, labelFilter, continuity, limit);
+        var edges = await _kg.GetAllEdgesForEntityAsync(entityId, labelFilter, ResolveContinuityArg(continuity), limit);
 
         if (edges.Count == 0)
             return new EntityRelationshipsDto(
@@ -321,7 +326,7 @@ public class GraphRAGToolkit
         [Description(ContinuityParamDescription)] string? continuity = null
     )
     {
-        var results = await _kg.GetRelationshipTypesAsync(entityId, continuity);
+        var results = await _kg.GetRelationshipTypesAsync(entityId, ResolveContinuityArg(continuity));
         return results.Select(r => new RelationshipTypeDto(r.label, r.count, Math.Round(r.avgWeight, 2))).ToList();
     }
 
@@ -347,7 +352,7 @@ public class GraphRAGToolkit
         [Description("Optional end of temporal window (sort-key year). Edges whose interval starts after this are pruned.")] int? yearTo = null
     )
     {
-        var result = await _kg.QueryGraphAsync(entityId, labels, maxDepth, continuity, yearFrom: yearFrom, yearTo: yearTo, ct: default);
+        var result = await _kg.QueryGraphAsync(entityId, labels, maxDepth, ResolveContinuityArg(continuity), yearFrom: yearFrom, yearTo: yearTo, ct: default);
 
         return new GraphTraversalDto(
             Root: new GraphTraversalRootDto(entityId),
@@ -401,7 +406,7 @@ public class GraphRAGToolkit
         if (!string.Equals(direction, "forward", StringComparison.OrdinalIgnoreCase) && !string.Equals(direction, "reverse", StringComparison.OrdinalIgnoreCase))
             return new LineageDto(entityId, string.Empty, label, direction, 0, [], Note: "direction must be 'forward' or 'reverse'.");
 
-        var result = await _kg.GetLineageAsync(entityId, label, direction, maxDepth, continuity);
+        var result = await _kg.GetLineageAsync(entityId, label, direction, maxDepth, ResolveContinuityArg(continuity));
 
         if (result.Chain.Count == 0)
             return new LineageDto(
@@ -445,7 +450,7 @@ public class GraphRAGToolkit
         if (entityId1 == entityId2)
             return new ConnectionsDto(Connected: true, PathLength: 0, Path: [], Note: "Same entity");
 
-        var (connected, path) = await _kg.FindConnectionsAsync(entityId1, entityId2, maxHops, continuity, yearFrom, yearTo);
+        var (connected, path) = await _kg.FindConnectionsAsync(entityId1, entityId2, maxHops, ResolveContinuityArg(continuity), yearFrom, yearTo);
 
         if (!connected)
             return new ConnectionsDto(Connected: false, SearchedHops: maxHops, Note: $"No connection found within {maxHops} hops.");
@@ -495,7 +500,8 @@ public class GraphRAGToolkit
         limit = Math.Clamp(limit, 1, 10);
 
         var types = !string.IsNullOrWhiteSpace(type) ? new[] { type } : null;
-        Continuity? cont = continuity is not null && Enum.TryParse<Continuity>(continuity, true, out var c) && c is Continuity.Canon or Continuity.Legends ? c : null;
+        var resolvedContinuity = ResolveContinuityArg(continuity);
+        Continuity? cont = resolvedContinuity is not null && Enum.TryParse<Continuity>(resolvedContinuity, true, out var c) && c is Continuity.Canon or Continuity.Legends ? c : null;
 
         var results = await _search.SearchAsync(query, types, cont, limit: limit);
 
@@ -538,6 +544,19 @@ public class GraphRAGToolkit
             return new GalaxyYearResultDto(null, null, null, null, null, null, null, Error: $"No data for year {year}.", NearestYears: available);
         }
 
+        // Honour the request-scoped continuity filter pinned by the AGUI
+        // envelope-parser middleware. When the user has Canon-only set, drop
+        // Legends events from the map view before serialising — the agent
+        // never sees them and can't accidentally mention them. See ADR-008
+        // + Design-029. Falls back to no filter when no HTTP context is
+        // active (background jobs, integration tests).
+        var continuityFilter = ResolveCurrentContinuity();
+
+        bool PassContinuity(GalaxyYearEvent e) => continuityFilter is null || e.Continuity == continuityFilter.Value || e.Continuity == Continuity.Both;
+
+        var filteredEvents = doc.EventCells.SelectMany(c => c.Events).Where(PassContinuity).Take(30).ToList();
+        var filteredTotal = doc.EventCells.Sum(c => c.Events.Count(PassContinuity)) + (doc.UnresolvedEvents?.Count(PassContinuity) ?? 0);
+
         return new GalaxyYearResultDto(
             Year: doc.Year,
             YearDisplay: doc.YearDisplay,
@@ -548,10 +567,33 @@ public class GraphRAGToolkit
                     Factions: r.Factions.Select(f => new GalaxyFactionDto(f.Faction, $"{f.Control * 100:0}%", f.Contested)).ToList()
                 ))
                 .ToList(),
-            EventsOnMap: doc.EventCells.SelectMany(c => c.Events).Select(e => new GalaxyEventDto(e.Title, e.Lens, e.Place, e.Outcome, e.WikiUrl, e.Continuity.ToString())).Take(30).ToList(),
-            TotalEvents: doc.EventCells.Sum(c => c.Count) + (doc.UnresolvedEvents?.Count ?? 0)
+            EventsOnMap: filteredEvents.Select(e => new GalaxyEventDto(e.Title, e.Lens, e.Place, e.Outcome, e.WikiUrl, e.Continuity.ToString())).ToList(),
+            TotalEvents: filteredTotal
         );
     }
+
+    /// <summary>
+    /// Read the active continuity from the request-scoped
+    /// <see cref="ICurrentRequestContext"/> populated by the AGUI envelope-parser
+    /// middleware. Returns null when no HTTP scope is active (background jobs,
+    /// tests) or when the envelope didn't carry a continuity — both mean
+    /// "no filter" / today's behaviour.
+    /// </summary>
+    Continuity? ResolveCurrentContinuity()
+    {
+        var http = _httpContextAccessor?.HttpContext;
+        if (http is null)
+            return null;
+        return http.RequestServices.GetService<ICurrentRequestContext>()?.Continuity;
+    }
+
+    /// <summary>
+    /// Default a tool's continuity argument from the request-scoped context when
+    /// the agent didn't explicitly pass one. Lets the agent stop having to think
+    /// about the global Canon/Legends filter — see ADR-008 + Design-029.
+    /// Explicit agent values always win over the ambient default.
+    /// </summary>
+    string? ResolveContinuityArg(string? agentValue) => !string.IsNullOrWhiteSpace(agentValue) ? agentValue : ResolveCurrentContinuity()?.ToString();
 
     [Description(
         """

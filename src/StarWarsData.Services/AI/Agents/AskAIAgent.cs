@@ -126,10 +126,12 @@ public sealed class AskAIAgent(
 
         MESSAGE METADATA: Messages are prefixed with [CONTINUITY: Canon|Legends|Both] and
         [PREFER: auto|chart|table|...] by the frontend — User selected UI modes, NOT user-typed text.
-        - Pass continuity to tool calls: "Canon", "Legends", or omit for Both.
+        - CONTINUITY is auto-applied at the data layer (ADR-008 + Design-029): KG tools default
+          their filter from the envelope, so you do NOT need to pass continuity yourself.
+          If a Canon-only run returns nothing, retry the same call passing continuity="Both"
+          to broaden across both canons, and note in your answer that the result is from Legends.
         - [PREFER: auto] = you decide. Other values = user selected that mode.
         - NEVER mention these tags to the user or tell them to type them.
-        - If Canon returns nothing, silently retry without the filter and note it's from Legends.
 
         DATA SOURCE PRIORITY (HARD RULE — KG FIRST, PAGES IS FALLBACK):
 

@@ -106,6 +106,15 @@
                             <MudPaper Elevation="0" Class="pa-2" Style="border-radius:10px;">
                                 <MudMarkdown Value="@(msg.Text ?? "")" />
                             </MudPaper>
+                            @if (msg.References is { Count: > 0 } refs)
+                            {
+                                <div class="d-flex flex-wrap gap-1 mt-2 mb-1" style="padding-left:4px;">
+                                    @foreach (var r in refs)
+                                    {
+                                        <CitationCard Reference="r" />
+                                    }
+                                </div>
+                            }
                         </div>
                     }
                     else if (msg.Role == Role.Error)
@@ -201,7 +210,16 @@
         public string? Text { get; set; }
         public string? ToolCallId { get; set; }
         public bool IsToolComplete { get; set; }
+
+        // Citation cards resolved from in-text /graph-explorer/{pageId} links
+        // after the assistant message completes. See Design-030.
+        public List<CitationReference>? References { get; set; }
     }
+
+    // Pulls /graph-explorer/{pageId} ids out of streamed assistant prose so we
+    // can resolve them into citation cards under the message bubble.
+    static readonly System.Text.RegularExpressions.Regex PageIdLinkRegex
+        = new(@"/graph-explorer/(\d+)", System.Text.RegularExpressions.RegexOptions.Compiled);
 
     sealed class CopilotModel
     {
@@ -377,8 +395,15 @@
                             break;
                         }
                         case "TEXT_MESSAGE_END":
+                        {
+                            // Resolve any /graph-explorer/{pageId} links the agent emitted
+                            // into rich citation cards rendered below the bubble. Fire-and-
+                            // forget — if the resolve call fails, the inline links still work.
+                            if (_currentAssistantMsg is { } finished)
+                                _ = ResolveCitationsAsync(finished);
                             _currentAssistantMsg = null;
                             break;
+                        }
                         case "RUN_ERROR":
                         {
                             var errorMsg = root.TryGetProperty("message", out var em) ? em.GetString() : "Unknown error";
@@ -417,6 +442,35 @@
         var msg = new Msg { Role = Role.Assistant, Text = "" };
         _conversation.Add(msg);
         return msg;
+    }
+
+    private async Task ResolveCitationsAsync(Msg msg)
+    {
+        var text = msg.Text;
+        if (string.IsNullOrEmpty(text)) return;
+
+        var ids = PageIdLinkRegex.Matches(text)
+            .Select(m => int.TryParse(m.Groups[1].Value, out var id) ? id : 0)
+            .Where(id => id > 0)
+            .Distinct()
+            .ToArray();
+        if (ids.Length == 0) return;
+
+        try
+        {
+            var response = await Http.PostAsJsonAsync("api/citations/resolve", new { pageIds = ids });
+            if (!response.IsSuccessStatusCode) return;
+            var refs = await response.Content.ReadFromJsonAsync<List<CitationReference>>();
+            if (refs is { Count: > 0 })
+            {
+                msg.References = refs;
+                await InvokeAsync(StateHasChanged);
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.LogDebug(ex, "Citation resolve failed for {Count} ids; inline links remain functional", ids.Length);
+        }
     }
 
     private void HandleToolCallStart(JsonElement root)

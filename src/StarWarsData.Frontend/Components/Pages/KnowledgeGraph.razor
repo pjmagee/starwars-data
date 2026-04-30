@@ -234,13 +234,20 @@
                                         }
                                         <MudTooltip Text="View in Graph Explorer">
                                             <MudIconButton Icon="@Icons.Material.Filled.Hub" Size="Size.Small"
-                                                           Href="@($"/graph-explorer/{context.Id}")" Color="Color.Secondary" />
+                                                           Href="@($"/graph-explorer/{context.Id}")" Target="_blank" Color="Color.Secondary" />
                                         </MudTooltip>
+                                        @if (IsSpatialKind(context.Type))
+                                        {
+                                            <MudTooltip Text="@($"Locate {context.Name} on the Galaxy Map")">
+                                                <MudIconButton Icon="@Icons.Material.Filled.Explore" Size="Size.Small"
+                                                               Href="@($"/galaxy-map/{context.Id}")" Target="_blank" Color="Color.Primary" />
+                                            </MudTooltip>
+                                        }
                                         @if (context.StartYear.HasValue || context.EndYear.HasValue)
                                         {
                                             <MudTooltip Text="@($"View timeline during {context.Name}")">
                                                 <MudIconButton Icon="@Icons.Material.Filled.Timeline" Size="Size.Small"
-                                                               Href="@($"/timeline/{context.Id}")" Color="Color.Tertiary" />
+                                                               Href="@($"/timeline/{context.Id}")" Target="_blank" Color="Color.Tertiary" />
                                             </MudTooltip>
                                         }
                                         @* Holocron enhance — open to any authenticated user. After completion the panel
@@ -543,6 +550,13 @@
                                                     @if (!string.IsNullOrEmpty(edge.OtherType))
                                                     {
                                                         <MudText HtmlTag="span" Typo="Typo.caption" Color="Color.Secondary" Class="ml-2">(@edge.OtherType)</MudText>
+                                                    }
+                                                    @if (IsSpatialKind(edge.OtherType))
+                                                    {
+                                                        <MudTooltip Text="@($"Locate {edge.OtherName} on the Galaxy Map")">
+                                                            <MudIconButton Icon="@Icons.Material.Filled.Explore" Size="Size.Small"
+                                                                           Href="@($"/galaxy-map/{edge.OtherId}")" Target="_blank" Color="Color.Primary" Class="ml-1" />
+                                                        </MudTooltip>
                                                     }
                                                     @if (!string.IsNullOrEmpty(edge.Phase1Qualifier))
                                                     {
@@ -1201,6 +1215,11 @@
     }
 
     private static string FormatYear(int year) => year < 0 ? $"{-year} BBY" : year > 0 ? $"{year} ABY" : "0 BBY/ABY";
+
+    // Direct spatial KG types — those that have a /galaxy-map/{pageId} deep
+    // link (per Design-031). Indirect spatial linking (Battle → location) is
+    // Phase 2 of Design-030 and lives in the citation resolver.
+    private static bool IsSpatialKind(string? type) => type is "System" or "CelestialBody" or "Sector" or "Region" or "TradeRoute";
 
     /// <summary>Render a UTC timestamp as a coarse "X ago" string for the edge-row last-updated caption.</summary>
     private static string FormatRelativeTime(DateTime utc)

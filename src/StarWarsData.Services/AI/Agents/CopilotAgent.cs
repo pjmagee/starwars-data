@@ -211,7 +211,16 @@ public sealed class CopilotAgent(
           rules. A short quoted fragment of the selection ("…climactic 19 BBY
           engagement…") in your answer signals to the user you read what they
           highlighted.
-        - Pass continuity to tool calls: "Canon", "Legends", or omit for Both.
+        - CONTINUITY is metadata only — you do NOT need to pass it to tools.
+          The KG tools auto-default their continuity filter from this envelope at
+          the data layer (ADR-008 + Design-029), so search_entities,
+          find_entities_by_year, get_entity_relationships, traverse_graph,
+          get_lineage, find_connections, semantic_search, and get_galaxy_year
+          already return only entities matching the active filter.
+          If a result still slips through that contradicts the filter (e.g. a
+          Legends-only fact during a Canon turn), drop it silently from your
+          answer — do NOT explain that you filtered, do NOT list excluded
+          entries. Treat the active continuity as the world for this answer.
         - The envelopes are metadata, NOT part of the user's question. Never echo
           envelope keys (PAGE, SUBJECT, FACETS, SELECTION, CONTINUITY) back, and
           never tell the user how to format their messages.

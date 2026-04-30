@@ -16,6 +16,8 @@ using StarWarsData.ServiceDefaults;
 using StarWarsData.Services;
 using StarWarsData.Services.AI.Agents;
 using StarWarsData.Services.AI.Agents.CharacterTimelines;
+using StarWarsData.Services.AI.Citations;
+using StarWarsData.Services.AI.RequestContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -72,6 +74,9 @@ builder
     .AddScoped<TimelineService>()
     .AddScoped<MapService>()
     .AddScoped<GalaxyMapReadService>()
+    .AddScoped<ICitationResolver, CitationResolver>()
+    .AddScoped<CurrentRequestContext>()
+    .AddScoped<ICurrentRequestContext>(sp => sp.GetRequiredService<CurrentRequestContext>())
     // CharacterTimelineService is needed for read endpoints (list/get/search)
     // The ChatClient is only used by GenerateTimelineAsync (called from Admin app)
     .AddSingleton<CharacterTimelineChatClient>(sp =>
@@ -107,7 +112,8 @@ builder
         var mongoClient = sp.GetRequiredService<IMongoClient>();
         var kgService = sp.GetRequiredService<KnowledgeGraphQueryService>();
         var search = sp.GetRequiredService<SemanticSearchService>();
-        return new GraphRAGToolkit(kgService, search, mongoClient, settings.DatabaseName);
+        var httpAccessor = sp.GetRequiredService<IHttpContextAccessor>();
+        return new GraphRAGToolkit(kgService, search, mongoClient, settings.DatabaseName, httpAccessor);
     })
     .AddSingleton<IChatClient>(sp =>
         new ChatClientBuilder(sp.GetRequiredService<OpenAIClient>().GetResponsesClient().AsIChatClient("gpt-5.4-mini")).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build()
@@ -179,6 +185,13 @@ app.MapGet(
         return Results.Ok(new { status = report.Status.ToString(), report.ErrorsLastHour });
     }
 );
+
+// Parse the [CONTINUITY:][PAGE:][SUBJECT:] envelope from the most recent
+// user message and pin onto the scoped CurrentRequestContext so tools can
+// default their filters from request state instead of relying on the agent
+// to pass parameters. See ADR-008 + Design-029. Runs before rate-limit
+// middleware so the body is buffered once for both passes.
+app.Use(AguiEnvelopeParserMiddleware.InvokeAsync);
 
 // Rate limiting + BYOK detection middleware for /kernel/stream and /copilot/stream.
 // Phase 1 shares the budget across both surfaces — see Design-022 Open questions.

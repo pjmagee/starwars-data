@@ -1,0 +1,81 @@
+@using StarWarsData.Models.Queries
+
+@*
+    Single reference card rendered for a resolved KG node — see Design-030.
+    Lays out one button per non-null link in CitationLinks, in a fixed display
+    order: Galaxy Map (when present) leads for spatial entities, then Graph
+    Explorer, then Wookieepedia, then any future surfaces (Timeline, Holocron).
+    All links open in a new tab so the user keeps their place.
+*@
+
+@if (Reference is { } r)
+{
+    <MudPaper Outlined="true" Class="pa-2 d-flex flex-column gap-1"
+              Style="min-width:160px; max-width:260px; background:var(--mud-palette-background-grey);">
+        <div class="d-flex align-center gap-2">
+            @if (!string.IsNullOrEmpty(r.ImageUrl))
+            {
+                <MudImage Src="@r.ImageUrl" Width="32" Height="32" ObjectFit="ObjectFit.Cover" Class="rounded" />
+            }
+            <div class="flex-grow-1" style="min-width:0;">
+                <MudText Typo="Typo.body2" Style="font-weight:600;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">@r.Name</MudText>
+                <div class="d-flex align-center gap-1" style="margin-top:2px;">
+                    <MudText Typo="Typo.caption" Color="Color.Secondary" Style="font-size:10px;">@r.Kind</MudText>
+                    @if (!string.IsNullOrEmpty(r.Continuity) && r.Continuity != "Unknown")
+                    {
+                        <MudText Typo="Typo.caption" Color="@ContinuityColor(r.Continuity)" Style="font-size:10px;">· @r.Continuity</MudText>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-wrap gap-1" style="margin-top:4px;">
+            @if (!string.IsNullOrEmpty(r.Links.GalaxyMap))
+            {
+                <MudButton Href="@r.Links.GalaxyMap" Target="_blank" rel="noopener noreferrer"
+                           Variant="Variant.Outlined" Size="Size.Small" Color="Color.Primary"
+                           StartIcon="@Icons.Material.Filled.Explore" Class="px-2"
+                           Style="font-size:10px;min-width:0;">Map</MudButton>
+            }
+            @if (!string.IsNullOrEmpty(r.Links.GraphExplorer))
+            {
+                <MudButton Href="@r.Links.GraphExplorer" Target="_blank" rel="noopener noreferrer"
+                           Variant="Variant.Outlined" Size="Size.Small" Color="Color.Secondary"
+                           StartIcon="@Icons.Material.Filled.Hub" Class="px-2"
+                           Style="font-size:10px;min-width:0;">Graph</MudButton>
+            }
+            @if (!string.IsNullOrEmpty(r.Links.Timeline))
+            {
+                <MudButton Href="@r.Links.Timeline" Target="_blank" rel="noopener noreferrer"
+                           Variant="Variant.Outlined" Size="Size.Small" Color="Color.Tertiary"
+                           StartIcon="@Icons.Material.Filled.Timeline" Class="px-2"
+                           Style="font-size:10px;min-width:0;">Timeline</MudButton>
+            }
+            @if (!string.IsNullOrEmpty(r.Links.Holocron))
+            {
+                <MudButton Href="@r.Links.Holocron" Target="_blank" rel="noopener noreferrer"
+                           Variant="Variant.Outlined" Size="Size.Small" Color="Color.Info"
+                           StartIcon="@Icons.Material.Filled.AutoAwesome" Class="px-2"
+                           Style="font-size:10px;min-width:0;">Holocron</MudButton>
+            }
+            @if (!string.IsNullOrEmpty(r.Links.Wiki))
+            {
+                <MudButton Href="@r.Links.Wiki" Target="_blank" rel="noopener noreferrer"
+                           Variant="Variant.Text" Size="Size.Small" Color="Color.Default"
+                           StartIcon="@Icons.Material.Filled.OpenInNew" Class="px-2"
+                           Style="font-size:10px;min-width:0;">Wiki</MudButton>
+            }
+        </div>
+    </MudPaper>
+}
+
+@code {
+    [Parameter, EditorRequired] public CitationReference? Reference { get; set; }
+
+    static Color ContinuityColor(string c) => c switch
+    {
+        "Canon" => Color.Primary,
+        "Legends" => Color.Secondary,
+        _ => Color.Default,
+    };
+}
