@@ -6,6 +6,7 @@
 @using StarWarsData.Frontend.Theming
 @inherits LayoutComponentBase
 @inject LayoutService Layout
+@inject PageContextService PageContext
 @inject IJSRuntime JS
 @inject ILogger<MainLayout> Logger
 @implements IDisposable
@@ -108,6 +109,16 @@
                                Href="/authentication/login" title="Sign in" Class="d-flex d-lg-none" />
             </NotAuthorized>
         </AuthorizeView>
+        @* Copilot sidebar toggle — hidden on pages that opt out (e.g. /ask). *@
+        @if (!Layout.HideCopilot)
+        {
+            <MudTooltip Text="@(_copilotOpen ? "Hide copilot" : "Open copilot")">
+                <MudIconButton Icon="@Icons.Material.Filled.AutoAwesome"
+                               Color="@(_copilotOpen ? Color.Secondary : Color.Inherit)"
+                               Edge="Edge.End"
+                               OnClick="ToggleCopilot" />
+            </MudTooltip>
+        }
     </MudAppBar>
     <MudDrawer id="nav-drawer" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2" Width="280px">
         @* Three flex zones: scrollable NavMenu on top (absorbs chat history growth),
@@ -171,6 +182,18 @@
             </div>
         </div>
     </MudDrawer>
+    @* Copilot sidebar — right anchor, symmetric with the left nav. Suppressed on
+       /ask and any page that has set Layout.HideCopilot. Temporary variant so
+       the page content underneath isn't pushed when the drawer is open; the
+       chat is meant to overlay, not reflow the viewport. *@
+    @if (!Layout.HideCopilot)
+    {
+        <MudDrawer id="copilot-drawer" @bind-Open="_copilotOpen" Anchor="Anchor.Right"
+                   ClipMode="DrawerClipMode.Always" Variant="DrawerVariant.Temporary"
+                   Elevation="3" Width="380px">
+            <CopilotSidebar />
+        </MudDrawer>
+    }
     }
     <MudMainContent Class="@(Layout.IsFullscreen ? "" : "pt-16 pa-4")" Style="@(Layout.IsFullscreen ? "padding-top:0!important;" : "")">
         @Body
@@ -211,6 +234,7 @@
 
 @code {
     private bool _drawerOpen = true;
+    private bool _copilotOpen;
     private bool _isDarkMode = true;
     private string _darkModePreference = "system"; // "light" | "dark" | "system"
     private bool _aurebesh;
@@ -220,6 +244,7 @@
     private MudThemeProvider _mudThemeProvider = null!;
     private DotNetObjectReference<MainLayout>? _dotNetRef;
     private bool _darkModeWatcherRegistered;
+    private bool _selectionWatcherRegistered;
 
     private static readonly (string Label, string Value)[] _textSizes =
     [
@@ -294,6 +319,13 @@
                 _darkModeWatcherRegistered = true;
             }
 
+            if (!_selectionWatcherRegistered)
+            {
+                _dotNetRef ??= DotNetObjectReference.Create(this);
+                await JS.InvokeVoidAsync("swRegisterSelectionWatcher", _dotNetRef);
+                _selectionWatcherRegistered = true;
+            }
+
             StateHasChanged();
         }
         catch (JSDisconnectedException) { }
@@ -314,6 +346,16 @@
         if (_darkModePreference != "system") return Task.CompletedTask;
         _isDarkMode = systemIsDark;
         return InvokeAsync(StateHasChanged);
+    }
+
+    [JSInvokable]
+    public Task OnSelectionChanged(string? text)
+    {
+        // Forwarded by swRegisterSelectionWatcher in App.razor when the user
+        // highlights text outside the copilot drawer. CopilotSidebar reads this
+        // at submit time and tacks it onto the agent envelope.
+        PageContext.SetSelection(text);
+        return Task.CompletedTask;
     }
 
     private async Task SetTextSize(string size)
@@ -360,12 +402,25 @@
             }
             catch { }
         }
+        if (_selectionWatcherRegistered)
+        {
+            try
+            {
+                _ = JS.InvokeVoidAsync("swUnregisterSelectionWatcher");
+            }
+            catch { }
+        }
         _dotNetRef?.Dispose();
     }
 
     private void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
+    }
+
+    private void ToggleCopilot()
+    {
+        _copilotOpen = !_copilotOpen;
     }
 
     private async Task SetDarkMode(string mode)

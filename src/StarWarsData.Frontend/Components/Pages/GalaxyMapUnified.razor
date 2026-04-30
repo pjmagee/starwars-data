@@ -1,4 +1,5 @@
 @page "/galaxy-map"
+@page "/galaxy-map/{PageId:int}"
 @using Microsoft.JSInterop
 @using WikiPage = StarWarsData.Models.Entities.Page
 @using StarWarsData.Models.Entities
@@ -7,6 +8,8 @@
 @inject StarWarsData.Frontend.Services.GlobalFilterService GlobalFilterService
 @inject IJSRuntime JS
 @inject LayoutService Layout
+@inject PageContextService PageContext
+@inject ISnackbar Snackbar
 @inject ILogger<GalaxyMapUnified> Logger
 @implements IAsyncDisposable
 
@@ -1107,12 +1110,101 @@
             _ => true, // null = show both
         }) ?? [];
 
+    [Parameter] public int? PageId { get; set; }
+
+    // Tracks the last deep-link we successfully applied so OnParametersSetAsync
+    // doesn't replay it on every parent re-render. Reset on dispose.
+    int? _appliedDeepLinkId;
+    int? _pendingDeepLinkId;
+
     // ══════════ LIFECYCLE ══════════
 
     protected override async Task OnInitializedAsync()
     {
         GlobalFilterService.OnChange += OnFilterChanged;
         await LoadData();
+        PublishPageContext();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (PageId is int id && id != _appliedDeepLinkId)
+        {
+            _pendingDeepLinkId = id;
+            await TryApplyDeepLinkAsync();
+        }
+    }
+
+    // Drives the JS module to the entity referenced by /galaxy-map/{pageId}.
+    // Called from OnParametersSetAsync (route hit) AND from OnAfterRenderAsync
+    // once D3 init finishes — whichever happens last gets to run, but the
+    // _appliedDeepLinkId guard prevents replays.
+    async Task TryApplyDeepLinkAsync()
+    {
+        if (_pendingDeepLinkId is not int id) return;
+        if (!_d3Initialized || _module is null)
+        {
+            // Map isn't initialised yet; OnAfterRenderAsync will retry.
+            return;
+        }
+        if (id == _appliedDeepLinkId) return;
+
+        _appliedDeepLinkId = id;
+        _pendingDeepLinkId = null;
+
+        MapLocateResult? loc = null;
+        try { loc = await Http.GetFromJsonAsync<MapLocateResult>($"api/galaxy-map/locate/{id}"); }
+        catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
+            Snackbar.Add($"Couldn't find entity #{id} on the galaxy map.", Severity.Warning);
+            return;
+        }
+        catch (Exception ex)
+        {
+            Logger.LogWarning(ex, "Deep-link locate failed for pageId {PageId}", id);
+            return;
+        }
+
+        if (loc is null) return;
+
+        switch (loc.Kind)
+        {
+            case "System":
+            case "CelestialBody":
+                if (loc.Col is null || loc.Row is null)
+                {
+                    Snackbar.Add($"{loc.Name} isn't placed on the galaxy grid yet.", Severity.Info);
+                    return;
+                }
+                var ok = await _module.InvokeAsync<bool>("drillToDeepLink", new
+                {
+                    kind = loc.Kind,
+                    pageId = loc.PageId,
+                    name = loc.Name,
+                    systemId = loc.SystemId,
+                    col = loc.Col,
+                    row = loc.Row,
+                });
+                if (!ok)
+                    Snackbar.Add($"Couldn't drill to {loc.Name} — system isn't loaded in this view yet.", Severity.Info);
+                break;
+
+            case "Region":
+                await _module.InvokeAsync<bool>("drillToDeepLink", new { kind = "Region", name = loc.Name });
+                break;
+
+            case "Sector":
+            case "TradeRoute":
+                Snackbar.Add($"Direct navigation to {loc.Kind.ToLowerInvariant()}s is coming in Phase 2 — opened the overview for now.", Severity.Info);
+                break;
+
+            case "Other":
+            default:
+                Snackbar.Add($"{loc.Name} isn't placed on the galaxy map.", Severity.Info);
+                break;
+        }
+
+        PublishPageContext();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -1156,6 +1248,11 @@
                 _d3Initialized = true;
                 Logger.LogInformation("GalaxyMap D3 init succeeded after {Attempts} attempt(s)", _initAttempts + 1);
                 _initAttempts = 0;
+
+                // If the user landed on /galaxy-map/{pageId}, OnParametersSetAsync
+                // queued the id but couldn't drill until JS was ready. Replay now.
+                if (_pendingDeepLinkId is not null)
+                    _ = TryApplyDeepLinkAsync();
             }
             catch (ObjectDisposedException ex) { initException = ex; }
             catch (JSDisconnectedException ex) { initException = ex; }
@@ -1235,6 +1332,7 @@
             if (_module is not null)
                 await _module.InvokeVoidAsync("clearTemporalLayers");
         }
+        PublishPageContext();
         StateHasChanged();
     }
 
@@ -1277,6 +1375,7 @@
         }
         _hoveredRegionName = null;
         UpdateBreadcrumbs();
+        PublishPageContext();
         InvokeAsync(StateHasChanged);
     }
 
@@ -1295,6 +1394,7 @@
     {
         _systemCache.TryGetValue(systemId, out _selectedSystem);
         if (_detailPage is null && _selectedSystem is not null) _ = LoadPageDetail(systemId);
+        PublishPageContext();
         InvokeAsync(StateHasChanged);
     }
 
@@ -1305,6 +1405,7 @@
     public void OnSystemDeselected()
     {
         _selectedSystem = null; _detailPage = null;
+        PublishPageContext();
         InvokeAsync(StateHasChanged);
     }
 
@@ -1436,10 +1537,14 @@
         _loadingDetails = true; StateHasChanged();
         try { _detailPage = await Http.GetFromJsonAsync<WikiPage>($"Pages/{pageId}"); }
         catch { _detailPage = null; }
-        finally { _loadingDetails = false; StateHasChanged(); }
+        finally { _loadingDetails = false; PublishPageContext(); StateHasChanged(); }
     }
 
-    void ClearDetailPanel() { _detailPage = null; _selectedSystem = null; }
+    void ClearDetailPanel()
+    {
+        _detailPage = null; _selectedSystem = null;
+        PublishPageContext();
+    }
 
     // ══════════ TIMELINE ══════════
 
@@ -1450,10 +1555,69 @@
         if (_yearData is not null)
         {
             var layers = new[] { "regions", "territory", "events" };
-            await _module.InvokeVoidAsync("renderTemporalLayer", _yearData, layers, _selectedLens);
+            // Filter EventCells + UnresolvedEvents by the global continuity/realm
+            // toggles before handing to the JS map renderer. Without this, the JS
+            // layer paints every event in the document — Legends-tagged events
+            // surface even when the user has Legends turned off.
+            var filtered = BuildFilteredYearData(_yearData);
+            await _module.InvokeVoidAsync("renderTemporalLayer", filtered, layers, _selectedLens);
         }
         StateHasChanged();
         _ = ScrollDensityToActive();
+    }
+
+    // Build a filtered clone of the loaded year document that respects the
+    // global Continuity + Realm toggles and the active lens. Mirrors the
+    // FilteredEventCells computed property used by the side panel so the map
+    // and the panel agree on what to show.
+    GalaxyYearDocument BuildFilteredYearData(GalaxyYearDocument src)
+    {
+        var realLenses = _overview?.Lenses.Where(l => l.IsReal).Select(l => l.Lens).ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new();
+        var swLenses = _overview?.Lenses.Where(l => !l.IsReal).Select(l => l.Lens).ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new();
+        var hiddenLenses = GlobalFilterService.SelectedRealm switch
+        {
+            Realm.Starwars => realLenses,
+            Realm.Real => swLenses,
+            _ => new HashSet<string>(),
+        };
+        var continuityFilter = GlobalFilterService.SelectedContinuity;
+
+        bool Pass(GalaxyYearEvent e)
+            => !hiddenLenses.Contains(e.Lens)
+               && (continuityFilter is null || e.Continuity == continuityFilter)
+               && (_selectedLens == "All" || e.Lens == _selectedLens);
+
+        var filteredCells = src.EventCells
+            .Select(c =>
+            {
+                var keep = c.Events.Where(Pass).ToList();
+                return new GalaxyYearEventCell
+                {
+                    Col = c.Col,
+                    Row = c.Row,
+                    Region = c.Region,
+                    Events = keep,
+                    Count = keep.Count,
+                };
+            })
+            .Where(c => c.Events.Count > 0)
+            .ToList();
+
+        var filteredUnresolved = (src.UnresolvedEvents ?? [])
+            .Where(Pass)
+            .ToList();
+
+        return new GalaxyYearDocument
+        {
+            Year = src.Year,
+            YearDisplay = src.YearDisplay,
+            Era = src.Era,
+            EraDescription = src.EraDescription,
+            Regions = src.Regions,
+            EventCells = filteredCells,
+            UnresolvedEvents = filteredUnresolved,
+            LensCounts = src.LensCounts,
+        };
     }
 
     async Task OnLensChanged(string lens)
@@ -1727,6 +1891,7 @@
     public async ValueTask DisposeAsync()
     {
         Layout.SetFullscreen(false);
+        PageContext.Clear();
         GlobalFilterService.OnChange -= OnFilterChanged;
         _autoplayTimer?.Dispose();
         if (_module is not null)
@@ -1735,5 +1900,108 @@
             catch (JSDisconnectedException) { } catch (ObjectDisposedException) { }
         }
         _dotNetRef?.Dispose();
+    }
+
+    // Build a snapshot of "what the user is looking at right now" and push to
+    // the copilot's PageContextService. Read at submit time by CopilotSidebar
+    // and injected as the [PAGE:][SUBJECT:][FACETS:] envelope on the next turn.
+    //
+    // Subject precedence (most specific wins):
+    //   1. Detail page (planet/body opened in the panel)
+    //   2. Selected system
+    //   3. Drilled-into sector (Sector breadcrumb level)
+    //   4. Selected region (clicked region overlay)
+    //   5. Drilled-into region (Region breadcrumb level)
+    //   6. Page-only baseline (overview / cell with no selection)
+    void PublishPageContext()
+    {
+        var extras = new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["mode"] = _mode,
+            ["zoom"] = string.IsNullOrEmpty(_currentLevel) ? "overview" : _currentLevel,
+        };
+
+        if (_mode == "timeline")
+        {
+            extras["year"] = _year.ToString();
+            if (!string.Equals(_selectedLens, "All", StringComparison.Ordinal))
+                extras["lens"] = _selectedLens;
+        }
+        else
+        {
+            // Explore-mode breadcrumb levels are useful context even without a
+            // hard selection — the user can be "in" a sector without clicking
+            // an individual system. Pass them through as facets.
+            if (!string.IsNullOrEmpty(_regionLabel)) extras["region"] = _regionLabel;
+            if (!string.IsNullOrEmpty(_cellLabel)) extras["cell"] = _cellLabel;
+            if (!string.IsNullOrEmpty(_sectorLabel)) extras["sector"] = _sectorLabel;
+        }
+
+        if (_detailPage is not null)
+        {
+            var kind = _detailPage.Infobox?.Template ?? "Page";
+            if (_selectedSystem is { Region: { } r }) extras["region"] = r;
+            if (_selectedSystem is { Sector: { } s }) extras["sector"] = s;
+            if (_selectedSystem is { Name: { } sysName }) extras["system"] = sysName;
+            PageContext.Set(new PageContext(
+                Page: "galaxy-map",
+                Subject: _detailPage.Title,
+                SubjectKind: kind,
+                SubjectId: _detailPage.PageId,
+                Extras: extras));
+            return;
+        }
+
+        if (_selectedSystem is not null)
+        {
+            if (_selectedSystem.Region is { } r) extras["region"] = r;
+            if (_selectedSystem.Sector is { } s) extras["sector"] = s;
+            PageContext.Set(new PageContext(
+                Page: "galaxy-map",
+                Subject: _selectedSystem.Name,
+                SubjectKind: "System",
+                SubjectId: _selectedSystem.Id,
+                Extras: extras));
+            return;
+        }
+
+        // Sector level (breadcrumb-drilled, no individual system selected).
+        // Sectors don't have KG node ids on the map — use the label as the
+        // subject string so the agent knows what to look up.
+        if (_mode == "explore" && !string.IsNullOrEmpty(_sectorLabel))
+        {
+            PageContext.Set(new PageContext(
+                Page: "galaxy-map",
+                Subject: _sectorLabel,
+                SubjectKind: "Sector",
+                Extras: extras));
+            return;
+        }
+
+        if (_selectedRegion is not null)
+        {
+            PageContext.Set(new PageContext(
+                Page: "galaxy-map",
+                Subject: _selectedRegion.Name,
+                SubjectKind: "Region",
+                Extras: extras));
+            return;
+        }
+
+        // Region drilled via breadcrumb but no overlay selected.
+        if (_mode == "explore" && !string.IsNullOrEmpty(_regionLabel))
+        {
+            PageContext.Set(new PageContext(
+                Page: "galaxy-map",
+                Subject: _regionLabel,
+                SubjectKind: "Region",
+                Extras: extras));
+            return;
+        }
+
+        // Overview / cell-only — no entity subject, just facets.
+        PageContext.Set(new PageContext(
+            Page: "galaxy-map",
+            Extras: extras));
     }
 }

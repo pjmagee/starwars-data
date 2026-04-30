@@ -983,11 +983,16 @@ export function initialize(containerId, overview, rawDotNetRef) {
         const startX = colX(col) + padX + slotW / 2;
         const startY = rowY(row) + padY + slotH / 2;
 
-        const nodes = filtered.map((sys, i) => ({
-            ...sys,
-            x: startX + (i % gridCols) * slotW,
-            y: startY + Math.floor(i / gridCols) * slotH,
-        }));
+        // Mutate items in place rather than spreading so that lastCellSystems
+        // (which shares references with `filtered`) sees the same x/y. The
+        // deep-link path needs `lastCellSystems.find(...)` to return positioned
+        // systems; without this, drillIntoSystem gets sys.x = undefined and
+        // computes NaN zoom transforms — map appears frozen at the wrong place.
+        filtered.forEach((sys, i) => {
+            sys.x = startX + (i % gridCols) * slotW;
+            sys.y = startY + Math.floor(i / gridCols) * slotH;
+        });
+        const nodes = filtered;
 
         // Highlight current cell
         contentLayer.append('rect')
@@ -1432,8 +1437,92 @@ export function initialize(containerId, overview, rawDotNetRef) {
     const regionCellMap = {};
     overview.regions.forEach(r => { regionCellMap[r.name] = r.cells; });
 
+    // === DEEP-LINK ENTRY POINT ===
+    // Drives the existing drill flow programmatically so the
+    // /galaxy-map/{pageId} route can land users at the right view.
+    // Payload comes from /api/galaxy-map/locate/{pageId} and is shaped like:
+    //   { kind: 'System' | 'CelestialBody' | 'Sector' | 'Region' | ...,
+    //     systemId?: number, col?: number, row?: number, name?: string }
+    async function drillToDeepLink(payload) {
+        if (!payload || !payload.kind) return false;
+
+        // Step 1: pop back to overview if we're somewhere else, so the drill
+        // path is the same regardless of where the user landed from.
+        while (currentLevel !== 'overview') {
+            goBack();
+            await new Promise(r => setTimeout(r, 700));
+        }
+
+        switch (payload.kind) {
+            case 'Region':
+                if (payload.name) await drillIntoRegion(payload.name);
+                return true;
+
+            case 'System':
+            case 'CelestialBody': {
+                const col = payload.col, row = payload.row;
+                if (col == null || row == null) return false;
+                await drillIntoCell(col, row);
+
+                // drillIntoCell awaits FetchSystemsInRange so lastCellSystems is
+                // populated by the time we reach here.
+                const targetSystemId = payload.kind === 'System'
+                    ? payload.pageId
+                    : payload.systemId;
+                if (!targetSystemId) return false;
+
+                let sys = (lastCellSystems || []).find(s => s.id === targetSystemId);
+                if (!sys) return false;
+
+                // If the cell has multiple sectors, drillIntoCell rendered the
+                // sector picker instead of laying out systems — so sys.x/sys.y
+                // are undefined. Step into the target's sector programmatically
+                // (mirrors the picker's click handler) so renderCellSystemsDirect
+                // mutates positions onto the system objects.
+                if (sys.x == null || sys.y == null) {
+                    const sectorName = sys.sector || 'Unknown sector';
+                    const sysList = (lastCellSystems || []).filter(
+                        s => (s.sector || 'Unknown sector') === sectorName);
+                    if (sysList.length > 0) {
+                        currentLevel = 'sector';
+                        currentSector = { name: sectorName, systems: sysList, col, row };
+                        dotNetRef.invokeMethodAsync('OnLevelChanged', 'sector', sectorName);
+                        renderCellSystemsDirect(sysList, col, row);
+                        sys = sysList.find(s => s.id === targetSystemId) || sys;
+                    }
+                }
+
+                if (sys.x == null || sys.y == null) return false;
+
+                // Wait for the cell zoom transition (800ms) to finish before
+                // starting the system zoom — chaining transitions from the same
+                // origin avoids the visible "fixed map" flicker users report.
+                await new Promise(r => setTimeout(r, 850));
+                drillIntoSystem(sys);
+
+                // For CelestialBody we'd also auto-select the body in the side
+                // panel — but the panel listens to OnCelestialBodySelected which
+                // fires from a chip click, not a programmatic call. Leaving the
+                // user at system level for Phase 1; the body chip is one click
+                // away in the panel that just opened. Phase 2 fires
+                // OnCelestialBodySelected directly.
+                if (payload.kind === 'CelestialBody' && payload.pageId) {
+                    setTimeout(() => {
+                        dotNetRef.invokeMethodAsync('OnCelestialBodySelected', payload.pageId, payload.name || '');
+                    }, 500);
+                }
+                return true;
+            }
+
+            // Sector + TradeRoute deferred to Phase 2 — for now fall through
+            // to overview with the toast handled on the C# side.
+            default:
+                return false;
+        }
+    }
+
     _state = {
-        svg, container, goBack, drillIntoCell, drillIntoRegion,
+        svg, container, goBack, drillIntoCell, drillIntoRegion, drillToDeepLink,
         getCurrentLevel: () => currentLevel,
         setSystemFilter, setRegionVisibility,
         // Layers
@@ -1442,6 +1531,13 @@ export function initialize(containerId, overview, rawDotNetRef) {
         currentYearData: null, selectedLens: 'All',
     };
     return true;
+}
+
+/** Drill the map to whatever entity the deep-link route resolved.
+ *  Payload shape mirrors the API's MapLocateResult — see Design-031. */
+export async function drillToDeepLink(payload) {
+    if (_state && _state.drillToDeepLink) return await _state.drillToDeepLink(payload);
+    return false;
 }
 
 // Lets C# verify the JS function actually executed. Blazor's SignalR layer

@@ -5,6 +5,7 @@
 @inject IHttpClientFactory HttpClientFactory
 @inject GlobalFilterService GlobalFilterService
 @inject ISnackbar Snackbar
+@inject PageContextService PageContext
 @implements IDisposable
 
 <PageTitle>Search — Star Wars Data</PageTitle>
@@ -200,6 +201,15 @@
     {
         GlobalFilterService.OnChange += OnGlobalFilterChanged;
         await LoadEntityTypes();
+        PublishPageContext();
+    }
+
+    private void PublishPageContext()
+    {
+        var extras = new Dictionary<string, string>(StringComparer.Ordinal);
+        if (!string.IsNullOrWhiteSpace(_searchedQuery)) extras["query"] = _searchedQuery;
+        if (!string.IsNullOrEmpty(_mode)) extras["mode"] = _mode;
+        PageContext.Set(new PageContext(Page: "search", Extras: extras));
     }
 
     private async Task LoadEntityTypes()
@@ -230,6 +240,7 @@
         _results = null;
         _searchedQuery = _query;
         _searchedMode = _mode;
+        PublishPageContext();
         StateHasChanged();
 
         try
@@ -311,6 +322,7 @@
 
     public void Dispose()
     {
+        PageContext.Clear();
         GlobalFilterService.OnChange -= OnGlobalFilterChanged;
     }
 

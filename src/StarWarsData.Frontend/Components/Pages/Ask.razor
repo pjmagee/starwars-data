@@ -2,12 +2,14 @@
 @page "/ask"
 @page "/ask/{SessionId:guid}"
 @using System.Text.Json.Serialization
+@using StarWarsData.Frontend.Components.Shared.Agui
 @inject IHttpClientFactory HttpClientFactory
 @inject GlobalFilterService GlobalFilterService
 @inject ChatHistoryService ChatHistory
 @inject NavigationManager Navigation
 @inject IJSRuntime JS
 @inject ILogger<Ask> Logger
+@inject LayoutService Layout
 @implements IDisposable
 
 <PageTitle>Ask AI — Star Wars Data</PageTitle>
@@ -363,44 +365,7 @@
     }
 
     // ── AGUI message replay (sent to /kernel/stream each turn) ──
-
-    class AguiMessage
-    {
-        [JsonPropertyName("role")]
-        public string Role { get; set; } = "";
-
-        [JsonPropertyName("content")]
-        public string? Content { get; set; }
-
-        [JsonPropertyName("toolCalls")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public List<AguiToolCall>? ToolCalls { get; set; }
-
-        [JsonPropertyName("toolCallId")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string? ToolCallId { get; set; }
-    }
-
-    class AguiToolCall
-    {
-        [JsonPropertyName("id")]
-        public string Id { get; set; } = "";
-
-        [JsonPropertyName("type")]
-        public string Type { get; set; } = "function";
-
-        [JsonPropertyName("function")]
-        public AguiFunction Function { get; set; } = new();
-    }
-
-    class AguiFunction
-    {
-        [JsonPropertyName("name")]
-        public string Name { get; set; } = "";
-
-        [JsonPropertyName("arguments")]
-        public string Arguments { get; set; } = "";
-    }
+    // DTOs live in Components/Shared/Agui — shared with the copilot sidebar.
 
     // ── State ──
 
@@ -616,6 +581,10 @@
 
     protected override async Task OnInitializedAsync()
     {
+        // Two chat surfaces on the same page is redundant — suppress the right
+        // copilot drawer while /ask is active. Cleared in Dispose.
+        Layout.SetHideCopilot(true);
+
         ChatHistory.OnChange += OnChatHistoryChanged;
         GlobalFilterService.OnChange += OnGlobalFilterChanged;
 
@@ -694,6 +663,7 @@
 
     public void Dispose()
     {
+        Layout.SetHideCopilot(false);
         ChatHistory.OnChange -= OnChatHistoryChanged;
         GlobalFilterService.OnChange -= OnGlobalFilterChanged;
     }
@@ -831,18 +801,9 @@
             }
 
             await using var stream = await response.Content.ReadAsStreamAsync(cts.Token);
-            using var reader = new System.IO.StreamReader(stream);
 
-            while (!cts.Token.IsCancellationRequested)
+            await foreach (var json in AguiSseReader.ReadEventsAsync(stream, cts.Token))
             {
-                var line = await reader.ReadLineAsync(cts.Token);
-                if (line is null) break;
-                if (line.Length == 0) continue;
-                if (!line.StartsWith("data:")) continue;
-
-                var json = line["data:".Length..].Trim();
-                if (json == "[DONE]") break;
-
                 try
                 {
                     using var doc = JsonDocument.Parse(json);

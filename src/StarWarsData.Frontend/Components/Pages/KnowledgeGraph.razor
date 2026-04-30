@@ -3,6 +3,7 @@
 @inject ISnackbar Snackbar
 @inject IDialogService DialogService
 @inject GlobalFilterService GlobalFilterService
+@inject PageContextService PageContext
 @inject NavigationManager Navigation
 @inject IJSRuntime JS
 @implements IDisposable
@@ -205,7 +206,7 @@
             </MudTd>
             <MudTd>
                 <MudIconButton Icon="@(_expandedNodeId == context.Id ? Icons.Material.Filled.ExpandLess : Icons.Material.Filled.ExpandMore)"
-                               Size="Size.Small" OnClick="@(() => ToggleDetails(context.Id))" />
+                               Size="Size.Small" OnClick="@(() => ToggleDetails(context))" />
             </MudTd>
         </RowTemplate>
         <ChildRowContent>
@@ -233,13 +234,20 @@
                                         }
                                         <MudTooltip Text="View in Graph Explorer">
                                             <MudIconButton Icon="@Icons.Material.Filled.Hub" Size="Size.Small"
-                                                           Href="@($"/graph-explorer/{context.Id}")" Color="Color.Secondary" />
+                                                           Href="@($"/graph-explorer/{context.Id}")" Target="_blank" Color="Color.Secondary" />
                                         </MudTooltip>
+                                        @if (IsSpatialKind(context.Type))
+                                        {
+                                            <MudTooltip Text="@($"Locate {context.Name} on the Galaxy Map")">
+                                                <MudIconButton Icon="@Icons.Material.Filled.Explore" Size="Size.Small"
+                                                               Href="@($"/galaxy-map/{context.Id}")" Target="_blank" Color="Color.Primary" />
+                                            </MudTooltip>
+                                        }
                                         @if (context.StartYear.HasValue || context.EndYear.HasValue)
                                         {
                                             <MudTooltip Text="@($"View timeline during {context.Name}")">
                                                 <MudIconButton Icon="@Icons.Material.Filled.Timeline" Size="Size.Small"
-                                                               Href="@($"/timeline/{context.Id}")" Color="Color.Tertiary" />
+                                                               Href="@($"/timeline/{context.Id}")" Target="_blank" Color="Color.Tertiary" />
                                             </MudTooltip>
                                         }
                                         @* Holocron enhance — open to any authenticated user. After completion the panel
@@ -249,7 +257,7 @@
                                             <MudTooltip Text="@(_holocronRunningForNodeId == context.Id ? "Re-open the live progress modal for the in-flight Holocron run on this node." : "Run the Holocron agent on this node — gathers context, calls the LLM, writes evidence-backed enrichments. Refreshes this panel when complete.")">
                                                 <MudButton Variant="Variant.Outlined" Color="Color.Tertiary" Size="Size.Small"
                                                            StartIcon="@Icons.Material.Filled.AutoFixHigh"
-                                                           OnClick="@(() => EnhanceWithHolocron(context.Id, context.Name))">
+                                                           OnClick="@(() => EnhanceWithHolocron(context))">
                                                     @if (_holocronRunningForNodeId == context.Id)
                                                     {
                                                         <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" />
@@ -543,6 +551,13 @@
                                                     {
                                                         <MudText HtmlTag="span" Typo="Typo.caption" Color="Color.Secondary" Class="ml-2">(@edge.OtherType)</MudText>
                                                     }
+                                                    @if (IsSpatialKind(edge.OtherType))
+                                                    {
+                                                        <MudTooltip Text="@($"Locate {edge.OtherName} on the Galaxy Map")">
+                                                            <MudIconButton Icon="@Icons.Material.Filled.Explore" Size="Size.Small"
+                                                                           Href="@($"/galaxy-map/{edge.OtherId}")" Target="_blank" Color="Color.Primary" Class="ml-1" />
+                                                        </MudTooltip>
+                                                    }
                                                     @if (!string.IsNullOrEmpty(edge.Phase1Qualifier))
                                                     {
                                                         <MudText Typo="Typo.caption" Color="Color.Default" Style="display:block;">@edge.Phase1Qualifier</MudText>
@@ -793,6 +808,32 @@
     {
         GlobalFilterService.OnChange += OnGlobalFilterChanged;
         await Task.WhenAll(LoadEntityTypes(), LoadEdgeLabels());
+        PublishPageContext(null);
+    }
+
+    // Publish "what the user is looking at" to the copilot. Page-only when no
+    // node is expanded; subject-bound when one is. Called from OnInitialized
+    // and ToggleDetails. Cleared on Dispose so the next page starts fresh.
+    private void PublishPageContext(TemporalNodeDto? node)
+    {
+        var extras = new Dictionary<string, string>(StringComparer.Ordinal);
+
+        if (node is null)
+        {
+            PageContext.Set(new PageContext(Page: "knowledge-graph", Extras: extras));
+            return;
+        }
+
+        if (!string.IsNullOrEmpty(node.Continuity)) extras["continuity"] = node.Continuity;
+        if (node.StartYear is int sy) extras["startYear"] = sy.ToString();
+        if (node.EndYear is int ey) extras["endYear"] = ey.ToString();
+
+        PageContext.Set(new PageContext(
+            Page: "knowledge-graph",
+            Subject: node.Name,
+            SubjectKind: string.IsNullOrEmpty(node.Type) ? null : node.Type,
+            SubjectId: node.Id,
+            Extras: extras));
     }
 
     private async Task LoadEntityTypes()
@@ -1006,8 +1047,9 @@
         Snackbar.Add($"Filtered nodes by '{FormatPropertyKey(label)}' — switch to the Nodes tab to view.", Severity.Info);
     }
 
-    private async Task ToggleDetails(int nodeId)
+    private async Task ToggleDetails(TemporalNodeDto node)
     {
+        var nodeId = node.Id;
         if (_expandedNodeId == nodeId)
         {
             _expandedNodeId = null;
@@ -1017,6 +1059,9 @@
             _expandedEdges = null;
             _expandedEdgesTotal = 0;
             _expandedNodeEnrichments = null;
+            // Collapsed — drop subject from page context but keep the page tag
+            // so the copilot still knows we're on /knowledge-graph.
+            PublishPageContext(null);
             return;
         }
 
@@ -1030,6 +1075,7 @@
         _expandedLabelsLoading = true;
         _expandedEdgesLoading = true;
         _expandedNodeEnrichmentsLoading = true;
+        PublishPageContext(node);
         StateHasChanged();
 
         // Fetch labels (chip summary), edges (drill-down table), and Phase 2 attribute enrichments
@@ -1098,8 +1144,10 @@
     /// the panel data so the new enrichments surface inline. Public to any authenticated
     /// user — the agent's own pre-flight rules and pass-budget settings bound the cost.
     /// </summary>
-    private async Task EnhanceWithHolocron(int nodeId, string nodeName)
+    private async Task EnhanceWithHolocron(TemporalNodeDto node)
     {
+        var nodeId = node.Id;
+        var nodeName = node.Name;
         // Re-clicking while a run is in flight re-opens the modal — the dialog itself
         // pre-checks status and re-attaches without firing a new POST. The previous
         // "no-op if already running" guard made the button feel broken when users
@@ -1139,8 +1187,8 @@
             {
                 // Refresh the panel: collapse → expand re-fetches labels/edges/node-enrichments
                 // in parallel, so the new enrichments surface inline.
-                await ToggleDetails(nodeId);
-                await ToggleDetails(nodeId);
+                await ToggleDetails(node);
+                await ToggleDetails(node);
             }
         }
         catch (Exception ex)
@@ -1167,6 +1215,11 @@
     }
 
     private static string FormatYear(int year) => year < 0 ? $"{-year} BBY" : year > 0 ? $"{year} ABY" : "0 BBY/ABY";
+
+    // Direct spatial KG types — those that have a /galaxy-map/{pageId} deep
+    // link (per Design-031). Indirect spatial linking (Battle → location) is
+    // Phase 2 of Design-030 and lives in the citation resolver.
+    private static bool IsSpatialKind(string? type) => type is "System" or "CelestialBody" or "Sector" or "Region" or "TradeRoute";
 
     /// <summary>Render a UTC timestamp as a coarse "X ago" string for the edge-row last-updated caption.</summary>
     private static string FormatRelativeTime(DateTime utc)
@@ -1346,6 +1399,7 @@
 
     public void Dispose()
     {
+        PageContext.Clear();
         GlobalFilterService.OnChange -= OnGlobalFilterChanged;
     }
 }

@@ -95,6 +95,26 @@ public class GalaxyMapUnifiedController(GalaxyMapReadService readService, MapSer
         return Ok(data);
     }
 
+    // ── Deep-link locate ─────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Resolves a KG node id to whatever the galaxy-map JS module needs to drill to it.
+    /// Powers the <c>/galaxy-map/{PageId:int}</c> deep-link route — clicking a citation
+    /// from the copilot or AskAI lands here first, then the Frontend drives the JS module
+    /// based on Kind. Returns 404 when the pageId doesn't exist in <c>kg.nodes</c>; returns
+    /// 200 with Kind="Other" when the entity exists but isn't placed on the map (Character,
+    /// Battle, etc.).
+    /// </summary>
+    [HttpGet("locate/{pageId:int}")]
+    [ResponseCache(Duration = 600)]
+    public async Task<ActionResult<MapLocateResult>> Locate(int pageId, CancellationToken ct)
+    {
+        var result = await mapService.LocateAsync(pageId, ct);
+        if (result is null)
+            return NotFound($"No KG node for pageId {pageId}");
+        return Ok(result);
+    }
+
     // ── Search ───────────────────────────────────────────────────────────────
 
     /// <summary>

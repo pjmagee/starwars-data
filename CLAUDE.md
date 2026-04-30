@@ -164,6 +164,20 @@ Continuity chips and badges **must** use MudBlazor theme colors consistently:
 
 Do not use `Color.Info`, `Color.Warning`, or other colors for continuity. This matches the `ContinuityFilter` toggle switches and `ContinuityBadge` component. See `ContinuityBadge.razor` and `ContinuityFilter.razor` as canonical references.
 
+### UI/Frontend Validation
+
+Any change that affects rendered UI (Frontend or Admin pages, layouts, shared components, theming, `wwwroot/` CSS/JS) **must** be validated against a running browser via Chrome DevTools MCP (`mcp__chrome-devtools__*`) before being reported as complete. Type-check passing and successful build are necessary but **not sufficient** — they verify code correctness, not feature correctness.
+
+The validation loop is iterative, not a one-shot end-of-task check:
+
+1. After each meaningful UI change, navigate to the affected page (`navigate_page`).
+2. Snapshot the DOM (`take_snapshot`) and confirm the markup matches the intent.
+3. Read the console (`list_console_messages`) for Blazor circuit drops, JS interop errors, MudBlazor warnings — fix them, don't accept them.
+4. Resize to mobile (`resize_page` 414×896) and re-snapshot if the change touches layout.
+5. Take a screenshot (`take_screenshot`) for the report-back.
+
+If the change has no running AppHost available (and one cannot be started — e.g. a port collision the agent can't resolve), say so explicitly in the report-back rather than claiming the change is verified. Do NOT skip validation silently. The blazor-mudblazor-expert sub-agent owns the detailed workflow; non-Blazor agents touching frontend assets follow the same rule.
+
 ## Library Deviations
 
 **Rule: standard library components are the default.** Third-party libraries in this repo (MudBlazor for UI, MudBlazor theming, MongoDB.Driver, Microsoft.Extensions.AI, Microsoft.Agents.AI, Hangfire, etc.) should be used via their public APIs. If the first instinct is to roll custom HTML/CSS, a custom abstraction, or a wrapper that bypasses the library's intended usage, **stop and reconsider** — the library almost always has a parameter, variant, or extension point that covers the case.
@@ -185,7 +199,7 @@ Use the attached MCP servers and skills for domain-specific guidance instead of 
 
 - **Aspire MCP** (`mcp__aspire__*`) — Interact with running Aspire resources: logs, traces, restart services, execute HTTP commands. Also provides `search_docs`/`get_doc` for looking up .NET Aspire documentation — use these before guessing at Aspire APIs.
 - **MongoDB MCP** (`mcp__MongoDB__*`) — Query, aggregate, inspect schemas, manage indexes on the MongoDB databases. Always connects via the host `MDB_MCP_CONNECTION_STRING` env var. Default database: `starwars-dev` — never write to `starwars` (production).
-- **Chrome DevTools MCP** (`mcp__chrome-devtools__*`) — Inspect live browser sessions: DOM snapshots, console logs, network requests, screenshots, performance traces, Lighthouse audits. Uses Brave browser.
+- **Chrome DevTools MCP** (`mcp__chrome-devtools__*`) — Inspect live browser sessions: DOM snapshots, console logs, network requests, screenshots, performance traces, Lighthouse audits. Uses Brave browser. **Required** for validating any UI/frontend change — see "UI/Frontend validation" below.
 - **MudBlazor MCP** (`mcp__mudblazor__*`) — Look up MudBlazor component docs, parameters, examples, and API reference when building or modifying Blazor UI.
 - **Playwright MCP** (`mcp__playwright__*`) — Browser automation for testing and screenshots.
 - **MediaWiki MCP** (`mcp__mediawiki-mcp-server__*`) — Search and fetch Wookieepedia pages directly.

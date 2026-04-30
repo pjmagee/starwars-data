@@ -206,18 +206,39 @@ Blazor Interactive Server hot-reload is unreliable when changing service registr
 - New page-specific CSS → component-scoped `.razor.css` next to the component (Blazor scopes it automatically). Avoid bloating the global stylesheets.
 - New JS → `wwwroot/js/<feature>.js`, loaded via `<script>` in the page or layout. Use `IJSRuntime` for interop. Always pair with the re-entry guard (#1).
 
-# Verifying UI changes
+# Self-validation via Chrome DevTools MCP
 
-A type-check pass is not enough — you must visually verify.
+Visual verification is not an end-of-task formality — it is part of the **development loop**. You write a change, you check the browser, you observe what actually happened, and you iterate. A type-check pass and a clean build verify that the C# compiles. They do **not** verify that the page renders, that the MudBlazor parameters resolved as expected, that the global filter wired up, that the console is clean, or that the mobile layout didn't break. Only the running browser tells you that.
 
-1. **Start the AppHost**: confirm it's running via `mcp__aspire__list_resources`.
-2. **Navigate via Chrome DevTools MCP**: `mcp__chrome-devtools__navigate_page` to the relevant page URL.
-3. **Snapshot the DOM**: `mcp__chrome-devtools__take_snapshot` and confirm the markup is what you expect.
-4. **Check the console**: `mcp__chrome-devtools__list_console_messages` — Blazor circuit drops, JS interop errors, MudBlazor warnings.
-5. **Mobile pass**: `mcp__chrome-devtools__resize_page` to 414×896 and re-snapshot.
-6. **Screenshot the result**: `mcp__chrome-devtools__take_screenshot` — useful for the report-back.
+You have direct Chrome DevTools MCP tool access for exactly this reason. Use it the same way a human developer alt-tabs to the browser after a save.
 
-If you can't run the dev server, **say so explicitly** rather than claiming success.
+## Before you start changing UI
+
+1. **Confirm the AppHost is running** via `mcp__aspire__list_resources`. If it isn't, the developer almost certainly has it up themselves — check before starting your own. If you must start one, follow the isolated-mode rule in `CLAUDE.md` (`aspire run --isolated --detach`).
+2. **Take a baseline snapshot** of the page you're about to change (`mcp__chrome-devtools__navigate_page` → `take_snapshot`). This is your reference for "what did my change actually do?"
+3. **Read the console once** (`list_console_messages`) so you can distinguish noise that was already there from regressions you introduced.
+
+## During development — the iterative loop
+
+After each meaningful change (a component swap, a parameter adjustment, a new lifecycle method, a CSS rule, a JS interop call):
+
+1. Reload / navigate (`navigate_page` again, or rely on hot reload).
+2. `take_snapshot` — does the DOM match the intent?
+3. `list_console_messages` — any new errors, warnings, "circuit closed" messages, or MudBlazor `IDisposable` complaints? **Treat new console output as a regression to fix, not a footnote.**
+4. If the change touches layout: `resize_page` to 414×896 and snapshot again — mobile is part of the loop, not an afterthought (gate is <960px per Design-011).
+5. If the change touches an interactive flow (form submit, filter change, navigation): drive it with `click` / `fill` / `wait_for` and snapshot the result. Don't claim "the button works" without having clicked it.
+6. If the change touches API calls: `list_network_requests` to verify the request fired with the expected query params (especially `continuity` and `realm` from `GlobalFilterService`).
+
+If a snapshot reveals something wrong, **fix it before moving on**. Don't accumulate visual debt across the task and try to clean it up at the end.
+
+## Before reporting the task complete
+
+1. Final `take_snapshot` on desktop + mobile.
+2. Final `list_console_messages` — must be clean of regressions you introduced.
+3. `take_screenshot` for the report-back (cite the screenshot URL).
+4. If any deviation from this loop happened (couldn't start AppHost, page requires auth you don't have, JS hot-reload didn't pick up the change, etc.), **say so explicitly in the report-back**. Silent skipping is worse than a flagged gap — the user can't trust your sign-off if you don't surface what you couldn't check.
+
+The cost of one extra snapshot is a tool call. The cost of shipping a Blazor change that throws on first render is a user-visible bug.
 
 # Required reading map
 
@@ -239,7 +260,7 @@ If you can't run the dev server, **say so explicitly** rather than claiming succ
 2. **Document deviations in ADR-004.** No silent custom HTML.
 3. **Continuity color convention is non-negotiable** — `Primary` for Canon, `Secondary` for Legends, `Default` for everything else.
 4. **Global filter compliance is non-negotiable** — every API-querying page subscribes to `OnChange` and passes both query params.
-5. **Visually verify** via Chrome DevTools MCP before claiming the task is done. Type-check ≠ feature-complete.
+5. **Self-validate via Chrome DevTools MCP throughout development**, not just at the end. Snapshot after every meaningful change, treat new console errors as regressions to fix, and drive interactive flows (`click`/`fill`) before claiming they work. Type-check ≠ feature-complete.
 6. **Mobile pass at 414×896** before sign-off on any new page.
 7. **Re-entry guards on every async lifecycle method** that touches JS interop.
 
