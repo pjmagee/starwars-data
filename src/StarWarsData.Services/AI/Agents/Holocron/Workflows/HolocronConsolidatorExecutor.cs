@@ -197,7 +197,11 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
             {
                 var unionedValues = g.SelectMany(p => p.Values).Where(v => !string.IsNullOrWhiteSpace(v)).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
                 var richest = g.OrderByDescending(p => p.Reasoning?.Length ?? 0).First();
-                var mergedEvidence = g.SelectMany(p => p.Evidence).Distinct().ToList();
+                // Same chunkId-keyed dedup as the edge branches — record .Distinct()
+                // keys on Excerpt/RelevanceScore too, so the same chunk retrieved
+                // across batches (different snippet window / cosine score) survives
+                // as a visible duplicate. See MergeEvidence.
+                var mergedEvidence = MergeEvidence(g.SelectMany(p => p.Evidence));
                 return new HolocronNodeProposalPayload(richest.BatchIndex, g.Key, unionedValues, richest.Claim, mergedEvidence, richest.Reasoning);
             })
             .ToList();
@@ -656,7 +660,7 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
     /// high-degree node like Anakin, "affiliated_with → Jedi Order" lands with the
     /// evidence from ~169 distinct backlink chunks instead of just the canonical one.
     /// </summary>
-    static List<HolocronEvidencePayload> MergeEvidence(IEnumerable<HolocronEvidencePayload> evidence) =>
+    internal static List<HolocronEvidencePayload> MergeEvidence(IEnumerable<HolocronEvidencePayload> evidence) =>
         evidence.GroupBy(e => !string.IsNullOrEmpty(e.ChunkId) ? $"chunk:{e.ChunkId}" : $"page:{e.SourcePageId ?? 0}").Select(g => g.First()).ToList();
 
     static string StripPropertiesPrefix(string fieldPath) =>
