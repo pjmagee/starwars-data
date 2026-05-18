@@ -52,11 +52,12 @@ public class SettingsOptions
     // ── Holocron agent (Phase 2 — Design-018) ──
 
     /// <summary>
-    /// Master switch for the Holocron daily pass. Default <c>false</c> — opt-in for safety.
-    /// When disabled, <see cref="StarWarsData.Services.AI.Agents.HolocronAgent.RunDailyPassAsync"/>
-    /// returns immediately without scheduling LLM calls.
+    /// Master switch for the Holocron daily pass. Default <c>true</c> — enabled.
+    /// Set to <c>false</c> (prod: <c>HOLOCRON_ENABLED=false</c> in the host .env) to
+    /// kill the billed LLM pass; <see cref="StarWarsData.Services.AI.Agents.HolocronAgent.RunDailyPassAsync"/>
+    /// then returns immediately without scheduling LLM calls.
     /// </summary>
-    public bool HolocronEnabled { get; set; } = false;
+    public bool HolocronEnabled { get; set; } = true;
 
     /// <summary>The model used for Holocron enhancement calls. Reasoning-capable model recommended.</summary>
     public string HolocronModel { get; set; } = "gpt-5.4";

@@ -39,10 +39,10 @@ var apiService = builder
     .WithEnvironment("Settings__OpenAiKey", openApi)
     .WithEnvironment("Settings__DatabaseName", starwarsDb)
     .WithEnvironment("Settings__HangfireEnabled", "true")
-    // Holocron is a billed LLM kill switch — default off. The literal here is
-    // overridden in ConfigureComposeFile to ${HOLOCRON_ENABLED:-false} so prod
-    // toggles it via the hand-maintained .env without a code change/redeploy.
-    .WithEnvironment("Settings__HolocronEnabled", "false")
+    // Holocron is a billed LLM pass — default ON. The literal here is overridden
+    // in ConfigureComposeFile to ${HOLOCRON_ENABLED:-true} so prod can still kill
+    // it via the hand-maintained .env (HOLOCRON_ENABLED=false) without a redeploy.
+    .WithEnvironment("Settings__HolocronEnabled", "true")
     .WithEnvironment("Settings__KeycloakAdminClientSecret", keycloakAdminSecret);
 
 var connString = ReferenceExpression.Create($"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true");
@@ -303,9 +303,9 @@ builder
             {
                 service.Environment ??= [];
                 service.Environment["Settings__KeycloakAdminClientSecret"] = "${KEYCLOAK_ADMIN_SECRET:-}";
-                // Billed LLM kill switch — controlled by the host's prod .env.
-                // Absent/false ⇒ Holocron stays off (safe default).
-                service.Environment["Settings__HolocronEnabled"] = "${HOLOCRON_ENABLED:-false}";
+                // Billed LLM pass — on by default; set HOLOCRON_ENABLED=false in the
+                // host's prod .env to kill it without a code change/redeploy.
+                service.Environment["Settings__HolocronEnabled"] = "${HOLOCRON_ENABLED:-true}";
             }
 
             switch (name)

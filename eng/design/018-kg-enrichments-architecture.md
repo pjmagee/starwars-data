@@ -448,11 +448,11 @@ reference can only point to definitions defined at the top level of the schema.
 
 ### `HolocronEnabled` forwarding (RESOLVED 2026-05-18)
 
-The AppHost only forwards a curated set of `Settings__*` env vars to the API child process. `Settings__HolocronEnabled` is now in that set: the `apiservice` chain in `AppHost/Program.cs` calls `.WithEnvironment("Settings__HolocronEnabled", "false")`, and `ConfigureComposeFile`'s `apiservice` block rewrites it to `${HOLOCRON_ENABLED:-false}` (mirroring the `KeycloakAdminClientSecret` precedent). So prod toggles the billed kill switch via the hand-maintained deploy `.env` (`HOLOCRON_ENABLED=true`) — no code change or redeploy needed, and absent ⇒ off (safe default).
+The AppHost only forwards a curated set of `Settings__*` env vars to the API child process. `Settings__HolocronEnabled` is in that set: the `apiservice` chain in `AppHost/Program.cs` calls `.WithEnvironment("Settings__HolocronEnabled", "true")`, and `ConfigureComposeFile`'s `apiservice` block rewrites it to `${HOLOCRON_ENABLED:-true}` (mirroring the `KeycloakAdminClientSecret` precedent). **Default flipped to ON 2026-05-18** — `SettingsOptions.HolocronEnabled` now defaults to `true`. Prod can still kill the billed pass via the hand-maintained deploy `.env` (`HOLOCRON_ENABLED=false`) without a code change or redeploy; absent ⇒ on.
 
-Scope note: this covers the **on-demand node-enhance** path (Frontend → API). The **daily Hangfire Holocron pass** runs in the **Admin** service and is gated separately — it is *not* forwarded, so the billed daily sweep stays off in prod unless explicitly wired the same way.
+Scope note: this covers the **on-demand node-enhance** path (Frontend → API). The **daily Hangfire Holocron pass** runs in the **Admin** service and is gated by the same `SettingsOptions.HolocronEnabled` (now default `true`); the Admin app is not given a separate compose literal, so it follows the code default unless `Settings__HolocronEnabled` is set in its environment.
 
-For **local dev**, the AppHost still doesn't forward it (literal `"false"` until ConfigureComposeFile, which only runs for compose publish/deploy). Set `Settings:HolocronEnabled` on the **API service's own** user-secrets (`UserSecretsId` is in its csproj) to enable it on localhost.
+For **local dev**, the literal is now `"true"` (until `ConfigureComposeFile`, which only runs for compose publish/deploy), so Holocron is enabled on localhost by default. Set `Settings:HolocronEnabled=false` (API service user-secrets, or `Settings__HolocronEnabled=false`) to disable it locally.
 
 ### Schema validators caveat
 
