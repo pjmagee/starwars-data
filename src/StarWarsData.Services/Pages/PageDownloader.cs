@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -46,6 +47,29 @@ public class PageDownloader
                 SmartHrefHandling = true,
             }
         );
+    }
+
+    /// <summary>
+    /// MediaWiki's ISO 8601 timestamp parser rejects fractional seconds — the .NET
+    /// round-trip ("o") format emits 7 fractional digits and gets a "badtimestamp"
+    /// error. Format to whole-second UTC ("yyyy-MM-ddTHH:mm:ssZ") instead.
+    /// </summary>
+    internal static string ToWikiTimestamp(DateTime dt) => dt.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss'Z'", CultureInfo.InvariantCulture);
+
+    /// <summary>
+    /// MediaWiki returns API errors as HTTP 200 with an <c>{"error":{...}}</c> body,
+    /// so <see cref="HttpClient"/> does not throw. Surface them as exceptions so a
+    /// failing incremental sync does NOT silently advance its watermark past
+    /// un-synced revisions (which is how the timestamp bug went unnoticed for weeks).
+    /// </summary>
+    internal static void ThrowIfApiError(JsonDocument doc)
+    {
+        if (doc.RootElement.TryGetProperty("error", out var error))
+        {
+            var code = error.TryGetProperty("code", out var c) ? c.GetString() : "unknown";
+            var info = error.TryGetProperty("info", out var i) ? i.GetString() : null;
+            throw new InvalidOperationException($"MediaWiki API error '{code}': {info}");
+        }
     }
 
     static string BuildQueryString(IDictionary<string, string?> parameters)
@@ -726,8 +750,8 @@ public class PageDownloader
                 ["list"] = "allrevisions",
                 ["arvprop"] = "ids|timestamp",
                 ["arvnamespace"] = _config.PageNamespace.ToString(),
-                ["arvstart"] = DateTime.UtcNow.ToString("o"),
-                ["arvend"] = since.ToString("o"),
+                ["arvstart"] = ToWikiTimestamp(DateTime.UtcNow),
+                ["arvend"] = ToWikiTimestamp(since),
                 ["arvlimit"] = _config.PageLimit.ToString(),
                 ["format"] = "json",
                 ["formatversion"] = "2",
@@ -739,6 +763,7 @@ public class PageDownloader
             var url = BuildQueryString(parameters);
             var json = await _http.GetStringAsync(url, cancellationToken);
             using var doc = JsonDocument.Parse(json);
+            ThrowIfApiError(doc);
 
             if (doc.RootElement.TryGetProperty("query", out var query) && query.TryGetProperty("allrevisions", out var revisions))
             {
