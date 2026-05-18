@@ -32,7 +32,7 @@
                 <MudTh>Article</MudTh>
                 <MudTh Style="width:90px">Page ID</MudTh>
                 <MudTh Style="width:90px">Realm</MudTh>
-                <MudTh Style="width:90px">Chunks</MudTh>
+                <MudTh Style="width:200px">Section</MudTh>
                 <MudTh Style="width:160px">Chunked</MudTh>
             </HeaderContent>
             <RowTemplate>
@@ -41,13 +41,13 @@
                 </MudTd>
                 <MudTd DataLabel="Page ID">@context.PageId</MudTd>
                 <MudTd DataLabel="Realm"><ContinuityBadge Continuity="@context.Continuity" /></MudTd>
-                <MudTd DataLabel="Chunks">@context.ChunkCount</MudTd>
+                <MudTd DataLabel="Section">@(string.IsNullOrWhiteSpace(context.Heading) ? "—" : context.Heading)</MudTd>
                 <MudTd DataLabel="Chunked">
                     <MudText Typo="Typo.caption" title="@context.CreatedAt.ToString("u")">@context.CreatedAt.ToString("yyyy-MM-dd HH:mm")</MudText>
                 </MudTd>
             </RowTemplate>
             <NoRecordsContent>
-                <MudText Typo="Typo.body2" Color="Color.Secondary">No chunked articles.</MudText>
+                <MudText Typo="Typo.body2" Color="Color.Secondary">No chunks.</MudText>
             </NoRecordsContent>
             <LoadingContent>
                 <MudText Typo="Typo.body2" Color="Color.Secondary">Loading…</MudText>

@@ -305,6 +305,14 @@ public class RecordService
             cancellationToken: cancellationToken
         );
 
+        // downloadedAt (desc) — Design-037 site-activity "recently synced" feed and the
+        // /activity/wiki-sync browse sort newest-synced-first; without this the query is
+        // a COLLSCAN + blocking in-memory sort over the whole collection.
+        await pages.Indexes.CreateOneAsync(
+            new CreateIndexModel<Page>(Builders<Page>.IndexKeys.Descending(p => p.DownloadedAt), new CreateIndexOptions { Name = "idx_downloadedAt", Background = true }),
+            cancellationToken: cancellationToken
+        );
+
         _logger.LogInformation("Pages indexes created");
 
         // Timeline event collections — add Continuity and Realm indexes

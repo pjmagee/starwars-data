@@ -37,15 +37,22 @@ public sealed class RecentArticleDto
     public Continuity Continuity { get; init; } = Continuity.Unknown;
 }
 
-/// <summary>A recently chunked article (one row per page, aggregated over its chunks).</summary>
+/// <summary>
+/// A recently written article chunk (one row per chunk). One article produces several
+/// chunks in a burst, so the feed reads as "the sections most recently chunked". This
+/// shape is a plain index-backed <c>Find().Sort(createdAt desc).Limit</c> — no
+/// whole-collection <c>$group</c> (Design-037 / ADR-009 option b).
+/// </summary>
 public sealed class RecentChunkDto
 {
     public int PageId { get; init; }
     public string Title { get; init; } = "";
     public string WikiUrl { get; init; } = "";
-    public int ChunkCount { get; init; }
 
-    /// <summary>Most recent <c>ArticleChunk.CreatedAt</c> across this page's chunks.</summary>
+    /// <summary>The markdown section heading this chunk came from (e.g. "Biography").</summary>
+    public string Heading { get; init; } = "";
+
+    /// <summary><c>ArticleChunk.CreatedAt</c> — when this chunk was written.</summary>
     public DateTime CreatedAt { get; init; }
 
     public Continuity Continuity { get; init; } = Continuity.Unknown;

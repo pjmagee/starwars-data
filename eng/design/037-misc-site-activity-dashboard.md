@@ -1,6 +1,8 @@
 # Design-037: Miscellaneous — public site-activity dashboard
 
 **Status:** Implemented & browser-validated 2026-05-18 (Phase 1 + Phase 2) — `CorpusStatsService` (`Services/Stats/`, `IMemoryCache` 5-min snapshot, `EstimatedDocumentCount`), `StatsController` (`api/stats/corpus`, `recent/pages`, `recent/chunks`, `pages`, `chunks`), `StarWarsData.Models.Stats` DTOs (the paged wrapper is named `StatsPage<T>` to avoid colliding with the existing `Models.Queries.PagedResult<T>`), the Frontend "Miscellaneous" nav section, and pages `SiteActivity` (`/activity`), `WikiSyncBrowse` (`/activity/wiki-sync`), `ArticleChunksBrowse` (`/activity/chunks`). All five endpoints verified end-to-end against live `starwars-dev` (166,424 nodes / 594,615 edges / 224,796 pages / 817,661 chunks; recent + paginated browse correct). **Browser-validated** (Chrome DevTools MCP, 2026-05-18): `/activity` renders the banner ("18 d ago"), four stat tiles, and both recent tables with continuity chips on desktop **and** 414×896 mobile; `/activity/wiki-sync` pager "1-25 of 224,796"; `/activity/chunks` pager "1-25 of 166,422"; console clean (one pre-existing app-wide 404 asset unrelated to this feature; Blazor circuit healthy); the snapshot caption advancing "just now"→"1 min ago" across navigations confirms the `IMemoryCache` 5-min TTL serves cached data; the global-filter exemption holds (header Canon/Legends switches present but the pages do not react — by design per ADR-009).
+
+**Update (2026-05-18, perf correctness):** the original implementation's recent-list queries were *not* index-backed — `explain` showed `raw.pages` recent-synced doing `COLLSCAN → blocking SORT` over ~224k docs, and recent-chunked doing a whole-collection `$group` over ~817k docs (amortised by the 5-min cache on the dashboard but re-paid per click on the uncached Phase-2 browse). Fixed: added `idx_downloadedAt` (`raw.pages`) and `ix_createdAt` (`search.chunks`) to the existing `EnsureIndexesAsync` paths; reworked recent-chunks to a flat index-backed `Find` over `ix_createdAt` (option b — **one row per chunk**, dropping the per-page `$group`/`$lookup` and the `ChunkCount` column in favour of the chunk's `Section`). ADR-009 §2 amended to make the indexes a hard prerequisite.
 **Date:** 2026-05-18
 **Author:** Patrick Magee + Claude
 **Companion docs:** [ADR-009 Public read-only corpus-stats surface](../adr/009-public-readonly-corpus-stats-surface.md), [ADR-001 Internal API Auth](../adr/001-internal-api-auth.md), [ADR-002 Three-Project Blazor Server + Shared API](../adr/002-three-project-blazor-server-shared-api.md)
@@ -61,12 +63,16 @@ public sealed class RecentArticleDto
     public string Continuity { get; init; } = ""; // display only — NOT a filter
 }
 
+// Shipped shape (option b): one row per CHUNK, not per page — a flat
+// index-backed Find over ix_createdAt. No whole-collection $group.
 public sealed class RecentChunkDto
 {
-    public int NodeId { get; init; }
+    public int PageId { get; init; }
     public string Title { get; init; } = "";
-    public int ChunkCount { get; init; }
-    public DateTime CreatedAt { get; init; }      // ArticleChunk.CreatedAt (max within node)
+    public string WikiUrl { get; init; } = "";
+    public string Heading { get; init; } = "";   // ArticleChunk.Heading (section)
+    public DateTime CreatedAt { get; init; }      // ArticleChunk.CreatedAt
+    public Continuity Continuity { get; init; }
 }
 ```
 
@@ -76,8 +82,8 @@ Primary-ctor `(IMongoClient mongoClient, IOptions<SettingsOptions> settings, IMe
 
 - **Totals:** `EstimatedDocumentCountAsync` on `Collections.KgNodes`, `KgEdges`, `Pages`, `SearchChunks` (O(1) metadata; never scans).
 - **Last sync:** `raw.job_state` find `JobName == "IncrementalSync"`, project `UpdatedAt` (mirrors `PageDownloader.GetRecentSyncStatusAsync` logic without taking the heavy dependency).
-- **Recent pages:** `raw.pages` `Sort(downloadedAt desc).Limit(n)` projected to `RecentArticleDto`.
-- **Recent chunks:** `search.chunks` aggregation `$group` by `nodeId` → `max(createdAt)`, `count`, `$sort` desc, `$limit n`, `$lookup` `raw.pages` for `title`.
+- **Recent pages:** `raw.pages` `Find().Sort(downloadedAt desc).Limit(n)` projected to `RecentArticleDto` — index-backed by `idx_downloadedAt` (created in `RecordService.EnsureIndexesAsync`; **required**, else COLLSCAN + blocking sort).
+- **Recent chunks:** `search.chunks` `Find().Sort(createdAt desc).Skip().Limit()` projected to `RecentChunkDto` — index-backed by `ix_createdAt` (created in `ArticleChunkingService.EnsureIndexesAsync`; **required**). One row per chunk (option b): a per-page view would need a whole-collection `$group` no index can serve. The original `$group`/`$lookup` design was rejected for that reason.
 - One `GetSnapshotAsync(ct)` builds totals + both recent lists + last-sync into one record cached under a single key, TTL 5 min. Phase-2 browse methods are separate and uncached (bounded, indexed).
 
 Register in `ApiService/Program.cs` DI (the ApiService has `IMemoryCache` available via `AddMemoryCache()` if not already present — add if missing).
@@ -102,7 +108,7 @@ In `src/StarWarsData.Frontend/Components/Layout/NavMenu.razor`, add a new sectio
 - `@inject IHttpClientFactory HttpClientFactory` → `CreateClient("StarWarsData")`. **No** `GlobalFilterService` injection/subscription (ADR-009 exemption).
 - **Last-sync banner:** `MudAlert Severity="Severity.Success" Variant="Variant.Outlined"` — "Wiki sync last ran {relative time} ago — the corpus is actively maintained." If `LastWikiSyncUtc` is older than ~48 h, downgrade to `Severity.Info` (no alarming colours on a public page).
 - **Stat tiles:** `MudGrid` of four `MudItem xs="6" md="3"`, each a `MudPaper Outlined` with a `MudStack` — `MudIcon` + `MudText Typo="Typo.h4"` (formatted `n0`, e.g. `595,159`) + `MudText Typo="Typo.caption"` label (KG Nodes / KG Edges / Article Pages / Article Chunks).
-- **Two "Top 10 recently…" panels** side by side (`MudGrid` → `MudItem xs="12" md="6"`), each a `MudPaper Outlined` with a read-only `MudTable Dense Hover` (no row click handlers, no actions column): *Recently Synced Articles* (Title, Last Modified, Synced) and *Recently Chunked Articles* (Title, Chunks, Chunked). Continuity rendered as a `MudChip` following the **continuity colour convention** (Canon→`Color.Primary`, Legends→`Color.Secondary`, else `Color.Default` — see `ContinuityBadge.razor`). Each panel footer: a `MudButton Variant="Text"` "Browse all →" linking to the corresponding Phase-2 page.
+- **Two "Top 10 recently…" panels** side by side (`MudGrid` → `MudItem xs="12" md="6"`), each a `MudPaper Outlined` with a read-only `MudTable Dense Hover` (no row click handlers, no actions column): *Recently Synced Articles* (Title, Realm, Synced) and *Recently Chunked Articles* (Title, Section, Chunked — one row per chunk per option b). Continuity rendered as a `MudChip` following the **continuity colour convention** (Canon→`Color.Primary`, Legends→`Color.Secondary`, else `Color.Default` — see `ContinuityBadge.razor`). Each panel footer: a `MudButton Variant="Text"` "Browse all →" linking to the corresponding Phase-2 page.
 - States: `MudProgressCircular` (or `MudSkeleton` tiles) while loading; `MudAlert Severity="Severity.Normal"` on empty; `MudAlert Severity="Severity.Warning"` with a retry button on fetch failure (never a raw exception).
 - Footer caption: "Figures refresh every few minutes." (sets expectations per ADR-009).
 
@@ -118,7 +124,7 @@ In `src/StarWarsData.Frontend/Components/Layout/NavMenu.razor`, add a new sectio
 ## Open questions
 
 1. **Route base** — `/activity` (chosen; communicates "the site is active") vs `/misc` vs `/stats`. Proposed: `/activity` with the nav section labelled "Miscellaneous" per the request.
-2. **Recently-chunked title source** — `$lookup` into `raw.pages` (proposed; authoritative title) vs `kg.nodes`. `raw.pages` chosen since chunking is page-driven and the title field is canonical there.
+2. **[Resolved: moot]** **Recently-chunked title source** — the `$lookup`-into-`raw.pages` question disappeared with the option-b switch: `ArticleChunk` already carries `title`/`wikiUrl`/`continuity`, so the index-backed `Find` over `ix_createdAt` needs no join at all.
 3. **"Browse all" on mobile** — Phase-2 tables are wide; on xs, fall back to a stacked `MudCard` list (same data, card layout) rather than a horizontally-scrolling table. Decide during Phase 2 UI validation.
 4. **Show `infobox graph last rebuilt` / `chunking last run`** too? The request named "sync jobs working"; last *wiki sync* covers the core signal. Additional job timestamps can be added to `CorpusStatsDto` later from `raw.job_state` without an API shape change — deferred.
 

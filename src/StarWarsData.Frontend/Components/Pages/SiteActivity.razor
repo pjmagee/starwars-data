@@ -123,14 +123,16 @@
                     <MudTable T="RecentChunkDto" Items="_recentChunks" Dense="true" Hover="true" Bordered="false" Breakpoint="Breakpoint.Sm">
                         <HeaderContent>
                             <MudTh>Article</MudTh>
-                            <MudTh Style="width:80px">Chunks</MudTh>
+                            <MudTh Style="width:140px">Section</MudTh>
                             <MudTh Style="width:130px">Chunked</MudTh>
                         </HeaderContent>
                         <RowTemplate>
                             <MudTd DataLabel="Article">
                                 <MudLink Href="@context.WikiUrl" Target="_blank" Typo="Typo.body2">@context.Title</MudLink>
                             </MudTd>
-                            <MudTd DataLabel="Chunks">@context.ChunkCount</MudTd>
+                            <MudTd DataLabel="Section">
+                                <MudText Typo="Typo.caption" Color="Color.Secondary">@(string.IsNullOrWhiteSpace(context.Heading) ? "—" : context.Heading)</MudText>
+                            </MudTd>
                             <MudTd DataLabel="Chunked">
                                 <MudText Typo="Typo.caption" title="@context.CreatedAt.ToString("u")">@RelativeAgo(context.CreatedAt)</MudText>
                             </MudTd>

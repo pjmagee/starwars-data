@@ -514,6 +514,10 @@ public partial class ArticleChunkingService
             [
                 new CreateIndexModel<ArticleChunk>(Builders<ArticleChunk>.IndexKeys.Ascending(c => c.PageId), new CreateIndexOptions { Name = "ix_pageId" }),
                 new CreateIndexModel<ArticleChunk>(Builders<ArticleChunk>.IndexKeys.Ascending(c => c.Type).Ascending(c => c.Continuity), new CreateIndexOptions { Name = "ix_type_continuity" }),
+                // createdAt (desc) — Design-037 site-activity "recently chunked" feed and the
+                // /activity/chunks browse sort newest-chunked-first; index-backed Find().Sort().Limit
+                // replaces the full-collection $group that had no index to stand on.
+                new CreateIndexModel<ArticleChunk>(Builders<ArticleChunk>.IndexKeys.Descending(c => c.CreatedAt), new CreateIndexOptions { Name = "ix_createdAt" }),
             ],
             ct
         );

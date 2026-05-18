@@ -71,7 +71,7 @@ public sealed class CorpusStatsService(IMongoClient mongoClient, IOptions<Settin
             })
             .ToListAsync(ct);
 
-        var recentChunks = await AggregateRecentChunksAsync(0, SnapshotRecentCount, ct);
+        var recentChunks = await RecentChunksAsync(0, SnapshotRecentCount, ct);
 
         var corpus = new CorpusStatsDto
         {
@@ -128,71 +128,37 @@ public sealed class CorpusStatsService(IMongoClient mongoClient, IOptions<Settin
         };
     }
 
-    public async Task<StatsPage<RecentChunkDto>> BrowseChunksAsync(int skip, int take, CancellationToken ct)
+    public Task<StatsPage<RecentChunkDto>> BrowseChunksAsync(int skip, int take, CancellationToken ct) => RecentChunksAsync(skip, take, ct);
+
+    /// <summary>
+    /// Recent chunk documents, newest first — a plain index-backed
+    /// <c>Find().Sort(createdAt desc).Skip().Limit()</c> over <c>ix_createdAt</c>.
+    /// One article chunks into several rows written in a burst, so this reads as
+    /// "sections most recently chunked". Used for both the cached recent list
+    /// (skip 0) and the Phase-2 paged browse. No whole-collection <c>$group</c>
+    /// (Design-037 / ADR-009 option b).
+    /// </summary>
+    async Task<StatsPage<RecentChunkDto>> RecentChunksAsync(int skip, int take, CancellationToken ct)
     {
         skip = Math.Max(0, skip);
         take = Math.Clamp(take, 1, MaxBrowseTake);
-        return await AggregateRecentChunksAsync(skip, take, ct);
-    }
+        var coll = Db.GetCollection<ArticleChunk>(Collections.SearchChunks);
 
-    /// <summary>
-    /// One row per page (grouped over its chunks), newest chunk first. Used both for
-    /// the cached recent list (skip 0) and the Phase-2 paged browse.
-    /// </summary>
-    async Task<StatsPage<RecentChunkDto>> AggregateRecentChunksAsync(int skip, int take, CancellationToken ct)
-    {
-        var coll = Db.GetCollection<BsonDocument>(Collections.SearchChunks);
-
-        var pipeline = new[]
-        {
-            new BsonDocument(
-                "$group",
-                new BsonDocument
-                {
-                    ["_id"] = "$pageId",
-                    ["title"] = new BsonDocument("$first", "$title"),
-                    ["wikiUrl"] = new BsonDocument("$first", "$wikiUrl"),
-                    ["continuity"] = new BsonDocument("$first", "$continuity"),
-                    ["chunkCount"] = new BsonDocument("$sum", 1),
-                    ["createdAt"] = new BsonDocument("$max", "$createdAt"),
-                }
-            ),
-            new BsonDocument(
-                "$facet",
-                new BsonDocument
-                {
-                    ["data"] = new BsonArray { new BsonDocument("$sort", new BsonDocument("createdAt", -1)), new BsonDocument("$skip", skip), new BsonDocument("$limit", take) },
-                    ["total"] = new BsonArray { new BsonDocument("$count", "n") },
-                }
-            ),
-        };
-
-        var facet = await coll.Aggregate<BsonDocument>(pipeline, cancellationToken: ct).FirstOrDefaultAsync(ct);
-
-        var items = new List<RecentChunkDto>();
-        long total = 0;
-        if (facet is not null)
-        {
-            foreach (var d in facet["data"].AsBsonArray)
+        var total = await coll.EstimatedDocumentCountAsync(cancellationToken: ct); // approx is fine for a browse footer
+        var items = await coll.Find(FilterDefinition<ArticleChunk>.Empty)
+            .SortByDescending(c => c.CreatedAt)
+            .Skip(skip)
+            .Limit(take)
+            .Project(c => new RecentChunkDto
             {
-                var doc = d.AsBsonDocument;
-                items.Add(
-                    new RecentChunkDto
-                    {
-                        PageId = doc["_id"].ToInt32(),
-                        Title = doc.GetValue("title", "").AsString,
-                        WikiUrl = doc.GetValue("wikiUrl", "").AsString,
-                        ChunkCount = doc["chunkCount"].ToInt32(),
-                        CreatedAt = doc["createdAt"].ToUniversalTime(),
-                        Continuity = ParseContinuity(doc.GetValue("continuity", BsonNull.Value)),
-                    }
-                );
-            }
-
-            var totalArr = facet["total"].AsBsonArray;
-            if (totalArr.Count > 0)
-                total = totalArr[0].AsBsonDocument["n"].ToInt64();
-        }
+                PageId = c.PageId,
+                Title = c.Title,
+                WikiUrl = c.WikiUrl,
+                Heading = c.Heading,
+                CreatedAt = c.CreatedAt,
+                Continuity = c.Continuity,
+            })
+            .ToListAsync(ct);
 
         return new StatsPage<RecentChunkDto>
         {
@@ -202,6 +168,4 @@ public sealed class CorpusStatsService(IMongoClient mongoClient, IOptions<Settin
             Take = take,
         };
     }
-
-    static Continuity ParseContinuity(BsonValue v) => v.IsString && Enum.TryParse<Continuity>(v.AsString, ignoreCase: true, out var c) ? c : Continuity.Unknown;
 }
