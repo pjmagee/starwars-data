@@ -104,14 +104,12 @@ The AppHost hardcodes `Settings__HangfireEnabled=true` for the Admin project at 
    | ------------------------- | -------------- | ---------------------------- | --------------------------------------------------------- |
    | `daily-incremental-sync`  | `0 3 * * *`    | **ON**                       | hits Wookieepedia API                                     |
    | `daily-infobox-graph`     | `0 4 * * *`    | OFF                          | rebuilds `kg.*` if on                                     |
-   | `submit-graph-batch`      | `*/30 * * * *` | OFF                          | **billed** OpenAI batch submission                        |
-   | `check-graph-batches`     | `*/5 * * * *`  | OFF                          | OpenAI Batch API poll (cheap, but pollutes batch state)   |
    | `daily-article-chunking`  | `0 5 * * *`    | **ON**                       | embedding generation = **billed**                         |
    | `refresh-ask-suggestions` | `0 3 * * 0`    | **ON**                       | LLM call = **billed**                                     |
    | `daily-holocron-pass`     | `0 6 * * *`    | gated by `HolocronEnabled`   | LLM workflow = **billed** + checkpoint pollution          |
    | `daily-openai-spend-sync` | `30 4 * * *`   | **ON**                       | read-only org billing                                     |
 
-   The 5- and 30-min jobs are the dangerous ones for a long-running agent, but they're OFF by default. If the developer has flipped them ON for testing, isolation does nothing to stop the agent's Admin from also running them. The `JobToggleFilter` honours the shared `admin.JobToggle` collection, so OFF stays OFF.
+   The billed jobs (`daily-article-chunking`, `refresh-ask-suggestions`, `daily-holocron-pass`) are the dangerous ones for a long-running agent. Isolation does nothing to stop the agent's Admin from running them. The `JobToggleFilter` honours the shared `admin.JobToggle` collection, so OFF stays OFF.
 
 ### Other shared infrastructure the AppHost spins up
 
@@ -137,7 +135,7 @@ The cheapest way to handle all the shared-state risk is to **not boot the full A
 - **Run unit tests** — `dotnet test --project src/StarWarsData.Tests --filter "TestCategory=Unit"`. No Docker, no Mongo, no Aspire.
 - **Run integration tests** — `dotnet test --project src/StarWarsData.Tests --filter "TestCategory=Unit|TestCategory=Integration"`. Testcontainers Mongo only, no AppHost.
 - **Smoke-test an API endpoint change** — `dotnet run --project src/StarWarsData.ApiService` with `Settings__DatabaseName=starwars-dev` and `Settings__HangfireEnabled=false` set as env vars. No Admin, no Hangfire, no MCP sidecar, no migrations container, no Frontend.
-- **Smoke-test an Admin/ETL change** — `aspire run --isolated --detach` is unavoidable here, but be aware Hangfire will boot. Disable any LLM-billed toggle (`submit-graph-batch`, `check-graph-batches`, `daily-holocron-pass`) in the shared `admin.JobToggle` collection before running.
+- **Smoke-test an Admin/ETL change** — `aspire run --isolated --detach` is unavoidable here, but be aware Hangfire will boot. Disable any LLM-billed toggle (`daily-article-chunking`, `refresh-ask-suggestions`, `daily-holocron-pass`) in the shared `admin.JobToggle` collection before running.
 - **Verify a Frontend Razor change renders** — `dotnet run --project src/StarWarsData.Frontend` with `services__apiservice__http__0` pointed at a running API (the dev's, or a separately-started one). No Admin, no Hangfire.
 
 If you do need the full AppHost, the **Hangfire kill-switch** worth wiring is making `Settings__HangfireEnabled` a parameter (it's currently hardcoded `"true"` at [src/StarWarsData.AppHost/Program.cs:73](../../src/StarWarsData.AppHost/Program.cs#L73)) so an agent can disable Hangfire without code changes:

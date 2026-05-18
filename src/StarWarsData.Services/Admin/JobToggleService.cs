@@ -29,31 +29,21 @@ public class JobToggleService
     }
 
     /// <summary>Get all job toggles.</summary>
-    public async Task<List<JobToggle>> GetAllAsync(CancellationToken ct = default) =>
-        await _toggles.Find(FilterDefinition<JobToggle>.Empty).ToListAsync(ct);
+    public async Task<List<JobToggle>> GetAllAsync(CancellationToken ct = default) => await _toggles.Find(FilterDefinition<JobToggle>.Empty).ToListAsync(ct);
 
     /// <summary>Set a job's enabled state.</summary>
     public async Task SetEnabledAsync(string jobId, bool enabled, CancellationToken ct = default)
     {
-        await _toggles.UpdateOneAsync(
-            t => t.JobId == jobId,
-            Builders<JobToggle>
-                .Update.Set(t => t.Enabled, enabled)
-                .Set(t => t.UpdatedAt, DateTime.UtcNow),
-            new UpdateOptions { IsUpsert = true },
-            ct
-        );
+        await _toggles.UpdateOneAsync(t => t.JobId == jobId, Builders<JobToggle>.Update.Set(t => t.Enabled, enabled).Set(t => t.UpdatedAt, DateTime.UtcNow), new UpdateOptions { IsUpsert = true }, ct);
     }
+
+    /// <summary>Remove a job toggle (used to retire decommissioned recurring jobs).</summary>
+    public async Task RemoveAsync(string jobId, CancellationToken ct = default) => await _toggles.DeleteOneAsync(t => t.JobId == jobId, ct);
 
     /// <summary>Upsert a job toggle with full details.</summary>
     public async Task UpsertAsync(JobToggle toggle, CancellationToken ct = default)
     {
         toggle.UpdatedAt = DateTime.UtcNow;
-        await _toggles.ReplaceOneAsync(
-            t => t.JobId == toggle.JobId,
-            toggle,
-            new ReplaceOptions { IsUpsert = true },
-            ct
-        );
+        await _toggles.ReplaceOneAsync(t => t.JobId == toggle.JobId, toggle, new ReplaceOptions { IsUpsert = true }, ct);
     }
 }

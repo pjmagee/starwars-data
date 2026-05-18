@@ -100,11 +100,7 @@
         <MudStack Spacing="2" Class="mb-4">
             <MudButton Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Material.Filled.AccountTree"
                 OnClick="@(() => RunJob("api/admin/mongo/build-infobox-graph"))" Disabled="_isLoading" Size="Size.Medium">
-                5a. Build Infobox Graph (deterministic)
-            </MudButton>
-            <MudButton Variant="Variant.Outlined" Color="Color.Info" StartIcon="@Icons.Material.Filled.Storage"
-                OnClick="@(() => RunJob("api/admin/mongo/ensure-graph-indexes"))" Disabled="_isLoading" Size="Size.Medium">
-                5b. Ensure Graph Indexes
+                5. Build Infobox Graph (deterministic — creates kg.* indexes too)
             </MudButton>
         </MudStack>
 
@@ -114,21 +110,6 @@
             <MudButton Variant="Variant.Filled" Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.PersonSearch"
                 OnClick="@(() => RunJob("api/admin/mongo/create-character-timelines"))" Disabled="_isLoading" Size="Size.Medium">
                 6. Build Character Timelines
-            </MudButton>
-        </MudStack>
-
-        <MudDivider Class="my-4" />
-
-        <!-- Phase 7: LLM Relationship Graph (optional) -->
-        <MudText Typo="Typo.h6" Class="mb-3 mt-4" Color="Color.Info">Phase 7 — LLM Relationship Graph (optional)</MudText>
-        <MudStack Spacing="2" Class="mb-4">
-            <MudButton Variant="Variant.Filled" Color="Color.Info" StartIcon="@Icons.Material.Filled.Hub"
-                OnClick="@(() => RunJob("api/admin/mongo/submit-graph-batch"))" Disabled="_isLoading" Size="Size.Medium">
-                7a. Submit LLM Graph Batch
-            </MudButton>
-            <MudButton Variant="Variant.Text" Color="Color.Info" StartIcon="@Icons.Material.Filled.Dashboard"
-                Href="/graph-builder" Size="Size.Medium">
-                View Graph Builder Dashboard
             </MudButton>
         </MudStack>
 
@@ -191,6 +172,59 @@
         }
     </MudPaper>
 
+    <!-- Recently Synced Wiki Pages -->
+    <MudPaper Class="pa-6 mb-6" Elevation="2">
+        <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Class="mb-2">
+            <MudText Typo="Typo.h5">Recently Synced Wiki Pages</MudText>
+            <MudButton Variant="Variant.Text" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Refresh"
+                       OnClick="LoadRecentSync" Size="Size.Small">Refresh</MudButton>
+        </MudStack>
+        <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-4">
+            @if (_recentSync?.LastIncrementalSyncAt is { } ts)
+            {
+                <span>Last incremental sync: <strong>@ts.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</strong> (@FormatAgo(ts))</span>
+            }
+            else
+            {
+                <span>Incremental sync has not run yet.</span>
+            }
+            &nbsp;— pages the daily sync most recently re-downloaded (newest first).
+        </MudText>
+        @if (_recentSync is null)
+        {
+            <MudProgressLinear Color="Color.Primary" Indeterminate="true" />
+        }
+        else if (_recentSync.Pages.Count == 0)
+        {
+            <MudText Typo="Typo.body2" Color="Color.Secondary">No pages downloaded yet.</MudText>
+        }
+        else
+        {
+            <MudTable Items="_recentSync.Pages" Dense="true" Hover="true" Elevation="0" FixedHeader="true" Height="420px">
+                <HeaderContent>
+                    <MudTh>Title</MudTh>
+                    <MudTh>Continuity</MudTh>
+                    <MudTh>Downloaded</MudTh>
+                    <MudTh>Wiki Last Modified</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Title">
+                        <MudLink Href="@context.WikiUrl" Target="_blank" Typo="Typo.body2">@context.Title</MudLink>
+                    </MudTd>
+                    <MudTd DataLabel="Continuity">
+                        <MudChip T="string" Size="Size.Small" Variant="Variant.Text" Color="@ContinuityColor(context.Continuity)">@context.Continuity</MudChip>
+                    </MudTd>
+                    <MudTd DataLabel="Downloaded">
+                        <MudText Typo="Typo.caption">@context.DownloadedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm") (@FormatAgo(context.DownloadedAt))</MudText>
+                    </MudTd>
+                    <MudTd DataLabel="Wiki Last Modified">
+                        <MudText Typo="Typo.caption">@context.LastModified.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</MudText>
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+        }
+    </MudPaper>
+
     <!-- Hangfire Dashboard -->
     <MudPaper Class="pa-6" Elevation="2">
         <MudText Typo="Typo.h5" Class="mb-4">Job Monitoring</MudText>
@@ -206,14 +240,37 @@
     HttpClient? _http;
     List<StarWarsData.Models.Entities.JobToggle>? _jobToggles;
     List<TemplateInfo>? _templates;
+    StarWarsData.Models.Entities.RecentSyncStatus? _recentSync;
     string? _selectedTemplate;
 
     HttpClient Http => _http ??= new HttpClient { BaseAddress = new Uri(Navigation.BaseUri) };
 
     protected override async Task OnInitializedAsync()
     {
-        await Task.WhenAll(LoadJobToggles(), LoadTemplates());
+        await Task.WhenAll(LoadJobToggles(), LoadTemplates(), LoadRecentSync());
     }
+
+    async Task LoadRecentSync()
+    {
+        try { _recentSync = await Http.GetFromJsonAsync<StarWarsData.Models.Entities.RecentSyncStatus>("api/admin/wiki-sync/recent?limit=100"); }
+        catch { _recentSync = new StarWarsData.Models.Entities.RecentSyncStatus(); }
+    }
+
+    static string FormatAgo(DateTime utc)
+    {
+        var delta = DateTime.UtcNow - utc;
+        if (delta.TotalMinutes < 1) return "just now";
+        if (delta.TotalHours < 1) return $"{(int)delta.TotalMinutes}m ago";
+        if (delta.TotalDays < 1) return $"{(int)delta.TotalHours}h ago";
+        return $"{(int)delta.TotalDays}d ago";
+    }
+
+    static Color ContinuityColor(string continuity) => continuity switch
+    {
+        "Canon" => Color.Primary,
+        "Legends" => Color.Secondary,
+        _ => Color.Default,
+    };
 
     record TemplateInfo(string Template, int Count);
 

@@ -14,6 +14,7 @@
         <br /><br />
         <strong>Chunked</strong> = pages that have been semantically split into overlapping text chunks with vector embeddings generated.
         <strong>Pending</strong> = eligible pages that have not yet been chunked.
+        <strong>Orphaned</strong> = pages with chunks that are no longer eligible (content/infobox cleared or page deleted) — use <em>Reconcile Orphans</em> to purge them.
         <strong>Coverage</strong> in the table below shows each entity type's share of total chunked pages.
     </MudAlert>
 
@@ -44,6 +45,14 @@
                                OnClick="CreateVectorIndex" Disabled="_jobRunning">
                         Create Vector Index
                     </MudButton>
+                    @if (_progress?.OrphanedChunkPages > 0)
+                    {
+                        <MudButton Variant="Variant.Filled" Color="Color.Error"
+                                   StartIcon="@Icons.Material.Filled.CleaningServices"
+                                   OnClick="ReconcileOrphans" Disabled="_jobRunning">
+                            Reconcile Orphans (@_progress.OrphanedChunkPages.ToString("N0"))
+                        </MudButton>
+                    }
                 </MudStack>
             </MudStack>
 
@@ -74,6 +83,12 @@
                     <MudStack AlignItems="AlignItems.Center">
                         <MudText Typo="Typo.h4" Color="Color.Warning">@_progress.PendingPages.ToString("N0")</MudText>
                         <MudText Typo="Typo.caption">Pending</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="12" sm="4" md="2">
+                    <MudStack AlignItems="AlignItems.Center">
+                        <MudText Typo="Typo.h4" Color="@(_progress.OrphanedChunkPages > 0 ? Color.Error : Color.Default)">@_progress.OrphanedChunkPages.ToString("N0")</MudText>
+                        <MudText Typo="Typo.caption">Orphaned</MudText>
                     </MudStack>
                 </MudItem>
                 <MudItem xs="12" sm="4" md="2">
@@ -227,6 +242,32 @@
         await RunJob("api/admin/mongo/create-index-embeddings", "Vector index creation started!");
     }
 
+    private async Task ReconcileOrphans()
+    {
+        try
+        {
+            _jobRunning = true;
+            var response = await Api.PostAsync("api/ArticleChunks/reconcile-orphans", null);
+            if (response.IsSuccessStatusCode)
+            {
+                Snackbar.Add("Orphaned chunks reconciled.", Severity.Success);
+                await LoadProgress();
+            }
+            else
+            {
+                Snackbar.Add($"Reconcile failed: {await response.Content.ReadAsStringAsync()}", Severity.Error);
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _jobRunning = false;
+        }
+    }
+
     private async Task RunJob(string endpoint, string successMessage)
     {
         try
@@ -268,6 +309,7 @@
         public int TotalEligiblePages { get; set; }
         public int ChunkedPages { get; set; }
         public int PendingPages { get; set; }
+        public int OrphanedChunkPages { get; set; }
         public long TotalChunks { get; set; }
         public double AvgChunksPerPage { get; set; }
         public double PagesPerHour { get; set; }
