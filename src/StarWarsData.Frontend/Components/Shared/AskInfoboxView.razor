@@ -71,7 +71,11 @@
                         </MudCardContent>
 
                         <MudCardActions>
-                            <MudButton Href="@wikiPage.WikiUrl" Target="_blank" Variant="Variant.Text" Color="Color.Primary"
+                            <MudButton Href="@($"/graph-explorer/{wikiPage.PageId}")" Variant="Variant.Text" Color="Color.Primary"
+                                       StartIcon="@Icons.Material.Filled.Hub" Size="Size.Small">
+                                Graph Explorer
+                            </MudButton>
+                            <MudButton Href="@wikiPage.WikiUrl" Target="_blank" Variant="Variant.Text" Color="Color.Default"
                                        StartIcon="@Icons.Material.Filled.OpenInNew" Size="Size.Small">
                                 View on Wookieepedia
                             </MudButton>
