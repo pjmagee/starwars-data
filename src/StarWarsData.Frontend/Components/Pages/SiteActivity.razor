@@ -1,0 +1,209 @@
+@page "/activity"
+@inject IHttpClientFactory HttpClientFactory
+@inject NavigationManager Navigation
+@using System.Net.Http.Json
+
+@* Design-037 / ADR-009: public, read-only corpus health. Deliberately does NOT
+   inject or subscribe to GlobalFilterService — these are whole-corpus infrastructure
+   figures and are global-filter exempt by design. *@
+
+<PageTitle>Site Activity — Star Wars Data</PageTitle>
+<HeadContent>
+    <meta name="description" content="Live corpus health for the Star Wars Data project: knowledge-graph size, article and chunk counts, and the most recently synced and chunked articles. Proof the pipeline is actively maintained." />
+</HeadContent>
+
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-4 px-4">
+
+    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-4">
+        <MudIcon Icon="@Icons.Material.Filled.Insights" Size="Size.Large" Color="Color.Tertiary" />
+        <MudStack Spacing="0">
+            <MudText Typo="Typo.h5">Site Activity</MudText>
+            <MudText Typo="Typo.body2" Color="Color.Secondary">
+                A live look at how much data powers this site and how recently it was refreshed.
+            </MudText>
+        </MudStack>
+    </MudStack>
+
+    @if (_loadError)
+    {
+        <MudAlert Severity="Severity.Warning" Variant="Variant.Outlined" Class="mb-4">
+            Couldn't load activity right now.
+            <MudButton Variant="Variant.Text" Size="Size.Small" OnClick="ReloadAsync" Class="ml-2">Retry</MudButton>
+        </MudAlert>
+    }
+
+    @* ── Last-sync banner ──────────────────────────────────────────────────── *@
+    @if (_corpus is not null)
+    {
+        @if (_corpus.LastWikiSyncUtc is { } sync)
+        {
+            <MudAlert Severity="@(IsRecent(sync) ? Severity.Success : Severity.Info)"
+                      Variant="Variant.Outlined" Class="mb-4" Icon="@Icons.Material.Filled.Sync">
+                Wiki sync last ran <strong>@RelativeAgo(sync)</strong> — the corpus is actively maintained.
+            </MudAlert>
+        }
+        else
+        {
+            <MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Class="mb-4">
+                The incremental wiki sync hasn't recorded a run yet.
+            </MudAlert>
+        }
+    }
+
+    @* ── Stat tiles ────────────────────────────────────────────────────────── *@
+    <MudGrid Class="mb-2">
+        @StatTile(Icons.Material.Filled.AccountTree, _corpus?.KgNodes, "Knowledge-graph nodes")
+        @StatTile(Icons.Material.Filled.Hub, _corpus?.KgEdges, "Knowledge-graph edges")
+        @StatTile(Icons.Material.Filled.Article, _corpus?.ArticlePages, "Wiki article pages")
+        @StatTile(Icons.Material.Filled.Dataset, _corpus?.ArticleChunks, "Article chunks")
+    </MudGrid>
+
+    @* ── Recently synced / chunked ─────────────────────────────────────────── *@
+    <MudGrid>
+        <MudItem xs="12" md="6">
+            <MudPaper Outlined="true" Class="pa-4">
+                <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-3">
+                    <MudIcon Icon="@Icons.Material.Filled.Sync" Color="Color.Primary" />
+                    <MudText Typo="Typo.h6">Recently synced articles</MudText>
+                    <MudSpacer />
+                    <MudButton Variant="Variant.Text" Size="Size.Small"
+                               EndIcon="@Icons.Material.Filled.ChevronRight"
+                               Href="/activity/wiki-sync">Browse all</MudButton>
+                </MudStack>
+                @if (_recentPages is null)
+                {
+                    <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+                }
+                else if (_recentPages.Count == 0)
+                {
+                    <MudText Typo="Typo.body2" Color="Color.Secondary">Nothing synced yet.</MudText>
+                }
+                else
+                {
+                    <MudTable T="RecentArticleDto" Items="_recentPages" Dense="true" Hover="true" Bordered="false" Breakpoint="Breakpoint.Sm">
+                        <HeaderContent>
+                            <MudTh>Article</MudTh>
+                            <MudTh Style="width:90px">Realm</MudTh>
+                            <MudTh Style="width:130px">Synced</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd DataLabel="Article">
+                                <MudLink Href="@context.WikiUrl" Target="_blank" Typo="Typo.body2">@context.Title</MudLink>
+                            </MudTd>
+                            <MudTd DataLabel="Realm"><ContinuityBadge Continuity="@context.Continuity" /></MudTd>
+                            <MudTd DataLabel="Synced">
+                                <MudText Typo="Typo.caption" title="@context.DownloadedAt.ToString("u")">@RelativeAgo(context.DownloadedAt)</MudText>
+                            </MudTd>
+                        </RowTemplate>
+                    </MudTable>
+                }
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudPaper Outlined="true" Class="pa-4">
+                <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-3">
+                    <MudIcon Icon="@Icons.Material.Filled.Dataset" Color="Color.Primary" />
+                    <MudText Typo="Typo.h6">Recently chunked articles</MudText>
+                    <MudSpacer />
+                    <MudButton Variant="Variant.Text" Size="Size.Small"
+                               EndIcon="@Icons.Material.Filled.ChevronRight"
+                               Href="/activity/chunks">Browse all</MudButton>
+                </MudStack>
+                @if (_recentChunks is null)
+                {
+                    <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+                }
+                else if (_recentChunks.Count == 0)
+                {
+                    <MudText Typo="Typo.body2" Color="Color.Secondary">Nothing chunked yet.</MudText>
+                }
+                else
+                {
+                    <MudTable T="RecentChunkDto" Items="_recentChunks" Dense="true" Hover="true" Bordered="false" Breakpoint="Breakpoint.Sm">
+                        <HeaderContent>
+                            <MudTh>Article</MudTh>
+                            <MudTh Style="width:80px">Chunks</MudTh>
+                            <MudTh Style="width:130px">Chunked</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd DataLabel="Article">
+                                <MudLink Href="@context.WikiUrl" Target="_blank" Typo="Typo.body2">@context.Title</MudLink>
+                            </MudTd>
+                            <MudTd DataLabel="Chunks">@context.ChunkCount</MudTd>
+                            <MudTd DataLabel="Chunked">
+                                <MudText Typo="Typo.caption" title="@context.CreatedAt.ToString("u")">@RelativeAgo(context.CreatedAt)</MudText>
+                            </MudTd>
+                        </RowTemplate>
+                    </MudTable>
+                }
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+    @if (_corpus is not null)
+    {
+        <MudText Typo="Typo.caption" Color="Color.Secondary" Class="d-block mt-4">
+            Figures refresh every few minutes (snapshot @RelativeAgo(_corpus.SnapshotUtc)).
+        </MudText>
+    }
+</MudContainer>
+
+@code {
+    CorpusStatsDto? _corpus;
+    List<RecentArticleDto>? _recentPages;
+    List<RecentChunkDto>? _recentChunks;
+    bool _loadError;
+
+    HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
+
+    protected override Task OnInitializedAsync() => ReloadAsync();
+
+    async Task ReloadAsync()
+    {
+        _loadError = false;
+        _corpus = null;
+        _recentPages = null;
+        _recentChunks = null;
+        StateHasChanged();
+        try
+        {
+            _corpus = await Api.GetFromJsonAsync<CorpusStatsDto>("api/stats/corpus");
+            _recentPages = await Api.GetFromJsonAsync<List<RecentArticleDto>>("api/stats/recent/pages?limit=10");
+            _recentChunks = await Api.GetFromJsonAsync<List<RecentChunkDto>>("api/stats/recent/chunks?limit=10");
+        }
+        catch
+        {
+            _loadError = true;
+        }
+    }
+
+    RenderFragment StatTile(string icon, long? value, string label) => @<MudItem xs="6" md="3">
+        <MudPaper Outlined="true" Class="pa-4">
+            <MudStack AlignItems="AlignItems.Center" Spacing="1">
+                <MudIcon Icon="@icon" Color="Color.Tertiary" Size="Size.Large" />
+                @if (value is { } v)
+                {
+                    <MudText Typo="Typo.h4">@v.ToString("N0")</MudText>
+                }
+                else
+                {
+                    <MudSkeleton Width="80px" Height="40px" />
+                }
+                <MudText Typo="Typo.caption" Color="Color.Secondary" Align="Align.Center">@label</MudText>
+            </MudStack>
+        </MudPaper>
+    </MudItem>;
+
+    static bool IsRecent(DateTime utc) => DateTime.UtcNow - utc < TimeSpan.FromHours(48);
+
+    static string RelativeAgo(DateTime utc)
+    {
+        var d = DateTime.UtcNow - utc;
+        if (d < TimeSpan.Zero) d = TimeSpan.Zero;
+        if (d.TotalMinutes < 1) return "just now";
+        if (d.TotalMinutes < 60) return $"{(int)d.TotalMinutes} min ago";
+        if (d.TotalHours < 24) return $"{(int)d.TotalHours} h ago";
+        return $"{(int)d.TotalDays} d ago";
+    }
+}

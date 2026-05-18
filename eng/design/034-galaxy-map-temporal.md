@@ -1,7 +1,11 @@
-# Design: Galaxy Map ETL — Temporal Knowledge Graph Integration
+# Design-034: Galaxy Map ETL — Temporal Knowledge Graph Integration
 
-**Status:** Draft
+> Renumbered from Design-003 on 2026-05-18 (resolved a duplicate-number collision).
+
+**Status:** Partially shipped — Phase A (plain rebuild against the cleaned KG) done. Phases B–E (calendar filter #5, battle-derived presence #6, lifecycle transitions #7, precise conflict.start/end spanning #8, `TemporalExplicit` refinement #9/E) are **not** built; these remain the tracked "Known gaps" in [004-galaxy-map-architecture.md](004-galaxy-map-architecture.md).
 **Date:** 2026-04-03
+
+> **Update (2026-05-18, audit):** Verified against `GalaxyMapETLService.cs`. The ETL still uses the first-facet `spanYears` heuristic (`semanticPrefix is "conflict" or "institutional" && endYear - startYear <= 100`, ~line 195) — improvements #5/#6/#7/#8 are not implemented. The `TemporalExplicit` schema dependency in #9/E was instead satisfied by `EdgeMeta.BoundsSource` (Design-021), but the galaxy ETL does not yet consume it for high-confidence territorial inference.
 
 ## Problem
 

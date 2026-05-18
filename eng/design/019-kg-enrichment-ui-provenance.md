@@ -1,6 +1,6 @@
 # 019 — UI provenance for Phase 1 vs Phase 2 KG data
 
-Status: in progress (Stage E1)
+Status: Partially shipped — Stage E1 shipped 2026-04-26 (`013574df09`): `TemporalNodeDto.EnrichmentMarkers`, `EntityLabelsResult.HolocronOnlyLabels`/`HolocronAnnotatedLabels`, and the Phase 1 vs Phase 2 chip/row styling on `/knowledge-graph`. Stage E2+ (Graph Explorer d3 viewer, Galaxy Map, Timeline) still pending.
 Date: 2026-04-26
 Author: Patrick Magee
 Cross-refs: [Design-018 — KG enrichments architecture](018-kg-enrichments-architecture.md)

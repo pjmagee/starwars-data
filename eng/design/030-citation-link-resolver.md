@@ -1,6 +1,40 @@
 # Design-030: Citation Link Resolver — agent emits IDs, system organises links
 
-**Status:** Proposed
+**Status:** Implemented (Phases 1–4, 2026-05-18)
+
+> Phase 1 (resolver scaffold + Wiki/Graph/Galaxy-Map *direct* links, the
+> `POST /api/citations/resolve` endpoint, `CitationCard.razor`, and
+> `CopilotSidebar` regex-extract+resolve wiring) landed in commit 616ae44dd2.
+> Phases 2–4 completed 2026-05-18:
+>
+> - **Phase 2 — indirect spatial linking.** `CitationResolver` runs one bulk
+>   `kg.edges` query over `IndirectSpatialLabels` (located_at / homeworld /
+>   birthplace / born_on / setting / fought_at + `SpatialEventLabels`,
+>   highest-weight edge wins). Battle/Character/Book citations get a Galaxy
+>   Map button pointing at their location; **Event-family sources emit the
+>   Design-032 `?event=` round-trip**. Reads `ICurrentRequestContext`
+>   (Design-029) so a link never points at a continuity-filtered target.
+> - **Phase 3 — AskAI reference shape.** `Reference` gained an optional
+>   `PageId` (`Title`/`Url` now nullable — backwards-compatible with old
+>   persisted sessions and non-KG sources). `ChartToolKit`'s
+>   reference-param description and the `AskAIAgent` prompt steer the agent
+>   to cite by pageId. `AskReferencesSection` resolves pageId refs into
+>   `CitationCard`s and keeps legacy chips for `{title,url}` refs.
+>   *(CopilotAgent's inline `[Name](/graph-explorer/{pageId})` prose links
+>   are intentionally retained — Design §"Non-goals" keeps inline markdown
+>   for fluid reading; CopilotSidebar already resolves those ids into cards.)*
+> - **Phase 4 — Timeline + Holocron.** Two bulk PageId probes populate
+>   `/character-timelines/{id}` (when a `genai.character_timelines` doc
+>   exists) and `/holocron/jobs/{id}` (when a `kg.enrichment_jobs` job
+>   exists).
+>
+> 7 resolver integration tests + 190 unit tests green; verified against
+> `starwars-dev`: Yavin 4 (direct), Battle of Yavin →
+> `/galaxy-map/499934?event=452305`, Han Solo → Corellia +
+> `/character-timelines/452394`. Open questions: inline-markdown-vs-token
+> stays "keep inline markdown"; the per-PageId cache stays deferred until
+> profiling shows the round trip.
+
 **Date:** 2026-04-30
 **Author:** Patrick Magee + Claude
 **Related:** [Design-022 Page-Aware Copilot Sidebar](022-galaxy-map-copilot.md), [Design-029 Continuity-aware Agent Tools](029-agent-filter-context.md), [ADR-002 AI Agent Toolkits](../adr/002-ai-agent-toolkits.md)

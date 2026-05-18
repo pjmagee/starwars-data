@@ -1,9 +1,20 @@
 # Design-031: Galaxy Map Deep-Link Route
 
-**Status:** Proposal
+**Status:** Implemented (Phases 1–3)
 **Date:** 2026-04-30
 **Author:** Patrick Magee + Claude
 **Related:** [Design-004 Galaxy Map Architecture](004-galaxy-map-architecture.md), [Design-030 Citation Link Resolver](030-citation-link-resolver.md), [Design-022 Page-Aware Copilot Sidebar](022-galaxy-map-copilot.md)
+
+> **Shipped 2026-05-18.** Phase 1 (System/CelestialBody via `drillToDeepLink`,
+> Region overlay, **Sector** via the new `drillToSector` JS verb) and Phase 2
+> (**TradeRoute** via `highlightTradeRouteById` — 3× pulse, stays at overview)
+> are live. Verified against `starwars-dev` in-browser: Yavin 4 (CelestialBody),
+> Gordian Reach (Sector → breadcrumb + systems + copilot context), Corellian
+> Run (TradeRoute → highlight snackbar). **Phase 3** (Citation Resolver
+> wiring) completed with Design-030 Phases 2–4 on 2026-05-18 — every spatial
+> citation (direct or via an indirect KG hop) now hands the user a
+> `/galaxy-map/{id}` button, and Event-family sources carry `?event=` so the
+> route lands on the location with the event highlighted.
 
 ## Problem
 

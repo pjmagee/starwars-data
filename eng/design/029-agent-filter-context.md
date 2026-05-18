@@ -1,6 +1,6 @@
 # Design-029: Continuity-aware Agent Tools
 
-**Status:** Proposed
+**Status:** Partially shipped (2026-05-18, commit 616ae44dd2) — Phase 1 landed: `ICurrentRequestContext`/`CurrentRequestContext` (`Services/AI/RequestContext/`), the `AguiEnvelopeParserMiddleware` wired on the streaming endpoints in `ApiService/Program.cs`, and `GraphRAGToolkit` defaults `continuity` from context across `search_entities` / `find_entities_by_year` / `get_entity_relationships` / graph-query / lineage / connections and filters `get_galaxy_year`'s `EventCells`/`UnresolvedEvents` by context. Phases 2 (wiki-search post-filter), 3 (Mongo MCP continuity wrapper) and 4 (AskAI agent) are not yet implemented.
 **Date:** 2026-04-30
 **Author:** Patrick Magee + Claude
 **Related:** [ADR-008 Agent request-scoped filter context](../adr/008-agent-request-scoped-filter-context.md), [Design-022 Page-Aware Copilot Sidebar](022-galaxy-map-copilot.md), [ADR-002 AI Agent Toolkits](../adr/002-ai-agent-toolkits.md)

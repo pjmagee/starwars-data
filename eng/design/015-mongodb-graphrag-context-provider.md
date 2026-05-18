@@ -1,6 +1,6 @@
 # Design-015: MongoDB GraphRAG Context Provider
 
-**Status:** Proposed
+**Status:** Proposed — not built (verified 2026-05-18). No `MongoGraphRagContextProvider`, `MongoGraphRagOptions`, or `StarWarsData.Services.AI.GraphRAG` namespace exists; no `AIContextProvider` is wired in `ApiService/Program.cs`. The existing explicit retrieval toolkits (`GraphRAGToolkit`, `KGAnalyticsToolkit`) remain the only KG-retrieval path.
 **Date:** 2026-04-25
 **Author:** Patrick Magee + Claude
 **Related:** [ADR-002 AI Agent Toolkits](../adr/002-ai-agent-toolkits.md), [ADR-003 KG Query Architecture](../adr/003-kg-query-architecture.md), [Design-005 Search Architecture](./005-search-architecture.md), [Design-007 KG Bidirectional Edges View](./007-kg-bidirectional-edges-view.md), [Design-012 AI Agent Tool-call Efficiency](./012-ai-agent-tool-call-efficiency.md), [Design-016 MongoDB Agent Memory Provider](./016-mongodb-agent-memory-provider.md)
@@ -254,7 +254,7 @@ We explicitly **do not** remove the existing `GraphRAGToolkit` tools. They remai
 
 - Microsoft ships an official `MongoDB.AgentFramework.GraphRAG` package — at which point we should evaluate switching to it and contributing our pipeline factories upstream.
 - Atlas Vector Search adds first-class graph traversal primitives (rumoured for 2026 Atlas releases) — would simplify the `RetrievalPipeline` step.
-- The `kg.edges.bidir` view is replaced by per-type node builders (Design-007 follow-up); pipeline factories will need to resolve node types differently.
+- The `kg.edges.bidir` view is replaced by per-type node builders (Design-035 follow-up); pipeline factories will need to resolve node types differently.
 
 ## Appendix A — Sample default `NodeNeighborhood` pipeline
 

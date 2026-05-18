@@ -1,9 +1,9 @@
 # 024 — Typed NodeBuilders: per-type infobox extraction strategy
 
-Status: in progress
+Status: Shipped (Phases A–C, 2026-04-28, `ed5d53f246`). Infrastructure (`NodeBuilderContext.NodeTypeByPageId`, `EdgeMeta.SourceFieldLabel`/`SideIndex`) plus per-type overrides landed for Character (has_role + Affiliation source×target relabels), Droid, Battle/Mission/Duel/War/Campaign/Event (`ConflictSideEncoder`), Sector, Year, TitleOrPosition, CelestialBody, TelevisionEpisode, Book/ReferenceBook/ComicBook/MagazineIssue (`IsbnNormalizer`), IndividualShip/StarshipClass, Organization — each with a dedicated unit-test class under `src/StarWarsData.Tests/Unit/`.
 Date: 2026-04-28
 Author: Patrick Magee
-Cross-refs: [Design-007 — KG per-type builders](007-kg-per-type-builders.md), [Design-013 — KG property/edge duality](013-kg-property-edge-duality.md), [Design-021 — Edge bound provenance](021-edge-bound-provenance.md), [Design-023 — Character roles as edges](023-character-roles-as-edges.md) (superseded by this doc)
+Cross-refs: [Design-035 — KG per-type builders](035-kg-per-type-builders.md), [Design-013 — KG property/edge duality](013-kg-property-edge-duality.md), [Design-021 — Edge bound provenance](021-edge-bound-provenance.md), [Design-023 — Character roles as edges](023-character-roles-as-edges.md) (superseded by this doc)
 
 ## Problem
 
@@ -15,7 +15,7 @@ node is built by the generic `NodeBuilderBase.Build` loop, which applies a
 single global `FieldSemantics` dictionary to every infobox field regardless
 of the source node's type.
 
-The infrastructure (Design-007) was set up so that per-type logic *could*
+The infrastructure (Design-035) was set up so that per-type logic *could*
 live in subclasses, but the actual logic was never written. Across a
 schema-survey of the top 30 node types in `starwars-dev`, this manifests as:
 
@@ -57,7 +57,7 @@ The schema survey (full per-type findings appended below) shows ~10–15
 high-leverage per-type opportunities, ranging from one-edit relabelings to
 substantial structural fixes (per-side index encoding, ISBN normalisation).
 
-The intent of Design-007 was to enable per-type logic. The next step is to
+The intent of Design-035 was to enable per-type logic. The next step is to
 **actually write it**, holistically and consistently, across all the types
 where it pays off.
 
@@ -582,7 +582,7 @@ For each Phase B / C item:
 
 ## References
 
-- [Design-007 — KG per-type builders](007-kg-per-type-builders.md) —
+- [Design-035 — KG per-type builders](035-kg-per-type-builders.md) —
   set up the per-type infrastructure that this design now uses.
 - [Design-013 — KG property/edge duality](013-kg-property-edge-duality.md)
   — the framework for deciding what's a property vs an edge.

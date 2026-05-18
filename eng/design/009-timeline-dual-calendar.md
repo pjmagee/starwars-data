@@ -1,6 +1,6 @@
 # Design 009 — Dual-Calendar Timeline (Galactic + Real World)
 
-**Status:** Analysis / not yet implemented
+**Status:** Shipped — Option A implemented (verified 2026-05-18). The recommended unified-component approach landed across all layers: `TimelineEvent.Calendar` (`Calendar` enum) + `RealYear` fields exist; `KgTimelineBuilderService` no longer skips `Calendar != "galactic"` and emits both galactic and real-world events tagged by calendar; `TimelineController`/`TimelineQueryParams` accept a `Calendar` parameter; `Timeline.razor` renders separate "Galactic" / "Real World" tabs via `EventTimeline CalendarMode="Calendar.Galactic|Real"` (the "Real World realm toggle has no effect" alert is gone). NOTE: the shipped UI uses an explicit per-tab `CalendarMode` parameter rather than binding to `GlobalFilterService.SelectedRealm` as the proposed shape suggested — the two-tab split supersedes the realm-toggle plumbing described in §Frontend.
 **Date:** 2026-04-05
 **Related:** [001-temporal-facets](001-temporal-facets.md), [002-ai-agent-toolkits](../adr/002-ai-agent-toolkits.md)
 

@@ -22,7 +22,7 @@ ETL phase 1 downloads pages from MediaWiki. Phase 2 creates per-template MongoDB
 
 ## 2. Infobox → KG (nodes, edges, labels, attributes)
 
-The KG is built by **per-type builders** ([Design-007](eng/design/007-kg-per-type-builders.md), shipped 2026-04-26).
+The KG is built by **per-type builders** ([Design-035](eng/design/035-kg-per-type-builders.md), shipped 2026-04-26).
 
 ### Layout
 - Coordinator: [src/StarWarsData.Services/KnowledgeGraph/InfoboxGraphService.cs](src/StarWarsData.Services/KnowledgeGraph/InfoboxGraphService.cs) — `BuildGraphAsync()` is the entrypoint; `RegisterAllBuilders()` wires up all 45 per-type builders.
@@ -138,7 +138,7 @@ When the parent agent hands you a task, read at least these before proposing cha
 
 | Touching... | Read |
 |---|---|
-| A new node type | [Design-007](eng/design/007-kg-per-type-builders.md), [Design-024](eng/design/024-typed-node-builders.md), an existing similar builder under `NodeBuilders/Types/` |
+| A new node type | [Design-035](eng/design/035-kg-per-type-builders.md), [Design-024](eng/design/024-typed-node-builders.md), an existing similar builder under `NodeBuilders/Types/` |
 | Edge construction or quality | [Design-002](eng/design/002-edge-quality.md), [Design-013](eng/design/013-kg-property-edge-duality.md), [Design-023](eng/design/023-character-roles-as-edges.md) |
 | Edge temporal bounds | [Design-001](eng/design/001-temporal-facets.md), [Design-021](eng/design/021-edge-bound-provenance.md) |
 | KG queries / traversal | [ADR-003](eng/adr/003-kg-query-architecture.md), [Design-007 bidir view](eng/design/007-kg-bidirectional-edges-view.md), [Design-008](eng/design/008-kg-hierarchy-helpers.md) |

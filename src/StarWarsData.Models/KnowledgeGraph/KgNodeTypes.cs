@@ -42,7 +42,7 @@ public static class KgNodeTypes
     /// string is "Military_unit" with underscore, matching Wookieepedia's
     /// template suffix. Earlier KgNodeTypes had a dead <c>Military</c> constant
     /// that didn't match the corpus and made <c>MilitaryNodeBuilder</c> a no-op
-    /// since Design-007. Renamed during the typed-NodeBuilders cleanup pass.
+    /// since Design-035. Renamed during the typed-NodeBuilders cleanup pass.
     /// </summary>
     public const string MilitaryUnit = "Military_unit";
     public const string Fleet = "Fleet";

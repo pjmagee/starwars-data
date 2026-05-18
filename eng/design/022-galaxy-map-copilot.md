@@ -1,6 +1,6 @@
 # Design-022: Page-Aware Copilot Sidebar
 
-**Status:** Proposal
+**Status:** Shipped (Phases 1–2, 2026-04-30; `d8cab0be8a`, `616ae44dd2`). `CopilotAgent` + `/copilot/stream` endpoint, `PageContextService`, `CopilotSidebar.razor`, right `MudDrawer` in `MainLayout`, shared `Components/Shared/Agui/` DTOs, and `PageContext.Set(...)` wired on galaxy-map, timeline, graph-explorer, knowledge-graph, search, character-timelines, tables (Phase 2). Galaxy-map deep links + agent filter context followed (Design-029/030). Phase 3 QoL (persist sidebar conversations, "continue in /ask") still pending.
 **Date:** 2026-04-28
 **Author:** Patrick Magee + Claude
 **Related:** [Design-004 Galaxy Map Architecture](./004-galaxy-map-architecture.md), [Design-006 Galaxy Map Timeline Mode](./006-galaxy-map-timeline-mode.md), [Design-011 Mobile Web UX](./011-mobile-web-ux.md), [ADR-002 AI Agent Toolkits](../adr/002-ai-agent-toolkits.md)

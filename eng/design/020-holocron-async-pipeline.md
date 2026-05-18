@@ -1,6 +1,6 @@
 # 020 — Async Holocron pipeline (full-corpus enhancement, change-aware re-runs)
 
-Status: in progress
+Status: Shipped (Phases A–C, 2026-04-27 → 2026-04-28; Phase A `05e8039544`). Async pipeline live on `main`: `HolocronEnhancementService` + workflow executors under `Services/AI/Agents/Holocron/Workflows/`, `HolocronController` job endpoints, `/holocron/jobs` + per-node pages, migration 0014. Note: the executor count grew from the 5 designed here to 6 — an `HolocronEvidenceVerifierExecutor` was inserted by the later hardening work (Design-025/026/ADR-007).
 Date: 2026-04-27
 Author: Patrick Magee
 Cross-refs: [Design-018 — KG enrichments architecture](018-kg-enrichments-architecture.md), [Design-019 — KG enrichment UI provenance](019-kg-enrichment-ui-provenance.md), [ADR-006 — long-running AI workflow pipelines](../adr/006-long-running-ai-workflow-pipelines.md)

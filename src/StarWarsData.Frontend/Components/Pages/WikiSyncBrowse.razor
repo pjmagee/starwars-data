@@ -1,0 +1,84 @@
+@page "/activity/wiki-sync"
+@inject IHttpClientFactory HttpClientFactory
+@using System.Net.Http.Json
+
+@* Design-037 / ADR-009: public, read-only. Global-filter exempt by design. *@
+
+<PageTitle>Wiki Sync — Star Wars Data</PageTitle>
+<HeadContent>
+    <meta name="description" content="Read-only view of the most recently synced Wookieepedia articles in the Star Wars Data corpus, newest first." />
+</HeadContent>
+
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-4 px-4">
+
+    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-4">
+        <MudIcon Icon="@Icons.Material.Filled.Sync" Size="Size.Large" Color="Color.Tertiary" />
+        <MudStack Spacing="0">
+            <MudText Typo="Typo.h5">Wiki Sync</MudText>
+            <MudText Typo="Typo.body2" Color="Color.Secondary">
+                Recently synced articles, newest first. Read-only.
+            </MudText>
+        </MudStack>
+        <MudSpacer />
+        <MudButton Variant="Variant.Text" Size="Size.Small"
+                   StartIcon="@Icons.Material.Filled.ChevronLeft" Href="/activity">Back to activity</MudButton>
+    </MudStack>
+
+    <MudPaper Outlined="true" Class="pa-2">
+        <MudTable T="RecentArticleDto" ServerData="LoadAsync" Dense="true" Hover="true"
+                  Breakpoint="Breakpoint.Sm" RowsPerPage="25">
+            <HeaderContent>
+                <MudTh>Article</MudTh>
+                <MudTh Style="width:90px">Page ID</MudTh>
+                <MudTh Style="width:90px">Realm</MudTh>
+                <MudTh Style="width:160px">Last modified</MudTh>
+                <MudTh Style="width:140px">Synced</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Article">
+                    <MudLink Href="@context.WikiUrl" Target="_blank" Typo="Typo.body2">@context.Title</MudLink>
+                </MudTd>
+                <MudTd DataLabel="Page ID">@context.PageId</MudTd>
+                <MudTd DataLabel="Realm"><ContinuityBadge Continuity="@context.Continuity" /></MudTd>
+                <MudTd DataLabel="Last modified">
+                    <MudText Typo="Typo.caption" title="@context.LastModified.ToString("u")">@context.LastModified.ToString("yyyy-MM-dd HH:mm")</MudText>
+                </MudTd>
+                <MudTd DataLabel="Synced">
+                    <MudText Typo="Typo.caption" title="@context.DownloadedAt.ToString("u")">@context.DownloadedAt.ToString("yyyy-MM-dd HH:mm")</MudText>
+                </MudTd>
+            </RowTemplate>
+            <NoRecordsContent>
+                <MudText Typo="Typo.body2" Color="Color.Secondary">No synced pages.</MudText>
+            </NoRecordsContent>
+            <LoadingContent>
+                <MudText Typo="Typo.body2" Color="Color.Secondary">Loading…</MudText>
+            </LoadingContent>
+            <PagerContent>
+                <MudTablePager PageSizeOptions="new[] { 25, 50, 100 }" />
+            </PagerContent>
+        </MudTable>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
+
+    async Task<TableData<RecentArticleDto>> LoadAsync(TableState state, CancellationToken token)
+    {
+        try
+        {
+            var skip = state.Page * state.PageSize;
+            var result = await Api.GetFromJsonAsync<StatsPage<RecentArticleDto>>(
+                $"api/stats/pages?skip={skip}&take={state.PageSize}", token);
+            return new TableData<RecentArticleDto>
+            {
+                Items = result?.Items ?? [],
+                TotalItems = (int)Math.Min(result?.Total ?? 0, int.MaxValue),
+            };
+        }
+        catch
+        {
+            return new TableData<RecentArticleDto> { Items = [], TotalItems = 0 };
+        }
+    }
+}

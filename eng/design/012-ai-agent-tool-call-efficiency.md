@@ -1,6 +1,6 @@
 # Design 012: AI Agent Tool-Call Efficiency
 
-**Status:** Phase 1 shipped 2026-04-11
+**Status:** Phase 1 shipped 2026-04-11 (`ToolCallBudgetMiddleware.cs`, `MongoSafe.cs`, `MaximumIterationsPerRequest=12`, sharpened tool descriptions, trimmed `AskAIAgent` prompt — all verified in code). Phase 2 (handoff/specialist-agent split) not built — it remains deferred per its own trigger condition; no `ProfileAgent`/`LoreAgent`/`HandoffAgentExecutor` exists in `Services/AI/Agents` as of 2026-05-18.
 **Date:** 2026-04-11
 **Owner:** Patrick Magee
 

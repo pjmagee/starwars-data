@@ -1,0 +1,83 @@
+@page "/activity/chunks"
+@inject IHttpClientFactory HttpClientFactory
+@using System.Net.Http.Json
+
+@* Design-037 / ADR-009: public, read-only. The public, safe analogue of the Admin
+   article-chunks view — counts only, no job controls. Global-filter exempt. *@
+
+<PageTitle>Article Chunks — Star Wars Data</PageTitle>
+<HeadContent>
+    <meta name="description" content="Read-only view of articles that have been chunked for semantic search in the Star Wars Data corpus, most recently chunked first." />
+</HeadContent>
+
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-4 px-4">
+
+    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-4">
+        <MudIcon Icon="@Icons.Material.Filled.Dataset" Size="Size.Large" Color="Color.Tertiary" />
+        <MudStack Spacing="0">
+            <MudText Typo="Typo.h5">Article Chunks</MudText>
+            <MudText Typo="Typo.body2" Color="Color.Secondary">
+                Articles split into searchable chunks, most recently chunked first. Read-only.
+            </MudText>
+        </MudStack>
+        <MudSpacer />
+        <MudButton Variant="Variant.Text" Size="Size.Small"
+                   StartIcon="@Icons.Material.Filled.ChevronLeft" Href="/activity">Back to activity</MudButton>
+    </MudStack>
+
+    <MudPaper Outlined="true" Class="pa-2">
+        <MudTable T="RecentChunkDto" ServerData="LoadAsync" Dense="true" Hover="true"
+                  Breakpoint="Breakpoint.Sm" RowsPerPage="25">
+            <HeaderContent>
+                <MudTh>Article</MudTh>
+                <MudTh Style="width:90px">Page ID</MudTh>
+                <MudTh Style="width:90px">Realm</MudTh>
+                <MudTh Style="width:90px">Chunks</MudTh>
+                <MudTh Style="width:160px">Chunked</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Article">
+                    <MudLink Href="@context.WikiUrl" Target="_blank" Typo="Typo.body2">@context.Title</MudLink>
+                </MudTd>
+                <MudTd DataLabel="Page ID">@context.PageId</MudTd>
+                <MudTd DataLabel="Realm"><ContinuityBadge Continuity="@context.Continuity" /></MudTd>
+                <MudTd DataLabel="Chunks">@context.ChunkCount</MudTd>
+                <MudTd DataLabel="Chunked">
+                    <MudText Typo="Typo.caption" title="@context.CreatedAt.ToString("u")">@context.CreatedAt.ToString("yyyy-MM-dd HH:mm")</MudText>
+                </MudTd>
+            </RowTemplate>
+            <NoRecordsContent>
+                <MudText Typo="Typo.body2" Color="Color.Secondary">No chunked articles.</MudText>
+            </NoRecordsContent>
+            <LoadingContent>
+                <MudText Typo="Typo.body2" Color="Color.Secondary">Loading…</MudText>
+            </LoadingContent>
+            <PagerContent>
+                <MudTablePager PageSizeOptions="new[] { 25, 50, 100 }" />
+            </PagerContent>
+        </MudTable>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
+
+    async Task<TableData<RecentChunkDto>> LoadAsync(TableState state, CancellationToken token)
+    {
+        try
+        {
+            var skip = state.Page * state.PageSize;
+            var result = await Api.GetFromJsonAsync<StatsPage<RecentChunkDto>>(
+                $"api/stats/chunks?skip={skip}&take={state.PageSize}", token);
+            return new TableData<RecentChunkDto>
+            {
+                Items = result?.Items ?? [],
+                TotalItems = (int)Math.Min(result?.Total ?? 0, int.MaxValue),
+            };
+        }
+        catch
+        {
+            return new TableData<RecentChunkDto> { Items = [], TotalItems = 0 };
+        }
+    }
+}

@@ -555,7 +555,7 @@
                                                     {
                                                         <MudTooltip Text="@($"Locate {edge.OtherName} on the Galaxy Map")">
                                                             <MudIconButton Icon="@Icons.Material.Filled.Explore" Size="Size.Small"
-                                                                           Href="@($"/galaxy-map/{edge.OtherId}")" Target="_blank" Color="Color.Primary" Class="ml-1" />
+                                                                           Href="@BuildGalaxyMapHref(edge.OtherId, context.Type, context.Id)" Target="_blank" Color="Color.Primary" Class="ml-1" />
                                                         </MudTooltip>
                                                     }
                                                     @if (!string.IsNullOrEmpty(edge.Phase1Qualifier))
@@ -1220,6 +1220,15 @@
     // link (per Design-031). Indirect spatial linking (Battle → location) is
     // Phase 2 of Design-030 and lives in the citation resolver.
     private static bool IsSpatialKind(string? type) => type is "System" or "CelestialBody" or "Sector" or "Region" or "TradeRoute";
+
+    // Design-032: when the node whose edges we're viewing is itself an event
+    // (Battle, Mission, …), carry its pageId into the galaxy-map deep link as
+    // ?event= so the spatial target lands with the event highlighted and the
+    // round-trip (KG event → location → event still in view) holds.
+    private static string BuildGalaxyMapHref(int locationId, string? sourceType, int sourceId) =>
+        SpatialEventLabels.EventFamily.Contains(sourceType ?? string.Empty)
+            ? $"/galaxy-map/{locationId}?event={sourceId}"
+            : $"/galaxy-map/{locationId}";
 
     /// <summary>Render a UTC timestamp as a coarse "X ago" string for the edge-row last-updated caption.</summary>
     private static string FormatRelativeTime(DateTime utc)

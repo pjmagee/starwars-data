@@ -156,6 +156,8 @@ When adding a new test, decide its tier first and put it in the matching folder 
 
 The Frontend has a global filter bar (continuity: Canon/Legends, realm: Star Wars/Real) managed by `GlobalFilterService`. **Every page and component that queries the API must respect the global filter** by subscribing to `GlobalFilterService.OnChange` and passing the filter values via `GetContinuityQueryParam()` / `GetRealmQueryParam()` to API calls. When the filter changes, active queries and data must be refreshed.
 
+**Documented exemption:** the public corpus-stats surface (`/api/stats/*` and the Frontend "Miscellaneous" section — [Design-037](eng/design/037-misc-site-activity-dashboard.md)) is deliberately filter-exempt because it reports whole-corpus *infrastructure* health, not continuity-scoped content. This carve-out is bounded and authoritative per [ADR-009](eng/adr/009-public-readonly-corpus-stats-surface.md); it does **not** generalize — any new content-bearing page is still bound by the rule above.
+
 ### Continuity Color Convention
 
 Continuity chips and badges **must** use MudBlazor theme colors consistently:

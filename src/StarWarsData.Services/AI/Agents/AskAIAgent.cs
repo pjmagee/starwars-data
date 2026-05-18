@@ -342,9 +342,11 @@ public sealed class AskAIAgent(
           bullets with actual values) — mobile users (< 960px) see ONLY the summary, never the
           chart. Skipping it leaves mobile users with nothing.
         - Every visualization render tool requires exhaustive `references`. If the visualization
-          shows N named entities, you must pass N references — one per entity — using wikiUrls
-          from your KG tool results. Do NOT curate a subset. See each render tool's references
-          parameter description for the exact rule.
+          shows N named entities, you must pass N references — one per entity. PREFER passing just
+          the entity's `pageId` from your KG tool results; the system resolves the name and all
+          navigation links (wiki, graph, galaxy map, timeline). Use title+url only for a source
+          with no pageId. Never invent a pageId. Do NOT curate a subset. See each render tool's
+          references parameter description for the exact rule.
 
         NEVER FABRICATE DATA. Every value in render_chart, render_data_table, and render_markdown
         MUST come from a tool result you received in this conversation. If you did not read a value

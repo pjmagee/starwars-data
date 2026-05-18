@@ -243,6 +243,22 @@ var admin = builder
             IconName = "Money",
             IsHighlighted = false,
         }
+    )
+    // ── Dev QA: pull fresh raw content from prod (Design-033) ──
+    .WithHttpCommand(
+        path: "/api/admin/sync/prod-to-dev/recent",
+        displayName: "↩ Pull Prod → Dev (raw, last 14d)",
+        commandOptions: new HttpCommandOptions
+        {
+            Method = HttpMethod.Post,
+            Description =
+                "Copies raw.pages changed in prod within the last 14 days into the dev "
+                + "database via a server-side $merge. Read-only against prod; refuses to run "
+                + "if target is starwars-prod. Run Phase 5 → 3a → 4a afterward to rebuild "
+                + "dev's derived data.",
+            IconName = "DatabaseArrowDown",
+            IsHighlighted = false,
+        }
     );
 
 var frontend = builder

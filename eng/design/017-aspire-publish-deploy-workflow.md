@@ -1,6 +1,6 @@
 # Design-017: Aspire Publish & Deploy Workflow
 
-**Status:** Accepted
+**Status:** Accepted — Implemented (2026-04-25). AppHost parameter cleanup + CI `prepare-starwars`/`publish` wiring shipped (`3d2487b4b8`, `7c8df07f27`); `HolocronEnabled` compose forwarding added 2026-05-18 (`c9f596c959`).
 **Date:** 2026-04-25
 **Author:** Patrick Magee + Claude
 **Related:** [ADR-005 MongoDB Migration Strategy](../adr/005-mongodb-migration-strategy.md), [Design-010 MongoDB Migration Environment Promotion](./010-mongodb-migration-environment-promotion.md), [CLAUDE.md (Build & Run section)](../../CLAUDE.md)

@@ -1,9 +1,9 @@
 # 023 — Character roles as `has_role` edges to TitleOrPosition nodes
 
-Status: in progress
+Status: Superseded by [Design-024 — Typed node builders](024-typed-node-builders.md). The outcome shipped (2026-04-28, `ed5d53f246`): `has_role`/`held_by` registered in `FieldSemantics` and the Character→TitleOrPosition promotion implemented — but via Design-024's `CharacterNodeBuilder.OnFinalize` per-type override, **not** the `InfoboxGraphService.cs:211` drop-filter flip proposed here (that filter was deliberately left intact). The standalone `0017-titles-to-has-role-edges.js` migration was never created; the typed-builder rebuild handles it. Treat Design-024 as authoritative.
 Date: 2026-04-28
 Author: Patrick Magee
-Cross-refs: [Design-001 — Temporal facets](001-temporal-facets.md), [Design-007 — KG per-type builders](007-kg-per-type-builders.md), [Design-018 — KG enrichments architecture](018-kg-enrichments-architecture.md), [Design-021 — Edge bound provenance](021-edge-bound-provenance.md)
+Cross-refs: [Design-001 — Temporal facets](001-temporal-facets.md), [Design-035 — KG per-type builders](035-kg-per-type-builders.md), [Design-018 — KG enrichments architecture](018-kg-enrichments-architecture.md), [Design-021 — Edge bound provenance](021-edge-bound-provenance.md)
 
 ## Problem
 
@@ -242,6 +242,6 @@ Acceptance criteria:
 ## References
 
 - [Design-021 — Edge bound provenance](021-edge-bound-provenance.md) — `has_role` inherits the BoundsSource provenance model.
-- [Design-007 — KG per-type builders](007-kg-per-type-builders.md) — character node builder is where `Titles` extraction logic lives.
+- [Design-035 — KG per-type builders](035-kg-per-type-builders.md) — character node builder is where `Titles` extraction logic lives.
 - [InfoboxGraphService.cs:200-225](../../src/StarWarsData.Services/KnowledgeGraph/InfoboxGraphService.cs#L200-L225) — the filter being relabeled.
 - [feedback memory `holocron_duplicated_validation`](../../) — same pattern: validation logic duplicated; must update both copies.

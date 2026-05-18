@@ -9,20 +9,31 @@
 #   4. Configure the variables below
 #
 # Prerequisites:
-#   - GitHub Personal Access Token with "actions:read" scope (for artifact download)
+#   - GitHub Personal Access Token with "actions:read" + "read:packages" scopes
+#     (actions:read = download artifact, read:packages = pull private GHCR images)
 #   - .env file already configured with secrets in DEPLOY_DIR
 
 set -euo pipefail
 
 # ── Configuration ──────────────────────────────────────────────────────────────
 GITHUB_REPO="pjmagee/starwars-data"
-GITHUB_TOKEN="ghp_your_token_here"        # PAT with actions:read scope
+GITHUB_TOKEN="ghp_your_token_here"        # PAT with actions:read + read:packages scopes
 DEPLOY_DIR="/boot/config/plugins/compose.manager/projects/starwars"
 COMPOSE_PROJECT="swdata"
 # ───────────────────────────────────────────────────────────────────────────────
 
 WORK_DIR=$(mktemp -d)
-trap 'rm -rf "$WORK_DIR"' EXIT
+GHCR_LOGGED_IN=0
+
+cleanup() {
+  rm -rf "$WORK_DIR"
+  # Drop GHCR credentials from the host's docker config — they only need to live
+  # for the duration of `docker compose pull`. Runs on success, failure, and ctrl-c.
+  if [[ "$GHCR_LOGGED_IN" == "1" ]]; then
+    docker logout ghcr.io >/dev/null 2>&1 || true
+  fi
+}
+trap cleanup EXIT
 
 log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*"; }
 
@@ -87,7 +98,13 @@ if [ -f "$WORK_DIR/release/.env.versions" ]; then
   done < "$WORK_DIR/release/.env.versions"
 fi
 
-# Pull new images and restart
+# Pull new images and restart. GHCR images may be private — log in with the same
+# PAT used for the API call (needs `read:packages` scope). Logout happens via the
+# EXIT trap so credentials don't persist on the box.
+log "Logging in to GHCR..."
+echo "$GITHUB_TOKEN" | docker login ghcr.io -u "${GITHUB_REPO%%/*}" --password-stdin >/dev/null
+GHCR_LOGGED_IN=1
+
 log "Pulling images..."
 cd "$DEPLOY_DIR"
 docker compose -p "$COMPOSE_PROJECT" pull

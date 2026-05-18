@@ -63,6 +63,22 @@ Denormalization consistency is maintained by the ETL being a **full delete + ins
 
 `InfoboxGraphService.ProcessAsync` is the **sole** site that creates indexes on `kg.edges`. `RelationshipGraphBuilderService.EnsureIndexesAsync` no longer touches `kg.edges` — it only maintains the LLM-pipeline's private `crawl_state` indexes. This reverses the previous situation where two services created partially-overlapping index sets at different times.
 
+> **Update (2026-05-18):** The legacy OpenAI Batch relationship-extraction
+> pipeline was removed (commit `c9f596c959`, "remove legacy batch path";
+> documented in `CLAUDE.md`). `RelationshipGraphBuilderService`, its
+> `submit/check/cleanup-graph-batch` endpoints, the `/graph-builder` admin
+> page, and the `crawl_state` index path no longer exist in source (verified:
+> no `*.cs` under `src/` references `RelationshipGraphBuilderService`). The
+> core decision is **strengthened, not weakened** — `InfoboxGraphService` is
+> now the *only* code that touches `kg.edges` at all; there is no longer a
+> second service to contend with. Read the references to
+> `RelationshipGraphBuilderService` / `crawl_state` / "the LLM extraction path
+> (Phase 6)" in this section, Rule 6, and the Security/correctness note as
+> historical context for *why* the single-owner rule was adopted, not as a
+> description of code that still runs. The deterministic builder + the
+> separate Holocron pass (ADR-006/ADR-007) are now the only edge writers, and
+> both already respect the unique constraint.
+
 The canonical index set is:
 
 | Name | Keys | Options | Primary read pattern |

@@ -102,6 +102,7 @@ builder
     .AddSingleton<StarWarsData.Services.SemanticSearchService>()
     .AddScoped<StarWarsData.Services.AI.Agents.HolocronAgent>()
     .AddSingleton<JobToggleService>()
+    .AddSingleton<ProdToDevSyncService>()
     .AddSingleton<PageDownloader>()
     .AddSingleton<IEmbeddingGenerator<string, Embedding<float>>>(sp => sp.GetRequiredService<OpenAIClient>().GetEmbeddingClient("text-embedding-3-small").AsIEmbeddingGenerator());
 

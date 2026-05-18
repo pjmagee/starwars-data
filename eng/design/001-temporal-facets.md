@@ -1,8 +1,10 @@
 # Design: Temporal Facets on Knowledge Graph Nodes & Edges
 
-**Status:** Draft
+**Status:** Shipped (Phases 1–3) — `TemporalFacet` model, `GraphNode.TemporalFacets`, and ETL facet population are live. Phase 4 (vague-date resolution) not built. The proposed `TemporalExplicit` edge flag was superseded by edge bound provenance (`EdgeMeta.BoundsSource`, Design-021).
 **Date:** 2026-04-02
 **Author:** Patrick Magee + Claude
+
+> **Update (2026-05-18, audit):** Verified against code. `TemporalFacet` ships at [src/StarWarsData.Models/Timeline/TemporalFacet.cs](../../src/StarWarsData.Models/Timeline/TemporalFacet.cs) (namespace `StarWarsData.Models.Entities`), `GraphNode.TemporalFacets` exists, and facets are populated by `NodeBuilderBase` (per-type builders, Design-024). Phase 1 (node facets), Phase 2 (indexes/queries), and Phase 3 (edge temporal derivation) landed. The "To Revisit" `TemporalExplicit` flag below was **not** added as designed; instead edge temporal provenance is tracked via `EdgeMeta.BoundsSource` (`EdgeBoundsSource` enum: Infobox/Lifecycle/Holocron/Unknown) — see [Design-021](./021-edge-bound-provenance.md). Phase 4 vague-date resolution remains unbuilt.
 
 ## Problem
 

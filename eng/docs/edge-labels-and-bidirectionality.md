@@ -10,7 +10,7 @@
 - [ADR-006 Long-running AI workflows](../adr/006-long-running-ai-workflow-pipelines.md)
 - [Design-002 Edge quality](../design/002-edge-quality.md)
 - [Design-007 KG bidirectional edges view](../design/007-kg-bidirectional-edges-view.md)
-- [Design-007 Per-type builders](../design/007-kg-per-type-builders.md)
+- [Design-035 Per-type builders](../design/035-kg-per-type-builders.md)
 - [Design-008 Hierarchy helpers](../design/008-kg-hierarchy-helpers.md)
 - [Design-013 Property/edge duality](../design/013-kg-property-edge-duality.md)
 - [Design-018 KG enrichments architecture](../design/018-kg-enrichments-architecture.md)

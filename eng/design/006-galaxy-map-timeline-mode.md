@@ -1,14 +1,14 @@
 # Design: Galaxy Map — Temporal Explore vs. Timeline Modes
 
-**Status:** Draft
+**Status:** Proposal — not built (verified 2026-05-18). No temporal fields on `GalaxyGeography` DTOs, no `GeoStructure`/`BodyTemporal`/`RouteTemporal` on `GalaxyOverviewDocument`, and no `applyTemporalBaseFilter`/`clearTemporalBaseFilter` in `galaxy-map-unified.js`. The temporal base-geography filter described here has not been implemented. (`TerritorySnapshot.StartYear/EndYear` is the unrelated per-year territory-control overlay, not this design's base-layer filter.)
 **Date:** 2026-04-05
-**Companion docs:** [003-galaxy-map-temporal.md](003-galaxy-map-temporal.md), [004-galaxy-map-architecture.md](004-galaxy-map-architecture.md), [001-temporal-facets.md](001-temporal-facets.md)
+**Companion docs:** [034-galaxy-map-temporal.md](034-galaxy-map-temporal.md), [004-galaxy-map-architecture.md](004-galaxy-map-architecture.md), [001-temporal-facets.md](001-temporal-facets.md)
 
 ## Problem
 
 The Galaxy Map has two modes (Explore and Timeline) but only the **overlays** (territory shading, event heatmap, markers) are temporal. The **base geography layer** — regions, trade routes, celestial bodies, nebulas, systems — is a single static snapshot rendered identically in both modes. Scrubbing the timeline to 100 BBY still shows Starkiller Base, Alderaan is alive in 4 ABY, trade routes that were not established until the High Republic appear in the Old Republic, and Death Star II orbits Endor in 200 BBY.
 
-The KG already carries the data needed to fix this (`construction.start/end`, `creation.start/end`, `institutional.start/end`, edge temporal bounds) — the ETL and rendering pipeline just ignore it for the base layer. See `003-galaxy-map-temporal.md` §6–§8 for the adjacent territory/events work that has already been designed.
+The KG already carries the data needed to fix this (`construction.start/end`, `creation.start/end`, `institutional.start/end`, edge temporal bounds) — the ETL and rendering pipeline just ignore it for the base layer. See `034-galaxy-map-temporal.md` §6–§8 for the adjacent territory/events work that has already been designed.
 
 ## Goals
 
@@ -36,9 +36,9 @@ The signals below already exist in `kg.nodes` / `kg.edges` after the 2026-04-04 
 | --- | --- | --- |
 | `construction.start` / `construction.end` / `construction.rebuilt` | `TemporalFacet.Semantic` on nodes | Celestial bodies destroyed (Alderaan, Jedha, Hosnian Prime, Scarif), structures built/destroyed (Death Stars, Starkiller, Starforge, Citadel Station), starships commissioned/retired |
 | `creation.start` / `creation.end` / `creation.discovered` | `TemporalFacet.Semantic` | Artifacts, devices — less relevant to the map |
-| `institutional.start` / `end` / `reorganized` / `restored` / `fragmented` | `TemporalFacet.Semantic` on Government / Organization | Faction lifecycle (already designed in `003-galaxy-map-temporal.md` §7) |
+| `institutional.start` / `end` / `reorganized` / `restored` / `fragmented` | `TemporalFacet.Semantic` on Government / Organization | Faction lifecycle (already designed in `034-galaxy-map-temporal.md` §7) |
 | Edge `FromYear` / `ToYear` on `end_points`, `transit_points`, `has_object`, `affiliated_with`, `has_capital` | `RelationshipEdge` | When each relationship was active |
-| `took_place_at` + `belligerent` from Battle nodes | `kg.edges` | Military presence inference (already designed in `003-galaxy-map-temporal.md` §6) |
+| `took_place_at` + `belligerent` from Battle nodes | `kg.edges` | Military presence inference (already designed in `034-galaxy-map-temporal.md` §6) |
 
 What's **not** in the KG today:
 

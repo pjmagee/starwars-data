@@ -2,9 +2,9 @@
 
 **Status:** Reference (current state)
 **Date:** 2026-04-05
-**Companion docs:** [001-temporal-facets.md](001-temporal-facets.md), [003-galaxy-map-temporal.md](003-galaxy-map-temporal.md)
+**Companion docs:** [001-temporal-facets.md](001-temporal-facets.md), [034-galaxy-map-temporal.md](034-galaxy-map-temporal.md)
 
-This document describes how the Galaxy Map page is built, served, and rendered **today**. It is a snapshot of current state — future improvements live in `003-galaxy-map-temporal.md`.
+This document describes how the Galaxy Map page is built, served, and rendered **today**. It is a snapshot of current state — future improvements live in `034-galaxy-map-temporal.md`.
 
 ## Overview
 
@@ -95,7 +95,7 @@ Steps:
 1. **Load territory source** from `kg.nodes` (governments, factions) and `kg.edges` (`in_region`, `affiliated_with` with `fromYear`/`toYear`). Build `planetToRegion` and `temporalAffiliations : (faction, region, fromYear, toYear)`.
 2. **Build grid lookup** by scanning `raw.pages` for infoboxes with `Grid square` + `Region` labels. Produces `planetToGrid : pageId → (col, row)` and `nameToGrid` for fuzzy lookup. Grid bounds are computed from the data (not hardcoded).
 3. **Build adjacency list** from *all* edges (across continuities) so BFS can resolve an event's location by walking from an event node to its nearest planet/system with a grid cell.
-4. **Load event nodes** from `kg.nodes` where `StartYear is not null`. Group by type (= lens) and by year. For conflict/institutional nodes with an end year, span all years in the range (capped at 100 to prevent pathological wars). See `003-galaxy-map-temporal.md` §5, §8 for the known limitations here (calendar filter, first-facet heuristic).
+4. **Load event nodes** from `kg.nodes` where `StartYear is not null`. Group by type (= lens) and by year. For conflict/institutional nodes with an end year, span all years in the range (capped at 100 to prevent pathological wars). See `034-galaxy-map-temporal.md` §5, §8 for the known limitations here (calendar filter, first-facet heuristic).
 5. **Load era nodes** from `kg.nodes` (`type = Era`).
 6. **Collect all years** from governments + events, then for each year compute `ComputeRegionControls` by filtering `temporalAffiliations` on `fromYear <= year <= toYear`.
 7. **Write `galaxy.years`**: one `GalaxyYearDocument` per year + one `GalaxyOverviewDocument` with factions, eras, available years.

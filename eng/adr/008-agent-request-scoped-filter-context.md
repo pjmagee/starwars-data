@@ -1,9 +1,23 @@
 # ADR-008: Agent tools consume a request-scoped filter context
 
-**Status:** Proposed
+**Status:** Accepted
 **Date:** 2026-04-30
 **Decision maker:** Patrick Magee
 **Cross-refs:** [ADR-002 AI Agent Toolkits](002-ai-agent-toolkits.md), [Design-022 Page-Aware Copilot Sidebar](../design/022-galaxy-map-copilot.md), [Design-029 Continuity-aware Agent Tools](../design/029-agent-filter-context.md)
+
+> **Update (2026-05-18):** Option C is no longer a proposal — Phase 1 shipped on
+> the `feature/copilot-sidebar` branch (merged to `main`, commits `616ae44dd2` /
+> `4fae7aad1d`). `ICurrentRequestContext`
+> (`src/StarWarsData.Services/AI/RequestContext/ICurrentRequestContext.cs`),
+> `AguiEnvelopeParserMiddleware`
+> (`src/StarWarsData.Services/AI/RequestContext/AguiEnvelopeParserMiddleware.cs`),
+> and GraphRAGToolkit continuity-defaulting-from-context are live. Design-022
+> (the copilot sidebar / envelope wire format) is now Shipped (Phases 1–2);
+> Design-029 is Partially shipped — only Phase 1 of its rollout landed
+> (context service + middleware + GraphRAGToolkit defaulting). Phases 2–4 of
+> Design-029 (the remaining ~5–10 tools, `get_galaxy_year` return filtering,
+> Mongo MCP wrappers, prompt-line removal) are **not yet built**; the
+> "Consequences" section below still describes them as pending work.
 
 ## Context
 

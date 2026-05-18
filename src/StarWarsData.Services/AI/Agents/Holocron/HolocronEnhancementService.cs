@@ -15,8 +15,10 @@ namespace StarWarsData.Services.AI.Agents.Holocron;
 ///
 /// <list type="number">
 ///   <item>Construct one fresh executor per stage (state isolation per run).</item>
-///   <item>Wire them with <see cref="WorkflowBuilder.AddEdge"/> into a 5-step
-///         sequential workflow with the Apply executor as the output node.</item>
+///   <item>Wire them with <see cref="WorkflowBuilder.AddEdge"/> into a 6-step
+///         sequential workflow (discovery → bundler → extractor → consolidator
+///         → verifier → apply) with the Apply executor as the output node.
+///         The verifier stage was added per ADR-007.</item>
 ///   <item>Resume-if-possible from <see cref="MongoCheckpointStore"/>; otherwise
 ///         start a fresh run keyed by session id <c>holocron-enhance-{pageId}</c>.</item>
 ///   <item>Stream events from <see cref="StreamingRun.WatchStreamAsync"/> and

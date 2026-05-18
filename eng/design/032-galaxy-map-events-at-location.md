@@ -1,9 +1,42 @@
 # Design-032: Events at Location (Galaxy Map Explore Mode)
 
-**Status:** Proposal
+**Status:** Implemented (Phase 1 — direct edges; Phase 1.5 enrichment overlay deferred)
 **Date:** 2026-04-30
 **Author:** Patrick Magee + Claude
 **Related:** [Design-004 Galaxy Map Architecture](004-galaxy-map-architecture.md), [Design-030 Citation Link Resolver](030-citation-link-resolver.md), [Design-031 Galaxy Map Deep-Link Route](031-galaxy-map-deep-link-route.md)
+
+> **Shipped 2026-05-18.** `SpatialEventLabels` (`Models/KnowledgeGraph/`),
+> `EventsAtLocationService`, `GET /api/galaxy-map/locations/{pageId}/events`
+> (continuity + realm filtered, `kg.edges` direct read, dedup keeping the
+> most-specific label, BBY→ABY sort with nulls last), the side-panel "Events
+> at this location" section (category chips + date/title sort + 20-row cap +
+> show-more), `?event=` deep-link (auto-expand + `scrollEventIntoView` flash),
+> and the KG edge-row `BuildGalaxyMapHref` upgrade (Event-family source →
+> `?event=`). The implementation-order item 6 (**Citation Link Resolver
+> wiring**) is also done: Design-030's resolver emits
+> `/galaxy-map/{loc}?event={src}` for Event-family citations whose spatial
+> target is found via an indirect KG hop (verified: Battle of Yavin →
+> `/galaxy-map/499934?event=452305`).
+>
+> **Phase 2 roll-up shipped 2026-05-18 (follow-up pass).** Standing on a
+> System / Sector / Region now aggregates the events of everything it
+> contains, via one capped bulk hop over the inverse `in_system` /
+> `in_sector` / `in_region` containment edges (`MaxDescendants = 4000`). The
+> result carries `Scope` + `RolledUpLocations`; the panel title switches to
+> "Events across this system/sector/region" with an "Aggregated across N
+> places" caption. Two UX bugs fixed in the same pass: (a) `OnSystemSelected`
+> only loaded events on the *first* selection (`_detailPage is null` guard) —
+> now reloads whenever the focused system changes; (b) a zero-event node
+> rendered nothing at all — the section now always shows for a spatial
+> entity with a "No recorded events …" empty state. Verified in-browser:
+> Yavin **system** (`/galaxy-map/499934`) → "Events across this system",
+> 42 events rolled up from 32 child locations (11 under the Canon filter).
+>
+> 8 EventsAtLocation + 7 resolver integration tests + 190 unit tests pass.
+> Verified in-browser on Yavin 4 (`/galaxy-map/453302`, `?event=483626`).
+> **Phase 1.5** (overlay `kg.edge_enrichments` with an "agent-derived"
+> badge) and the **Phase 2 materialised view** (only if the union becomes a
+> hot path) remain open per the sections below.
 
 ## Problem
 
@@ -269,12 +302,17 @@ string BuildGalaxyMapHref(int locationId, GraphNode source) =>
 
 ## Open questions
 
-- **Region / Sector roll-up.** Should standing on a Sector list events
-  that happened on any system *within* the sector? Yes for sectors and
-  regions probably — the user is looking at "Outer Rim" expecting wars
-  fought there. Implementation is a one-hop graph walk (location → has-
-  system → events) that gets expensive on large regions. Phase 1 ships
-  *direct edges only*. Phase 2 adds a roll-up toggle.
+- **Region / Sector roll-up.** ✅ **Resolved 2026-05-18.** Standing on a
+  System / Sector / Region aggregates events from everything it contains,
+  via one capped bulk hop over the inverse `in_system` / `in_sector` /
+  `in_region` containment edges (`MaxDescendants = 4000`). It's always-on
+  (not a toggle) because a container node almost never carries its own
+  direct event edges — without the roll-up the section was empty and looked
+  broken. Large regions are bounded by the descendant cap; the per-row
+  frontend cap (20 + show-more) still applies. The deeper-than-one-hop case
+  (Region → Sector → System → body) is covered because every entity carries
+  a *direct* `in_region` / `in_sector` edge to each ancestor, so one query
+  per level suffices — no recursive walk.
 - **Trade routes.** Events that happened *along* a route (skirmishes,
   patrols) are an edge type we don't currently model. Defer to ETL.
 - **Per-faction filter.** "Show only Empire-side events at Yavin 4."

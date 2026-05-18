@@ -1,6 +1,6 @@
 # Design 013: KG-as-Single-Source-of-Truth + Tool Routing Fix
 
-**Status:** Partially shipped 2026-04-11 (dropped-fields fallthrough). Tool routing fix deferred.
+**Status:** Shipped. Dropped-fields fallthrough landed 2026-04-11; the deferred tool-routing fix (Layer A self-correcting hints + Layer B sharpened descriptions) shipped 2026-04-25 in `KGAnalyticsToolkit` (commit `6fb0a44760`).
 **Date:** 2026-04-11
 **Owner:** Patrick Magee
 
@@ -104,9 +104,11 @@ Phase 5 has been re-run against `starwars-dev` and the KG is now at **166,424 no
 
 ## What's deferred (pending a follow-up session)
 
-- **Layer A (self-correcting hints)** on `count_nodes_by_property`, `count_nodes_by_properties`, `count_property_for_related_entities`.
-- **Layer B (sharpened descriptions)** on the same four tools plus `group_entities_by_connection`.
-- **Deletion of Pages-side duplicates.** Per Patrick's north star, Pages-side tools should be retired as KG reaches coverage parity. `list_relationship_labels` is a clean deletion candidate (strict subset of `describe_relationship_labels`). `sample_property_values`, `get_page_property`, and similar are deletable once the KG-side routing is tight enough that the agent never needs to fall back to raw.
+**Update 2026-05-18:** Layers A and B shipped (verified below). The remaining bullet (Pages-side deletion) is the only deferred item.
+
+- ~~**Layer A (self-correcting hints)** on `count_nodes_by_property`, `count_nodes_by_properties`, `count_property_for_related_entities`.~~ **Shipped 2026-04-25** — `KGAnalyticsToolkit.cs` emits a structured `note` + `RecommendedEdgeLabels` redirecting to `group_entities_by_connection` when a property aggregation comes back sparse (< 20 rows).
+- ~~**Layer B (sharpened descriptions)** on the same four tools plus `group_entities_by_connection`.~~ **Shipped 2026-04-25** — `[Description]` on `count_nodes_by_property` / `group_entities_by_connection` in `KGAnalyticsToolkit.cs` now carries the scalar-vs-link-bearing routing rule and the self-correction read order.
+- **Deletion of Pages-side duplicates.** Per Patrick's north star, Pages-side tools should be retired as KG reaches coverage parity. `list_relationship_labels` has been removed from `GraphRAGToolkit`. `sample_property_values`, `get_page_property`, and similar are deletable once the KG-side routing is tight enough that the agent never needs to fall back to raw.
 
 ## What we tried first and why it was wrong
 
@@ -119,7 +121,7 @@ Lessons:
 1. **When the KG is the source of truth, check both collections before concluding anything is missing.** `kg.nodes.properties` is only one half of the model; `kg.edges` carries link-bearing facts and normalizes them into typed relationships. A low property-count for a field name is normal, not alarming.
 2. **Don't propose data-layer fixes for tool-layer bugs.** If the data is correct and complete but the agent is asking the wrong tool for it, the fix is in the tool descriptions or the tool routing, not in the storage shape.
 3. **Edge labels are normalized, field names are not.** "Species" on a Character page corresponds to the edge label `species`, "Place of origin" on a Food page corresponds to `originates_from`, "commanders1" on a Battle page corresponds to `commanded_by`. An agent (or a tool) trying to route between them needs to know the mapping. The routing layer should either (a) know the mapping, or (b) derive it from the label normalization function (`NormaliseLabel` in InfoboxGraphService) + the InfoboxDefinitionRegistry relationship labels.
-4. **The `kg.labels` registry already exists** ([ADR-003 / Design-007 / project_kg_labels_registry memory](project_kg_labels_registry)) as a materialized view of all edge labels with usage counts, from/to types, and descriptions. The self-correcting hint can query this directly instead of running an ad-hoc aggregation.
+4. **The `kg.labels` registry already exists** ([ADR-003 / Design-035 / project_kg_labels_registry memory](project_kg_labels_registry)) as a materialized view of all edge labels with usage counts, from/to types, and descriptions. The self-correcting hint can query this directly instead of running an ad-hoc aggregation.
 
 ## References
 

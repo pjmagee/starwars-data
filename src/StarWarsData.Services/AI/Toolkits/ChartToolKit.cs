@@ -27,14 +27,16 @@ public class ComponentToolkit
     public TimelineDescriptor? TimelineResult { get; private set; }
 
     const string ReferencesParamDescription =
-        "Source references (title + wikiUrl) for EVERY distinct entity represented in this visualization. "
+        "Source references for EVERY distinct entity represented in this visualization. "
+        + "PREFERRED shape: pass ONLY the entity's `pageId` (verbatim from a KG tool result — search_entities, "
+        + "get_entity_relationships, count_nodes_by_property sources[], etc). The system resolves the name and "
+        + "every navigation link (wiki, graph, galaxy map, timeline) — you do not pass a url. Use the legacy "
+        + "title+url shape ONLY for a source that has no pageId. "
         + "If the chart/table/graph has N named entity rows, segments, or nodes, you MUST provide N references — "
-        + "one per item — using the wikiUrls returned from the KG tools (search_entities, get_entity_relationships, "
-        + "count_nodes_by_property sources[], etc). Do NOT curate a subset, do NOT limit to 'the top 5', and do NOT "
-        + "omit references for items you didn't write about in prose. Every chart segment, every data_table row, "
-        + "and every graph node with a known source MUST be citable in `references`. If an individual item has no "
-        + "known wikiUrl (e.g. it came from aggregation with no source attached) omit only that one entry, keeping "
-        + "references for the rest. A 50-item donut chart must produce ~50 references, not 8.";
+        + "one per item. Do NOT curate a subset, do NOT limit to 'the top 5', and do NOT omit references for items "
+        + "you didn't write about in prose. If an individual item has neither a pageId nor a url (e.g. it came from "
+        + "aggregation with no source attached) omit only that one entry. A 50-item donut chart must produce ~50 "
+        + "references, not 8. Never invent a pageId or url.";
 
     const string MobileSummaryParamDescription =
         "REQUIRED for mobile users. Concise markdown summary (3-6 bullet points or short paragraphs) of "

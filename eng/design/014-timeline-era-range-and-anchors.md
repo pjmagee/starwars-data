@@ -1,6 +1,6 @@
 # Design 014: Timeline Era Range Filter & KG Temporal Anchors
 
-**Status:** Phase 1 Shipped 2026-04-14 (From/To era selects). Phase 2 Draft (KG temporal anchors).
+**Status:** Shipped 2026-04-14 (commit `95d79e7b8a`). Phase 1 (From/To era selects in `EventTimeline.razor`) and Phase 2 (anchored timeline route `/timeline/{nodeId}` — `TimelineAnchored.razor`, `NodeAnchor` model, `Timeline/anchor` endpoint) both landed in the same commit.
 **Date:** 2026-04-14
 
 ## Context
@@ -67,7 +67,9 @@ Edge case handled: continuity switch (Canon ↔ Legends) drops some era names. W
 
 A `MudSelect` with `MultiSelection=true` would be equivalent to the chip set (already there) — it doesn't solve the contiguous-range-in-one-step problem. The From/To pair is exactly the "I want everything between A and B" metaphor, which is the dominant browsing pattern.
 
-## Phase 2: Anchored timeline route `/timeline/{nodeId}`
+## Phase 2: Anchored timeline route `/timeline/{nodeId}` (shipped)
+
+> **Shipped 2026-04-14.** Implemented as [TimelineAnchored.razor](../../src/StarWarsData.Frontend/Components/Pages/TimelineAnchored.razor) at route `/timeline/{NodeId:int}`, backed by the `NodeAnchor` model ([NodeAnchor.cs](../../src/StarWarsData.Models/Timeline/NodeAnchor.cs)) and the `Timeline/anchor` endpoint in [TimelineController.cs](../../src/StarWarsData.ApiService/Features/Timeline/TimelineController.cs). The route uses an `int` NodeId rather than the string id sketched below; the rest of the design (semantic-dimension picker, era-filter composition) is reflected in the implementation. The remaining subsections capture the original proposal.
 
 ### Proposal
 

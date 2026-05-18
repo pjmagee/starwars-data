@@ -447,18 +447,30 @@ public class AurebeshDescriptor
 
 // ── References ────────────────────────────────────────────────────────
 
-[Description("A source reference link from a wiki page")]
+/// <summary>
+/// A source citation. Design-030 Phase 3: the preferred shape is just a
+/// <see cref="PageId"/> — the server-side citation resolver turns that into a
+/// name + the full set of navigation surfaces (Wiki / Graph / Galaxy Map /
+/// Timeline / Holocron). The legacy <see cref="Title"/> + <see cref="Url"/>
+/// pair is still accepted (and is the only option for non-KG sources), so old
+/// persisted chat sessions keep rendering unchanged.
+/// </summary>
+[Description(
+    "A source reference. Prefer passing the entity's pageId (from a KG tool result) and nothing else — the system resolves the name and links. Fall back to title+url only for sources with no pageId."
+)]
 public class Reference
 {
+    [JsonPropertyName("pageId")]
+    [Description("The KG pageId of the cited entity, taken verbatim from a tool result. Preferred. Never invent one — if you don't have a pageId, use title+url instead.")]
+    public int? PageId { get; set; }
+
     [JsonPropertyName("title")]
-    [Required]
-    [Description("Display title of the source page")]
-    public string Title { get; set; } = string.Empty;
+    [Description("Display title of the source page. Only needed when there is no pageId.")]
+    public string? Title { get; set; }
 
     [JsonPropertyName("url")]
-    [Required]
-    [Description("The Wookieepedia URL for the source page")]
-    public string Url { get; set; } = string.Empty;
+    [Description("The Wookieepedia URL for the source page. Only needed when there is no pageId.")]
+    public string? Url { get; set; }
 }
 
 // ── Chart data types ───────────────────────────────────────────────────

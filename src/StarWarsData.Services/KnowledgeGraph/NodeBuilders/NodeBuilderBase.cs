@@ -15,7 +15,7 @@ namespace StarWarsData.Services.KnowledgeGraph.NodeBuilders;
 /// <see cref="OnFinalize"/>, etc.) to inject type-specific behaviour without
 /// duplicating the generic loop.
 ///
-/// See <c>eng/design/007-kg-per-type-builders.md</c> for the design rationale.
+/// See <c>eng/design/035-kg-per-type-builders.md</c> for the design rationale.
 /// </summary>
 public abstract partial class NodeBuilderBase : INodeBuilder
 {

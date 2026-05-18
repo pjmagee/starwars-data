@@ -1,6 +1,8 @@
-# Design: Knowledge Graph — Per-Type Node Builders
+# Design-035: Knowledge Graph — Per-Type Node Builders
 
-**Status:** Implemented (2026-04-26). Every `KgNodeTypes` constant has its own `INodeBuilder` under `NodeBuilders/Types/`. `InfoboxGraphService` is a coordinator with an explicit registry — no monolithic generic loop, no fallback default. Type-specific extraction logic (per-type-specific behaviour beyond the shared field loop) lands incrementally per builder.
+> Renumbered from Design-007 on 2026-05-18 (resolved a duplicate-number collision).
+
+**Status:** Implemented (2026-04-26); verified still in place 2026-05-18. Every `KgNodeTypes` constant has its own `INodeBuilder` under `NodeBuilders/Types/` (70 builder files as of 2026-05-18 — grown from the 45 listed below as new node types were added). `InfoboxGraphService` remains the coordinator with an explicit registry (`RegisterAllBuilders`, `_builders.GetValueOrDefault(...)`) — no monolithic generic loop, no reflection. Type-specific extraction logic (per-type-specific behaviour beyond the shared field loop) lands incrementally per builder.
 **Date:** 2026-04-06 (proposal); 2026-04-26 (full decomposition landed)
 **Companion docs:** [002-ai-agent-toolkits.md](../adr/002-ai-agent-toolkits.md)
 

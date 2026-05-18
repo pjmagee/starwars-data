@@ -1,6 +1,6 @@
 # Design-008: KG Hierarchy Helpers — Precomputed Lineage Closures on `kg.nodes`
 
-**Status:** Shipped (code + dev-populated + verified)
+**Status:** Shipped — lineage closures only (verified 2026-05-18). `HierarchyRegistry.Lineages`, `InfoboxGraphService.ComputeLineageClosures`, the `lineages.<key>` embedding, and the `ix_lineages_wildcard` wildcard index are all in code and run during Phase 5. The "Planned: new AI agent tools" (`is_descendant_of`, `get_ancestors`, `get_descendants_of`) are **not yet built** — no such methods exist in `GraphRAGToolkit`/`KnowledgeGraphQueryService` (still correctly labelled "Planned" below).
 **Date:** 2026-04-05
 **Author:** Patrick Magee + Claude
 

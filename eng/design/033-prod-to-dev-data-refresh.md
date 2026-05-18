@@ -1,6 +1,8 @@
 # Design: Prod → Dev Raw Data Refresh
 
-**Status:** Proposed
+**Status:** Implemented & verified 2026-05-18 — `ProdToDevSyncService` (server-side `$merge`, hard prod-write guard), `POST /api/admin/sync/prod-to-dev?since=&wipe=` (full control, endpoint-only) plus a dedicated clean `POST /api/admin/sync/prod-to-dev/recent` route, and the `↩ Pull Prod → Dev (raw, last 14d)` Aspire command on the `admin` resource. Open Questions resolved per their proposed defaults: additive `$merge` by default with explicit `?wipe=true` for a true mirror (Q1); full-mirror is endpoint-only, only the 14d slice is a dashboard one-click (Q2); `raw.job_state` left untouched (Q3). **Verified against a live isolated AppHost (both DBs on one `mongod`):** the `since=60` slice merged 18,552 prod pages into `starwars-dev` server-side — a sentinel field planted on a dev doc was overwritten by prod's version (proving `whenMatched: replace`), counts stayed 224,796/224,796 (additive, no loss, prod untouched); the Aspire dashboard command executed end-to-end (`mode=since-14d`, slice empty as expected given stale test data).
+
+**Implementation deviation from the draft below:** the draft's Aspire command used `path: "/api/admin/sync/prod-to-dev?since=14"`. Aspire's `WithHttpCommand` treats the whole `path` literally and URL-encodes the `?`, so the server never sees a query string and returns 404. Fixed by adding a dedicated clean route `POST /api/admin/sync/prod-to-dev/recent` (hardcodes the 14-day slice, no wipe) that the Aspire command targets — consistent with every other plain-path admin command and with Q2 (full-mirror/wipe stays on the query-param route, off the one-click surface). The code blocks below are kept as the original rationale; the shipped controller has both routes.
 **Date:** 2026-05-18
 **Author:** Patrick Magee + Claude
 **Companion docs:** [Design-010](010-mongodb-migration-environment-promotion.md) (the forward, dev→prod direction), [ADR-005](../adr/005-mongodb-migration-strategy.md)
@@ -194,9 +196,11 @@ Steps 2–5 are exactly the existing Aspire commands — this design adds only s
 
 ## Open Questions
 
-1. **True-mirror semantics** — `$merge` never deletes, so dev pages absent from prod (or from the slice) linger. Should a `?wipe=true` flag `DeleteMany({})` dev's `raw.pages` before the `$merge` (true mirror, removes upstream-deleted pages), accepting that it briefly empties the collection? Proposed: additive `$merge` by default; explicit `?wipe=true` for a true full mirror only.
-2. **Expose full-mirror as a dashboard one-click**, or endpoint-only? Proposed: endpoint-only to keep the heavy/destructive case off the single-click surface.
-3. **`raw.job_state` handling** — leave dev's cursor untouched (proposed) vs. seed it from prod so a subsequent dev incremental sync continues from prod's position. Leaving it untouched avoids the Dashboard "Recently Synced" panel misreporting a copy as a wiki sync.
+*All resolved at implementation (2026-05-18) per their proposed defaults — kept here for the rationale.*
+
+1. **[Resolved: implemented as proposed]** **True-mirror semantics** — `$merge` never deletes, so dev pages absent from prod (or from the slice) linger. Should a `?wipe=true` flag `DeleteMany({})` dev's `raw.pages` before the `$merge` (true mirror, removes upstream-deleted pages), accepting that it briefly empties the collection? Proposed: additive `$merge` by default; explicit `?wipe=true` for a true full mirror only.
+2. **[Resolved: endpoint-only]** **Expose full-mirror as a dashboard one-click**, or endpoint-only? Proposed: endpoint-only to keep the heavy/destructive case off the single-click surface.
+3. **[Resolved: left untouched]** **`raw.job_state` handling** — leave dev's cursor untouched (proposed) vs. seed it from prod so a subsequent dev incremental sync continues from prod's position. Leaving it untouched avoids the Dashboard "Recently Synced" panel misreporting a copy as a wiki sync.
 
 ## Future Work
 

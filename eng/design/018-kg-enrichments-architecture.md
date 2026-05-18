@@ -1,9 +1,9 @@
 # Design-018: Knowledge Graph Enrichments Architecture
 
-**Status:** Proposal
+**Status:** Implemented (2026-04-26 → 2026-04-28). Architecture shipped on `main`: `kg.enrichments`/`kg.edge_enrichments`/`kg.events` collections + `kg.nodes.enriched`/`kg.edges.enriched` views (migrations 0009/0010), HolocronAgent + async pipeline, Stage E1 provenance UI (`f5231616d7`, `cf0916183b`, `013574df09`). The full per-consumer Stage E2–E9 migration (galaxy map, timeline, all toolkits) remains partial — see "Migration sequencing". Cross-page context gathering subsequently superseded by the tool-using agent (Design-025).
 **Date:** 2026-04-26
 **Author:** Patrick Magee + Claude
-**Related:** [Design-007 KG Per-Type Node Builders](./007-kg-per-type-builders.md), [Design-013 KG Property/Edge Duality](./013-kg-property-edge-duality.md), [ADR-003 KG Query Architecture](../adr/003-kg-query-architecture.md), [ADR-005 MongoDB Migration Strategy](../adr/005-mongodb-migration-strategy.md)
+**Related:** [Design-035 KG Per-Type Node Builders](./035-kg-per-type-builders.md), [Design-013 KG Property/Edge Duality](./013-kg-property-edge-duality.md), [ADR-003 KG Query Architecture](../adr/003-kg-query-architecture.md), [ADR-005 MongoDB Migration Strategy](../adr/005-mongodb-migration-strategy.md)
 
 ## Problem
 

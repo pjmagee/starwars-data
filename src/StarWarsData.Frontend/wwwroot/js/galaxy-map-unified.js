@@ -1514,15 +1514,85 @@ export function initialize(containerId, overview, rawDotNetRef) {
                 return true;
             }
 
-            // Sector + TradeRoute deferred to Phase 2 — for now fall through
-            // to overview with the toast handled on the C# side.
+            case 'Sector':
+                return await drillToSector(payload.name);
+
+            case 'TradeRoute':
+                return highlightTradeRouteById(payload.pageId);
+
             default:
                 return false;
         }
     }
 
+    // Design-031 Phase 1: drive the breadcrumb to a sector by name. The locate
+    // endpoint only gives us the sector's name (sectors aren't grid-pinned), so
+    // we find the overview cell that holds the most systems for that sector,
+    // drill into it, then step into the sector exactly as the picker click does.
+    async function drillToSector(name) {
+        if (!name) return false;
+        while (currentLevel !== 'overview') {
+            goBack();
+            await new Promise(r => setTimeout(r, 700));
+        }
+
+        const target = (name || '').trim().toLowerCase();
+        let best = null;
+        for (const c of (overview.cells || [])) {
+            const match = (c.sectors || []).find(s => (s.name || '').trim().toLowerCase() === target);
+            if (match && (!best || match.count > best.count))
+                best = { col: c.col, row: c.row, count: match.count };
+        }
+        if (!best) return false;
+
+        await drillIntoCell(best.col, best.row);
+        await new Promise(r => setTimeout(r, 850));
+
+        const sysList = (lastCellSystems || []).filter(
+            s => (s.sector || 'Unknown sector').trim().toLowerCase() === target);
+        if (sysList.length === 0) return false;
+
+        currentLevel = 'sector';
+        currentSector = { name, systems: sysList, col: best.col, row: best.row };
+        dotNetRef.invokeMethodAsync('OnLevelChanged', 'sector', name);
+        renderCellSystemsDirect(sysList, best.col, best.row);
+        return true;
+    }
+
+    // Design-031 Phase 2: pulse a trade route on the overview without drilling.
+    // 3 cycles of a brighter, thicker stroke over ~2s, then restore baseline.
+    function highlightTradeRouteById(id) {
+        if (id == null) return false;
+        while (currentLevel !== 'overview') goBack();
+
+        const group = routeLayer.selectAll('.trade-route-group')
+            .filter(d => d && d.id === id);
+        if (group.empty()) return false;
+
+        const path = group.select('.trade-route');
+        if (path.empty()) return false;
+
+        let cycle = 0;
+        function pulse() {
+            if (cycle >= 3) {
+                path.transition().duration(300)
+                    .attr('stroke', 'rgba(255,215,0,0.2)').attr('stroke-width', 1.2);
+                return;
+            }
+            cycle++;
+            path.transition().duration(330)
+                .attr('stroke', 'rgba(255,215,0,0.95)').attr('stroke-width', 4)
+                .transition().duration(330)
+                .attr('stroke', 'rgba(255,215,0,0.25)').attr('stroke-width', 1.4)
+                .on('end', pulse);
+        }
+        pulse();
+        return true;
+    }
+
     _state = {
         svg, container, goBack, drillIntoCell, drillIntoRegion, drillToDeepLink,
+        drillToSector, highlightTradeRouteById,
         getCurrentLevel: () => currentLevel,
         setSystemFilter, setRegionVisibility,
         // Layers
@@ -1538,6 +1608,32 @@ export function initialize(containerId, overview, rawDotNetRef) {
 export async function drillToDeepLink(payload) {
     if (_state && _state.drillToDeepLink) return await _state.drillToDeepLink(payload);
     return false;
+}
+
+/** Drive the breadcrumb to a sector by name (Design-031 Phase 1). */
+export async function drillToSector(name) {
+    if (_state && _state.drillToSector) return await _state.drillToSector(name);
+    return false;
+}
+
+/** Pulse a trade route on the overview by KG pageId (Design-031 Phase 2). */
+export function highlightTradeRouteById(id) {
+    if (_state && _state.highlightTradeRouteById) return _state.highlightTradeRouteById(id);
+    return false;
+}
+
+/** Design-032: scroll a deep-linked "Events at this location" row into view
+ *  inside the side panel and flash it for 2s. Pure DOM — no map state. */
+export function scrollEventIntoView(elementId) {
+    const el = document.getElementById(elementId);
+    if (!el) return false;
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.classList.remove('loc-event-flash');
+    // Force reflow so the animation restarts even on repeat calls.
+    void el.offsetWidth;
+    el.classList.add('loc-event-flash');
+    setTimeout(() => el.classList.remove('loc-event-flash'), 2200);
+    return true;
 }
 
 // Lets C# verify the JS function actually executed. Blazor's SignalR layer

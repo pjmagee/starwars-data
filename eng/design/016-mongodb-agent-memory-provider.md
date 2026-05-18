@@ -1,6 +1,6 @@
 # Design-016: MongoDB Agent Memory Provider
 
-**Status:** Proposed
+**Status:** Proposed — not built (verified 2026-05-18). No `MongoMemoryContextProvider`, `MemoryEntity` model, `StarWarsData.Services.AI.Memory` namespace, or `memory.*` collections exist. The MEVD `Microsoft.SemanticKernel.Connectors.MongoDB` dependency is not referenced. Persistent per-user agent memory is entirely unimplemented; `chat.sessions` short-term history is the only existing layer.
 **Date:** 2026-04-25
 **Author:** Patrick Magee + Claude
 **Related:** [Design-003 AI Game Master](./003-ai-game-master.md), [Design-015 MongoDB GraphRAG Context Provider](./015-mongodb-graphrag-context-provider.md), [ADR-001 Internal API Auth](../adr/001-internal-api-auth.md), [CLAUDE.md (GDPR section)](../../CLAUDE.md)

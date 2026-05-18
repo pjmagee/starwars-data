@@ -12,7 +12,7 @@ namespace StarWarsData.ApiService.Controllers;
 [ApiController]
 [Route("api/galaxy-map")]
 [Produces("application/json")]
-public class GalaxyMapUnifiedController(GalaxyMapReadService readService, MapService mapService) : ControllerBase
+public class GalaxyMapUnifiedController(GalaxyMapReadService readService, MapService mapService, EventsAtLocationService eventsAtLocation) : ControllerBase
 {
     // ── Overview ─────────────────────────────────────────────────────────────
 
@@ -110,6 +110,26 @@ public class GalaxyMapUnifiedController(GalaxyMapReadService readService, MapSer
     public async Task<ActionResult<MapLocateResult>> Locate(int pageId, CancellationToken ct)
     {
         var result = await mapService.LocateAsync(pageId, ct);
+        if (result is null)
+            return NotFound($"No KG node for pageId {pageId}");
+        return Ok(result);
+    }
+
+    // ── Events at a location (Design-032) ────────────────────────────────────
+
+    /// <summary>
+    /// Every event the KG records as having happened at the spatial entity
+    /// <paramref name="pageId"/> (System / CelestialBody / Sector / Region /
+    /// TradeRoute). Date-agnostic — the full history of the place, not a single
+    /// year. Powers the "Events at this location" side-panel section and the
+    /// <c>/galaxy-map/{locId}?event={eventId}</c> deep-link. Returns 404 when
+    /// the pageId isn't a KG node.
+    /// </summary>
+    [HttpGet("locations/{pageId:int}/events")]
+    [ResponseCache(Duration = 600, VaryByQueryKeys = ["continuity", "realm"])]
+    public async Task<ActionResult<EventsAtLocationResult>> GetEventsAt(int pageId, [FromQuery] Continuity? continuity = null, [FromQuery] Realm? realm = null, CancellationToken ct = default)
+    {
+        var result = await eventsAtLocation.GetEventsAtAsync(pageId, continuity, realm, ct);
         if (result is null)
             return NotFound($"No KG node for pageId {pageId}");
         return Ok(result);

@@ -11,7 +11,6 @@ namespace StarWarsData.Admin.Controllers;
 public class AdminController(
     ILogger<AdminController> logger,
     PageDownloader pageDownloader,
-    OpenAiStatusService aiStatus,
     GalaxyMapETLService galaxyMapETLService,
     InfoboxGraphService infoboxGraphService,
     JobToggleService jobToggleService
@@ -162,6 +161,56 @@ public class AdminController(
     [HttpGet("wiki-sync/recent")]
     public async Task<StarWarsData.Models.Entities.RecentSyncStatus> GetRecentWikiSync([FromQuery] int limit = 50, CancellationToken ct = default) =>
         await pageDownloader.GetRecentSyncStatusAsync(limit, ct);
+
+    // === Prod → Dev raw data refresh (Design-033) ===
+
+    /// <summary>
+    /// Full-control prod→dev refresh. Pulls <c>raw.pages</c> backward from
+    /// <c>starwars-prod</c> into the dev database via a server-side <c>$merge</c> (no
+    /// document transits this process). Read-only against prod; the service refuses to
+    /// run if the write target is <c>starwars-prod</c>.
+    /// <para>
+    /// <c>?since=N</c> ⇒ recent slice (pages changed in the last N days). <c>since</c>
+    /// omitted ⇒ full mirror. <c>?wipe=true</c> empties dev's <c>raw.pages</c> first for
+    /// a true mirror (removes upstream-deleted pages). Endpoint-only — the full-mirror /
+    /// wipe path is deliberately kept off the one-click dashboard surface (Design-033
+    /// Open Question 2). Rebuild dev's derived data afterward via Phase 5 → 3a → 4a.
+    /// </para>
+    /// </summary>
+    [HttpPost("sync/prod-to-dev")]
+    public IActionResult RefreshFromProd([FromQuery] int? since, [FromQuery] bool wipe = false) => EnqueueProdToDevRefresh(since, wipe);
+
+    /// <summary>
+    /// Dashboard one-click: the 14-day recent slice (the QA case). A dedicated clean
+    /// route — Aspire's <c>WithHttpCommand</c> treats the whole command path literally
+    /// and URL-encodes a <c>?</c>, so a query string can't be carried by the Aspire
+    /// command. Full mirror / custom window / wipe stay on the query-param route above.
+    /// </summary>
+    [HttpPost("sync/prod-to-dev/recent")]
+    public IActionResult RefreshFromProdRecent() => EnqueueProdToDevRefresh(14, wipe: false);
+
+    IActionResult EnqueueProdToDevRefresh(int? since, bool wipe)
+    {
+        try
+        {
+            if (IsJobAlreadyActive(typeof(ProdToDevSyncService), nameof(ProdToDevSyncService.RefreshRawPagesAsync)))
+                return Conflict(new { error = "A prod→dev refresh is already running." });
+
+            var jobId = BackgroundJob.Enqueue<ProdToDevSyncService>(s => s.RefreshRawPagesAsync(since, wipe, CancellationToken.None));
+            return Accepted(
+                new
+                {
+                    jobId,
+                    mode = since is null ? "full" : $"since-{since}d",
+                    wipe,
+                }
+            );
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { error = ex.Message });
+        }
+    }
 
     [HttpPost("mongo/ensure-indexes")]
     public ActionResult<string> EnqueueEnsureIndexes()
@@ -500,11 +549,6 @@ public class AdminController(
         var summary = await holocron.RunStalenessSweepAsync(ct);
         return Ok(summary);
     }
-
-    // === OpenAI Status ===
-
-    [HttpGet("openai/status")]
-    public OpenAiHealthReport GetOpenAiStatus() => aiStatus.GetHealthReport();
 
     // === Job Toggles ===
 

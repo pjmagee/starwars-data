@@ -1,6 +1,6 @@
 # Design-007: KG Bidirectional Edges View + Planned `QueryGraphAsync` Rewrite
 
-**Status:** Partially Shipped (view landed; `QueryGraphAsync` rewrite pending)
+**Status:** Partially Shipped — view + `reverseLabel` denormalization landed; `QueryGraphAsync` rewrite still pending (verified 2026-05-18). `InfoboxGraphService.EnsureBidirectionalEdgesViewAsync` and the `reverseLabelMap`/`ReverseLabel` enrichment are in code. `KnowledgeGraphQueryService.QueryGraphAsync` still performs the manual hop-by-hop BFS (`outgoingLabelFilter`/`inboundLabelFilter`/`forwardToReverse` against `kg.edges`, no `$graphLookup` over `kg.edges.bidir`) — the rewrite in §"Planned" has not been done.
 **Date:** 2026-04-05
 **Author:** Patrick Magee + Claude
 

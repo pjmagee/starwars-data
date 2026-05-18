@@ -1,22 +1,92 @@
 @using StarWarsData.Models.Queries
+@inject IHttpClientFactory HttpClientFactory
+@inject ILogger<AskReferencesSection> Logger
 
-@if (References is { Count: > 0 })
+@*
+    Design-030 Phase 3. References now arrive in one of two shapes:
+      • { pageId }            → resolved server-side into a rich CitationCard
+                                 (Wiki / Graph / Galaxy Map / Timeline / Holocron)
+      • { title, url }        → legacy chip, the only option for non-KG sources
+                                 and what old persisted sessions carry
+    Both render side by side; resolution failure degrades to nothing extra.
+*@
+
+@if (_resolved is { Count: > 0 } || _legacy is { Count: > 0 })
 {
     <MudDivider Class="mt-4 mb-2" />
     <MudText Typo="Typo.subtitle2" Color="Color.Secondary" Class="mb-1">Sources</MudText>
-    <MudStack Row="true" Spacing="2" Wrap="Wrap.Wrap">
-        @foreach (var reference in References.DistinctBy(r => r.Url))
-        {
-            <MudLink Href="@reference.Url" Target="_blank" Typo="Typo.caption" Color="Color.Info"
-                     Underline="Underline.Hover">
-                @reference.Title
-                <MudIcon Icon="@Icons.Material.Filled.OpenInNew" Size="Size.Small" Class="ml-1" Style="font-size:0.75rem; vertical-align:middle;" />
-            </MudLink>
-        }
-    </MudStack>
+
+    @if (_resolved is { Count: > 0 })
+    {
+        <MudStack Row="true" Spacing="2" Wrap="Wrap.Wrap" Class="mb-2">
+            @foreach (var r in _resolved)
+            {
+                <CitationCard Reference="r" />
+            }
+        </MudStack>
+    }
+
+    @if (_legacy is { Count: > 0 })
+    {
+        <MudStack Row="true" Spacing="2" Wrap="Wrap.Wrap">
+            @foreach (var reference in _legacy)
+            {
+                <MudLink Href="@reference.Url" Target="_blank" Typo="Typo.caption" Color="Color.Info"
+                         Underline="Underline.Hover">
+                    @reference.Title
+                    <MudIcon Icon="@Icons.Material.Filled.OpenInNew" Size="Size.Small" Class="ml-1" Style="font-size:0.75rem; vertical-align:middle;" />
+                </MudLink>
+            }
+        </MudStack>
+    }
 }
 
 @code {
-    [Parameter]
-    public List<Reference>? References { get; set; }
+    [Parameter] public List<Reference>? References { get; set; }
+
+    List<CitationReference>? _resolved;
+    List<Reference>? _legacy;
+    int[] _lastResolvedIds = [];
+
+    HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var refs = References ?? [];
+
+        // Legacy = no pageId but a usable url. Dedup on url like before.
+        _legacy = refs
+            .Where(r => r.PageId is null && !string.IsNullOrEmpty(r.Url))
+            .DistinctBy(r => r.Url)
+            .ToList();
+
+        var ids = refs
+            .Where(r => r.PageId is > 0)
+            .Select(r => r.PageId!.Value)
+            .Distinct()
+            .ToArray();
+
+        // Skip the round trip when the id set hasn't changed (re-render churn).
+        if (ids.Length == 0)
+        {
+            _resolved = null;
+            _lastResolvedIds = [];
+            return;
+        }
+        if (ids.SequenceEqual(_lastResolvedIds))
+            return;
+        _lastResolvedIds = ids;
+
+        try
+        {
+            var response = await Http.PostAsJsonAsync("api/citations/resolve", new { pageIds = ids });
+            if (response.IsSuccessStatusCode)
+                _resolved = await response.Content.ReadFromJsonAsync<List<CitationReference>>();
+        }
+        catch (Exception ex)
+        {
+            // Citations are additive — a failed resolve just means no cards.
+            Logger.LogDebug(ex, "Citation resolve failed for {Count} ids", ids.Length);
+        }
+    }
 }

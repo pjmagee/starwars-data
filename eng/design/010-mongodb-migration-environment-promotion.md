@@ -1,6 +1,6 @@
 # Design: MongoDB Migration & Environment Promotion
 
-**Status:** Implemented
+**Status:** Implemented (2026-04-06). Migration infrastructure (`src/StarWarsData.MongoDbMigrations/`) is live; the initial 8-migration set has since grown to 17 (`0001`–`0017`) following the same module format. "Future Work" items (Admin dashboard `/api/admin/migrations` endpoints, cross-env diff report, pre-deploy CI check) remain unbuilt as of 2026-05-18.
 **Date:** 2026-04-06
 **Author:** Patrick Magee + Claude
 **Companion docs:** [ADR-005](../adr/005-mongodb-migration-strategy.md), [ADR-003](../adr/003-kg-query-architecture.md)

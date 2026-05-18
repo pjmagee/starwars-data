@@ -1,6 +1,6 @@
 # 021 — Edge bound provenance
 
-Status: in progress
+Status: Shipped (2026-04-28, `5a3506646d`). All phases landed: `EdgeBoundsSource` enum + `EdgeMeta.BoundsSource`, write-side tagging at both sites (`NodeBuilderBase.cs` → Infobox, `InfoboxGraphService.cs` → Lifecycle), `HolocronAgent` FillGap refinable check + `[infobox, hard]`/`[lifecycle, refinable]` prompt annotation, read-side merge in `KnowledgeGraphQueryService`, and retroactive Migration 0015 (`0015-edge-bounds-source-tagging.js`).
 Date: 2026-04-27
 Author: Patrick Magee
 Cross-refs: [Design-001 — Temporal facets](001-temporal-facets.md), [Design-002 — Edge quality](002-edge-quality.md), [Design-018 — KG enrichments architecture](018-kg-enrichments-architecture.md), [Design-020 — Async Holocron pipeline](020-holocron-async-pipeline.md), [ADR-006 — long-running AI workflow pipelines](../adr/006-long-running-ai-workflow-pipelines.md)

@@ -30,6 +30,7 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddAGUI();
 builder.Services.AddResponseCaching();
+builder.Services.AddMemoryCache();
 
 builder
     .Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -50,6 +51,7 @@ builder
     .AddSingleton<AskRateLimiter>()
     .AddSingleton<SearchRateLimiter>()
     .AddSingleton<UserSettingsService>()
+    .AddSingleton<CorpusStatsService>()
     .AddHttpClient<KeycloakAdminService>()
     .Services.AddSingleton<ByokChatClient>(sp =>
     {
@@ -73,6 +75,7 @@ builder
     .AddScoped<RecordService>()
     .AddScoped<TimelineService>()
     .AddScoped<MapService>()
+    .AddScoped<EventsAtLocationService>()
     .AddScoped<GalaxyMapReadService>()
     .AddScoped<ICitationResolver, CitationResolver>()
     .AddScoped<CurrentRequestContext>()
