@@ -159,6 +159,10 @@ public class AdminController(
         }
     }
 
+    [HttpGet("wiki-sync/recent")]
+    public async Task<StarWarsData.Models.Entities.RecentSyncStatus> GetRecentWikiSync([FromQuery] int limit = 50, CancellationToken ct = default) =>
+        await pageDownloader.GetRecentSyncStatusAsync(limit, ct);
+
     [HttpPost("mongo/ensure-indexes")]
     public ActionResult<string> EnqueueEnsureIndexes()
     {
@@ -327,68 +331,6 @@ public class AdminController(
         }
     }
 
-    [HttpPost("mongo/submit-graph-batch")]
-    public ActionResult<string> EnqueueSubmitGraphBatch()
-    {
-        try
-        {
-            if (IsJobAlreadyActive(typeof(RelationshipGraphBuilderService), nameof(RelationshipGraphBuilderService.SubmitBatchAsync)))
-                return Conflict(new { error = "Batch submission already running" });
-            var jobId = BackgroundJob.Enqueue<RelationshipGraphBuilderService>(s => s.SubmitBatchAsync(CancellationToken.None));
-            return Ok(new { jobId });
-        }
-        catch (InvalidOperationException ex)
-        {
-            return Conflict(new { error = ex.Message });
-        }
-    }
-
-    [HttpPost("mongo/check-graph-batches")]
-    public ActionResult<string> EnqueueCheckGraphBatches()
-    {
-        try
-        {
-            if (IsJobAlreadyActive(typeof(RelationshipGraphBuilderService), nameof(RelationshipGraphBuilderService.CheckBatchesAsync)))
-                return Conflict(new { error = "Batch check already running" });
-            var jobId = BackgroundJob.Enqueue<RelationshipGraphBuilderService>(s => s.CheckBatchesAsync(CancellationToken.None));
-            return Ok(new { jobId });
-        }
-        catch (InvalidOperationException ex)
-        {
-            return Conflict(new { error = ex.Message });
-        }
-    }
-
-    [HttpPost("mongo/cleanup-graph-batches")]
-    public ActionResult<string> EnqueueCleanupGraphBatches()
-    {
-        try
-        {
-            var jobId = BackgroundJob.Enqueue<RelationshipGraphBuilderService>(s => s.CleanupFailedBatchesAsync(CancellationToken.None));
-            return Ok(new { jobId });
-        }
-        catch (InvalidOperationException ex)
-        {
-            return Conflict(new { error = ex.Message });
-        }
-    }
-
-    [HttpPost("mongo/ensure-graph-indexes")]
-    public ActionResult<string> EnqueueEnsureGraphIndexes()
-    {
-        try
-        {
-            if (IsJobAlreadyActive(typeof(RelationshipGraphBuilderService), nameof(RelationshipGraphBuilderService.EnsureIndexesAsync)))
-                return Conflict(new { error = "Graph index creation already running" });
-            var jobId = BackgroundJob.Enqueue<RelationshipGraphBuilderService>(s => s.EnsureIndexesAsync(CancellationToken.None));
-            return Ok(new { jobId });
-        }
-        catch (InvalidOperationException ex)
-        {
-            return Conflict(new { error = ex.Message });
-        }
-    }
-
     [HttpPost("mongo/ensure-all-indexes")]
     public ActionResult<string> EnqueueEnsureAllIndexes()
     {
@@ -399,8 +341,6 @@ public class AdminController(
 
         var vectorIndexJob = BackgroundJob.ContinueJobWith<ArticleChunkingService>(chunkIndexJob, s => s.CreateVectorIndexAsync(CancellationToken.None));
 
-        var graphIndexJob = BackgroundJob.ContinueJobWith<RelationshipGraphBuilderService>(vectorIndexJob, s => s.EnsureIndexesAsync(CancellationToken.None));
-
         return Ok(
             new
             {
@@ -409,22 +349,10 @@ public class AdminController(
                     pageIndexJob,
                     chunkIndexJob,
                     vectorIndexJob,
-                    graphIndexJob,
                 },
-                message = "All index jobs queued (pages → chunks → vector search → KG graph)",
+                message = "All index jobs queued (pages → chunks → vector search)",
             }
         );
-    }
-
-    [HttpGet("graph/priority-categories")]
-    public ActionResult<string[]> GetPriorityCategories() => Ok(RelationshipGraphBuilderService.GetPriorityCategories());
-
-    [HttpPost("graph/priority-categories")]
-    public ActionResult SetPriorityCategories([FromBody] string[] categories)
-    {
-        RelationshipGraphBuilderService.SetPriorityCategories(categories);
-        logger.LogInformation("Graph builder priority categories set: {Categories}", string.Join(", ", categories));
-        return Ok(new { message = $"Priority set: {string.Join(", ", categories)}" });
     }
 
     // === Infobox Knowledge Graph ===

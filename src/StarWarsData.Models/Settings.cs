@@ -49,11 +49,6 @@ public class SettingsOptions
     /// </summary>
     public string RelationshipAnalystModel { get; set; } = "gpt-5.4-mini";
 
-    /// <summary>
-    /// Max pages to process per graph builder batch run
-    /// </summary>
-    public int GraphBuilderBatchSize { get; set; } = 100;
-
     // ── Holocron agent (Phase 2 — Design-018) ──
 
     /// <summary>

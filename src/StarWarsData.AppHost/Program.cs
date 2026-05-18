@@ -39,6 +39,10 @@ var apiService = builder
     .WithEnvironment("Settings__OpenAiKey", openApi)
     .WithEnvironment("Settings__DatabaseName", starwarsDb)
     .WithEnvironment("Settings__HangfireEnabled", "true")
+    // Holocron is a billed LLM kill switch — default off. The literal here is
+    // overridden in ConfigureComposeFile to ${HOLOCRON_ENABLED:-false} so prod
+    // toggles it via the hand-maintained .env without a code change/redeploy.
+    .WithEnvironment("Settings__HolocronEnabled", "false")
     .WithEnvironment("Settings__KeycloakAdminClientSecret", keycloakAdminSecret);
 
 var connString = ReferenceExpression.Create($"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true");
@@ -140,7 +144,7 @@ var admin = builder
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
-            Description = "Runs ALL index creation in sequence: pages → chunks → vector search → KG graph. Safe to re-run.",
+            Description = "Runs ALL index creation in sequence: pages → chunks → vector search. Safe to re-run.",
             IconName = "DatabaseSearch",
             IsHighlighted = true,
         }
@@ -182,23 +186,12 @@ var admin = builder
     // ── Phase 5: Knowledge Graph (deterministic) ──
     .WithHttpCommand(
         path: "/api/admin/mongo/build-infobox-graph",
-        displayName: "5a. Build Infobox Graph",
+        displayName: "5. Build Infobox Graph",
         commandOptions: new HttpCommandOptions
         {
             Method = HttpMethod.Post,
             Description = "Builds deterministic knowledge graph (kg.nodes + kg.edges) from infobox data. No LLM needed. Requires Phase 1.",
             IconName = "AccountTree",
-            IsHighlighted = false,
-        }
-    )
-    .WithHttpCommand(
-        path: "/api/admin/mongo/ensure-graph-indexes",
-        displayName: "5b. Ensure Graph Indexes",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "Creates MongoDB indexes on kg.nodes and kg.edges for query performance.",
-            IconName = "DatabaseSearch",
             IsHighlighted = false,
         }
     )
@@ -211,40 +204,6 @@ var admin = builder
             Method = HttpMethod.Post,
             Description = "Uses AI to generate rich timeline events for each character. Requires Phase 1 and OpenAI key.",
             IconName = "PersonTimeline",
-            IsHighlighted = false,
-        }
-    )
-    // ── Phase 7: LLM Relationship Graph (OpenAI Batch API, optional) ──
-    .WithHttpCommand(
-        path: "/api/admin/mongo/submit-graph-batch",
-        displayName: "7a. Submit LLM Graph Batch",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "Submits a batch to OpenAI Batch API for LLM relationship extraction. Drip-feeds to respect token quota.",
-            IconName = "CloudUpload",
-            IsHighlighted = false,
-        }
-    )
-    .WithHttpCommand(
-        path: "/api/admin/mongo/check-graph-batches",
-        displayName: "7b. Check Graph Batches",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "Checks status of in-flight OpenAI batches and processes completed results. Runs every 5 minutes.",
-            IconName = "ArrowSync",
-            IsHighlighted = false,
-        }
-    )
-    .WithHttpCommand(
-        path: "/api/admin/mongo/cleanup-graph-batches",
-        displayName: "7c. Cleanup Failed Batches",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "Releases orphaned pages from failed/stale batches so they can be resubmitted.",
-            IconName = "BroomAll",
             IsHighlighted = false,
         }
     )
@@ -328,6 +287,9 @@ builder
             {
                 service.Environment ??= [];
                 service.Environment["Settings__KeycloakAdminClientSecret"] = "${KEYCLOAK_ADMIN_SECRET:-}";
+                // Billed LLM kill switch — controlled by the host's prod .env.
+                // Absent/false ⇒ Holocron stays off (safe default).
+                service.Environment["Settings__HolocronEnabled"] = "${HOLOCRON_ENABLED:-false}";
             }
 
             switch (name)

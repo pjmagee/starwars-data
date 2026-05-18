@@ -83,7 +83,6 @@ builder
     })
     .AddScoped<CharacterTimelineService>()
     .AddSingleton<CharacterTimelineTracker>()
-    .AddScoped<RelationshipGraphBuilderService>()
     .AddScoped<ArticleChunkingService>()
     .AddSingleton<KnowledgeGraphQueryService>()
     .AddSingleton<IChatClient>(sp =>
@@ -175,8 +174,6 @@ if (hangfireEnabled)
     {
         ("daily-incremental-sync", "0 3 * * *", "Daily incremental sync of changed wiki pages at 03:00 UTC", true),
         ("daily-infobox-graph", "0 4 * * *", "Daily infobox knowledge graph rebuild at 04:00 UTC", false),
-        ("submit-graph-batch", "*/30 * * * *", "Submit one LLM batch every 30 min for relationship extraction", false),
-        ("check-graph-batches", "*/5 * * * *", "Check OpenAI batch status every 5 min", false),
         ("daily-article-chunking", "0 5 * * *", "Daily article chunking at 05:00 UTC", true),
         ("refresh-ask-suggestions", "0 3 * * 0", "Weekly AI-generated Ask page example questions (Sundays 03:00 UTC)", true),
         ("daily-openai-spend-sync", "30 4 * * *", "Daily OpenAI billing/spend sync at 04:30 UTC", true),
@@ -206,10 +203,6 @@ if (hangfireEnabled)
 
     RecurringJob.AddOrUpdate<InfoboxGraphService>("daily-infobox-graph", s => s.BuildGraphAsync(CancellationToken.None), Cron.Daily(4));
 
-    RecurringJob.AddOrUpdate<RelationshipGraphBuilderService>("submit-graph-batch", s => s.SubmitBatchAsync(CancellationToken.None), "*/30 * * * *");
-
-    RecurringJob.AddOrUpdate<RelationshipGraphBuilderService>("check-graph-batches", s => s.CheckBatchesAsync(CancellationToken.None), "*/5 * * * *");
-
     RecurringJob.AddOrUpdate<ArticleChunkingService>("daily-article-chunking", s => s.ProcessAllAsync(CancellationToken.None), Cron.Daily(5));
 
     RecurringJob.AddOrUpdate<StarWarsData.Services.AI.Agents.SuggestionAgent>("refresh-ask-suggestions", s => s.GenerateAsync(CancellationToken.None), Cron.Weekly(DayOfWeek.Sunday, 3));
@@ -222,6 +215,16 @@ if (hangfireEnabled)
     // OpenAI organisation spend sync (powers the public /costs page). Skips silently
     // when Settings.OpenAiAdminKey is unset, so dev environments don't error nightly.
     RecurringJob.AddOrUpdate<OpenAiSpendSyncService>("daily-openai-spend-sync", s => s.SyncAsync(CancellationToken.None), "30 4 * * *");
+
+    // Retired: the OpenAI Batch relationship-extraction path was removed (deterministic
+    // InfoboxGraphService + Holocron supersede it). Hangfire persists recurring jobs in
+    // Mongo, so without this they'd keep firing against a deleted type. Also drop their
+    // stale JobToggle docs so they vanish from the admin dashboard.
+    foreach (var retired in new[] { "submit-graph-batch", "check-graph-batches" })
+    {
+        RecurringJob.RemoveIfExists(retired);
+        await toggleService.RemoveAsync(retired);
+    }
 }
 
 app.MapControllers();

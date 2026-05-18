@@ -1,5 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <Sdk Name="Aspire.AppHost.Sdk" Version="13.2.4" />
+<Project Sdk="Aspire.AppHost.Sdk/13.3.3">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
@@ -9,10 +8,13 @@
     <UserSecretsId>59ee3b5d-5913-4ff8-8856-9fd5265fdca1</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="13.2.4" />
-    <PackageReference Include="Aspire.Hosting.Keycloak" Version="13.2.4-preview.1.26224.4" />
-    <PackageReference Include="Aspire.Hosting.Docker" Version="13.2.4" />
-    <PackageReference Include="Aspire.Hosting.MongoDB" Version="13.2.4" />
+    <PackageReference Include="Aspire.Hosting.Keycloak" Version="13.3.3-preview.1.26264.13" />
+    <PackageReference Include="Aspire.Hosting.Docker" Version="13.3.3" />
+    <PackageReference Include="Aspire.Hosting.MongoDB" Version="13.3.3" />
+    <!-- Float transitive MongoDB.Driver up so Snappier 1.3.1+/SharpCompress override apply. -->
+    <PackageReference Include="MongoDB.Driver" Version="3.8.1" />
+    <!-- Direct override: MongoDB.Driver's transitive SharpCompress 0.30.1 is flagged (GHSA-6c8g-7p36-r338). 0.48.1 is safe and satisfies the >=0.30.1 constraint. -->
+    <PackageReference Include="SharpCompress" Version="0.48.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StarWarsData.Admin\StarWarsData.Admin.csproj" />

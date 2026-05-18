@@ -16,4 +16,15 @@ public class ArticleChunksController(ArticleChunkingService chunkingService) : C
     {
         return await chunkingService.GetProgressAsync(ct);
     }
+
+    /// <summary>
+    /// Purge chunks for pages that are no longer eligible (stale/orphaned),
+    /// keeping distinct-chunked counts and the dashboard accurate.
+    /// </summary>
+    [HttpPost("reconcile-orphans")]
+    public async Task<IActionResult> ReconcileOrphans(CancellationToken ct)
+    {
+        var purged = await chunkingService.ReconcileOrphanedChunksAsync(ct);
+        return Ok(new { purgedPages = purged });
+    }
 }

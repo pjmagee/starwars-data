@@ -402,9 +402,9 @@ public class InfoboxGraphService
         );
 
         // ── Authoritative kg.edges index set ──
-        // This is the single site that creates indexes on kg.edges. RelationshipGraphBuilderService
-        // does NOT duplicate these — Phase 5 is a full delete+insert so we re-assert the index set
-        // on every rebuild. Singleton prefixes (fromId, toId) are intentionally omitted: they are
+        // This is the single site that creates indexes on kg.edges — Phase 5 is a
+        // full delete+insert so we re-assert the index set on every rebuild.
+        // Singleton prefixes (fromId, toId) are intentionally omitted: they are
         // covered by the compound (fromId, label) / (toId, label) indexes as leading-key prefixes.
         await _edges.Indexes.CreateManyAsync(
             [

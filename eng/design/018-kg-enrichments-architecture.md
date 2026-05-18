@@ -446,9 +446,13 @@ reference can only point to definitions defined at the top level of the schema.
 
 **Rule of thumb**: when defining records used as `ChatResponseFormat.ForJsonSchema<T>()` payloads, **never share a child record across two collection-typed properties**. Duplicate the record (e.g. `NodeProposalEvidence` + `EdgeProposalEvidence`) so the generator inlines each copy. Common helpers can still operate over a tuple/interface projection.
 
-### `HolocronEnabled` not forwarded by AppHost
+### `HolocronEnabled` forwarding (RESOLVED 2026-05-18)
 
-The AppHost only forwards a curated set of `Settings__*` env vars to the API child process (`OpenAiKey`, `DatabaseName`, `HangfireEnabled`, `KeycloakAdminClientSecret`). For the kill switch to work via the AppHost's user-secrets, we'd need to add `WithEnvironment("Settings__HolocronEnabled", ...)` to the apiservice + admin chains. Until then, `Settings:HolocronEnabled` must be set on the **API service's own** user-secrets (`UserSecretsId` was added to its csproj as part of the Stage C fix).
+The AppHost only forwards a curated set of `Settings__*` env vars to the API child process. `Settings__HolocronEnabled` is now in that set: the `apiservice` chain in `AppHost/Program.cs` calls `.WithEnvironment("Settings__HolocronEnabled", "false")`, and `ConfigureComposeFile`'s `apiservice` block rewrites it to `${HOLOCRON_ENABLED:-false}` (mirroring the `KeycloakAdminClientSecret` precedent). So prod toggles the billed kill switch via the hand-maintained deploy `.env` (`HOLOCRON_ENABLED=true`) — no code change or redeploy needed, and absent ⇒ off (safe default).
+
+Scope note: this covers the **on-demand node-enhance** path (Frontend → API). The **daily Hangfire Holocron pass** runs in the **Admin** service and is gated separately — it is *not* forwarded, so the billed daily sweep stays off in prod unless explicitly wired the same way.
+
+For **local dev**, the AppHost still doesn't forward it (literal `"false"` until ConfigureComposeFile, which only runs for compose publish/deploy). Set `Settings:HolocronEnabled` on the **API service's own** user-secrets (`UserSecretsId` is in its csproj) to enable it on localhost.
 
 ### Schema validators caveat
 

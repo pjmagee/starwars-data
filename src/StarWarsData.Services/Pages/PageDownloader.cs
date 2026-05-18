@@ -682,6 +682,34 @@ public class PageDownloader
     }
 
     /// <summary>
+    /// Dashboard view of the incremental sync: when it last ran plus the pages
+    /// most recently (re)downloaded (DownloadedAt desc — the sync stamps this to
+    /// "now" for every changed page it re-pulls, so this surfaces freshly
+    /// consumed/updated wiki pages).
+    /// </summary>
+    public async Task<RecentSyncStatus> GetRecentSyncStatusAsync(int limit = 50, CancellationToken cancellationToken = default)
+    {
+        var lastSync = await _jobStateCollection.Find(s => s.JobName == IncrementalSyncJobName).FirstOrDefaultAsync(cancellationToken);
+
+        var pages = await _pagesCollection
+            .Find(FilterDefinition<Page>.Empty)
+            .SortByDescending(p => p.DownloadedAt)
+            .Limit(Math.Clamp(limit, 1, 500))
+            .Project(p => new RecentSyncedPage
+            {
+                PageId = p.PageId,
+                Title = p.Title,
+                WikiUrl = p.WikiUrl,
+                DownloadedAt = p.DownloadedAt,
+                LastModified = p.LastModified,
+                Continuity = p.Continuity.ToString(),
+            })
+            .ToListAsync(cancellationToken);
+
+        return new RecentSyncStatus { LastIncrementalSyncAt = lastSync?.UpdatedAt, Pages = pages };
+    }
+
+    /// <summary>
     /// Uses list=allrevisions to find all pages in namespace 0 that have been
     /// revised since a given timestamp. Returns deduplicated page titles.
     /// </summary>

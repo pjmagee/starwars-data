@@ -129,10 +129,12 @@ When adding a new test, decide its tier first and put it in the matching folder 
 3. Build categorized timeline events
 4. Create indexes + embeddings + vector indexes
 5. AI-generated character timelines
-6. Relationship graph via OpenAI Batch API (submit/check/cleanup cycle)
+6. Deterministic infobox knowledge graph (`InfoboxGraphService` — per-type node builders; creates `kg.*` indexes). LLM enrichment of the graph is the separate Holocron pass (Design-018/020), not an ETL phase.
 7. Infer territory control from battle outcomes + government lifecycles
 
-**Hangfire recurring jobs**: Daily incremental wiki sync (03:00 UTC), daily relationship graph builder (04:00 UTC), batch submissions every 30 min, batch status checks every 5 min, daily article chunking (05:00 UTC).
+> The legacy OpenAI Batch relationship-extraction path (`RelationshipGraphBuilderService`, `submit/check/cleanup-graph-batch`, the `/graph-builder` admin page) was removed 2026-05-18 — superseded by the deterministic builder + Holocron.
+
+**Hangfire recurring jobs**: Daily incremental wiki sync (03:00 UTC), daily infobox graph rebuild (04:00 UTC), daily article chunking (05:00 UTC), weekly Ask suggestions (Sun 03:00 UTC), daily OpenAI spend sync (04:30 UTC), daily Holocron pass (06:00 UTC, gated by `HolocronEnabled`).
 
 **Authentication**: Keycloak OIDC on the Frontend (users sign in at `auth.magaoidh.pro`). The API is internal-only (not exposed to the internet) — user identity is forwarded via `X-User-Id` header set by a `DelegatingHandler` from the authenticated `ClaimsPrincipal`. See `eng/adr/001-internal-api-auth.md` for the full rationale (JWT Bearer was attempted but is incompatible with Blazor Interactive Server mode).
 
@@ -177,6 +179,21 @@ The validation loop is iterative, not a one-shot end-of-task check:
 5. Take a screenshot (`take_screenshot`) for the report-back.
 
 If the change has no running AppHost available (and one cannot be started — e.g. a port collision the agent can't resolve), say so explicitly in the report-back rather than claiming the change is verified. Do NOT skip validation silently. The blazor-mudblazor-expert sub-agent owns the detailed workflow; non-Blazor agents touching frontend assets follow the same rule.
+
+## Engineering Docs (`eng/`)
+
+The `eng/` folder is the project's engineering knowledge base. It is **not archival** — it is a living record that MUST be kept in sync with the code. When a change alters a decision, architecture, or workflow captured here, update the relevant doc in the same PR as the code change. A doc that contradicts the code is a bug.
+
+| Folder | Purpose | When to touch it |
+| --- | --- | --- |
+| `eng/adr/` | Architecture Decision Records — numbered, immutable decisions and their rationale (e.g. internal API auth, MongoDB migration strategy, library deviations). | Add a new numbered ADR when making a cross-cutting decision or a justified library deviation. Don't rewrite history — supersede. |
+| `eng/design/` | Numbered design docs — feature designs, the plan behind a body of work, and its shipped status. | Add a numbered design doc before/alongside a non-trivial feature. Update its status when phases ship. |
+| `eng/docs/` | How-to / reference guides for working in this repo (e.g. Aspire isolated mode, edge labels). | Add or update when a workflow or convention changes that future contributors need to follow. |
+| `eng/diagrams/` | LikeC4 architecture model (`.c4`) — the C4 model, specification, and views. | Update when components, their relationships, or deployment shape change. See the `/likec4-dsl` skill for syntax. |
+| `eng/scripts/` | Engineering/ops scripts (see `eng/scripts/README.md`). | Add scripts here, not loose in the repo root. |
+| `eng/NOTES.md` | Scratch list of referenced external material (research links, licences, media sources). | Append references used while building; not a structured doc. |
+
+ADRs and design docs are referenced throughout this file by path — those links are load-bearing. When you create a new ADR or design doc that establishes a rule or pattern an agent must follow, add a reference to it from the relevant section of this `CLAUDE.md`.
 
 ## Library Deviations
 

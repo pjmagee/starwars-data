@@ -279,13 +279,8 @@ public partial class ArticleChunkingService
     /// </summary>
     public async Task<ChunkingProgress> GetProgressAsync(CancellationToken ct = default)
     {
-        // Total eligible pages (content + infobox)
-        var eligibleFilter = new BsonDocument
-        {
-            { PageBsonFields.Content, new BsonDocument("$nin", new BsonArray { BsonNull.Value, "" }) },
-            { PageBsonFields.Infobox, new BsonDocument("$ne", BsonNull.Value) },
-            { PageBsonFields.InfoboxTemplate, new BsonDocument("$ne", BsonNull.Value) },
-        };
+        // Total eligible pages (content + infobox + known template).
+        var eligibleFilter = BuildEligibleFilter();
         var totalEligible = (int)await _pages.CountDocumentsAsync(eligibleFilter, cancellationToken: ct);
 
         // Total chunks
@@ -339,24 +334,78 @@ public partial class ArticleChunkingService
             })
             .ToList();
 
+        // Pending / orphans are SET operations, not arithmetic. chunkedPageIds
+        // can contain pages that are no longer eligible (content/infobox cleared)
+        // or were removed from raw.pages entirely — counting those against
+        // totalEligible is what drove PendingPages negative.
+        var eligibleIdSet = await GetEligiblePageIdsAsync(ct);
+
+        var chunkedEligible = chunkedPageIds.Count(id => eligibleIdSet.Contains(id));
+        var orphanedChunkPages = chunkedPages - chunkedEligible;
+        var pendingPages = totalEligible - chunkedEligible; // >= 0 by construction
+
         // Throughput: count distinct pages chunked in the last hour
         var oneHourAgo = DateTime.UtcNow.AddHours(-1);
         var recentChunkedPages = await _chunks.Distinct(c => c.PageId, Builders<ArticleChunk>.Filter.Gte(c => c.CreatedAt, oneHourAgo), cancellationToken: ct).ToListAsync(ct);
         var pagesPerHour = (double)recentChunkedPages.Count;
-        var pendingPages = totalEligible - chunkedPages;
         double? estimatedHoursRemaining = pagesPerHour > 0 ? Math.Round(pendingPages / pagesPerHour, 1) : null;
 
         return new ChunkingProgress
         {
             TotalEligiblePages = totalEligible,
-            ChunkedPages = chunkedPages,
+            ChunkedPages = chunkedEligible,
             PendingPages = pendingPages,
+            OrphanedChunkPages = orphanedChunkPages,
             TotalChunks = totalChunks,
             AvgChunksPerPage = chunkedPages > 0 ? Math.Round((double)totalChunks / chunkedPages, 1) : 0,
             PagesPerHour = pagesPerHour,
             EstimatedHoursRemaining = estimatedHoursRemaining,
             ByType = byType,
         };
+    }
+
+    /// <summary>
+    /// The authoritative "should be chunked" predicate: non-empty content,
+    /// an infobox, and a known template type. Single source of truth shared
+    /// by progress reporting and orphan reconciliation so the two can't drift.
+    /// </summary>
+    static BsonDocument BuildEligibleFilter() =>
+        new()
+        {
+            { PageBsonFields.Content, new BsonDocument("$nin", new BsonArray { BsonNull.Value, "" }) },
+            { PageBsonFields.Infobox, new BsonDocument("$ne", BsonNull.Value) },
+            { PageBsonFields.InfoboxTemplate, new BsonDocument("$ne", BsonNull.Value) },
+        };
+
+    /// <summary>
+    /// Eligible page IDs as a set. Uses the typed <see cref="Page"/> collection so
+    /// the driver maps <c>PageId</c> to the <c>_id</c> element correctly (PageId is
+    /// <c>[BsonId]</c>, so a raw BsonDocument include/exclude projection drops it).
+    /// </summary>
+    async Task<HashSet<int>> GetEligiblePageIdsAsync(CancellationToken ct)
+    {
+        var typedPages = _pages.Database.GetCollection<Page>(Collections.Pages);
+        var ids = await typedPages.Find(new BsonDocumentFilterDefinition<Page>(BuildEligibleFilter())).Project(p => p.PageId).ToListAsync(ct);
+        return ids.ToHashSet();
+    }
+
+    /// <summary>
+    /// Deletes chunks whose page no longer satisfies <see cref="BuildEligibleFilter"/>
+    /// (content/infobox cleared, or page removed from raw.pages). Fixes the data
+    /// at source so distinct-chunked counts stay accurate and PendingPages can't
+    /// be skewed by stale chunks. Returns the number of orphaned pages purged.
+    /// </summary>
+    public async Task<int> ReconcileOrphanedChunksAsync(CancellationToken ct = default)
+    {
+        var eligibleIdSet = await GetEligiblePageIdsAsync(ct);
+
+        var chunkedPageIds = await _chunks.Distinct(c => c.PageId, FilterDefinition<ArticleChunk>.Empty, cancellationToken: ct).ToListAsync(ct);
+        var orphanIds = chunkedPageIds.Where(id => !eligibleIdSet.Contains(id)).ToList();
+        if (orphanIds.Count == 0)
+            return 0;
+
+        await _chunks.DeleteManyAsync(Builders<ArticleChunk>.Filter.In(c => c.PageId, orphanIds), ct);
+        return orphanIds.Count;
     }
 
     /// <summary>
