@@ -71,17 +71,36 @@ The chat agent already has all the tooling needed (GraphRAG, KG analytics, seman
 **Wide (≥ 960px) — split panel.** `MudMainContent` hosts a `MudSplitPanel`; the page (`@Body` + footer, with its own scroll) is `FirstPanel`, `CopilotSidebar` is `SecondPanel`, with a draggable divider:
 
 ```razor
-<div class="sw-copilot-split-host">
+<div class="sw-copilot-split-host @(_copilotOpen ? null : "copilot-closed")">
     <MudSplitPanel @ref="_splitPanel" Class="mud-width-full mud-height-full"
                    MinPanelSize="320" PanelGap="6" Transparent="true"
-                   ClassDivider="sw-split-divider" ClassSecondPanel="sw-copilot-pane">
+                   ClassDivider="sw-split-divider"
+                   ClassFirstPanel="sw-split-first" ClassSecondPanel="sw-copilot-pane">
         <FirstPanel>
             <div class="sw-split-scroll pa-4">@Body @FooterContent</div>
         </FirstPanel>
-        <SecondPanel><CopilotSidebar /></SecondPanel>
+        <SecondPanel>@if (_copilotOpen) { <CopilotSidebar /> }</SecondPanel>
     </MudSplitPanel>
 </div>
 ```
+
+> **Re-mount fix 2026-05-19.** The split structure is mounted on
+> `CopilotEligible` (`!HideCopilot && !IsFullscreen && _isWide`) — **not** on
+> `_copilotOpen`. The first cut gated the whole `<MudSplitPanel>` behind
+> `_copilotOpen` in an `@if/else`: opening the copilot moved `@Body` from a
+> direct child of `MudMainContent` into `MudSplitPanel → FirstPanel`. Blazor
+> only preserves a component at the same render-tree position, so every open
+> **disposed and re-created the entire routed page** — `OnInitializedAsync`
+> re-ran, scroll/galaxy-map camera/form state was lost, looking like a page
+> refresh. Now `@Body`'s ancestor chain is invariant across the toggle; only
+> the `copilot-closed` class, the `SecondPanel` content, and the divider
+> position change. Cost: eligible pages always render inside the `FirstPanel`
+> internal-scroll container even when the copilot is closed (a closed copilot
+> is folded to full-width plain content via the `.copilot-closed` CSS:
+> divider + pane hidden, first panel forced to 100%). This is the unavoidable
+> price of using `MudSplitPanel` as the mechanism without re-mounting; a
+> custom CSS resizer would be the only way to also keep body-scroll when
+> closed, and it isn't worth it.
 
 - The split host fills the viewport below the 64px `MudAppBar` (`MainContent` keeps its `pt-16` offset, drops `pa-4`; padding/scroll move inside `FirstPanel`), so the page never reflows the whole viewport and the copilot never overlays it.
 - `MudSplitPanel`'s default is a 50/50 split; `OnAfterRenderAsync` measures the actual content host (already inset by the left nav drawer) via `swElementWidth` and calls `SetDividerPositionAsync` so the copilot opens at ~34% clamped to a readable 360–460px band. `MinPanelSize="320"` keeps either side usable when dragged.

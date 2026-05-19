@@ -293,3 +293,26 @@ html[data-text-size="extra-large"] {
 .sw-copilot-pane > .copilot-container {
     height: 100%;
 }
+
+/*
+ * Collapsed state. The split structure stays mounted when the copilot is
+ * closed (so @Body never re-parents and the page is never re-mounted on
+ * toggle — see MainLayout.CopilotEligible). When closed we visually fold it
+ * back to plain full-width content: hide the divider and the copilot pane,
+ * and force the first panel to the full width. MudSplitPanel sets panel
+ * width/flex-basis via inline style from JS, so these overrides need
+ * !important to win.
+ */
+.copilot-closed .sw-split-divider {
+    display: none;
+}
+
+.copilot-closed .sw-copilot-pane {
+    display: none !important;
+}
+
+.copilot-closed .sw-split-first {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
