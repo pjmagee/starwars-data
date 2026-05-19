@@ -18,10 +18,20 @@
 #
 # Required env (set these in the User Scripts editor, NOT in the repo):
 #   MDB_URI         prod connection string (maintainer-held secret)
-#   COPYPARTY_VOL   absolute path of the copyparty volume dir on disk
+#   COPYPARTY_VOL   HOST path of the copyparty files dir. User Scripts run on
+#                   the Unraid host, not in the container, so use the host
+#                   path — copyparty's container /w maps to
+#                   /mnt/user/appdata/copyparty/files. Use a dedicated
+#                   subfolder so retention only ever globs our own files:
+#                     COPYPARTY_VOL=/mnt/user/appdata/copyparty/files/swdata
+#                   → served at https://copyparty.magaoidh.pro/swdata/<file>
 # Optional:
 #   STABLE_NAME     published filename (default: starwars-snapshot-latest.gz)
 #   KEEP            dated copies to retain (default: 3)
+#
+# Ensure the copyparty volume config (/mnt/user/appdata/copyparty/config)
+# grants read on that path to whoever the devs authenticate as (or anon-read,
+# since the URL itself is the secret AppHost parameter).
 #
 # Suggested schedule: weekly. Exits non-zero on failure so Unraid surfaces it.
 # ----------------------------------------------------------------------------
@@ -31,6 +41,8 @@ set -euo pipefail
 : "${COPYPARTY_VOL:?set COPYPARTY_VOL to the copyparty volume directory}"
 STABLE_NAME="${STABLE_NAME:-starwars-snapshot-latest.gz}"
 KEEP="${KEEP:-3}"
+
+mkdir -p "$COPYPARTY_VOL"   # dedicated subfolder may not exist on first run
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOCK="/tmp/sw-snapshot-cron.lock"

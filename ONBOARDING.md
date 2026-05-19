@@ -166,12 +166,26 @@ to the Unraid **User Scripts** plugin on a weekly schedule. It calls
 `make-snapshot.sh`, publishes **atomically** to a stable filename
 (`starwars-snapshot-latest.gz`) so a dev can never fetch a half-written
 archive, keeps the last few dated copies for rollback, and is flock-guarded.
-Set `MDB_URI` and `COPYPARTY_VOL` in the User Scripts editor (not in the repo).
-Because it runs on the box and writes straight into the copyparty volume there
-is **no upload and `COPYPARTY_ADMIN` is not needed**, and `snapshot-url` is set
-once (to the stable file) and never changes. This was chosen over an AppHost
-resource on purpose — see [Design-038](eng/design/038-developer-onboarding-snapshot.md)
-§"Automation decision".
+User Scripts run on the **Unraid host**, so use the host path. With copyparty
+mapped `/w → /mnt/user/appdata/copyparty/files`, set in the editor (not in the
+repo):
+
+```bash
+export MDB_URI='mongodb://…@localhost:27018/?authSource=admin&directConnection=true'
+export COPYPARTY_VOL=/mnt/user/appdata/copyparty/files/swdata   # dedicated subfolder
+```
+
+That publishes to `…/files/swdata/starwars-snapshot-latest.gz`, served at
+**`https://copyparty.magaoidh.pro/swdata/starwars-snapshot-latest.gz`**
+(LAN: `http://192.168.1.102:3923/swdata/starwars-snapshot-latest.gz`). Set the
+dev-side `snapshot-url` parameter to that **once** — it never changes.
+
+Make sure the copyparty volume config (`/mnt/user/appdata/copyparty/config`)
+grants read on `swdata` to whoever devs authenticate as (or anon-read; the URL
+itself is the secret AppHost parameter). Because it runs on the box and writes
+straight into the volume there is **no upload and `COPYPARTY_ADMIN` is not
+needed**. Chosen over an AppHost resource on purpose — see
+[Design-038](eng/design/038-developer-onboarding-snapshot.md) §"Automation decision".
 
 ## Troubleshooting
 
