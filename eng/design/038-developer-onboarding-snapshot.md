@@ -110,6 +110,29 @@ Documented in `ONBOARDING.md`: run the existing Aspire `admin` commands
 "Ensure All Indexes" then "4b. Create Index Embeddings". Embeddings are already
 present in the restored docs, so this is keyless and fast.
 
+### Automation decision: Unraid cron, not the AppHost (chosen)
+
+Snapshot creation is scheduled via `unraid-snapshot-cron.sh` in the Unraid
+**User Scripts** plugin (weekly), not an AppHost resource/command.
+
+- **Chosen** because it runs on the box where prod Mongo + copyparty already
+  live: the dump is written straight into the copyparty volume (no upload,
+  `COPYPARTY_ADMIN` not needed), no WAN double-transfer, and it publishes
+  atomically to a stable filename so `snapshot-url` is set once and a dev can
+  never fetch a half-written archive. Retention + `flock` included.
+- **Rejected: putting it in the AppHost.** The AppHost is the developer-facing
+  orchestrator and the source of `aspire publish`/`prepare`/`deploy` output.
+  An automated dump+upload there would (a) ride every `aspire run`, only ever
+  working for the maintainer; (b) thread a second prod-adjacent secret
+  (`COPYPARTY_ADMIN`) through the prod-critical file that already leaked
+  secrets once via a release artifact (`feedback_ci_no_filled_env`); (c) force
+  a 29 GB-down / 15 GB-up WAN round-trip from a laptop instead of a box-local
+  write. Wrong layer, more risk, worse performance.
+- **Revisit when:** the box stops co-hosting prod + copyparty, or snapshots
+  need to originate off-box — then the documented `COPYPARTY_ADMIN` HTTP-upload
+  path (or a job in the Admin app, which already runs on the box with prod
+  creds) becomes the better fit.
+
 ## Validation status
 
 - **Compiles:** the AppHost change + whole solution build clean and the
@@ -131,10 +154,9 @@ present in the restored docs, so this is keyless and fast.
    was **intentionally not done here**. ONBOARDING.md documents the manual
    `docker run` instead. Recommend: spike it behind the same
    Development+RunMode gate, write the ADR, then revisit.
-2. **Snapshot refresh cadence / staleness.** No automation publishes the
-   artifact — the maintainer runs `make-snapshot` and uploads by hand (the
-   prod secret is theirs alone, by design). Manual for now; revisit if
-   onboarding frequency rises.
+2. ~~**Snapshot refresh cadence / staleness.**~~ **Resolved** — scheduled
+   weekly via `unraid-snapshot-cron.sh` (Unraid User Scripts). See "Automation
+   decision" above. The prod secret stays on the box, by design.
 3. **Archive size.** `starwars-prod` is ~29 GB on disk; the gzip archive is
    several GB (embeddings compress poorly). If download time becomes a problem,
    consider a curated subset or splitting embeddings into an optional layer.

@@ -159,6 +159,20 @@ Then update the `snapshot-url` AppHost parameter (and tell devs) to point at the
 new file. Old snapshots can be deleted from copyparty once the new one is
 verified.
 
+### Recommended: schedule it (Unraid)
+
+Rather than running it by hand, add `src/StarWarsData.SnapshotRestore/unraid-snapshot-cron.sh`
+to the Unraid **User Scripts** plugin on a weekly schedule. It calls
+`make-snapshot.sh`, publishes **atomically** to a stable filename
+(`starwars-snapshot-latest.gz`) so a dev can never fetch a half-written
+archive, keeps the last few dated copies for rollback, and is flock-guarded.
+Set `MDB_URI` and `COPYPARTY_VOL` in the User Scripts editor (not in the repo).
+Because it runs on the box and writes straight into the copyparty volume there
+is **no upload and `COPYPARTY_ADMIN` is not needed**, and `snapshot-url` is set
+once (to the stable file) and never changes. This was chosen over an AppHost
+resource on purpose — see [Design-038](eng/design/038-developer-onboarding-snapshot.md)
+§"Automation decision".
+
 ## Troubleshooting
 
 | Symptom | Cause / fix |

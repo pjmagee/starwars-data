@@ -8,8 +8,9 @@ Two halves:
 
 | File | Who runs it | What it does |
 |---|---|---|
-| `make-snapshot.{sh,ps1}` | **Maintainer**, on a host with prod access | `mongodump` of `starwars-prod` → one `.gz`, excluding `chat.*`/`admin.*`/`hangfire.*`. Upload result to the snapshot host (object storage / static HTTPS — see [ONBOARDING.md](../../ONBOARDING.md)). |
-| `Dockerfile` + `restore.sh` | **Aspire**, automatically | Run-once container (mirrors `mongodb-migrations`). Downloads the snapshot from `SNAPSHOT_URL` and `mongorestore`s it into the dev DB (`starwars-prod.*` → `<TARGET_DB>.*`). Idempotent; hard-refuses any DB named `*prod*`. |
+| `make-snapshot.{sh,ps1}` | **Maintainer**, on the Unraid box | `mongodump` of `starwars-prod` → one `.gz`, excluding `chat.*`/`admin.*`/`hangfire.*`. Writes straight into the copyparty volume (no upload). |
+| `unraid-snapshot-cron.sh` | **Unraid User Scripts**, scheduled | Wraps `make-snapshot.sh`: atomic publish to a stable filename, dated-copy retention, flock-guarded. The recommended way to keep the snapshot fresh. |
+| `Dockerfile` + `restore.sh` | **Aspire**, automatically | Run-once container (mirrors `mongodb-migrations`). Downloads the snapshot from `SNAPSHOT_URL` and `mongorestore`s it into the dev DB (`starwars-prod.*` → `<TARGET_DB>.*`). Idempotent, resumable, `gzip -t`-validated; hard-refuses any DB named `*prod*`. |
 
 The container is wired in `AppHost/Program.cs` only under
 `IsDevelopment() && ExecutionContext.IsRunMode`, so it never enters
