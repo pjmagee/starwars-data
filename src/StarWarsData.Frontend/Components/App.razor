@@ -96,6 +96,20 @@
                 }
             })();
 
+            // First-visit landing: new users see "/" (the Getting Started page).
+            // Once they've been welcomed we set sw-welcomed and, on subsequent
+            // visits to the bare root, send them straight to /ask. Done here in
+            // <head> BEFORE Blazor boots so returning users never flash the
+            // welcome page (Design-039). Functional-only flag — not tracking,
+            // so it does not require cookie consent.
+            function swSetWelcomed() { localStorage.setItem('sw-welcomed', 'true'); }
+            function swGetWelcomed() { return localStorage.getItem('sw-welcomed') === 'true'; }
+            (function redirectWelcomedRoot() {
+                if (location.pathname === '/' && swGetWelcomed()) {
+                    location.replace('/ask');
+                }
+            })();
+
             // Faction theme: persist user's selected MudTheme palette
             function swSetTheme(themeId) { localStorage.setItem('sw-theme', themeId); }
             function swGetTheme() { return localStorage.getItem('sw-theme'); }

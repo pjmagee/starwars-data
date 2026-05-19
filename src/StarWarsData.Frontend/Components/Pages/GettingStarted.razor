@@ -1,0 +1,185 @@
+@page "/"
+@page "/getting-started"
+@using System.Net.Http.Json
+@using StarWarsData.Frontend.Services
+@inject IHttpClientFactory HttpClientFactory
+@inject NavigationManager Nav
+@inject IJSRuntime JS
+@inject LayoutService Layout
+@implements IDisposable
+
+@* Design-039: friendly ELI5 landing page for new visitors. Served at "/" for
+   first-timers; once welcomed, an inline <head> script in App.razor sends the
+   bare root straight to /ask, so returning users never see this. Always
+   reachable at /getting-started (and from the nav). SP-4 is suppressed here
+   like on /ask — this is a welcome page, not an explore surface. *@
+
+<PageTitle>Getting Started — Star Wars Data</PageTitle>
+<HeadContent>
+    <meta name="description" content="New here? A plain-English tour of Star Wars Data: chat with an AI that knows the whole archive, search, an interactive galaxy map, AI-written character timelines, a relationship graph explorer, and the Holocron AI that keeps it all fresh." />
+</HeadContent>
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="my-6 px-4">
+
+    @* ── Welcome hero ───────────────────────────────────────────────── *@
+    <MudStack AlignItems="AlignItems.Center" Spacing="2" Class="mb-6 text-center">
+        <MudImage Src="img/galaxy-logo.svg" Alt="Star Wars Data" Width="64" Height="64" />
+        <MudText Typo="Typo.h3" Align="Align.Center">Welcome, traveller 👋</MudText>
+        <MudText Typo="Typo.h6" Color="Color.Secondary" Align="Align.Center" Style="max-width:680px;">
+            This is a giant, explorable map of the Star Wars universe — every character,
+            planet, ship, battle and faction from Wookieepedia, woven together so an AI
+            can actually reason about it.
+        </MudText>
+        <MudText Typo="Typo.body1" Align="Align.Center" Style="max-width:680px;">
+            @if (_stats is { } s)
+            {
+                <text>Under the hood: a knowledge graph of <b>@s.KgNodes.ToString("N0")</b>
+                things connected by <b>@s.KgEdges.ToString("N0")</b> relationships, plus
+                <b>@s.ArticlePages.ToString("N0")</b> articles the AI can read and quote.</text>
+            }
+            else
+            {
+                <text>Under the hood: a vast knowledge graph of entities and relationships,
+                plus the full Wookieepedia article corpus the AI can read and quote.</text>
+            }
+        </MudText>
+
+        <MudStack Row="true" Spacing="3" Justify="Justify.Center" Class="mt-4 flex-wrap">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large"
+                       StartIcon="@Icons.Material.Filled.Forum" OnClick="@(() => Go("/ask"))">
+                Start chatting
+            </MudButton>
+            <MudButton Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Large"
+                       StartIcon="@Icons.Material.Filled.ManageSearch" OnClick="@(() => Go("/search"))">
+                Just search
+            </MudButton>
+        </MudStack>
+        <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mt-1">
+            Not sure where to start? <b>Chat</b> and <b>Search</b> are all most people ever need.
+        </MudText>
+    </MudStack>
+
+    @* ── The two things to try first ───────────────────────────────── *@
+    <MudGrid Spacing="4" Class="mb-2">
+        @FeatureCard(Icons.Material.Filled.Forum, "Chat", "Ask anything",
+            "Talk to the archive in plain English. The AI reads articles, runs semantic search, and walks the knowledge graph to answer with real, cited facts — not made-up ones.",
+            "/ask", "Open Chat", recommended: true)
+
+        @FeatureCard(Icons.Material.Filled.ManageSearch, "Search", "Find it fast",
+            "Classic keyword search plus AI \"meaning\" search — type what you remember, even fuzzily, and get the right article.",
+            "/search", "Open Search", recommended: true)
+    </MudGrid>
+
+    <MudText Typo="Typo.overline" Color="Color.Secondary" Class="mt-6 mb-2">Explore deeper</MudText>
+    <MudGrid Spacing="4">
+        @FeatureCard(Icons.Material.Filled.Explore, "Galaxy Map", "See the galaxy",
+            "An interactive map with two modes — browse regions and worlds, or watch territory change over time. Click in to drill down into anything.",
+            "/galaxy-map", "Open Galaxy Map")
+
+        @FeatureCard(Icons.Material.Filled.Timeline, "Timeline", "Walk the eras",
+            "Scrub through galactic history era by era and drill into the events, people and places of any moment.",
+            "/timeline", "Open Timeline")
+
+        @FeatureCard(Icons.Material.Filled.Person, "Character Timelines", "Their whole story",
+            "AI-written life stories of characters, grounded in Wookieepedia and the knowledge graph for an accurate, readable retelling — not a hallucination.",
+            "/character-timelines", "Open Character Timelines")
+
+        @FeatureCard(Icons.Material.Filled.TableView, "Data Tables", "Just the facts",
+            "Wookieepedia's infoboxes — the little fact panels scattered across articles — collected into one clean, accessible, sortable table.",
+            "/tables", "Open Data Tables")
+
+        @FeatureCard(Icons.Material.Filled.Hub, "Graph Explorer", "See the connections",
+            "Visualise how everything links together. Hop from node to node, and filter by time to see *when* a relationship existed — not just that it did.",
+            "/graph-explorer", "Open Graph Explorer")
+
+        @FeatureCard(Icons.Material.Filled.AutoStories, "Holocron AI", "The librarian droid",
+            "A background AI agent that continuously improves the knowledge graph — first from structured infobox data, then by reading articles and validating claims to fill the gaps. Watch it work, live.",
+            "/holocron", "Open Holocron")
+    </MudGrid>
+
+    @* ── SP-4 companion ─────────────────────────────────────────────── *@
+    <MudPaper Elevation="0" Outlined="true" Class="pa-4 mt-8"
+              Style="border-color:#C9A227; background:rgba(201,162,39,0.06);">
+        <MudStack Row="true" Spacing="3" AlignItems="AlignItems.Center">
+            <MudIcon Icon="@Icons.Material.Filled.Android" Size="Size.Large" Style="color:#C9A227;" />
+            <MudStack Spacing="0">
+                <MudText Typo="Typo.subtitle1"><b>Meet SP-4</b>, your droid companion</MudText>
+                <MudText Typo="Typo.body2" Color="Color.Secondary">
+                    On every Explore page, the SP-4 analysis droid rides along in a side panel —
+                    ask it about whatever you're looking at and keep exploring without losing your place.
+                </MudText>
+            </MudStack>
+        </MudStack>
+    </MudPaper>
+
+    @* ── The fine print pointers ────────────────────────────────────── *@
+    <MudStack Row="true" Spacing="4" Justify="Justify.Center" Class="mt-8 flex-wrap">
+        <MudLink Href="/about" Color="Color.Secondary">About</MudLink>
+        <MudLink Href="/costs" Color="Color.Secondary">Costs</MudLink>
+        <MudLink Href="/privacy" Color="Color.Secondary">Privacy</MudLink>
+        <MudLink Href="/terms" Color="Color.Secondary">Terms</MudLink>
+    </MudStack>
+    <MudText Typo="Typo.caption" Color="Color.Secondary" Align="Align.Center" Class="d-block mt-2">
+        Want the details — how it's built, what it costs, the licences? It's all on those pages.
+    </MudText>
+
+</MudContainer>
+
+@code {
+    private StarWarsData.Models.Stats.CorpusStatsDto? _stats;
+
+    protected override void OnInitialized()
+    {
+        // Welcome page, not an explore surface — suppress SP-4 like /ask does.
+        Layout.SetHideCopilot(true);
+    }
+
+    public void Dispose() => Layout.SetHideCopilot(false);
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+
+        // Mark the visitor welcomed: next time they hit the bare root the
+        // App.razor head script sends them straight to /ask. They can always
+        // come back here via /getting-started or the nav link.
+        try { await JS.InvokeVoidAsync("swSetWelcomed"); }
+        catch (Microsoft.JSInterop.JSDisconnectedException) { }
+        catch (TaskCanceledException) { }
+
+        try
+        {
+            var http = HttpClientFactory.CreateClient("StarWarsData");
+            _stats = await http.GetFromJsonAsync<StarWarsData.Models.Stats.CorpusStatsDto>("api/stats/corpus");
+            StateHasChanged();
+        }
+        catch
+        {
+            // Live counts are a nice-to-have; the page reads fine without them.
+        }
+    }
+
+    private void Go(string url) => Nav.NavigateTo(url);
+
+    private RenderFragment FeatureCard(string icon, string tag, string title, string blurb,
+        string href, string cta, bool recommended = false) => @<MudItem xs="12" sm="6" md="4">
+        <MudPaper Elevation="1" Class="pa-4 d-flex flex-column" Style="height:100%;">
+            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-2">
+                <MudIcon Icon="@icon" Color="Color.Primary" />
+                <MudText Typo="Typo.overline" Color="Color.Secondary">@tag</MudText>
+                @if (recommended)
+                {
+                    <MudSpacer />
+                    <MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Filled"
+                             Style="font-size:10px;">Start here</MudChip>
+                }
+            </MudStack>
+            <MudText Typo="Typo.h6" Class="mb-1">@title</MudText>
+            <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-4" Style="flex:1;">@blurb</MudText>
+            <MudButton Variant="Variant.Text" Color="Color.Primary" FullWidth="true"
+                       EndIcon="@Icons.Material.Filled.ArrowForward" OnClick="@(() => Go(href))">
+                @cta
+            </MudButton>
+        </MudPaper>
+    </MudItem>;
+}
