@@ -2,10 +2,11 @@
 
 **Status:** Implemented 2026-05-19 — `src/StarWarsData.SnapshotRestore/make-snapshot.{sh,ps1}`,
 `src/StarWarsData.SnapshotRestore/` run-once container, Development+run-mode
-gated `snapshot-restore` resource in the AppHost, `ONBOARDING.md`. **Not yet
-verified end-to-end** (no snapshot has been published yet; AppHost
-wiring could not be clean-built locally because a running AppHost held the
-referenced DLLs — see "Validation status").
+gated `snapshot-restore` resource in the AppHost, `ONBOARDING.md`. AppHost +
+solution **compile clean** (verified via the pre-commit `dotnet build` +
+Unit/Integration test gate). **Not yet verified end-to-end** — no snapshot has
+been published and the restore container has not been run against a live Mongo
+(see "Validation status").
 **Date:** 2026-05-19
 **Author:** Patrick Magee + Claude
 **Companion docs:** [Design-033](033-prod-to-dev-data-refresh.md) (raw-only,
@@ -111,14 +112,14 @@ present in the restored docs, so this is keyless and fast.
 
 ## Validation status
 
-- Scripts and `restore.sh` are written but **not executed** (no published
-  snapshot yet; sandbox can't reach the LAN Mongo).
-- AppHost change is line-for-line analogous to the existing `mongodb-migrations`
-  wiring (`AddDockerfile`/`WithEnvironment`/`WaitFor`) plus standard
-  `IsDevelopment()` / `ExecutionContext.IsRunMode` / `WaitForCompletion` APIs.
-  A clean `dotnet build` of the AppHost could **not** be obtained locally
-  because a running AppHost instance held the project DLLs. **Must be built +
-  run once before this is trusted.**
+- **Compiles:** the AppHost change + whole solution build clean and the
+  Unit/Integration test tiers pass — verified by the pre-commit hook
+  (`csharpier` + `dotnet build` + tests) on commit `dad2763e49`.
+- **Not executed end-to-end:** `make-snapshot` and `restore.sh` have not been
+  run (no snapshot published; this sandbox can't reach the LAN Mongo). The
+  run-once container, the `WaitForCompletion` ordering, the `gzip -t` guard,
+  and the prod-write guard are unproven against a live system. **Run once on a
+  real fresh clone before this is trusted.**
 
 ## Open Questions
 
