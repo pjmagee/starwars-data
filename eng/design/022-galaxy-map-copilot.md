@@ -279,9 +279,23 @@ probability aside). The block is deliberately constrained:
   At most one flourish per answer; the 2–4 paragraph budget is unchanged. This
   is the explicit guard against C-3PO's natural verbosity degrading a surface
   whose whole point is concise in-page reading.
-- UI side: a single muted antique-gold (`#C9A227`) icon + "Protocol Assistant"
-  label in the `CopilotSidebar` header (`.copilot-brand`). No avatar, no theme
-  takeover — `/ask` and the rest of the site are untouched.
+- UI side: a single muted antique-gold (`#C9A227`) icon + name label in the
+  `CopilotSidebar` header (`.copilot-brand`). No avatar, no theme takeover —
+  `/ask` and the rest of the site are untouched.
+
+> **Update 2026-05-19 — named "SP-4", open by default.** At the user's
+> request the UI surface is now branded **SP-4** (after the
+> [SP-4 analysis droid](https://starwars.fandom.com/wiki/SP-4_analysis_droid))
+> instead of the neutral "Protocol Assistant" — header label, the empty-state
+> caption, and the app-bar toggle tooltip all read "SP-4". This supersedes
+> the "not surfaced as a named character" line above for the *UI label only*;
+> the `CopilotAgent` **system prompt is unchanged** (still voice-only, still
+> instructed not to self-name in answers — change that separately if desired).
+> SP-4 is an obscure analysis droid, far lower IP exposure than a C-3PO
+> rebrand. The app-bar icon is `Icons.Material.Filled.Android` (robot) and
+> the drawer is **open by default** (`_copilotOpen = true`) — safe because
+> the drawer is a sibling of `MudMainContent` (default-open just insets the
+> content from first paint; no re-mount). Validated cold on `/search`.
 
 Only `CopilotAgent` carries this; `AskAIAgent` stays neutral. **Revisit when:**
 if the persona ever measurably increases answer length or hurts citation

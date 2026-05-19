@@ -33,8 +33,8 @@
            (Design-022). Not a likeness or named character; the persona itself
            lives in the CopilotAgent system prompt. *@
         <div class="copilot-brand">
-            <MudIcon Icon="@Icons.Material.Filled.PrecisionManufacturing" Size="Size.Small" Class="copilot-brand-icon" />
-            <MudText Typo="Typo.subtitle2" Class="copilot-brand-name">Protocol Assistant</MudText>
+            <MudIcon Icon="@Icons.Material.Filled.Android" Size="Size.Small" Class="copilot-brand-icon" />
+            <MudText Typo="Typo.subtitle2" Class="copilot-brand-name">SP-4</MudText>
         </div>
         @if (PageContext.Current is { } ctx && !string.IsNullOrEmpty(ctx.Subject))
         {
@@ -46,7 +46,7 @@
         else
         {
             <MudText Typo="Typo.caption" Color="Color.Secondary">
-                Copilot — ask about anything on the current page.
+                SP-4 — ask about anything on the current page.
             </MudText>
         }
         @if (!string.IsNullOrWhiteSpace(PageContext.CurrentSelection))

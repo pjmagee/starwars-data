@@ -109,11 +109,11 @@
                                Href="/authentication/login" title="Sign in" Class="d-flex d-lg-none" />
             </NotAuthorized>
         </AuthorizeView>
-        @* Copilot sidebar toggle — hidden on pages that opt out (e.g. /ask). *@
+        @* SP-4 sidebar toggle — hidden on pages that opt out (e.g. /ask). *@
         @if (!Layout.HideCopilot)
         {
-            <MudTooltip Text="@(_copilotOpen ? "Hide copilot" : "Open copilot")">
-                <MudIconButton Icon="@Icons.Material.Filled.AutoAwesome"
+            <MudTooltip Text="@(_copilotOpen ? "Hide SP-4" : "Open SP-4")">
+                <MudIconButton Icon="@Icons.Material.Filled.Android"
                                Color="@(_copilotOpen ? Color.Secondary : Color.Inherit)"
                                Edge="Edge.End"
                                OnClick="ToggleCopilot" />
@@ -224,7 +224,7 @@
 
 @code {
     private bool _drawerOpen = true;
-    private bool _copilotOpen;
+    private bool _copilotOpen = true; // SP-4 is open by default
     private bool _isDarkMode = true;
     private string _darkModePreference = "system"; // "light" | "dark" | "system"
     private bool _aurebesh;
