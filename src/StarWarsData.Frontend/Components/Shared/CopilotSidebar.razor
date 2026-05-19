@@ -29,6 +29,13 @@
 
     @* ── Focus chip header — shows what the agent's currently grounded on. ── *@
     <div class="copilot-header">
+        @* Protocol-droid persona brand row — subtle gold, voice-only flavour
+           (Design-022). Not a likeness or named character; the persona itself
+           lives in the CopilotAgent system prompt. *@
+        <div class="copilot-brand">
+            <MudIcon Icon="@Icons.Material.Filled.PrecisionManufacturing" Size="Size.Small" Class="copilot-brand-icon" />
+            <MudText Typo="Typo.subtitle2" Class="copilot-brand-name">Protocol Assistant</MudText>
+        </div>
         @if (PageContext.Current is { } ctx && !string.IsNullOrEmpty(ctx.Subject))
         {
             <MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Outlined"
@@ -186,6 +193,22 @@
         flex-shrink: 0;
         padding: 8px 12px;
         border-bottom: 1px solid var(--mud-palette-lines-default);
+    }
+    /* Subtle protocol-droid gold. One muted antique-gold reads on both the
+       dark and light themes; deliberately understated, not a full rebrand. */
+    .copilot-brand {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 4px;
+    }
+    .copilot-brand-icon {
+        color: #C9A227;
+    }
+    .copilot-brand-name {
+        color: #C9A227;
+        font-weight: 600;
+        letter-spacing: 0.3px;
     }
     .copilot-messages {
         flex: 1;

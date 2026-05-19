@@ -1,6 +1,18 @@
 # Design-022: Page-Aware Copilot Sidebar
 
-**Status:** Shipped (Phases 1–2, 2026-04-30; `d8cab0be8a`, `616ae44dd2`). `CopilotAgent` + `/copilot/stream` endpoint, `PageContextService`, `CopilotSidebar.razor`, right `MudDrawer` in `MainLayout`, shared `Components/Shared/Agui/` DTOs, and `PageContext.Set(...)` wired on galaxy-map, timeline, graph-explorer, knowledge-graph, search, character-timelines, tables (Phase 2). Galaxy-map deep links + agent filter context followed (Design-029/030). Phase 3 QoL (persist sidebar conversations, "continue in /ask") still pending.
+**Status:** Shipped (Phases 1–2, 2026-04-30; `d8cab0be8a`, `616ae44dd2`). `CopilotAgent` + `/copilot/stream` endpoint, `PageContextService`, `CopilotSidebar.razor`, shared `Components/Shared/Agui/` DTOs, and `PageContext.Set(...)` wired on galaxy-map, timeline, graph-explorer, knowledge-graph, search, character-timelines, tables (Phase 2). Galaxy-map deep links + agent filter context followed (Design-029/030). Phase 3 QoL (persist sidebar conversations, "continue in /ask") still pending.
+
+> **Layout reworked 2026-05-19 (`feature/copilot-split-panel`).** The right
+> `MudDrawer` (`DrawerVariant.Temporary`) was replaced with a `MudSplitPanel`:
+> the page renders in `FirstPanel`, the copilot in `SecondPanel`, with a
+> draggable divider. The temporary drawer overlaid the page behind a scrim, so
+> the user could not scroll or navigate the site while the copilot was open —
+> the opposite of a "contextual reading assistant". The split panel sits
+> beside the content instead, so the user keeps reading and clicking around
+> while it's open. Below the 960px Design-011 gate (a side-by-side split is
+> unusable on a phone) the copilot still falls back to the temporary drawer.
+> See the updated **1. Layout** section.
+
 **Date:** 2026-04-28
 **Author:** Patrick Magee + Claude
 **Related:** [Design-004 Galaxy Map Architecture](./004-galaxy-map-architecture.md), [Design-006 Galaxy Map Timeline Mode](./006-galaxy-map-timeline-mode.md), [Design-011 Mobile Web UX](./011-mobile-web-ux.md), [ADR-002 AI Agent Toolkits](../adr/002-ai-agent-toolkits.md)
@@ -46,21 +58,40 @@ The chat agent already has all the tooling needed (GraphRAG, KG analytics, seman
 
 ### 1. Layout
 
-Add a second `MudDrawer` to [`MainLayout.razor`](../../src/StarWarsData.Frontend/Components/Layout/MainLayout.razor#L20), anchored right, symmetric with the existing left nav drawer:
+> **Superseded 2026-05-19.** The original Phase-1 design (and shipped 2026-04-30
+> implementation) used a right `MudDrawer` with `DrawerVariant.Temporary`. That
+> drawer overlaid the page behind a scrim: opening the copilot froze the page
+> underneath, so the user could not scroll or navigate while reading the
+> copilot's answer — directly contradicting the "contextual reading assistant"
+> goal. The drawer is now a `MudSplitPanel`. The original drawer markup is
+> retained verbatim below the divider as the **mobile fallback only**.
+
+[`MainLayout.razor`](../../src/StarWarsData.Frontend/Components/Layout/MainLayout.razor) renders the copilot in one of two modes, gated on viewport width at the 960px Design-011 breakpoint:
+
+**Wide (≥ 960px) — split panel.** `MudMainContent` hosts a `MudSplitPanel`; the page (`@Body` + footer, with its own scroll) is `FirstPanel`, `CopilotSidebar` is `SecondPanel`, with a draggable divider:
 
 ```razor
-<MudDrawer @bind-Open="_copilotOpen" Anchor="Anchor.Right"
-           ClipMode="DrawerClipMode.Always" Variant="DrawerVariant.Mini"
-           OpenMiniOnHover="false" Elevation="2" Width="380px" MiniWidth="48px">
-    <CopilotSidebar />
-</MudDrawer>
+<div class="sw-copilot-split-host">
+    <MudSplitPanel @ref="_splitPanel" Class="mud-width-full mud-height-full"
+                   MinPanelSize="320" PanelGap="6" Transparent="true"
+                   ClassDivider="sw-split-divider" ClassSecondPanel="sw-copilot-pane">
+        <FirstPanel>
+            <div class="sw-split-scroll pa-4">@Body @FooterContent</div>
+        </FirstPanel>
+        <SecondPanel><CopilotSidebar /></SecondPanel>
+    </MudSplitPanel>
+</div>
 ```
 
-- `Variant="Mini"` so collapsed it shows a thin rail with a sparkle icon (`Icons.Material.Filled.AutoAwesome`) — discoverable on every page.
-- Toggle button in the `MudAppBar` at the right edge, mirroring the left `Menu` button at line 24.
-- Width persisted to localStorage via the existing `swSetUiState` / `swGetUiState` channel used for theme/text-size at [`MainLayout.razor:260`](../../src/StarWarsData.Frontend/Components/Layout/MainLayout.razor#L260).
-- Honors `Layout.IsFullscreen` exactly like the left drawer at [`MainLayout.razor:21`](../../src/StarWarsData.Frontend/Components/Layout/MainLayout.razor#L21) — galaxy-map fullscreen mode hides both drawers.
-- Below `md` (mobile) the sidebar swaps to `Anchor="Anchor.Bottom"` with `Variant="Temporary"` and full width — same gating CSS as Design-011.
+- The split host fills the viewport below the 64px `MudAppBar` (`MainContent` keeps its `pt-16` offset, drops `pa-4`; padding/scroll move inside `FirstPanel`), so the page never reflows the whole viewport and the copilot never overlays it.
+- `MudSplitPanel`'s default is a 50/50 split; `OnAfterRenderAsync` measures the actual content host (already inset by the left nav drawer) via `swElementWidth` and calls `SetDividerPositionAsync` so the copilot opens at ~34% clamped to a readable 360–460px band. `MinPanelSize="320"` keeps either side usable when dragged.
+- The divider is invisible by default with `Transparent` panels on the dark theme, so `sw-split-divider` gives it a faint track, a centred grip dash, the `col-resize` cursor, and a primary-colour hover — discoverable.
+- Toggle button in the `MudAppBar` at the right edge, mirroring the left `Menu` button.
+- Honors `Layout.IsFullscreen` exactly like the left drawer — galaxy-map fullscreen mode hides the appbar, drawers, and the split.
+
+**Narrow (< 960px) — temporary drawer fallback.** A side-by-side split is unusable on a phone, so below the gate the original right `MudDrawer` (`DrawerVariant.Temporary`, 380px) is rendered instead, wrapping the same `CopilotSidebar`. The viewport is tracked by `swRegisterViewportWatcher` (a `matchMedia('(min-width: 960px)')` listener mirroring the existing dark-mode watcher), so the two modes swap live on resize without a reload.
+
+- Divider position is **not** persisted yet (resets to the computed default each open). `MudSplitPanel` 9.4 exposes no resize-end event, so persistence is deferred to Phase 3 — see Open questions.
 
 ### 2. Page-context service
 
@@ -199,6 +230,28 @@ User messages may include envelopes describing the page the user is on:
 
 Note the explicit "suggest the user open `/ask`" escape hatch — the copilot is allowed to recognize when a question wants the bigger surface and bow out gracefully.
 
+#### Persona — protocol droid, lightly (added 2026-05-19)
+
+The copilot prompt carries a `PERSONA` block giving it a courteous, fastidious
+Star Wars protocol-droid voice (polite, a little fussy, the occasional
+probability aside). The block is deliberately constrained:
+
+- It is **voice only** — no character name, no likeness, no films/owners, no
+  backstory. The site's independent-fan-project disclaimer is the reason this
+  stops at flavour; a literal C-3PO rebrand would lean far harder on
+  trademarked IP. The persona is *not* surfaced as a named character anywhere.
+- Brevity, accuracy, and the entity-linking rules **always override** flair.
+  At most one flourish per answer; the 2–4 paragraph budget is unchanged. This
+  is the explicit guard against C-3PO's natural verbosity degrading a surface
+  whose whole point is concise in-page reading.
+- UI side: a single muted antique-gold (`#C9A227`) icon + "Protocol Assistant"
+  label in the `CopilotSidebar` header (`.copilot-brand`). No avatar, no theme
+  takeover — `/ask` and the rest of the site are untouched.
+
+Only `CopilotAgent` carries this; `AskAIAgent` stays neutral. **Revisit when:**
+if the persona ever measurably increases answer length or hurts citation
+discipline, cut it back to the prior neutral prompt — the reading job wins.
+
 ### Two-agent rate-limiting
 
 The existing rate-limit middleware is per-endpoint. Default the copilot to the same per-user budget as `/kernel/stream` for Phase 1 — observe usage, then split the limits if one surface starves the other.
@@ -235,7 +288,7 @@ The existing rate-limit middleware is per-endpoint. Default the copilot to the s
 
 ## Open questions
 
-- **Layout cost on dense pages.** A right drawer eats horizontal space on `/galaxy-map`, `/timeline`, `/graph-explorer` — pages that already feel cramped. Mini variant (48px rail) keeps the cost small when collapsed; the user sees the rail and chooses whether to expand. Verify with the dense visual pages before committing the layout.
+- **Layout cost on dense pages.** ~~A right drawer eats horizontal space on `/galaxy-map`, `/timeline`, `/graph-explorer`.~~ **Resolved 2026-05-19:** the split panel only consumes width while the copilot is open, and the user controls the divider (draggable, 320px min). Closed, there is zero layout cost — the page renders exactly as before. Galaxy-map fullscreen hides it entirely.
 - **Per-page hide list.** `/ask` definitely hides the sidebar. Should `/profile`, `/privacy`, `/terms`, `/about` also opt out — they have nothing for the copilot to ground on, but a generic chat there is harmless. Default: leave it on; the rail is unobtrusive and consistent.
 - **Quota.** Phase 1 shares the `/kernel/stream` budget with `/copilot/stream`. The "always available" framing might burn quota faster — observe before deciding whether to split limits per surface.
 - **Privacy of saved context.** If sidebar conversations get persisted in Phase 3, the `[PAGE:][SUBJECT:]` prefix gets stored. Fine for the user's own history; if they share the session URL, it'd leak which entity they were viewing. Probably acceptable; flag for review.
@@ -254,4 +307,4 @@ Until then the two agents are intentionally distinct products: `AskAIAgent` is a
 
 **Drop the page-context-as-prefix wire format** if AGUI gains a first-class `forwardedProps` / state channel that survives replay across the existing client persistence — structured state beats prefix-injected strings at that point.
 
-**Drop the right-drawer layout** if Phase 1 measurement shows the rail consistently hurts the dense pages it's meant to assist (e.g. galaxy map's per-pixel layout becomes intolerable). Fallback: per-page floating action button, lower discoverability but no layout cost.
+**~~Drop the right-drawer layout~~** — **done 2026-05-19.** The temporary drawer was replaced with a `MudSplitPanel` (wide) + temporary-drawer fallback (< 960px) because the overlay+scrim drawer blocked page interaction while open. If `MudSplitPanel` (≥ v9.4) gains a resize-end event, persist the divider position to the `swGetUiState` channel (Phase 3).

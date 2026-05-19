@@ -182,11 +182,13 @@
             </div>
         </div>
     </MudDrawer>
-    @* Copilot sidebar — right anchor, symmetric with the left nav. Suppressed on
-       /ask and any page that has set Layout.HideCopilot. Temporary variant so
-       the page content underneath isn't pushed when the drawer is open; the
-       chat is meant to overlay, not reflow the viewport. *@
-    @if (!Layout.HideCopilot)
+    @* Copilot — mobile fallback only. On wide viewports the copilot lives in a
+       MudSplitPanel beside the page content (see MudMainContent below) so the
+       user can keep reading and navigating while it's open. A side-by-side
+       split is unusable on a phone, so below the 960px gate it stays a
+       temporary drawer. Suppressed on /ask and any page that sets
+       Layout.HideCopilot. *@
+    @if (!Layout.HideCopilot && !_isWide)
     {
         <MudDrawer id="copilot-drawer" @bind-Open="_copilotOpen" Anchor="Anchor.Right"
                    ClipMode="DrawerClipMode.Always" Variant="DrawerVariant.Temporary"
@@ -195,31 +197,40 @@
         </MudDrawer>
     }
     }
-    <MudMainContent Class="@(Layout.IsFullscreen ? "" : "pt-16 pa-4")" Style="@(Layout.IsFullscreen ? "padding-top:0!important;" : "")">
-        @Body
-        @if (!Layout.IsFullscreen)
+    <MudMainContent Class="@MainContentClass" Style="@MainContentStyle">
+        @if (SplitActive)
         {
-        @* Footer hidden below lg (< 1280px) — its content lives in the nav drawer in compact mode. *@
-        <footer class="d-none d-lg-flex flex-column align-center gap-2 pa-4 mt-4">
-            <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center" Justify="Justify.Center" Class="flex-wrap">
-                <MudText Typo="Typo.caption" Color="Color.Secondary">
-                    Made with ❤️ by
-                    <MudLink Href="https://magaoidh.pro" Target="_blank" Color="Color.Secondary" Underline="Underline.Always">Patrick Magee</MudLink>
-                    &copy; @DateTime.UtcNow.Year
-                </MudText>
-                <MudText Typo="Typo.caption" Color="Color.Secondary">|</MudText>
-                <MudLink Href="/privacy" Typo="Typo.caption" Color="Color.Secondary" Underline="Underline.Hover">Privacy</MudLink>
-                <MudLink Href="/terms" Typo="Typo.caption" Color="Color.Secondary" Underline="Underline.Hover">Terms</MudLink>
-                <MudLink Href="/about" Typo="Typo.caption" Color="Color.Secondary" Underline="Underline.Hover">About</MudLink>
-                <MudText Typo="Typo.caption" Color="Color.Secondary">|</MudText>
-                <MudText Typo="Typo.caption" Color="Color.Secondary">v@(_version)</MudText>
-            </MudStack>
-            <MudText Typo="Typo.caption" Style="color:rgba(146,146,159,0.6); font-size:11px; text-align:center; max-width:600px;">
-                Not affiliated with or endorsed by Wookieepedia, Fandom, Disney, or Lucasfilm.
-                Star Wars and all related properties are trademarks of Disney/Lucasfilm Ltd.
-                This is an independent fan project. <MudLink Href="/about" Style="font-size:11px;" Color="Color.Secondary" Underline="Underline.Hover">Learn more</MudLink>
-            </MudText>
-        </footer>
+            @* Copilot lives beside the page in a draggable split panel rather than
+               an overlay drawer, so the user can keep reading and clicking around
+               the site while it's open. The page scrolls inside FirstPanel; the
+               copilot owns its own internal scroll in SecondPanel. *@
+            <div class="sw-copilot-split-host">
+                <MudSplitPanel @ref="_splitPanel"
+                               Class="mud-width-full mud-height-full"
+                               MinPanelSize="320"
+                               PanelGap="6"
+                               Transparent="true"
+                               ClassDivider="sw-split-divider"
+                               ClassSecondPanel="sw-copilot-pane">
+                    <FirstPanel>
+                        <div class="sw-split-scroll pa-4">
+                            @Body
+                            @FooterContent
+                        </div>
+                    </FirstPanel>
+                    <SecondPanel>
+                        <CopilotSidebar />
+                    </SecondPanel>
+                </MudSplitPanel>
+            </div>
+        }
+        else
+        {
+            @Body
+            @if (!Layout.IsFullscreen)
+            {
+                @FooterContent
+            }
         }
     </MudMainContent>
 </MudLayout>
@@ -245,6 +256,52 @@
     private DotNetObjectReference<MainLayout>? _dotNetRef;
     private bool _darkModeWatcherRegistered;
     private bool _selectionWatcherRegistered;
+    private bool _viewportWatcherRegistered;
+
+    // True when the viewport is wide enough (>= 960px, the Design-011 gate) to
+    // host the copilot beside the page in a split panel. Defaults true — the
+    // app renders server-side with no prerender so the real value lands on the
+    // first JS-interop round-trip; desktop-first is the safe default.
+    private bool _isWide = true;
+    private MudSplitPanel? _splitPanel;
+    private bool _splitInitialized;
+
+    // The copilot occupies a resizable split panel (not an overlay) only when
+    // it's open, not page-suppressed, not in fullscreen, and the viewport is
+    // wide enough. Otherwise the page renders exactly as before.
+    private bool SplitActive => _copilotOpen && !Layout.HideCopilot && !Layout.IsFullscreen && _isWide;
+
+    // In split mode the scroll + padding move inside FirstPanel, so the main
+    // content keeps only its app-bar offset (pt-16) and drops pa-4.
+    private string MainContentClass =>
+        Layout.IsFullscreen ? "" : SplitActive ? "pt-16" : "pt-16 pa-4";
+
+    private string MainContentStyle =>
+        Layout.IsFullscreen ? "padding-top:0!important;" : "";
+
+    // Footer is shared between the split and non-split branches. It's static
+    // markup (not @Body), so rendering it from a fragment in either branch is
+    // safe — @Body itself only ever lives in one branch at a time.
+    private RenderFragment FooterContent => @<footer class="d-none d-lg-flex flex-column align-center gap-2 pa-4 mt-4">
+        <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center" Justify="Justify.Center" Class="flex-wrap">
+            <MudText Typo="Typo.caption" Color="Color.Secondary">
+                Made with ❤️ by
+                <MudLink Href="https://magaoidh.pro" Target="_blank" Color="Color.Secondary" Underline="Underline.Always">Patrick Magee</MudLink>
+                &copy; @DateTime.UtcNow.Year
+            </MudText>
+            <MudText Typo="Typo.caption" Color="Color.Secondary">|</MudText>
+            <MudLink Href="/privacy" Typo="Typo.caption" Color="Color.Secondary" Underline="Underline.Hover">Privacy</MudLink>
+            <MudLink Href="/terms" Typo="Typo.caption" Color="Color.Secondary" Underline="Underline.Hover">Terms</MudLink>
+            <MudLink Href="/about" Typo="Typo.caption" Color="Color.Secondary" Underline="Underline.Hover">About</MudLink>
+            <MudText Typo="Typo.caption" Color="Color.Secondary">|</MudText>
+            <MudText Typo="Typo.caption" Color="Color.Secondary">v@(_version)</MudText>
+        </MudStack>
+        <MudText Typo="Typo.caption" Style="color:rgba(146,146,159,0.6); font-size:11px; text-align:center; max-width:600px;">
+            Not affiliated with or endorsed by Wookieepedia, Fandom, Disney, or Lucasfilm.
+            Star Wars and all related properties are trademarks of Disney/Lucasfilm Ltd.
+            This is an independent fan project. <MudLink Href="/about" Style="font-size:11px;" Color="Color.Secondary" Underline="Underline.Hover">Learn more</MudLink>
+        </MudText>
+    </footer>;
 
     private static readonly (string Label, string Value)[] _textSizes =
     [
@@ -273,6 +330,37 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        // Size the copilot split divider the first time the split becomes
+        // active. This runs on every render (not just first) because the split
+        // appears when the user toggles the copilot — long after first render.
+        // Measure the actual content host (already inset by the left nav
+        // drawer) so the copilot lands at a sane ~34% width clamped to a
+        // readable band rather than MudSplitPanel's 50/50 default. Reset the
+        // flag when it closes so it re-sizes the next time it opens.
+        if (SplitActive && _splitPanel is not null && !_splitInitialized)
+        {
+            _splitInitialized = true;
+            try
+            {
+                var hostWidth = await JS.InvokeAsync<int>("swElementWidth", ".sw-copilot-split-host");
+                if (hostWidth > 0)
+                {
+                    var copilot = Math.Clamp((int)(hostWidth * 0.34), 360, 460);
+                    var offset = Math.Max(320, hostWidth - copilot - 6);
+                    await _splitPanel.SetDividerPositionAsync(offset);
+                }
+            }
+            catch (JSDisconnectedException) { }
+            catch (Exception ex)
+            {
+                Logger.LogDebug(ex, "Failed initializing copilot split divider");
+            }
+        }
+        else if (!SplitActive && _splitInitialized)
+        {
+            _splitInitialized = false;
+        }
+
         if (!firstRender) return;
 
         // Critical: load all persisted UI state in ONE round-trip via swGetUiState.
@@ -295,6 +383,8 @@
                 "light" => false,
                 _ => ui.SystemDark,
             };
+
+            _isWide = ui.Wide;
 
             _theme = BuildTheme(_selectedTheme);
             StateHasChanged();
@@ -326,6 +416,13 @@
                 _selectionWatcherRegistered = true;
             }
 
+            if (!_viewportWatcherRegistered)
+            {
+                _dotNetRef ??= DotNetObjectReference.Create(this);
+                await JS.InvokeVoidAsync("swRegisterViewportWatcher", _dotNetRef);
+                _viewportWatcherRegistered = true;
+            }
+
             StateHasChanged();
         }
         catch (JSDisconnectedException) { }
@@ -335,7 +432,18 @@
         }
     }
 
-    private sealed record UiState(string? Theme, string? TextSize, bool Aurebesh, string? DarkMode, bool SystemDark);
+    private sealed record UiState(string? Theme, string? TextSize, bool Aurebesh, string? DarkMode, bool SystemDark, bool Wide);
+
+    [JSInvokable]
+    public Task OnViewportChanged(bool wide)
+    {
+        // Forwarded by swRegisterViewportWatcher when the window crosses the
+        // 960px gate. Flips the copilot between split-panel and drawer modes
+        // live, without a reload.
+        if (_isWide == wide) return Task.CompletedTask;
+        _isWide = wide;
+        return InvokeAsync(StateHasChanged);
+    }
 
     [JSInvokable]
     public Task OnSystemDarkModeChangedJs(bool systemIsDark)
@@ -407,6 +515,14 @@
             try
             {
                 _ = JS.InvokeVoidAsync("swUnregisterSelectionWatcher");
+            }
+            catch { }
+        }
+        if (_viewportWatcherRegistered)
+        {
+            try
+            {
+                _ = JS.InvokeVoidAsync("swUnregisterViewportWatcher");
             }
             catch { }
         }

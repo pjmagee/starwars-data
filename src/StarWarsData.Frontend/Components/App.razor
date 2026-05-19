@@ -156,8 +156,57 @@
                     textSize: localStorage.getItem('sw-text-size') || 'default',
                     aurebesh: localStorage.getItem('sw-aurebesh') === 'true',
                     darkMode: localStorage.getItem('sw-dark-mode') || 'system',
-                    systemDark: window.matchMedia('(prefers-color-scheme: dark)').matches
+                    systemDark: window.matchMedia('(prefers-color-scheme: dark)').matches,
+                    // Wide = the copilot can sit beside the page in a split panel.
+                    // Below this the copilot falls back to a temporary drawer (a
+                    // side-by-side split is unusable on a phone). 960px matches the
+                    // Design-011 mobile gate used everywhere else in the layout.
+                    wide: window.matchMedia('(min-width: 960px)').matches
                 };
+            }
+
+            // Viewport width watcher — mirrors the dark-mode watcher above. Lets
+            // MainLayout switch the copilot between split-panel (wide) and
+            // temporary-drawer (narrow) modes when the window is resized, without
+            // a full reload. Same 960px breakpoint as swGetUiState.
+            var _swViewportMql = null;
+            var _swViewportListener = null;
+            var _swViewportRef = null;
+            function swRegisterViewportWatcher(dotnetRef) {
+                swUnregisterViewportWatcher();
+                _swViewportRef = dotnetRef;
+                _swViewportMql = window.matchMedia('(min-width: 960px)');
+                _swViewportListener = function (e) {
+                    if (_swViewportRef) {
+                        _swViewportRef.invokeMethodAsync('OnViewportChanged', e.matches);
+                    }
+                };
+                if (_swViewportMql.addEventListener) {
+                    _swViewportMql.addEventListener('change', _swViewportListener);
+                } else if (_swViewportMql.addListener) {
+                    _swViewportMql.addListener(_swViewportListener);
+                }
+            }
+            function swUnregisterViewportWatcher() {
+                if (_swViewportMql && _swViewportListener) {
+                    if (_swViewportMql.removeEventListener) {
+                        _swViewportMql.removeEventListener('change', _swViewportListener);
+                    } else if (_swViewportMql.removeListener) {
+                        _swViewportMql.removeListener(_swViewportListener);
+                    }
+                }
+                _swViewportMql = null;
+                _swViewportListener = null;
+                _swViewportRef = null;
+            }
+
+            // Returns the rendered pixel width of the first element matching the
+            // selector (0 if none). Used by MainLayout to size the copilot split
+            // panel's divider relative to the actual content area — which is
+            // already inset by the left nav drawer — rather than the raw viewport.
+            function swElementWidth(selector) {
+                var el = document.querySelector(selector);
+                return el ? Math.round(el.getBoundingClientRect().width) : 0;
             }
 
             // Aurebesh preview: show selected text in galactic script
