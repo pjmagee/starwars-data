@@ -19,62 +19,40 @@ automated by the Aspire AppHost.
   - Or skip the CLI entirely and use `dotnet run --project src/StarWarsData.AppHost`
 - An **OpenAI API key** (yours — used only at runtime for chat/agent features)
 
-## 2. MongoDB — pick one
+## 2. MongoDB — nothing to do
 
-The app talks to an external Mongo (it is **not** Aspire-managed). Two ways:
+In Development, the AppHost **runs MongoDB for you**: an Aspire-managed
+`mongodb/mongodb-atlas-local` container with a persistent volume (ADR-010).
+No `docker run`, no connection strings, no `mongo-*` user-secrets. On first
+`aspire run` it's created and the snapshot is restored into it; the volume
+persists so it never re-restores.
 
-### Option A — you are on the LAN/VPN with the shared server
+*(Optional override — only if you're on the LAN/VPN and want the shared
+server instead of a local container: set `Parameters:mongo-host/-port/-user/
+-password` user-secrets. Production always uses the external server; this
+local container is Development-only.)*
 
-Nothing to do. `appsettings.Development.json` already points at the shared
-server's `starwars-dev` database, which is kept current. Skip to step 3 and
-**leave `snapshot-url` unset** — the restore container will no-op.
-
-### Option B — fresh clone, no LAN access (the common case)
-
-Run a local **Atlas-compatible** Mongo (plain `mongo` will NOT do — vector
-search needs Atlas Local):
-
-```bash
-docker run -d --name starwars-mongo -p 27017:27017 \
-  -e MONGODB_INITDB_ROOT_USERNAME=admin \
-  -e MONGODB_INITDB_ROOT_PASSWORD=password \
-  mongodb/mongodb-atlas-local:latest
-```
-
-Point the AppHost at it (user-secrets, AppHost project):
-
-```bash
-cd src/StarWarsData.AppHost
-dotnet user-secrets set "Parameters:mongo-host" "localhost"
-dotnet user-secrets set "Parameters:mongo-port" "27017"
-dotnet user-secrets set "Parameters:mongo-user" "admin"
-dotnet user-secrets set "Parameters:mongo-password" "password"
-```
-
-## 3. Secrets
+## 3. Secrets — just your OpenAI key
 
 From `src/StarWarsData.AppHost`:
 
 ```bash
-# Your OpenAI key (required for chat/agent features)
 dotnet user-secrets set "Parameters:openapi" "sk-..."
-
-# Option B only: the data snapshot (see "Getting the snapshot URL" below)
-dotnet user-secrets set "Parameters:snapshot-url" "<direct-download URL>"
 ```
 
-Leave `snapshot-url` unset for Option A.
+That's the only required secret. `snapshot-url` already defaults to the shared
+copyparty snapshot — you don't set it unless the host/file changes.
 
-### Getting the snapshot URL
+### (Reference) the snapshot URL — already the default, no action needed
 
-Snapshots are hosted on the project's **copyparty** file server. `snapshot-url`
-is the **direct file URL** (not a folder/listing — the restore `gzip -t`-checks
-the download and fails fast if it gets HTML):
+`snapshot-url` defaults in the AppHost to the shared copyparty file —
+`https://copyparty.magaoidh.pro/swdata/starwars-snapshot-latest.gz`. You only
+read this section if you need to override it. It must be a **direct file URL**
+(not a folder/listing — the restore `gzip -t`-checks and fails fast on HTML):
 
-- **Default — use this:** `https://copyparty.magaoidh.pro/swdata/starwars-snapshot-latest.gz`
-  Works from anywhere, which is the whole point — a fresh-clone dev is *not*
-  on the LAN and cannot reach a `192.168.1.x` address. The restore resumes on
-  drop (`curl -C -`), so a slow/large pull is fine.
+- **The default:** `https://copyparty.magaoidh.pro/swdata/starwars-snapshot-latest.gz`
+  Works from anywhere — a fresh clone is *not* on the LAN and cannot reach a
+  `192.168.1.x` address. The restore resumes on drop (`curl -C -`).
 - **Optional LAN override (only if you're already on the LAN/VPN):**
   `http://192.168.1.102:3923/swdata/starwars-snapshot-latest.gz` — bypasses
   Cloudflare for full local speed. Not reachable off-network; don't set this
@@ -94,18 +72,19 @@ aspire run --project src/StarWarsData.AppHost
 #   or: dotnet run --project src/StarWarsData.AppHost
 ```
 
-On first run (Option B), the Aspire dashboard shows a **`snapshot-restore`**
-resource that:
+On first run the Aspire dashboard shows a **`mongodb-local`** container coming
+up, then a **`snapshot-restore`** resource that:
 
 1. downloads the snapshot,
-2. restores it into your `starwars-dev` database (renaming `starwars-prod.*` →
+2. restores it into `starwars-dev` (renaming `starwars-prod.*` →
    `starwars-dev.*`),
 3. exits.
 
-`mongodb-migrations` waits for it to finish, then applies schema/index
-migrations. It is **idempotent** — restart the AppHost any time; the restore
-skips itself once the dev DB is populated (delete the dev DB or set
-`Parameters:snapshot-restore` env `FORCE=true` to redo it).
+`mongodb-migrations` waits for it, then applies schema/index migrations. It is
+**idempotent** — restart the AppHost any time; the restore skips itself once
+the DB is populated. The `starwars-dev-mongo` volume persists the data across
+restarts, so this whole sequence runs **once**. To force a fresh restore,
+remove that Docker volume (`docker volume rm starwars-dev-mongo`) and re-run.
 
 ## 5. Rebuild the search/vector indexes (one-time, keyless)
 

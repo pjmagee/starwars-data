@@ -46,7 +46,35 @@ var apiService = builder
     .WithEnvironment("Settings__HolocronEnabled", "true")
     .WithEnvironment("Settings__KeycloakAdminClientSecret", keycloakAdminSecret);
 
-var connString = ReferenceExpression.Create($"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true");
+// Local dev (run mode only): Aspire runs the MongoDB itself so a fresh clone
+// needs ZERO Mongo config — `aspire run` and you have a database. Atlas Local
+// (NOT plain mongo) because the app needs Atlas vector/text search. A named
+// volume + persistent lifetime mean the ~15 GB snapshot restore runs ONCE and
+// survives `aspire run` restarts. Production is byte-identical to before — it
+// still points at the external self-hosted server (the `else` branch); this
+// whole container is gated to Development+RunMode so it can never enter
+// `aspire publish`/`prepare`/`deploy` output. See ADR-010.
+var useLocalMongo = builder.Environment.IsDevelopment() && builder.ExecutionContext.IsRunMode;
+
+IResourceBuilder<ContainerResource>? mongoLocal = null;
+ReferenceExpression connString;
+
+if (useLocalMongo)
+{
+    mongoLocal = builder
+        .AddContainer("mongodb-local", "mongodb/mongodb-atlas-local", "latest")
+        .WithEndpoint(port: 27017, targetPort: 27017, scheme: "tcp", name: "mongo")
+        .WithVolume("starwars-dev-mongo", "/data/db")
+        .WithLifetime(ContainerLifetime.Persistent);
+
+    var ep = mongoLocal.GetEndpoint("mongo");
+    connString = ReferenceExpression.Create($"mongodb://{ep.Property(EndpointProperty.Host)}:{ep.Property(EndpointProperty.Port)}/?directConnection=true");
+}
+else
+{
+    connString = ReferenceExpression.Create($"mongodb://{mongoUser}:{mongoPassword}@{mongoHost}:{mongoPort}/?authSource=admin&directConnection=true");
+}
+
 var mongo = builder.AddConnectionString("mongodb", connString);
 
 // MongoDB migrations: runs mongosh migrate.js inside mongo:latest, then exits.
@@ -58,25 +86,29 @@ var mongoDbMigrations = builder
     .WithEnvironment("STARWARS_DB", starwarsDb);
 
 // Developer-onboarding snapshot restore (Design-038). Development-only,
-// run-once: downloads the shared starwars-prod snapshot from OneDrive and
+// run-once: downloads the shared starwars-prod snapshot from copyparty and
 // restores it into the dev database so a fresh clone has full data (incl.
 // embeddings) without re-running ETL or spending OpenAI credit. Idempotent —
-// no-ops if SNAPSHOT_URL is unset or the dev DB is already populated. NEVER
-// added in Production (gated below) so it can't enter the published compose,
-// and restore.sh hard-refuses any DB whose name contains "prod".
+// no-ops once the dev DB is already populated. NEVER added in Production
+// (gated below) so it can't enter the published compose, and restore.sh
+// hard-refuses any DB whose name contains "prod".
 if (builder.Environment.IsDevelopment() && builder.ExecutionContext.IsRunMode)
 {
-    // Direct-download URL of the .gz on the shared OneDrive folder. Empty by
-    // default (no-op) — set with:
+    // Defaulted so a fresh clone needs ZERO config for data — `aspire run`
+    // just restores. The URL is not a secret (copyparty access is the gate),
+    // so it's a normal parameter; override only if the host/file changes:
     //   dotnet user-secrets set "Parameters:snapshot-url" "<url>" --project src/StarWarsData.AppHost
-    var snapshotUrl = builder.AddParameter("snapshot-url", value: "", secret: true);
+    var snapshotUrl = builder.AddParameter("snapshot-url", value: "https://copyparty.magaoidh.pro/swdata/starwars-snapshot-latest.gz");
 
     var snapshotRestore = builder
         .AddDockerfile("snapshot-restore", "../StarWarsData.SnapshotRestore")
         .WithEnvironment("MDB_CONNECTION_STRING", connString)
         .WithEnvironment("TARGET_DB", starwarsDb)
         .WithEnvironment("SNAPSHOT_URL", snapshotUrl)
-        .WaitFor(mongo);
+        // Wait for the actual Mongo container (the AddConnectionString resource
+        // has no lifecycle to wait on). mongoLocal is non-null here — this
+        // block's guard is exactly `useLocalMongo`.
+        .WaitFor(mongoLocal!);
 
     // Restore drops & recreates collections — it MUST finish before migrations
     // apply schema/indexes on top, or --drop would wipe migrated state.
@@ -367,5 +399,17 @@ builder
     {
         dashboard.WithHostPort(18888);
     });
+
+// When Aspire owns the Mongo container (local dev), every Mongo consumer must
+// wait for it to be running — the `mongodb` AddConnectionString resource has no
+// lifecycle of its own to gate on. No-op in Production (mongoLocal is null;
+// the external server is assumed up).
+if (mongoLocal is not null)
+{
+    apiService.WaitFor(mongoLocal);
+    admin.WaitFor(mongoLocal);
+    mongoMcp.WaitFor(mongoLocal);
+    mongoDbMigrations.WaitFor(mongoLocal);
+}
 
 builder.Build().Run();
