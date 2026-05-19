@@ -11,17 +11,28 @@ only when `useLocalMongo` is true:
 ```csharp
 builder.Environment.IsDevelopment()
 && builder.ExecutionContext.IsRunMode
-&& builder.Configuration.GetValue("STARWARS_LOCAL_MONGO", false)
+&& builder.Configuration.GetValue("Parameters:use-local-mongo", false)
 ```
 
-A fresh-clone dev with no server sets the env var `STARWARS_LOCAL_MONGO=true`
-and the AppHost runs `mongodb/mongodb-atlas-local`
+`use-local-mongo` is a first-class Aspire parameter —
+`builder.AddParameter("use-local-mongo", value: "false")`, registered like
+`mongo-host` etc. (dashboard-visible, manifest, same resolution order: env
+`Parameters__use_local_mongo` > user-secrets > appsettings; `value: "false"`
+default so it is never an unresolved prompt in prod/CI, mirroring
+`keycloak-admin-secret`). It is also checked into `appsettings.Development.json`
+as `Parameters:use-local-mongo = "false"` so the knob is discoverable next to
+`mongo-host`, and overridden per-machine via
+`dotnet user-secrets set "Parameters:use-local-mongo" "true"`. Because a
+`ParameterResource` is a deferred reference that cannot conditionally create
+resources, the build-time topology branch reads the value from configuration
+(`builder.Configuration["Parameters:use-local-mongo"]`) — the pattern the
+Aspire "External parameters" docs explicitly sanction for AppHost-side reads. When true the AppHost runs `mongodb/mongodb-atlas-local`
 (`AddContainer("mongodb-local", …)`) with a named volume (`starwars-dev-mongo`)
 and `ContainerLifetime.Persistent`; the `mongodb` connection string is built
 from that container's endpoint, and the snapshot-restore resource (gated on the
 same flag) populates it once.
 
-**Default (env var unset) is unchanged behaviour:** the connection string is
+**Default (`"false"`) is unchanged behaviour:** the connection string is
 assembled from the external `mongo-host/-port/-user/-password` parameters
 pointing at the self-hosted server. So **production AND every existing
 server-based dev workflow are byte-identical to before** — opting in is the

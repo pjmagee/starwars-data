@@ -154,7 +154,8 @@ Snapshot creation is scheduled via `unraid-snapshot-cron.sh` in the Unraid
 
 1. ~~**Should Aspire fully manage the local Mongo container?**~~ **Resolved —
    yes, opt-in** ([ADR-010](../adr/010-aspire-managed-dev-mongo.md)). A
-   fresh-clone dev sets env var `STARWARS_LOCAL_MONGO=true`; the AppHost then
+   fresh-clone dev sets the `use-local-mongo` parameter true (user-secret
+   `Parameters:use-local-mongo`, or env `Parameters__use_local_mongo`); the AppHost then
    runs `mongodb/mongodb-atlas-local` (persistent volume) + auto-restore, in
    Development+RunMode only. Default (unset) = external server, so production
    and existing server-based dev workflows are byte-identical to before.

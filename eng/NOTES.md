@@ -41,7 +41,6 @@ mcp <https://blazor.syncfusion.com/documentation/mcp-server/overview>
 react root for react components??
 <https://learn.microsoft.com/en-us/aspnet/core/blazor/javascript-interoperability/call-javascript-from-dotnet?view=aspnetcore-10.0>
 
-
 ## starwars ref material
 
 <https://wrvh.home.xs4all.nl/galaxymap/>

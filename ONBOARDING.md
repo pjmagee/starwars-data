@@ -16,7 +16,6 @@ automated by the Aspire AppHost.
 - **Aspire CLI** — install via the official script ([aspire.dev](https://aspire.dev/get-started/install-cli/)):
   - Windows (PowerShell): `irm https://aspire.dev/install.ps1 | iex`
   - macOS/Linux (bash): `curl -sSL https://aspire.dev/install.sh | bash`
-  - Or skip the CLI entirely and use `dotnet run --project src/StarWarsData.AppHost`
 - An **OpenAI API key** (yours — used only at runtime for chat/agent features)
 
 ## 2. MongoDB
@@ -24,19 +23,24 @@ automated by the Aspire AppHost.
 **On the LAN/VPN with the shared server?** Nothing to do —
 `appsettings.Development.json` already points at it. Skip to step 3.
 
-**Fresh clone, no server access?** Set one env var and the AppHost runs
-MongoDB for you — an Aspire-managed `mongodb/mongodb-atlas-local` container
-with a persistent volume; on first `aspire run` it's created and the snapshot
-is restored into it (the volume persists, so it never re-restores). ADR-010.
+**Fresh clone, no server access?** Flip `use-local-mongo` to `true` and the
+AppHost runs MongoDB for you — an Aspire-managed `mongodb/mongodb-atlas-local`
+container with a persistent volume; on first `aspire run` it's created and the
+snapshot is restored into it (the volume persists, so it never re-restores).
+ADR-010.
+
+It's a normal parameter — you can see it in
+`src/StarWarsData.AppHost/appsettings.Development.json` under
+`Parameters:use-local-mongo` (default `"false"`), right next to `mongo-host`.
+Flip it on with a machine-local user-secret (same convention as every other
+parameter in this repo — nothing tracked changes):
 
 ```bash
-# Windows (PowerShell):  $env:STARWARS_LOCAL_MONGO = "true"
-# macOS/Linux (bash):    export STARWARS_LOCAL_MONGO=true
+dotnet user-secrets set "Parameters:use-local-mongo" "true" --project src/StarWarsData.AppHost
 ```
 
-Default (unset) = external server, so existing server-based workflows and
-production are completely unaffected. (The env var also works via user-secrets
-or appsettings as `STARWARS_LOCAL_MONGO` if you prefer it persisted.)
+Default (`"false"`) = external server, so existing server-based workflows and
+production are completely unaffected.
 
 ## 3. Secrets — just your OpenAI key
 
@@ -78,7 +82,7 @@ aspire run --project src/StarWarsData.AppHost
 #   or: dotnet run --project src/StarWarsData.AppHost
 ```
 
-If you set `STARWARS_LOCAL_MONGO=true`, the first run shows a **`mongodb-local`**
+If `use-local-mongo` is `true`, the first run shows a **`mongodb-local`**
 container coming up, then a **`snapshot-restore`** resource that:
 
 1. downloads the snapshot,

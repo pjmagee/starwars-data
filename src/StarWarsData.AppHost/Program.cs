@@ -46,17 +46,27 @@ var apiService = builder
     .WithEnvironment("Settings__HolocronEnabled", "true")
     .WithEnvironment("Settings__KeycloakAdminClientSecret", keycloakAdminSecret);
 
-// OPT-IN local Mongo for a fresh clone. Default (env var unset) = the external
-// self-hosted server — so production AND existing server-based dev workflows
-// are byte-identical to before; nobody on the LAN is affected. A fresh-clone
-// dev with no server sets ONE env var — `STARWARS_LOCAL_MONGO=true` — and the
-// AppHost runs Mongo itself: Atlas Local (NOT plain mongo, vector/text search
-// is required) with a named volume + persistent lifetime so the ~15 GB
-// snapshot restore runs ONCE and survives `aspire run` restarts. Also gated to
-// Development+RunMode so it can never enter `aspire publish`/`prepare`/`deploy`
-// output. The env var binds through Configuration, so user-secrets /
-// appsettings (`STARWARS_LOCAL_MONGO`) work too. See ADR-010.
-var useLocalMongo = builder.Environment.IsDevelopment() && builder.ExecutionContext.IsRunMode && builder.Configuration.GetValue("STARWARS_LOCAL_MONGO", false);
+// OPT-IN local Mongo for a fresh clone with no MongoDB server. Default false =
+// the external self-hosted server, so production AND existing server-based dev
+// workflows are byte-identical to before — nobody on the LAN is affected. When
+// true (Development + run mode only, so it can never enter
+// `aspire publish`/`prepare`/`deploy`) the AppHost runs Mongo itself: Atlas
+// Local (NOT plain mongo — vector/text search is required) with a named volume
+// + persistent lifetime so the ~15 GB snapshot restore runs ONCE and survives
+// `aspire run` restarts. See ADR-010.
+//
+// Registered as a first-class parameter like mongo-host etc. — dashboard /
+// manifest visible, same resolution chain (env `Parameters__use_local_mongo`
+// > user-secrets > appsettings), `value: "false"` default so it is never an
+// unresolved prompt in prod/CI (mirrors `keycloak-admin-secret` above). It is
+// also checked into appsettings.Development.json under `Parameters:` next to
+// mongo-host so the knob is discoverable. A ParameterResource is a deferred
+// reference that cannot gate resource creation, so the build-time topology
+// branch reads the value from configuration — the pattern the Aspire "External
+// parameters" docs explicitly sanction for AppHost-side reads.
+builder.AddParameter("use-local-mongo", value: "false");
+
+var useLocalMongo = builder.Environment.IsDevelopment() && builder.ExecutionContext.IsRunMode && builder.Configuration.GetValue("Parameters:use-local-mongo", false);
 
 IResourceBuilder<ContainerResource>? mongoLocal = null;
 ReferenceExpression connString;
