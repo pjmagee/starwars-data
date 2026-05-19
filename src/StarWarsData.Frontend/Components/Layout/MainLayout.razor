@@ -198,27 +198,19 @@
     }
     }
     <MudMainContent Class="@MainContentClass" Style="@MainContentStyle">
-        @if (CopilotEligible)
+        @if (SplitActive)
         {
-            @* Copilot lives beside the page in a draggable split panel rather
-               than an overlay drawer, so the user can keep reading and clicking
-               around the site while it's open. The page scrolls inside
-               FirstPanel; the copilot owns its own internal scroll in
-               SecondPanel.
-
-               CRITICAL: this structure is rendered whether or not the copilot
-               is open — only the `copilot-closed` class, the SecondPanel
-               content, and the divider position change on toggle. @Body must
-               keep the same ancestor chain across the toggle or Blazor
-               re-mounts the whole page (lost scroll/state). See CopilotEligible. *@
-            <div class="sw-copilot-split-host @(_copilotOpen ? null : "copilot-closed")">
+            @* Copilot lives beside the page in a draggable split panel rather than
+               an overlay drawer, so the user can keep reading and clicking around
+               the site while it's open. The page scrolls inside FirstPanel; the
+               copilot owns its own internal scroll in SecondPanel. *@
+            <div class="sw-copilot-split-host">
                 <MudSplitPanel @ref="_splitPanel"
                                Class="mud-width-full mud-height-full"
                                MinPanelSize="320"
                                PanelGap="6"
                                Transparent="true"
                                ClassDivider="sw-split-divider"
-                               ClassFirstPanel="sw-split-first"
                                ClassSecondPanel="sw-copilot-pane">
                     <FirstPanel>
                         <div class="sw-split-scroll pa-4">
@@ -227,10 +219,7 @@
                         </div>
                     </FirstPanel>
                     <SecondPanel>
-                        @if (_copilotOpen)
-                        {
-                            <CopilotSidebar />
-                        }
+                        <CopilotSidebar />
                     </SecondPanel>
                 </MudSplitPanel>
             </div>
@@ -277,24 +266,15 @@
     private MudSplitPanel? _splitPanel;
     private bool _splitInitialized;
 
-    // Whether the copilot is *permitted* to host beside the page on this
-    // page/viewport — deliberately INDEPENDENT of _copilotOpen.
-    //
-    // The split structure (host div → MudSplitPanel → FirstPanel) is mounted
-    // whenever this is true, open or closed. It must NOT depend on
-    // _copilotOpen: @Body's ancestor chain has to be invariant across the
-    // open/close toggle. If the toggle moved @Body between an `if` and `else`
-    // branch (its old behaviour), Blazor would re-mount the entire routed page
-    // — re-running OnInitialized, wiping scroll/camera/form state — every time
-    // the user opened the copilot. Open/closed now only flips a CSS class, the
-    // SecondPanel content, and the divider position; @Body never moves.
-    private bool CopilotEligible => !Layout.HideCopilot && !Layout.IsFullscreen && _isWide;
+    // The copilot occupies a resizable split panel (not an overlay) only when
+    // it's open, not page-suppressed, not in fullscreen, and the viewport is
+    // wide enough. Otherwise the page renders exactly as before.
+    private bool SplitActive => _copilotOpen && !Layout.HideCopilot && !Layout.IsFullscreen && _isWide;
 
-    // When eligible the page always lives inside FirstPanel (its own scroll
-    // container), so the main content keeps only its app-bar offset (pt-16)
-    // and drops pa-4 regardless of whether the copilot is open.
+    // In split mode the scroll + padding move inside FirstPanel, so the main
+    // content keeps only its app-bar offset (pt-16) and drops pa-4.
     private string MainContentClass =>
-        Layout.IsFullscreen ? "" : CopilotEligible ? "pt-16" : "pt-16 pa-4";
+        Layout.IsFullscreen ? "" : SplitActive ? "pt-16" : "pt-16 pa-4";
 
     private string MainContentStyle =>
         Layout.IsFullscreen ? "padding-top:0!important;" : "";
@@ -357,7 +337,7 @@
         // drawer) so the copilot lands at a sane ~34% width clamped to a
         // readable band rather than MudSplitPanel's 50/50 default. Reset the
         // flag when it closes so it re-sizes the next time it opens.
-        if (CopilotEligible && _copilotOpen && _splitPanel is not null && !_splitInitialized)
+        if (SplitActive && _splitPanel is not null && !_splitInitialized)
         {
             _splitInitialized = true;
             try
@@ -376,10 +356,8 @@
                 Logger.LogDebug(ex, "Failed initializing copilot split divider");
             }
         }
-        else if (!_copilotOpen && _splitInitialized)
+        else if (!SplitActive && _splitInitialized)
         {
-            // Closed (or no longer eligible): re-arm so the divider is
-            // re-measured and re-positioned the next time it opens.
             _splitInitialized = false;
         }
 
