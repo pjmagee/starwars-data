@@ -5,17 +5,30 @@
 
 ## Decision
 
-In **Development + run mode only**, the AppHost runs MongoDB itself as an
-Aspire-managed `mongodb/mongodb-atlas-local` container
-(`AddContainer("mongodb-local", …)`), with a named data volume
-(`starwars-dev-mongo`) and `ContainerLifetime.Persistent`. The `mongodb`
-connection string is built from that container's endpoint.
+The Aspire-managed local Mongo is **opt-in**, not the default. It activates
+only when `useLocalMongo` is true:
 
-In **Production (and any publish/prepare/deploy)** nothing changes: the
-connection string is still assembled from the external `mongo-host/-port/-user/
--password` parameters pointing at the self-hosted server. The container is
-gated by `builder.Environment.IsDevelopment() && builder.ExecutionContext.IsRunMode`,
-so it can never enter `aspire publish`/`prepare`/`deploy` output.
+```csharp
+builder.Environment.IsDevelopment()
+&& builder.ExecutionContext.IsRunMode
+&& builder.Configuration.GetValue("STARWARS_LOCAL_MONGO", false)
+```
+
+A fresh-clone dev with no server sets the env var `STARWARS_LOCAL_MONGO=true`
+and the AppHost runs `mongodb/mongodb-atlas-local`
+(`AddContainer("mongodb-local", …)`) with a named volume (`starwars-dev-mongo`)
+and `ContainerLifetime.Persistent`; the `mongodb` connection string is built
+from that container's endpoint, and the snapshot-restore resource (gated on the
+same flag) populates it once.
+
+**Default (env var unset) is unchanged behaviour:** the connection string is
+assembled from the external `mongo-host/-port/-user/-password` parameters
+pointing at the self-hosted server. So **production AND every existing
+server-based dev workflow are byte-identical to before** — opting in is the
+only way to get the container, and it can never enter
+`aspire publish`/`prepare`/`deploy` output (Development+RunMode gate).
+Crucially, snapshot-restore is gated on the *same* flag, so it can never
+`mongorestore --drop` over a shared server's `starwars-dev`.
 
 ## Why this overrides the prior "not Aspire-managed" stance
 

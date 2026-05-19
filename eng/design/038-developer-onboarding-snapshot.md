@@ -153,11 +153,14 @@ Snapshot creation is scheduled via `unraid-snapshot-cron.sh` in the Unraid
 ## Open Questions
 
 1. ~~**Should Aspire fully manage the local Mongo container?**~~ **Resolved —
-   yes** ([ADR-010](../adr/010-aspire-managed-dev-mongo.md)). The AppHost runs
-   `mongodb/mongodb-atlas-local` with a persistent volume in Development+RunMode;
-   production stays external and unchanged. Onboarding is now clone → set
-   OpenAI key → `aspire run`. Compile-verified; one real `aspire run` still
-   required (see Validation status).
+   yes, opt-in** ([ADR-010](../adr/010-aspire-managed-dev-mongo.md)). A
+   fresh-clone dev sets env var `STARWARS_LOCAL_MONGO=true`; the AppHost then
+   runs `mongodb/mongodb-atlas-local` (persistent volume) + auto-restore, in
+   Development+RunMode only. Default (unset) = external server, so production
+   and existing server-based dev workflows are byte-identical to before.
+   snapshot-restore is gated on the same flag so it can never clobber a shared
+   server's `starwars-dev`. Compile-verified; one real opt-in `aspire run`
+   still required (see Validation status).
 2. ~~**Snapshot refresh cadence / staleness.**~~ **Resolved** — scheduled
    weekly via `unraid-snapshot-cron.sh` (Unraid User Scripts). See "Automation
    decision" above. The prod secret stays on the box, by design.

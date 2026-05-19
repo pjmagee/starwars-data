@@ -46,15 +46,17 @@ var apiService = builder
     .WithEnvironment("Settings__HolocronEnabled", "true")
     .WithEnvironment("Settings__KeycloakAdminClientSecret", keycloakAdminSecret);
 
-// Local dev (run mode only): Aspire runs the MongoDB itself so a fresh clone
-// needs ZERO Mongo config — `aspire run` and you have a database. Atlas Local
-// (NOT plain mongo) because the app needs Atlas vector/text search. A named
-// volume + persistent lifetime mean the ~15 GB snapshot restore runs ONCE and
-// survives `aspire run` restarts. Production is byte-identical to before — it
-// still points at the external self-hosted server (the `else` branch); this
-// whole container is gated to Development+RunMode so it can never enter
-// `aspire publish`/`prepare`/`deploy` output. See ADR-010.
-var useLocalMongo = builder.Environment.IsDevelopment() && builder.ExecutionContext.IsRunMode;
+// OPT-IN local Mongo for a fresh clone. Default (env var unset) = the external
+// self-hosted server — so production AND existing server-based dev workflows
+// are byte-identical to before; nobody on the LAN is affected. A fresh-clone
+// dev with no server sets ONE env var — `STARWARS_LOCAL_MONGO=true` — and the
+// AppHost runs Mongo itself: Atlas Local (NOT plain mongo, vector/text search
+// is required) with a named volume + persistent lifetime so the ~15 GB
+// snapshot restore runs ONCE and survives `aspire run` restarts. Also gated to
+// Development+RunMode so it can never enter `aspire publish`/`prepare`/`deploy`
+// output. The env var binds through Configuration, so user-secrets /
+// appsettings (`STARWARS_LOCAL_MONGO`) work too. See ADR-010.
+var useLocalMongo = builder.Environment.IsDevelopment() && builder.ExecutionContext.IsRunMode && builder.Configuration.GetValue("STARWARS_LOCAL_MONGO", false);
 
 IResourceBuilder<ContainerResource>? mongoLocal = null;
 ReferenceExpression connString;
@@ -85,14 +87,13 @@ var mongoDbMigrations = builder
     .WithEnvironment("MDB_MCP_CONNECTION_STRING", connString)
     .WithEnvironment("STARWARS_DB", starwarsDb);
 
-// Developer-onboarding snapshot restore (Design-038). Development-only,
-// run-once: downloads the shared starwars-prod snapshot from copyparty and
-// restores it into the dev database so a fresh clone has full data (incl.
-// embeddings) without re-running ETL or spending OpenAI credit. Idempotent —
-// no-ops once the dev DB is already populated. NEVER added in Production
-// (gated below) so it can't enter the published compose, and restore.sh
-// hard-refuses any DB whose name contains "prod".
-if (builder.Environment.IsDevelopment() && builder.ExecutionContext.IsRunMode)
+// Developer-onboarding snapshot restore (Design-038). Gated on `useLocalMongo`
+// — it ONLY runs when Aspire owns the local Mongo container. This is critical:
+// if it ran against the external shared server it would `mongorestore --drop`
+// over a live shared `starwars-dev`. Run-once: downloads the snapshot from
+// copyparty, restores into the local container. Idempotent (no-ops once
+// populated); restore.sh also hard-refuses any DB whose name contains "prod".
+if (useLocalMongo)
 {
     // Defaulted so a fresh clone needs ZERO config for data — `aspire run`
     // just restores. The URL is not a secret (copyparty access is the gate),

@@ -19,18 +19,24 @@ automated by the Aspire AppHost.
   - Or skip the CLI entirely and use `dotnet run --project src/StarWarsData.AppHost`
 - An **OpenAI API key** (yours — used only at runtime for chat/agent features)
 
-## 2. MongoDB — nothing to do
+## 2. MongoDB
 
-In Development, the AppHost **runs MongoDB for you**: an Aspire-managed
-`mongodb/mongodb-atlas-local` container with a persistent volume (ADR-010).
-No `docker run`, no connection strings, no `mongo-*` user-secrets. On first
-`aspire run` it's created and the snapshot is restored into it; the volume
-persists so it never re-restores.
+**On the LAN/VPN with the shared server?** Nothing to do —
+`appsettings.Development.json` already points at it. Skip to step 3.
 
-*(Optional override — only if you're on the LAN/VPN and want the shared
-server instead of a local container: set `Parameters:mongo-host/-port/-user/
--password` user-secrets. Production always uses the external server; this
-local container is Development-only.)*
+**Fresh clone, no server access?** Set one env var and the AppHost runs
+MongoDB for you — an Aspire-managed `mongodb/mongodb-atlas-local` container
+with a persistent volume; on first `aspire run` it's created and the snapshot
+is restored into it (the volume persists, so it never re-restores). ADR-010.
+
+```bash
+# Windows (PowerShell):  $env:STARWARS_LOCAL_MONGO = "true"
+# macOS/Linux (bash):    export STARWARS_LOCAL_MONGO=true
+```
+
+Default (unset) = external server, so existing server-based workflows and
+production are completely unaffected. (The env var also works via user-secrets
+or appsettings as `STARWARS_LOCAL_MONGO` if you prefer it persisted.)
 
 ## 3. Secrets — just your OpenAI key
 
@@ -72,8 +78,8 @@ aspire run --project src/StarWarsData.AppHost
 #   or: dotnet run --project src/StarWarsData.AppHost
 ```
 
-On first run the Aspire dashboard shows a **`mongodb-local`** container coming
-up, then a **`snapshot-restore`** resource that:
+If you set `STARWARS_LOCAL_MONGO=true`, the first run shows a **`mongodb-local`**
+container coming up, then a **`snapshot-restore`** resource that:
 
 1. downloads the snapshot,
 2. restores it into `starwars-dev` (renaming `starwars-prod.*` →
