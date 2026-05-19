@@ -200,15 +200,6 @@
                 _swViewportRef = null;
             }
 
-            // Returns the rendered pixel width of the first element matching the
-            // selector (0 if none). Used by MainLayout to size the copilot split
-            // panel's divider relative to the actual content area — which is
-            // already inset by the left nav drawer — rather than the raw viewport.
-            function swElementWidth(selector) {
-                var el = document.querySelector(selector);
-                return el ? Math.round(el.getBoundingClientRect().width) : 0;
-            }
-
             // Aurebesh preview: show selected text in galactic script
             var _aurebeshBar = null;
             function swSetAurebesh(enabled) {

@@ -58,13 +58,48 @@ The chat agent already has all the tooling needed (GraphRAG, KG analytics, seman
 
 ### 1. Layout
 
-> **Superseded 2026-05-19.** The original Phase-1 design (and shipped 2026-04-30
-> implementation) used a right `MudDrawer` with `DrawerVariant.Temporary`. That
-> drawer overlaid the page behind a scrim: opening the copilot froze the page
-> underneath, so the user could not scroll or navigate while reading the
-> copilot's answer — directly contradicting the "contextual reading assistant"
-> goal. The drawer is now a `MudSplitPanel`. The original drawer markup is
-> retained verbatim below the divider as the **mobile fallback only**.
+> **Final design 2026-05-19 — persistent sibling drawer (NOT a split panel).**
+> History: the original Phase-1 drawer was `DrawerVariant.Temporary`, which
+> scrimmed and froze the page (the user's complaint). It was replaced with a
+> `MudSplitPanel` wrapping `@Body`; that introduced a **page re-mount on every
+> copilot toggle** (Blazor only preserves a component at the same render-tree
+> position — moving `@Body` between an `@if/else` re-parents it, disposing the
+> routed page and wiping scroll/camera/form state). The attempted fix —
+> *"always mount the split, just show/hide the right panel"* — caused a
+> **blank-screen render loop**: pages set `Layout.HideCopilot` /
+> `Layout.IsFullscreen` in `OnInitialized`, which runs *after* `MainLayout`'s
+> first render, so eligibility flips mid-first-render → `MudSplitPanel`
+> mounts then immediately unmounts → it throws during the churn →
+> `LoggingErrorBoundary.Recover()` re-renders → loops forever → empty DOM.
+> (Reproduced: infinite `GET /api/ai/status`, blank page.)
+>
+> The root problem is structural: **any** approach that puts `@Body` inside
+> the copilot's container makes the page's ancestor chain depend on
+> copilot/eligibility state, and that state legitimately changes (toggle,
+> page-set `HideCopilot`, fullscreen). "Always split, hide the right panel"
+> doesn't escape this — the fragility was never the panel's visibility, it
+> was `@Body`'s position and the cold-load eligibility flip. A genuinely
+> invariant always-split would require driving `/ask` suppression and
+> galaxy-map fullscreen purely via CSS while keeping `@Body` permanently
+> inside `FirstPanel` — a large, load-bearing refactor of fullscreen + the
+> galaxy map, after that approach already shipped one catastrophic regression.
+>
+> Resolution: the copilot is a **right `MudDrawer` that is a sibling of
+> `MudMainContent`** — it never wraps `@Body`. `@Body` has exactly one fixed
+> render-tree position for the whole session, so it is *structurally
+> impossible* to re-parent or re-mount it on toggle/navigation, and there is
+> no `MudSplitPanel` to churn on cold load. `DrawerVariant.Persistent` on
+> wide viewports: `MudLayout` insets `MudMainContent` by the drawer width
+> with **no scrim**, so the content sits in a narrower column beside the
+> copilot and stays fully scrollable/clickable (functionally the split the
+> user asked for — minus only a user-draggable divider, which `MudSplitPanel`
+> 9.4 can't persist anyway as it exposes no resize-end event).
+> `DrawerVariant.Temporary` below the 960px gate (a pushed side column is
+> unusable on a phone). This is the long-proven sibling-drawer structure the
+> app used for months; only the `Variant` changed. Validated cold:
+> `/` (no blank), `/search` toggle open+close (search-box state preserved =
+> no re-mount, content pushed not scrimmed), navigate-while-open
+> (`/search → /timeline`, copilot persists), zero console errors.
 
 [`MainLayout.razor`](../../src/StarWarsData.Frontend/Components/Layout/MainLayout.razor) renders the copilot in one of two modes, gated on viewport width at the 960px Design-011 breakpoint:
 
