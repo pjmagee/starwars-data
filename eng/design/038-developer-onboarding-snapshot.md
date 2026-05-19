@@ -75,11 +75,17 @@ Snapshots are served by **copyparty** on the Unraid host —
 - **Chosen** because the data already lives on this box (zero-cost, no upload,
   full maintainer control), onboarding is infrequent, and copyparty serves raw
   bytes to `curl` (clean direct URLs; HTML listing only to browsers).
-- **Caveats:** the public URL traverses Cloudflare, which can 524 on a ~15 GB
-  pull over a slow link (CF won't cache an object this large on the free tier,
-  so it doesn't offload the home uplink either) — devs should prefer the LAN
-  URL. `restore.sh` mitigates with `curl -fL -C - --retry 5` (resumes a partial
-  transfer) and `gzip -t`-validates before restore.
+- **Default URL is the public one** (`copyparty.magaoidh.pro/swdata/…`): the
+  restore exists for off-LAN fresh-clone devs who cannot reach a
+  `192.168.1.x` address, so that *must* be the shared `snapshot-url`. The LAN
+  URL is an optional speed override for on-network users only — not the
+  default.
+- **Caveats:** the public URL traverses Cloudflare and CF won't cache an
+  object this large on the free tier (no uplink offload). CF's ~100 s limit is
+  time-to-first-byte, not total transfer, so a steadily-streaming download
+  does not 524 mid-flight; `restore.sh` further mitigates with
+  `curl -fL -C - --retry 5` (resumes a partial transfer) and `gzip -t`-validates
+  before restore.
 - **Rejected:** personal OneDrive / Google Drive — an unauthenticated container
   cannot download from them (verified: `1drv.ms` edit/folder link
   301→`…&migratedtospo=true`→`403`; legacy `api.onedrive.com/v1.0/shares` →

@@ -71,12 +71,14 @@ Snapshots are hosted on the project's **copyparty** file server. `snapshot-url`
 is the **direct file URL** (not a folder/listing — the restore `gzip -t`-checks
 the download and fails fast if it gets HTML):
 
-- **On LAN/VPN (fastest, recommended):** `http://192.168.1.102:3923/<volume>/starwars-snapshot-YYYYMMDD.gz`
-  — bypasses Cloudflare entirely, full local speed, no proxy timeout.
-- **Remote:** `https://copyparty.magaoidh.pro/<volume>/starwars-snapshot-YYYYMMDD.gz`
-  — goes through Cloudflare. A ~15 GB pull can hit CF's ~100 s proxy timeout
-  on a slow link; the restore retries with resume (`curl -C -`), but prefer
-  the LAN URL when you can.
+- **Default — use this:** `https://copyparty.magaoidh.pro/swdata/starwars-snapshot-latest.gz`
+  Works from anywhere, which is the whole point — a fresh-clone dev is *not*
+  on the LAN and cannot reach a `192.168.1.x` address. The restore resumes on
+  drop (`curl -C -`), so a slow/large pull is fine.
+- **Optional LAN override (only if you're already on the LAN/VPN):**
+  `http://192.168.1.102:3923/swdata/starwars-snapshot-latest.gz` — bypasses
+  Cloudflare for full local speed. Not reachable off-network; don't set this
+  as the shared default.
 - If the copyparty volume is password-protected, put the password in the URL
   (`?pw=…`) or use `https://user:pass@…` — `snapshot-url` is a secret AppHost
   parameter, so it never lands in the repo.
