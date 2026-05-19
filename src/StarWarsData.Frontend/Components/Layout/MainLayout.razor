@@ -112,11 +112,11 @@
         @* SP-4 sidebar toggle — hidden on pages that opt out (e.g. /ask). *@
         @if (!Layout.HideCopilot)
         {
-            <MudTooltip Text="@(_copilotOpen ? "Hide SP-4" : "Open SP-4")">
+            <MudTooltip Text="@(Layout.CopilotOpen ? "Hide SP-4" : "Open SP-4")">
                 <MudIconButton Icon="@Icons.Material.Filled.Android"
-                               Color="@(_copilotOpen ? Color.Secondary : Color.Inherit)"
+                               Color="@(Layout.CopilotOpen ? Color.Secondary : Color.Inherit)"
                                Edge="Edge.End"
-                               OnClick="ToggleCopilot" />
+                               OnClick="Layout.ToggleCopilot" />
             </MudTooltip>
         }
     </MudAppBar>
@@ -197,7 +197,7 @@
        hidden in fullscreen along with the rest of the chrome. *@
     @if (!Layout.HideCopilot)
     {
-        <MudDrawer id="copilot-drawer" @bind-Open="_copilotOpen" Anchor="Anchor.Right"
+        <MudDrawer id="copilot-drawer" Open="Layout.CopilotOpen" OpenChanged="Layout.SetCopilotOpen" Anchor="Anchor.Right"
                    ClipMode="DrawerClipMode.Always"
                    Variant="@(_isWide ? DrawerVariant.Persistent : DrawerVariant.Temporary)"
                    Elevation="3" Width="420px">
@@ -224,7 +224,6 @@
 
 @code {
     private bool _drawerOpen = true;
-    private bool _copilotOpen = true; // SP-4 is open by default
     private bool _isDarkMode = true;
     private string _darkModePreference = "system"; // "light" | "dark" | "system"
     private bool _aurebesh;
@@ -473,10 +472,6 @@
         _drawerOpen = !_drawerOpen;
     }
 
-    private void ToggleCopilot()
-    {
-        _copilotOpen = !_copilotOpen;
-    }
 
     private async Task SetDarkMode(string mode)
     {

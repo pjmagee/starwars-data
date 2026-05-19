@@ -21,9 +21,16 @@ returning users go straight to chat.
   Holocron AI), an SP-4 companion callout, and pointers to
   about/costs/privacy/terms for the fine print. Live KG/article counts come
   from the existing public `GET /api/stats/corpus` (Design-037); the page
-  degrades to generic copy if that fetch fails. Suppresses SP-4 via
-  `Layout.SetHideCopilot(true)` exactly like `/ask` — it's a welcome page,
-  not an explore surface.
+  degrades to generic copy if that fetch fails. Unlike `/ask`, SP-4 is
+  **not** suppressed here: the companion callout has a **Show/Hide SP-4**
+  button that opens/closes the real right-hand panel so a new user can see
+  exactly what it is (updated 2026-05-19).
+- **SP-4 open state moved to `LayoutService`** (`CopilotOpen` +
+  `SetCopilotOpen`/`ToggleCopilot`, default open) as the single source of
+  truth, so the Getting Started button and the app-bar toggle drive the same
+  drawer. `MainLayout` binds the drawer to `Layout.CopilotOpen` and already
+  re-renders on `Layout.OnChange`; the page re-renders its button label the
+  same way. No `@Body` re-parenting (the drawer is still a sibling — Design-022).
 - **`Ask.razor`** lost its `@page "/"` (kept `/ask`, `/ask/{SessionId:guid}`).
 - **First-visit redirect** — a functional-only `localStorage` flag
   `sw-welcomed`. An inline `<head>` IIFE in `App.razor`

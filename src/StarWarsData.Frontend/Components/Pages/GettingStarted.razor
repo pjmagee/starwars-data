@@ -100,27 +100,30 @@
     @* ── SP-4 companion ─────────────────────────────────────────────── *@
     <MudPaper Elevation="0" Outlined="true" Class="pa-4 mt-8"
               Style="border-color:#C9A227; background:rgba(201,162,39,0.06);">
-        <MudStack Row="true" Spacing="3" AlignItems="AlignItems.Center">
+        <MudStack Row="true" Spacing="3" AlignItems="AlignItems.Center" Class="flex-wrap">
             <MudIcon Icon="@Icons.Material.Filled.Android" Size="Size.Large" Style="color:#C9A227;" />
-            <MudStack Spacing="0">
+            <MudStack Spacing="0" Style="flex:1; min-width:240px;">
                 <MudText Typo="Typo.subtitle1"><b>Meet SP-4</b>, your droid companion</MudText>
                 <MudText Typo="Typo.body2" Color="Color.Secondary">
-                    On every Explore page, the SP-4 analysis droid rides along in a side panel —
-                    ask it about whatever you're looking at and keep exploring without losing your place.
+                    On every Explore page, the SP-4 analysis droid rides along in a panel on the
+                    right — ask it about whatever you're looking at and keep exploring without
+                    losing your place. Try the button to see it now. →
                 </MudText>
             </MudStack>
+            <MudButton Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Android"
+                       OnClick="Layout.ToggleCopilot"
+                       Style="background:#C9A227; color:#000;">
+                @(Layout.CopilotOpen ? "Hide SP-4" : "Show SP-4")
+            </MudButton>
         </MudStack>
     </MudPaper>
 
-    @* ── The fine print pointers ────────────────────────────────────── *@
-    <MudStack Row="true" Spacing="4" Justify="Justify.Center" Class="mt-8 flex-wrap">
-        <MudLink Href="/about" Color="Color.Secondary">About</MudLink>
-        <MudLink Href="/costs" Color="Color.Secondary">Costs</MudLink>
-        <MudLink Href="/privacy" Color="Color.Secondary">Privacy</MudLink>
-        <MudLink Href="/terms" Color="Color.Secondary">Terms</MudLink>
-    </MudStack>
-    <MudText Typo="Typo.caption" Color="Color.Secondary" Align="Align.Center" Class="d-block mt-2">
-        Want the details — how it's built, what it costs, the licences? It's all on those pages.
+    @* Site details / licences / costs live in the shared footer + nav
+       (About · Costs · Privacy · Terms) — no in-page duplicate here. *@
+    <MudText Typo="Typo.caption" Color="Color.Secondary" Align="Align.Center" Class="d-block mt-8">
+        Curious how it's built, what it costs, or the licences? It's all under
+        <b>About</b>, <b>Costs</b>, <b>Privacy</b> and <b>Terms</b> in the menu.
     </MudText>
 
 </MudContainer>
@@ -130,11 +133,16 @@
 
     protected override void OnInitialized()
     {
-        // Welcome page, not an explore surface — suppress SP-4 like /ask does.
-        Layout.SetHideCopilot(true);
+        // SP-4 is intentionally NOT suppressed here (unlike /ask): the callout
+        // below has a button that opens/closes the real right-hand panel so a
+        // new user can see exactly what it is. Re-render when it toggles so the
+        // button label ("Show/Hide SP-4") stays in sync with the panel.
+        Layout.OnChange += OnLayoutChanged;
     }
 
-    public void Dispose() => Layout.SetHideCopilot(false);
+    private void OnLayoutChanged() => InvokeAsync(StateHasChanged);
+
+    public void Dispose() => Layout.OnChange -= OnLayoutChanged;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

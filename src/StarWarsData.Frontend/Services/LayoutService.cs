@@ -12,7 +12,26 @@ public class LayoutService
     /// </summary>
     public bool HideCopilot { get; private set; }
 
+    /// <summary>
+    /// Whether the right-hand SP-4 drawer is open. Single source of truth so
+    /// any page (e.g. the Getting Started callout) can open/close the same
+    /// panel the app-bar toggle controls. Open by default. Honoured only when
+    /// <see cref="HideCopilot"/> is false.
+    /// </summary>
+    public bool CopilotOpen { get; private set; } = true;
+
     public event Action? OnChange;
+
+    public void SetCopilotOpen(bool value)
+    {
+        if (CopilotOpen != value)
+        {
+            CopilotOpen = value;
+            OnChange?.Invoke();
+        }
+    }
+
+    public void ToggleCopilot() => SetCopilotOpen(!CopilotOpen);
 
     public void SetFullscreen(bool value)
     {
