@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Projects;
 
 var builder = DistributedApplication.CreateBuilder(args);
@@ -55,6 +56,32 @@ var mongoDbMigrations = builder
     .AddDockerfile("mongodb-migrations", "../StarWarsData.MongoDbMigrations")
     .WithEnvironment("MDB_MCP_CONNECTION_STRING", connString)
     .WithEnvironment("STARWARS_DB", starwarsDb);
+
+// Developer-onboarding snapshot restore (Design-038). Development-only,
+// run-once: downloads the shared starwars-prod snapshot from OneDrive and
+// restores it into the dev database so a fresh clone has full data (incl.
+// embeddings) without re-running ETL or spending OpenAI credit. Idempotent —
+// no-ops if SNAPSHOT_URL is unset or the dev DB is already populated. NEVER
+// added in Production (gated below) so it can't enter the published compose,
+// and restore.sh hard-refuses any DB whose name contains "prod".
+if (builder.Environment.IsDevelopment() && builder.ExecutionContext.IsRunMode)
+{
+    // Direct-download URL of the .gz on the shared OneDrive folder. Empty by
+    // default (no-op) — set with:
+    //   dotnet user-secrets set "Parameters:snapshot-url" "<url>" --project src/StarWarsData.AppHost
+    var snapshotUrl = builder.AddParameter("snapshot-url", value: "", secret: true);
+
+    var snapshotRestore = builder
+        .AddDockerfile("snapshot-restore", "../StarWarsData.SnapshotRestore")
+        .WithEnvironment("MDB_CONNECTION_STRING", connString)
+        .WithEnvironment("TARGET_DB", starwarsDb)
+        .WithEnvironment("SNAPSHOT_URL", snapshotUrl)
+        .WaitFor(mongo);
+
+    // Restore drops & recreates collections — it MUST finish before migrations
+    // apply schema/indexes on top, or --drop would wipe migrated state.
+    mongoDbMigrations.WaitForCompletion(snapshotRestore);
+}
 
 apiService.WithReference(mongo).WaitFor(mongo);
 

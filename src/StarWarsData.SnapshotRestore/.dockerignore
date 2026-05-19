@@ -1,0 +1,5 @@
+# Only restore.sh belongs in the run-once container image.
+# make-snapshot.* are maintainer-side host scripts; README/docs are not needed.
+make-snapshot.sh
+make-snapshot.ps1
+README.md

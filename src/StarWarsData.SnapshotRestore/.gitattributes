@@ -1,0 +1,5 @@
+# These run inside a Linux container — CRLF would break the bash shebang and
+# the Dockerfile. Force LF regardless of the developer's core.autocrlf.
+*.sh text eol=lf
+Dockerfile text eol=lf
+.dockerignore text eol=lf

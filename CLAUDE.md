@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 All projects live under `src/` with the solution at `src/StarWarsData.slnx`. Requires .NET 10 SDK (see `global.json` at the repo root).
 
+**New here?** [ONBOARDING.md](ONBOARDING.md) gets a fresh clone running against real data (full snapshot restore, no ETL re-run, no OpenAI spend) — only your own OpenAI key is needed. Mechanism: [eng/design/038-developer-onboarding-snapshot.md](eng/design/038-developer-onboarding-snapshot.md).
+
 ```bash
 # Build everything
 dotnet build src/StarWarsData.slnx
@@ -120,7 +122,7 @@ When adding a new test, decide its tier first and put it in the matching folder 
 
 **AI Agent pipeline** (in `ApiService/Program.cs`): Topic guardrail classifier -> AI agent with tool registry (ComponentToolkit, DataExplorerToolkit, GraphRAGToolkit, WikiSearchProvider, MongoDB MCP tools) -> AGUI streaming endpoint at `/kernel/stream`.
 
-**MongoDB**: External self-hosted MongoDB Atlas Local (Community Edition) — not Aspire-managed. Connection string is assembled from parameters in the AppHost (`mongo-user`, `mongo-password`, `mongo-host`, `mongo-port`). **When using the MongoDB MCP server (`mcp__MongoDB__*`) directly, always connect using the host machine's `MDB_MCP_CONNECTION_STRING` environment variable** — do not hardcode credentials or construct connection strings manually. The default database is `starwars-dev` (safe for experimentation); production is `starwars` and must never be written to from dev tooling. Single database configured via `SettingsOptions.DatabaseName` with namespaced collections: `raw.*`, `timeline.*`, `kg.*`, `search.*`, `genai.*`, `chat.*`, `territory.*`, `galaxy.*`, `admin.*`, `hangfire.*`. Hangfire collections live in the same database, namespaced by the `Prefix` option (default `"hangfire"`). Collection names are defined in the `Collections` static class in `Settings.cs`. Production overrides via `appsettings.json` or env var `Settings__DatabaseName`.
+**MongoDB**: External self-hosted MongoDB Atlas Local (Community Edition) — not Aspire-managed. Connection string is assembled from parameters in the AppHost (`mongo-user`, `mongo-password`, `mongo-host`, `mongo-port`). **When using the MongoDB MCP server (`mcp__MongoDB__*`) directly, always connect using the host machine's `MDB_MCP_CONNECTION_STRING` environment variable** — do not hardcode credentials or construct connection strings manually. The default database is `starwars-dev` (safe for experimentation); production is `starwars-prod` and must never be written to from dev tooling. Single database configured via `SettingsOptions.DatabaseName` with namespaced collections: `raw.*`, `timeline.*`, `kg.*`, `search.*`, `genai.*`, `chat.*`, `territory.*`, `galaxy.*`, `admin.*`, `hangfire.*`. Hangfire collections live in the same database, namespaced by the `Prefix` option (default `"hangfire"`). Collection names are defined in the `Collections` static class in `Settings.cs`. Production overrides via `appsettings.json` or env var `Settings__DatabaseName`.
 
 **ETL pipeline** (ordered phases, triggered via admin endpoints or Aspire HTTP commands):
 
@@ -217,7 +219,7 @@ Do not introduce silent deviations. A deviation that is not documented is a bug.
 Use the attached MCP servers and skills for domain-specific guidance instead of guessing:
 
 - **Aspire MCP** (`mcp__aspire__*`) — Interact with running Aspire resources: logs, traces, restart services, execute HTTP commands. Also provides `search_docs`/`get_doc` for looking up .NET Aspire documentation — use these before guessing at Aspire APIs.
-- **MongoDB MCP** (`mcp__MongoDB__*`) — Query, aggregate, inspect schemas, manage indexes on the MongoDB databases. Always connects via the host `MDB_MCP_CONNECTION_STRING` env var. Default database: `starwars-dev` — never write to `starwars` (production).
+- **MongoDB MCP** (`mcp__MongoDB__*`) — Query, aggregate, inspect schemas, manage indexes on the MongoDB databases. Always connects via the host `MDB_MCP_CONNECTION_STRING` env var. Default database: `starwars-dev` — never write to `starwars-prod` (production).
 - **Chrome DevTools MCP** (`mcp__chrome-devtools__*`) — Inspect live browser sessions: DOM snapshots, console logs, network requests, screenshots, performance traces, Lighthouse audits. Uses Brave browser. **Required** for validating any UI/frontend change — see "UI/Frontend validation" below.
 - **MudBlazor MCP** (`mcp__mudblazor__*`) — Look up MudBlazor component docs, parameters, examples, and API reference when building or modifying Blazor UI.
 - **Playwright MCP** (`mcp__playwright__*`) — Browser automation for testing and screenshots.
