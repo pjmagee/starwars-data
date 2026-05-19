@@ -4,9 +4,12 @@
 `src/StarWarsData.SnapshotRestore/` run-once container, Development+run-mode
 gated `snapshot-restore` resource in the AppHost, `ONBOARDING.md`. AppHost +
 solution **compile clean** (verified via the pre-commit `dotnet build` +
-Unit/Integration test gate). **Not yet verified end-to-end** — no snapshot has
-been published and the restore container has not been run against a live Mongo
-(see "Validation status").
+Unit/Integration test gate). **Snapshot side now verified end-to-end** — a
+6.3 GB snapshot of `starwars-prod` has been published to
+`copyparty.magaoidh.pro/swdata/starwars-snapshot-latest.gz` (2026-05-19) and
+its public-URL download path confirmed; the **restore** container has still not
+been run against a live Mongo (see "Validation status"). Operational how-to:
+[eng/docs/maintainer-snapshot-publish.md](../docs/maintainer-snapshot-publish.md).
 **Date:** 2026-05-19
 **Author:** Patrick Magee + Claude
 **Companion docs:** [Design-033](033-prod-to-dev-data-refresh.md) (raw-only,
@@ -144,11 +147,18 @@ Snapshot creation is scheduled via `unraid-snapshot-cron.sh` in the Unraid
 - **Compiles:** the AppHost change + whole solution build clean and the
   Unit/Integration test tiers pass — verified by the pre-commit hook
   (`csharpier` + `dotnet build` + tests) on commit `dad2763e49`.
-- **Not executed end-to-end:** `make-snapshot` and `restore.sh` have not been
-  run (no snapshot published; this sandbox can't reach the LAN Mongo). The
-  run-once container, the `WaitForCompletion` ordering, the `gzip -t` guard,
-  and the prod-write guard are unproven against a live system. **Run once on a
-  real fresh clone before this is trusted.**
+- **Snapshot publish executed (2026-05-19):** `make-snapshot.ps1` dumped
+  `starwars-prod` (6.3 GB gzip; `search.chunks` 797,055, `raw.pages` 226,742;
+  `chat./admin./hangfire.` excluded), uploaded via the **LAN** copyparty
+  address (the public Cloudflare URL 413s a multi-GB upload — request-body cap),
+  and was server-side `?move=`'d onto `starwars-snapshot-latest.gz`. Public
+  download path verified: `HTTP 200`, full `Content-Length`, ranged `GET`→`206`
+  (so `curl -C -` resume works). See
+  [eng/docs/maintainer-snapshot-publish.md](../docs/maintainer-snapshot-publish.md).
+- **Restore still not executed end-to-end:** `restore.sh` has not been run
+  against a live Mongo. The run-once container, the `WaitForCompletion`
+  ordering, the `gzip -t` guard, and the prod-write guard are unproven. **Run
+  once on a real fresh clone before the restore side is trusted.**
 
 ## Open Questions
 

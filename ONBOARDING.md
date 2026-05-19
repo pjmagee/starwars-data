@@ -121,6 +121,10 @@ Until you do this, full-text/semantic search and the RAG tools return empty.
 
 ## Maintainer: publishing a snapshot
 
+> Full operational how-to (both paths, prerequisites, the Cloudflare-413
+> gotcha, verification): [eng/docs/maintainer-snapshot-publish.md](eng/docs/maintainer-snapshot-publish.md).
+> The summary below is the on-box happy path.
+
 Only the maintainer can do this — it needs the prod connection string, which is
 **never** in the repo or given to devs (same rule as CI: a filled prod secret
 must never leave the maintainer's machine). Run it **on the Unraid box** (where
