@@ -1,6 +1,6 @@
 # Design-041: SP-4 Page Control via AGUI Frontend Tools
 
-**Status:** Proposed
+**Status:** Proposed — Phase 0 spike completed 2026-05-21 (see § 7). `Microsoft.Agents.AI.AGUI` 1.6.1-preview added to the Frontend csproj on `feature/design-041-page-control-tools`; no behavioural code yet. Phase 1 implementation pending.
 **Date:** 2026-05-21
 **Author:** Patrick Magee + Claude
 **Related:** [Design-022 Page-Aware Copilot Sidebar](./022-galaxy-map-copilot.md), [Design-004 Galaxy Map Architecture](./004-galaxy-map-architecture.md), [Design-006 Galaxy Map Timeline Mode](./006-galaxy-map-timeline-mode.md), [Design-031 Galaxy Map Deep-Link Route](./031-galaxy-map-deep-link-route.md), [Design-032 Galaxy Map Events at Location](./032-galaxy-map-events-at-location.md), [Design-034 Galaxy Map Temporal](./034-galaxy-map-temporal.md), [Design-029 Agent Filter Context](./029-agent-filter-context.md)
@@ -69,29 +69,35 @@ builder.Services.AddHttpClient<AGUIChatClient>("StarWarsData.Copilot", c =>
 
 The shared `AguiMessage` / `AguiToolCall` / `AguiFunction` DTOs in `Components/Shared/Agui/` become redundant once both surfaces use the package's typed messages; they stay in place until `Ask.razor` is migrated (see *Open questions*), then deleted.
 
-> **Phase 0 spike.** The `Microsoft.Agents.AI.AGUI` 1.6.1-preview NuGet page does not enumerate types and the linked sample ([Generative-AI-for-beginners-dotnet/samples/AgentFx/AgentFx-AIWebChatApp-AG-UI](https://github.com/microsoft/Generative-AI-for-beginners-dotnet/tree/main/samples/AgentFx/AgentFx-AIWebChatApp-AG-UI)) demonstrates the client constructor but not the frontend-tool registration API. Before Phase 1 starts, a half-day spike confirms: (a) the .NET client exposes a frontend-tool registration hook (handler keyed on tool name), (b) the wire shape matches what the server-side `MapAGUI` accepts when forwarding `tools` in `RunAgentInput`, (c) cancellation, error mapping, and the `[CONTINUITY:]` envelope pre-pend still work. If the .NET client does NOT yet support frontend-tool dispatch in 1.6.1-preview, fall back to keeping the hand-rolled reader and extending it (Alternatives § A). Either way, Phase 2's contract is unaffected.
+> **Phase 0 spike (completed 2026-05-21).** Read `Microsoft.Agents.AI.AGUI.xml` from the restored package cache. Public surface is minimal — one type, `AGUIChatClient`, implementing `Microsoft.Extensions.AI.IChatClient`. Single ctor: `(HttpClient, string endpoint, ILoggerFactory, JsonSerializerOptions, IServiceProvider)`. Only methods are `GetResponseAsync` / `GetStreamingResponseAsync` inherited from `IChatClient`. **There is no AGUI-specific frontend-tool registration hook.** The expectation in the original draft of this design (a `RegisterToolHandler("name", handler)` API on the client) was wrong — frontend tools ride the standard M.E.AI tool-invocation pipeline:
+>
+> 1. Wrap the `AGUIChatClient` with `.AsBuilder().UseFunctionInvocation().Build()` (same pattern the server already uses in [`CopilotAgent.Build`](../../src/StarWarsData.Services/AI/Agents/CopilotAgent.cs#L76-L83)).
+> 2. Per turn, populate `ChatOptions.Tools` with `AIFunction.Create(handler, name, description)` instances built from `PageControlService.AvailableActions`. The middleware sees the model's tool call in the streamed response, executes the local delegate, appends the result as a `ChatMessage`, and re-invokes `GetStreamingResponseAsync` automatically.
+>
+> Server-side prerequisite: the hosting layer's `MapAGUI` handler must merge `RunAgentInput.tools` (declared by the client per turn) into the agent's per-call tool catalog so the model sees them. The XML doc enumerates `IEnumerableAGUITool`, `AGUITool`, and `RunAgentInput` in the source-generated context, which is consistent with the wire shape supporting per-turn tools — but the implementation detail is opaque from the public surface alone. **First Phase 1 task is an end-to-end smoke test confirming a frontend tool registered via `ChatOptions.Tools` actually fires from a `MapAGUI` round-trip.** If the hosting layer ignores per-turn tools, fall back to Alternatives § A. Either way, Phase 2's `PageControlService` contract is unaffected.
 
 ### 3. `PageControlService` — the action contract
 
-A new scoped singleton on the Frontend, sibling to `PageContextService`:
+A new scoped singleton on the Frontend, sibling to `PageContextService`. Because frontend tools ride `Microsoft.Extensions.AI` (Phase 0 finding), each action **is** an `AIFunction` — not a custom `PageAction` record + dispatcher map. The service is a thin registry over them:
 
 ```csharp
 namespace StarWarsData.Frontend.Services;
 
-public sealed record PageAction(string Name, string Description, JsonElement ParametersSchema);
-
-public sealed record PageActionResult(bool Ok, string? Message = null, JsonElement? Data = default);
-
 public sealed class PageControlService
 {
     // Tools the focused page advertises for SP-4's next turn. Empty if no page registered.
-    public IReadOnlyList<PageAction> AvailableActions { get; }
+    // Built as AIFunction so they drop directly into ChatOptions.Tools.
+    public IReadOnlyList<AIFunction> AvailableActions { get; }
+
+    // The slug of the page that owns the current registration ("galaxy_map", "timeline", ...).
+    // null when no page is registered. Used by CopilotSidebar to render a "page tools available"
+    // chip and by the agent's narration to know which page it's driving.
+    public string? CurrentPage { get; }
 
     // Page registers handlers in OnInitialized; unregisters in Dispose.
-    public IDisposable Register(string page, IReadOnlyList<PageAction> actions, Func<string, JsonElement, CancellationToken, Task<PageActionResult>> dispatch);
-
-    // Invoked by CopilotSidebar when AGUIChatClient routes a frontend-tool call.
-    public Task<PageActionResult> InvokeAsync(string name, JsonElement args, CancellationToken ct);
+    // Each AIFunction is built via AIFunctionFactory.Create(delegate, name, description) by the
+    // page, so the page owns the param binding (the page knows its own types).
+    public IDisposable Register(string page, IReadOnlyList<AIFunction> actions);
 
     public event Action? OnChange;
 }
@@ -100,8 +106,9 @@ public sealed class PageControlService
 Rules:
 
 - Only **one** page can be registered at a time (the focused page). `Register` returns an `IDisposable` whose `Dispose` removes the registration; pages call it from `IDisposable.Dispose` / `IAsyncDisposable.DisposeAsync`. A second `Register` while one is active is a programmer bug and throws — never silently overwrite.
-- The handler `Func` runs on the Blazor circuit's sync context (callers wrap in `InvokeAsync` themselves, like every other UI-touching service in this repo).
-- `PageControlService.AvailableActions` is consumed by `CopilotSidebar.SubmitAsync` at submit time and forwarded as the `tools` field of the AGUI `RunAgentInput`. This is the key: **the tool catalog SP-4 sees this turn is the union of the server-side toolkit and whatever the focused page advertises**. Switch to `/timeline` and SP-4 loses `galaxy_map_navigate` and gains `timeline_set_year`. No prompt rewrite, no second agent.
+- Each `AIFunction` wraps a method on the page itself (or a thin lambda over `_module.InvokeAsync<bool>("drillToDeepLink", ...)`). The `UseFunctionInvocation` middleware calls the wrapped delegate on the same SynchronizationContext the chat call was made from — i.e. the Blazor circuit — so handlers can touch component state directly without an explicit `InvokeAsync(...)` wrap. (Verified by Phase 1 smoke test before relying on this.)
+- `PageControlService.AvailableActions` is consumed by `CopilotSidebar.SubmitAsync` at submit time. The sidebar's `ChatOptions.Tools` is the union of `[…server-side static tools — already baked into the agent, ...AvailableActions]`. The server-side tools come from `CopilotAgent.Build()` and don't change; the page tools are per-turn via `RunAgentInput.tools`. **The tool catalog SP-4 sees this turn is the union of the server-side toolkit and whatever the focused page advertises** — switch to `/timeline` and SP-4 loses `galaxy_map_navigate`, gains `timeline_set_year`. No prompt rewrite, no second agent.
+- Handler return type is `Task<string>` (or `string`) — a one-line confirmation the agent quotes (`"Centred on Coruscant (system, Core Worlds)."`) or a typed result the agent reasons about. Failures are returned as a string (`"No system named 'Bothan'. Closest match: Bothawui."`) — `UseFunctionInvocation` already serializes any return type to JSON for the model.
 
 ### 4. Galaxy map's action set (Phase 2)
 
@@ -130,17 +137,15 @@ Every handler returns `PageActionResult.Ok(message)` with a one-line confirmatio
 ### 5. Wire path end-to-end
 
 1. User types "take me to Coruscant" in SP-4 with `/galaxy-map` focused.
-2. `CopilotSidebar.SubmitAsync` builds the AGUI `RunAgentInput`:
-   - `messages`: prior conversation + the new user message (envelope-prefixed as today).
-   - `tools`: `[…server-toolkit (static, defined by CopilotAgent), …PageControlService.AvailableActions]`.
-3. `AGUIChatClient` POSTs to `/copilot/stream`. Server adds the page tools to the model's tool catalog for this turn only.
-4. Model emits `TOOL_CALL_START { toolCallName: "galaxy_map_navigate" }` + args. Server has no executor registered for that name, so it forwards the events to the SSE stream and pauses, waiting for the client tool result.
-5. `AGUIChatClient`'s frontend-tool handler for `galaxy_map_navigate` calls `PageControlService.InvokeAsync(...)`, which calls `GalaxyMapUnified`'s registered dispatch, which calls `drillToDeepLink(...)`.
-6. Client sends back a `role: "tool"` message with the `PageActionResult` JSON.
-7. Server resumes; model emits `TEXT_MESSAGE_*` ("Centred on Coruscant — the Core Worlds capital. Want me to highlight the surrounding sectors?").
-8. Sidebar renders the prose; the map already moved in step 5.
+2. `CopilotSidebar.SubmitAsync` builds a `ChatOptions` with `Tools = PageControlService.AvailableActions` (a list of `AIFunction` from the focused page) and prior conversation `messages` (envelope-prefixed as today). It calls `_chatClient.GetStreamingResponseAsync(messages, options, ct)` where `_chatClient` is the `AGUIChatClient` wrapped with `.UseFunctionInvocation()`.
+3. `AGUIChatClient` POSTs to `/copilot/stream` with `RunAgentInput.tools` carrying the page tools' name + JSON-Schema parameters. Server's `MapAGUI` merges those into the per-turn model tool catalog alongside `CopilotAgent`'s static tools.
+4. Model emits `TOOL_CALL_START { toolCallName: "galaxy_map_navigate" }` + args. Server has no executor registered for that name (the page tools are declarations only on the server), so it forwards the events to the SSE stream and waits for a tool-result message on the next turn.
+5. `AGUIChatClient` surfaces the tool call as an `AIContent` on the streaming response. The wrapping `UseFunctionInvocation` middleware finds a matching `AIFunction` in `ChatOptions.Tools`, invokes it on the Blazor circuit, and appends a `ChatMessage(role: tool, …)` carrying the return value. The middleware then re-invokes `GetStreamingResponseAsync` with the updated message list — transparent to `CopilotSidebar.SubmitAsync`.
+6. Server receives the tool-result message in `RunAgentInput.messages`, feeds it back to the model.
+7. Model emits `TEXT_MESSAGE_*` ("Centred on Coruscant — the Core Worlds capital. Want me to highlight the surrounding sectors?").
+8. Sidebar renders the prose; the map already moved in step 5 (the `AIFunction` body called `_module.InvokeAsync<bool>("drillToDeepLink", …)` before returning).
 
-The breadcrumb UI in `CopilotSidebar` (the existing `Role.ToolBreadcrumb`) shows page-control calls with a distinct icon and label ("🧭 navigated to Coruscant") so the user can see *what* SP-4 did, not just the prose narration.
+The breadcrumb UI in `CopilotSidebar` (the existing `Role.ToolBreadcrumb`) shows page-control calls with a distinct icon and label ("🧭 navigated to Coruscant") so the user can see *what* SP-4 did, not just the prose narration. The breadcrumb is populated by hooking into the `UseFunctionInvocation` pipeline (either by subscribing to the streaming updates' `FunctionCallContent` / `FunctionResultContent` items, or by wrapping the page's `AIFunction` instances at registration time so they emit a `UIEvent` before delegating).
 
 ### 6. Server-side: `CopilotAgent` and the `MapAGUI` endpoint
 
