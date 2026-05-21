@@ -1,7 +1,5 @@
 # Design-036: Path Graph Rendering
 
-> Renumbered from Design-009 on 2026-05-18 (resolved a duplicate-number collision).
-
 **Status:** Shipped (commit `4a93a918ec`, 2026-04-09; verified 2026-05-18). The `render_path` tool, `GraphLayoutMode` enum, `PathData`/`PathStep` models, `ConnectionStepDto` ID/type extension, and the D3 `layoutPathPositions()` path layout are all present (`Ask.cs`, `ToolkitDtos.cs`, `ChartToolKit.cs`/`ComponentToolkit`, `AskGraphView.razor`, `GraphViewer.razor`, `d3-graph.js`, `AskAIAgent.cs`).  
 **Date:** 2026-04-09
 

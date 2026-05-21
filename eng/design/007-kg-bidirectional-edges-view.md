@@ -1,6 +1,10 @@
 # Design-007: KG Bidirectional Edges View + Planned `QueryGraphAsync` Rewrite
 
-**Status:** Partially Shipped — view + `reverseLabel` denormalization landed; `QueryGraphAsync` rewrite still pending (verified 2026-05-18). `InfoboxGraphService.EnsureBidirectionalEdgesViewAsync` and the `reverseLabelMap`/`ReverseLabel` enrichment are in code. `KnowledgeGraphQueryService.QueryGraphAsync` still performs the manual hop-by-hop BFS (`outgoingLabelFilter`/`inboundLabelFilter`/`forwardToReverse` against `kg.edges`, no `$graphLookup` over `kg.edges.bidir`) — the rewrite in §"Planned" has not been done.
+**Status:** Partially Shipped — view + `reverseLabel` denormalization landed; `QueryGraphAsync` rewrite still pending (re-verified 2026-05-21).
+
+- Shipped: `InfoboxGraphService.EnsureBidirectionalEdgesViewAsync` (called at the end of Phase 5), the `reverseLabelMap`/`ReverseLabel` enrichment loop, and the equivalent fresh-clone migration [`0007-create-kg-bidir-view.js`](../../src/StarWarsData.MongoDbMigrations/migrations/0007-create-kg-bidir-view.js).
+- Not yet done: `KnowledgeGraphQueryService.QueryGraphAsync` still performs the manual hop-by-hop BFS (`outgoingLabelFilter`/`inboundLabelFilter`/`forwardToReverse` against `kg.edges`, no `$graphLookup` over `kg.edges.bidir`). The single-direction `$graphLookup` at line ~2798 of `KnowledgeGraphQueryService.cs` is a different, narrower pipeline — not the mixed-direction rewrite proposed here.
+
 **Date:** 2026-04-05
 **Author:** Patrick Magee + Claude
 
@@ -48,7 +52,7 @@ if (reverseLabelMap.TryGetValue(edge.Label, out var revLabel) && !string.IsNullO
     edge.ReverseLabel = revLabel;
 ```
 
-On dev, 582,051 / 595,159 edges (97.8%) carry a `reverseLabel`. The remaining 2.2% are genuine one-way labels (self-referential, terminal, or not yet mapped in `FieldSemantics`) — these are intentionally excluded from the reverse branch of the view so it never surfaces ambiguous labels.
+On dev (as of 2026-05-21), 581,448 / 594,615 edges (97.8%) carry a `reverseLabel`. The remaining ~2.2% are genuine one-way labels (self-referential, terminal, or not yet mapped in `FieldSemantics`) — these are intentionally excluded from the reverse branch of the view so it never surfaces ambiguous labels.
 
 ### 2. The `kg.edges.bidir` view
 
@@ -85,18 +89,18 @@ db.createView("kg.edges.bidir", "kg.edges", [
 ])
 ```
 
-**View statistics on dev:**
+**View statistics on dev (2026-05-21):**
 
 | Metric | Value |
 | --- | --- |
-| Forward branch (base `kg.edges`) | 595,159 edges |
-| Reverse branch (after `reverseLabel` filter) | 582,051 edges |
-| Total view documents | 1,177,210 |
-| Edges dropped from reverse branch | 13,108 (one-way labels) |
+| Forward branch (base `kg.edges`) | 594,615 edges |
+| Reverse branch (after `reverseLabel` filter) | 581,448 edges |
+| Total view documents | 1,176,063 |
+| Edges dropped from reverse branch | 13,167 (one-way labels) |
 
-The view is lifecycle-managed by `EnsureBidirectionalEdgesViewAsync`: drops any existing view, then runs `createView` via `RunCommandAsync`. Called at the end of every Phase 5 run so the definition stays in sync with any changes to `FieldSemantics.Relationships` that flow through the `reverseLabel` denormalization.
+The view is lifecycle-managed by `EnsureBidirectionalEdgesViewAsync`: drops any existing view, then runs `createView` via `RunCommandAsync`. Called at the end of every Phase 5 run so the definition stays in sync with any changes to `FieldSemantics.Relationships` that flow through the `reverseLabel` denormalization. Fresh clones get the same view via migration [`0007-create-kg-bidir-view.js`](../../src/StarWarsData.MongoDbMigrations/migrations/0007-create-kg-bidir-view.js), which has parity with the C# definition.
 
-### 3. Smoke-test results
+### 3. Smoke-test results (April 2026)
 
 A 2-hop bidirectional `$graphLookup` from Anakin Skywalker (PageId 452390) filtered to `apprentice_of` + `master_of` labels, Canon continuity:
 
@@ -218,6 +222,7 @@ Not urgent. The current manual BFS is correct, well-tested, and performs adequat
 | [src/StarWarsData.Models/KnowledgeGraph/RelationshipEdge.cs](../../src/StarWarsData.Models/KnowledgeGraph/RelationshipEdge.cs) | Added `ReverseLabel` field |
 | [src/StarWarsData.Models/KnowledgeGraph/RelationshipEdgeBsonFields.cs](../../src/StarWarsData.Models/KnowledgeGraph/RelationshipEdgeBsonFields.cs) | Added `ReverseLabel` BSON field constant |
 | [src/StarWarsData.Services/KnowledgeGraph/InfoboxGraphService.cs](../../src/StarWarsData.Services/KnowledgeGraph/InfoboxGraphService.cs) | `reverseLabelMap`, per-edge enrichment, `EnsureBidirectionalEdgesViewAsync` |
+| [src/StarWarsData.MongoDbMigrations/migrations/0007-create-kg-bidir-view.js](../../src/StarWarsData.MongoDbMigrations/migrations/0007-create-kg-bidir-view.js) | Fresh-clone migration that mirrors the C# view definition (Design-038 onboarding path) |
 | ADR-003 ([`eng/adr/003-kg-query-architecture.md`](../adr/003-kg-query-architecture.md)) | Documents denormalization strategy and index ownership |
 
 ## Files to touch during the planned rewrite
@@ -232,6 +237,5 @@ Not urgent. The current manual BFS is correct, well-tested, and performs adequat
 
 ## Open items
 
-- **Indexes on the view.** MongoDB views themselves cannot have their own indexes — they use the underlying collection's indexes via pipeline rewrite. Confirm via `db["kg.edges.bidir"].aggregate([...]).explain("executionStats")` that both branches of the view hit `ix_fromId_label` and `ix_toId_label` respectively for typical traversal queries.
-- **Prod rollout.** The view creation is idempotent (drop + create) and runs at the end of every Phase 5. For prod, no manual step is needed beyond rerunning Phase 5, which is already scheduled daily via Hangfire. The `reverseLabel` denormalization lands on the same rerun.
+- **Indexes on the view.** MongoDB views themselves cannot have their own indexes — they use the underlying collection's indexes via pipeline rewrite. Confirm via `db["kg.edges.bidir"].aggregate([...]).explain("executionStats")` that both branches of the view hit `ix_fromId_label` and `ix_toId_label` respectively for typical traversal queries. (Only material once the `QueryGraphAsync` rewrite ships — today nothing reads from the view at runtime.)
 - **`EdgeMeta` on the reverse branch.** The view's reverse `$project` does not include `meta`. This is intentional for now (the qualifier text is source-side) but worth flagging if the UI starts surfacing edge metadata from both perspectives.

@@ -1,6 +1,10 @@
 # Design: Galaxy Map — Temporal Explore vs. Timeline Modes
 
-**Status:** Proposal — not built (verified 2026-05-18). No temporal fields on `GalaxyGeography` DTOs, no `GeoStructure`/`BodyTemporal`/`RouteTemporal` on `GalaxyOverviewDocument`, and no `applyTemporalBaseFilter`/`clearTemporalBaseFilter` in `galaxy-map-unified.js`. The temporal base-geography filter described here has not been implemented. (`TerritorySnapshot.StartYear/EndYear` is the unrelated per-year territory-control overlay, not this design's base-layer filter.)
+**Status:** Proposal — not built (re-verified 2026-05-21).
+
+To be clear about what this doc is *not* tracking: the **Explore/Timeline mode toggle itself ships** — see [GalaxyMapUnified.razor:285-287](../../src/StarWarsData.Frontend/Components/Pages/GalaxyMapUnified.razor#L285-L287). Timeline mode renders the per-year territory shading + event heatmap **overlays** via `renderTemporalLayers`/`clearTemporalLayers` in [galaxy-map-unified.js](../../src/StarWarsData.Frontend/wwwroot/js/galaxy-map-unified.js).
+
+What is **not** built is the **base-geography temporal filter** this doc proposes: no `StartYear`/`EndYear`/`EndReason` on `GalaxyGeography` DTOs, no `GeoStructure`/`BodyTemporal`/`RouteTemporal` on `GalaxyOverviewDocument`, no `applyTemporalBaseFilter`/`clearTemporalBaseFilter` JS, no `data-start-year`/`data-end-year` DOM stamps, and no ETL projection of `construction.*` facets into the overview. Scrubbing to 100 BBY still shows Starkiller Base; Alderaan is still alive in 4 ABY. (`TerritorySnapshot.StartYear/EndYear` is the unrelated per-year territory-control overlay, not this design's base-layer filter.)
 **Date:** 2026-04-05
 **Companion docs:** [034-galaxy-map-temporal.md](034-galaxy-map-temporal.md), [004-galaxy-map-architecture.md](004-galaxy-map-architecture.md), [001-temporal-facets.md](001-temporal-facets.md)
 
