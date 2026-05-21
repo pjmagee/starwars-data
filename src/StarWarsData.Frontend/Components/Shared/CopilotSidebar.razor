@@ -1,13 +1,14 @@
 @using System.Text.Json
-@using System.Text.Json.Serialization
 @using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Web
-@using StarWarsData.Frontend.Components.Shared.Agui
+@using Microsoft.Agents.AI.AGUI
+@using Microsoft.Extensions.AI
 @using StarWarsData.Frontend.Services
 @inject IHttpClientFactory HttpClientFactory
 @inject GlobalFilterService GlobalFilterService
 @inject PageContextService PageContext
+@inject ILoggerFactory LoggerFactory
 @inject IJSRuntime JS
 @inject ILogger<CopilotSidebar> Logger
 @implements IDisposable
@@ -22,7 +23,14 @@
       - Reads PageContextService at submit time and injects a [PAGE:][SUBJECT:][FACETS:]
         envelope alongside [CONTINUITY:].
 
-    See Design-022 for the full rationale.
+    Wire path: AGUIChatClient (Microsoft.Agents.AI.AGUI) implements IChatClient over
+    the AGUI SSE protocol. Server-executed tool calls surface as FunctionCallContent /
+    FunctionResultContent in the streaming updates and drive the breadcrumb UI;
+    text deltas accumulate into the assistant bubble. Phase 2 (page-control tools)
+    wraps this with .UseFunctionInvocation() and supplies AIFunction tools via
+    ChatOptions.Tools so the agent can call back into the page.
+
+    See Design-022 (sidebar foundation) and Design-041 (page-control / AGUI client adoption).
 *@
 
 <div class="copilot-container">
@@ -251,29 +259,42 @@
     }
 
     private readonly List<Msg> _conversation = [];
-    private readonly List<AguiMessage> _aguiMessages = [];
+    private readonly List<ChatMessage> _chatMessages = [];
 
-    // Per-turn SSE state
-    private readonly Dictionary<string, Msg> _toolByCallId = [];
-    private readonly Dictionary<string, string> _toolNamesByCallId = [];
-    private readonly Dictionary<string, string> _toolArgsByCallId = [];
-    private Msg? _currentAssistantMsg;
-    private List<AguiToolCall> _pendingToolCalls = [];
+    // Per-turn streaming state. We key breadcrumbs and the in-flight assistant
+    // bubble off the streaming update's MessageId / CallId so we can accumulate
+    // text deltas and the matching FunctionCallContent / FunctionResultContent
+    // pairs back into one UI element each.
+    private readonly Dictionary<string, Msg> _assistantByMessageId = [];
+    private readonly Dictionary<string, Msg> _breadcrumbByCallId = [];
 
     private CopilotModel _model = new();
     private bool _loading;
     private ElementReference _messagesContainer;
 
-    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+    private IChatClient? _chatClient;
 
     protected override void OnInitialized()
     {
+        // AGUIChatClient is an IChatClient over the AGUI SSE protocol. The named
+        // "StarWarsData" HttpClient already has the auth DelegatingHandler that
+        // forwards X-User-Id (ADR-001) and resilience handlers stripped so SSE
+        // streams aren't killed by the default 30s timeout (see Program.cs).
+        var http = HttpClientFactory.CreateClient("StarWarsData");
+        _chatClient = new AGUIChatClient(
+            http,
+            "copilot/stream",
+            LoggerFactory,
+            jsonSerializerOptions: null,
+            serviceProvider: null);
+
         PageContext.OnChange += OnPageContextChanged;
     }
 
     public void Dispose()
     {
         PageContext.OnChange -= OnPageContextChanged;
+        (_chatClient as IDisposable)?.Dispose();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -311,17 +332,16 @@
     private void ResetConversation()
     {
         _conversation.Clear();
-        _aguiMessages.Clear();
-        _toolByCallId.Clear();
-        _toolNamesByCallId.Clear();
-        _toolArgsByCallId.Clear();
+        _chatMessages.Clear();
+        _assistantByMessageId.Clear();
+        _breadcrumbByCallId.Clear();
         _model = new CopilotModel();
         StateHasChanged();
     }
 
     private async Task SubmitAsync()
     {
-        if (string.IsNullOrWhiteSpace(_model.Prompt) || _loading) return;
+        if (string.IsNullOrWhiteSpace(_model.Prompt) || _loading || _chatClient is null) return;
 
         var userPrompt = _model.Prompt.Trim();
         _model.Prompt = "";
@@ -337,119 +357,62 @@
         var selPart = !string.IsNullOrWhiteSpace(sel)
             ? $" [SELECTION: \"{EscapeForEnvelope(sel)}\"]"
             : "";
-        var aguiContent = string.IsNullOrEmpty(pageEnv)
+        var envelopedContent = string.IsNullOrEmpty(pageEnv)
             ? $"[CONTINUITY: {continuity}]{selPart} {userPrompt}"
             : $"[CONTINUITY: {continuity}] {pageEnv}{selPart} {userPrompt}";
 
-        _aguiMessages.Add(new AguiMessage { Role = "user", Content = aguiContent });
+        _chatMessages.Add(new ChatMessage(ChatRole.User, envelopedContent));
 
-        // Reset per-turn SSE state
-        _toolByCallId.Clear();
-        _toolNamesByCallId.Clear();
-        _toolArgsByCallId.Clear();
-        _currentAssistantMsg = null;
-        _pendingToolCalls = [];
+        // Reset per-turn streaming state
+        _assistantByMessageId.Clear();
+        _breadcrumbByCallId.Clear();
 
         await ScrollToBottom();
 
-        var body = new { messages = _aguiMessages };
         using var cts = new CancellationTokenSource(TimeSpan.FromMinutes(3));
+
+        // Phase 1: no client-side tools yet — Tools is empty. Phase 2 will pass
+        // PageControlService.AvailableActions here so the agent can call back
+        // into the focused page.
+        var options = new ChatOptions();
 
         try
         {
-            using var request = new HttpRequestMessage(HttpMethod.Post, "copilot/stream")
+            var updates = new List<ChatResponseUpdate>();
+
+            await foreach (var update in _chatClient.GetStreamingResponseAsync(_chatMessages, options, cts.Token))
             {
-                Content = JsonContent.Create(body),
-            };
-            request.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("text/event-stream"));
-
-            using var response = await Http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cts.Token);
-
-            if (response.StatusCode == System.Net.HttpStatusCode.TooManyRequests)
-            {
-                _conversation.Add(new Msg { Role = Role.Error, Text = "Rate limit reached. Try again in a few minutes." });
-                FinalizeTurn();
-                return;
-            }
-
-            if (!response.IsSuccessStatusCode)
-            {
-                _conversation.Add(new Msg { Role = Role.Error, Text = $"Request failed ({(int)response.StatusCode})." });
-                FinalizeTurn();
-                return;
-            }
-
-            await using var stream = await response.Content.ReadAsStreamAsync(cts.Token);
-
-            await foreach (var json in AguiSseReader.ReadEventsAsync(stream, cts.Token))
-            {
-                try
-                {
-                    using var doc = JsonDocument.Parse(json);
-                    var root = doc.RootElement;
-                    var eventType = root.TryGetProperty("type", out var t) ? t.GetString() : null;
-
-                    switch (eventType)
-                    {
-                        case "TOOL_CALL_START":
-                            HandleToolCallStart(root);
-                            break;
-                        case "TOOL_CALL_ARGS":
-                            HandleToolCallArgs(root);
-                            break;
-                        case "TOOL_CALL_END":
-                            HandleToolCallEnd(root);
-                            break;
-                        case "TOOL_CALL_RESULT":
-                            HandleToolCallResult(root);
-                            break;
-                        case "TEXT_MESSAGE_START":
-                            _currentAssistantMsg = new Msg { Role = Role.Assistant, Text = "" };
-                            _conversation.Add(_currentAssistantMsg);
-                            break;
-                        case "TEXT_MESSAGE_CONTENT":
-                        {
-                            var delta = root.TryGetProperty("delta", out var d) ? d.GetString() : null;
-                            if (delta is not null)
-                            {
-                                _currentAssistantMsg ??= AddNewAssistantMsg();
-                                _currentAssistantMsg.Text += delta;
-                            }
-                            break;
-                        }
-                        case "TEXT_MESSAGE_END":
-                        {
-                            // Resolve any /graph-explorer/{pageId} links the agent emitted
-                            // into rich citation cards rendered below the bubble. Fire-and-
-                            // forget — if the resolve call fails, the inline links still work.
-                            if (_currentAssistantMsg is { } finished)
-                                _ = ResolveCitationsAsync(finished);
-                            _currentAssistantMsg = null;
-                            break;
-                        }
-                        case "RUN_ERROR":
-                        {
-                            var errorMsg = root.TryGetProperty("message", out var em) ? em.GetString() : "Unknown error";
-                            _conversation.Add(new Msg { Role = Role.Error, Text = errorMsg ?? "Unknown error" });
-                            Logger.LogError("RUN_ERROR from copilot agent: {Error}", errorMsg);
-                            break;
-                        }
-                    }
-                }
-                catch (JsonException) { }
+                updates.Add(update);
+                ApplyUpdate(update);
 
                 StateHasChanged();
                 await ScrollToBottom();
             }
 
-            FinalizeTurn();
+            // Persist the assistant turn (with any tool calls + results) back into
+            // _chatMessages so the next user turn carries full context. ToChatResponse
+            // collapses streamed deltas into the canonical messages M.E.AI would emit.
+            var response = updates.ToChatResponse();
+            foreach (var m in response.Messages)
+                _chatMessages.Add(m);
+
+            // Resolve /graph-explorer/{pageId} links the agent emitted into citation
+            // cards rendered under the bubble. Fire-and-forget — inline links still
+            // work if the resolve fails.
+            foreach (var assistant in _conversation.Where(m => m.Role == Role.Assistant && m.References is null))
+                _ = ResolveCitationsAsync(assistant);
         }
         catch (OperationCanceledException)
         {
             _conversation.Add(new Msg { Role = Role.Error, Text = "Request timed out." });
         }
+        catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.TooManyRequests)
+        {
+            _conversation.Add(new Msg { Role = Role.Error, Text = "Rate limit reached. Try again in a few minutes." });
+        }
         catch (Exception ex)
         {
+            Logger.LogError(ex, "Copilot streaming call failed");
             _conversation.Add(new Msg { Role = Role.Error, Text = $"Unexpected error: {ex.Message}" });
         }
         finally
@@ -460,10 +423,64 @@
         }
     }
 
-    private Msg AddNewAssistantMsg()
+    private void ApplyUpdate(ChatResponseUpdate update)
     {
+        foreach (var content in update.Contents)
+        {
+            switch (content)
+            {
+                case TextContent text when !string.IsNullOrEmpty(text.Text):
+                {
+                    var msg = GetOrCreateAssistantMsg(update.MessageId);
+                    msg.Text += text.Text;
+                    break;
+                }
+                case FunctionCallContent fc:
+                {
+                    if (!_breadcrumbByCallId.ContainsKey(fc.CallId))
+                    {
+                        var bc = new Msg
+                        {
+                            Role = Role.ToolBreadcrumb,
+                            ToolCallId = fc.CallId,
+                            Text = FriendlyToolName(fc.Name),
+                            IsToolComplete = false,
+                        };
+                        _breadcrumbByCallId[fc.CallId] = bc;
+                        _conversation.Add(bc);
+                    }
+                    break;
+                }
+                case FunctionResultContent fr:
+                {
+                    if (_breadcrumbByCallId.TryGetValue(fr.CallId, out var bc))
+                        bc.IsToolComplete = true;
+                    break;
+                }
+                case ErrorContent err:
+                {
+                    var errText = !string.IsNullOrEmpty(err.Message) ? err.Message : "Unknown error";
+                    _conversation.Add(new Msg { Role = Role.Error, Text = errText });
+                    Logger.LogError("ErrorContent from copilot agent: {Error}", errText);
+                    break;
+                }
+            }
+        }
+    }
+
+    private Msg GetOrCreateAssistantMsg(string? messageId)
+    {
+        // No MessageId on the update yet — fall back to "the current open assistant
+        // msg" (the last one we created with no id). Most providers do supply an id;
+        // this guards against the AGUI client emitting an early text content before
+        // the message id is known.
+        var key = messageId ?? "";
+        if (_assistantByMessageId.TryGetValue(key, out var existing))
+            return existing;
+
         var msg = new Msg { Role = Role.Assistant, Text = "" };
         _conversation.Add(msg);
+        _assistantByMessageId[key] = msg;
         return msg;
     }
 
@@ -481,7 +498,8 @@
 
         try
         {
-            var response = await Http.PostAsJsonAsync("api/citations/resolve", new { pageIds = ids });
+            var http = HttpClientFactory.CreateClient("StarWarsData");
+            var response = await http.PostAsJsonAsync("api/citations/resolve", new { pageIds = ids });
             if (!response.IsSuccessStatusCode) return;
             var refs = await response.Content.ReadFromJsonAsync<List<CitationReference>>();
             if (refs is { Count: > 0 })
@@ -493,124 +511,6 @@
         catch (Exception ex)
         {
             Logger.LogDebug(ex, "Citation resolve failed for {Count} ids; inline links remain functional", ids.Length);
-        }
-    }
-
-    private void HandleToolCallStart(JsonElement root)
-    {
-        var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
-        var toolName = root.TryGetProperty("toolCallName", out var tn) ? tn.GetString() : "tool";
-        if (callId is null) return;
-
-        _toolNamesByCallId[callId] = toolName ?? "tool";
-        _toolArgsByCallId[callId] = "";
-
-        var bc = new Msg
-        {
-            Role = Role.ToolBreadcrumb,
-            ToolCallId = callId,
-            Text = FriendlyToolName(toolName),
-            IsToolComplete = false,
-        };
-        _toolByCallId[callId] = bc;
-        _conversation.Add(bc);
-    }
-
-    private void HandleToolCallArgs(JsonElement root)
-    {
-        var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
-        if (callId is null) return;
-
-        var delta = root.TryGetProperty("delta", out var d) ? d.GetString() : null;
-        if (delta is null) return;
-
-        if (_toolArgsByCallId.TryGetValue(callId, out var existing))
-            _toolArgsByCallId[callId] = existing + delta;
-    }
-
-    private void HandleToolCallEnd(JsonElement root)
-    {
-        var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
-        if (callId is null) return;
-
-        if (_toolByCallId.TryGetValue(callId, out var bc))
-        {
-            bc.IsToolComplete = true;
-        }
-
-        // Track for AGUI replay (assistant tool_calls message + per-call tool result)
-        if (_toolNamesByCallId.TryGetValue(callId, out var name)
-            && _toolArgsByCallId.TryGetValue(callId, out var args))
-        {
-            _pendingToolCalls.Add(new AguiToolCall
-            {
-                Id = callId,
-                Function = new AguiFunction { Name = name, Arguments = args },
-            });
-        }
-    }
-
-    private void HandleToolCallResult(JsonElement root)
-    {
-        var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
-        if (callId is null) return;
-
-        // Capture content for AGUI replay; the breadcrumb itself doesn't expand
-        // (deliberate UX choice — the sidebar is for prose, not tool diving).
-        string? content = null;
-        if (root.TryGetProperty("content", out var contentEl))
-        {
-            content = contentEl.ValueKind == JsonValueKind.String
-                ? contentEl.GetString()
-                : contentEl.GetRawText();
-            if (content?.StartsWith("\"") == true)
-                content = JsonSerializer.Deserialize<string>(content);
-        }
-
-        // Stash on the tool name dict so FinalizeTurn can build the tool message.
-        // We hijack a separate dict to avoid the args/result collision.
-        _toolResultsByCallId[callId] = content ?? "";
-    }
-
-    private readonly Dictionary<string, string> _toolResultsByCallId = [];
-
-    private void FinalizeTurn()
-    {
-        if (_pendingToolCalls.Count > 0)
-        {
-            _aguiMessages.Add(new AguiMessage
-            {
-                Role = "assistant",
-                Content = "",
-                ToolCalls = [.. _pendingToolCalls],
-            });
-
-            foreach (var tc in _pendingToolCalls)
-            {
-                _aguiMessages.Add(new AguiMessage
-                {
-                    Role = "tool",
-                    ToolCallId = tc.Id,
-                    Content = _toolResultsByCallId.TryGetValue(tc.Id, out var r) ? r : "",
-                });
-            }
-
-            _pendingToolCalls = [];
-            _toolResultsByCallId.Clear();
-        }
-
-        var lastAssistant = _conversation.LastOrDefault(m => m.Role == Role.Assistant);
-        if (!string.IsNullOrWhiteSpace(lastAssistant?.Text))
-        {
-            var lastAgui = _aguiMessages.LastOrDefault();
-            if (lastAgui?.Role != "assistant" || lastAgui.ToolCalls is not null)
-            {
-                _aguiMessages.Add(new AguiMessage
-                {
-                    Role = "assistant",
-                    Content = lastAssistant.Text,
-                });
-            }
         }
     }
 
