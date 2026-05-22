@@ -70,15 +70,16 @@
         @if (PageControl.Actions.Count > 0)
         {
             @* "Can drive page" popover — surfaces the page-control vocabulary (Design-041
-               Discoverability). Click expands a menu listing each action's label, the
-               agent-facing description (so the user sees the exact intent), and one
-               example phrase. Click an example to drop it into the input. *@
+               Discoverability). MudButton (not MudChip) as activator: MudChip's own click
+               handling swallows the menu open event. The button is styled compact + the
+               same outlined-success look so it reads as a chip. *@
             <MudMenu AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft" Dense="true">
                 <ActivatorContent>
-                    <MudChip T="string" Size="Size.Small" Color="Color.Success" Variant="Variant.Outlined"
-                             Icon="@Icons.Material.Filled.SmartToy"
-                             Style="font-size:11px;margin-left:4px;cursor:pointer;"
-                             Text="@($"Can drive page ({PageControl.Actions.Count})")" />
+                    <MudButton Size="Size.Small" Variant="Variant.Outlined" Color="Color.Success"
+                               StartIcon="@Icons.Material.Filled.SmartToy"
+                               Style="text-transform:none;font-size:11px;margin-left:4px;min-height:22px;padding:0 8px;line-height:1.4;">
+                        Can drive page (@PageControl.Actions.Count)
+                    </MudButton>
                 </ActivatorContent>
                 <ChildContent>
                     <div class="pa-2" style="max-width:320px;">
