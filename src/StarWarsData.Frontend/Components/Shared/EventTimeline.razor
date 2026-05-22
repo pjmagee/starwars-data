@@ -187,10 +187,15 @@
                                 @foreach (var timelineEvent in timelineEvents.Events)
                                 {
                                     var color = GetColor(timelineEvent);
+                                    var ev = timelineEvent;
+                                    var isFocused = _focusedEventPageId is int fid && ev.PageId == fid;
+                                    var panelId = ev.PageId is int pid ? $"timeline-event-{pid}" : null;
 
-                                    <MudExpansionPanel Style="@($"color:{color}; text-align:{contentAlign};")">
+                                    <MudExpansionPanel id="@panelId"
+                                                       Style="@($"color:{color}; text-align:{contentAlign};{(isFocused ? " outline:2px solid var(--mud-palette-success);" : string.Empty)}")"
+                                                       ExpandedChanged="@(expanded => OnPanelExpanded(ev, expanded))">
                                         <TitleContent>
-                                            <div class="d-flex align-center gap-2 flex-wrap">
+                                            <div class="d-flex align-center gap-2 flex-wrap" @onclick="@(() => OnEventClicked(ev))">
                                                 <MudText Typo="Typo.body2" Style="@($"color:{color}")">@timelineEvent.DisplayTitle</MudText>
                                                 @if (!string.IsNullOrEmpty(timelineEvent.Template))
                                                 {
@@ -318,6 +323,97 @@
 
     [Parameter] public string? Category { get; set; }
     [Parameter] public bool ShowCategoryFilter { get; set; } = true;
+
+    /// <summary>
+    /// Fired when an event becomes the focus — either because the user clicked
+    /// its title bar / expanded its panel, or because <see cref="SelectEventByPageIdAsync"/>
+    /// matched one. The parent uses this to publish a SUBJECT envelope to
+    /// PageContextService so SP-4 can answer follow-up questions about it.
+    /// </summary>
+    [Parameter] public EventCallback<TimelineEvent> OnEventSelected { get; set; }
+
+    /// <summary>Categories available in the current realm/continuity (Design-041 page-control).</summary>
+    public IReadOnlyList<string> AvailableCategories => _categories ?? [];
+
+    /// <summary>The current category multi-select (Design-041 page-control).</summary>
+    public IReadOnlyCollection<string> SelectedCategories => _selectedCategories;
+
+    /// <summary>Whether the timeline is currently fullscreen-maximized (Design-041 page-control).</summary>
+    public bool IsMaximized => _maximized;
+
+    /// <summary>The events currently rendered in the timeline (across all loaded pages).</summary>
+    public IReadOnlyList<TimelineEvent> LoadedEvents =>
+        _allItems.SelectMany(g => g.Events).ToList();
+
+    private int? _focusedEventPageId;
+
+    /// <summary>
+    /// Replace the category multi-select. Pass an empty array to clear it.
+    /// Does NOT auto-apply the filter — the caller follows up with <see cref="ApplyFiltersAsync"/>
+    /// when they want to load results.
+    /// </summary>
+    public Task SetCategoriesAsync(IEnumerable<string>? categories)
+    {
+        if (_categories is null) { _selectedCategories = new List<string>(); }
+        else
+        {
+            var lookup = new HashSet<string>(_categories, StringComparer.OrdinalIgnoreCase);
+            _selectedCategories = categories?.Where(c => lookup.Contains(c)).Distinct(StringComparer.OrdinalIgnoreCase).ToList() ?? [];
+        }
+        return InvokeAsync(StateHasChanged);
+    }
+
+    /// <summary>Add or remove one category from the current multi-select.</summary>
+    public Task SetCategoryAsync(string category, bool selected)
+    {
+        if (_categories is null) return Task.CompletedTask;
+        var match = _categories.FirstOrDefault(c => c.Equals(category, StringComparison.OrdinalIgnoreCase));
+        if (match is null) return Task.CompletedTask;
+        var current = _selectedCategories.ToHashSet(StringComparer.OrdinalIgnoreCase);
+        if (selected) current.Add(match); else current.Remove(match);
+        _selectedCategories = current.ToList();
+        return InvokeAsync(StateHasChanged);
+    }
+
+    /// <summary>Apply the current filters and (re)load the timeline. Equivalent to clicking "Load Timeline".</summary>
+    public Task ApplyFiltersAsync() => ApplyFilters();
+
+    /// <summary>Toggle fullscreen mode (used by the page-control toggle_fullscreen tool).</summary>
+    public Task SetMaximizedAsync(bool maximized)
+    {
+        _maximized = maximized;
+        return InvokeAsync(StateHasChanged);
+    }
+
+    /// <summary>
+    /// Programmatically focus an event by its KG pageId. Searches the loaded
+    /// timeline; if found, fires <see cref="OnEventSelected"/>, marks the panel
+    /// outlined, and scrolls it into view. Returns true if a match was found.
+    /// </summary>
+    public async Task<TimelineEvent?> SelectEventByPageIdAsync(int pageId)
+    {
+        var match = _allItems.SelectMany(g => g.Events).FirstOrDefault(e => e.PageId == pageId);
+        if (match is null) return null;
+        _focusedEventPageId = pageId;
+        await InvokeAsync(StateHasChanged);
+        try { await JS.InvokeVoidAsync("eval", $"document.getElementById('timeline-event-{pageId}')?.scrollIntoView({{behavior:'smooth',block:'center'}})"); }
+        catch { }
+        if (OnEventSelected.HasDelegate) await OnEventSelected.InvokeAsync(match);
+        return match;
+    }
+
+    private void OnEventClicked(TimelineEvent ev)
+    {
+        _focusedEventPageId = ev.PageId;
+        if (OnEventSelected.HasDelegate) _ = OnEventSelected.InvokeAsync(ev);
+    }
+
+    private void OnPanelExpanded(TimelineEvent ev, bool expanded)
+    {
+        if (!expanded) return;
+        _focusedEventPageId = ev.PageId;
+        if (OnEventSelected.HasDelegate) _ = OnEventSelected.InvokeAsync(ev);
+    }
 
     // ── Anchor ceiling (Design-014 Phase 2) ──
     // When set, all timeline queries are clamped to this range even if the era filter

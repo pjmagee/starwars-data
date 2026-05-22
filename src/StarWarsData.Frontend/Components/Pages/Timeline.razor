@@ -1,5 +1,8 @@
 @page "/timeline"
+@using StarWarsData.Models.Queries
 @inject PageContextService PageContext
+@inject PageControlService PageControl
+@inject ILogger<Timeline> Logger
 @implements IDisposable
 
 <PageTitle>Timeline — Star Wars Data</PageTitle>
@@ -9,24 +12,247 @@
 
 <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-4 px-4">
 
-    @* <MudText Typo="Typo.h5" Class="mb-4">Timeline</MudText> *@
-
-    <MudTabs Elevation="0" Rounded="true" ApplyEffectsToContainer="true" TabPanelsClass="pa-0 pt-4">
+    <MudTabs Elevation="0" Rounded="true" ApplyEffectsToContainer="true" TabPanelsClass="pa-0 pt-4"
+             @bind-ActivePanelIndex="_activeTabIndex">
         <MudTabPanel Text="Star Wars" Icon="@Icons.Material.Filled.Explore">
-            <EventTimeline ShowCategoryFilter="true" CalendarMode="Calendar.Galactic" />
+            <EventTimeline @ref="_swTimeline"
+                           ShowCategoryFilter="true"
+                           CalendarMode="Calendar.Galactic"
+                           OnEventSelected="OnEventSelected" />
         </MudTabPanel>
         <MudTabPanel Text="Real World" Icon="@Icons.Material.Filled.CalendarMonth">
-            <EventTimeline ShowCategoryFilter="true" CalendarMode="Calendar.Real" />
+            <EventTimeline @ref="_realTimeline"
+                           ShowCategoryFilter="true"
+                           CalendarMode="Calendar.Real"
+                           OnEventSelected="OnEventSelected" />
         </MudTabPanel>
     </MudTabs>
 
 </MudContainer>
 
 @code {
+    int _activeTabIndex;
+    EventTimeline? _swTimeline;
+    EventTimeline? _realTimeline;
+    IDisposable? _pageControlRegistration;
+
+    string ActiveRealm => _activeTabIndex == 0 ? "Star Wars" : "Real World";
+    EventTimeline? ActiveTimeline => _activeTabIndex == 0 ? _swTimeline : _realTimeline;
+
     protected override void OnInitialized()
     {
-        PageContext.Set(new PageContext(Page: "timeline"));
+        PublishBaselineContext();
     }
 
-    public void Dispose() => PageContext.Clear();
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // Register on first render — the child refs aren't bound until then.
+        if (firstRender)
+            RegisterPageControlActions();
+    }
+
+    void PublishBaselineContext()
+    {
+        // Page baseline — no SUBJECT until an event is selected. We pass the
+        // active realm as a facet so SP-4 knows which timeline we're on without
+        // needing to read the URL.
+        PageContext.Set(new PageContext(
+            Page: "timeline",
+            Extras: new Dictionary<string, string>(StringComparer.Ordinal) { ["realm"] = ActiveRealm }));
+    }
+
+    void OnEventSelected(TimelineEvent ev)
+    {
+        // When the user clicks (or the agent calls timeline_select_event) we
+        // publish a SUBJECT envelope so SP-4 can answer follow-up questions
+        // about that specific event via the KG.
+        if (ev.PageId is null)
+        {
+            PublishBaselineContext();
+            return;
+        }
+
+        var kind = string.IsNullOrEmpty(ev.Template) ? "TimelineEvent" : CleanTemplateName(ev.Template);
+        var extras = new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["realm"] = ActiveRealm,
+            ["year"] = ev.DisplayYear,
+        };
+        if (!string.IsNullOrEmpty(ev.Template))
+            extras["category"] = CleanTemplateName(ev.Template);
+
+        PageContext.Set(new PageContext(
+            Page: "timeline",
+            Subject: ev.Title ?? ev.DisplayTitle,
+            SubjectKind: kind,
+            SubjectId: ev.PageId,
+            Extras: extras));
+    }
+
+    static string CleanTemplateName(string template)
+    {
+        var lastColon = template.LastIndexOf(':');
+        var name = lastColon >= 0 ? template[(lastColon + 1)..] : template;
+        return name.Replace("_infobox", "", StringComparison.OrdinalIgnoreCase);
+    }
+
+    void RegisterPageControlActions()
+    {
+        // Page-control catalogue for /timeline (Design-041 Phase 3).
+        // Each handler delegates to the currently-active EventTimeline child;
+        // when the user switches tabs, ActiveTimeline flips and the same tool
+        // names target the new tab transparently.
+
+        var setRealm = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            (string realm) =>
+            {
+                var r = realm?.Trim().ToLowerInvariant();
+                var target = r switch
+                {
+                    "star wars" or "starwars" or "galactic" or "in-universe" => 0,
+                    "real world" or "real" or "real-world" or "publication" => 1,
+                    _ => -1,
+                };
+                if (target < 0)
+                    return $"Unknown realm '{realm}'. Use 'Star Wars' (in-universe BBY/ABY) or 'Real World' (publication dates).";
+                if (target == _activeTabIndex)
+                    return $"Already on the {ActiveRealm} timeline tab.";
+                _activeTabIndex = target;
+                PublishBaselineContext();
+                _ = InvokeAsync(StateHasChanged);
+                return $"Switched to the {ActiveRealm} timeline tab.";
+            },
+            name: "timeline_set_realm",
+            description: "Switch between the two timeline tabs. Arg: realm = 'Star Wars' (in-universe BBY/ABY events) "
+                + "or 'Real World' (real-world publication dates)."
+        );
+
+        var listCategories = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            () =>
+            {
+                var t = ActiveTimeline;
+                if (t is null || t.AvailableCategories.Count == 0)
+                    return "No categories loaded yet — the timeline tab is still initialising.";
+                var selected = t.SelectedCategories;
+                var lines = t.AvailableCategories
+                    .OrderBy(c => c, StringComparer.OrdinalIgnoreCase)
+                    .Select(c => selected.Contains(c, StringComparer.OrdinalIgnoreCase) ? $"[x] {c}" : $"[ ] {c}");
+                return $"Categories available on the {ActiveRealm} tab (x = currently selected):\n" + string.Join("\n", lines);
+            },
+            name: "timeline_list_categories",
+            description: "List every available event-category on the active timeline tab, marking which are currently selected. "
+                + "Use this before timeline_set_categories so you pick names that exist."
+        );
+
+        var setCategories = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            async (string[] categories) =>
+            {
+                var t = ActiveTimeline;
+                if (t is null) return "No active timeline tab.";
+                if (t.AvailableCategories.Count == 0)
+                    return "Categories haven't loaded yet on this tab — try again in a moment.";
+                var requested = categories ?? Array.Empty<string>();
+                await t.SetCategoriesAsync(requested);
+                var applied = t.SelectedCategories;
+                var unmatched = requested.Where(r => !t.AvailableCategories.Contains(r, StringComparer.OrdinalIgnoreCase)).ToArray();
+                await t.ApplyFiltersAsync();
+                var summary = applied.Count switch
+                {
+                    0 => $"Cleared all category filters on the {ActiveRealm} tab.",
+                    _ => $"Applied {applied.Count} categor{(applied.Count == 1 ? "y" : "ies")} on the {ActiveRealm} tab: {string.Join(", ", applied)}.",
+                };
+                return unmatched.Length == 0
+                    ? summary
+                    : summary + $" (Ignored unknown: {string.Join(", ", unmatched)}.)";
+            },
+            name: "timeline_set_categories",
+            description: "Replace the timeline's event-category multi-select, then load events. Pass an empty array to clear. "
+                + "Use timeline_list_categories first to see valid names. Args: categories (string array)."
+        );
+
+        var clearCategories = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            async () =>
+            {
+                var t = ActiveTimeline;
+                if (t is null) return "No active timeline tab.";
+                await t.SetCategoriesAsync([]);
+                return $"Cleared all category filters on the {ActiveRealm} tab.";
+            },
+            name: "timeline_clear_categories",
+            description: "Clear all event-category filters on the active timeline tab (no events will load until you set some)."
+        );
+
+        var selectEvent = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            async (int pageId) =>
+            {
+                var t = ActiveTimeline;
+                if (t is null) return "No active timeline tab.";
+                var match = await t.SelectEventByPageIdAsync(pageId);
+                if (match is null)
+                    return $"No timeline event with pageId {pageId} is currently loaded. Load more categories or switch tabs first.";
+                return $"Selected '{match.Title}' ({match.DisplayYear}, pageId {pageId}). The user can now ask follow-up questions about it.";
+            },
+            name: "timeline_select_event",
+            description: "Focus a specific event in the current timeline view by its KG pageId. Scrolls it into view, "
+                + "outlines it, and updates the page context so follow-up questions are scoped to that event. "
+                + "Arg: pageId (int). The event must already be loaded — use this AFTER timeline_set_categories has fetched it."
+        );
+
+        var listEvents = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            (int? limit) =>
+            {
+                var t = ActiveTimeline;
+                if (t is null || t.LoadedEvents.Count == 0)
+                    return "No events loaded — pick some categories first via timeline_set_categories.";
+                var max = limit is int n && n > 0 ? n : 30;
+                var lines = t.LoadedEvents
+                    .Take(max)
+                    .Select(e => $"#{e.PageId} · {e.DisplayYear} · {e.Title} [{CleanTemplateName(e.Template ?? "")}]");
+                return $"Events currently loaded on the {ActiveRealm} tab (showing up to {max} of {t.LoadedEvents.Count}):\n"
+                    + string.Join("\n", lines);
+            },
+            name: "timeline_list_events",
+            description: "List the events currently loaded on the active timeline tab — pageId, year, title, category. "
+                + "Optional arg: limit (default 30). Use this to find the pageId before calling timeline_select_event."
+        );
+
+        var toggleFullscreen = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            async (bool? fullscreen) =>
+            {
+                var t = ActiveTimeline;
+                if (t is null) return "No active timeline tab.";
+                var target = fullscreen ?? !t.IsMaximized;
+                await t.SetMaximizedAsync(target);
+                return target ? "Timeline is now fullscreen." : "Exited fullscreen.";
+            },
+            name: "timeline_toggle_fullscreen",
+            description: "Enter or exit fullscreen for the active timeline. Optional arg 'fullscreen' (true/false); omit to toggle."
+        );
+
+        var actions = new PageAction[]
+        {
+            new(setRealm, Label: "Switch Star Wars / Real World tab", Example: "switch to the Real World timeline"),
+            new(listCategories, Label: "List available categories", Example: "what categories can I filter by?"),
+            new(setCategories, Label: "Apply category filters", Example: "show me only battles and treaties"),
+            new(clearCategories, Label: "Clear all category filters", Example: "clear all filters"),
+            new(listEvents, Label: "List loaded events", Example: "what events are on the timeline?"),
+            new(selectEvent, Label: "Select / focus an event", Example: "open the Battle of Yavin"),
+            new(toggleFullscreen, Label: "Toggle fullscreen", Example: "go fullscreen"),
+        };
+
+        try
+        {
+            _pageControlRegistration = PageControl.Register("timeline", actions);
+        }
+        catch (InvalidOperationException ex)
+        {
+            Logger.LogWarning(ex, "PageControlService already had a registration; timeline page tools unavailable this circuit.");
+        }
+    }
+
+    public void Dispose()
+    {
+        _pageControlRegistration?.Dispose();
+        PageContext.Clear();
+    }
 }
