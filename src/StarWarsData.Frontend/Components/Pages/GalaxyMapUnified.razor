@@ -1590,9 +1590,18 @@
             case "TradeRoute":
                 var routeOk = await _module.InvokeAsync<bool>("drillToDeepLink", new { kind = "TradeRoute", pageId = loc.PageId, name = loc.Name });
                 if (routeOk)
-                    Snackbar.Add($"Highlighted trade route: {loc.Name}", Severity.Success);
+                {
+                    // Open the side panel just like a direct route click does
+                    // (galaxy-map-unified.js fires OnCelestialBodySelected → LoadPageDetail).
+                    // Without this, the deep-link path pulsed the line and stopped —
+                    // no detail panel, no PageContext SUBJECT for SP-4 follow-ups.
+                    _detailPanelOpen = true;
+                    await LoadPageDetail(loc.PageId);
+                }
                 else
+                {
                     Snackbar.Add($"{loc.Name} isn't drawn on the galaxy map (needs 2+ mapped waypoints).", Severity.Info);
+                }
                 break;
 
             case "Other":
