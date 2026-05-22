@@ -206,7 +206,9 @@ Blazor Interactive Server hot-reload is unreliable when changing service registr
 - New page-specific CSS → component-scoped `.razor.css` next to the component (Blazor scopes it automatically). Avoid bloating the global stylesheets.
 - New JS → `wwwroot/js/<feature>.js`, loaded via `<script>` in the page or layout. Use `IJSRuntime` for interop. Always pair with the re-entry guard (#1).
 
-# Self-validation via Chrome DevTools MCP
+# Self-validation via Chrome DevTools MCP — ALWAYS
+
+**ALWAYS use Chrome DevTools MCP (`mcp__chrome-devtools__*`) when working on a UI feature.** This is non-negotiable. "Small change," "obvious fix," "the build passed," "I just tweaked CSS," "it's just a label change" — none of these are reasons to skip browser validation. If your diff touches a `.razor`, `.razor.css`, `wwwroot/` asset, theming file, layout, shared component, or any rendered surface, you validate in the browser before reporting back. Period.
 
 Visual verification is not an end-of-task formality — it is part of the **development loop**. You write a change, you check the browser, you observe what actually happened, and you iterate. A type-check pass and a clean build verify that the C# compiles. They do **not** verify that the page renders, that the MudBlazor parameters resolved as expected, that the global filter wired up, that the console is clean, or that the mobile layout didn't break. Only the running browser tells you that.
 
@@ -260,7 +262,7 @@ The cost of one extra snapshot is a tool call. The cost of shipping a Blazor cha
 2. **Document deviations in ADR-004.** No silent custom HTML.
 3. **Continuity color convention is non-negotiable** — `Primary` for Canon, `Secondary` for Legends, `Default` for everything else.
 4. **Global filter compliance is non-negotiable** — every API-querying page subscribes to `OnChange` and passes both query params.
-5. **Self-validate via Chrome DevTools MCP throughout development**, not just at the end. Snapshot after every meaningful change, treat new console errors as regressions to fix, and drive interactive flows (`click`/`fill`) before claiming they work. Type-check ≠ feature-complete.
+5. **ALWAYS self-validate via Chrome DevTools MCP throughout development**, not just at the end. Snapshot after every meaningful change, treat new console errors as regressions to fix, and drive interactive flows (`click`/`fill`) before claiming they work. Type-check ≠ feature-complete. If you can't validate (no AppHost, auth gate, etc.), **say so explicitly** — silent omission is worse than a flagged gap.
 6. **Mobile pass at 414×896** before sign-off on any new page.
 7. **Re-entry guards on every async lifecycle method** that touches JS interop.
 

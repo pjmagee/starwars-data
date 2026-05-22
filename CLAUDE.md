@@ -172,7 +172,9 @@ Do not use `Color.Info`, `Color.Warning`, or other colors for continuity. This m
 
 ### UI/Frontend Validation
 
-Any change that affects rendered UI (Frontend or Admin pages, layouts, shared components, theming, `wwwroot/` CSS/JS) **must** be validated against a running browser via Chrome DevTools MCP (`mcp__chrome-devtools__*`) before being reported as complete. Type-check passing and successful build are necessary but **not sufficient** — they verify code correctness, not feature correctness.
+**ALWAYS use Chrome DevTools MCP (`mcp__chrome-devtools__*`) when working on a UI feature.** No exceptions, no "it's a small change," no "the build passes so it's fine." Any change that affects rendered UI — Frontend or Admin pages, layouts, shared components, theming, `wwwroot/` CSS/JS, JS interop, MudBlazor parameter swaps, scoped `.razor.css` — **must** be validated against a running browser via Chrome DevTools MCP before being reported as complete. Type-check passing and successful build are necessary but **not sufficient** — they verify code correctness, not feature correctness.
+
+This rule applies to **every** agent that edits a UI-affecting file, not just the `blazor-mudblazor-expert` sub-agent. If a task started as backend/KG/ETL work but the diff ends up touching a `.razor`, `.razor.css`, `wwwroot/` asset, theming file, or any rendered surface, the agent doing the edit owns the Chrome DevTools validation — do not silently hand off the verification gap.
 
 The validation loop is iterative, not a one-shot end-of-task check:
 
@@ -180,9 +182,9 @@ The validation loop is iterative, not a one-shot end-of-task check:
 2. Snapshot the DOM (`take_snapshot`) and confirm the markup matches the intent.
 3. Read the console (`list_console_messages`) for Blazor circuit drops, JS interop errors, MudBlazor warnings — fix them, don't accept them.
 4. Resize to mobile (`resize_page` 414×896) and re-snapshot if the change touches layout.
-5. Take a screenshot (`take_screenshot`) for the report-back.
+5. Take a screenshot (`take_screenshot`) for the report-back, and cite the URL.
 
-If the change has no running AppHost available (and one cannot be started — e.g. a port collision the agent can't resolve), say so explicitly in the report-back rather than claiming the change is verified. Do NOT skip validation silently. The blazor-mudblazor-expert sub-agent owns the detailed workflow; non-Blazor agents touching frontend assets follow the same rule.
+If the change has no running AppHost available (and one cannot be started — e.g. a port collision the agent can't resolve, or auth gates the agent can't pass), say so **explicitly in the report-back** rather than claiming the change is verified. Do NOT skip validation silently. "I couldn't validate because X" is acceptable; silent omission is not. The blazor-mudblazor-expert sub-agent owns the detailed workflow; every other agent touching frontend assets follows the same rule.
 
 ## Engineering Docs (`eng/`)
 

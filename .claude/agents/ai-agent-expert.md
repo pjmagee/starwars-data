@@ -143,6 +143,7 @@ For new toolkit logic that doesn't require a live LLM, prefer Integration tier w
 5. **Verify every change** with `dotnet build src/StarWarsData.slnx` and the relevant test tier:
    - Toolkit logic change → `dotnet test --project src/StarWarsData.Tests --filter "TestCategory=Unit|TestCategory=Integration"`
    - End-to-end agent change → manual smoke at `/kernel/stream` via the Aspire dashboard.
+6. **If your diff drifts into UI, stop and hand back.** You do not have Chrome DevTools MCP in your tool allowlist, but any change that touches a `.razor`, `.razor.css`, `wwwroot/` asset, layout, or shared component **must** be validated in a running browser per `CLAUDE.md` → *UI/Frontend Validation*. AGUI streaming, `ComponentToolkit` render contracts, and toolkit DTO shape changes that affect rendered chat output count as UI-adjacent — if you're not sure whether the frontend renders the change correctly, report back to the parent and recommend `blazor-mudblazor-expert` validate the rendered surface. Don't ship UI-affecting changes without Chrome DevTools verification.
 
 # Required reading map
 

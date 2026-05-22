@@ -312,7 +312,7 @@ export function initialize(containerId, overview, rawDotNetRef) {
             // mouseout would revert it to default and "lose" the selection.
             if (route.id !== selectedTradeRouteId) {
                 d3.select(this).select('.trade-route')
-                    .interrupt('selected-pulse')
+                    .interrupt('selected-pulse').interrupt()
                     .attr('stroke', 'rgba(255,215,0,0.6)').attr('stroke-width', 2.5);
             }
             tooltip.html(
@@ -1570,34 +1570,41 @@ export function initialize(containerId, overview, rawDotNetRef) {
     // Design-031 Phase 2: pulse a trade route on the overview without drilling.
     // 3 cycles of a brighter, thicker stroke over ~2s, then restore baseline.
     // ── Persistent trade-route selection ─────────────────────────────────────
-    // A selected route gets a continuous gentle pulse (same UX vocabulary as
-    // region hover — 2s opacity loop) and stays styled until cleared. This
-    // replaces the previous 3-cycle one-shot flash that left the route
-    // looking dimmer than its default state.
+    // A selected route gets a STATIC bright+thick style (no animation). The
+    // earlier recursive pulse approach was too brittle: d3's interrupt(name)
+    // didn't reliably stop the chained .transition().transition().on('end',
+    // pulse) cycle — empirically observed via Chrome DevTools probe that
+    // strokes stayed at the pulse's "low" value (0.55 opacity, width 3) even
+    // after both interrupt() and token-based cancellation, with __transition
+    // === null. Static styling sidesteps all of that — selected means a fixed
+    // visual treatment until cleared, full stop.
     let selectedTradeRouteId = null;
 
+    const ROUTE_DEFAULT_STROKE = 'rgba(255,215,0,0.2)';
+    const ROUTE_DEFAULT_WIDTH = 1.2;
+    const ROUTE_SELECTED_STROKE = 'rgba(255,215,0,0.95)';
+    const ROUTE_SELECTED_WIDTH = 4;
+    const ROUTE_HOVER_STROKE = 'rgba(255,215,0,0.6)';
+    const ROUTE_HOVER_WIDTH = 2.5;
+
     function paintSelectedRoute(path) {
-        // Stop any previous animation, then start the persistent pulse.
-        (function pulse() {
-            path.interrupt('selected-pulse')
-                .transition('selected-pulse').duration(1000)
-                .attr('stroke', 'rgba(255,215,0,0.95)').attr('stroke-width', 4)
-                .transition('selected-pulse').duration(1000)
-                .attr('stroke', 'rgba(255,215,0,0.55)').attr('stroke-width', 3)
-                .on('end', pulse);
-        })();
+        // Synchronous attr assignment — no transition, no callback, no chain
+        // to interrupt later. Killing any in-flight transition first so we
+        // don't get overwritten by a stale tween's tail.
+        path.interrupt('selected-pulse').interrupt()
+            .attr('stroke', ROUTE_SELECTED_STROKE)
+            .attr('stroke-width', ROUTE_SELECTED_WIDTH);
     }
 
-    function deselectRoute(id) {
+    function resetRouteToDefault(id) {
         if (id == null) return;
-        const group = routeLayer.selectAll('.trade-route-group')
-            .filter(d => d && d.id === id);
-        if (group.empty()) return;
-        const path = group.select('.trade-route');
+        const path = routeLayer.selectAll('.trade-route-group')
+            .filter(d => d && d.id === id)
+            .select('.trade-route');
         if (path.empty()) return;
-        path.interrupt('selected-pulse')
-            .transition().duration(250)
-            .attr('stroke', 'rgba(255,215,0,0.2)').attr('stroke-width', 1.2);
+        path.interrupt('selected-pulse').interrupt()
+            .attr('stroke', ROUTE_DEFAULT_STROKE)
+            .attr('stroke-width', ROUTE_DEFAULT_WIDTH);
     }
 
     function selectTradeRouteById(id) {
@@ -1610,9 +1617,8 @@ export function initialize(containerId, overview, rawDotNetRef) {
         const path = group.select('.trade-route');
         if (path.empty()) return false;
 
-        // Clear the previous selection (if any) before painting the new one.
         if (selectedTradeRouteId !== null && selectedTradeRouteId !== id) {
-            deselectRoute(selectedTradeRouteId);
+            resetRouteToDefault(selectedTradeRouteId);
         }
         selectedTradeRouteId = id;
         paintSelectedRoute(path);
@@ -1621,8 +1627,9 @@ export function initialize(containerId, overview, rawDotNetRef) {
 
     function clearTradeRouteSelection() {
         if (selectedTradeRouteId === null) return;
-        deselectRoute(selectedTradeRouteId);
+        const id = selectedTradeRouteId;
         selectedTradeRouteId = null;
+        resetRouteToDefault(id);
     }
 
     // Legacy name kept for the existing drillToDeepLink call site — it now

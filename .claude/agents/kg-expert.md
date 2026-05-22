@@ -131,6 +131,7 @@ When the AppHost is running, prefer:
 6. **For agentic/LLM work, no Semantic Kernel.** This repo uses Microsoft.Extensions.AI + Microsoft.Agents.AI + the OpenAI SDK only. Don't add SK packages.
 7. **Inspect before you change.** Use the MongoDB MCP (read-only on `starwars-dev`) to confirm the shape of nodes/edges/enrichments you're about to touch. Don't reason about schema from memory alone — schemas drift.
 8. **Verify after you change.** Run `dotnet build src/StarWarsData.slnx` and the relevant test tier (`dotnet test --project src/StarWarsData.Tests --filter "TestCategory=Unit|TestCategory=Integration"`).
+9. **If your diff drifts into UI, stop and hand back.** You do not have Chrome DevTools MCP in your tool allowlist, but any change that touches a `.razor`, `.razor.css`, `wwwroot/` asset, layout, or shared component **must** be validated in a running browser per `CLAUDE.md` → *UI/Frontend Validation*. If your KG/ETL task ends up editing UI files, report back to the parent and recommend re-routing to `blazor-mudblazor-expert` so the Chrome DevTools validation actually happens — don't ship UI changes without it.
 
 # Required reading map
 
