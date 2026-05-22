@@ -99,10 +99,22 @@
     void RegisterPageControlActions()
     {
         // Page-control catalogue for /timeline (Design-041 Phase 3).
+        // Tools are organised around the four user-visible knobs on this page:
+        //
+        //   1. Tab          — timeline_set_realm
+        //   2. Era range    — timeline_set_eras / timeline_list_eras
+        //   3. Categories   — timeline_set_categories / timeline_list_categories
+        //   4. Selection    — timeline_select_event
+        //
         // Each handler delegates to the currently-active EventTimeline child;
-        // when the user switches tabs, ActiveTimeline flips and the same tool
-        // names target the new tab transparently.
+        // when the realm tab flips, ActiveTimeline points at the other instance
+        // and the same tool names target it transparently.
+        //
+        // The two list_* tools are MEDIA for the agent — read once when needed,
+        // not on every turn. Tool descriptions instruct the agent to skip them
+        // when it already knows valid names from prior context.
 
+        // ── 1. Realm tab ────────────────────────────────────────────────────
         var setRealm = Microsoft.Extensions.AI.AIFunctionFactory.Create(
             (string realm) =>
             {
@@ -123,10 +135,63 @@
                 return $"Switched to the {ActiveRealm} timeline tab.";
             },
             name: "timeline_set_realm",
-            description: "Switch between the two timeline tabs. Arg: realm = 'Star Wars' (in-universe BBY/ABY events) "
-                + "or 'Real World' (real-world publication dates)."
+            description: "Switch the timeline tab. Args: realm = 'Star Wars' (in-universe BBY/ABY events, eras apply) "
+                + "or 'Real World' (real-world publication dates, no era filter)."
         );
 
+        // ── 2. Era range ────────────────────────────────────────────────────
+        var listEras = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            () =>
+            {
+                var t = ActiveTimeline;
+                if (t is null) return "No active timeline tab.";
+                if (t.IsRealWorldCalendar)
+                    return "Era filtering is a Galactic-calendar concept and does not apply to the Real World tab.";
+                if (t.AvailableEras.Count == 0)
+                    return "Eras haven't loaded yet on this tab — try again in a moment.";
+                var lines = t.AvailableEras
+                    .OrderBy(e => e.StartDemarcation == Demarcation.Bby ? -e.StartYear : e.StartYear)
+                    .Select(e =>
+                    {
+                        var range = $"{e.StartYear:0.##} {e.StartDemarcation.ToString().ToUpperInvariant()}–"
+                                  + $"{e.EndYear:0.##} {e.EndDemarcation.ToString().ToUpperInvariant()}";
+                        return $"- {e.Name} ({range})";
+                    });
+                return $"Eras available on the Star Wars tab (oldest first):\n" + string.Join("\n", lines);
+            },
+            name: "timeline_list_eras",
+            description: "List every available era and its year range on the Star Wars tab. CALL THIS ONLY when you don't already "
+                + "know the era names the user mentioned. Do not call it every turn."
+        );
+
+        var setEras = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            async (string? fromEra, string? toEra) =>
+            {
+                var t = ActiveTimeline;
+                if (t is null) return "No active timeline tab.";
+                if (t.IsRealWorldCalendar)
+                    return "Era filtering doesn't apply to the Real World tab. Switch via timeline_set_realm first if you want era filters.";
+                if (string.IsNullOrWhiteSpace(fromEra) && string.IsNullOrWhiteSpace(toEra))
+                {
+                    await t.ClearErasAsync();
+                    await t.ApplyFiltersAsync();
+                    return "Cleared the era filter — showing every era.";
+                }
+                var applied = await t.SetEraRangeAsync(fromEra, toEra);
+                if (applied is null || applied.Count == 0)
+                    return $"No matching eras for '{fromEra}' → '{toEra}'. Use timeline_list_eras to see valid names.";
+                await t.ApplyFiltersAsync();
+                return $"Era filter set: {applied.Count} era(s) from {t.FromEraName ?? "(open)"} to {t.ToEraName ?? "(open)"}. "
+                    + $"Includes: {string.Join(", ", applied)}.";
+            },
+            name: "timeline_set_eras",
+            description: "Set the era range (From / To inclusive) on the Star Wars tab, then reload events. "
+                + "Args: fromEra (string, optional) and toEra (string, optional). Pass both null to clear. "
+                + "Use the user's era phrasing — e.g. 'Republic Era', 'High Republic Era', 'Imperial Era'. "
+                + "If you don't already know what's valid, call timeline_list_eras first."
+        );
+
+        // ── 3. Categories ───────────────────────────────────────────────────
         var listCategories = Microsoft.Extensions.AI.AIFunctionFactory.Create(
             () =>
             {
@@ -140,8 +205,9 @@
                 return $"Categories available on the {ActiveRealm} tab (x = currently selected):\n" + string.Join("\n", lines);
             },
             name: "timeline_list_categories",
-            description: "List every available event-category on the active timeline tab, marking which are currently selected. "
-                + "Use this before timeline_set_categories so you pick names that exist."
+            description: "List every available event-category on the active timeline tab. CALL THIS ONLY when the user's request "
+                + "uses words you cannot map to a known category (e.g. 'unrest', 'first contact'). Common categories like "
+                + "Battle, Treaty, War, Mission, Duel, Character, Government, Election, Disease are usually safe to set directly."
         );
 
         var setCategories = Microsoft.Extensions.AI.AIFunctionFactory.Create(
@@ -158,30 +224,20 @@
                 await t.ApplyFiltersAsync();
                 var summary = applied.Count switch
                 {
-                    0 => $"Cleared all category filters on the {ActiveRealm} tab.",
-                    _ => $"Applied {applied.Count} categor{(applied.Count == 1 ? "y" : "ies")} on the {ActiveRealm} tab: {string.Join(", ", applied)}.",
+                    0 => $"Cleared all category filters on the {ActiveRealm} tab — no events will show until categories are set.",
+                    _ => $"Set {applied.Count} categor{(applied.Count == 1 ? "y" : "ies")} on the {ActiveRealm} tab: {string.Join(", ", applied)}.",
                 };
                 return unmatched.Length == 0
                     ? summary
                     : summary + $" (Ignored unknown: {string.Join(", ", unmatched)}.)";
             },
             name: "timeline_set_categories",
-            description: "Replace the timeline's event-category multi-select, then load events. Pass an empty array to clear. "
-                + "Use timeline_list_categories first to see valid names. Args: categories (string array)."
+            description: "Replace the event-category multi-select and reload events. Pass an empty array to clear. "
+                + "Args: categories (string array, e.g. ['Battle','Treaty']). Use category names verbatim from the chip set; "
+                + "if uncertain, call timeline_list_categories first."
         );
 
-        var clearCategories = Microsoft.Extensions.AI.AIFunctionFactory.Create(
-            async () =>
-            {
-                var t = ActiveTimeline;
-                if (t is null) return "No active timeline tab.";
-                await t.SetCategoriesAsync([]);
-                return $"Cleared all category filters on the {ActiveRealm} tab.";
-            },
-            name: "timeline_clear_categories",
-            description: "Clear all event-category filters on the active timeline tab (no events will load until you set some)."
-        );
-
+        // ── 4. Event selection ──────────────────────────────────────────────
         var selectEvent = Microsoft.Extensions.AI.AIFunctionFactory.Create(
             async (int pageId) =>
             {
@@ -189,55 +245,25 @@
                 if (t is null) return "No active timeline tab.";
                 var match = await t.SelectEventByPageIdAsync(pageId);
                 if (match is null)
-                    return $"No timeline event with pageId {pageId} is currently loaded. Load more categories or switch tabs first.";
-                return $"Selected '{match.Title}' ({match.DisplayYear}, pageId {pageId}). The user can now ask follow-up questions about it.";
+                    return $"No timeline event with pageId {pageId} is currently loaded. Use timeline_set_categories / timeline_set_eras "
+                        + "to load the relevant slice, then retry.";
+                return $"Focused '{match.Title}' ({match.DisplayYear}, pageId {pageId}). The user's next question will be answered "
+                    + "with this event as the SUBJECT — you can call get_entity_properties / get_entity_relationships on the pageId directly.";
             },
             name: "timeline_select_event",
-            description: "Focus a specific event in the current timeline view by its KG pageId. Scrolls it into view, "
-                + "outlines it, and updates the page context so follow-up questions are scoped to that event. "
-                + "Arg: pageId (int). The event must already be loaded — use this AFTER timeline_set_categories has fetched it."
-        );
-
-        var listEvents = Microsoft.Extensions.AI.AIFunctionFactory.Create(
-            (int? limit) =>
-            {
-                var t = ActiveTimeline;
-                if (t is null || t.LoadedEvents.Count == 0)
-                    return "No events loaded — pick some categories first via timeline_set_categories.";
-                var max = limit is int n && n > 0 ? n : 30;
-                var lines = t.LoadedEvents
-                    .Take(max)
-                    .Select(e => $"#{e.PageId} · {e.DisplayYear} · {e.Title} [{CleanTemplateName(e.Template ?? "")}]");
-                return $"Events currently loaded on the {ActiveRealm} tab (showing up to {max} of {t.LoadedEvents.Count}):\n"
-                    + string.Join("\n", lines);
-            },
-            name: "timeline_list_events",
-            description: "List the events currently loaded on the active timeline tab — pageId, year, title, category. "
-                + "Optional arg: limit (default 30). Use this to find the pageId before calling timeline_select_event."
-        );
-
-        var toggleFullscreen = Microsoft.Extensions.AI.AIFunctionFactory.Create(
-            async (bool? fullscreen) =>
-            {
-                var t = ActiveTimeline;
-                if (t is null) return "No active timeline tab.";
-                var target = fullscreen ?? !t.IsMaximized;
-                await t.SetMaximizedAsync(target);
-                return target ? "Timeline is now fullscreen." : "Exited fullscreen.";
-            },
-            name: "timeline_toggle_fullscreen",
-            description: "Enter or exit fullscreen for the active timeline. Optional arg 'fullscreen' (true/false); omit to toggle."
+            description: "Focus a specific event on the active timeline by its KG pageId. Scrolls it into view, outlines it, "
+                + "and updates the SUBJECT envelope so follow-up questions resolve against that event. "
+                + "Arg: pageId (int). The event must already be loaded (run timeline_set_categories / timeline_set_eras first if not)."
         );
 
         var actions = new PageAction[]
         {
             new(setRealm, Label: "Switch Star Wars / Real World tab", Example: "switch to the Real World timeline"),
-            new(listCategories, Label: "List available categories", Example: "what categories can I filter by?"),
-            new(setCategories, Label: "Apply category filters", Example: "show me only battles and treaties"),
-            new(clearCategories, Label: "Clear all category filters", Example: "clear all filters"),
-            new(listEvents, Label: "List loaded events", Example: "what events are on the timeline?"),
-            new(selectEvent, Label: "Select / focus an event", Example: "open the Battle of Yavin"),
-            new(toggleFullscreen, Label: "Toggle fullscreen", Example: "go fullscreen"),
+            new(listEras, Label: "List eras", Example: "what eras are available?"),
+            new(setEras, Label: "Filter by era range (From / To)", Example: "narrow to the High Republic and Imperial eras"),
+            new(listCategories, Label: "List categories", Example: "what categories can I filter by?"),
+            new(setCategories, Label: "Filter by event category", Example: "show me only battles and treaties"),
+            new(selectEvent, Label: "Focus a specific event", Example: "open the Battle of Yavin"),
         };
 
         try

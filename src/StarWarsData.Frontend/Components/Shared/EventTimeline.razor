@@ -338,6 +338,21 @@
     /// <summary>The current category multi-select (Design-041 page-control).</summary>
     public IReadOnlyCollection<string> SelectedCategories => _selectedCategories;
 
+    /// <summary>Eras available on this tab (Galactic calendar only — empty in Real World mode).</summary>
+    public IReadOnlyList<Era> AvailableEras => _eras ?? [];
+
+    /// <summary>The chip multi-select (may be a contiguous range or a custom set).</summary>
+    public IReadOnlyCollection<string> SelectedEraNames => _selectedEraNames;
+
+    /// <summary>Currently-pinned From era in the range selector, or null.</summary>
+    public string? FromEraName => _fromEraName;
+
+    /// <summary>Currently-pinned To era in the range selector, or null.</summary>
+    public string? ToEraName => _toEraName;
+
+    /// <summary>True when this instance is the Real World tab (no era filter applies).</summary>
+    public bool IsRealWorldCalendar => CurrentCalendar == Calendar.Real;
+
     /// <summary>Whether the timeline is currently fullscreen-maximized (Design-041 page-control).</summary>
     public bool IsMaximized => _maximized;
 
@@ -377,6 +392,34 @@
 
     /// <summary>Apply the current filters and (re)load the timeline. Equivalent to clicking "Load Timeline".</summary>
     public Task ApplyFiltersAsync() => ApplyFilters();
+
+    /// <summary>
+    /// Set the From/To era range. Mirrors the user picking From + To in the dropdowns:
+    /// fills the chip selection with every era between (inclusive). Pass null/null to clear.
+    /// Returns the actual ordered era names that ended up selected (post-resolution), or
+    /// null if the era list isn't available (Real World mode).
+    /// </summary>
+    public Task<IReadOnlyList<string>?> SetEraRangeAsync(string? fromEra, string? toEra)
+    {
+        if (_eras is null || _eras.Length == 0)
+            return Task.FromResult<IReadOnlyList<string>?>(null);
+
+        // Resolve names case-insensitively against the era list.
+        string? Resolve(string? name) =>
+            name is null ? null : _eras.FirstOrDefault(e => e.Name.Equals(name, StringComparison.OrdinalIgnoreCase))?.Name;
+
+        _fromEraName = Resolve(fromEra);
+        _toEraName = Resolve(toEra);
+        ApplyFromToRange();
+        return InvokeAsync(StateHasChanged).ContinueWith<IReadOnlyList<string>?>(_ => _selectedEraNames.ToList(), TaskScheduler.Default);
+    }
+
+    /// <summary>Clear era selection back to "all eras". Equivalent to the dropdowns' Clear button.</summary>
+    public Task ClearErasAsync()
+    {
+        ClearEraSelection();
+        return InvokeAsync(StateHasChanged);
+    }
 
     /// <summary>Toggle fullscreen mode (used by the page-control toggle_fullscreen tool).</summary>
     public Task SetMaximizedAsync(bool maximized)
