@@ -87,6 +87,14 @@
                                 Timeline
                             </MudButton>
                         }
+                        @if (_hasCharacterTimeline)
+                        {
+                            <MudButton Variant="Variant.Outlined" Color="Color.Tertiary" Size="Size.Small"
+                                       StartIcon="@Icons.Material.Filled.Person"
+                                       Href="@($"/character-timelines/{_node.Id}")">
+                                Character timeline
+                            </MudButton>
+                        }
                         <MudButton Variant="Variant.Text" Color="Color.Default" Size="Size.Small"
                                    StartIcon="@Icons.Material.Filled.History"
                                    Href="@($"/holocron/jobs/{_node.Id}")">
@@ -114,6 +122,10 @@
     private bool _loading;
     private string? _error;
     private List<BreadcrumbItem> _breadcrumbs = [];
+    // True when CharacterTimelines/{NodeId}/character returns HasTimeline=true.
+    // Probed in parallel with the node fetch; silently false if the node isn't
+    // a character or the probe 404s.
+    private bool _hasCharacterTimeline;
 
     private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
 
@@ -135,6 +147,7 @@
         _loading = true;
         _error = null;
         _node = null;
+        _hasCharacterTimeline = false;
         StateHasChanged();
 
         try
@@ -158,6 +171,11 @@
 
             RebuildBreadcrumbs();
             PublishPageContext();
+
+            // Fire-and-forget character-timeline probe so the "Character timeline"
+            // button appears once we know one exists. We don't block the node-load
+            // path on this — the button just flips on when the probe resolves.
+            _ = ProbeCharacterTimelineAsync(NodeId);
         }
         catch (Exception ex)
         {
@@ -167,6 +185,29 @@
         {
             _loading = false;
             StateHasChanged();
+        }
+    }
+
+    private async Task ProbeCharacterTimelineAsync(int nodeId)
+    {
+        try
+        {
+            var info = await Api.GetFromJsonAsync<CharacterSearchResult>($"CharacterTimelines/{nodeId}/character");
+            if (info?.HasTimeline == true && _node?.Id == nodeId)
+            {
+                _hasCharacterTimeline = true;
+                await InvokeAsync(StateHasChanged);
+            }
+        }
+        catch (HttpRequestException)
+        {
+            // 404 = node isn't tracked as a character in Pages, or no character timeline.
+            // Silent skip — the button just doesn't appear.
+        }
+        catch (Exception ex)
+        {
+            // Anything else: log and skip so the main node view still renders.
+            System.Diagnostics.Debug.WriteLine($"Character-timeline probe failed: {ex.Message}");
         }
     }
 
