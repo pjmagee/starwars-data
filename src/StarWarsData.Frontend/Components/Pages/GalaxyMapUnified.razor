@@ -283,6 +283,21 @@
                     <MudBreadcrumbs Items="_breadcrumbs.Skip(1).ToList()" MaxItems="3"
                                     Style="padding:0;color:rgba(255,255,255,0.7);font-size:13px;" />
                 }
+                @if (_selectedTradeRouteName is not null)
+                {
+                    @* Dismissible chip — X close icon clears the persistent route
+                       selection. Sits alongside the breadcrumb because trade routes
+                       are orthogonal to the region/cell/sector/system hierarchy. *@
+                    <MudChip T="string"
+                             Size="Size.Small"
+                             Color="Color.Warning"
+                             Variant="Variant.Outlined"
+                             Icon="@Icons.Material.Filled.Timeline"
+                             CloseIcon="@Icons.Material.Filled.Close"
+                             OnClose="@(() => ClearTradeRouteSelectionAsync())"
+                             Text="@_selectedTradeRouteName"
+                             Style="font-size:11px;margin-left:8px;" />
+                }
                 <MudSpacer />
                 <MudToggleGroup T="string" Value="_mode" ValueChanged="OnModeChanged" Size="Size.Small">
                     <MudToggleItem Value="@("explore")" Text="Explore" />
@@ -1891,8 +1906,9 @@
             _breadcrumbs.Add(new(_sectorLabel, null, disabled: true, icon: Icons.Material.Filled.Grain));
         if (_currentLevel == "system")
             _breadcrumbs.Add(new(_currentLabel, null, disabled: true, icon: Icons.Material.Filled.Star));
-        if (!string.IsNullOrEmpty(_selectedTradeRouteName))
-            _breadcrumbs.Add(new(_selectedTradeRouteName, null, disabled: true, icon: Icons.Material.Filled.Timeline));
+        // Trade routes are rendered as a dismissible chip beside the breadcrumb
+        // (with an X close icon) — putting them inside MudBreadcrumbs gives no
+        // way to clear the selection, which was the original UX bug.
     }
 
     // ══════════ EXPLORE: Search ══════════
