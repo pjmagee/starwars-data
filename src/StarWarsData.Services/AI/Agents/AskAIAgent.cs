@@ -254,9 +254,17 @@ public sealed class AskAIAgent(
              → root on Anakin Skywalker (Character), NOT Skywalker family (Family).
           2. get_relationship_types(rootEntityId) → discover which KG edge labels exist. REQUIRED.
              Do NOT skip this step. Do NOT guess labels from training data.
-          3. render_graph with labels drawn ONLY from step 2. Include ALL family/relevant labels
-             from step 2 (child_of, parent_of, partner_of, sibling_of, family, etc.). NEVER
-             invent or guess labels that weren't returned by step 2.
+          3. render_graph with labels drawn ONLY from step 2, AND filtered to ONLY those
+             semantically relevant to the user's question. NEVER invent or guess labels that
+             weren't returned by step 2, and NEVER pass the full step-2 list verbatim — that
+             widens the BFS at every hop and pulls in Battles, Factions, Ships, Planets.
+               "family tree / ancestry / lineage"   → child_of, parent_of, sibling_of,
+                                                       partner_of, family, spouse_of, married_to
+               "political hierarchy / org chart"    → head_of_state, member_of, leads,
+                                                       subordinate_of, governs
+               "military / battles"                 → commanded_by, fought_in, allied_with,
+                                                       enemy_of, participated_in
+             Intersect the example set with step 2's output — keep only labels present in both.
         Layout selection:
           "family tree" / "ancestry" / "lineage"              → layoutMode=tree
           "hierarchy" / "political structure" / "org chart"    → layoutMode=tree

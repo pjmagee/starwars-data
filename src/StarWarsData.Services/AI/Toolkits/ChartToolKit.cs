@@ -164,8 +164,18 @@ public class ComponentToolkit
               3. render_graph with labels drawn ONLY from step 2's output — never from guesses,
                  never from typical-family/political/alliance cheatsheets, never from training data.
 
-            Pass ALL relevant labels from step 2, not a subset — pruning irrelevant ones in
-            `enabledLabels` is cheap, but missing labels are invisible to the user.
+            Pass ONLY labels semantically relevant to the question, not the full step-2 list.
+            Question-domain → label set examples (always verified against step 2):
+              "family tree / ancestry / lineage / kin"  → child_of, parent_of, sibling_of,
+                                                          partner_of, family, spouse_of, married_to
+              "political hierarchy / org chart"         → head_of_state, member_of, leads,
+                                                          subordinate_of, governs
+              "military / who fought where"             → commanded_by, fought_in, allied_with,
+                                                          enemy_of, participated_in
+            Irrelevant labels (e.g. `affiliated_with`, `fought_in` on a family-tree query) widen the
+            BFS at every hop and pull in Battles, Factions, Ships, and Planets — the graph then
+            stops being a family tree. Use `enabledLabels` for UI-default pruning, NOT to
+            compensate for an overly wide `labels`.
 
             Layout modes:
               Tree  = hierarchical top-down (works for any entity type: Characters, Governments)
