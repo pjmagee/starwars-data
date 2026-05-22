@@ -24,8 +24,6 @@ public sealed class CitationResolver : ICitationResolver
 
     readonly IMongoCollection<GraphNode> _nodes;
     readonly IMongoCollection<RelationshipEdge> _edges;
-    readonly IMongoCollection<CharacterTimelineExistsProbe> _timelines;
-    readonly IMongoCollection<HolocronJob> _holocronJobs;
     readonly ICurrentRequestContext _requestContext;
 
     public CitationResolver(IOptions<SettingsOptions> settingsOptions, IMongoClient mongoClient, ICurrentRequestContext requestContext)
@@ -33,8 +31,6 @@ public sealed class CitationResolver : ICitationResolver
         var db = mongoClient.GetDatabase(settingsOptions.Value.DatabaseName);
         _nodes = db.GetCollection<GraphNode>(Collections.KgNodes);
         _edges = db.GetCollection<RelationshipEdge>(Collections.KgEdges);
-        _timelines = db.GetCollection<CharacterTimelineExistsProbe>(Collections.GenaiCharacterTimelines);
-        _holocronJobs = db.GetCollection<HolocronJob>(Collections.KgEnrichmentJobs);
         _requestContext = requestContext;
     }
 
@@ -69,15 +65,6 @@ public sealed class CitationResolver : ICitationResolver
 
         var indirectTarget = indirectCandidates.Length == 0 ? new Dictionary<int, int>() : await ResolveIndirectSpatialTargetsAsync(indirectCandidates, ct);
 
-        // Phase 4 existence probes — one bulk query each, both keyed on PageId.
-        var timelineIds =
-            distinctIds.Length == 0
-                ? new HashSet<int>()
-                : (await _timelines.Find(Builders<CharacterTimelineExistsProbe>.Filter.In(t => t.CharacterPageId, distinctIds)).Project(t => t.CharacterPageId).ToListAsync(ct)).ToHashSet();
-
-        var holocronIds =
-            distinctIds.Length == 0 ? new HashSet<int>() : (await _holocronJobs.Find(Builders<HolocronJob>.Filter.In(j => j.PageId, distinctIds)).Project(j => j.PageId).ToListAsync(ct)).ToHashSet();
-
         // Preserve caller order. Missing ids return a minimal "Unknown" reference
         // with only the wiki link populated when we know nothing else — keeps
         // the UI from breaking on a stale id while still rendering something.
@@ -93,7 +80,7 @@ public sealed class CitationResolver : ICitationResolver
                         Kind: "Unknown",
                         Continuity: null,
                         ImageUrl: null,
-                        Links: new CitationLinks(Wiki: null, GraphExplorer: null, GalaxyMap: null, Timeline: null, Holocron: null)
+                        Links: new CitationLinks(Wiki: null, KnowledgeGraph: null, GalaxyMap: null)
                     )
                 );
                 continue;
@@ -119,13 +106,11 @@ public sealed class CitationResolver : ICitationResolver
                     Kind: n.Type,
                     Continuity: n.Continuity.ToString(),
                     ImageUrl: n.ImageUrl,
-                    Links: new CitationLinks(
-                        Wiki: n.WikiUrl,
-                        GraphExplorer: $"/graph-explorer/{n.PageId}",
-                        GalaxyMap: galaxyMap,
-                        Timeline: timelineIds.Contains(n.PageId) ? $"/character-timelines/{n.PageId}" : null,
-                        Holocron: holocronIds.Contains(n.PageId) ? $"/holocron/jobs/{n.PageId}" : null
-                    )
+                    // KnowledgeGraph is the canonical node-detail surface for every
+                    // KG entity, so it's always populated when the node was found.
+                    // Graph Explorer / Character Timeline / Holocron remain reachable
+                    // from inside that page (Design-030 follow-up).
+                    Links: new CitationLinks(Wiki: n.WikiUrl, KnowledgeGraph: $"/knowledge-graph/nodes/{n.PageId}", GalaxyMap: galaxyMap)
                 )
             );
         }
@@ -156,12 +141,5 @@ public sealed class CitationResolver : ICitationResolver
         foreach (var e in edges)
             map.TryAdd(e.FromId, e.ToId);
         return map;
-    }
-
-    /// <summary>Minimal projection target — we only need to know a timeline exists for the id.</summary>
-    sealed class CharacterTimelineExistsProbe
-    {
-        [MongoDB.Bson.Serialization.Attributes.BsonElement("characterPageId")]
-        public int CharacterPageId { get; set; }
     }
 }

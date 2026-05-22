@@ -13,11 +13,14 @@ public sealed record CitationReference(int PageId, string Name, string Kind, str
 /// <summary>
 /// The set of in-site and external surfaces the user can navigate to for a
 /// given KG node. Each property is null when the surface doesn't apply —
-/// e.g. <c>GalaxyMap</c> is null for non-spatial entities, <c>Holocron</c>
-/// is null when no Holocron run exists. The frontend renders one button per
-/// non-null entry.
+/// e.g. <c>GalaxyMap</c> is null for non-spatial entities. The frontend
+/// renders one button per non-null entry.
+///
+/// Kept deliberately slim — Node (canonical KG view), Location (galaxy map),
+/// Wiki (Wookieepedia) are sufficient. The previous Graph Explorer / Timeline /
+/// Holocron chips are reachable from the KG node detail page itself.
 ///
 /// All paths are relative (or absolute external) — callers should treat them
 /// opaquely and never construct alternates.
 /// </summary>
-public sealed record CitationLinks(string? Wiki, string? GraphExplorer, string? GalaxyMap, string? Timeline, string? Holocron);
+public sealed record CitationLinks(string? Wiki, string? KnowledgeGraph, string? GalaxyMap);

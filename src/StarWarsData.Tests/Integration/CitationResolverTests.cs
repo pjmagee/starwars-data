@@ -55,17 +55,10 @@ public class CitationResolverTests
                 ]
             );
 
-        await db.GetCollection<CharacterTimeline>(Collections.GenaiCharacterTimelines)
-            .InsertOneAsync(
-                new CharacterTimeline
-                {
-                    CharacterPageId = 30,
-                    CharacterTitle = "Luke Skywalker",
-                    CharacterWikiUrl = "https://wiki/Luke",
-                }
-            );
-
-        await db.GetCollection<HolocronJob>(Collections.KgEnrichmentJobs).InsertOneAsync(new HolocronJob { PageId = 30, NodeName = "Luke Skywalker" });
+        // No timeline / holocron seed: the resolver no longer probes those
+        // collections — slim citation card surfaces Node / Location / Wiki only
+        // (Design-041 follow-up). Timeline and Holocron remain reachable from
+        // the KG node detail page itself.
     }
 
     [ClassCleanup]
@@ -87,7 +80,7 @@ public class CitationResolverTests
         var r = (await NewResolver().ResolveAsync([10])).Single();
         Assert.AreEqual("/galaxy-map/10", r.Links.GalaxyMap);
         Assert.AreEqual("https://wiki/Yavin_4", r.Links.Wiki);
-        Assert.AreEqual("/graph-explorer/10", r.Links.GraphExplorer);
+        Assert.AreEqual("/knowledge-graph/nodes/10", r.Links.KnowledgeGraph);
     }
 
     [TestMethod]
@@ -106,15 +99,16 @@ public class CitationResolverTests
     }
 
     [TestMethod]
-    public async Task TimelineAndHolocron_PopulatedWhenDocsExist()
+    public async Task KnownNode_AlwaysGetsKnowledgeGraphLink()
     {
-        var r = (await NewResolver().ResolveAsync([30])).Single();
-        Assert.AreEqual("/character-timelines/30", r.Links.Timeline);
-        Assert.AreEqual("/holocron/jobs/30", r.Links.Holocron);
+        // KG node detail is the canonical surface for any KG entity — it's the
+        // jumping-off point to Graph Explorer / Timeline / Holocron, which
+        // explains why we no longer emit those as separate chips.
+        var luke = (await NewResolver().ResolveAsync([30])).Single();
+        Assert.AreEqual("/knowledge-graph/nodes/30", luke.Links.KnowledgeGraph);
 
-        var noExtras = (await NewResolver().ResolveAsync([40])).Single();
-        Assert.IsNull(noExtras.Links.Timeline);
-        Assert.IsNull(noExtras.Links.Holocron);
+        var han = (await NewResolver().ResolveAsync([40])).Single();
+        Assert.AreEqual("/knowledge-graph/nodes/40", han.Links.KnowledgeGraph);
     }
 
     [TestMethod]
@@ -122,7 +116,7 @@ public class CitationResolverTests
     {
         var r = (await NewResolver().ResolveAsync([50])).Single();
         Assert.IsNull(r.Links.GalaxyMap);
-        Assert.AreEqual("/graph-explorer/50", r.Links.GraphExplorer);
+        Assert.AreEqual("/knowledge-graph/nodes/50", r.Links.KnowledgeGraph);
     }
 
     [TestMethod]

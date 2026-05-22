@@ -2,10 +2,11 @@
 
 @*
     Single reference card rendered for a resolved KG node — see Design-030.
-    Lays out one button per non-null link in CitationLinks, in a fixed display
-    order: Galaxy Map (when present) leads for spatial entities, then Graph
-    Explorer, then Wookieepedia, then any future surfaces (Timeline, Holocron).
-    All links open in a new tab so the user keeps their place.
+    Slim by design (Design-041 follow-up): only Node (canonical KG node detail),
+    Location (galaxy-map for direct/indirect spatial entities), and Wiki
+    (external Wookieepedia). Graph Explorer, Character Timeline, and Holocron
+    are reachable from the KG node detail page itself, so they don't earn a
+    chip on every source. All links open in a new tab.
 *@
 
 @if (Reference is { } r)
@@ -30,33 +31,19 @@
         </div>
 
         <div class="d-flex flex-wrap gap-1" style="margin-top:4px;">
+            @if (!string.IsNullOrEmpty(r.Links.KnowledgeGraph))
+            {
+                <MudButton Href="@r.Links.KnowledgeGraph" Target="_blank" rel="noopener noreferrer"
+                           Variant="Variant.Outlined" Size="Size.Small" Color="Color.Secondary"
+                           StartIcon="@Icons.Material.Filled.Hub" Class="px-2"
+                           Style="font-size:10px;min-width:0;">Node</MudButton>
+            }
             @if (!string.IsNullOrEmpty(r.Links.GalaxyMap))
             {
                 <MudButton Href="@r.Links.GalaxyMap" Target="_blank" rel="noopener noreferrer"
                            Variant="Variant.Outlined" Size="Size.Small" Color="Color.Primary"
                            StartIcon="@Icons.Material.Filled.Explore" Class="px-2"
-                           Style="font-size:10px;min-width:0;">Map</MudButton>
-            }
-            @if (!string.IsNullOrEmpty(r.Links.GraphExplorer))
-            {
-                <MudButton Href="@r.Links.GraphExplorer" Target="_blank" rel="noopener noreferrer"
-                           Variant="Variant.Outlined" Size="Size.Small" Color="Color.Secondary"
-                           StartIcon="@Icons.Material.Filled.Hub" Class="px-2"
-                           Style="font-size:10px;min-width:0;">Graph</MudButton>
-            }
-            @if (!string.IsNullOrEmpty(r.Links.Timeline))
-            {
-                <MudButton Href="@r.Links.Timeline" Target="_blank" rel="noopener noreferrer"
-                           Variant="Variant.Outlined" Size="Size.Small" Color="Color.Tertiary"
-                           StartIcon="@Icons.Material.Filled.Timeline" Class="px-2"
-                           Style="font-size:10px;min-width:0;">Timeline</MudButton>
-            }
-            @if (!string.IsNullOrEmpty(r.Links.Holocron))
-            {
-                <MudButton Href="@r.Links.Holocron" Target="_blank" rel="noopener noreferrer"
-                           Variant="Variant.Outlined" Size="Size.Small" Color="Color.Info"
-                           StartIcon="@Icons.Material.Filled.AutoAwesome" Class="px-2"
-                           Style="font-size:10px;min-width:0;">Holocron</MudButton>
+                           Style="font-size:10px;min-width:0;">Location</MudButton>
             }
             @if (!string.IsNullOrEmpty(r.Links.Wiki))
             {

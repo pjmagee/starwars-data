@@ -1,12 +1,13 @@
 @page "/ask"
 @page "/ask/{SessionId:guid}"
-@using System.Text.Json.Serialization
-@using StarWarsData.Frontend.Components.Shared.Agui
+@using Microsoft.Agents.AI.AGUI
+@using Microsoft.Extensions.AI
 @inject IHttpClientFactory HttpClientFactory
 @inject GlobalFilterService GlobalFilterService
 @inject ChatHistoryService ChatHistory
 @inject NavigationManager Navigation
 @inject IJSRuntime JS
+@inject ILoggerFactory LoggerFactory
 @inject ILogger<Ask> Logger
 @inject LayoutService Layout
 @implements IDisposable
@@ -324,12 +325,6 @@
 
     // ── Conversation model ──
 
-    record RateLimitResponse(
-        [property: JsonPropertyName("limit")] int? Limit,
-        [property: JsonPropertyName("isAuthenticated")] bool? IsAuthenticated,
-        [property: JsonPropertyName("retryAfterSeconds")] int? RetryAfterSeconds
-    );
-
     enum ConversationRole { User, Assistant, ToolGroup, Visualization, Error }
 
     class ToolCallInfo
@@ -363,30 +358,42 @@
         public AurebeshDescriptor? AurebeshDescriptor { get; set; }
     }
 
-    // ── AGUI message replay (sent to /kernel/stream each turn) ──
-    // DTOs live in Components/Shared/Agui — shared with the copilot sidebar.
-
     // ── State ──
+    //
+    // Wire path: AGUIChatClient (Microsoft.Agents.AI.AGUI) wraps the AGUI SSE
+    // protocol behind IChatClient — see Design-041. `_chatMessages` is the
+    // canonical conversation history M.E.AI feeds back to the agent each turn;
+    // `_conversation` is the UI render list, which carries extras the wire
+    // protocol doesn't (Visualization, Error, ToolGroup) and stays in sync via
+    // mirroring during streaming and session load.
 
     private readonly List<ConversationMessage> _conversation = [];
-    private readonly List<AguiMessage> _aguiMessages = [];
+    private readonly List<ChatMessage> _chatMessages = [];
 
-    // SSE streaming state for current turn
-    private readonly Dictionary<string, string> _sseToolCallNames = [];
-    private readonly Dictionary<string, ToolCallInfo> _sseToolCallInfos = [];
+    // Per-turn streaming state — cleared at each SubmitAsync.
+    // _callNames lets us recognise render_* tool calls by their FunctionResultContent
+    // (which only carries CallId, not Name) so we can build the inline Visualization.
+    // _toolGroupByCallId / _currentToolGroup group consecutive tool calls into a single
+    // expandable card the same way the SSE-era code did (interrupted by any non-tool message).
+    // _assistantByMessageId mirrors CopilotSidebar — rebuild assistant bubbles from the
+    // canonical M.E.AI accumulator each tick, keyed by MessageId to avoid duplication
+    // when AGUIChatClient emits both incremental deltas and a final assembled TextContent.
+    private readonly Dictionary<string, string> _callNames = [];
+    private readonly Dictionary<string, ToolCallInfo> _toolInfoByCallId = [];
+    private readonly Dictionary<string, ConversationMessage> _assistantByMessageId = [];
     private ConversationMessage? _currentToolGroup;
     private bool _toolGroupInterrupted;
-    private ConversationMessage? _currentAssistantMsg;
-    // Set true after any render_* tool result fires this turn. Subsequent TEXT_MESSAGE_CONTENT
-    // events are suppressed because the visualization IS the answer — any post-render prose
+    // Set true after any render_* tool result fires this turn. Subsequent assistant text
+    // is suppressed because the visualization IS the answer — any post-render prose
     // (or worse, JSON-as-text leaking from a regurgitated tool call) is clutter. The system
     // prompt instructs the agent to end the turn after rendering; this is the structural backstop.
     private bool _renderedThisTurn;
-    private List<AguiToolCall> _pendingAguiToolCalls = [];
 
     private AskModel _model = new();
     private bool _loading;
     private ElementReference _messagesContainer;
+
+    private IChatClient? _chatClient;
 
     private static readonly JsonSerializerOptions JsonOpts = new() { PropertyNameCaseInsensitive = true };
 
@@ -584,6 +591,24 @@
         // copilot drawer while /ask is active. Cleared in Dispose.
         Layout.SetHideCopilot(true);
 
+        // AGUIChatClient is an IChatClient over the AGUI SSE protocol. The named
+        // "StarWarsData" HttpClient has the X-User-Id and rate-limit-body-capture
+        // handlers, plus resilience disabled so long SSE streams aren't cut by
+        // the default 30s timeout (Program.cs).
+        //
+        // No .UseFunctionInvocation() here — /ask has no client-side (frontend)
+        // tools; render_* and every other tool runs server-side in AskAIAgent.
+        // Server-executed tools still surface as FunctionCallContent /
+        // FunctionResultContent on the streaming response and drive the tool
+        // group + inline visualization.
+        var http = HttpClientFactory.CreateClient("StarWarsData");
+        _chatClient = new AGUIChatClient(
+            http,
+            "kernel/stream",
+            LoggerFactory,
+            jsonSerializerOptions: null,
+            serviceProvider: null);
+
         ChatHistory.OnChange += OnChatHistoryChanged;
         GlobalFilterService.OnChange += OnGlobalFilterChanged;
 
@@ -637,7 +662,13 @@
         _currentSessionId = null;
         _model = new AskModel();
         _conversation.Clear();
-        _aguiMessages.Clear();
+        _chatMessages.Clear();
+        _callNames.Clear();
+        _toolInfoByCallId.Clear();
+        _assistantByMessageId.Clear();
+        _currentToolGroup = null;
+        _toolGroupInterrupted = false;
+        _renderedThisTurn = false;
         // Intermediate placeholder while LoadSuggestionsAsync runs — respect the current realm filter.
         var allowInUniverse = !string.Equals(GlobalFilterService.GetRealmQueryParam(), "Real", StringComparison.OrdinalIgnoreCase);
         _randomExamples = ShuffleFallback(_selectedMode == "auto" ? null : _selectedMode, allowInUniverse);
@@ -665,6 +696,7 @@
         Layout.SetHideCopilot(false);
         ChatHistory.OnChange -= OnChatHistoryChanged;
         GlobalFilterService.OnChange -= OnGlobalFilterChanged;
+        (_chatClient as IDisposable)?.Dispose();
     }
 
 
@@ -732,151 +764,53 @@
 
     private async Task SubmitAsync()
     {
-        if (string.IsNullOrWhiteSpace(_model.Prompt) || _loading) return;
+        if (string.IsNullOrWhiteSpace(_model.Prompt) || _loading || _chatClient is null) return;
 
         var userPrompt = _model.Prompt.Trim();
         _model.Prompt = "";
         _loading = true;
         StateHasChanged();
 
-        // Add user message to conversation display
+        // UI bubble shows raw prompt; the wire-format message carries the envelope.
         _conversation.Add(new ConversationMessage { Role = ConversationRole.User, Text = userPrompt });
 
-        // Build AGUI user message with metadata
         var continuity = GlobalFilterService.GetContinuityQueryParam() ?? "Both";
-        var modeHint = $" [PREFER: {_selectedMode}]";
-        var aguiContent = $"[CONTINUITY: {continuity}]{modeHint} {userPrompt}";
-        _aguiMessages.Add(new AguiMessage { Role = "user", Content = aguiContent });
+        var envelopedContent = $"[CONTINUITY: {continuity}] [PREFER: {_selectedMode}] {userPrompt}";
+        _chatMessages.Add(new ChatMessage(ChatRole.User, envelopedContent));
 
-        // Reset per-turn SSE tracking
-        _sseToolCallNames.Clear();
-        _sseToolCallInfos.Clear();
+        // Reset per-turn streaming state
+        _callNames.Clear();
+        _toolInfoByCallId.Clear();
+        _assistantByMessageId.Clear();
         _currentToolGroup = null;
         _toolGroupInterrupted = false;
-        _currentAssistantMsg = null;
         _renderedThisTurn = false;
-        _pendingAguiToolCalls = [];
 
         await ScrollToBottom();
 
-        var body = new { messages = _aguiMessages };
         using var cts = new CancellationTokenSource(TimeSpan.FromMinutes(5));
 
         try
         {
-            using var request = new HttpRequestMessage(HttpMethod.Post, "kernel/stream")
+            var updates = new List<ChatResponseUpdate>();
+
+            await foreach (var update in _chatClient.GetStreamingResponseAsync(_chatMessages, options: null, cts.Token))
             {
-                Content = JsonContent.Create(body),
-            };
-            request.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("text/event-stream"));
-            // Auth token is forwarded automatically by AuthTokenDelegatingHandler
-
-            using var response = await Http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cts.Token);
-
-            if (response.StatusCode == System.Net.HttpStatusCode.TooManyRequests)
-            {
-                var rateLimitBody = await response.Content.ReadFromJsonAsync<RateLimitResponse>(cts.Token);
-                var retryMinutes = Math.Ceiling((rateLimitBody?.RetryAfterSeconds ?? 1800) / 60.0);
-                var limit = rateLimitBody?.Limit ?? (_isAuthenticated ? 6 : 1);
-
-                var message = _isAuthenticated
-                    ? $"You have used all {limit} of your requests. Your next request will be available in {retryMinutes:0} minutes. Add your own OpenAI API key in your Profile to remove this limit."
-                    : $"As an anonymous user you are limited to {limit} request per window. Your next request will be available in {retryMinutes:0} minutes. Sign in for more requests, or add your own OpenAI API key for unlimited access.";
-
-                _conversation.Add(new ConversationMessage
-                {
-                    Role = ConversationRole.Error,
-                    Text = message
-                });
-                FinalizeAguiTurn();
-                return;
-            }
-
-            if (!response.IsSuccessStatusCode)
-            {
-                _conversation.Add(new ConversationMessage { Role = ConversationRole.Error, Text = $"Request failed ({(int)response.StatusCode}). Please try again." });
-                FinalizeAguiTurn();
-                return;
-            }
-
-            await using var stream = await response.Content.ReadAsStreamAsync(cts.Token);
-
-            await foreach (var json in AguiSseReader.ReadEventsAsync(stream, cts.Token))
-            {
-                try
-                {
-                    using var doc = JsonDocument.Parse(json);
-                    var root = doc.RootElement;
-                    var eventType = root.TryGetProperty("type", out var t) ? t.GetString() : null;
-
-                    switch (eventType)
-                    {
-                        case "TOOL_CALL_START":
-                            HandleToolCallStart(root);
-                            break;
-                        case "TOOL_CALL_ARGS":
-                            HandleToolCallArgs(root);
-                            break;
-                        case "TOOL_CALL_END":
-                            HandleToolCallEnd(root);
-                            break;
-                        case "TOOL_CALL_RESULT":
-                            HandleToolCallResult(root);
-                            break;
-                        case "TEXT_MESSAGE_START":
-                            // Suppress new text-only messages after a render tool has fired this turn.
-                            // The visualization is the answer; any post-render assistant prose
-                            // (including raw JSON args of a regurgitated tool call) is clutter.
-                            if (_renderedThisTurn)
-                                break;
-                            _currentAssistantMsg = new ConversationMessage { Role = ConversationRole.Assistant, Text = "" };
-                            _conversation.Add(_currentAssistantMsg);
-                            _toolGroupInterrupted = true;
-                            break;
-                        case "TEXT_MESSAGE_CONTENT":
-                        {
-                            // Same post-render suppression as TEXT_MESSAGE_START.
-                            if (_renderedThisTurn)
-                                break;
-                            var delta = root.TryGetProperty("delta", out var d) ? d.GetString() : null;
-                            if (delta is not null)
-                            {
-                                if (_currentAssistantMsg is null)
-                                {
-                                    _currentAssistantMsg = new ConversationMessage { Role = ConversationRole.Assistant, Text = "" };
-                                    _conversation.Add(_currentAssistantMsg);
-                                }
-                                _currentAssistantMsg.Text += delta;
-                            }
-                            break;
-                        }
-                        case "TEXT_MESSAGE_END":
-                            _currentAssistantMsg = null;
-                            break;
-                        case "RUN_ERROR":
-                        {
-                            var errorMsg = root.TryGetProperty("message", out var em) ? em.GetString() : "Unknown error";
-                            if (errorMsg?.Contains("429", StringComparison.Ordinal) == true
-                                || errorMsg?.Contains("quota", StringComparison.OrdinalIgnoreCase) == true
-                                || errorMsg?.Contains("insufficient_quota", StringComparison.OrdinalIgnoreCase) == true)
-                            {
-                                _aiUnavailable = true;
-                                _conversation.Add(new ConversationMessage { Role = ConversationRole.Error, Text = "AI features are temporarily unavailable due to API quota limits. Other features such as Timeline, Data Tables, Graph Explorer, and Galaxy Maps remain fully operational." });
-                            }
-                            else
-                            {
-                                _conversation.Add(new ConversationMessage { Role = ConversationRole.Error, Text = errorMsg });
-                            }
-                            Logger.LogError("RUN_ERROR from agent: {Error}", errorMsg);
-                            break;
-                        }
-                    }
-                }
-                catch (JsonException) { }
+                updates.Add(update);
+                ApplyToolCallContents(update);
+                ApplyErrorContents(update);
+                ApplyAssistantText(updates);
 
                 StateHasChanged();
                 await ScrollToBottom();
             }
+
+            // Persist this assistant turn back into _chatMessages so the next user
+            // turn carries full context. ToChatResponse() collapses streamed deltas
+            // (and AGUI's per-event splits) into the canonical M.E.AI messages.
+            var response = updates.ToChatResponse();
+            foreach (var m in response.Messages)
+                _chatMessages.Add(m);
 
             // If the stream completed but no assistant/tool/visualization message appeared
             // after the user's message, the guardrail or agent returned an empty response.
@@ -897,8 +831,12 @@
                 });
             }
 
-            // Finalize: build AGUI replay messages for this turn
-            FinalizeAguiTurn();
+            // Collapse tool groups now that the turn is done — matches the old finalize step.
+            foreach (var msg in _conversation)
+            {
+                if (msg.Role == ConversationRole.ToolGroup)
+                    msg.IsExpanded = false;
+            }
 
             // Auto-save session
             await SaveCurrentSessionAsync(userPrompt);
@@ -907,9 +845,43 @@
         {
             _conversation.Add(new ConversationMessage { Role = ConversationRole.Error, Text = "Request timed out. Try a simpler question." });
         }
+        catch (JsonException jsonEx)
+        {
+            // AGUIChatClient internally deserializes every TOOL_CALL_RESULT content
+            // field as JsonElement. When a server tool returns a non-JSON value
+            // (raw error string, plain text), the exception escapes the streaming
+            // iterator and kills the turn. Render a friendly message instead of
+            // raw "'E' is an invalid start of a value" parser noise. The faulty
+            // tool itself is the bug to chase upstream — see Design-041 follow-up.
+            Logger.LogError(jsonEx, "Ask streaming hit malformed JSON in a tool result");
+            _conversation.Add(new ConversationMessage
+            {
+                Role = ConversationRole.Error,
+                Text = "A tool returned a malformed response, so this turn couldn't complete. Try rephrasing the question or asking again.",
+            });
+        }
+        catch (RateLimitedException rl)
+        {
+            var retryMinutes = Math.Ceiling((rl.RetryAfterSeconds ?? 1800) / 60.0);
+            var isAuthForMessage = rl.IsAuthenticated ?? _isAuthenticated;
+            var limit = rl.Limit ?? (isAuthForMessage ? 6 : 1);
+
+            var message = isAuthForMessage
+                ? $"You have used all {limit} of your requests. Your next request will be available in {retryMinutes:0} minutes. Add your own OpenAI API key in your Profile to remove this limit."
+                : $"As an anonymous user you are limited to {limit} request per window. Your next request will be available in {retryMinutes:0} minutes. Sign in for more requests, or add your own OpenAI API key for unlimited access.";
+
+            _conversation.Add(new ConversationMessage { Role = ConversationRole.Error, Text = message });
+        }
+        catch (HttpRequestException httpEx)
+        {
+            var code = httpEx.StatusCode is { } sc ? $"({(int)sc})" : "";
+            _conversation.Add(new ConversationMessage { Role = ConversationRole.Error, Text = $"Request failed {code}. Please try again.".Trim() });
+            Logger.LogError(httpEx, "Ask streaming request failed");
+        }
         catch (Exception ex)
         {
             _conversation.Add(new ConversationMessage { Role = ConversationRole.Error, Text = $"Unexpected error: {ex.Message}" });
+            Logger.LogError(ex, "Ask streaming call threw");
         }
         finally
         {
@@ -919,22 +891,43 @@
         }
     }
 
-    // ── SSE event handlers ──
+    // ── ChatResponseUpdate handlers ──
 
-    private void HandleToolCallStart(JsonElement root)
+    private void ApplyToolCallContents(ChatResponseUpdate update)
     {
-        var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
-        var toolName = root.TryGetProperty("toolCallName", out var tn) ? tn.GetString() : "tool";
+        foreach (var content in update.Contents)
+        {
+            switch (content)
+            {
+                case FunctionCallContent fc:
+                    OnFunctionCall(fc);
+                    break;
+                case FunctionResultContent fr:
+                    OnFunctionResult(fr);
+                    break;
+            }
+        }
+    }
 
-        if (callId is not null && toolName is not null)
-            _sseToolCallNames[callId] = toolName;
+    private void OnFunctionCall(FunctionCallContent fc)
+    {
+        if (_toolInfoByCallId.ContainsKey(fc.CallId))
+            return;
 
-        var info = new ToolCallInfo { CallId = callId ?? "", ToolName = toolName ?? "tool" };
-        if (callId is not null)
-            _sseToolCallInfos[callId] = info;
+        _callNames[fc.CallId] = fc.Name;
+        var info = new ToolCallInfo
+        {
+            CallId = fc.CallId,
+            ToolName = fc.Name,
+            Arguments = fc.Arguments is { Count: > 0 }
+                ? JsonSerializer.Serialize(fc.Arguments, JsonOpts)
+                : "",
+        };
+        _toolInfoByCallId[fc.CallId] = info;
 
-        // Group consecutive tool calls together — only start a new group
-        // when there's no current group or a non-tool message interrupted the sequence
+        // Group consecutive tool calls together — only start a new group when there's
+        // no current group or a non-tool message (assistant text / visualization)
+        // interrupted the sequence. Mirrors the SSE-era behaviour.
         if (_currentToolGroup is null || _toolGroupInterrupted)
         {
             _currentToolGroup = new ConversationMessage
@@ -952,161 +945,143 @@
         }
     }
 
-    private void HandleToolCallArgs(JsonElement root)
+    private void OnFunctionResult(FunctionResultContent fr)
     {
-        var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
-        if (callId is not null && _sseToolCallInfos.TryGetValue(callId, out var info))
+        if (!_toolInfoByCallId.TryGetValue(fr.CallId, out var info))
+            return;
+        info.IsComplete = true;
+
+        var resultJson = SerializeFunctionResult(fr.Result);
+        info.Result = resultJson;
+
+        var toolName = _callNames.TryGetValue(fr.CallId, out var n) ? n : null;
+        if (toolName is null || resultJson is null) return;
+
+        var vizType = toolName switch
         {
-            var delta = root.TryGetProperty("delta", out var d) ? d.GetString() : null;
-            if (delta is not null) info.Arguments += delta;
+            "render_table" => "table",
+            "render_data_table" => "data_table",
+            "render_chart" => "chart",
+            "render_graph" or "render_path" => "graph",
+            "render_timeline" => "timeline",
+            "render_infobox" => "infobox",
+            "render_markdown" => "text",
+            "render_aurebesh" => "aurebesh",
+            _ => null,
+        };
+        if (vizType is null) return;
+
+        var vizMsg = new ConversationMessage { Role = ConversationRole.Visualization, VisualizationType = vizType };
+        try
+        {
+            switch (toolName)
+            {
+                case "render_table":
+                    vizMsg.TableDescriptor = JsonSerializer.Deserialize<TableDescriptor>(resultJson, JsonOpts);
+                    break;
+                case "render_data_table":
+                    vizMsg.DataTableDescriptor = JsonSerializer.Deserialize<DataTableDescriptor>(resultJson, JsonOpts);
+                    break;
+                case "render_chart":
+                    vizMsg.ChartDescriptor = JsonSerializer.Deserialize<ChartDescriptor>(resultJson, JsonOpts);
+                    break;
+                case "render_graph":
+                case "render_path":
+                    vizMsg.GraphDescriptor = JsonSerializer.Deserialize<GraphDescriptor>(resultJson, JsonOpts);
+                    break;
+                case "render_timeline":
+                    vizMsg.TimelineDescriptor = JsonSerializer.Deserialize<TimelineDescriptor>(resultJson, JsonOpts);
+                    break;
+                case "render_infobox":
+                    vizMsg.InfoboxDescriptor = JsonSerializer.Deserialize<InfoboxDescriptor>(resultJson, JsonOpts);
+                    break;
+                case "render_markdown":
+                    vizMsg.TextDescriptor = JsonSerializer.Deserialize<TextDescriptor>(resultJson, JsonOpts);
+                    break;
+                case "render_aurebesh":
+                    vizMsg.AurebeshDescriptor = JsonSerializer.Deserialize<AurebeshDescriptor>(resultJson, JsonOpts);
+                    break;
+            }
+            _conversation.Add(vizMsg);
+            _toolGroupInterrupted = true;
+            // Lock out post-render assistant text — see _renderedThisTurn declaration.
+            _renderedThisTurn = true;
+        }
+        catch (JsonException ex)
+        {
+            Logger.LogWarning(ex, "Failed to deserialize {ToolName} result", toolName);
         }
     }
 
-    private void HandleToolCallEnd(JsonElement root)
+    // The AGUI wire-format result arrives as a JsonElement; saved-session replay
+    // hands us a string. Normalise both to the raw JSON text we feed to the
+    // descriptor deserializers and the session-persistence layer.
+    private static string? SerializeFunctionResult(object? result) => result switch
     {
-        var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
-        if (callId is not null && _sseToolCallInfos.TryGetValue(callId, out var info))
-        {
-            info.IsComplete = true;
+        null => null,
+        string s => s,
+        JsonElement el => el.ValueKind == JsonValueKind.String ? el.GetString() : el.GetRawText(),
+        _ => JsonSerializer.Serialize(result, JsonOpts),
+    };
 
-            // Track for AGUI replay
-            _pendingAguiToolCalls.Add(new AguiToolCall
+    private void ApplyErrorContents(ChatResponseUpdate update)
+    {
+        foreach (var content in update.Contents)
+        {
+            if (content is not ErrorContent err) continue;
+            var errorMsg = !string.IsNullOrEmpty(err.Message) ? err.Message : "Unknown error";
+            if (errorMsg.Contains("429", StringComparison.Ordinal)
+                || errorMsg.Contains("quota", StringComparison.OrdinalIgnoreCase)
+                || errorMsg.Contains("insufficient_quota", StringComparison.OrdinalIgnoreCase))
             {
-                Id = callId,
-                Function = new AguiFunction { Name = info.ToolName, Arguments = info.Arguments },
-            });
+                _aiUnavailable = true;
+                _conversation.Add(new ConversationMessage { Role = ConversationRole.Error, Text = "AI features are temporarily unavailable due to API quota limits. Other features such as Timeline, Data Tables, Graph Explorer, and Galaxy Maps remain fully operational." });
+            }
+            else
+            {
+                _conversation.Add(new ConversationMessage { Role = ConversationRole.Error, Text = errorMsg });
+            }
+            Logger.LogError("ErrorContent from agent: {Error}", errorMsg);
+            _toolGroupInterrupted = true;
         }
     }
 
-    private void HandleToolCallResult(JsonElement root)
+    private void ApplyAssistantText(IReadOnlyList<ChatResponseUpdate> updates)
     {
-        var callId = root.TryGetProperty("toolCallId", out var ci) ? ci.GetString() : null;
-        var toolName = callId is not null && _sseToolCallNames.TryGetValue(callId, out var n) ? n : null;
+        // After a render_* result this turn, the visualization IS the answer —
+        // skip mirroring assistant text bubbles so we don't render leftover JSON
+        // or boilerplate the model emitted before stopping.
+        if (_renderedThisTurn) return;
 
-        string? contentJson = null;
-        if (root.TryGetProperty("content", out var contentEl))
+        // Rebuild the assistant message list from the canonical M.E.AI accumulator
+        // each tick. ToChatResponse() collapses streamed deltas + final assembled
+        // messages into one ChatMessage per assistant segment, keyed by MessageId.
+        var response = updates.ToChatResponse();
+        var index = 0;
+        foreach (var m in response.Messages.Where(m => m.Role == ChatRole.Assistant))
         {
-            contentJson = contentEl.ValueKind == JsonValueKind.String
-                ? contentEl.GetString()
-                : contentEl.GetRawText();
-            if (contentJson?.StartsWith("\"") == true)
-                contentJson = JsonSerializer.Deserialize<string>(contentJson);
-        }
-
-        // Store result for AGUI replay
-        if (callId is not null && _sseToolCallInfos.TryGetValue(callId, out var info))
-            info.Result = contentJson;
-
-        // Check if this is a render_* tool and create inline visualization
-        if (toolName is "render_table" or "render_data_table" or "render_chart" or "render_graph" or "render_path" or "render_timeline" or "render_infobox" or "render_markdown" or "render_aurebesh"
-            && contentJson is not null)
-        {
-            var vizMsg = new ConversationMessage { Role = ConversationRole.Visualization };
-            try
+            var text = m.Text ?? "";
+            // Skip tool-call-only assistant segments. ToChatResponse emits one
+            // assistant ChatMessage per tool call (carrying just FunctionCallContent),
+            // which has no user-facing text — the tool breadcrumb already represents
+            // it. Without this filter we render an empty MudPaper between every pair
+            // of tool calls.
+            if (string.IsNullOrEmpty(text))
             {
-                switch (toolName)
-                {
-                    case "render_table":
-                        vizMsg.VisualizationType = "table";
-                        vizMsg.TableDescriptor = JsonSerializer.Deserialize<TableDescriptor>(contentJson, JsonOpts);
-                        break;
-                    case "render_data_table":
-                        vizMsg.VisualizationType = "data_table";
-                        vizMsg.DataTableDescriptor = JsonSerializer.Deserialize<DataTableDescriptor>(contentJson, JsonOpts);
-                        break;
-                    case "render_chart":
-                        vizMsg.VisualizationType = "chart";
-                        vizMsg.ChartDescriptor = JsonSerializer.Deserialize<ChartDescriptor>(contentJson, JsonOpts);
-                        break;
-                    case "render_graph":
-                    case "render_path":
-                        vizMsg.VisualizationType = "graph";
-                        vizMsg.GraphDescriptor = JsonSerializer.Deserialize<GraphDescriptor>(contentJson, JsonOpts);
-                        break;
-                    case "render_timeline":
-                        vizMsg.VisualizationType = "timeline";
-                        vizMsg.TimelineDescriptor = JsonSerializer.Deserialize<TimelineDescriptor>(contentJson, JsonOpts);
-                        break;
-                    case "render_infobox":
-                        vizMsg.VisualizationType = "infobox";
-                        vizMsg.InfoboxDescriptor = JsonSerializer.Deserialize<InfoboxDescriptor>(contentJson, JsonOpts);
-                        break;
-                    case "render_markdown":
-                        vizMsg.VisualizationType = "text";
-                        vizMsg.TextDescriptor = JsonSerializer.Deserialize<TextDescriptor>(contentJson, JsonOpts);
-                        break;
-                    case "render_aurebesh":
-                        vizMsg.VisualizationType = "aurebesh";
-                        vizMsg.AurebeshDescriptor = JsonSerializer.Deserialize<AurebeshDescriptor>(contentJson, JsonOpts);
-                        break;
-                }
-                _conversation.Add(vizMsg);
+                index++;
+                continue;
+            }
+
+            var key = !string.IsNullOrEmpty(m.MessageId) ? m.MessageId! : $"__pos:{index}";
+            if (!_assistantByMessageId.TryGetValue(key, out var bubble))
+            {
+                bubble = new ConversationMessage { Role = ConversationRole.Assistant, Text = "" };
+                _assistantByMessageId[key] = bubble;
+                _conversation.Add(bubble);
                 _toolGroupInterrupted = true;
-                // Lock out post-render assistant text — see _renderedThisTurn declaration.
-                _renderedThisTurn = true;
-                // Drop any in-progress assistant text bubble; the visualization replaces it.
-                _currentAssistantMsg = null;
             }
-            catch (JsonException ex)
-            {
-                Logger.LogWarning(ex, "Failed to deserialize {ToolName} result", toolName);
-            }
-        }
-    }
-
-    /// <summary>
-    /// After a full AI turn completes, build the AGUI replay messages so the next
-    /// user message includes the full conversation history.
-    /// </summary>
-    private void FinalizeAguiTurn()
-    {
-        // Collapse all tool groups now that the turn is complete
-        foreach (var msg in _conversation)
-        {
-            if (msg.Role == ConversationRole.ToolGroup)
-                msg.IsExpanded = false;
-        }
-
-        // Emit an assistant message with any pending tool calls
-        if (_pendingAguiToolCalls.Count > 0)
-        {
-            _aguiMessages.Add(new AguiMessage
-            {
-                Role = "assistant",
-                Content = "",
-                ToolCalls = [.. _pendingAguiToolCalls],
-            });
-
-            // Emit tool result messages
-            foreach (var tc in _pendingAguiToolCalls)
-            {
-                var result = _sseToolCallInfos.TryGetValue(tc.Id, out var info) ? info.Result : null;
-                _aguiMessages.Add(new AguiMessage
-                {
-                    Role = "tool",
-                    ToolCallId = tc.Id,
-                    Content = result ?? "",
-                });
-            }
-
-            _pendingAguiToolCalls = [];
-        }
-
-        // Capture the last assistant text message if any
-        var lastAssistantText = _conversation
-            .LastOrDefault(m => m.Role == ConversationRole.Assistant)?.Text;
-        if (!string.IsNullOrWhiteSpace(lastAssistantText))
-        {
-            // Only add if we haven't already captured it as part of tool calls
-            var lastAgui = _aguiMessages.LastOrDefault();
-            if (lastAgui?.Role != "assistant" || lastAgui.ToolCalls is not null)
-            {
-                _aguiMessages.Add(new AguiMessage
-                {
-                    Role = "assistant",
-                    Content = lastAssistantText,
-                });
-            }
+            bubble.Text = text;
+            index++;
         }
     }
 
@@ -1249,7 +1224,13 @@
     {
         _loading = true;
         _conversation.Clear();
-        _aguiMessages.Clear();
+        _chatMessages.Clear();
+        _callNames.Clear();
+        _toolInfoByCallId.Clear();
+        _assistantByMessageId.Clear();
+        _currentToolGroup = null;
+        _toolGroupInterrupted = false;
+        _renderedThisTurn = false;
         StateHasChanged();
 
         try
@@ -1278,83 +1259,87 @@
                     ChatHistory.ActiveSessionId = sessionId;
                     _model.Prompt = "";
 
-                    // Rebuild conversation display and AGUI replay from saved messages
+                    // Rebuild conversation display + IChatClient replay from saved messages.
+                    // ChatMessage shapes mirror what AGUIChatClient.AsAGUIMessages produces:
+                    // - assistant + tool calls in ONE ChatMessage with FunctionCallContent items
+                    // - each tool result in its own ChatMessage(ChatRole.Tool) with FunctionResultContent
                     foreach (var msg in sessionMessages)
                     {
                         switch (msg.Role)
                         {
                             case "user":
                                 _conversation.Add(new ConversationMessage { Role = ConversationRole.User, Text = msg.Content, Timestamp = msg.Timestamp });
-                                // Rebuild AGUI replay
-                                _aguiMessages.Add(new AguiMessage { Role = "user", Content = msg.Content });
+                                _chatMessages.Add(new ChatMessage(ChatRole.User, msg.Content));
                                 break;
                             case "assistant":
                                 _conversation.Add(new ConversationMessage { Role = ConversationRole.Assistant, Text = msg.Content, Timestamp = msg.Timestamp });
-                                _aguiMessages.Add(new AguiMessage { Role = "assistant", Content = msg.Content });
+                                _chatMessages.Add(new ChatMessage(ChatRole.Assistant, msg.Content));
                                 break;
                             case "tool":
                             {
-                                // Add to AGUI replay as assistant tool call + tool result
-                                var aguiTc = new AguiToolCall
+                                var callId = msg.ToolCallId ?? Guid.NewGuid().ToString("N");
+                                var toolName = msg.ToolName ?? "tool";
+
+                                // Build the FunctionCallContent. If we can parse the saved
+                                // arguments string as a JSON object, hand it over as a dictionary
+                                // so AGUIChatClient round-trips it intact; otherwise leave args
+                                // empty and let the wire format degrade to "{}" rather than
+                                // crash the JSON pipeline with malformed args.
+                                IDictionary<string, object?>? argsDict = null;
+                                if (!string.IsNullOrWhiteSpace(msg.ToolCallArgs))
                                 {
-                                    Id = msg.ToolCallId ?? Guid.NewGuid().ToString(),
-                                    Function = new AguiFunction
+                                    try
                                     {
-                                        Name = msg.ToolName ?? "tool",
-                                        Arguments = msg.ToolCallArgs ?? "",
-                                    },
-                                };
-                                // Check if last AGUI message is an assistant with tool calls we can append to
-                                var lastAgui = _aguiMessages.LastOrDefault();
-                                if (lastAgui?.Role == "assistant" && lastAgui.ToolCalls is not null)
+                                        argsDict = JsonSerializer.Deserialize<Dictionary<string, object?>>(msg.ToolCallArgs!, JsonOpts);
+                                    }
+                                    catch (JsonException) { }
+                                }
+                                var fnCall = new FunctionCallContent(callId, toolName, argsDict);
+
+                                // Append the FunctionCallContent to the previous assistant
+                                // ChatMessage if it's already carrying tool calls — matches
+                                // how AGUI groups multiple parallel calls under one assistant
+                                // message. Otherwise start a new assistant message.
+                                var lastChat = _chatMessages.LastOrDefault();
+                                if (lastChat is { Role.Value: "assistant" } && lastChat.Contents.Any(c => c is FunctionCallContent))
                                 {
-                                    lastAgui.ToolCalls.Add(aguiTc);
+                                    lastChat.Contents.Add(fnCall);
                                 }
                                 else
                                 {
-                                    _aguiMessages.Add(new AguiMessage
-                                    {
-                                        Role = "assistant",
-                                        Content = "",
-                                        ToolCalls = [aguiTc],
-                                    });
+                                    _chatMessages.Add(new ChatMessage(ChatRole.Assistant, [fnCall]));
                                 }
-                                _aguiMessages.Add(new AguiMessage
-                                {
-                                    Role = "tool",
-                                    ToolCallId = aguiTc.Id,
-                                    Content = msg.Content,
-                                });
 
-                                // Add to conversation display as tool group
+                                // Tool result. The saved Content is the raw JSON the server returned;
+                                // parse as JsonElement so the round-trip back through AGUI doesn't
+                                // double-encode the string. Fall back to the raw string if parsing
+                                // fails (rare — should only happen for non-JSON tool returns).
+                                object? resultObj = msg.Content;
+                                try { resultObj = JsonSerializer.Deserialize<JsonElement>(msg.Content); }
+                                catch (JsonException) { }
+                                _chatMessages.Add(new ChatMessage(ChatRole.Tool, [new FunctionResultContent(callId, resultObj)]));
+
+                                // Render side — group consecutive tool calls into one card,
+                                // exactly as live streaming does.
                                 var lastConv = _conversation.LastOrDefault();
+                                var info = new ToolCallInfo
+                                {
+                                    CallId = callId,
+                                    ToolName = toolName,
+                                    Arguments = msg.ToolCallArgs ?? "",
+                                    Result = msg.Content,
+                                    IsComplete = true,
+                                };
                                 if (lastConv?.Role == ConversationRole.ToolGroup)
                                 {
-                                    lastConv.ToolCalls!.Add(new ToolCallInfo
-                                    {
-                                        CallId = msg.ToolCallId ?? "",
-                                        ToolName = msg.ToolName ?? "tool",
-                                        Arguments = msg.ToolCallArgs ?? "",
-                                        Result = msg.Content,
-                                        IsComplete = true,
-                                    });
+                                    lastConv.ToolCalls!.Add(info);
                                 }
                                 else
                                 {
                                     _conversation.Add(new ConversationMessage
                                     {
                                         Role = ConversationRole.ToolGroup,
-                                        ToolCalls =
-                                        [
-                                            new ToolCallInfo
-                                            {
-                                                CallId = msg.ToolCallId ?? "",
-                                                ToolName = msg.ToolName ?? "tool",
-                                                Arguments = msg.ToolCallArgs ?? "",
-                                                Result = msg.Content,
-                                                IsComplete = true,
-                                            }
-                                        ],
+                                        ToolCalls = [info],
                                         IsExpanded = false,
                                         Timestamp = msg.Timestamp,
                                     });

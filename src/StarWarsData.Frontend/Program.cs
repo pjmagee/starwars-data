@@ -117,6 +117,7 @@ builder
 // Register a named HttpClient for the API service
 // SSE streaming is long-lived; the default 30s total timeout from StandardResilienceHandler kills it
 builder.Services.AddScoped<UserIdDelegatingHandler>();
+builder.Services.AddTransient<RateLimitMessageHandler>();
 builder
     .Services.AddHttpClient(
         "StarWarsData",
@@ -127,7 +128,12 @@ builder
         }
     )
     .RemoveAllResilienceHandlers()
-    .AddHttpMessageHandler<UserIdDelegatingHandler>();
+    .AddHttpMessageHandler<UserIdDelegatingHandler>()
+    // AGUIChatClient calls EnsureSuccessStatusCode() and discards the body. The
+    // rate-limit handler runs first on the response path, converts a 429 into a
+    // typed RateLimitedException carrying the JSON body, and lets Ask/Copilot
+    // render the precise limit + retry-after instead of a generic message.
+    .AddHttpMessageHandler<RateLimitMessageHandler>();
 
 var app = builder.Build();
 
