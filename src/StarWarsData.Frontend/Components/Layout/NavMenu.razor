@@ -10,7 +10,10 @@
 
     @* Explore section hidden on phones (< 600px / xs) — visible on tablets (sm+) and desktop *@
     <MudDivider Class="my-2 d-none d-sm-block" />
-    <MudText Typo="Typo.caption" Class="px-4 pt-1 pb-1 d-none d-sm-block" Color="Color.Secondary">Explore</MudText>
+    <MudText Typo="Typo.caption" Class="px-4 pt-1 pb-1 d-none d-sm-flex align-center gap-1" Color="Color.Secondary">
+        <MudIcon Icon="@Icons.Material.Filled.Android" Size="Size.Small" />
+        <span>Explore</span>
+    </MudText>
     <MudNavLink Href="/search" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.ManageSearch" Class="d-none d-sm-flex">Search</MudNavLink>
     <MudNavLink Href="/galaxy-map" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Explore" Class="d-none d-sm-flex">Galaxy Map</MudNavLink>
     <MudNavLink Href="/timeline" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Timeline" Class="d-none d-sm-flex">Timeline</MudNavLink>
