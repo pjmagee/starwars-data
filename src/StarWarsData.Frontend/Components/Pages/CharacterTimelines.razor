@@ -7,6 +7,9 @@
 @inject NavigationManager Navigation
 @inject GlobalFilterService GlobalFilterService
 @inject PageContextService PageContext
+@inject PageControlService PageControl
+@inject IJSRuntime JS
+@inject ILogger<CharacterTimelines> Logger
 @implements IDisposable
 
 <PageTitle>@GetPageTitle()</PageTitle>
@@ -448,6 +451,14 @@ else
                     var showYearSeparator = previousEvent is null
                         || evt.Year != previousEvent.Year
                         || evt.Demarcation != previousEvent.Demarcation;
+                    // Index into the UNFILTERED events list — stable across filter
+                    // changes so character_timelines_focus_event(index) works even
+                    // when the agent recommends an index after a different filter
+                    // state. The DOM id is rendered only for events currently
+                    // visible (i.e. matching the active filter set).
+                    var eventIndex = _timeline!.Events.IndexOf(evt);
+                    var domId = $"character-event-{eventIndex}";
+                    var isFocused = _focusedEventIndex == eventIndex;
 
                     <MudTimelineItem Variant="Variant.Outlined" Color="@GetTimelineItemColor(evt.EventType)" Size="Size.Medium">
                         <ItemOpposite>
@@ -459,6 +470,7 @@ else
                             }
                         </ItemOpposite>
                         <ItemContent>
+                            <div id="@domId" style="@(isFocused ? "outline:2px solid var(--mud-palette-success); outline-offset:4px; border-radius:6px;" : "")">
                             <MudCard Outlined="true" Class="ma-1">
                                 <MudCardHeader>
                                     <CardHeaderContent>
@@ -535,6 +547,7 @@ else
                                     }
                                 </MudCardContent>
                             </MudCard>
+                            </div>
                         </ItemContent>
                     </MudTimelineItem>
 
@@ -622,6 +635,13 @@ else
     private IReadOnlyCollection<string> _selectedEventTypes = new List<string>();
     private Timer? _pollTimer;
 
+    // ── Page-control state (Design-041) ──
+    // Index into _timeline.Events (the unfiltered list) of the event SP-4 last
+    // focused. Renders an outline ring on that event and stays set across
+    // re-renders. Cleared when navigating away from the detail view.
+    private int? _focusedEventIndex;
+    private IDisposable? _pageControlRegistration;
+
     // ── Workflow steps (shown on detail page during generation) ──
     private record WorkflowStep(GenerationStage Stage, string Label);
 
@@ -681,8 +701,15 @@ else
         PublishPageContext();
     }
 
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+            RegisterPageControlActions();
+    }
+
     protected override async Task OnParametersSetAsync()
     {
+        _focusedEventIndex = null; // drop any previous event focus when route changes
         if (PageId is not null)
         {
             StopActiveGenPolling();
@@ -720,6 +747,7 @@ else
 
     public void Dispose()
     {
+        _pageControlRegistration?.Dispose();
         PageContext.Clear();
         GlobalFilterService.OnChange -= OnGlobalFilterChanged;
         _pollTimer?.Dispose();
@@ -1165,4 +1193,227 @@ else
         "review_complete" => Color.Success,
         _ => Color.Default,
     };
+
+    // ── Page-control: SP-4 driving /character-timelines (Design-041) ─────────
+    //
+    // Tools are organised around the user's natural flow:
+    //
+    //   1. Find a character          — character_timelines_search
+    //   2. Open their timeline       — character_timelines_open
+    //   3. Filter the rendered list  — character_timelines_set_event_types
+    //   4. Find a specific event     — character_timelines_find_event
+    //   5. Focus that event          — character_timelines_focus_event
+    //   6. Back to the search list   — character_timelines_back_to_search
+    //
+    // Find + focus together answer prompts like "take me to Maul's timeline
+    // where he was exiled" — the agent searches Maul, opens his timeline,
+    // calls find_event("exile"), then focus_event(index) to scroll + highlight.
+    //
+    // The page IS rendered for both /character-timelines and
+    // /character-timelines/{PageId}. Each tool checks the current state
+    // (PageId / _timeline) and returns a sensible message if it can't run yet.
+    void RegisterPageControlActions()
+    {
+        var search = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            async (string query) =>
+            {
+                if (string.IsNullOrWhiteSpace(query)) return "Provide a search term — e.g. 'Maul', 'Ahsoka Tano'.";
+                try
+                {
+                    var q = System.Web.HttpUtility.ParseQueryString(string.Empty);
+                    q.Add("query", query);
+                    var cont = GlobalFilterService.GetContinuityQueryParam();
+                    if (!string.IsNullOrEmpty(cont)) q.Add("continuity", cont);
+                    var results = await Http.GetFromJsonAsync<List<CharacterSearchResult>>($"CharacterTimelines/search?{q}");
+                    if (results is null || results.Count == 0)
+                        return $"No characters found matching '{query}'.";
+                    var lines = results.Take(8).Select(r =>
+                        $"- #{r.PageId} · {r.Title} ({r.Continuity}){(r.HasTimeline ? " · timeline ready" : " · no timeline yet")}");
+                    return $"Top matches for '{query}':\n" + string.Join("\n", lines)
+                        + "\n\nPass the pageId to character_timelines_open to load that character's timeline.";
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogWarning(ex, "character_timelines_search failed for '{Query}'", query);
+                    return $"Search failed: {ex.Message}";
+                }
+            },
+            name: "character_timelines_search",
+            description: "Search Wookieepedia characters by name. Returns up to 8 matches with their pageId, "
+                + "continuity, and whether a timeline has been generated. Use this to resolve a user's character "
+                + "phrasing (e.g. 'Maul') into a pageId, then call character_timelines_open."
+        );
+
+        var open = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            (int pageId, string? name) =>
+            {
+                Navigation.NavigateTo($"/character-timelines/{pageId}");
+                var display = string.IsNullOrWhiteSpace(name) ? $"pageId {pageId}" : name!;
+                return $"Opened the character timeline for {display}. If a timeline hasn't been generated yet "
+                    + "the page will offer to generate one; otherwise the events list loads and you can call "
+                    + "character_timelines_find_event to locate specific moments.";
+            },
+            name: "character_timelines_open",
+            description: "Navigate to a character's timeline page by pageId. Call after character_timelines_search "
+                + "has resolved the user's phrasing to a pageId. Optional 'name' arg is used in the confirmation message."
+        );
+
+        var backToSearch = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            () =>
+            {
+                if (PageId is null) return "Already on the character search list.";
+                Navigation.NavigateTo("/character-timelines");
+                return "Returned to the character search list.";
+            },
+            name: "character_timelines_back_to_search",
+            description: "Leave the current character's timeline and return to the search list. "
+                + "Use when the user wants to start over or look at a different character."
+        );
+
+        var setEventTypes = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            (string[] types) =>
+            {
+                if (_timeline is null) return "No timeline loaded — open a character first via character_timelines_open.";
+                if (_eventTypes.Count == 0) return "This timeline has no event-type filter available.";
+                if (types is null || types.Length == 0)
+                {
+                    _selectedEventTypes = new List<string>();
+                    InvokeAsync(StateHasChanged);
+                    return "Cleared the event-type filter (no events will show).";
+                }
+                var lookup = new HashSet<string>(_eventTypes, StringComparer.OrdinalIgnoreCase);
+                var resolved = types.Where(t => lookup.Contains(t)).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+                var unknown = types.Where(t => !lookup.Contains(t)).ToArray();
+                _selectedEventTypes = resolved;
+                InvokeAsync(StateHasChanged);
+                var msg = resolved.Count == 0
+                    ? $"None of the requested types matched. Available: {string.Join(", ", _eventTypes)}."
+                    : $"Filtered to {resolved.Count} event type(s): {string.Join(", ", resolved)}.";
+                return unknown.Length == 0 ? msg : msg + $" (Ignored unknown: {string.Join(", ", unknown)}.)";
+            },
+            name: "character_timelines_set_event_types",
+            description: "Filter the loaded timeline to only the given event types. Common types include "
+                + "Birth, Death, Battle, Duel, Apprenticeship, Training, Promotion, Exile, Capture, Rescue, "
+                + "Discovery, Betrayal, Alliance, Mission, Transformation. Pass an empty array to clear. "
+                + "Arg: types (string array)."
+        );
+
+        var listEvents = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            (string? eventType, int? limit) =>
+            {
+                if (_timeline is null || _timeline.Events.Count == 0)
+                    return "No timeline loaded — open a character first via character_timelines_open.";
+
+                IEnumerable<(CharacterEvent Event, int Index)> events = _timeline.Events.Select((e, i) => (e, i));
+                if (!string.IsNullOrWhiteSpace(eventType))
+                {
+                    events = events.Where(x => x.Event.EventType.Equals(eventType, StringComparison.OrdinalIgnoreCase));
+                }
+
+                var cap = limit is int n && n > 0 ? Math.Min(n, 200) : 80;
+                var taken = events.Take(cap).ToList();
+                if (taken.Count == 0)
+                {
+                    var available = _timeline.Events.Select(e => e.EventType).Distinct(StringComparer.OrdinalIgnoreCase);
+                    return $"No events on this timeline match eventType '{eventType}'. Available types: {string.Join(", ", available)}.";
+                }
+
+                // Compact one-line-per-event structure — the agent reads the
+                // whole list and picks the index that matches the user's intent
+                // (LLM does the search; no scoring algorithm here).
+                var lines = taken.Select(x =>
+                {
+                    var location = string.IsNullOrEmpty(x.Event.Location) ? "" : $" @ {x.Event.Location}";
+                    var related = x.Event.RelatedCharacters.Count > 0
+                        ? $" [w/ {string.Join(", ", x.Event.RelatedCharacters.Take(3))}]"
+                        : "";
+                    return $"[index {x.Index}] {FormatYear(x.Event)} · {x.Event.EventType} · {x.Event.Description}{location}{related}";
+                });
+
+                var header = string.IsNullOrWhiteSpace(eventType)
+                    ? $"Timeline events ({taken.Count} of {_timeline.Events.Count}):"
+                    : $"'{eventType}' events ({taken.Count} of {_timeline.Events.Count(e => e.EventType.Equals(eventType, StringComparison.OrdinalIgnoreCase))}):";
+
+                return header + "\n" + string.Join("\n", lines)
+                    + "\n\nPick the [index N] that best matches the user's question, then call "
+                    + "character_timelines_focus_event(index). The Narrative / Significance / Consequences fields "
+                    + "for the chosen event are visible on the page once focused.";
+            },
+            name: "character_timelines_list_events",
+            description: "List the loaded character's timeline events (index, year, type, description, location, "
+                + "related characters). Use this to find the right event by reading the list and picking the one "
+                + "that matches the user's phrasing — your judgement is the matcher. Optional 'eventType' filter "
+                + "(e.g. 'Exile', 'Duel', 'Apprenticeship') narrows the list. Optional 'limit' caps the output "
+                + "(default 80, max 200)."
+        );
+
+        var focusEvent = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            async (int index) =>
+            {
+                if (_timeline is null) return "No timeline loaded.";
+                if (index < 0 || index >= _timeline.Events.Count)
+                    return $"Index {index} out of range (0..{_timeline.Events.Count - 1}).";
+                var evt = _timeline.Events[index];
+
+                // If this event's type is excluded by the active filter, add it
+                // back so the row is actually rendered before we try to scroll.
+                if (_selectedEventTypes.Count > 0
+                    && !_selectedEventTypes.Contains(evt.EventType, StringComparer.OrdinalIgnoreCase))
+                {
+                    _selectedEventTypes = _selectedEventTypes.Append(evt.EventType).ToList();
+                }
+
+                _focusedEventIndex = index;
+                await InvokeAsync(StateHasChanged);
+                try
+                {
+                    await JS.InvokeVoidAsync("eval",
+                        $"document.getElementById('character-event-{index}')?.scrollIntoView({{behavior:'smooth',block:'center'}})");
+                }
+                catch { }
+
+                // Republish PageContext with the focused event as the SUBJECT.
+                // SP-4 can then answer follow-up questions about *this* event
+                // (related characters, source page, era context) via KG tools.
+                PageContext.Set(new PageContext(
+                    Page: "character-timelines",
+                    Subject: evt.Description,
+                    SubjectKind: string.IsNullOrEmpty(evt.EventType) ? "TimelineEvent" : evt.EventType,
+                    SubjectId: PageId,
+                    Extras: new Dictionary<string, string>(StringComparer.Ordinal)
+                    {
+                        ["character"] = _characterInfo?.Title ?? _timeline.CharacterTitle,
+                        ["year"] = FormatYear(evt),
+                        ["event_type"] = evt.EventType,
+                    }));
+
+                var related = evt.RelatedCharacters.Count > 0 ? $" (with {string.Join(", ", evt.RelatedCharacters.Take(4))})" : "";
+                return $"Focused event #{index}: {evt.EventType} — {evt.Description} ({FormatYear(evt)}){related}.";
+            },
+            name: "character_timelines_focus_event",
+            description: "Scroll to and highlight a specific event in the loaded timeline by its index. "
+                + "Updates the page SUBJECT so the user's next question is answered against this event. "
+                + "Get a valid index from character_timelines_find_event. Arg: index (int)."
+        );
+
+        var actions = new PageAction[]
+        {
+            new(search, Label: "Search characters", Example: "search for Darth Maul"),
+            new(open, Label: "Open a character's timeline", Example: "open Maul's timeline"),
+            new(backToSearch, Label: "Back to the character search list", Example: "back to search"),
+            new(setEventTypes, Label: "Filter by event type", Example: "show only battles and duels"),
+            new(listEvents, Label: "Read the event list", Example: "where was Maul exiled?"),
+            new(focusEvent, Label: "Focus / scroll to an event", Example: "open the exile event"),
+        };
+
+        try
+        {
+            _pageControlRegistration = PageControl.Register("character_timelines", actions);
+        }
+        catch (InvalidOperationException ex)
+        {
+            Logger.LogWarning(ex, "PageControlService already had a registration; character-timelines page tools unavailable this circuit.");
+        }
+    }
+
 }

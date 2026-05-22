@@ -1,0 +1,597 @@
+@*
+    Knowledge Graph node-detail panel — the rich attributes + temporal + edges +
+    Holocron-enrichments view that lives inside the KnowledgeGraph page's row-expand
+    and now also backs the standalone /knowledge-graph/nodes/{id} page.
+
+    Single source of truth for "what does the user see when they drill into a node":
+    pull this component in, hand it a TemporalNodeDto (already fetched by the parent),
+    and it owns the rest of the data fetch (labels / edges / node-enrichments) and the
+    Holocron-enhance dialog launch. The parent surface (a row-expand vs. a dedicated
+    page) only differs in chrome (header card, breadcrumbs, etc.), not in detail content.
+*@
+
+@using System.Net.Http.Json
+@using static StarWarsData.Frontend.Components.Shared.KnowledgeGraphFormatters
+@inject IHttpClientFactory HttpClientFactory
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+@if (Node is null)
+{
+    return;
+}
+
+<MudGrid Spacing="2">
+    @if (ShowImageInline && Node.ImageUrl is not null)
+    {
+        <MudItem xs="12" sm="3" md="2">
+            <MudImage Src="@StripRevision(Node.ImageUrl)" Alt="@Node.Name"
+                      ObjectFit="ObjectFit.Contain" Style="max-height:200px; width:100%;"
+                      Class="rounded" />
+        </MudItem>
+    }
+    <MudItem xs="12" sm="@(ShowImageInline && Node.ImageUrl is not null ? 9 : 12)" md="@(ShowImageInline && Node.ImageUrl is not null ? 10 : 12)">
+        @if (ShowHeader)
+        {
+            <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-2" Spacing="2">
+                <MudText Typo="Typo.h6">@Node.Name</MudText>
+                @if (Node.WikiUrl is not null)
+                {
+                    <MudIconButton Icon="@Icons.Material.Filled.OpenInNew" Size="Size.Small"
+                                   Href="@Node.WikiUrl" Target="_blank" Color="Color.Primary" />
+                }
+                <MudTooltip Text="View in Graph Explorer">
+                    <MudIconButton Icon="@Icons.Material.Filled.Hub" Size="Size.Small"
+                                   Href="@($"/graph-explorer/{Node.Id}")" Target="_blank" Color="Color.Secondary" />
+                </MudTooltip>
+                @if (IsSpatialKind(Node.Type))
+                {
+                    <MudTooltip Text="@($"Locate {Node.Name} on the Galaxy Map")">
+                        <MudIconButton Icon="@Icons.Material.Filled.Explore" Size="Size.Small"
+                                       Href="@($"/galaxy-map/{Node.Id}")" Target="_blank" Color="Color.Primary" />
+                    </MudTooltip>
+                }
+                @if (Node.StartYear.HasValue || Node.EndYear.HasValue)
+                {
+                    <MudTooltip Text="@($"View timeline during {Node.Name}")">
+                        <MudIconButton Icon="@Icons.Material.Filled.Timeline" Size="Size.Small"
+                                       Href="@($"/timeline/{Node.Id}")" Target="_blank" Color="Color.Tertiary" />
+                    </MudTooltip>
+                }
+                @* Holocron enhance — open to any authenticated user. After completion the panel
+                     re-fetches labels + edges + node-enrichments for the current node, so newly
+                     written enrichments appear without requiring the user to collapse + re-expand. *@
+                <AuthorizeView Context="auth">
+                    <MudTooltip Text="@(_holocronRunning ? "Re-open the live progress modal for the in-flight Holocron run on this node." : "Run the Holocron agent on this node — gathers context, calls the LLM, writes evidence-backed enrichments. Refreshes this panel when complete.")">
+                        <MudButton Variant="Variant.Outlined" Color="Color.Tertiary" Size="Size.Small"
+                                   StartIcon="@Icons.Material.Filled.AutoFixHigh"
+                                   OnClick="EnhanceWithHolocron">
+                            @if (_holocronRunning)
+                            {
+                                <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" />
+                                <span>Enhancing… (view)</span>
+                            }
+                            else
+                            {
+                                <span>Enhance with Holocron</span>
+                            }
+                        </MudButton>
+                    </MudTooltip>
+                </AuthorizeView>
+                @* Deep-link to the per-node Holocron history page — visible to ALL users
+                    (even anonymous), so anyone curious about what the agent did on a node
+                    can browse the run history + see any in-flight workflow.
+                    Mirrors the Character Timeline per-character page pattern. *@
+                <MudTooltip Text="Open the per-node Holocron history page — see all past runs and any workflow currently in progress.">
+                    <MudButton Variant="Variant.Text" Color="Color.Default" Size="Size.Small"
+                               StartIcon="@Icons.Material.Filled.History"
+                               Href="@($"/holocron/jobs/{Node.Id}")">
+                        Holocron history
+                    </MudButton>
+                </MudTooltip>
+            </MudStack>
+        }
+
+        @* ── Temporal Facets ── *@
+        @if (Node.TemporalFacets.Count > 0)
+        {
+            <MudText Typo="Typo.subtitle2" Class="mb-1">
+                <MudIcon Icon="@Icons.Material.Filled.Schedule" Size="Size.Small" Class="mr-1" />
+                Timeline
+            </MudText>
+            @foreach (var group in Node.TemporalFacets.GroupBy(f => f.Semantic.Split('.')[0]).OrderBy(g => g.Key))
+            {
+                <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mt-1" Style="text-transform:capitalize;">
+                    @group.Key
+                </MudText>
+                <MudStack Row="true" Wrap="Wrap.Wrap" Spacing="1" AlignItems="AlignItems.Center" Class="mb-2">
+                    @foreach (var (facet, idx) in group.OrderBy(f => f.Order).Select((f, i) => (f, i)))
+                    {
+                        @if (idx > 0)
+                        {
+                            <MudIcon Icon="@Icons.Material.Filled.ArrowForward" Size="Size.Small"
+                                     Color="Color.Secondary" Style="opacity:0.5;" />
+                        }
+                        <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined"
+                                 Color="@GetFacetColor(facet.Semantic)">
+                            @FormatFacetRole(facet.Semantic): @facet.Text
+                            @if (facet.Calendar == "real" && facet.Year.HasValue)
+                            {
+                                <text> (CE)</text>
+                            }
+                        </MudChip>
+                    }
+                </MudStack>
+            }
+
+            @if (Node.StartYear.HasValue && Node.EndYear.HasValue)
+            {
+                <MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Outlined" Class="mb-3">
+                    Duration: @Math.Abs(Node.EndYear.Value - Node.StartYear.Value) years
+                </MudChip>
+            }
+        }
+        else if (Node.StartYear.HasValue || Node.EndYear.HasValue)
+        {
+            <MudStack Row="true" Spacing="2" Class="mb-3">
+                @if (Node.StartDateText is not null)
+                {
+                    <MudChip T="string" Size="Size.Small" Color="Color.Success" Variant="Variant.Outlined">
+                        Start: @Node.StartDateText
+                    </MudChip>
+                }
+                @if (Node.EndDateText is not null)
+                {
+                    <MudChip T="string" Size="Size.Small" Color="Color.Error" Variant="Variant.Outlined">
+                        End: @Node.EndDateText
+                    </MudChip>
+                }
+            </MudStack>
+        }
+
+        @* ── Attributes + Phase 2 enhancements side-by-side ──
+             Per user feedback: don't merge Phase 2 into the Phase 1 attributes table — there's no place to
+             show evidence inline. Instead, render Phase 1 attributes on the left (canonical infobox data,
+             unmodified) and a dedicated "Holocron-added attributes" card on the right with claim + evidence
+             per enrichment. The two are stacked on small screens via xs=12 / md=6. *@
+        <MudGrid Spacing="3" Class="mb-4">
+            <MudItem xs="12" md="6">
+                <MudText Typo="Typo.subtitle2" Class="mb-1">
+                    <MudIcon Icon="@Icons.Material.Filled.ListAlt" Size="Size.Small" Class="mr-1" />
+                    Attributes
+                </MudText>
+                @if (Node.Properties.Count > 0)
+                {
+                    <MudSimpleTable Dense="true" Bordered="true" Striped="true" Style="font-size:13px;">
+                        <tbody>
+                            @foreach (var kvp in Node.Properties.OrderBy(p => p.Key))
+                            {
+                                <tr>
+                                    <td style="font-weight:600; white-space:nowrap; width:1%; padding:4px 8px; vertical-align:top; text-transform:capitalize;">
+                                        @FormatPropertyKey(kvp.Key)
+                                    </td>
+                                    <td style="padding:4px 8px;">
+                                        @string.Join(", ", kvp.Value)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </MudSimpleTable>
+                }
+                else
+                {
+                    <MudText Typo="Typo.body2" Color="Color.Secondary">No attributes recorded.</MudText>
+                }
+            </MudItem>
+
+            <MudItem xs="12" md="6">
+                <MudText Typo="Typo.subtitle2" Class="mb-1">
+                    <MudIcon Icon="@Icons.Material.Filled.AutoAwesome" Size="Size.Small" Color="Color.Secondary" Class="mr-1" />
+                    Holocron-added attributes
+                </MudText>
+                @if (_enrichmentsLoading)
+                {
+                    <MudProgressLinear Indeterminate="true" Color="Color.Secondary" Style="max-width:400px;" />
+                }
+                else if (_enrichments is { Count: > 0 })
+                {
+                    <MudSimpleTable Dense="true" Bordered="true" Striped="true" Style="font-size:13px;">
+                        <tbody>
+                            @foreach (var en in _enrichments)
+                            {
+                                <tr>
+                                    <td style="font-weight:600; white-space:nowrap; width:1%; padding:4px 8px; vertical-align:top; text-transform:capitalize;">
+                                        <MudChip T="string" Size="Size.Small" Color="Color.Secondary" Variant="Variant.Filled" Class="mr-1">@en.Operation</MudChip>
+                                        @FormatPropertyKey(en.FieldPath)
+                                    </td>
+                                    <td style="padding:4px 8px;">
+                                        @if (en.Values is { Count: > 0 })
+                                        {
+                                            <MudText Typo="Typo.body2">@string.Join(", ", en.Values)</MudText>
+                                        }
+                                        <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mt-1" Style="display:block; font-style:italic;">@en.Claim</MudText>
+
+                                        @if (en.Evidence is { Count: > 0 })
+                                        {
+                                            var enrichmentId = en.Id;
+                                            var isExpanded = _expandedEvidence.Contains(enrichmentId);
+                                            <MudButton Size="Size.Small" Variant="Variant.Text" Color="Color.Secondary" Class="mt-1 px-1"
+                                                       StartIcon="@(isExpanded ? Icons.Material.Filled.ExpandLess : Icons.Material.Filled.ExpandMore)"
+                                                       OnClick="@(() => ToggleEvidence(enrichmentId))">
+                                                @($"{(isExpanded ? "Hide" : "Show")} {en.Evidence.Count} source{(en.Evidence.Count == 1 ? "" : "s")}")
+                                            </MudButton>
+                                            @if (isExpanded)
+                                            {
+                                                @foreach (var ev in en.Evidence)
+                                                {
+                                                    <div style="border-left:2px solid var(--mud-palette-secondary); padding-left:8px; margin-top:4px;">
+                                                        @if (ev.SourcePageId.HasValue)
+                                                        {
+                                                            <MudLink Href="@($"/knowledge-graph/nodes/{ev.SourcePageId.Value}")" Underline="Underline.Hover" Typo="Typo.caption">
+                                                                @(ev.SourcePageName ?? $"PageId {ev.SourcePageId}")
+                                                            </MudLink>
+                                                        }
+                                                        <MudText Typo="Typo.caption" Style="display:block; font-style:italic;">"@ev.Excerpt"</MudText>
+                                                    </div>
+                                                }
+                                                <MudLink Href="@($"/holocron?pageId={Node.Id}")" Typo="Typo.caption" Class="mt-1" Style="display:block;">
+                                                    See full Holocron entry →
+                                                </MudLink>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </MudSimpleTable>
+                }
+                else
+                {
+                    <MudText Typo="Typo.body2" Color="Color.Secondary">No Holocron enhancements yet — click "Enhance with Holocron" above to run the agent on this node.</MudText>
+                }
+            </MudItem>
+        </MudGrid>
+
+        @* ── Relationships (edge labels connecting this node to others) ── *@
+        <MudText Typo="Typo.subtitle2" Class="mb-1">
+            <MudIcon Icon="@Icons.Material.Filled.Hub" Size="Size.Small" Class="mr-1" />
+            Relationships
+        </MudText>
+        @if (_labelsLoading)
+        {
+            <MudProgressLinear Indeterminate="true" Color="Color.Info" Style="max-width:400px;" />
+        }
+        else if (_labels is { Count: > 0 })
+        {
+            <MudStack Row="true" Wrap="Wrap.Wrap" Spacing="1">
+                @foreach (var label in _labels)
+                {
+                    @* Phase 2 provenance for relationship chips per Design-019:
+                         - HolocronOnly      → secondary-coloured chip (Phase 2 added the relationship)
+                         - HolocronAnnotated → primary chip + secondary dot (Phase 1 with Phase 2 context overlay)
+                         - otherwise         → primary chip (Phase 1 only) *@
+                    var phase2Only = _holocronOnlyLabels.Contains(label);
+                    var annotated = _holocronAnnotatedLabels.Contains(label);
+                    var chipColor = phase2Only ? Color.Secondary : Color.Info;
+                    var chipTooltip = phase2Only
+                        ? "Added by the Holocron agent — no Phase 1 edge with this label exists."
+                        : annotated
+                            ? "Phase 1 relationship with Holocron context attached (role/qualifier/description)."
+                            : null;
+                    <MudTooltip Text="@chipTooltip" Disabled="@(chipTooltip is null)">
+                        <MudChip T="string" Size="Size.Small" Color="@chipColor" Variant="Variant.Outlined"
+                                 Href="@($"/graph-explorer/{Node.Id}")" Target="_self">
+                            @FormatPropertyKey(label)
+                            @if (annotated && !phase2Only)
+                            {
+                                <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background-color: var(--mud-palette-secondary); margin-left:6px; vertical-align:middle;"></span>
+                            }
+                        </MudChip>
+                    </MudTooltip>
+                }
+            </MudStack>
+        }
+        else
+        {
+            <MudText Typo="Typo.body2" Color="Color.Secondary">No relationships found.</MudText>
+        }
+
+        @* ── Edges table — virtualised per-edge view with Phase 2 annotation context inline.
+             Virtualize=true keeps high-degree nodes (Anakin: 671 edges) scrolling smoothly without
+             server-side pagination. ItemSize is the average row height in px and feeds the virtualiser's
+             viewport calculation; bumped above the default 50px because annotation rows can wrap to
+             multiple lines (description text). FixedHeader keeps the column headers visible while
+             the body scrolls. ── *@
+        @if (_edgesLoading)
+        {
+            <MudProgressLinear Indeterminate="true" Color="Color.Info" Style="max-width:400px;" Class="mt-3" />
+        }
+        else if (_edges is { Count: > 0 })
+        {
+            <MudText Typo="Typo.subtitle2" Class="mt-4 mb-1">
+                <MudIcon Icon="@Icons.Material.Filled.AccountTree" Size="Size.Small" Class="mr-1" />
+                Edges
+                <MudText HtmlTag="span" Typo="Typo.caption" Color="Color.Secondary" Class="ml-2">
+                    @(_edgesTotal > _edges.Count
+                        ? $"showing {_edges.Count} of {_edgesTotal}"
+                        : $"{_edges.Count}")
+                </MudText>
+            </MudText>
+            <MudTable T="EntityEdgeRowDto" Items="_edges" Virtualize="true" FixedHeader="true" Height="520px"
+                      ItemSize="64f" OverscanCount="6"
+                      Dense="true" Hover="true" Striped="true" Bordered="true" Class="mb-2"
+                      Style="font-size:13px;"
+                      RowStyleFunc="@(static (EntityEdgeRowDto e, int _) => e.IsHolocronOnly ? "background-color: var(--mud-palette-secondary-hover);" : "")">
+                <HeaderContent>
+                    <MudTh Style="width:1%;">Dir</MudTh>
+                    <MudTh>Label</MudTh>
+                    <MudTh>Target</MudTh>
+                    <MudTh>Years</MudTh>
+                    <MudTh>Holocron context</MudTh>
+                </HeaderContent>
+                <RowTemplate Context="edge">
+                    @{
+                        var hasAnnotation = !string.IsNullOrWhiteSpace(edge.Role) || !string.IsNullOrWhiteSpace(edge.Qualifier) || !string.IsNullOrWhiteSpace(edge.Description);
+                    }
+                    <MudTd Style="white-space:nowrap;">
+                        <MudIcon Icon="@(edge.Direction == "out" ? Icons.Material.Filled.ArrowOutward : Icons.Material.Filled.SubdirectoryArrowLeft)" Size="Size.Small" Color="@(edge.Direction == "out" ? Color.Tertiary : Color.Info)" />
+                    </MudTd>
+                    <MudTd Style="white-space:nowrap;">
+                        <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="@(edge.IsHolocronOnly ? Color.Secondary : Color.Info)">
+                            @FormatPropertyKey(edge.Label)
+                            @if (hasAnnotation && !edge.IsHolocronOnly)
+                            {
+                                <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background-color: var(--mud-palette-secondary); margin-left:6px; vertical-align:middle;"></span>
+                            }
+                        </MudChip>
+                    </MudTd>
+                    <MudTd>
+                        <MudLink Href="@($"/knowledge-graph/nodes/{edge.OtherId}")" Underline="Underline.Hover">@edge.OtherName</MudLink>
+                        @if (!string.IsNullOrEmpty(edge.OtherType))
+                        {
+                            <MudText HtmlTag="span" Typo="Typo.caption" Color="Color.Secondary" Class="ml-2">(@edge.OtherType)</MudText>
+                        }
+                        @if (IsSpatialKind(edge.OtherType))
+                        {
+                            <MudTooltip Text="@($"Locate {edge.OtherName} on the Galaxy Map")">
+                                <MudIconButton Icon="@Icons.Material.Filled.Explore" Size="Size.Small"
+                                               Href="@BuildGalaxyMapHref(edge.OtherId, Node.Type, Node.Id)" Target="_blank" Color="Color.Primary" Class="ml-1" />
+                            </MudTooltip>
+                        }
+                        @if (!string.IsNullOrEmpty(edge.Phase1Qualifier))
+                        {
+                            <MudText Typo="Typo.caption" Color="Color.Default" Style="display:block;">@edge.Phase1Qualifier</MudText>
+                        }
+                    </MudTd>
+                    <MudTd Style="white-space:nowrap;">@FormatYearRange(edge.FromYear, edge.ToYear)</MudTd>
+                    <MudTd>
+                        @if (edge.IsHolocronOnly)
+                        {
+                            <MudChip T="string" Size="Size.Small" Variant="Variant.Filled" Color="Color.Secondary" Class="mr-1">Holocron-added</MudChip>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(edge.Role))
+                        {
+                            <MudText HtmlTag="span" Typo="Typo.body2"><b>@edge.Role</b></MudText>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(edge.Qualifier))
+                        {
+                            <MudText HtmlTag="span" Typo="Typo.caption" Color="Color.Secondary" Class="ml-2">@edge.Qualifier</MudText>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(edge.Description))
+                        {
+                            <MudText Typo="Typo.caption" Style="display:block;">@edge.Description</MudText>
+                        }
+                        @if (edge.HolocronAppliedAt.HasValue)
+                        {
+                            var tooltip = $"Applied {edge.HolocronAppliedAt:yyyy-MM-dd HH:mm} UTC by {edge.HolocronAgentVersion ?? "(unknown agent)"}";
+                            <MudTooltip Text="@tooltip">
+                                <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center" Class="mt-1">
+                                    <MudIcon Icon="@Icons.Material.Outlined.Schedule" Size="Size.Small" Color="Color.Secondary" />
+                                    <MudText Typo="Typo.caption" Color="Color.Secondary">last updated @FormatRelativeTime(edge.HolocronAppliedAt.Value)</MudText>
+                                    @if (!string.IsNullOrEmpty(edge.HolocronJobId))
+                                    {
+                                        <MudLink Href="@($"/holocron/jobs/{Node.Id}")" Underline="Underline.Hover">
+                                            <MudText Typo="Typo.caption" Color="Color.Tertiary">view run</MudText>
+                                        </MudLink>
+                                    }
+                                </MudStack>
+                            </MudTooltip>
+                        }
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+        }
+    </MudItem>
+</MudGrid>
+
+@code {
+    /// <summary>
+    /// The node this panel is rendering. Required. The panel will refetch labels/edges/enrichments
+    /// whenever this changes identity (PageId).
+    /// </summary>
+    [Parameter, EditorRequired] public TemporalNodeDto? Node { get; set; }
+
+    /// <summary>
+    /// Whether to show the action-button header row (name + Wiki / Graph Explorer / Galaxy Map /
+    /// Timeline / Holocron buttons). Defaults to <c>true</c> — set to <c>false</c> on the
+    /// standalone <c>/knowledge-graph/nodes/{id}</c> page where the surrounding page chrome
+    /// provides its own header.
+    /// </summary>
+    [Parameter] public bool ShowHeader { get; set; } = true;
+
+    /// <summary>
+    /// Whether to render the node's image inline at the left of the panel. Default <c>true</c>
+    /// matches the row-expand layout. The standalone page sets this <c>false</c> when it shows
+    /// the image in its own header card.
+    /// </summary>
+    [Parameter] public bool ShowImageInline { get; set; } = true;
+
+    // Fetched lazily from the API once Node is known.
+    private List<string>? _labels;
+    private bool _labelsLoading;
+    private HashSet<string> _holocronOnlyLabels = new(StringComparer.OrdinalIgnoreCase);
+    private HashSet<string> _holocronAnnotatedLabels = new(StringComparer.OrdinalIgnoreCase);
+
+    private List<EntityEdgeRowDto>? _edges;
+    private int _edgesTotal;
+    private bool _edgesLoading;
+
+    private List<EntityNodeEnrichmentRowDto>? _enrichments;
+    private bool _enrichmentsLoading;
+
+    // Per-enrichment evidence-toggle state.
+    private readonly HashSet<string> _expandedEvidence = new();
+
+    private void ToggleEvidence(string id)
+    {
+        if (!_expandedEvidence.Add(id))
+            _expandedEvidence.Remove(id);
+    }
+
+    private bool _holocronRunning;
+
+    // Track which node we last loaded so OnParametersSetAsync skips reloads when
+    // the parent re-renders without actually changing the bound DTO identity.
+    private int? _loadedForPageId;
+
+    private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Node is null)
+            return;
+
+        if (_loadedForPageId == Node.Id)
+            return;
+
+        _loadedForPageId = Node.Id;
+        await LoadAllAsync();
+    }
+
+    private async Task LoadAllAsync()
+    {
+        if (Node is null)
+            return;
+
+        _labels = null;
+        _edges = null;
+        _enrichments = null;
+        _holocronOnlyLabels.Clear();
+        _holocronAnnotatedLabels.Clear();
+        _expandedEvidence.Clear();
+
+        _labelsLoading = true;
+        _edgesLoading = true;
+        _enrichmentsLoading = true;
+        StateHasChanged();
+
+        var nodeId = Node.Id;
+        var labelsTask = Api.GetFromJsonAsync<EntityLabelsResult>($"api/RelationshipGraph/labels/{nodeId}");
+        var edgesTask = Api.GetFromJsonAsync<EntityEdgesResult>($"api/RelationshipGraph/edges/{nodeId}?limit=500");
+        var enrichmentsTask = Api.GetFromJsonAsync<EntityNodeEnrichmentsResult>($"api/RelationshipGraph/node-enrichments/{nodeId}");
+
+        try
+        {
+            var result = await labelsTask;
+            _labels = result?.Labels ?? [];
+            if (result is not null)
+            {
+                _holocronOnlyLabels = new HashSet<string>(result.HolocronOnlyLabels ?? [], StringComparer.OrdinalIgnoreCase);
+                _holocronAnnotatedLabels = new HashSet<string>(result.HolocronAnnotatedLabels ?? [], StringComparer.OrdinalIgnoreCase);
+            }
+        }
+        catch
+        {
+            _labels = [];
+        }
+        finally
+        {
+            _labelsLoading = false;
+        }
+
+        try
+        {
+            var edges = await edgesTask;
+            _edges = edges?.Edges ?? [];
+            _edgesTotal = edges?.Total ?? 0;
+        }
+        catch
+        {
+            _edges = [];
+            _edgesTotal = 0;
+        }
+        finally
+        {
+            _edgesLoading = false;
+        }
+
+        try
+        {
+            var enrichments = await enrichmentsTask;
+            _enrichments = enrichments?.Enrichments ?? [];
+        }
+        catch
+        {
+            _enrichments = [];
+        }
+        finally
+        {
+            _enrichmentsLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    /// <summary>
+    /// Opens the Holocron progress dialog (Design-020 async pipeline). On completion,
+    /// refreshes the panel data so newly written enrichments surface inline.
+    /// </summary>
+    private async Task EnhanceWithHolocron()
+    {
+        if (Node is null)
+            return;
+
+        var nodeId = Node.Id;
+        var nodeName = Node.Name;
+        _holocronRunning = true;
+        StateHasChanged();
+        try
+        {
+            var parameters = new DialogParameters<HolocronProgressDialog>
+            {
+                { x => x.PageId, nodeId },
+                { x => x.NodeName, nodeName },
+            };
+            var options = new DialogOptions
+            {
+                CloseOnEscapeKey = true,
+                BackdropClick = true,
+                MaxWidth = MaxWidth.Medium,
+                FullWidth = true,
+            };
+            var dialog = await DialogService.ShowAsync<HolocronProgressDialog>($"Enhance {nodeName}", parameters, options);
+            var result = await dialog.Result;
+
+            var finished = false;
+            if (result is { Canceled: false, Data: HolocronProgressDialog.HolocronStatusResponse status })
+            {
+                finished = status.Stage is HolocronJobStatus.Completed or HolocronJobStatus.Failed;
+            }
+
+            if (finished && Node is not null && Node.Id == nodeId)
+            {
+                _loadedForPageId = null;
+                await LoadAllAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Holocron call errored: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _holocronRunning = false;
+            StateHasChanged();
+        }
+    }
+
+}

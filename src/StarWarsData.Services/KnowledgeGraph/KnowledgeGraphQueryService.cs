@@ -777,6 +777,34 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         return [];
     }
 
+    /// <summary>
+    /// Fetches a single node by PageId and projects it as a <see cref="TemporalNodeDto"/>
+    /// with the same enrichment-attachment + staleness policy used by
+    /// <see cref="BrowseTemporalNodesAsync"/>. Powers the standalone
+    /// <c>/knowledge-graph/nodes/{id}</c> detail page introduced alongside Graph Explorer
+    /// so users can land on a Knowledge Graph-rooted view of a single node.
+    /// Returns <c>null</c> when no node with that PageId exists.
+    /// </summary>
+    public async Task<TemporalNodeDto?> GetTemporalNodeAsync(int pageId, CancellationToken ct = default)
+    {
+        var node = await _nodes.Find(n => n.PageId == pageId).FirstOrDefaultAsync(ct);
+        if (node is null)
+            return null;
+
+        var enrichments = await _nodeEnrichments
+            .Find(Builders<NodeEnrichment>.Filter.Eq(e => e.PageId, pageId) & Builders<NodeEnrichment>.Filter.Eq(e => e.Status, EnrichmentStatus.Active))
+            .SortByDescending(e => e.CreatedAt)
+            .ToListAsync(ct);
+
+        var live = enrichments
+            .Where(e => string.IsNullOrEmpty(e.ContentHashAtCreation) || string.IsNullOrEmpty(node.ContentHash) || string.Equals(e.ContentHashAtCreation, node.ContentHash, StringComparison.Ordinal))
+            .ToList();
+        if (live.Count > 0)
+            node.Enrichments = live;
+
+        return BuildTemporalNodeDto(node);
+    }
+
     public async Task<BrowseTemporalNodesResult> BrowseTemporalNodesAsync(
         string? type,
         string? q,

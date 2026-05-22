@@ -69,7 +69,7 @@
                         </MudStack>
                     </MudTd>
                     <MudTd>
-                        <MudLink Href="@($"/graph-explorer/{row.PageId}")" Underline="Underline.Hover" @onclick:stopPropagation>@(row.NodeName ?? $"PageId {row.PageId}")</MudLink>
+                        <MudLink Href="@($"/knowledge-graph/nodes/{row.PageId}")" Underline="Underline.Hover" @onclick:stopPropagation>@(row.NodeName ?? $"PageId {row.PageId}")</MudLink>
                     </MudTd>
                     <MudTd>
                         @if (row.TotalSteps > 0)
@@ -144,7 +144,7 @@
                         <MudChip T="string" Size="Size.Small" Color="@StatusColor(job.Status)">@job.Status</MudChip>
                     </MudTd>
                     <MudTd>
-                        <MudLink Href="@($"/graph-explorer/{job.PageId}")" Underline="Underline.Hover" @onclick:stopPropagation>@job.NodeName</MudLink>
+                        <MudLink Href="@($"/knowledge-graph/nodes/{job.PageId}")" Underline="Underline.Hover" @onclick:stopPropagation>@job.NodeName</MudLink>
                     </MudTd>
                     <MudTd>
                         <MudText Typo="Typo.caption" Color="Color.Secondary">@FormatRelative(job.StartedAt ?? job.CreatedAt)</MudText>

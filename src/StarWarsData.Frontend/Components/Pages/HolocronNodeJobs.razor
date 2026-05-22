@@ -14,7 +14,7 @@
 
     @* ── Header ─────────────────────────────────────────────────────────────── *@
     <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-4">
-        <MudIconButton Icon="@Icons.Material.Filled.ArrowBack" OnClick="@(() => Navigation.NavigateTo($"/graph-explorer/{PageId}"))" />
+        <MudIconButton Icon="@Icons.Material.Filled.ArrowBack" OnClick="@(() => Navigation.NavigateTo($"/knowledge-graph/nodes/{PageId}"))" />
         <MudIcon Icon="@Icons.Material.Filled.AutoAwesome" Size="Size.Large" />
         <MudStack Spacing="0">
             <MudText Typo="Typo.h5">Holocron Jobs</MudText>
@@ -169,11 +169,11 @@
                                 @if (row.FromId == PageId)
                                 {
                                     <MudText Typo="Typo.caption" Color="Color.Secondary">[@row.Label] →</MudText>
-                                    <MudLink Href="@($"/graph-explorer/{row.ToId}")" Underline="Underline.Hover" @onclick:stopPropagation>@row.ToName</MudLink>
+                                    <MudLink Href="@($"/knowledge-graph/nodes/{row.ToId}")" Underline="Underline.Hover" @onclick:stopPropagation>@row.ToName</MudLink>
                                 }
                                 else
                                 {
-                                    <MudLink Href="@($"/graph-explorer/{row.FromId}")" Underline="Underline.Hover" @onclick:stopPropagation>@row.FromName</MudLink>
+                                    <MudLink Href="@($"/knowledge-graph/nodes/{row.FromId}")" Underline="Underline.Hover" @onclick:stopPropagation>@row.FromName</MudLink>
                                     <MudText Typo="Typo.caption" Color="Color.Secondary">→ [@row.Label]</MudText>
                                 }
                             </MudStack>
@@ -254,7 +254,7 @@
                                                         <MudIcon Icon="@Icons.Material.Filled.Article" Size="Size.Small" Color="Color.Info" />
                                                         @if (ev.SourcePageId.HasValue && !string.IsNullOrEmpty(ev.SourcePageName))
                                                         {
-                                                            <MudLink Href="@($"/graph-explorer/{ev.SourcePageId}")" Underline="Underline.Hover">
+                                                            <MudLink Href="@($"/knowledge-graph/nodes/{ev.SourcePageId}")" Underline="Underline.Hover">
                                                                 <MudText Typo="Typo.body2" Style="font-weight:500;">@ev.SourcePageName</MudText>
                                                             </MudLink>
                                                         }

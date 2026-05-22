@@ -85,6 +85,17 @@
             <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
                 <MudText Typo="Typo.h6">@_selectedEntityName</MudText>
                 <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                    @* The Knowledge Graph node-detail page is the root surface for a single
+                       node (attributes / temporal / edges / Holocron enrichments). Graph
+                       Explorer's visual graph is one of many ways to look at the node, so
+                       give users an explicit pivot back to the canonical detail view. *@
+                    <MudTooltip Text="Open the Knowledge Graph detail view for this node — attributes, temporal data, edges, and Holocron enrichments.">
+                        <MudButton Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small"
+                                   StartIcon="@Icons.Material.Filled.AccountTree"
+                                   Href="@($"/knowledge-graph/nodes/{_selectedEntityId}")">
+                            View details
+                        </MudButton>
+                    </MudTooltip>
                     @* Holocron enhancement is open to any authenticated user — bounded by Holocron's own
                        pre-flight rules and pass-budget settings, so a public refresh button is safe. *@
                     <AuthorizeView Context="auth">

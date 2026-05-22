@@ -64,6 +64,19 @@ public class RelationshipGraphController(KnowledgeGraphQueryService kg) : Contro
     [HttpGet("node-enrichments/{pageId:int}")]
     public Task<EntityNodeEnrichmentsResult> GetNodeEnrichments(int pageId, CancellationToken ct = default) => kg.GetNodeEnrichmentsAsync(pageId, ct);
 
+    /// <summary>
+    /// Single-node TemporalNodeDto by PageId — backs the standalone
+    /// <c>/knowledge-graph/nodes/{id}</c> detail page. Same shape as a row inside
+    /// <see cref="BrowseTemporalNodes"/> so the same <see cref="NodeDetailPanel"/> UI
+    /// works against both surfaces. Returns 404 when the node does not exist.
+    /// </summary>
+    [HttpGet("temporal-nodes/{pageId:int}")]
+    public async Task<ActionResult<TemporalNodeDto>> GetTemporalNode(int pageId, CancellationToken ct = default)
+    {
+        var node = await kg.GetTemporalNodeAsync(pageId, ct);
+        return node is null ? NotFound() : Ok(node);
+    }
+
     [HttpGet("temporal-nodes")]
     public Task<BrowseTemporalNodesResult> BrowseTemporalNodes(
         [FromQuery] string? type = null,

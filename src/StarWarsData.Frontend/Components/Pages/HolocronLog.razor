@@ -110,9 +110,9 @@
                         <MudSpacer />
                         @if (evt.PageId is { } pid && pid > 0)
                         {
-                            <MudLink Href="@($"/graph-explorer/{pid}")" Underline="Underline.Hover">
+                            <MudLink Href="@($"/knowledge-graph/nodes/{pid}")" Underline="Underline.Hover">
                                 <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
-                                    <MudIcon Icon="@Icons.Material.Filled.Hub" Size="Size.Small" />
+                                    <MudIcon Icon="@Icons.Material.Filled.AccountTree" Size="Size.Small" />
                                     <MudText Typo="Typo.body2">@(evt.NodeName ?? $"PageId {pid}")</MudText>
                                 </MudStack>
                             </MudLink>
@@ -120,11 +120,11 @@
                         else if (evt.FromId is { } fid && evt.ToId is { } tid)
                         {
                             <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
-                                <MudLink Href="@($"/graph-explorer/{fid}")" Underline="Underline.Hover">@(evt.FromName ?? $"PageId {fid}")</MudLink>
+                                <MudLink Href="@($"/knowledge-graph/nodes/{fid}")" Underline="Underline.Hover">@(evt.FromName ?? $"PageId {fid}")</MudLink>
                                 <MudIcon Icon="@Icons.Material.Filled.ArrowForward" Size="Size.Small" Color="Color.Secondary" />
                                 <MudText Typo="Typo.body2" Color="Color.Secondary">@evt.Label</MudText>
                                 <MudIcon Icon="@Icons.Material.Filled.ArrowForward" Size="Size.Small" Color="Color.Secondary" />
-                                <MudLink Href="@($"/graph-explorer/{tid}")" Underline="Underline.Hover">@(evt.ToName ?? $"PageId {tid}")</MudLink>
+                                <MudLink Href="@($"/knowledge-graph/nodes/{tid}")" Underline="Underline.Hover">@(evt.ToName ?? $"PageId {tid}")</MudLink>
                             </MudStack>
                         }
                     </MudStack>
@@ -163,7 +163,7 @@
                                             <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1" Class="mb-1">
                                                 @if (ev.SourcePageId is { } evPid && evPid > 0)
                                                 {
-                                                    <MudLink Href="@($"/graph-explorer/{evPid}")" Underline="Underline.Hover">
+                                                    <MudLink Href="@($"/knowledge-graph/nodes/{evPid}")" Underline="Underline.Hover">
                                                         <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
                                                             <MudIcon Icon="@Icons.Material.Filled.Article" Size="Size.Small" />
                                                             <MudText Typo="Typo.body2">@(ev.SourcePageName ?? $"PageId {evPid}")</MudText>
