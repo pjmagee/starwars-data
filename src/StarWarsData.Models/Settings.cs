@@ -106,7 +106,7 @@ public class SettingsOptions
     // ── Rate Limiting ──
 
     /// <summary>Rate limit for anonymous users (requests per window). 0 = unlimited.</summary>
-    public int RateLimitAnonymous { get; set; } = 3;
+    public int RateLimitAnonymous { get; set; } = 6;
 
     /// <summary>Rate limit for authenticated users without BYOK (requests per window). 0 = unlimited.</summary>
     public int RateLimitAuthenticated { get; set; } = 10;
