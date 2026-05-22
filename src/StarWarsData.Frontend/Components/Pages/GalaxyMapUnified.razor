@@ -1279,22 +1279,24 @@
         // after locating a pageId via keyword_search / get_entity_properties.
         // Re-uses the existing /galaxy-map/{pageId} deep-link route (Design-031)
         // so the locate + drill code path is identical to clicking a citation.
-        var actions = new Microsoft.Extensions.AI.AIFunction[]
+        var navigate = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            (int pageId, string? name) =>
+            {
+                var display = string.IsNullOrWhiteSpace(name) ? $"page #{pageId}" : name!;
+                Nav.NavigateTo($"/galaxy-map/{pageId}");
+                return $"Navigated the galaxy map to {display} (pageId {pageId}).";
+            },
+            name: "galaxy_map_navigate",
+            description: "Centre the galaxy map on a System, CelestialBody (planet/moon), Sector, Region, or TradeRoute. "
+                + "Provide the entity's pageId (look it up first via keyword_search or get_entity_properties) "
+                + "and optionally its display name for the confirmation message. "
+                + "Use this when the user asks you to take them to, show, or navigate to a place on the map — "
+                + "do not just describe it in prose."
+        );
+
+        var actions = new PageAction[]
         {
-            Microsoft.Extensions.AI.AIFunctionFactory.Create(
-                (int pageId, string? name) =>
-                {
-                    var display = string.IsNullOrWhiteSpace(name) ? $"page #{pageId}" : name!;
-                    Nav.NavigateTo($"/galaxy-map/{pageId}");
-                    return $"Navigated the galaxy map to {display} (pageId {pageId}).";
-                },
-                name: "galaxy_map_navigate",
-                description:
-                    "Centre the galaxy map on a System, CelestialBody (planet/moon), Sector, Region, or TradeRoute. " +
-                    "Provide the entity's pageId (look it up first via keyword_search or get_entity_properties) " +
-                    "and optionally its display name for the confirmation message. " +
-                    "Use this when the user asks you to take them to, show, or navigate to a place on the map — " +
-                    "do not just describe it in prose."),
+            new(navigate, Label: "Navigate to a place", Example: "take me to Tatooine"),
         };
 
         try

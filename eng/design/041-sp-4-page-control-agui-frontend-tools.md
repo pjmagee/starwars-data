@@ -1,6 +1,6 @@
 # Design-041: SP-4 Page Control via AGUI Frontend Tools
 
-**Status:** Proposed — Phase 0 spike completed 2026-05-21 (see § 7). `Microsoft.Agents.AI.AGUI` 1.6.1-preview added to the Frontend csproj on `feature/design-041-page-control-tools`; no behavioural code yet. Phase 1 implementation pending.
+**Status:** Partially Implemented — Phases 0, 1, and 2a shipped 2026-05-22 on `feature/design-041-page-control-tools` (not yet merged). Phase 0 spike confirmed the preview NuGet's API surface (§ 7). Phase 1 swapped `CopilotSidebar.razor` to `AGUIChatClient` via `IChatClient`. Phase 2a wired the minimal end-to-end path — `PageControlService` + the single `galaxy_map_navigate` action + `UseFunctionInvocation` + the agent prompt block — and the open assumption that `MapAGUI` merges per-turn `RunAgentInput.tools` into the agent catalog is **confirmed** (verified by "take me to Tatooine" centring the map). Discoverability addressed via a "Can drive page" chip + popover in the sidebar header (resolves the open question of the same name). Phase 2b (the remaining 12 galaxy-map actions) and Phase 3 (other pages) are pending.
 **Date:** 2026-05-21
 **Author:** Patrick Magee + Claude
 **Related:** [Design-022 Page-Aware Copilot Sidebar](./022-galaxy-map-copilot.md), [Design-004 Galaxy Map Architecture](./004-galaxy-map-architecture.md), [Design-006 Galaxy Map Timeline Mode](./006-galaxy-map-timeline-mode.md), [Design-031 Galaxy Map Deep-Link Route](./031-galaxy-map-deep-link-route.md), [Design-032 Galaxy Map Events at Location](./032-galaxy-map-events-at-location.md), [Design-034 Galaxy Map Temporal](./034-galaxy-map-temporal.md), [Design-029 Agent Filter Context](./029-agent-filter-context.md)
@@ -78,26 +78,27 @@ The shared `AguiMessage` / `AguiToolCall` / `AguiFunction` DTOs in `Components/S
 
 ### 3. `PageControlService` — the action contract
 
-A new scoped singleton on the Frontend, sibling to `PageContextService`. Because frontend tools ride `Microsoft.Extensions.AI` (Phase 0 finding), each action **is** an `AIFunction` — not a custom `PageAction` record + dispatcher map. The service is a thin registry over them:
+A scoped singleton on the Frontend, sibling to `PageContextService`. Because frontend tools ride `Microsoft.Extensions.AI` (Phase 0 finding), the executable surface is an `AIFunction` per action — but each action also carries the user-facing strings the sidebar's discoverability popover renders (Open Q resolved: § "Discoverability" below). The service is a thin registry over a `PageAction` record:
 
 ```csharp
 namespace StarWarsData.Frontend.Services;
 
+// The agent-facing AIFunction plus the user-facing strings the popover renders.
+public sealed record PageAction(AIFunction Tool, string Label, string? Example = null);
+
 public sealed class PageControlService
 {
-    // Tools the focused page advertises for SP-4's next turn. Empty if no page registered.
-    // Built as AIFunction so they drop directly into ChatOptions.Tools.
-    public IReadOnlyList<AIFunction> AvailableActions { get; }
+    // Actions the focused page advertises. Empty if no page registered.
+    public IReadOnlyList<PageAction> Actions { get; }
+
+    // Convenience projection for ChatOptions.Tools — just the AIFunctions.
+    public IReadOnlyList<AIFunction> Tools { get; }
 
     // The slug of the page that owns the current registration ("galaxy_map", "timeline", ...).
-    // null when no page is registered. Used by CopilotSidebar to render a "page tools available"
-    // chip and by the agent's narration to know which page it's driving.
     public string? CurrentPage { get; }
 
-    // Page registers handlers in OnInitialized; unregisters in Dispose.
-    // Each AIFunction is built via AIFunctionFactory.Create(delegate, name, description) by the
-    // page, so the page owns the param binding (the page knows its own types).
-    public IDisposable Register(string page, IReadOnlyList<AIFunction> actions);
+    // Page registers in OnInitialized; unregisters in Dispose.
+    public IDisposable Register(string page, IReadOnlyList<PageAction> actions);
 
     public event Action? OnChange;
 }
@@ -106,8 +107,9 @@ public sealed class PageControlService
 Rules:
 
 - Only **one** page can be registered at a time (the focused page). `Register` returns an `IDisposable` whose `Dispose` removes the registration; pages call it from `IDisposable.Dispose` / `IAsyncDisposable.DisposeAsync`. A second `Register` while one is active is a programmer bug and throws — never silently overwrite.
-- Each `AIFunction` wraps a method on the page itself (or a thin lambda over `_module.InvokeAsync<bool>("drillToDeepLink", ...)`). The `UseFunctionInvocation` middleware calls the wrapped delegate on the same SynchronizationContext the chat call was made from — i.e. the Blazor circuit — so handlers can touch component state directly without an explicit `InvokeAsync(...)` wrap. (Verified by Phase 1 smoke test before relying on this.)
-- `PageControlService.AvailableActions` is consumed by `CopilotSidebar.SubmitAsync` at submit time. The sidebar's `ChatOptions.Tools` is the union of `[…server-side static tools — already baked into the agent, ...AvailableActions]`. The server-side tools come from `CopilotAgent.Build()` and don't change; the page tools are per-turn via `RunAgentInput.tools`. **The tool catalog SP-4 sees this turn is the union of the server-side toolkit and whatever the focused page advertises** — switch to `/timeline` and SP-4 loses `galaxy_map_navigate`, gains `timeline_set_year`. No prompt rewrite, no second agent.
+- Each `AIFunction` is built via `AIFunctionFactory.Create(delegate, name, description)` by the page. The page owns the parameter binding (it knows its own types) and the body (it knows its own JS module / component methods). `description` is **model-facing** copy with parameter guidance; `PageAction.Label` is the **user-facing** short title; `PageAction.Example` is one example phrase the user might type. All three render together in the sidebar popover so users learn the vocabulary by seeing it.
+- The `UseFunctionInvocation` middleware calls the wrapped delegate on the same SynchronizationContext the chat call was made from — i.e. the Blazor circuit — so handlers can touch component state directly without an explicit `InvokeAsync(...)` wrap. (Confirmed by Phase 2a smoke test; navigation called from the middleware re-renders cleanly.)
+- `PageControlService.Tools` is consumed by `CopilotSidebar.SubmitAsync` at submit time as `ChatOptions.Tools`. The server-side tools come from `CopilotAgent.Build()` and don't change; the page tools are per-turn via `RunAgentInput.tools`. **The tool catalog SP-4 sees this turn is the union of the server-side toolkit and whatever the focused page advertises** — switch to `/timeline` and SP-4 loses `galaxy_map_navigate`, gains `timeline_set_year`. No prompt rewrite, no second agent.
 - Handler return type is `Task<string>` (or `string`) — a one-line confirmation the agent quotes (`"Centred on Coruscant (system, Core Worlds)."`) or a typed result the agent reasons about. Failures are returned as a string (`"No system named 'Bothan'. Closest match: Bothawui."`) — `UseFunctionInvocation` already serializes any return type to JSON for the model.
 
 ### 4. Galaxy map's action set (Phase 2)
@@ -178,9 +180,10 @@ The protocol-droid persona, the entity-linking rules, the data-source priority �
 
 ### 7. Implementation phases
 
-- **Phase 0 — spike (≤ ½ day).** Confirm the `Microsoft.Agents.AI.AGUI` 1.6.1-preview client exposes a frontend-tool registration hook compatible with what `MapAGUI`'s `RunAgentInput.tools` field forwards. If yes, Phase 1 proceeds. If no, fall back to Alternatives § A.
-- **Phase 1 — adopt `AGUIChatClient`.** Frontend takes the package reference, `CopilotSidebar.razor` is rewritten against the typed client. Existing read-only SP-4 behaviour preserved (regression: existing E2E on Yoda still produces prose + citations as today). Hand-rolled `AguiSseReader.cs` deleted in the same change.
-- **Phase 2 — galaxy map page control.** `PageControlService` added; `GalaxyMapUnified.razor` registers the 13 actions from § 4; `CopilotAgent.Instructions` gets the page-control block; sidebar breadcrumb adds the page-action icon. Ship behind no flag — the action registry is empty for every other page, so SP-4 elsewhere is byte-identical to today.
+- **Phase 0 — spike (shipped 2026-05-21).** Read the `Microsoft.Agents.AI.AGUI` 1.6.1-preview public surface from the restored package XML. Findings recorded in the Phase 0 callout above and in the doc's revised § 3 (no custom frontend-tool hook; use M.E.AI `UseFunctionInvocation`). `AguiSseReader.cs` survives — still used by `Ask.razor`.
+- **Phase 1 — adopt `AGUIChatClient` (shipped 2026-05-22).** Frontend csproj takes the package reference. `CopilotSidebar.razor` rewritten against `IChatClient`: per-circuit `AGUIChatClient` instantiated in `OnInitialized`, conversation state migrated from `List<AguiMessage>` to `List<ChatMessage>`, streaming-update walker maps `TextContent` / `FunctionCallContent` / `FunctionResultContent` to the existing breadcrumb UI. No regressions on the read-only path — server-executed tools still render as breadcrumbs.
+- **Phase 2a — minimal page-control wire (shipped 2026-05-22).** `PageControlService` scoped singleton landed; `GalaxyMapUnified.razor` registers ONE `galaxy_map_navigate(pageId, name?)` action; `CopilotSidebar.razor` wraps the chat client with `.UseFunctionInvocation()` and passes `PageControl.Tools` per turn; `CopilotAgent.InstructionsTemplate` gains the `PAGE-CONTROL TOOLS` block; sidebar header gains a "Can drive page (N)" chip with a popover listing each action's label + description + clickable example phrase. Confirmed end-to-end: "take me to Tatooine" resolves the pageId via `keyword_search`, calls the client tool, the map drills, SP-4 narrates one sentence. Validates the previously-open assumption that `MapAGUI` merges `RunAgentInput.tools` into the per-turn agent catalog.
+- **Phase 2b — remaining galaxy-map actions (pending).** The other 12 verbs from § 4 (`galaxy_map_go_overview`, `_go_back`, `_set_mode`, `_toggle_region`, `_show/hide_all_regions`, `_highlight_sector`, `_open/close_details`, `_toggle_fullscreen`, `_set_era`, `_set_lens`, `_play_timeline`). Each is a thin lambda over a method that already exists on `GalaxyMapUnified.razor` — registration follow-ups, not new code paths.
 - **Phase 3 — opt-in other pages.** Timeline (`timeline_set_year`, `timeline_set_lens`, `timeline_play`), Graph Explorer (`graph_explorer_focus_node`, `graph_explorer_expand`, `graph_explorer_collapse`), Knowledge Graph (`kg_inspect_node`, `kg_switch_tab`), Search (`search_set_query`, `search_set_filter`). One PR per page; the contract is stable.
 - **Phase 4 (deferred) — shared state via `STATE_DELTA`.** If a use case appears for SP-4 owning a slice of UI state across turns (e.g. a persistent "watch list" of highlighted systems), introduce a `PageStateService` mirror and bind the relevant UI to it. Not on the critical path for any user request today.
 
@@ -195,13 +198,17 @@ The protocol-droid persona, the entity-linking rules, the data-source priority �
 
 ## Open questions
 
-- **`AGUIChatClient`'s frontend-tool API in 1.6.1-preview.** Verified by Phase 0 spike. The blog post and NuGet page both confirm the package exists and the client class is `AGUIChatClient`, but neither documents the frontend-tool handler shape. If the preview is missing it, defer to Alternatives § A and reopen this question when the API stabilises.
 - **Migrating `Ask.razor` to `AGUIChatClient`.** Out of scope for Phase 1. Once SP-4 has been on the typed client for ≥ 2 weeks with no regressions, migrate `/ask`. Until then, the shared `Components/Shared/Agui/` DTOs stay — two callers, one wire format.
 - **Confirm-before-act for irreversible actions.** Switching from Explore to Timeline mode is mostly harmless; toggling fullscreen is jarring. Default: every action fires immediately, the breadcrumb + narration tells the user what happened, and there's an undo affordance only where the page already has one (`GoBack`). If user feedback says fullscreen-toggle is too startling, gate it behind a confirm-step in the agent prompt rather than a UI dialog.
-- **Tool-call budget.** Page actions are cheap (no LLM cost, no MongoDB hit), but each one still consumes a tool-call iteration against `UseFunctionInvocation.MaximumIterationsPerRequest = 8` and the `UseToolCallBudget(softWarnAt: 6, hardLimit: 10)` cap. Likely fine — a typical "take me to X and highlight Y" turn is 2 page calls + maybe 1 KG lookup — but worth measuring after Phase 2 lands.
+- **Tool-call budget.** Page actions are cheap (no LLM cost, no MongoDB hit), but each one still consumes a tool-call iteration against `UseFunctionInvocation.MaximumIterationsPerRequest = 8` and the `UseToolCallBudget(softWarnAt: 6, hardLimit: 10)` cap. Likely fine — a typical "take me to X and highlight Y" turn is 2 page calls + maybe 1 KG lookup — but worth measuring after Phase 2b lands.
 - **Cross-page actions ("take me to the timeline at 22 BBY").** SP-4 could chain `goto:/timeline?year=-22` via `NavigationManager.NavigateTo` before invoking the new page's action set, but the in-flight tool would need to await page re-registration. Out of scope for Phase 2; revisit when Phase 3 lands and the second page (timeline) is wired.
 - **Persistence of agent-driven state across reload.** Today the page restores from the URL deep link (Design-031); SP-4-driven highlights are not in the URL. Acceptable for now — refresh = clean slate is the existing behaviour for filters too. Revisit if users complain.
-- **Discoverability.** Should the sidebar empty-state list a "Try: 'take me to Coruscant'" prompt on `/galaxy-map`? Default yes — extend `_galaxyMapGenericPrompts` in `CopilotSidebar.razor` with two navigation-style prompts so users discover the capability.
+
+## Resolved questions
+
+- **`AGUIChatClient`'s frontend-tool API in 1.6.1-preview.** Resolved 2026-05-21 by Phase 0 spike — no AGUI-specific hook; frontend tools ride standard M.E.AI `ChatOptions.Tools` + `.UseFunctionInvocation()`. Confirmed end-to-end by Phase 2a.
+- **Server-side merge of `RunAgentInput.tools`.** Resolved 2026-05-22 by Phase 2a smoke test — `MapAGUI` (1.0.0-preview.260311.1) does merge per-turn client tools into the agent's tool catalog, "take me to Tatooine" works.
+- **Discoverability.** Resolved 2026-05-22 — the "Can drive page (N)" chip in the sidebar header opens a MudMenu popover listing each registered `PageAction`'s `Label`, agent-facing `Description`, and clickable `Example` phrase. Reuses the same descriptions the model sees — single source of truth. Empty-state suggestion prompts (the original sketched fallback) are not needed; the chip is visible the moment the page registers.
 
 ## Revisit when
 

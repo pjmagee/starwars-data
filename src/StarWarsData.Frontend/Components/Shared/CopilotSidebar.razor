@@ -67,14 +67,48 @@
                          Text="@($"Selected: {Truncate(PageContext.CurrentSelection!, 40)}")" />
             </MudTooltip>
         }
-        @if (PageControl.AvailableActions.Count > 0)
+        @if (PageControl.Actions.Count > 0)
         {
-            <MudTooltip Text="@($"SP-4 can drive this page — {PageControl.AvailableActions.Count} action(s) available")">
-                <MudChip T="string" Size="Size.Small" Color="Color.Success" Variant="Variant.Outlined"
-                         Icon="@Icons.Material.Filled.SmartToy"
-                         Style="font-size:11px;margin-left:4px;"
-                         Text="Can drive page" />
-            </MudTooltip>
+            @* "Can drive page" popover — surfaces the page-control vocabulary (Design-041
+               Discoverability). Click expands a menu listing each action's label, the
+               agent-facing description (so the user sees the exact intent), and one
+               example phrase. Click an example to drop it into the input. *@
+            <MudMenu AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft" Dense="true">
+                <ActivatorContent>
+                    <MudChip T="string" Size="Size.Small" Color="Color.Success" Variant="Variant.Outlined"
+                             Icon="@Icons.Material.Filled.SmartToy"
+                             Style="font-size:11px;margin-left:4px;cursor:pointer;"
+                             Text="@($"Can drive page ({PageControl.Actions.Count})")" />
+                </ActivatorContent>
+                <ChildContent>
+                    <div class="pa-2" style="max-width:320px;">
+                        <MudText Typo="Typo.subtitle2" Class="mb-1">SP-4 can do this here</MudText>
+                        <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-2">
+                            Ask in plain English. Click an example to try it.
+                        </MudText>
+                        @foreach (var a in PageControl.Actions)
+                        {
+                            var action = a;
+                            <div class="mb-2">
+                                <MudText Typo="Typo.body2" Style="font-weight:600;">@action.Label</MudText>
+                                <MudText Typo="Typo.caption" Color="Color.Secondary" Style="white-space:normal;">
+                                    @action.Tool.Description
+                                </MudText>
+                                @if (!string.IsNullOrWhiteSpace(action.Example))
+                                {
+                                    <MudButton Size="Size.Small" Variant="Variant.Text" Color="Color.Primary"
+                                               StartIcon="@Icons.Material.Filled.PlayArrow"
+                                               Class="mt-1"
+                                               Style="text-transform:none;padding:0 6px;font-size:11px;"
+                                               OnClick="@(() => UseSuggestion(action.Example!))">
+                                        "@action.Example"
+                                    </MudButton>
+                                }
+                            </div>
+                        }
+                    </div>
+                </ChildContent>
+            </MudMenu>
         }
     </div>
 
@@ -271,10 +305,12 @@
     private readonly List<Msg> _conversation = [];
     private readonly List<ChatMessage> _chatMessages = [];
 
-    // Per-turn streaming state. We key breadcrumbs and the in-flight assistant
-    // bubble off the streaming update's MessageId / CallId so we can accumulate
-    // text deltas and the matching FunctionCallContent / FunctionResultContent
-    // pairs back into one UI element each.
+    // Per-turn streaming state. Breadcrumbs are keyed by CallId so they don't
+    // re-render when the same FunctionCallContent shows up across updates. The
+    // assistant bubble's text is rebuilt from the canonical M.E.AI accumulator
+    // (ToChatResponse) each tick — direct `msg.Text += text.Text` doubled the
+    // text when AGUIChatClient emitted both incremental deltas AND a final
+    // assembled TextContent.
     private readonly Dictionary<string, Msg> _assistantByMessageId = [];
     private readonly Dictionary<string, Msg> _breadcrumbByCallId = [];
 
@@ -403,7 +439,7 @@
         // Per-turn tools: whatever the focused page has registered with
         // PageControlService (Design-041 § 3). UseFunctionInvocation (wired
         // in OnInitialized) handles local execution when the agent calls one.
-        var pageTools = PageControl.AvailableActions;
+        var pageTools = PageControl.Tools;
         var options = new ChatOptions
         {
             Tools = pageTools.Count > 0 ? [.. pageTools.Cast<AITool>()] : null,
@@ -416,7 +452,8 @@
             await foreach (var update in _chatClient.GetStreamingResponseAsync(_chatMessages, options, cts.Token))
             {
                 updates.Add(update);
-                ApplyUpdate(update);
+                ApplyToolCallContents(update);
+                ApplyAssistantText(updates);
 
                 StateHasChanged();
                 await ScrollToBottom();
@@ -456,18 +493,15 @@
         }
     }
 
-    private void ApplyUpdate(ChatResponseUpdate update)
+    private void ApplyToolCallContents(ChatResponseUpdate update)
     {
+        // Breadcrumbs + error surface only — text is handled by ApplyAssistantText
+        // via the M.E.AI canonical accumulator (avoids double-counting when the
+        // AGUI stream emits both deltas and a final assembled TextContent).
         foreach (var content in update.Contents)
         {
             switch (content)
             {
-                case TextContent text when !string.IsNullOrEmpty(text.Text):
-                {
-                    var msg = GetOrCreateAssistantMsg(update.MessageId);
-                    msg.Text += text.Text;
-                    break;
-                }
                 case FunctionCallContent fc:
                 {
                     if (!_breadcrumbByCallId.ContainsKey(fc.CallId))
@@ -501,20 +535,32 @@
         }
     }
 
-    private Msg GetOrCreateAssistantMsg(string? messageId)
+    private void ApplyAssistantText(IReadOnlyList<ChatResponseUpdate> updates)
     {
-        // No MessageId on the update yet — fall back to "the current open assistant
-        // msg" (the last one we created with no id). Most providers do supply an id;
-        // this guards against the AGUI client emitting an early text content before
-        // the message id is known.
-        var key = messageId ?? "";
-        if (_assistantByMessageId.TryGetValue(key, out var existing))
-            return existing;
+        // Rebuild the assistant message list from the canonical M.E.AI accumulator
+        // each tick. ToChatResponse() collapses streamed deltas + any final
+        // assembled message into the messages the model actually produced — one
+        // ChatMessage per assistant turn segment (pre-tool-call thinking and
+        // post-tool-call narration become two separate messages, each with one
+        // canonical text). We mirror each into a Msg bubble, keyed by MessageId.
+        var response = updates.ToChatResponse();
+        var seen = new HashSet<string>(StringComparer.Ordinal);
+        var index = 0;
+        foreach (var m in response.Messages.Where(m => m.Role == ChatRole.Assistant))
+        {
+            var key = !string.IsNullOrEmpty(m.MessageId) ? m.MessageId! : $"__pos:{index}";
+            seen.Add(key);
 
-        var msg = new Msg { Role = Role.Assistant, Text = "" };
-        _conversation.Add(msg);
-        _assistantByMessageId[key] = msg;
-        return msg;
+            if (!_assistantByMessageId.TryGetValue(key, out var bubble))
+            {
+                bubble = new Msg { Role = Role.Assistant, Text = "" };
+                _assistantByMessageId[key] = bubble;
+                _conversation.Add(bubble);
+            }
+
+            bubble.Text = m.Text ?? "";
+            index++;
+        }
     }
 
     private async Task ResolveCitationsAsync(Msg msg)

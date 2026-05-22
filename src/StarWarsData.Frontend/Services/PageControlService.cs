@@ -3,10 +3,22 @@ using Microsoft.Extensions.AI;
 namespace StarWarsData.Frontend.Services;
 
 /// <summary>
-/// Per-circuit registry of <see cref="AIFunction"/> tools the currently focused
-/// page advertises to the copilot (SP-4). The sidebar passes
-/// <see cref="AvailableActions"/> as <c>ChatOptions.Tools</c> on every turn so
-/// the agent can call back into the page (navigate, highlight, toggle panels…).
+/// One page-control action: the <see cref="AIFunction"/> the agent calls plus
+/// the user-facing strings the sidebar shows in the "Can drive page" popover.
+///
+/// The <see cref="AIFunction.Description"/> on the tool is model-facing copy
+/// (precise, includes parameter guidance) — kept separate from <see cref="Label"/>
+/// (short human title) and <see cref="Example"/> (one phrase a user would type
+/// to trigger this action). All three render together in the popover so users
+/// learn the vocabulary by seeing it.
+/// </summary>
+public sealed record PageAction(AIFunction Tool, string Label, string? Example = null);
+
+/// <summary>
+/// Per-circuit registry of page-control actions the currently focused page
+/// advertises to the copilot (SP-4). The sidebar passes <see cref="Tools"/> as
+/// <c>ChatOptions.Tools</c> on every turn so the agent can call back into the
+/// page; it reads <see cref="Actions"/> for the discoverability popover.
 ///
 /// Pages register in <c>OnInitialized</c> and dispose the returned token in
 /// <c>IDisposable.Dispose</c> / <c>IAsyncDisposable.DisposeAsync</c>. Only ONE
@@ -20,7 +32,7 @@ public sealed class PageControlService
 {
     readonly object _gate = new();
     string? _currentPage;
-    IReadOnlyList<AIFunction> _actions = [];
+    IReadOnlyList<PageAction> _actions = [];
 
     public string? CurrentPage
     {
@@ -31,7 +43,7 @@ public sealed class PageControlService
         }
     }
 
-    public IReadOnlyList<AIFunction> AvailableActions
+    public IReadOnlyList<PageAction> Actions
     {
         get
         {
@@ -40,9 +52,18 @@ public sealed class PageControlService
         }
     }
 
+    public IReadOnlyList<AIFunction> Tools
+    {
+        get
+        {
+            lock (_gate)
+                return [.. _actions.Select(a => a.Tool)];
+        }
+    }
+
     public event Action? OnChange;
 
-    public IDisposable Register(string page, IReadOnlyList<AIFunction> actions)
+    public IDisposable Register(string page, IReadOnlyList<PageAction> actions)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(page);
         ArgumentNullException.ThrowIfNull(actions);
