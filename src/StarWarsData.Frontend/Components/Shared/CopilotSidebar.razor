@@ -70,45 +70,46 @@
         @if (PageControl.Actions.Count > 0)
         {
             @* "Can drive page" popover — surfaces the page-control vocabulary (Design-041
-               Discoverability). MudButton (not MudChip) as activator: MudChip's own click
-               handling swallows the menu open event. The button is styled compact + the
-               same outlined-success look so it reads as a chip. *@
-            <MudMenu AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft" Dense="true">
-                <ActivatorContent>
-                    <MudButton Size="Size.Small" Variant="Variant.Outlined" Color="Color.Success"
-                               StartIcon="@Icons.Material.Filled.SmartToy"
-                               Style="text-transform:none;font-size:11px;margin-left:4px;min-height:22px;padding:0 8px;line-height:1.4;">
-                        Can drive page (@PageControl.Actions.Count)
-                    </MudButton>
-                </ActivatorContent>
-                <ChildContent>
-                    <div class="pa-2" style="max-width:320px;">
-                        <MudText Typo="Typo.subtitle2" Class="mb-1">SP-4 can do this here</MudText>
-                        <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-2">
-                            Ask in plain English. Click an example to try it.
-                        </MudText>
-                        @foreach (var a in PageControl.Actions)
-                        {
-                            var action = a;
-                            <div class="mb-2">
-                                <MudText Typo="Typo.body2" Style="font-weight:600;">@action.Label</MudText>
-                                <MudText Typo="Typo.caption" Color="Color.Secondary" Style="white-space:normal;">
-                                    @action.Tool.Description
-                                </MudText>
-                                @if (!string.IsNullOrWhiteSpace(action.Example))
-                                {
-                                    <MudButton Size="Size.Small" Variant="Variant.Text" Color="Color.Primary"
-                                               StartIcon="@Icons.Material.Filled.PlayArrow"
-                                               Class="mt-1"
-                                               Style="text-transform:none;padding:0 6px;font-size:11px;"
-                                               OnClick="@(() => UseSuggestion(action.Example!))">
-                                        "@action.Example"
-                                    </MudButton>
-                                }
-                            </div>
-                        }
-                    </div>
-                </ChildContent>
+               Discoverability). Uses MudMenu's built-in activator (Label + StartIcon),
+               which wires the click correctly — the ActivatorContent + nested-button
+               pattern times out the click on MudBlazor 9.4 (verified via Chrome DevTools).
+               Each menu item shows the user-facing label, the agent-facing description,
+               and a clickable example phrase that drops into the input. *@
+            <MudMenu Label="@($"Can drive page ({PageControl.Actions.Count})")"
+                     StartIcon="@Icons.Material.Filled.SmartToy"
+                     Variant="Variant.Outlined"
+                     Color="Color.Success"
+                     Size="Size.Small"
+                     AnchorOrigin="Origin.BottomLeft"
+                     TransformOrigin="Origin.TopLeft"
+                     Dense="true"
+                     Style="text-transform:none;font-size:11px;margin-left:4px;min-height:22px;padding:0 8px;line-height:1.4;">
+                <div class="pa-2" style="max-width:320px;">
+                    <MudText Typo="Typo.subtitle2" Class="mb-1">SP-4 can do this here</MudText>
+                    <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-2">
+                        Ask in plain English. Click an example to try it.
+                    </MudText>
+                    @foreach (var a in PageControl.Actions)
+                    {
+                        var action = a;
+                        <div class="mb-2">
+                            <MudText Typo="Typo.body2" Style="font-weight:600;">@action.Label</MudText>
+                            <MudText Typo="Typo.caption" Color="Color.Secondary" Style="white-space:normal;">
+                                @action.Tool.Description
+                            </MudText>
+                            @if (!string.IsNullOrWhiteSpace(action.Example))
+                            {
+                                <MudButton Size="Size.Small" Variant="Variant.Text" Color="Color.Primary"
+                                           StartIcon="@Icons.Material.Filled.PlayArrow"
+                                           Class="mt-1"
+                                           Style="text-transform:none;padding:0 6px;font-size:11px;"
+                                           OnClick="@(() => UseSuggestion(action.Example!))">
+                                    "@action.Example"
+                                </MudButton>
+                            }
+                        </div>
+                    }
+                </div>
             </MudMenu>
         }
     </div>

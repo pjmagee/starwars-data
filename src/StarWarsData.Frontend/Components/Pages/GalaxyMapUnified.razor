@@ -1275,10 +1275,22 @@
 
     void RegisterPageControlActions()
     {
-        // Design-041 Phase 2a — single smoke-test action. The agent calls this
-        // after locating a pageId via keyword_search / get_entity_properties.
-        // Re-uses the existing /galaxy-map/{pageId} deep-link route (Design-031)
-        // so the locate + drill code path is identical to clicking a citation.
+        // Design-041 Phase 2 — the galaxy map's full action catalogue.
+        //
+        // Each handler is a thin lambda over a method that already exists on
+        // this component or its JS module. Handlers always return a one-line
+        // string SP-4 quotes verbatim in its narration; failure paths return
+        // an explanation the agent can react to (e.g. "couldn't find region X
+        // — closest match Y").
+        //
+        // Naming convention (Design-041 § 4): <page>_<verb>[_<object>],
+        // snake_case, page slug mandatory. Keeps page tools visually distinct
+        // from server-side data tools in the agent's catalog.
+
+        // AIFunctionFactory.Create has multiple overloads; we call it via its
+        // fully-qualified name on each registration rather than via a method-
+        // group alias (the alias hits CS8917 "delegate type could not be
+        // inferred"). One static using would also work; this keeps it local.
         var navigate = Microsoft.Extensions.AI.AIFunctionFactory.Create(
             (int pageId, string? name) =>
             {
@@ -1294,9 +1306,197 @@
                 + "do not just describe it in prose."
         );
 
+        var goOverview = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            async () =>
+            {
+                await GoToOverview();
+                return "Zoomed out to the galaxy overview.";
+            },
+            name: "galaxy_map_go_overview",
+            description: "Zoom the galaxy map all the way out to the overview (full galaxy)."
+        );
+
+        var goBack = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            async () =>
+            {
+                await GoBack();
+                return "Stepped back one level on the map.";
+            },
+            name: "galaxy_map_go_back",
+            description: "Step the galaxy map back one drill-down level (e.g. from a system back to its sector)."
+        );
+
+        var setMode = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            async (string mode) =>
+            {
+                var m = mode?.Trim().ToLowerInvariant();
+                if (m is not ("explore" or "timeline"))
+                    return $"Unknown mode '{mode}'. Use 'explore' (default geography) or 'timeline' (per-year territory + events).";
+                await OnModeChanged(m);
+                return m == "timeline"
+                    ? "Switched to Timeline mode — per-year territory shading and events are now visible."
+                    : "Switched to Explore mode — back to the default geography view.";
+            },
+            name: "galaxy_map_set_mode",
+            description: "Switch the galaxy map between 'explore' (default geography, drill-down) and 'timeline' "
+                + "(per-year territory + event heatmap overlays). Argument: mode = 'explore' | 'timeline'."
+        );
+
+        var toggleRegion = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            async (string region, bool visible) =>
+            {
+                if (_geography is null)
+                    return "Map geography hasn't loaded yet.";
+                var match = _geography.Regions.FirstOrDefault(r => r.Name.Equals(region, StringComparison.OrdinalIgnoreCase));
+                if (match is null)
+                    return $"No region named '{region}' on this map. Known regions include: {string.Join(", ", _geography.Regions.Take(5).Select(r => r.Name))}…";
+                var currentlyHidden = _hiddenRegions.Contains(match.Name);
+                if (visible && currentlyHidden)
+                    await ToggleRegion(match.Name);
+                else if (!visible && !currentlyHidden)
+                    await ToggleRegion(match.Name);
+                return visible
+                    ? $"Showing the {match.Name} region overlay."
+                    : $"Hid the {match.Name} region overlay.";
+            },
+            name: "galaxy_map_toggle_region",
+            description: "Show or hide a named region overlay on the galaxy map (e.g. Core Worlds, Outer Rim Territories). "
+                + "Idempotent on the desired state. Args: region (name), visible (true/false)."
+        );
+
+        var showAllRegions = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            async () =>
+            {
+                await ShowAllRegions();
+                return "All region overlays are now visible.";
+            },
+            name: "galaxy_map_show_all_regions",
+            description: "Make every region overlay visible on the galaxy map."
+        );
+
+        var hideAllRegions = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            async () =>
+            {
+                await HideAllRegions();
+                return "Hid all region overlays.";
+            },
+            name: "galaxy_map_hide_all_regions",
+            description: "Hide every region overlay on the galaxy map (useful before highlighting one specific region)."
+        );
+
+        var highlightSector = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            async (string sector) =>
+            {
+                await HighlightSector(sector);
+                return $"Highlighted the {sector} sector on the map.";
+            },
+            name: "galaxy_map_highlight_sector",
+            description: "Flash-highlight the grid cells that belong to a named sector. Argument: sector (name)."
+        );
+
+        var openDetails = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            async (int pageId) =>
+            {
+                _detailPanelOpen = true;
+                await LoadPageDetail(pageId);
+                StateHasChanged();
+                return $"Opened the details panel for pageId {pageId}.";
+            },
+            name: "galaxy_map_open_details",
+            description: "Open the right-hand details panel and load the info card for the entity with this pageId."
+        );
+
+        var closeDetails = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            () =>
+            {
+                _detailPanelOpen = false;
+                ClearDetailPanel();
+                StateHasChanged();
+                return "Closed the details panel.";
+            },
+            name: "galaxy_map_close_details",
+            description: "Close the right-hand details panel."
+        );
+
+        var toggleFullscreen = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            (bool? fullscreen) =>
+            {
+                var target = fullscreen ?? !Layout.IsFullscreen;
+                Layout.SetFullscreen(target);
+                return target ? "Galaxy map is now fullscreen." : "Exited fullscreen.";
+            },
+            name: "galaxy_map_toggle_fullscreen",
+            description: "Enter or exit fullscreen for the galaxy map. Optional arg 'fullscreen' (true/false); omit to toggle."
+        );
+
+        var setYear = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            async (int year) =>
+            {
+                if (_mode != "timeline")
+                    await OnModeChanged("timeline");
+                await JumpToYear(year);
+                return $"Jumped the timeline to year {_year} (closest available to {year}).";
+            },
+            name: "galaxy_map_set_year",
+            description: "Jump the Timeline mode to a specific galactic year (BBY = negative, ABY = positive). "
+                + "Auto-switches to Timeline mode first if needed. Arg: year (int)."
+        );
+
+        var setLens = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            async (string lens) =>
+            {
+                if (_overview is null)
+                    return "Timeline overview hasn't loaded yet.";
+                var available = _overview.Lenses.Select(l => l.Lens).ToList();
+                var match = lens.Equals("All", StringComparison.OrdinalIgnoreCase)
+                    ? "All"
+                    : available.FirstOrDefault(l => l.Equals(lens, StringComparison.OrdinalIgnoreCase));
+                if (match is null)
+                    return $"No lens named '{lens}'. Available: {string.Join(", ", available)}.";
+                if (_mode != "timeline")
+                    await OnModeChanged("timeline");
+                await OnLensChanged(match);
+                return match == "All"
+                    ? "Cleared the lens filter — all events shown."
+                    : $"Filtered to the {match} lens.";
+            },
+            name: "galaxy_map_set_lens",
+            description: "Filter the Timeline mode's event overlay by lens (Battles, Politics, Trade, etc.) or 'All' to clear. "
+                + "Auto-switches to Timeline mode first if needed. Arg: lens (name)."
+        );
+
+        var playTimeline = Microsoft.Extensions.AI.AIFunctionFactory.Create(
+            (bool playing, int? fromYear) =>
+            {
+                if (fromYear is int y)
+                    _ = JumpToYear(y);
+                if (playing != _autoplay)
+                    ToggleAutoplay();
+                return playing
+                    ? (fromYear is int y2 ? $"Started timeline autoplay from year {y2}." : "Started timeline autoplay.")
+                    : "Paused timeline autoplay.";
+            },
+            name: "galaxy_map_play_timeline",
+            description: "Start or pause the Timeline mode's per-year autoplay. Args: playing (true/false), "
+                + "optional fromYear (int) to jump first."
+        );
+
         var actions = new PageAction[]
         {
             new(navigate, Label: "Navigate to a place", Example: "take me to Tatooine"),
+            new(goOverview, Label: "Zoom out to overview", Example: "zoom out to the galaxy"),
+            new(goBack, Label: "Step back one level", Example: "go back"),
+            new(setMode, Label: "Switch Explore / Timeline mode", Example: "switch to timeline mode"),
+            new(toggleRegion, Label: "Show or hide a region", Example: "hide Wild Space"),
+            new(showAllRegions, Label: "Show every region", Example: "show all regions"),
+            new(hideAllRegions, Label: "Hide every region", Example: "hide all regions"),
+            new(highlightSector, Label: "Highlight a sector", Example: "highlight the Arkanis sector"),
+            new(openDetails, Label: "Open the details panel", Example: "show me details for Coruscant"),
+            new(closeDetails, Label: "Close the details panel", Example: "close the details panel"),
+            new(toggleFullscreen, Label: "Toggle fullscreen", Example: "go fullscreen"),
+            new(setYear, Label: "Jump to a year", Example: "jump to 22 BBY"),
+            new(setLens, Label: "Filter by lens", Example: "show me the Battles lens"),
+            new(playTimeline, Label: "Play / pause timeline", Example: "play the timeline from 22 BBY"),
         };
 
         try
