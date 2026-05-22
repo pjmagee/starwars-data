@@ -84,31 +84,38 @@
                      TransformOrigin="Origin.TopLeft"
                      Dense="true"
                      Style="text-transform:none;font-size:11px;margin-left:4px;min-height:22px;padding:0 8px;line-height:1.4;">
-                <div class="pa-2" style="max-width:320px;">
-                    <MudText Typo="Typo.subtitle2" Class="mb-1">SP-4 can do this here</MudText>
-                    <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-2">
-                        Ask in plain English. Click an example to try it.
-                    </MudText>
-                    @foreach (var a in PageControl.Actions)
-                    {
-                        var action = a;
-                        <div class="mb-2">
-                            <MudText Typo="Typo.body2" Style="font-weight:600;">@action.Label</MudText>
-                            <MudText Typo="Typo.caption" Color="Color.Secondary" Style="white-space:normal;">
-                                @action.Tool.Description
-                            </MudText>
-                            @if (!string.IsNullOrWhiteSpace(action.Example))
-                            {
-                                <MudButton Size="Size.Small" Variant="Variant.Text" Color="Color.Primary"
-                                           StartIcon="@Icons.Material.Filled.PlayArrow"
-                                           Class="mt-1"
-                                           Style="text-transform:none;padding:0 6px;font-size:11px;"
-                                           OnClick="@(() => UseSuggestion(action.Example!))">
-                                    "@action.Example"
-                                </MudButton>
-                            }
-                        </div>
-                    }
+                @* Sticky-header pattern: the title + helper text stay pinned, only the
+                   action list scrolls. Capped at 60vh so the popover never exceeds the
+                   viewport regardless of action count. *@
+                <div style="width:320px;max-width:320px;max-height:60vh;display:flex;flex-direction:column;">
+                    <div class="pa-2" style="flex-shrink:0;border-bottom:1px solid var(--mud-palette-lines-default);">
+                        <MudText Typo="Typo.subtitle2" Class="mb-1">SP-4 can do this here</MudText>
+                        <MudText Typo="Typo.caption" Color="Color.Secondary">
+                            Ask in plain English. Click an example to try it.
+                        </MudText>
+                    </div>
+                    <div class="pa-2" style="overflow-y:auto;flex:1 1 auto;min-height:0;">
+                        @foreach (var a in PageControl.Actions)
+                        {
+                            var action = a;
+                            <div class="mb-2">
+                                <MudText Typo="Typo.body2" Style="font-weight:600;">@action.Label</MudText>
+                                <MudText Typo="Typo.caption" Color="Color.Secondary" Style="white-space:normal;">
+                                    @action.Tool.Description
+                                </MudText>
+                                @if (!string.IsNullOrWhiteSpace(action.Example))
+                                {
+                                    <MudButton Size="Size.Small" Variant="Variant.Text" Color="Color.Primary"
+                                               StartIcon="@Icons.Material.Filled.PlayArrow"
+                                               Class="mt-1"
+                                               Style="text-transform:none;padding:0 6px;font-size:11px;"
+                                               OnClick="@(() => UseSuggestion(action.Example!))">
+                                        "@action.Example"
+                                    </MudButton>
+                                }
+                            </div>
+                        }
+                    </div>
                 </div>
             </MudMenu>
         }
