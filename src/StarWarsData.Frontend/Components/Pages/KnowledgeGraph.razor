@@ -1,12 +1,15 @@
 @page "/knowledge-graph"
 @using static StarWarsData.Frontend.Components.Shared.KnowledgeGraphFormatters
+@using Microsoft.Extensions.AI
 @inject IHttpClientFactory HttpClientFactory
 @inject ISnackbar Snackbar
 @inject IDialogService DialogService
 @inject GlobalFilterService GlobalFilterService
 @inject PageContextService PageContext
+@inject PageControlService PageControl
 @inject NavigationManager Navigation
 @inject IJSRuntime JS
+@inject ILogger<KnowledgeGraph> Logger
 @implements IDisposable
 
 <PageTitle>Knowledge Graph — Star Wars Data</PageTitle>
@@ -18,7 +21,8 @@
 
     @* <MudText Typo="Typo.h5" Class="mb-4">Knowledge Graph</MudText> *@
 
-    <MudTabs Elevation="0" Rounded="true" ApplyEffectsToContainer="true" TabPanelsClass="pa-0 pt-4">
+    <MudTabs Elevation="0" Rounded="true" ApplyEffectsToContainer="true" TabPanelsClass="pa-0 pt-4"
+             @bind-ActivePanelIndex="_activeTabIndex">
     <MudTabPanel Text="Nodes" Icon="@Icons.Material.Filled.AccountTree">
 
     @* ── Bulk action bar (visible when nodes are selected) ── *@
@@ -384,6 +388,12 @@
     private string _labelToType = "";
     private long? _labelMinCount;
 
+    // Tab index for MudTabs — bound so SP-4 can switch between Nodes (0) and Edges (1).
+    private int _activeTabIndex;
+
+    // Page-control registration token (Design-041); disposed in Dispose.
+    private IDisposable? _pageControlRegistration;
+
     private HttpClient Api => HttpClientFactory.CreateClient("StarWarsData");
 
     protected override async Task OnInitializedAsync()
@@ -391,6 +401,12 @@
         GlobalFilterService.OnChange += OnGlobalFilterChanged;
         await Task.WhenAll(LoadEntityTypes(), LoadEdgeLabels());
         PublishPageContext(null);
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+            RegisterPageControlActions();
     }
 
     // Publish "what the user is looking at" to the copilot. Page-only when no
@@ -720,7 +736,379 @@
 
     public void Dispose()
     {
+        _pageControlRegistration?.Dispose();
         PageContext.Clear();
         GlobalFilterService.OnChange -= OnGlobalFilterChanged;
+    }
+
+    // ── Page-control: SP-4 driving /knowledge-graph (Design-041) ─────────────
+    //
+    // Coverage:
+    //   1. Switch tab                     — knowledge_graph_switch_tab
+    //   2. Apply node filters (any subset)— knowledge_graph_set_node_filters
+    //   3. Apply edge filters             — knowledge_graph_set_edge_filters
+    //   4. Reset filters                  — knowledge_graph_clear_filters
+    //   5. Read the current node page     — knowledge_graph_list_nodes
+    //   6. Read the current edge page     — knowledge_graph_list_edges
+    //   7. Open a node's detail page      — knowledge_graph_open_node
+    //
+    // list_nodes/list_edges use LLM-as-matcher: the agent reads the rows
+    // (each tagged with pageId) and picks the one matching the user's intent,
+    // then calls open_node. Filter tools are forgiving: unknown type/label
+    // values trigger a substring resolve against the entity-types and
+    // edge-labels catalogues so phrasing like "starship" maps to the actual
+    // canonical type name without an extra discovery turn.
+    void RegisterPageControlActions()
+    {
+        var switchTab = AIFunctionFactory.Create(
+            (string tab) =>
+            {
+                if (string.IsNullOrWhiteSpace(tab))
+                    return "Provide 'nodes' or 'edges'.";
+                var target = tab.Trim().ToLowerInvariant() switch
+                {
+                    "nodes" or "node" or "entities" => 0,
+                    "edges" or "edge" or "relationships" or "labels" => 1,
+                    _ => -1,
+                };
+                if (target < 0) return $"Unknown tab '{tab}'. Use 'nodes' or 'edges'.";
+                _activeTabIndex = target;
+                InvokeAsync(StateHasChanged);
+                return target == 0
+                    ? "Switched to the Nodes tab. Use knowledge_graph_set_node_filters to filter."
+                    : "Switched to the Edges tab. Use knowledge_graph_set_edge_filters to filter.";
+            },
+            name: "knowledge_graph_switch_tab",
+            description: "Switch between the 'nodes' (entities) and 'edges' (relationship labels) tabs. "
+                + "Arg: tab ('nodes' or 'edges')."
+        );
+
+        var setNodeFilters = AIFunctionFactory.Create(
+            (string? search, string? type, string? relationship, string? semantic,
+             string? calendar, int? yearFrom, int? yearTo, bool? temporalOnly) =>
+            {
+                var changes = new List<string>();
+
+                if (search is not null) { _search = search; changes.Add($"search='{search}'"); }
+
+                if (type is not null)
+                {
+                    if (type.Length == 0) { _selectedType = ""; changes.Add("type=cleared"); }
+                    else
+                    {
+                        var resolved = ResolveCatalogValue(type, _entityTypes, FormatTypeName);
+                        if (resolved is null) return $"No entity type matches '{type}'. Try a shorter substring (e.g. 'starship').";
+                        _selectedType = resolved;
+                        changes.Add($"type={FormatTypeName(resolved)}");
+                    }
+                }
+
+                if (relationship is not null)
+                {
+                    if (relationship.Length == 0) { _selectedLabel = ""; changes.Add("relationship=cleared"); }
+                    else
+                    {
+                        var resolved = ResolveCatalogValue(relationship, _edgeLabels, FormatPropertyKey);
+                        if (resolved is null) return $"No relationship matches '{relationship}'. Available examples: " + string.Join(", ", _edgeLabels.Take(8).Select(FormatPropertyKey));
+                        _selectedLabel = resolved;
+                        changes.Add($"relationship={FormatPropertyKey(resolved)}");
+                    }
+                }
+
+                if (semantic is not null)
+                {
+                    if (semantic.Length == 0) { _selectedSemantic = ""; changes.Add("semantic=cleared"); }
+                    else
+                    {
+                        var hit = _semanticOptions.FirstOrDefault(s => s.Equals(semantic, StringComparison.OrdinalIgnoreCase))
+                            ?? _semanticOptions.FirstOrDefault(s => s.Contains(semantic, StringComparison.OrdinalIgnoreCase));
+                        if (hit is null) return $"No semantic dimension matches '{semantic}'. Options: {string.Join(", ", _semanticOptions)}.";
+                        _selectedSemantic = hit;
+                        changes.Add($"semantic={hit}");
+                    }
+                }
+
+                if (calendar is not null)
+                {
+                    var c = calendar.Trim().ToLowerInvariant();
+                    var hit = c switch
+                    {
+                        "" or "all" or "any" => "",
+                        "galactic" or "in-universe" or "iu" => "galactic",
+                        "real" or "real-world" or "rw" => "real",
+                        _ => null,
+                    };
+                    if (hit is null) return $"Unknown calendar '{calendar}'. Use 'galactic', 'real', or empty for all.";
+                    _selectedCalendar = hit;
+                    changes.Add($"calendar={(hit.Length == 0 ? "all" : hit)}");
+                }
+
+                // Signed year input: negative = BBY, positive = ABY (galactic),
+                // or plain absolute year (real / all). Mirror the abs+era split
+                // so the UI's NumericField + ToggleGroup reflect the choice.
+                if (yearFrom is int yf)
+                {
+                    _yearFromAbs = Math.Abs(yf);
+                    _yearFromEra = yf < 0 ? "BBY" : "ABY";
+                    changes.Add($"yearFrom={yf}");
+                }
+                if (yearTo is int yt)
+                {
+                    _yearToAbs = Math.Abs(yt);
+                    _yearToEra = yt < 0 ? "BBY" : "ABY";
+                    changes.Add($"yearTo={yt}");
+                }
+                if (yearFrom is not null || yearTo is not null || calendar is not null)
+                {
+                    // Recompute the underlying _yearFrom/_yearTo from abs+era,
+                    // then reload. OnYearInputChanged calls OnFilterChanged().
+                    OnYearInputChanged();
+                }
+
+                if (temporalOnly is bool tOnly) { _temporalOnly = tOnly; changes.Add($"temporalOnly={tOnly}"); }
+
+                if (changes.Count == 0) return "No filter values were provided — nothing changed.";
+
+                _activeTabIndex = 0; // ensure user sees the Nodes tab they're filtering
+                _table?.ReloadServerData();
+                InvokeAsync(StateHasChanged);
+                return "Applied node filters: " + string.Join(", ", changes) + ". Call knowledge_graph_list_nodes to read the matches.";
+            },
+            name: "knowledge_graph_set_node_filters",
+            description: "Apply any combination of Nodes-tab filters. All args optional; pass only what should change. "
+                + "search: text matched against entity names. "
+                + "type: entity type (e.g. 'Starship', 'Character', 'Battle') — resolved by substring. "
+                + "relationship: edge label (e.g. 'affiliated_with', 'destroyed') — resolved by substring. "
+                + "semantic: temporal dimension ('lifespan', 'conflict', 'construction', 'creation', 'institutional', 'publication', 'usage'). "
+                + "calendar: 'galactic' (in-universe BBY/ABY), 'real' (real-world year), or empty for both. "
+                + "yearFrom / yearTo: SIGNED years — negative = BBY, positive = ABY in galactic mode; absolute in real/all. "
+                + "temporalOnly: when true, only nodes with temporal data are returned. "
+                + "Pass an empty string to clear an individual text filter."
+        );
+
+        var setEdgeFilters = AIFunctionFactory.Create(
+            (string? search, string? fromType, string? toType, long? minCount) =>
+            {
+                var changes = new List<string>();
+
+                if (search is not null) { _labelSearch = search; changes.Add($"search='{search}'"); }
+
+                if (fromType is not null)
+                {
+                    if (fromType.Length == 0) { _labelFromType = ""; changes.Add("fromType=cleared"); }
+                    else
+                    {
+                        var resolved = ResolveCatalogValue(fromType, _entityTypes, FormatTypeName);
+                        if (resolved is null) return $"No entity type matches fromType='{fromType}'.";
+                        _labelFromType = resolved;
+                        changes.Add($"fromType={FormatTypeName(resolved)}");
+                    }
+                }
+
+                if (toType is not null)
+                {
+                    if (toType.Length == 0) { _labelToType = ""; changes.Add("toType=cleared"); }
+                    else
+                    {
+                        var resolved = ResolveCatalogValue(toType, _entityTypes, FormatTypeName);
+                        if (resolved is null) return $"No entity type matches toType='{toType}'.";
+                        _labelToType = resolved;
+                        changes.Add($"toType={FormatTypeName(resolved)}");
+                    }
+                }
+
+                if (minCount is long mc) { _labelMinCount = mc > 0 ? mc : null; changes.Add($"minCount={mc}"); }
+
+                if (changes.Count == 0) return "No filter values were provided — nothing changed.";
+
+                _activeTabIndex = 1; // surface the Edges tab
+                _labelTable?.ReloadServerData();
+                InvokeAsync(StateHasChanged);
+                return "Applied edge filters: " + string.Join(", ", changes) + ". Call knowledge_graph_list_edges to read the matches.";
+            },
+            name: "knowledge_graph_set_edge_filters",
+            description: "Apply any combination of Edges-tab filters (relationship-label statistics). "
+                + "search: substring of the label name. "
+                + "fromType / toType: entity types on either side of the relationship (resolved by substring). "
+                + "minCount: hide labels with fewer than this many edges. "
+                + "Pass an empty string to clear an individual text filter."
+        );
+
+        var clearFilters = AIFunctionFactory.Create(
+            () =>
+            {
+                _search = "";
+                _selectedType = "";
+                _selectedLabel = "";
+                _selectedSemantic = "";
+                _selectedCalendar = "";
+                _temporalOnly = false;
+                _yearFromAbs = null;
+                _yearToAbs = null;
+                _yearFromEra = "BBY";
+                _yearToEra = "ABY";
+                _yearFrom = null;
+                _yearTo = null;
+
+                _labelSearch = "";
+                _labelFromType = "";
+                _labelToType = "";
+                _labelMinCount = null;
+
+                _table?.ReloadServerData();
+                _labelTable?.ReloadServerData();
+                InvokeAsync(StateHasChanged);
+                return "Cleared all node and edge filters.";
+            },
+            name: "knowledge_graph_clear_filters",
+            description: "Reset every filter on both the Nodes and Edges tabs to its default."
+        );
+
+        var listNodes = AIFunctionFactory.Create(
+            async (int? limit) =>
+            {
+                var cap = limit is int n && n > 0 ? Math.Min(n, 50) : 20;
+                try
+                {
+                    var qs = System.Web.HttpUtility.ParseQueryString(string.Empty);
+                    qs["page"] = "1";
+                    qs["pageSize"] = cap.ToString();
+                    if (!string.IsNullOrWhiteSpace(_selectedType)) qs["type"] = _selectedType;
+                    if (!string.IsNullOrWhiteSpace(_search)) qs["q"] = _search;
+                    if (_temporalOnly) qs["temporalOnly"] = "true";
+                    if (!string.IsNullOrWhiteSpace(_selectedSemantic)) qs["semantic"] = _selectedSemantic;
+                    if (!string.IsNullOrWhiteSpace(_selectedLabel)) qs["label"] = _selectedLabel;
+                    if (!string.IsNullOrWhiteSpace(_selectedCalendar)) qs["calendar"] = _selectedCalendar;
+                    if (_yearFrom.HasValue) qs["yearFrom"] = _yearFrom.Value.ToString();
+                    if (_yearTo.HasValue) qs["yearTo"] = _yearTo.Value.ToString();
+                    var cont = GlobalFilterService.GetContinuityQueryParam();
+                    if (!string.IsNullOrEmpty(cont)) qs["continuity"] = cont;
+                    var realm = GlobalFilterService.GetRealmQueryParam();
+                    if (!string.IsNullOrEmpty(realm)) qs["realm"] = realm;
+
+                    var result = await Api.GetFromJsonAsync<BrowseTemporalNodesResult>(
+                        $"api/RelationshipGraph/temporal-nodes?{qs}");
+
+                    if (result is null || result.Items.Count == 0)
+                        return "No nodes match the current filters. Try relaxing them with knowledge_graph_clear_filters.";
+
+                    var lines = result.Items.Select(n =>
+                    {
+                        var era = n.StartYear.HasValue || n.EndYear.HasValue
+                            ? $" · {n.StartYear?.ToString() ?? "?"}..{n.EndYear?.ToString() ?? "?"}"
+                            : "";
+                        return $"- #{n.Id} · {n.Name} ({FormatTypeName(n.Type)}, {n.Continuity}){era}";
+                    });
+                    return $"Top {result.Items.Count} of {result.Total:N0} matching nodes:\n"
+                        + string.Join("\n", lines)
+                        + "\n\nCall knowledge_graph_open_node(id) to navigate to one.";
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogWarning(ex, "knowledge_graph_list_nodes failed");
+                    return $"Failed to list nodes: {ex.Message}";
+                }
+            },
+            name: "knowledge_graph_list_nodes",
+            description: "Read the first page of nodes matching the current Nodes-tab filters. Each line includes "
+                + "the pageId, name, type, continuity, and temporal range. Use this to find the right node by reading "
+                + "the list and picking the one that matches the user's phrasing. Optional 'limit' caps the output "
+                + "(default 20, max 50)."
+        );
+
+        var listEdges = AIFunctionFactory.Create(
+            async (int? limit) =>
+            {
+                var cap = limit is int n && n > 0 ? Math.Min(n, 50) : 20;
+                try
+                {
+                    var qs = System.Web.HttpUtility.ParseQueryString(string.Empty);
+                    qs["page"] = "1";
+                    qs["pageSize"] = cap.ToString();
+                    qs["sortBy"] = "count";
+                    qs["sortDirection"] = "descending";
+                    if (!string.IsNullOrWhiteSpace(_labelSearch)) qs["q"] = _labelSearch;
+                    if (!string.IsNullOrWhiteSpace(_labelFromType)) qs["fromType"] = _labelFromType;
+                    if (!string.IsNullOrWhiteSpace(_labelToType)) qs["toType"] = _labelToType;
+                    if (_labelMinCount is > 0) qs["minCount"] = _labelMinCount.Value.ToString();
+                    var cont = GlobalFilterService.GetContinuityQueryParam();
+                    if (!string.IsNullOrEmpty(cont)) qs["continuity"] = cont;
+                    var realm = GlobalFilterService.GetRealmQueryParam();
+                    if (!string.IsNullOrEmpty(realm)) qs["realm"] = realm;
+
+                    var result = await Api.GetFromJsonAsync<BrowseEdgeLabelsResult>(
+                        $"api/RelationshipGraph/edge-label-stats?{qs}");
+
+                    if (result is null || result.Items.Count == 0)
+                        return "No relationship labels match the current Edges-tab filters.";
+
+                    var lines = result.Items.Select(e =>
+                    {
+                        var fromTypes = string.Join("/", e.TopFromTypes.Take(3).Select(t => FormatTypeName(t.Type)));
+                        var toTypes = string.Join("/", e.TopToTypes.Take(3).Select(t => FormatTypeName(t.Type)));
+                        return $"- {FormatPropertyKey(e.Label)} · {e.Count:N0} edges · {fromTypes} → {toTypes}";
+                    });
+                    return $"Top {result.Items.Count} of {result.Total:N0} relationship labels:\n"
+                        + string.Join("\n", lines)
+                        + "\n\nCall knowledge_graph_set_node_filters(relationship: '<label>') to find the nodes using one.";
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogWarning(ex, "knowledge_graph_list_edges failed");
+                    return $"Failed to list edges: {ex.Message}";
+                }
+            },
+            name: "knowledge_graph_list_edges",
+            description: "Read the most common relationship labels matching the current Edges-tab filters. "
+                + "Each line includes the label, edge count, and dominant from/to entity types. "
+                + "Optional 'limit' caps the output (default 20, max 50)."
+        );
+
+        var openNode = AIFunctionFactory.Create(
+            (int pageId, string? name) =>
+            {
+                if (pageId <= 0) return "Provide a positive pageId from knowledge_graph_list_nodes.";
+                Navigation.NavigateTo($"/knowledge-graph/nodes/{pageId}");
+                var display = string.IsNullOrWhiteSpace(name) ? $"pageId {pageId}" : name!;
+                return $"Opened the knowledge graph node detail for {display}.";
+            },
+            name: "knowledge_graph_open_node",
+            description: "Navigate to a node's detail page by pageId. Get the pageId from knowledge_graph_list_nodes. "
+                + "Optional 'name' is used in the confirmation message."
+        );
+
+        var actions = new PageAction[]
+        {
+            new(switchTab, Label: "Switch between Nodes and Edges tabs", Example: "show me the edges tab"),
+            new(setNodeFilters, Label: "Filter the nodes list", Example: "show only canon starships from the clone wars"),
+            new(setEdgeFilters, Label: "Filter the relationship labels", Example: "edges between characters and battles"),
+            new(clearFilters, Label: "Clear all filters", Example: "reset the filters"),
+            new(listNodes, Label: "Read the current node matches", Example: "what nodes match?"),
+            new(listEdges, Label: "Read the relationship labels", Example: "list the relationship types"),
+            new(openNode, Label: "Open a node's detail page", Example: "open Yoda"),
+        };
+
+        try
+        {
+            _pageControlRegistration = PageControl.Register("knowledge_graph", actions);
+        }
+        catch (InvalidOperationException ex)
+        {
+            Logger.LogWarning(ex, "PageControlService already had a registration; knowledge-graph page tools unavailable this circuit.");
+        }
+    }
+
+    // Case-insensitive resolve of a user-typed value against a catalogue. Tries
+    // exact (raw + formatted), then unique substring on either form. Returns
+    // the canonical (raw) value or null when ambiguous / no match.
+    static string? ResolveCatalogValue(string input, IReadOnlyList<string> catalogue, Func<string, string> format)
+    {
+        if (string.IsNullOrWhiteSpace(input) || catalogue.Count == 0) return null;
+        var exact = catalogue.FirstOrDefault(v => v.Equals(input, StringComparison.OrdinalIgnoreCase)
+            || format(v).Equals(input, StringComparison.OrdinalIgnoreCase));
+        if (exact is not null) return exact;
+        var matches = catalogue.Where(v => v.Contains(input, StringComparison.OrdinalIgnoreCase)
+            || format(v).Contains(input, StringComparison.OrdinalIgnoreCase)).Take(2).ToList();
+        return matches.Count == 1 ? matches[0] : null;
     }
 }
