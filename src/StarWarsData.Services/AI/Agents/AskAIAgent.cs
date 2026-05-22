@@ -1,4 +1,5 @@
 using Microsoft.Agents.AI;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -24,6 +25,7 @@ namespace StarWarsData.Services.AI.Agents;
 /// </summary>
 public sealed class AskAIAgent(
     IOptions<SettingsOptions> settingsOptions,
+    IOptions<JsonOptions> jsonOptions,
     OpenAIClient openAiClient,
     IMongoClient mongoClient,
     ByokChatClient byokClient,
@@ -37,6 +39,15 @@ public sealed class AskAIAgent(
     public AIAgent Build()
     {
         var settings = settingsOptions.Value;
+        // Pass the same serializer options AGUI hosting uses to every AIFunctionFactory.Create
+        // call. Without this, M.E.AI's argument deserializer falls back to a default
+        // JsonSerializerOptions that doesn't share a type-info chain with AGUI hosting —
+        // tools with complex parameter types (List<int>, List<Reference>, our descriptor
+        // POCOs) fail argument binding, M.E.AI substitutes 'Error: Function failed.' as
+        // the result, AGUI hosting writes that raw string to the wire, and AGUIChatClient
+        // chokes parsing it as JsonElement. Documented in the official AG-UI backend tool
+        // rendering tutorial — non-negotiable when tool params aren't primitives.
+        var serializerOptions = jsonOptions.Value.SerializerOptions;
 
         var componentToolkit = new ComponentToolkit();
         var dataExplorer = new DataExplorerToolkit(mongoClient, settingsOptions);
@@ -49,10 +60,10 @@ public sealed class AskAIAgent(
         var kgAnalytics = new KGAnalyticsToolkit(kgService, mongoClient, settings.DatabaseName);
 
         var tools = new List<AITool>();
-        tools.AddRange(componentToolkit.AsAIFunctions());
-        tools.AddRange(dataExplorer.AsAIFunctions());
-        tools.AddRange(graphRAG.AsAIFunctions());
-        tools.AddRange(kgAnalytics.AsAIFunctions());
+        tools.AddRange(componentToolkit.AsAIFunctions(serializerOptions));
+        tools.AddRange(dataExplorer.AsAIFunctions(serializerOptions));
+        tools.AddRange(graphRAG.AsAIFunctions(serializerOptions));
+        tools.AddRange(kgAnalytics.AsAIFunctions(serializerOptions));
         tools.Add(
             AIFunctionFactory.Create(
                 (string query, CancellationToken ct) => wikiSearchProvider.SearchAsync(query, ct),
@@ -60,7 +71,8 @@ public sealed class AskAIAgent(
                 """
                 Keyword search over wiki page titles and content. Fast, no AI cost.
                 Best for exact name lookups. For why/how/explain questions, use semantic_search instead.
-                """
+                """,
+                serializerOptions: serializerOptions
             )
         );
 
@@ -82,6 +94,13 @@ public sealed class AskAIAgent(
             {
                 c.MaximumIterationsPerRequest = 12;
                 c.AllowConcurrentInvocation = true;
+                // Inline the inner exception message into the 'Error: Function failed.'
+                // fallback string M.E.AI substitutes for a non-RanToCompletion tool result.
+                // Without this we see only the bare 'Error: ...' on the wire which gives
+                // no hint why a tool actually failed. The string still trips AGUIChatClient's
+                // strict JsonElement parse (Design-041) but our defensive catch surfaces a
+                // friendly message and we get the real exception in our middleware log.
+                c.IncludeDetailedErrors = true;
             })
             .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
             .Build();

@@ -123,7 +123,13 @@ public sealed class ToolCallBudgetMiddleware
             {
                 _logger.LogWarning("ToolCallBudget: duplicate render tool {ToolName} blocked at call #{Count}. Calls so far: {Calls}", name, count, string.Join(",", counter.Calls));
                 context.Terminate = true;
-                return $"Duplicate render call blocked: '{name}' was already invoked this turn. The first call's output is already on screen. End the turn now — do not call any render tool again.";
+                // Wrap the short-circuit value in a POCO so the AGUI hosting layer takes its
+                // structured JSON serialization path (SerializeResultContent line 7230). A raw
+                // string is written to the wire unquoted and AGUIChatClient.DeserializeResultIfAvailable
+                // chokes parsing it back as JsonElement — see Design-041 root-cause notes.
+                return new BlockedResult(
+                    $"Duplicate render call blocked: '{name}' was already invoked this turn. The first call's output is already on screen. End the turn now — do not call any render tool again."
+                );
             }
         }
 
@@ -136,7 +142,7 @@ public sealed class ToolCallBudgetMiddleware
                 string.Join(",", counter.Calls)
             );
             context.Terminate = true;
-            return $"Tool call budget exceeded ({_hardLimit}). The agent must answer with what it already has.";
+            return new BlockedResult($"Tool call budget exceeded ({_hardLimit}). The agent must answer with what it already has.");
         }
 
         if (count == _softWarnAt)
@@ -146,7 +152,35 @@ public sealed class ToolCallBudgetMiddleware
 
         _logger.LogDebug("ToolCall #{Count}: {ToolName}", count, name);
 
-        return await next(context, cancellationToken);
+        object? result;
+        try
+        {
+            result = await next(context, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            // When a tool's invocation throws (arg-binding failure, unhandled exception,
+            // cancellation), M.E.AI substitutes an 'Error: Function failed. Exception: ...'
+            // string in the result that AGUI hosting then writes raw to the wire — see
+            // Design-041 root-cause notes. Logging here gives us the actual exception +
+            // bad arguments without instrumenting the SSE stream itself, which is the only
+            // reliable way to chase model-arg-shape regressions.
+            string argsJson;
+            try
+            {
+                argsJson = System.Text.Json.JsonSerializer.Serialize(context.Arguments);
+            }
+            catch
+            {
+                argsJson = "<unserializable>";
+            }
+            if (argsJson.Length > 1200)
+                argsJson = argsJson[..1200] + "...";
+            _logger.LogError(ex, "ToolCall #{Count} {ToolName} threw: {Message}; args={Args}", count, name, ex.Message, argsJson);
+            throw;
+        }
+
+        return result;
     }
 
     sealed class RunCounter
@@ -155,6 +189,11 @@ public sealed class ToolCallBudgetMiddleware
         public List<string> Calls { get; } = [];
         public HashSet<string> RenderToolsUsed { get; } = [];
     }
+
+    // POCO wrapper so middleware short-circuit results serialize as JSON on the AGUI wire.
+    // See Design-041 root-cause notes: a raw-string FunctionResultContent.Result is written
+    // unquoted by AGUI hosting and breaks AGUIChatClient's JsonElement parser.
+    sealed record BlockedResult(string Message);
 }
 
 public static class ToolCallBudgetExtensions

@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Text.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
@@ -698,21 +699,21 @@ public class GraphRAGToolkit
         return docs.Select(d => new LabelCountDto(d[MongoFields.Id].AsString, d["count"].AsInt32)).ToList();
     }
 
-    public IReadOnlyList<AITool> AsAIFunctions() =>
+    public IReadOnlyList<AITool> AsAIFunctions(JsonSerializerOptions serializerOptions) =>
         [
-            AIFunctionFactory.Create(SearchEntities, ToolNames.GraphRAG.SearchEntities),
-            AIFunctionFactory.Create(FindEntitiesByYear, ToolNames.GraphRAG.FindEntitiesByYear),
-            AIFunctionFactory.Create(GetEntityProperties, ToolNames.GraphRAG.GetEntityProperties),
-            AIFunctionFactory.Create(GetEntityTimeline, ToolNames.GraphRAG.GetEntityTimeline),
-            AIFunctionFactory.Create(GetEntityRelationships, ToolNames.GraphRAG.GetEntityRelationships),
-            AIFunctionFactory.Create(GetRelationshipTypes, ToolNames.GraphRAG.GetRelationshipTypes),
-            AIFunctionFactory.Create(TraverseGraph, ToolNames.GraphRAG.TraverseGraph),
-            AIFunctionFactory.Create(GetLineage, ToolNames.GraphRAG.GetLineage),
-            AIFunctionFactory.Create(FindConnections, ToolNames.GraphRAG.FindConnections),
-            AIFunctionFactory.Create(GetGalaxyYear, ToolNames.GraphRAG.GetGalaxyYear),
-            AIFunctionFactory.Create(ListEntityTypes, ToolNames.GraphRAG.ListEntityTypes),
-            AIFunctionFactory.Create(ListRelationshipLabels, ToolNames.GraphRAG.ListRelationshipLabels),
-            AIFunctionFactory.Create(SemanticSearch, ToolNames.GraphRAG.SemanticSearch),
+            AIFunctionFactory.Create(SearchEntities, ToolNames.GraphRAG.SearchEntities, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(FindEntitiesByYear, ToolNames.GraphRAG.FindEntitiesByYear, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(GetEntityProperties, ToolNames.GraphRAG.GetEntityProperties, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(GetEntityTimeline, ToolNames.GraphRAG.GetEntityTimeline, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(GetEntityRelationships, ToolNames.GraphRAG.GetEntityRelationships, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(GetRelationshipTypes, ToolNames.GraphRAG.GetRelationshipTypes, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(TraverseGraph, ToolNames.GraphRAG.TraverseGraph, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(GetLineage, ToolNames.GraphRAG.GetLineage, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(FindConnections, ToolNames.GraphRAG.FindConnections, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(GetGalaxyYear, ToolNames.GraphRAG.GetGalaxyYear, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(ListEntityTypes, ToolNames.GraphRAG.ListEntityTypes, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(ListRelationshipLabels, ToolNames.GraphRAG.ListRelationshipLabels, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(SemanticSearch, ToolNames.GraphRAG.SemanticSearch, serializerOptions: serializerOptions),
         ];
 
     static string Truncate(string s, int max) =>

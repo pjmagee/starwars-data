@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace StarWarsData.Models.Queries;
@@ -458,6 +459,7 @@ public class AurebeshDescriptor
 [Description(
     "A source reference. Prefer passing the entity's pageId (from a KG tool result) and nothing else — the system resolves the name and links. Fall back to title+url only for sources with no pageId."
 )]
+[JsonConverter(typeof(ReferenceJsonConverter))]
 public class Reference
 {
     [JsonPropertyName("pageId")]
@@ -471,6 +473,77 @@ public class Reference
     [JsonPropertyName("url")]
     [Description("The Wookieepedia URL for the source page. Only needed when there is no pageId.")]
     public string? Url { get; set; }
+}
+
+/// <summary>
+/// Tolerant converter for <see cref="Reference"/> — accepts the canonical object shape
+/// <c>{ "pageId": N, "title": "...", "url": "..." }</c> AND the shorthand the model
+/// frequently emits despite the schema: a bare integer <c>524426</c> which we lift into
+/// <c>{ "pageId": 524426 }</c>, or a bare string URL we lift into <c>{ "url": "..." }</c>.
+/// Without this, the model's "shorthand" args throw at deserialization and the whole
+/// turn fails (the M.E.AI fallback string then trips the AGUI wire — see Design-041).
+/// </summary>
+public sealed class ReferenceJsonConverter : JsonConverter<Reference>
+{
+    public override Reference? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
+        reader.TokenType switch
+        {
+            JsonTokenType.Null => null,
+            JsonTokenType.Number when reader.TryGetInt32(out var id) => new Reference { PageId = id },
+            JsonTokenType.String => new Reference { Url = reader.GetString() },
+            JsonTokenType.StartObject => ReadObject(ref reader, options),
+            _ => throw new JsonException($"Unexpected Reference token {reader.TokenType}"),
+        };
+
+    static Reference ReadObject(ref Utf8JsonReader reader, JsonSerializerOptions options)
+    {
+        var r = new Reference();
+        while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+        {
+            if (reader.TokenType != JsonTokenType.PropertyName)
+                continue;
+            var prop = reader.GetString();
+            reader.Read();
+            if (reader.TokenType == JsonTokenType.Null)
+                continue;
+            switch (prop)
+            {
+                case "pageId"
+                or "PageId":
+                    r.PageId = reader.TokenType switch
+                    {
+                        JsonTokenType.Number => reader.GetInt32(),
+                        JsonTokenType.String when int.TryParse(reader.GetString(), out var n) => n,
+                        _ => null,
+                    };
+                    break;
+                case "title"
+                or "Title":
+                    r.Title = reader.GetString();
+                    break;
+                case "url"
+                or "Url":
+                    r.Url = reader.GetString();
+                    break;
+                default:
+                    reader.Skip();
+                    break;
+            }
+        }
+        return r;
+    }
+
+    public override void Write(Utf8JsonWriter writer, Reference value, JsonSerializerOptions options)
+    {
+        writer.WriteStartObject();
+        if (value.PageId is { } id)
+            writer.WriteNumber("pageId", id);
+        if (!string.IsNullOrEmpty(value.Title))
+            writer.WriteString("title", value.Title);
+        if (!string.IsNullOrEmpty(value.Url))
+            writer.WriteString("url", value.Url);
+        writer.WriteEndObject();
+    }
 }
 
 // ── Chart data types ───────────────────────────────────────────────────

@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Text.Json;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
@@ -654,18 +655,18 @@ public class DataExplorerToolkit(IMongoClient mongoClient, IOptions<SettingsOpti
         return allNames.Where(n => n.StartsWith(Collections.TimelinePrefix)).Select(n => n[Collections.TimelinePrefix.Length..]).OrderBy(x => x).ToList();
     }
 
-    public IReadOnlyList<AITool> AsAIFunctions() =>
+    public IReadOnlyList<AITool> AsAIFunctions(JsonSerializerOptions serializerOptions) =>
         [
-            AIFunctionFactory.Create(SearchByName, ToolNames.DataExplorer.SearchPagesByName),
-            AIFunctionFactory.Create(GetPageById, ToolNames.DataExplorer.GetPageById),
-            AIFunctionFactory.Create(GetPropertyValues, ToolNames.DataExplorer.GetPageProperty),
-            AIFunctionFactory.Create(SearchByProperty, ToolNames.DataExplorer.SearchPagesByProperty),
-            AIFunctionFactory.Create(SearchByDate, ToolNames.DataExplorer.SearchPagesByDate),
-            AIFunctionFactory.Create(SearchByLink, ToolNames.DataExplorer.SearchPagesByLink),
-            AIFunctionFactory.Create(SampleLabelValues, ToolNames.DataExplorer.SamplePropertyValues),
-            AIFunctionFactory.Create(SampleLinkLabels, ToolNames.DataExplorer.SampleLinkLabels),
-            AIFunctionFactory.Create(ListInfoboxTypes, ToolNames.DataExplorer.ListInfoboxTypes),
-            AIFunctionFactory.Create(ListInfoboxLabels, ToolNames.DataExplorer.ListInfoboxLabels),
-            AIFunctionFactory.Create(ListTimelineCategories, ToolNames.DataExplorer.ListTimelineCategories),
+            AIFunctionFactory.Create(SearchByName, ToolNames.DataExplorer.SearchPagesByName, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(GetPageById, ToolNames.DataExplorer.GetPageById, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(GetPropertyValues, ToolNames.DataExplorer.GetPageProperty, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(SearchByProperty, ToolNames.DataExplorer.SearchPagesByProperty, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(SearchByDate, ToolNames.DataExplorer.SearchPagesByDate, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(SearchByLink, ToolNames.DataExplorer.SearchPagesByLink, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(SampleLabelValues, ToolNames.DataExplorer.SamplePropertyValues, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(SampleLinkLabels, ToolNames.DataExplorer.SampleLinkLabels, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(ListInfoboxTypes, ToolNames.DataExplorer.ListInfoboxTypes, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(ListInfoboxLabels, ToolNames.DataExplorer.ListInfoboxLabels, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(ListTimelineCategories, ToolNames.DataExplorer.ListTimelineCategories, serializerOptions: serializerOptions),
         ];
 }

@@ -28,6 +28,7 @@ namespace StarWarsData.Services.AI.Agents;
 /// </summary>
 public sealed class CopilotAgent(
     IOptions<SettingsOptions> settingsOptions,
+    IOptions<Microsoft.AspNetCore.Http.Json.JsonOptions> jsonOptions,
     OpenAIClient openAiClient,
     IMongoClient mongoClient,
     ByokChatClient byokClient,
@@ -41,6 +42,9 @@ public sealed class CopilotAgent(
     public AIAgent Build()
     {
         var settings = settingsOptions.Value;
+        // Shared JsonSerializerOptions with AGUI hosting — see AskAIAgent.Build for the
+        // full rationale and the canonical pattern from the backend-tool-rendering docs.
+        var serializerOptions = jsonOptions.Value.SerializerOptions;
 
         var pagesCollection = mongoClient.GetDatabase(settings.DatabaseName).GetCollection<BsonDocument>(Collections.Pages);
         var wikiSearchProvider = new StarWarsWikiSearchProvider(pagesCollection, loggerFactory);
@@ -48,8 +52,8 @@ public sealed class CopilotAgent(
         var kgAnalytics = new KGAnalyticsToolkit(kgService, mongoClient, settings.DatabaseName);
 
         var tools = new List<AITool>();
-        tools.AddRange(graphRAG.AsAIFunctions());
-        tools.AddRange(kgAnalytics.AsAIFunctions());
+        tools.AddRange(graphRAG.AsAIFunctions(serializerOptions));
+        tools.AddRange(kgAnalytics.AsAIFunctions(serializerOptions));
         tools.Add(
             AIFunctionFactory.Create(
                 (string query, CancellationToken ct) => wikiSearchProvider.SearchAsync(query, ct),
@@ -57,7 +61,8 @@ public sealed class CopilotAgent(
                 """
                 Keyword search over wiki page titles and content. Fast, no AI cost.
                 Best for exact name lookups. For why/how/explain questions, use semantic_search instead.
-                """
+                """,
+                serializerOptions: serializerOptions
             )
         );
 

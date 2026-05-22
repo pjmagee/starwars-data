@@ -401,7 +401,7 @@ public class ComponentToolkitTests
     public void AsAIFunctions_ReturnsAllToolDefinitions()
     {
         var toolkit = new ComponentToolkit();
-        var functions = toolkit.AsAIFunctions();
+        var functions = toolkit.AsAIFunctions(System.Text.Json.JsonSerializerOptions.Web);
 
         Assert.AreEqual(9, functions.Count);
         var names = functions.Select(f => f.Name).ToHashSet();

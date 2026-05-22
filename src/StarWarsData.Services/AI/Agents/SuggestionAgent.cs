@@ -49,10 +49,15 @@ public sealed class SuggestionAgent(IMongoClient mongoClient, IOptions<SettingsO
 
         var kgAnalytics = new KGAnalyticsToolkit(kgService, mongoClient, options.Value.DatabaseName);
 
+        // SuggestionAgent runs in Admin's background job (not AGUI), so the same
+        // wire-contract concern doesn't apply, but we still need to pass a sensible
+        // JsonSerializerOptions for argument binding on complex parameter types.
+        var serializerOptions = JsonSerializerOptions.Web;
+
         var tools = new List<AITool>();
         // Exclude semantic_search — it requires SemanticSearchService which isn't available in Admin.
-        tools.AddRange(graphRAG.AsAIFunctions().Where(t => t.Name != "semantic_search"));
-        tools.AddRange(kgAnalytics.AsAIFunctions());
+        tools.AddRange(graphRAG.AsAIFunctions(serializerOptions).Where(t => t.Name != "semantic_search"));
+        tools.AddRange(kgAnalytics.AsAIFunctions(serializerOptions));
 
         var all = new List<GeneratedSuggestion>();
 

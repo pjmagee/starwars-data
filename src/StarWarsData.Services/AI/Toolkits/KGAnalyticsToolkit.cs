@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Text.Json;
 using Microsoft.Extensions.AI;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -661,23 +662,23 @@ public class KGAnalyticsToolkit
         return new RelationshipsByCategoryDto(EntityId: entityId, EntityName: edges[0].FromName, Category: category, Relationships: grouped, TotalEdges: edges.Count);
     }
 
-    public IReadOnlyList<AITool> AsAIFunctions() =>
+    public IReadOnlyList<AITool> AsAIFunctions(JsonSerializerOptions serializerOptions) =>
         [
-            AIFunctionFactory.Create(DescribeRelationshipLabels, ToolNames.KGAnalytics.DescribeRelationshipLabels),
-            AIFunctionFactory.Create(CountRelatedEntities, ToolNames.KGAnalytics.CountRelatedEntities),
-            AIFunctionFactory.Create(CountNodesByProperty, ToolNames.KGAnalytics.CountNodesByProperty),
-            AIFunctionFactory.Create(CountByYearRange, ToolNames.KGAnalytics.CountByYearRange),
-            AIFunctionFactory.Create(CountEdgesBetweenTypes, ToolNames.KGAnalytics.CountEdgesBetweenTypes),
-            AIFunctionFactory.Create(TopConnectedEntities, ToolNames.KGAnalytics.TopConnectedEntities),
-            AIFunctionFactory.Create(EntityProfile, ToolNames.KGAnalytics.EntityProfile),
-            AIFunctionFactory.Create(CountNodesByType, ToolNames.KGAnalytics.CountNodesByType),
-            AIFunctionFactory.Create(CountPropertyForRelatedEntities, ToolNames.KGAnalytics.CountPropertyForRelatedEntities),
-            AIFunctionFactory.Create(GroupEntitiesByConnection, ToolNames.KGAnalytics.GroupEntitiesByConnection),
-            AIFunctionFactory.Create(CompareEntities, ToolNames.KGAnalytics.CompareEntities),
-            AIFunctionFactory.Create(DescribeEntitySchema, ToolNames.KGAnalytics.DescribeEntitySchema),
-            AIFunctionFactory.Create(FindByLifecycleTransition, ToolNames.KGAnalytics.FindByLifecycleTransition),
-            AIFunctionFactory.Create(CountLifecycleTransitions, ToolNames.KGAnalytics.CountLifecycleTransitions),
-            AIFunctionFactory.Create(ListLabelsByCategory, ToolNames.KGAnalytics.ListLabelsByCategory),
-            AIFunctionFactory.Create(GetRelationshipsByCategory, ToolNames.KGAnalytics.GetRelationshipsByCategory),
+            AIFunctionFactory.Create(DescribeRelationshipLabels, ToolNames.KGAnalytics.DescribeRelationshipLabels, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(CountRelatedEntities, ToolNames.KGAnalytics.CountRelatedEntities, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(CountNodesByProperty, ToolNames.KGAnalytics.CountNodesByProperty, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(CountByYearRange, ToolNames.KGAnalytics.CountByYearRange, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(CountEdgesBetweenTypes, ToolNames.KGAnalytics.CountEdgesBetweenTypes, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(TopConnectedEntities, ToolNames.KGAnalytics.TopConnectedEntities, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(EntityProfile, ToolNames.KGAnalytics.EntityProfile, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(CountNodesByType, ToolNames.KGAnalytics.CountNodesByType, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(CountPropertyForRelatedEntities, ToolNames.KGAnalytics.CountPropertyForRelatedEntities, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(GroupEntitiesByConnection, ToolNames.KGAnalytics.GroupEntitiesByConnection, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(CompareEntities, ToolNames.KGAnalytics.CompareEntities, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(DescribeEntitySchema, ToolNames.KGAnalytics.DescribeEntitySchema, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(FindByLifecycleTransition, ToolNames.KGAnalytics.FindByLifecycleTransition, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(CountLifecycleTransitions, ToolNames.KGAnalytics.CountLifecycleTransitions, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(ListLabelsByCategory, ToolNames.KGAnalytics.ListLabelsByCategory, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(GetRelationshipsByCategory, ToolNames.KGAnalytics.GetRelationshipsByCategory, serializerOptions: serializerOptions),
         ];
 }

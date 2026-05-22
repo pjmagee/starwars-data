@@ -88,11 +88,16 @@ public static class AgentFixture
             var pagesCollection = mongoClient.GetDatabase(databaseName).GetCollection<BsonDocument>(Collections.Pages);
             var wikiSearchProvider = new StarWarsWikiSearchProvider(pagesCollection, NullLoggerFactory.Instance);
 
+            // Tests use Web defaults — the agent isn't served via AGUI so the shared
+            // hosting options aren't in play, but tools still need a JsonSerializerOptions
+            // for argument deserialization on complex parameter types.
+            var serializerOptions = System.Text.Json.JsonSerializerOptions.Web;
+
             var tools = new List<AITool>();
-            tools.AddRange(components.AsAIFunctions());
-            tools.AddRange(dataExplorer.AsAIFunctions());
-            tools.AddRange(graphRag.AsAIFunctions());
-            tools.AddRange(kgAnalytics.AsAIFunctions());
+            tools.AddRange(components.AsAIFunctions(serializerOptions));
+            tools.AddRange(dataExplorer.AsAIFunctions(serializerOptions));
+            tools.AddRange(graphRag.AsAIFunctions(serializerOptions));
+            tools.AddRange(kgAnalytics.AsAIFunctions(serializerOptions));
             tools.Add(
                 AIFunctionFactory.Create(
                     (string query, CancellationToken ct) => wikiSearchProvider.SearchAsync(query, ct),

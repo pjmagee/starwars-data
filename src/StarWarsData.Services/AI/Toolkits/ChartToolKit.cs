@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.AI;
 using StarWarsData.Models.Queries;
@@ -463,16 +464,22 @@ public class ComponentToolkit
         };
     }
 
-    public List<AITool> AsAIFunctions() =>
+    // Pass the AGUI-hosting JsonSerializerOptions through every AIFunctionFactory.Create
+    // so argument deserialization and result serialization share a type-info chain with
+    // the AGUI wire layer. Without this, complex parameters (List<Reference>, List<int>,
+    // our descriptor POCOs) can fail argument binding and M.E.AI substitutes a raw
+    // 'Error: Function failed.' string which AGUI hosting then writes raw to the wire
+    // and the AGUI client chokes on. See backend-tool-rendering tutorial.
+    public List<AITool> AsAIFunctions(JsonSerializerOptions serializerOptions) =>
         [
-            AIFunctionFactory.Create(RenderTable, ToolNames.Component.RenderTable),
-            AIFunctionFactory.Create(RenderDataTable, ToolNames.Component.RenderDataTable),
-            AIFunctionFactory.Create(RenderChart, ToolNames.Component.RenderChart),
-            AIFunctionFactory.Create(RenderGraph, ToolNames.Component.RenderGraph),
-            AIFunctionFactory.Create(RenderPath, ToolNames.Component.RenderPath),
-            AIFunctionFactory.Create(RenderTimeline, ToolNames.Component.RenderTimeline),
-            AIFunctionFactory.Create(RenderInfobox, ToolNames.Component.RenderInfobox),
-            AIFunctionFactory.Create(RenderText, ToolNames.Component.RenderMarkdown),
-            AIFunctionFactory.Create(RenderAurebesh, ToolNames.Component.RenderAurebesh),
+            AIFunctionFactory.Create(RenderTable, ToolNames.Component.RenderTable, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(RenderDataTable, ToolNames.Component.RenderDataTable, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(RenderChart, ToolNames.Component.RenderChart, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(RenderGraph, ToolNames.Component.RenderGraph, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(RenderPath, ToolNames.Component.RenderPath, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(RenderTimeline, ToolNames.Component.RenderTimeline, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(RenderInfobox, ToolNames.Component.RenderInfobox, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(RenderText, ToolNames.Component.RenderMarkdown, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(RenderAurebesh, ToolNames.Component.RenderAurebesh, serializerOptions: serializerOptions),
         ];
 }
