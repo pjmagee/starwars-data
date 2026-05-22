@@ -239,9 +239,16 @@ else
                         </MudText>
                     }
                 </MudStack>
-                <MudLink Href="@_characterInfo.WikiUrl" Target="_blank" Underline="Underline.Always" Typo="Typo.caption">
-                    View on Wookieepedia
-                </MudLink>
+                <MudStack Row="true" Spacing="3" AlignItems="AlignItems.Center" Wrap="Wrap.Wrap">
+                    <MudLink Href="@($"/knowledge-graph/nodes/{PageId}")" Underline="Underline.Always" Typo="Typo.caption">
+                        <MudIcon Icon="@Icons.Material.Filled.Hub" Size="Size.Small" Class="mr-1" Style="vertical-align:middle;" />
+                        Knowledge graph node
+                    </MudLink>
+                    <MudLink Href="@_characterInfo.WikiUrl" Target="_blank" Underline="Underline.Always" Typo="Typo.caption">
+                        <MudIcon Icon="@Icons.Material.Filled.OpenInNew" Size="Size.Small" Class="mr-1" Style="vertical-align:middle;" />
+                        View on Wookieepedia
+                    </MudLink>
+                </MudStack>
             </MudStack>
         </MudStack>
 
