@@ -9,6 +9,8 @@
 @inject IJSRuntime JS
 @inject LayoutService Layout
 @inject PageContextService PageContext
+@inject PageControlService PageControl
+@inject NavigationManager Nav
 @inject ISnackbar Snackbar
 @inject ILogger<GalaxyMapUnified> Logger
 @implements IAsyncDisposable
@@ -1266,6 +1268,43 @@
         GlobalFilterService.OnChange += OnFilterChanged;
         await LoadData();
         PublishPageContext();
+        RegisterPageControlActions();
+    }
+
+    IDisposable? _pageControlRegistration;
+
+    void RegisterPageControlActions()
+    {
+        // Design-041 Phase 2a — single smoke-test action. The agent calls this
+        // after locating a pageId via keyword_search / get_entity_properties.
+        // Re-uses the existing /galaxy-map/{pageId} deep-link route (Design-031)
+        // so the locate + drill code path is identical to clicking a citation.
+        var actions = new Microsoft.Extensions.AI.AIFunction[]
+        {
+            Microsoft.Extensions.AI.AIFunctionFactory.Create(
+                (int pageId, string? name) =>
+                {
+                    var display = string.IsNullOrWhiteSpace(name) ? $"page #{pageId}" : name!;
+                    Nav.NavigateTo($"/galaxy-map/{pageId}");
+                    return $"Navigated the galaxy map to {display} (pageId {pageId}).";
+                },
+                name: "galaxy_map_navigate",
+                description:
+                    "Centre the galaxy map on a System, CelestialBody (planet/moon), Sector, Region, or TradeRoute. " +
+                    "Provide the entity's pageId (look it up first via keyword_search or get_entity_properties) " +
+                    "and optionally its display name for the confirmation message. " +
+                    "Use this when the user asks you to take them to, show, or navigate to a place on the map — " +
+                    "do not just describe it in prose."),
+        };
+
+        try
+        {
+            _pageControlRegistration = PageControl.Register("galaxy_map", actions);
+        }
+        catch (InvalidOperationException ex)
+        {
+            Logger.LogWarning(ex, "PageControlService already had a registration; galaxy-map page tools unavailable this circuit.");
+        }
     }
 
     protected override async Task OnParametersSetAsync()
@@ -2148,6 +2187,7 @@
     {
         Layout.SetFullscreen(false);
         PageContext.Clear();
+        _pageControlRegistration?.Dispose();
         GlobalFilterService.OnChange -= OnFilterChanged;
         _autoplayTimer?.Dispose();
         if (_module is not null)

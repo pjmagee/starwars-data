@@ -8,6 +8,7 @@
 @inject IHttpClientFactory HttpClientFactory
 @inject GlobalFilterService GlobalFilterService
 @inject PageContextService PageContext
+@inject PageControlService PageControl
 @inject ILoggerFactory LoggerFactory
 @inject IJSRuntime JS
 @inject ILogger<CopilotSidebar> Logger
@@ -64,6 +65,15 @@
                          Icon="@Icons.Material.Filled.FormatQuote"
                          Style="font-size:11px;margin-left:4px;"
                          Text="@($"Selected: {Truncate(PageContext.CurrentSelection!, 40)}")" />
+            </MudTooltip>
+        }
+        @if (PageControl.AvailableActions.Count > 0)
+        {
+            <MudTooltip Text="@($"SP-4 can drive this page — {PageControl.AvailableActions.Count} action(s) available")">
+                <MudChip T="string" Size="Size.Small" Color="Color.Success" Variant="Variant.Outlined"
+                         Icon="@Icons.Material.Filled.SmartToy"
+                         Style="font-size:11px;margin-left:4px;"
+                         Text="Can drive page" />
             </MudTooltip>
         }
     </div>
@@ -280,21 +290,40 @@
         // "StarWarsData" HttpClient already has the auth DelegatingHandler that
         // forwards X-User-Id (ADR-001) and resilience handlers stripped so SSE
         // streams aren't killed by the default 30s timeout (see Program.cs).
+        //
+        // .UseFunctionInvocation() is the middleware that handles page-control
+        // (frontend) tools (Design-041): when the agent emits a FunctionCallContent
+        // whose name matches an AIFunction in ChatOptions.Tools, the middleware
+        // executes it locally on the Blazor circuit and posts the result back
+        // through the AGUIChatClient. Server-side tools (whose names don't match
+        // anything in Tools) still surface as breadcrumbs but are not executed
+        // locally — the server already ran them.
         var http = HttpClientFactory.CreateClient("StarWarsData");
-        _chatClient = new AGUIChatClient(
+        var agui = new AGUIChatClient(
             http,
             "copilot/stream",
             LoggerFactory,
             jsonSerializerOptions: null,
             serviceProvider: null);
+        _chatClient = agui
+            .AsBuilder()
+            .UseFunctionInvocation(LoggerFactory)
+            .Build();
 
         PageContext.OnChange += OnPageContextChanged;
+        PageControl.OnChange += OnPageControlChanged;
     }
 
     public void Dispose()
     {
         PageContext.OnChange -= OnPageContextChanged;
+        PageControl.OnChange -= OnPageControlChanged;
         (_chatClient as IDisposable)?.Dispose();
+    }
+
+    private void OnPageControlChanged()
+    {
+        InvokeAsync(StateHasChanged);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -371,10 +400,14 @@
 
         using var cts = new CancellationTokenSource(TimeSpan.FromMinutes(3));
 
-        // Phase 1: no client-side tools yet — Tools is empty. Phase 2 will pass
-        // PageControlService.AvailableActions here so the agent can call back
-        // into the focused page.
-        var options = new ChatOptions();
+        // Per-turn tools: whatever the focused page has registered with
+        // PageControlService (Design-041 § 3). UseFunctionInvocation (wired
+        // in OnInitialized) handles local execution when the agent calls one.
+        var pageTools = PageControl.AvailableActions;
+        var options = new ChatOptions
+        {
+            Tools = pageTools.Count > 0 ? [.. pageTools.Cast<AITool>()] : null,
+        };
 
         try
         {
