@@ -1084,6 +1084,14 @@
     string _cellLabel = "";
     string _regionLabel = "";
     string _sectorLabel = "";
+
+    // Trade-route selection — orthogonal to the region/cell/sector/system
+    // hierarchy. When set, the route gets a persistent pulse on the map and a
+    // dedicated breadcrumb entry. Cleared by GoToOverview / GoBack / closing
+    // the detail panel / selecting a different route.
+    int? _selectedTradeRouteId;
+    string? _selectedTradeRouteName;
+
     List<MudBlazor.BreadcrumbItem> _breadcrumbs = [new("", null, disabled: true, icon: Icons.Material.Filled.Explore)];
     bool _onlyWithBodies = true;
     bool _semanticSearch;
@@ -1591,11 +1599,13 @@
                 var routeOk = await _module.InvokeAsync<bool>("drillToDeepLink", new { kind = "TradeRoute", pageId = loc.PageId, name = loc.Name });
                 if (routeOk)
                 {
-                    // Open the side panel just like a direct route click does
-                    // (galaxy-map-unified.js fires OnCelestialBodySelected → LoadPageDetail).
-                    // Without this, the deep-link path pulsed the line and stopped —
-                    // no detail panel, no PageContext SUBJECT for SP-4 follow-ups.
+                    // Persist the route as the active selection (renders with a
+                    // continuous pulse + adds a breadcrumb entry). Open the side
+                    // panel + publish PageContext SUBJECT for SP-4 follow-ups.
+                    _selectedTradeRouteId = loc.PageId;
+                    _selectedTradeRouteName = loc.Name;
                     _detailPanelOpen = true;
+                    UpdateBreadcrumbs();
                     await LoadPageDetail(loc.PageId);
                 }
                 else
@@ -1810,7 +1820,20 @@
     }
 
     [JSInvokable]
-    public void OnCelestialBodySelected(int bodyId, string bodyName) => InvokeAsync(() => LoadPageDetail(bodyId));
+    public void OnCelestialBodySelected(int bodyId, string bodyName)
+    {
+        // The JS side reuses this callback for trade-route clicks too — same
+        // "open the detail panel" intent, different entity kind. Promote it to
+        // a persistent route selection so the breadcrumb + map styling reflect it.
+        var route = _geography?.TradeRoutes.FirstOrDefault(r => r.Id == bodyId);
+        if (route is not null)
+        {
+            _selectedTradeRouteId = route.Id;
+            _selectedTradeRouteName = route.Name;
+            UpdateBreadcrumbs();
+        }
+        InvokeAsync(() => LoadPageDetail(bodyId));
+    }
 
     [JSInvokable]
     public void OnSystemDeselected()
@@ -1823,8 +1846,39 @@
 
     // ══════════ EXPLORE: Navigation ══════════
 
-    async Task GoBack() { if (_module is not null) await _module.InvokeVoidAsync("goBack"); }
-    async Task GoToOverview() { if (_module is not null) await _module.InvokeVoidAsync("goToOverview"); }
+    async Task GoBack()
+    {
+        // Pop trade-route selection FIRST if it's set — the breadcrumb's last
+        // entry is the route, so "back" should clear it before climbing the
+        // region/cell/sector/system hierarchy.
+        if (_selectedTradeRouteId is not null)
+        {
+            await ClearTradeRouteSelectionAsync();
+            return;
+        }
+        if (_module is not null) await _module.InvokeVoidAsync("goBack");
+    }
+
+    async Task GoToOverview()
+    {
+        if (_selectedTradeRouteId is not null)
+            await ClearTradeRouteSelectionAsync();
+        if (_module is not null) await _module.InvokeVoidAsync("goToOverview");
+    }
+
+    async Task ClearTradeRouteSelectionAsync()
+    {
+        _selectedTradeRouteId = null;
+        _selectedTradeRouteName = null;
+        if (_module is not null)
+        {
+            try { await _module.InvokeVoidAsync("clearTradeRouteSelection"); }
+            catch (JSDisconnectedException) { } catch (ObjectDisposedException) { }
+        }
+        ClearDetailPanel();
+        UpdateBreadcrumbs();
+        StateHasChanged();
+    }
 
     void UpdateBreadcrumbs()
     {
@@ -1837,6 +1891,8 @@
             _breadcrumbs.Add(new(_sectorLabel, null, disabled: true, icon: Icons.Material.Filled.Grain));
         if (_currentLevel == "system")
             _breadcrumbs.Add(new(_currentLabel, null, disabled: true, icon: Icons.Material.Filled.Star));
+        if (!string.IsNullOrEmpty(_selectedTradeRouteName))
+            _breadcrumbs.Add(new(_selectedTradeRouteName, null, disabled: true, icon: Icons.Material.Filled.Timeline));
     }
 
     // ══════════ EXPLORE: Search ══════════
@@ -2048,6 +2104,20 @@
     {
         _detailPage = null; _selectedSystem = null;
         _locationEvents = null; _locationEventsForPageId = 0; _eventsExpanded = false;
+
+        // If a trade route was the active selection, closing the panel clears
+        // the persistent JS highlight + drops the breadcrumb entry too.
+        if (_selectedTradeRouteId is not null)
+        {
+            _selectedTradeRouteId = null;
+            _selectedTradeRouteName = null;
+            if (_module is not null)
+            {
+                try { _ = _module.InvokeVoidAsync("clearTradeRouteSelection"); }
+                catch (JSDisconnectedException) { } catch (ObjectDisposedException) { }
+            }
+            UpdateBreadcrumbs();
+        }
         PublishPageContext();
     }
 

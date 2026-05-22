@@ -308,8 +308,13 @@ export function initialize(containerId, overview, rawDotNetRef) {
             .style('pointer-events', 'none');
 
         rg.on('mouseover', function () {
-            d3.select(this).select('.trade-route')
-                .attr('stroke', 'rgba(255,215,0,0.6)').attr('stroke-width', 2.5);
+            // Don't override the selected-route persistent style on hover —
+            // mouseout would revert it to default and "lose" the selection.
+            if (route.id !== selectedTradeRouteId) {
+                d3.select(this).select('.trade-route')
+                    .interrupt('selected-pulse')
+                    .attr('stroke', 'rgba(255,215,0,0.6)').attr('stroke-width', 2.5);
+            }
             tooltip.html(
                 `<strong style="color:#ffd700;">${route.name}</strong>` +
                 `<br><span style="color:#aaa">Trade Route</span>` +
@@ -321,12 +326,15 @@ export function initialize(containerId, overview, rawDotNetRef) {
             tooltip.style('top', (event.offsetY - 10) + 'px').style('left', (event.offsetX + 15) + 'px');
         })
         .on('mouseout', function () {
-            d3.select(this).select('.trade-route')
-                .attr('stroke', 'rgba(255,215,0,0.2)').attr('stroke-width', 1.2);
+            if (route.id !== selectedTradeRouteId) {
+                d3.select(this).select('.trade-route')
+                    .attr('stroke', 'rgba(255,215,0,0.2)').attr('stroke-width', 1.2);
+            }
             tooltip.style('visibility', 'hidden');
         })
         .on('click', (event) => {
             event.stopPropagation();
+            selectTradeRouteById(route.id);
             dotNetRef.invokeMethodAsync('OnCelestialBodySelected', route.id, route.name);
         });
     });
@@ -1561,38 +1569,69 @@ export function initialize(containerId, overview, rawDotNetRef) {
 
     // Design-031 Phase 2: pulse a trade route on the overview without drilling.
     // 3 cycles of a brighter, thicker stroke over ~2s, then restore baseline.
-    function highlightTradeRouteById(id) {
+    // ── Persistent trade-route selection ─────────────────────────────────────
+    // A selected route gets a continuous gentle pulse (same UX vocabulary as
+    // region hover — 2s opacity loop) and stays styled until cleared. This
+    // replaces the previous 3-cycle one-shot flash that left the route
+    // looking dimmer than its default state.
+    let selectedTradeRouteId = null;
+
+    function paintSelectedRoute(path) {
+        // Stop any previous animation, then start the persistent pulse.
+        (function pulse() {
+            path.interrupt('selected-pulse')
+                .transition('selected-pulse').duration(1000)
+                .attr('stroke', 'rgba(255,215,0,0.95)').attr('stroke-width', 4)
+                .transition('selected-pulse').duration(1000)
+                .attr('stroke', 'rgba(255,215,0,0.55)').attr('stroke-width', 3)
+                .on('end', pulse);
+        })();
+    }
+
+    function deselectRoute(id) {
+        if (id == null) return;
+        const group = routeLayer.selectAll('.trade-route-group')
+            .filter(d => d && d.id === id);
+        if (group.empty()) return;
+        const path = group.select('.trade-route');
+        if (path.empty()) return;
+        path.interrupt('selected-pulse')
+            .transition().duration(250)
+            .attr('stroke', 'rgba(255,215,0,0.2)').attr('stroke-width', 1.2);
+    }
+
+    function selectTradeRouteById(id) {
         if (id == null) return false;
         while (currentLevel !== 'overview') goBack();
 
         const group = routeLayer.selectAll('.trade-route-group')
             .filter(d => d && d.id === id);
         if (group.empty()) return false;
-
         const path = group.select('.trade-route');
         if (path.empty()) return false;
 
-        let cycle = 0;
-        function pulse() {
-            if (cycle >= 3) {
-                path.transition().duration(300)
-                    .attr('stroke', 'rgba(255,215,0,0.2)').attr('stroke-width', 1.2);
-                return;
-            }
-            cycle++;
-            path.transition().duration(330)
-                .attr('stroke', 'rgba(255,215,0,0.95)').attr('stroke-width', 4)
-                .transition().duration(330)
-                .attr('stroke', 'rgba(255,215,0,0.25)').attr('stroke-width', 1.4)
-                .on('end', pulse);
+        // Clear the previous selection (if any) before painting the new one.
+        if (selectedTradeRouteId !== null && selectedTradeRouteId !== id) {
+            deselectRoute(selectedTradeRouteId);
         }
-        pulse();
+        selectedTradeRouteId = id;
+        paintSelectedRoute(path);
         return true;
     }
 
+    function clearTradeRouteSelection() {
+        if (selectedTradeRouteId === null) return;
+        deselectRoute(selectedTradeRouteId);
+        selectedTradeRouteId = null;
+    }
+
+    // Legacy name kept for the existing drillToDeepLink call site — it now
+    // routes through the persistent selection path.
+    const highlightTradeRouteById = selectTradeRouteById;
+
     _state = {
         svg, container, goBack, drillIntoCell, drillIntoRegion, drillToDeepLink,
-        drillToSector, highlightTradeRouteById,
+        drillToSector, highlightTradeRouteById, clearTradeRouteSelection,
         getCurrentLevel: () => currentLevel,
         setSystemFilter, setRegionVisibility,
         // Layers
@@ -1616,9 +1655,16 @@ export async function drillToSector(name) {
     return false;
 }
 
-/** Pulse a trade route on the overview by KG pageId (Design-031 Phase 2). */
+/** Select a trade route on the overview (persistent pulse). Replaces the
+ *  one-shot flash that left the route looking dimmer than the default style. */
 export function highlightTradeRouteById(id) {
     if (_state && _state.highlightTradeRouteById) return _state.highlightTradeRouteById(id);
+    return false;
+}
+
+/** Clear the persistent trade-route selection (fade back to default style). */
+export function clearTradeRouteSelection() {
+    if (_state && _state.clearTradeRouteSelection) return _state.clearTradeRouteSelection();
     return false;
 }
 
