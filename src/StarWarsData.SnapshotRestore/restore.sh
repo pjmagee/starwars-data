@@ -83,5 +83,5 @@ mongorestore \
   --numParallelCollections=4
 
 rm -f "$ARCHIVE"
-log "Restore complete. NOTE: recreate vector indexes via the Aspire commands"
-log "'Ensure All Indexes' then '4b. Create Index Embeddings' (no OpenAI key needed)."
+log "Restore complete. NOTE: recreate vector indexes via the Aspire"
+log "'Ensure All Indexes' command (chains pages → chunks → vector, no OpenAI key needed)."

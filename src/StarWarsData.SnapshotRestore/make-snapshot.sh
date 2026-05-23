@@ -15,8 +15,8 @@
 # NOTE: mongodump does NOT capture Atlas Search / vector-search index
 # DEFINITIONS (only collections + regular indexes). Embeddings survive as
 # document fields, so no re-embedding is needed on restore — but the dev must
-# recreate vector indexes via the existing "4b. Create Index Embeddings" /
-# "Ensure All Indexes" Aspire commands after restoring. This is keyless.
+# recreate vector indexes via the "Ensure All Indexes" Aspire command after
+# restoring (chains pages → chunks → vector). This is keyless.
 #
 # Usage:
 #   MDB_URI='mongodb://user:pass@host:port/?authSource=admin&directConnection=true' \

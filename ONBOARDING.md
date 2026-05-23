@@ -103,17 +103,15 @@ vector-search index *definitions*. The embedding vectors themselves are in the
 restored documents (so **no re-embedding, no OpenAI spend**) — you just need to
 recreate the index definitions over them.
 
-In the **Aspire dashboard**, on the `admin` resource, run these commands once,
-in order:
-
-1. **Ensure All Indexes**
-2. **4b. Create Index Embeddings** (creates the Atlas vector-search indexes)
+In the **Aspire dashboard**, on the `admin` resource, run **Ensure All
+Indexes** once. It chains pages → chunks → vector indexes.
 
 Until you do this, full-text/semantic search and the RAG tools return empty.
 
 ## 6. Verify
 
-- Frontend (port `9081` by default) loads and search returns results → indexes OK.
+- Open the **Aspire dashboard**, click the `frontend` link, and confirm
+  search returns results → indexes OK.
 - Open a chat / ask a question → exercises your OpenAI key.
 - Galaxy map / timelines render → KG + derived data restored.
 
