@@ -542,6 +542,19 @@
     }
 
     /// <summary>
+    /// Public entry point for external callers (e.g. a parent page that hosts its own
+    /// Holocron-enhance button in its chrome and mounts this panel with ShowHeader=false)
+    /// to force a panel reload. Resets the per-node load guard so OnParametersSetAsync's
+    /// "same id, skip" short-circuit doesn't block the refresh, then re-fetches labels,
+    /// edges, and enrichments. Safe to call when Node is null (no-ops).
+    /// </summary>
+    public async Task RefreshAsync()
+    {
+        _loadedForPageId = null;
+        await LoadAllAsync();
+    }
+
+    /// <summary>
     /// Opens the Holocron progress dialog (Design-020 async pipeline). On completion,
     /// refreshes the panel data so newly written enrichments surface inline.
     /// </summary>

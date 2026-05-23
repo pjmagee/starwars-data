@@ -3,6 +3,7 @@
 @inject IHttpClientFactory HttpClientFactory
 @inject NavigationManager Navigation
 @inject ISnackbar Snackbar
+@inject IDialogService DialogService
 @inject GlobalFilterService GlobalFilterService
 @inject PageContextService PageContext
 @implements IDisposable
@@ -95,6 +96,29 @@
                                 Character timeline
                             </MudButton>
                         }
+                        @* Holocron enhance — parity with the in-panel control on
+                             /knowledge-graph's row-expand surface. Wrapped in AuthorizeView
+                             because the panel's own button is, and dialog launch lives here
+                             (not in the panel) because the panel's header is suppressed via
+                             ShowHeader="false" on this page. On dialog close we call
+                             _panel.RefreshAsync() so newly written enrichments surface inline. *@
+                        <AuthorizeView Context="auth">
+                            <MudTooltip Text="@(_holocronRunning ? "Re-open the live progress modal for the in-flight Holocron run on this node." : "Run the Holocron agent on this node — gathers context, calls the LLM, writes evidence-backed enrichments. Refreshes this panel when complete.")">
+                                <MudButton Variant="Variant.Outlined" Color="Color.Tertiary" Size="Size.Small"
+                                           StartIcon="@Icons.Material.Filled.AutoFixHigh"
+                                           OnClick="EnhanceWithHolocron">
+                                    @if (_holocronRunning)
+                                    {
+                                        <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" />
+                                        <span>Enhancing… (view)</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Enhance with Holocron</span>
+                                    }
+                                </MudButton>
+                            </MudTooltip>
+                        </AuthorizeView>
                         <MudButton Variant="Variant.Text" Color="Color.Default" Size="Size.Small"
                                    StartIcon="@Icons.Material.Filled.History"
                                    Href="@($"/holocron/jobs/{_node.Id}")">
@@ -110,7 +134,7 @@
              the header card above already exposes the action buttons; ShowImageInline=false
              because the image lives in the header card. ── *@
         <MudPaper Outlined="true" Class="pa-4">
-            <NodeDetailPanel Node="_node" ShowHeader="false" ShowImageInline="false" />
+            <NodeDetailPanel @ref="_panel" Node="_node" ShowHeader="false" ShowImageInline="false" />
         </MudPaper>
     }
 </MudContainer>
@@ -256,6 +280,57 @@
         {
             await LoadAsync();
         });
+    }
+
+    private NodeDetailPanel _panel = default!;
+    private bool _holocronRunning;
+
+    private async Task EnhanceWithHolocron()
+    {
+        if (_node is null)
+            return;
+
+        var nodeId = _node.Id;
+        var nodeName = _node.Name;
+        _holocronRunning = true;
+        StateHasChanged();
+        try
+        {
+            var parameters = new DialogParameters<HolocronProgressDialog>
+            {
+                { x => x.PageId, nodeId },
+                { x => x.NodeName, nodeName },
+            };
+            var options = new DialogOptions
+            {
+                CloseOnEscapeKey = true,
+                BackdropClick = true,
+                MaxWidth = MaxWidth.Medium,
+                FullWidth = true,
+            };
+            var dialog = await DialogService.ShowAsync<HolocronProgressDialog>($"Enhance {nodeName}", parameters, options);
+            var result = await dialog.Result;
+
+            var finished = false;
+            if (result is { Canceled: false, Data: HolocronProgressDialog.HolocronStatusResponse status })
+            {
+                finished = status.Stage is HolocronJobStatus.Completed or HolocronJobStatus.Failed;
+            }
+
+            if (finished && _node is not null && _node.Id == nodeId)
+            {
+                await _panel.RefreshAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Holocron call errored: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _holocronRunning = false;
+            StateHasChanged();
+        }
     }
 
     public void Dispose()
