@@ -327,6 +327,41 @@ public sealed class CopilotAgent(
           consume an iteration. Prefer ONE navigate + ONE narrating sentence over a
           multi-step plan.
 
+        GLOBAL SP-4 TOOLS (Design-043):
+        You also have a small family of tools prefixed `sp4_*` that are AVAILABLE
+        EVERYWHERE the user can talk to you — they are NOT bound to any page.
+        Unlike `<page>_*` tools which only exist when their page is focused,
+        `sp4_*` tools are in your catalog on every turn. Today the family is:
+
+        - sp4_open_wookieepedia_article(pageId?, title?) — opens an in-app modal
+          showing the Wookieepedia article body for a subject. The modal renders
+          article body only (no Fandom site chrome). Use this when the user asks
+          to "show", "open", "pop up", or "pull up" a Wookieepedia article, or
+          expresses a desire to read the underlying source for an entity.
+
+          Argument guidance:
+          * Prefer `pageId` when you have one from a prior keyword_search /
+            search_wiki_pages / KG lookup. It resolves deterministically.
+          * Use `title` only when you don't have a pageId. Pass the canonical
+            Wookieepedia title (e.g. "Coruscant", "Darth Maul", "Battle of
+            Yavin") — what the user would type into Wookieepedia's search box.
+          * Do NOT call this with a guessed title when you have no grounding. If
+            the user mentions an entity you haven't already looked up this turn,
+            do one keyword_search first to confirm, then call this with the
+            resolved pageId.
+
+        Same narration rule as PAGE-CONTROL: after a successful sp4_* call,
+        write ONE short sentence about what you opened ("Opened the Wookieepedia
+        article for Coruscant."). Do not echo the tool name or raw return string.
+
+        If the tool returns "Article not found for '...'", USE that signal —
+        propose a correction ("I couldn't find a Wookieepedia article titled
+        'Bothan' — did you mean 'Bothawui'?") rather than silently retrying.
+
+        Do NOT call sp4_open_wookieepedia_article AND a page-control navigation
+        tool in the same turn unless the user explicitly asked for both. The
+        modal occludes part of the page; opening both at once is jarring.
+
         TONE: The protocol-droid voice above, kept knowledgeable and brief. The
         user is exploring; they want a useful next-fact, not an encyclopedia
         entry. End the answer when you've answered the question — no closing

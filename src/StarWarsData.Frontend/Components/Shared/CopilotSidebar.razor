@@ -9,6 +9,7 @@
 @inject GlobalFilterService GlobalFilterService
 @inject PageContextService PageContext
 @inject PageControlService PageControl
+@inject GlobalCopilotToolsService GlobalCopilotTools
 @inject ILoggerFactory LoggerFactory
 @inject IJSRuntime JS
 @inject ILogger<CopilotSidebar> Logger
@@ -67,15 +68,15 @@
                          Text="@($"Selected: {Truncate(PageContext.CurrentSelection!, 40)}")" />
             </MudTooltip>
         }
-        @if (PageControl.Actions.Count > 0)
+        @if (PageControl.Actions.Count + GlobalCopilotTools.Actions.Count > 0)
         {
-            @* "Can drive page" popover — surfaces the page-control vocabulary (Design-041
-               Discoverability). Uses MudMenu's built-in activator (Label + StartIcon),
+            @* "SP-4 tools" popover — surfaces both the global SP-4 vocabulary (Design-043)
+               and the page-scoped vocabulary (Design-041 Discoverability) in one menu.
+               Global tools render first under "Always available"; page tools render under
+               "On this page". Uses MudMenu's built-in activator (Label + StartIcon),
                which wires the click correctly — the ActivatorContent + nested-button
-               pattern times out the click on MudBlazor 9.4 (verified via Chrome DevTools).
-               Each menu item shows the user-facing label, the agent-facing description,
-               and a clickable example phrase that drops into the input. *@
-            <MudMenu Label="@($"Can drive page ({PageControl.Actions.Count})")"
+               pattern times out the click on MudBlazor 9.4. *@
+            <MudMenu Label="@($"SP-4 tools ({PageControl.Actions.Count + GlobalCopilotTools.Actions.Count})")"
                      StartIcon="@Icons.Material.Filled.SmartToy"
                      Variant="Variant.Outlined"
                      Color="Color.Success"
@@ -84,36 +85,65 @@
                      TransformOrigin="Origin.TopLeft"
                      Dense="true"
                      Style="text-transform:none;font-size:11px;margin-left:4px;min-height:22px;padding:0 8px;line-height:1.4;">
-                @* Sticky-header pattern: the title + helper text stay pinned, only the
-                   action list scrolls. Capped at 60vh so the popover never exceeds the
-                   viewport regardless of action count. *@
                 <div style="width:320px;max-width:320px;max-height:60vh;display:flex;flex-direction:column;">
                     <div class="pa-2" style="flex-shrink:0;border-bottom:1px solid var(--mud-palette-lines-default);">
-                        <MudText Typo="Typo.subtitle2" Class="mb-1">SP-4 can do this here</MudText>
+                        <MudText Typo="Typo.subtitle2" Class="mb-1">SP-4 can do these things</MudText>
                         <MudText Typo="Typo.caption" Color="Color.Secondary">
                             Ask in plain English. Click an example to try it.
                         </MudText>
                     </div>
                     <div class="pa-2" style="overflow-y:auto;flex:1 1 auto;min-height:0;">
-                        @foreach (var a in PageControl.Actions)
+                        @if (GlobalCopilotTools.Actions.Count > 0)
                         {
-                            var action = a;
-                            <div class="mb-2">
-                                <MudText Typo="Typo.body2" Style="font-weight:600;">@action.Label</MudText>
-                                <MudText Typo="Typo.caption" Color="Color.Secondary" Style="white-space:normal;">
-                                    @action.Tool.Description
-                                </MudText>
-                                @if (!string.IsNullOrWhiteSpace(action.Example))
-                                {
-                                    <MudButton Size="Size.Small" Variant="Variant.Text" Color="Color.Primary"
-                                               StartIcon="@Icons.Material.Filled.PlayArrow"
-                                               Class="mt-1"
-                                               Style="text-transform:none;padding:0 6px;font-size:11px;"
-                                               OnClick="@(() => UseSuggestion(action.Example!))">
-                                        "@action.Example"
-                                    </MudButton>
-                                }
-                            </div>
+                            <MudText Typo="Typo.overline" Color="Color.Tertiary" Class="mb-1">Always available</MudText>
+                            @foreach (var a in GlobalCopilotTools.Actions)
+                            {
+                                var action = a;
+                                <div class="mb-2">
+                                    <MudText Typo="Typo.body2" Style="font-weight:600;">@action.Label</MudText>
+                                    <MudText Typo="Typo.caption" Color="Color.Secondary" Style="white-space:normal;">
+                                        @action.Tool.Description
+                                    </MudText>
+                                    @if (!string.IsNullOrWhiteSpace(action.Example))
+                                    {
+                                        <MudButton Size="Size.Small" Variant="Variant.Text" Color="Color.Primary"
+                                                   StartIcon="@Icons.Material.Filled.PlayArrow"
+                                                   Class="mt-1"
+                                                   Style="text-transform:none;padding:0 6px;font-size:11px;"
+                                                   OnClick="@(() => UseSuggestion(action.Example!))">
+                                            "@action.Example"
+                                        </MudButton>
+                                    }
+                                </div>
+                            }
+                        }
+                        @if (PageControl.Actions.Count > 0)
+                        {
+                            @if (GlobalCopilotTools.Actions.Count > 0)
+                            {
+                                <MudDivider Class="my-2" />
+                            }
+                            <MudText Typo="Typo.overline" Color="Color.Tertiary" Class="mb-1">On this page</MudText>
+                            @foreach (var a in PageControl.Actions)
+                            {
+                                var action = a;
+                                <div class="mb-2">
+                                    <MudText Typo="Typo.body2" Style="font-weight:600;">@action.Label</MudText>
+                                    <MudText Typo="Typo.caption" Color="Color.Secondary" Style="white-space:normal;">
+                                        @action.Tool.Description
+                                    </MudText>
+                                    @if (!string.IsNullOrWhiteSpace(action.Example))
+                                    {
+                                        <MudButton Size="Size.Small" Variant="Variant.Text" Color="Color.Primary"
+                                                   StartIcon="@Icons.Material.Filled.PlayArrow"
+                                                   Class="mt-1"
+                                                   Style="text-transform:none;padding:0 6px;font-size:11px;"
+                                                   OnClick="@(() => UseSuggestion(action.Example!))">
+                                            "@action.Example"
+                                        </MudButton>
+                                    }
+                                </div>
+                            }
                         }
                     </div>
                 </div>
@@ -445,13 +475,16 @@
 
         using var cts = new CancellationTokenSource(TimeSpan.FromMinutes(3));
 
-        // Per-turn tools: whatever the focused page has registered with
-        // PageControlService (Design-041 § 3). UseFunctionInvocation (wired
-        // in OnInitialized) handles local execution when the agent calls one.
+        // Per-turn tools: union of GlobalCopilotToolsService (SP-4-wide; Design-043)
+        // and PageControlService (per-page; Design-041 § 3). UseFunctionInvocation
+        // (wired in OnInitialized) handles local execution when the agent calls one.
+        var globalTools = GlobalCopilotTools.Tools;
         var pageTools = PageControl.Tools;
         var options = new ChatOptions
         {
-            Tools = pageTools.Count > 0 ? [.. pageTools.Cast<AITool>()] : null,
+            Tools = globalTools.Count + pageTools.Count > 0
+                ? [.. globalTools.Cast<AITool>(), .. pageTools.Cast<AITool>()]
+                : null,
         };
 
         try
@@ -553,13 +586,23 @@
         // post-tool-call narration become two separate messages, each with one
         // canonical text). We mirror each into a Msg bubble, keyed by MessageId.
         var response = updates.ToChatResponse();
-        var seen = new HashSet<string>(StringComparer.Ordinal);
         var index = 0;
         foreach (var m in response.Messages.Where(m => m.Role == ChatRole.Assistant))
         {
-            var key = !string.IsNullOrEmpty(m.MessageId) ? m.MessageId! : $"__pos:{index}";
-            seen.Add(key);
+            var text = m.Text ?? "";
+            // Skip tool-call-only assistant segments. ToChatResponse emits one
+            // assistant ChatMessage per tool call (carrying just FunctionCallContent),
+            // which has no user-facing text — the tool breadcrumb already represents
+            // it. Without this filter we render an empty bubble between every pair
+            // of tool calls. (Design-041 § Resolved questions bug #1; ported from
+            // Ask.razor's ApplyAssistantText.)
+            if (string.IsNullOrEmpty(text))
+            {
+                index++;
+                continue;
+            }
 
+            var key = !string.IsNullOrEmpty(m.MessageId) ? m.MessageId! : $"__pos:{index}";
             if (!_assistantByMessageId.TryGetValue(key, out var bubble))
             {
                 bubble = new Msg { Role = Role.Assistant, Text = "" };
@@ -567,7 +610,7 @@
                 _conversation.Add(bubble);
             }
 
-            bubble.Text = m.Text ?? "";
+            bubble.Text = text;
             index++;
         }
     }

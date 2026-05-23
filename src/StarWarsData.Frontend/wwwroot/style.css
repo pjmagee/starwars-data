@@ -231,3 +231,19 @@ html[data-text-size="extra-large"] {
     --mud-typography-caption-size: 0.975rem;
     --mud-typography-overline-size: 0.975rem;
 }
+
+/* Wookieepedia article modal (Design-043) — fullscreen on mobile (<960px).
+   The dialog wrapper is rendered by MudBlazor in a portal outside the
+   WookieepediaArticleDialog component tree, so this rule MUST live in global
+   CSS (scoped CSS would not reach it). The .wookieepedia-modal class is set
+   on MudDialog via `Class="wookieepedia-modal"`. */
+@media (max-width: 960px) {
+    .mud-dialog.wookieepedia-modal {
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+    }
+}

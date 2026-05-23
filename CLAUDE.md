@@ -1,244 +1,136 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
-## Build & Run
-
-All projects live under `src/` with the solution at `src/StarWarsData.slnx`. Requires .NET 10 SDK (see `global.json` at the repo root).
-
-**New here?** [ONBOARDING.md](ONBOARDING.md) gets a fresh clone running against real data (full snapshot restore, no ETL re-run, no OpenAI spend) — only your own OpenAI key is needed. Mechanism: [eng/design/038-developer-onboarding-snapshot.md](eng/design/038-developer-onboarding-snapshot.md).
-
-```bash
-# Build everything
-dotnet build src/StarWarsData.slnx
-
-# Run the Aspire orchestrator (starts all components we need)
-dotnet run --project src/StarWarsData.AppHost 
-dotnet watch --project src/StarWarsData.AppHost 
-```
-
-### Running Aspire from an agent
-
-When an agent (worktree, `/loop`, background) needs to boot the AppHost, use `aspire run --isolated --detach` instead of `dotnet run --project src/StarWarsData.AppHost`. The developer almost certainly has the AppHost running already; isolated mode (Aspire 13.2+) gives the agent its own randomized ports and a private user-secrets store, so the two instances don't collide. Tear down with `aspire stop <id>` (find the id with `aspire ps`). Never use `--isolated` with `aspire publish`, `aspire do prepare-starwars`, or `aspire deploy` — those resolve `Parameters:*` from the project's user-secrets and an isolated store would silently produce empty `.env` files. Full guide: [eng/docs/aspire-isolated-mode-for-claude-code.md](eng/docs/aspire-isolated-mode-for-claude-code.md).
-
-### Publish & Deploy
-
-The AppHost defines a Docker Compose environment named `starwars` (`AddDockerComposeEnvironment("starwars")` in [src/StarWarsData.AppHost/Program.cs](src/StarWarsData.AppHost/Program.cs)). Three CLI commands operate on it — pick by what you need:
-
-```bash
-# Template only — emits docker-compose.yaml + UNFILLED .env. Hand to CI.
-aspire publish --apphost src/StarWarsData.AppHost/StarWarsData.AppHost.csproj
-
-# Full bake — emits docker-compose.yaml + FILLED .env.<env> + container images.
-# Resolves parameter values from user-secrets / Parameters__* env vars / appsettings.
-aspire do prepare-starwars -e Production \
-  --apphost src/StarWarsData.AppHost/StarWarsData.AppHost.csproj \
-  --non-interactive
-
-# Same as `prepare`, then runs `docker compose up` against the host.
-aspire deploy -e Production --apphost src/StarWarsData.AppHost/StarWarsData.AppHost.csproj
-```
-
-Output lands in `src/StarWarsData.AppHost/aspire-output/` (gitignored). All parameter values for `prepare`/`deploy` resolve from the AppHost's user-secrets store — set them once with `dotnet user-secrets set "Parameters:<name>" <value> --project src/StarWarsData.AppHost`. **Do not** rely on shell env vars like `STARWARS_OPENAI_KEY` for AppHost parameters; those are runtime-only for the API service. See [eng/design/017-aspire-publish-deploy-workflow.md](eng/design/017-aspire-publish-deploy-workflow.md) for the full rationale, parameter resolution order, and the empty-string-user-secret gotcha.
-
-### Aspire MCP
-
-When the AppHost is running, use the **Aspire MCP server** (`mcp__aspire__*`) to interact with the running application:
-
-- `list_resources` — see all running services and their status
-- `list_console_logs` / `list_structured_logs` — read service logs and diagnose issues
-- `list_traces` / `list_trace_structured_logs` — inspect distributed traces
-- `execute_resource_command` — restart services or trigger the HTTP commands defined in the AppHost (ETL pipeline phases, index creation, etc.)
-- `search_docs` / `list_docs` / `get_doc` — search and read .NET Aspire documentation directly
-
-The AppHost defines HTTP commands on the **admin** resource for every ETL pipeline phase (1a–9). These are visible in the Aspire dashboard and executable via the MCP.
-
-When working with Aspire APIs, configuration, or orchestration patterns, **always check the Aspire docs via the MCP first** (`mcp__aspire__search_docs`, `mcp__aspire__get_doc`) rather than guessing or relying on stale knowledge.
-
-## Tests
-
-The whole suite lives in **one project** — `src/StarWarsData.Tests` — and uses **MSTest on `MSTest.Sdk`** running through the new `Microsoft.Testing.Platform` (MTP) runner. The runner is selected via `global.json` at the repo root (`"test": { "runner": "Microsoft.Testing.Platform" }`); the legacy VSTest mode is no longer supported on .NET 10.
-
-Tests are split into three tiers under matching folders, tagged with `[TestCategory(TestTiers.Unit|Integration|Agent)]`:
-
-| Tier         | Folder                | What it touches                                | Where it runs                             |
-| ------------ | --------------------- | ---------------------------------------------- | ----------------------------------------- |
-| `Unit`       | `Unit/`               | Pure logic. No Docker, env vars, or network.   | Pre-commit + CI + Docker build            |
-| `Integration`| `Integration/`        | Testcontainers MongoDB only.                   | CI (Docker required)                      |
-| `Agent`      | `Agent/`              | Real OpenAI key + live `starwars-dev` MongoDB. | Manual / nightly only                     |
-
-Filter syntax is the standard MSTest one. Always pass the test project with `--project` (the new MTP `dotnet test` mode requires it):
-
-```bash
-# Pre-commit / fast CI gate — pure unit tests, ~700ms
-dotnet test --project src/StarWarsData.Tests --filter "TestCategory=Unit"
-
-# CI gate — unit + integration (needs Docker for Testcontainers), ~15s
-dotnet test --project src/StarWarsData.Tests --filter "TestCategory=Unit|TestCategory=Integration"
-
-# Manual / nightly — Agent tier (needs STARWARS_OPENAI_KEY + MDB_MCP_CONNECTION_STRING)
-dotnet test --project src/StarWarsData.Tests --filter "TestCategory=Agent"
-
-# Single test class
-dotnet test --project src/StarWarsData.Tests --filter "FullyQualifiedName~RecordServiceTests"
-
-# Single test method
-dotnet test --project src/StarWarsData.Tests --filter "FullyQualifiedName~RecordServiceTests.GetCollectionNames_ResultsAreSorted"
-```
-
-**Fixtures** all live in `src/StarWarsData.Tests/Infrastructure/` and are **lazy static** — they expose `EnsureInitializedAsync()` and are wired in via `[ClassInitialize]` on each test class that needs them, with a single `[AssemblyCleanup]` in `AssemblyHooks.cs` disposing whichever ones got touched. Unit-only runs never spin up containers or contact OpenAI.
-
-- `ApiFixture` — shared Testcontainers MongoDB seeded with diverse infobox types. Used by `RecordServiceTests`, `RelationshipAnalystToolkitTests`, `RelationshipGraphPipelineTests`.
-- `CheckpointStoreFixture` — separate Testcontainers MongoDB for `MongoCheckpointStoreTests` (no seed).
-- `AgentFixture` — real OpenAI client + live MongoDB connection for the Agent tier (`AskAiPipelineTests`, `DeepResearchTests`, `RelationshipQueryTests`, `TemporalQueryTests`).
-
-`ArticleChunkingIntegrationTests` owns its own Testcontainer via `[ClassInitialize]`/`[ClassCleanup]` so chunking writes can't pollute the shared `ApiFixture` seed.
-
-Parallelism: assembly-level `[Parallelize(Scope = ExecutionScope.ClassLevel)]` (sequential within a class, parallel across classes). Integration and Agent classes that share fixture state are marked `[DoNotParallelize]` to keep their writes from racing.
-
-When adding a new test, decide its tier first and put it in the matching folder with `[TestCategory(TestTiers.X)]`. New tier constants live in `src/StarWarsData.Tests/TestTiers.cs`.
-
-## Architecture
-
-**Aspire-orchestrated app** with five runtime components:
-
-- **AppHost** — .NET Aspire orchestrator. Wires MongoDB connection, OpenAI key, and defines HTTP commands for the ETL pipeline phases (visible in the Aspire dashboard). Also manages a MongoDB MCP sidecar container.
-- **ApiService** — ASP.NET Core API. Hosts the AI agent (via Microsoft.Agents.AI + AGUI), MCP client for MongoDB tools, and feature endpoints. Organized into `Features/` folders: `CharacterTimelines`, `Chat`, `GalaxyMap`, `KnowledgeGraph`, `Pages`, `RPG`, `Search`, `Timeline`, `User`.
-- **Admin** — Blazor Interactive Server app (MudBlazor UI) for ETL pipeline management, Hangfire background jobs, and admin dashboards. Organized into `Features/` folders: `Admin`, `KnowledgeGraph`, `Search`. Also has `Components/Pages/`, `Components/Layout/`, `Components/Shared/`.
-- **Frontend** — Blazor Interactive Server with MudBlazor UI. Authenticates via Keycloak OIDC. Uses `Components/Pages/`, `Components/Layout/`, `Components/Shared/`.
-- **MongoDbMigrations** — Run-once container (`mongo:latest`) that executes `mongosh migrate.js` against the target database. Tracked in a `migrations` collection — re-runs are idempotent. Scripts live in `src/StarWarsData.MongoDbMigrations/`.
-
-**Shared libraries:**
-
-- **Models** — Entities (`Page`, `Infobox`, `TimelineEvent`, `RelationshipEdge`, `CharacterTimeline`, `ArticleChunk`, etc.), DTOs, and `SettingsOptions` configuration.
-- **Services** — All business logic organized by feature: `AI/Toolkits`, `Admin`, `CharacterTimelines`, `Chat`, `GalaxyMap`, `KnowledgeGraph`, `Pages`, `RPG`, `Search`, `Shared`, `Timeline`, `User`.
-- **ServiceDefaults** — Aspire service defaults (OpenTelemetry, resilience).
-
-**Folder convention:** ApiService, Admin, and Services use feature-based folder organization (`Features/<FeatureName>/` or `<FeatureName>/`), not layer-based (no `Controllers/`, `Repositories/` top-level folders).
-
-## Key Patterns
-
-**AI stack**: Microsoft.Extensions.AI (`IChatClient`) + Microsoft.Agents.AI (`AIAgent`, `AITool`) + OpenAI SDK. No Semantic Kernel — do not add SK packages.
-
-**AI Agent pipeline** (in `ApiService/Program.cs`): Topic guardrail classifier -> AI agent with tool registry (ComponentToolkit, DataExplorerToolkit, GraphRAGToolkit, WikiSearchProvider, MongoDB MCP tools) -> AGUI streaming endpoint at `/kernel/stream`.
-
-**MongoDB**: External self-hosted MongoDB Atlas Local (Community Edition) — not Aspire-managed; this is the default for prod **and** dev. **Opt-in exception:** a fresh-clone dev with no server access sets the `use-local-mongo` parameter true (`dotnet user-secrets set "Parameters:use-local-mongo" "true"`, or env `Parameters__use_local_mongo=true`), and then (Development+RunMode only) the AppHost runs `mongodb/mongodb-atlas-local` itself with a persistent volume + auto snapshot restore — see [eng/adr/010-aspire-managed-dev-mongo.md](eng/adr/010-aspire-managed-dev-mongo.md). Unset (the default) = external server; production and existing server-based dev workflows are unaffected. Connection string is assembled from parameters in the AppHost (`mongo-user`, `mongo-password`, `mongo-host`, `mongo-port`). **When using the MongoDB MCP server (`mcp__MongoDB__*`) directly, always connect using the host machine's `MDB_MCP_CONNECTION_STRING` environment variable** — do not hardcode credentials or construct connection strings manually. The default database is `starwars-dev` (safe for experimentation); production is `starwars-prod` and must never be written to from dev tooling. Single database configured via `SettingsOptions.DatabaseName` with namespaced collections: `raw.*`, `timeline.*`, `kg.*`, `search.*`, `genai.*`, `chat.*`, `territory.*`, `galaxy.*`, `admin.*`, `hangfire.*`. Hangfire collections live in the same database, namespaced by the `Prefix` option (default `"hangfire"`). Collection names are defined in the `Collections` static class in `Settings.cs`. Production overrides via `appsettings.json` or env var `Settings__DatabaseName`.
-
-**ETL pipeline** (ordered phases, triggered via admin endpoints or Aspire HTTP commands):
-
-1. Download pages from Wookieepedia MediaWiki API
-2. Create MongoDB views per infobox template type
-3. Build categorized timeline events
-4. Create indexes + embeddings + vector indexes
-5. AI-generated character timelines
-6. Deterministic infobox knowledge graph (`InfoboxGraphService` — per-type node builders; creates `kg.*` indexes). LLM enrichment of the graph is the separate Holocron pass (Design-018/020), not an ETL phase.
-7. Infer territory control from battle outcomes + government lifecycles
-
-> The legacy OpenAI Batch relationship-extraction path (`RelationshipGraphBuilderService`, `submit/check/cleanup-graph-batch`, the `/graph-builder` admin page) was removed 2026-05-18 — superseded by the deterministic builder + Holocron.
-
-**Hangfire recurring jobs**: Daily incremental wiki sync (03:00 UTC), daily infobox graph rebuild (04:00 UTC), daily article chunking (05:00 UTC), weekly Ask suggestions (Sun 03:00 UTC), daily OpenAI spend sync (04:30 UTC), daily Holocron pass (06:00 UTC, gated by `HolocronEnabled`).
-
-**Authentication**: Keycloak OIDC on the Frontend (users sign in at `auth.magaoidh.pro`). The API is internal-only (not exposed to the internet) — user identity is forwarded via `X-User-Id` header set by a `DelegatingHandler` from the authenticated `ClaimsPrincipal`. See `eng/adr/001-internal-api-auth.md` for the full rationale (JWT Bearer was attempted but is incompatible with Blazor Interactive Server mode).
-
-**Admin section**: The **Admin** project is a separate Blazor app with its own admin endpoints and Hangfire dashboard. ETL pipeline phases are triggered via admin controllers (`Features/Admin/AdminController.cs`) and are also exposed as Aspire HTTP commands in the AppHost dashboard.
-
-**GDPR compliance**: Cookie consent banner (blocks GA until accepted), Privacy Policy (`/privacy`), Terms of Use (`/terms`), "Delete All My Data" and "Export My Data" in Profile.
-
-**Environment variables**: `STARWARS_OPENAI_KEY` for OpenAI API key, `MDB_MCP_CONNECTION_STRING` for the MongoDB MCP server connection.
-
-## Code Conventions
-
-- C# preview language features enabled (collection expressions, primary constructors, etc.)
-- Nullable reference types enabled across all projects
-- Configuration via `SettingsOptions` bound from `appsettings.json` section `"Settings"`
-- Controllers under `ApiService/Features/<Feature>/` and `Admin/Features/<Feature>/` follow `[Route("api/[controller]")]` pattern
-- Frontend pages under `Frontend/Components/Pages/`, shared components under `Frontend/Components/Shared/`
-
-### Global Filter
-
-The Frontend has a global filter bar (continuity: Canon/Legends, realm: Star Wars/Real) managed by `GlobalFilterService`. **Every page and component that queries the API must respect the global filter** by subscribing to `GlobalFilterService.OnChange` and passing the filter values via `GetContinuityQueryParam()` / `GetRealmQueryParam()` to API calls. When the filter changes, active queries and data must be refreshed.
-
-**Documented exemption:** the public corpus-stats surface (`/api/stats/*` and the Frontend "Miscellaneous" section — [Design-037](eng/design/037-misc-site-activity-dashboard.md)) is deliberately filter-exempt because it reports whole-corpus *infrastructure* health, not continuity-scoped content. This carve-out is bounded and authoritative per [ADR-009](eng/adr/009-public-readonly-corpus-stats-surface.md); it does **not** generalize — any new content-bearing page is still bound by the rule above.
-
-### Continuity Color Convention
-
-Continuity chips and badges **must** use MudBlazor theme colors consistently:
-
-- `Continuity.Canon` → `Color.Primary`
-- `Continuity.Legends` → `Color.Secondary`
-- Everything else → `Color.Default`
-
-Do not use `Color.Info`, `Color.Warning`, or other colors for continuity. This matches the `ContinuityFilter` toggle switches and `ContinuityBadge` component. See `ContinuityBadge.razor` and `ContinuityFilter.razor` as canonical references.
-
-### UI/Frontend Validation
-
-**ALWAYS use Chrome DevTools MCP (`mcp__chrome-devtools__*`) when working on a UI feature.** No exceptions, no "it's a small change," no "the build passes so it's fine." Any change that affects rendered UI — Frontend or Admin pages, layouts, shared components, theming, `wwwroot/` CSS/JS, JS interop, MudBlazor parameter swaps, scoped `.razor.css` — **must** be validated against a running browser via Chrome DevTools MCP before being reported as complete. Type-check passing and successful build are necessary but **not sufficient** — they verify code correctness, not feature correctness.
-
-This rule applies to **every** agent that edits a UI-affecting file, not just the `blazor-mudblazor-expert` sub-agent. If a task started as backend/KG/ETL work but the diff ends up touching a `.razor`, `.razor.css`, `wwwroot/` asset, theming file, or any rendered surface, the agent doing the edit owns the Chrome DevTools validation — do not silently hand off the verification gap.
-
-The validation loop is iterative, not a one-shot end-of-task check:
-
-1. After each meaningful UI change, navigate to the affected page (`navigate_page`).
-2. Snapshot the DOM (`take_snapshot`) and confirm the markup matches the intent.
-3. Read the console (`list_console_messages`) for Blazor circuit drops, JS interop errors, MudBlazor warnings — fix them, don't accept them.
-4. Resize to mobile (`resize_page` 414×896) and re-snapshot if the change touches layout.
-5. Take a screenshot (`take_screenshot`) for the report-back, and cite the URL.
-
-If the change has no running AppHost available (and one cannot be started — e.g. a port collision the agent can't resolve, or auth gates the agent can't pass), say so **explicitly in the report-back** rather than claiming the change is verified. Do NOT skip validation silently. "I couldn't validate because X" is acceptable; silent omission is not. The blazor-mudblazor-expert sub-agent owns the detailed workflow; every other agent touching frontend assets follows the same rule.
+This file is the **index** for Claude Code in this repo. Binding rules live in the **constitution** at [.specify/memory/constitution.md](.specify/memory/constitution.md) (7 numbered principles); decisions and designs live under [eng/](eng/). CLAUDE.md points at them and surfaces only per-turn operational reminders (commands, MCP names, skill names) — when CLAUDE.md and the constitution disagree, the constitution wins.
+
+**New here?** [ONBOARDING.md](ONBOARDING.md) gets a fresh clone running against real data (snapshot restore, no ETL re-run, only your own OpenAI key needed). Mechanism: [eng/design/038-developer-onboarding-snapshot.md](eng/design/038-developer-onboarding-snapshot.md).
+
+## Spec-Kit Workflow
+
+This repo uses [GitHub Spec Kit](https://github.com/github/spec-kit) for feature work. Per-feature artifacts live under `specs/[###-name]/`. Use the `/speckit-*` skills in order:
+
+1. `/speckit-constitution` — amend [.specify/memory/constitution.md](.specify/memory/constitution.md) (rare; cross-cutting only).
+2. `/speckit-git-feature` — create the feature branch + `specs/[###-name]/` folder.
+3. `/speckit-specify` → `/speckit-clarify` *(optional)* — write `spec.md` (user stories, acceptance, success criteria).
+4. `/speckit-plan` — write `plan.md` (technical context, structure, Constitution Check). Cite binding `eng/adr/N` and `eng/design/M` entries here.
+5. `/speckit-tasks` → `/speckit-checklist` / `/speckit-analyze` *(optional)* — generate ordered work.
+6. `/speckit-implement` — execute `tasks.md`.
+7. `/speckit-taskstoissues` *(optional)* — push tasks to GitHub Issues.
+
+**Two layers, not one** (Principle V):
+
+- `specs/[###]/` — **per-feature tactical** artifacts (frozen after the feature ships).
+- `eng/adr/`, `eng/design/`, `eng/docs/`, `eng/diagrams/` — **durable institutional** knowledge.
+
+When a per-feature plan crystallises a new standing rule, **graduate it into `eng/adr/`** — never leave a rule for future features buried in one feature's `plan.md`. Existing `eng/adr/` / `eng/design/` docs MUST NOT be migrated into `specs/`.
+
+## Authoritative References
+
+| Subject | Where the rule/design lives | One-line restatement |
+| --- | --- | --- |
+| All binding rules | [.specify/memory/constitution.md](.specify/memory/constitution.md) | 7 principles; overrides chat and memory until amended. |
+| Library deviations | Principle I + [eng/adr/004-mudblazor-deviations.md](eng/adr/004-mudblazor-deviations.md) | Standard library APIs are default; deviations need an ADR entry with `Revisit when:`. |
+| Production DB safety | Principle II + [eng/adr/010-aspire-managed-dev-mongo.md](eng/adr/010-aspire-managed-dev-mongo.md) | Default DB `starwars-dev`; never write to `starwars-prod` from dev tooling. |
+| Test tiers | Principle III + [src/StarWarsData.Tests/TestTiers.cs](src/StarWarsData.Tests/TestTiers.cs) | `Unit` (pre-commit), `Integration` (CI), `Agent` (manual/nightly). |
+| UI validation | Principle IV | Every UI-touching change MUST be validated via Chrome DevTools MCP before report-back. |
+| KG-first runtime | Principle VI | Runtime reads `kg.*` only; fix missing fields at the ETL node-builder source. |
+| Global filter + continuity colours | Principle VII + [eng/adr/009-public-readonly-corpus-stats-surface.md](eng/adr/009-public-readonly-corpus-stats-surface.md) | Every content page subscribes to `GlobalFilterService.OnChange`. Canon→`Primary`, Legends→`Secondary`. |
+| Internal API auth | [eng/adr/001-internal-api-auth.md](eng/adr/001-internal-api-auth.md) | Keycloak OIDC on Frontend; `X-User-Id` header to the internal API. |
+| Aspire publish/deploy | [eng/design/017-aspire-publish-deploy-workflow.md](eng/design/017-aspire-publish-deploy-workflow.md) | `publish` (template) vs `prepare-starwars` (filled) vs `deploy`. |
+| Running Aspire from an agent | [eng/docs/aspire-isolated-mode-for-claude-code.md](eng/docs/aspire-isolated-mode-for-claude-code.md) | Use `aspire run --isolated --detach`; never with `prepare`/`deploy`. |
+| Holocron LLM enrichment | [eng/design/018-kg-enrichments-architecture.md](eng/design/018-kg-enrichments-architecture.md) + [eng/design/020-holocron-async-pipeline.md](eng/design/020-holocron-async-pipeline.md) | Separate pass over `kg.*`; not an ETL phase. |
+| AGUI page control (SP-4) | [eng/design/041-sp-4-page-control-agui-frontend-tools.md](eng/design/041-sp-4-page-control-agui-frontend-tools.md) | Frontend tools dispatched via official `Microsoft.Agents.AI.AGUI` client. |
+| SP-4 global tool family | [eng/design/043-sp4-global-tool-family.md](eng/design/043-sp4-global-tool-family.md) | `sp4_*` prefix for tools available everywhere the sidebar mounts (sibling to per-page `<page>_*`). First member: Wookieepedia article modal. |
 
 ## Engineering Docs (`eng/`)
 
-The `eng/` folder is the project's engineering knowledge base. It is **not archival** — it is a living record that MUST be kept in sync with the code. When a change alters a decision, architecture, or workflow captured here, update the relevant doc in the same PR as the code change. A doc that contradicts the code is a bug.
+The `eng/` folder is **load-bearing, not archival**. A doc that contradicts the code is a bug — update it in the same PR as the code change.
 
-| Folder | Purpose | When to touch it |
-| --- | --- | --- |
-| `eng/adr/` | Architecture Decision Records — numbered, immutable decisions and their rationale (e.g. internal API auth, MongoDB migration strategy, library deviations). | Add a new numbered ADR when making a cross-cutting decision or a justified library deviation. Don't rewrite history — supersede. |
-| `eng/design/` | Numbered design docs — feature designs, the plan behind a body of work, and its shipped status. | Add a numbered design doc before/alongside a non-trivial feature. Update its status when phases ship. |
-| `eng/docs/` | How-to / reference guides for working in this repo (e.g. Aspire isolated mode, edge labels). | Add or update when a workflow or convention changes that future contributors need to follow. |
-| `eng/diagrams/` | LikeC4 architecture model (`.c4`) — the C4 model, specification, and views. | Update when components, their relationships, or deployment shape change. See the `/likec4-dsl` skill for syntax. |
-| `eng/scripts/` | Engineering/ops scripts (see `eng/scripts/README.md`). | Add scripts here, not loose in the repo root. |
-| `eng/NOTES.md` | Scratch list of referenced external material (research links, licences, media sources). | Append references used while building; not a structured doc. |
+| Folder | Purpose |
+| --- | --- |
+| `eng/adr/` | Architecture Decision Records — numbered, immutable. Supersede; don't rewrite. |
+| `eng/design/` | Numbered design docs with shipped-status tracking. |
+| `eng/docs/` | How-to / reference guides. |
+| `eng/diagrams/` | LikeC4 model — update when components or deployment shape change. Syntax: `/likec4-dsl` skill. |
+| `eng/scripts/` | Engineering/ops scripts (see its `README.md`). |
+| `eng/NOTES.md` | Scratch list of external references. |
 
-ADRs and design docs are referenced throughout this file by path — those links are load-bearing. When you create a new ADR or design doc that establishes a rule or pattern an agent must follow, add a reference to it from the relevant section of this `CLAUDE.md`.
+When you create an ADR or design doc that establishes a rule an agent must follow, add it to the **Authoritative References** table above.
 
-## Library Deviations
+## Build, Run, Test
 
-**Rule: standard library components are the default.** Third-party libraries in this repo (MudBlazor for UI, MudBlazor theming, MongoDB.Driver, Microsoft.Extensions.AI, Microsoft.Agents.AI, Hangfire, etc.) should be used via their public APIs. If the first instinct is to roll custom HTML/CSS, a custom abstraction, or a wrapper that bypasses the library's intended usage, **stop and reconsider** — the library almost always has a parameter, variant, or extension point that covers the case.
+```bash
+dotnet build src/StarWarsData.slnx
+dotnet run --project src/StarWarsData.AppHost      # or: dotnet watch --project src/StarWarsData.AppHost
 
-When a deviation is genuinely justified (the library's public API cannot meet the requirement), it **MUST** be recorded in an ADR under `eng/adr/` before or alongside the code change. The ADR entry must include:
+# Tests (MSTest on Microsoft.Testing.Platform — --project is required)
+dotnet test --project src/StarWarsData.Tests --filter "TestCategory=Unit"                              # pre-commit, ~700ms
+dotnet test --project src/StarWarsData.Tests --filter "TestCategory=Unit|TestCategory=Integration"    # CI, ~15s (Docker required)
+dotnet test --project src/StarWarsData.Tests --filter "TestCategory=Agent"                            # manual; needs STARWARS_OPENAI_KEY + MDB_MCP_CONNECTION_STRING
+dotnet test --project src/StarWarsData.Tests --filter "FullyQualifiedName~ClassName.MethodName"       # single class/method
+```
 
-1. The file/location of the deviation
-2. The library component or API it replaces
-3. The concrete reason the standard component cannot be used (with specifics — "too big" is not enough; give numbers, parameter names, and what was tried)
-4. A **"Revisit when"** line describing the condition under which the deviation could be removed (e.g. a library feature being added)
+Fixtures (`src/StarWarsData.Tests/Infrastructure/`) are lazy-static and wired via `[ClassInitialize]`; assembly-cleanup in `AssemblyHooks.cs`. New tests pick a tier (`Unit/`, `Integration/`, `Agent/`) and tag with `[TestCategory(TestTiers.X)]`. Aspire publish/deploy: [Design-017](eng/design/017-aspire-publish-deploy-workflow.md). Running AppHost from an agent: [eng/docs/aspire-isolated-mode-for-claude-code.md](eng/docs/aspire-isolated-mode-for-claude-code.md).
 
-The current catalogue of MudBlazor deviations lives in [eng/adr/004-mudblazor-deviations.md](eng/adr/004-mudblazor-deviations.md). When adding a new deviation for a component already covered by an existing ADR, add it to that ADR's **Catalogue** section rather than creating a new ADR. Create a new ADR only when deviating from a library/framework not yet covered.
+## Architecture (Index)
 
-Do not introduce silent deviations. A deviation that is not documented is a bug.
+Five runtime components under `src/`:
 
-## MCP Servers & Skills
+- **AppHost** — Aspire orchestrator; defines ETL HTTP commands (1a–9) on the **admin** resource; manages the MongoDB MCP sidecar.
+- **ApiService** — ASP.NET Core API; hosts the AI agent + AGUI streaming at `/kernel/stream`. Feature folders under `Features/`.
+- **Admin** — Blazor Interactive Server (MudBlazor); ETL pipeline UI + Hangfire dashboard.
+- **Frontend** — Blazor Interactive Server (MudBlazor); Keycloak OIDC.
+- **MongoDbMigrations** — run-once `mongosh migrate.js` container; idempotent via the `migrations` collection. Scripts in `src/StarWarsData.MongoDbMigrations/`.
 
-Use the attached MCP servers and skills for domain-specific guidance instead of guessing:
+Shared libraries: **Models**, **Services** (feature-organised: `AI/Agents`, `AI/Toolkits`, `KnowledgeGraph`, `CharacterTimelines`, `GalaxyMap`, `Search`, `Chat`, `Pages`, `RPG`, `Timeline`, `User`, …), **ServiceDefaults**.
 
-- **Aspire MCP** (`mcp__aspire__*`) — Interact with running Aspire resources: logs, traces, restart services, execute HTTP commands. Also provides `search_docs`/`get_doc` for looking up .NET Aspire documentation — use these before guessing at Aspire APIs.
-- **MongoDB MCP** (`mcp__MongoDB__*`) — Query, aggregate, inspect schemas, manage indexes on the MongoDB databases. Always connects via the host `MDB_MCP_CONNECTION_STRING` env var. Default database: `starwars-dev` — never write to `starwars-prod` (production).
-- **Chrome DevTools MCP** (`mcp__chrome-devtools__*`) — Inspect live browser sessions: DOM snapshots, console logs, network requests, screenshots, performance traces, Lighthouse audits. Uses Brave browser. **Required** for validating any UI/frontend change — see "UI/Frontend validation" below.
-- **MudBlazor MCP** (`mcp__mudblazor__*`) — Look up MudBlazor component docs, parameters, examples, and API reference when building or modifying Blazor UI.
-- **Playwright MCP** (`mcp__playwright__*`) — Browser automation for testing and screenshots.
-- **MediaWiki MCP** (`mcp__mediawiki-mcp-server__*`) — Search and fetch Wookieepedia pages directly.
-- **OpenAI Developer Docs** (`mcp__openaiDeveloperDocs__*`) — Search OpenAI API docs and specs.
+**MongoDB**: single DB (`Settings.DatabaseName`) with namespaced collections `raw.*`, `timeline.*`, `kg.*`, `search.*`, `genai.*`, `chat.*`, `territory.*`, `galaxy.*`, `admin.*`, `hangfire.*`. Connection assembled from AppHost parameters; MCP usage via host `MDB_MCP_CONNECTION_STRING`. Opt-in Aspire-managed dev Mongo via `Parameters:use-local-mongo=true` ([ADR-010](eng/adr/010-aspire-managed-dev-mongo.md)). See Principle II.
 
-**Skills** (invoke with `/skill-name`). Installed and managed via `gh skill install <repo> <skill> --agent claude-code --scope project` (run `gh skill update --all` to pull upstream changes):
+**ETL phases** (triggered via admin endpoints / Aspire HTTP commands):
 
-- `/claude-d3js-skill` — D3.js interactive visualization guidance.
-- `/microsoft-agent-framework` — Microsoft Agent Framework (M.E.AI, Agents.AI) guidance for the AI pipeline.
-- `/mongodb-natural-language-querying` — Generate MongoDB queries/aggregations from natural language.
-- `/mongodb-query-optimizer` — MongoDB query performance and indexing advice.
-- `/mongodb-schema-design` — MongoDB schema patterns and anti-patterns.
-- `/mongodb-search-and-ai` — Atlas Search, Vector Search, and Hybrid Search guidance.
-- `/dotnet-best-practices` — .NET/C# code quality and best practices review.
+1. Download Wookieepedia pages → `raw.*`
+2. MongoDB views per infobox template type
+3. Categorised timeline events
+4. Indexes + embeddings + vector indexes
+5. AI-generated character timelines
+6. Deterministic infobox KG (`InfoboxGraphService`, per-type node builders → `kg.*`). LLM enrichment is the separate **Holocron** pass — [Design-018](eng/design/018-kg-enrichments-architecture.md) / [Design-020](eng/design/020-holocron-async-pipeline.md).
+7. Inferred territory control (`territory.*`, `galaxy.*`).
+
+> Legacy OpenAI Batch relationship-extraction path (`RelationshipGraphBuilderService`, `/graph-builder`) removed 2026-05-18.
+
+**Hangfire recurring jobs**: daily wiki sync (03:00 UTC), KG rebuild (04:00), article chunking (05:00), OpenAI spend (04:30), Holocron (06:00, gated by `HolocronEnabled`); weekly Ask suggestions (Sun 03:00).
+
+## Conventions
+
+- C# preview features + nullable enabled across all projects.
+- Feature-based folder layout (`Features/<Name>/`), not layer-based.
+- Configuration: `SettingsOptions` from `appsettings.json` section `"Settings"`. Collection names in the `Collections` static class in `Settings.cs`.
+- AI stack: `Microsoft.Extensions.AI` + `Microsoft.Agents.AI` + OpenAI SDK. **No Semantic Kernel.**
+- Agent classes at `Services/AI/Agents/<Agent>/`; agent-scoped toolkits at `…/<Agent>/Tools/`; cross-agent toolkits at `Services/AI/Toolkits/`. Tool name constants in `ToolNames.cs`.
+- Env vars: `STARWARS_OPENAI_KEY` (OpenAI), `MDB_MCP_CONNECTION_STRING` (MongoDB MCP).
+
+## MCP Servers
+
+Use these instead of guessing:
+
+- **Aspire** (`mcp__aspire__*`) — running-resource logs/traces/commands + `search_docs`/`get_doc` for Aspire docs (check first; don't guess at APIs).
+- **MongoDB** (`mcp__MongoDB__*`) — connects via host `MDB_MCP_CONNECTION_STRING`. Default DB `starwars-dev`. Never write to `starwars-prod`.
+- **Chrome DevTools** (`mcp__chrome-devtools__*`) — **required** for UI validation per Principle IV.
+- **MudBlazor** (`mcp__mudblazor__*`) — component docs, parameters, examples.
+- **Playwright** (`mcp__playwright__*`) — browser automation.
+- **MediaWiki** (`mcp__mediawiki-mcp-server__*`) — Wookieepedia search/fetch.
+- **OpenAI Developer Docs** (`mcp__openaiDeveloperDocs__*`) — OpenAI API docs and specs.
+
+## Skills (`/skill-name`)
+
+Domain skills (installed via `gh skill install`; update with `gh skill update --all`):
+
+- `/dotnet-best-practices`, `/microsoft-agent-framework`, `/claude-d3js-skill`, `/likec4-dsl`
+- `/mongodb-natural-language-querying`, `/mongodb-query-optimizer`, `/mongodb-schema-design`, `/mongodb-search-and-ai`
+
+Spec-Kit skills: `/speckit-constitution`, `/speckit-specify`, `/speckit-clarify`, `/speckit-plan`, `/speckit-tasks`, `/speckit-checklist`, `/speckit-analyze`, `/speckit-implement`, `/speckit-taskstoissues`, plus git helpers (`/speckit-git-feature`, `/speckit-git-commit`, `/speckit-git-initialize`, `/speckit-git-remote`, `/speckit-git-validate`).
 
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
-shell commands, and other important information, read the current plan
+shell commands, and other important information, read the current plan:
+[specs/002-sp4-wookieepedia-modal/plan.md](specs/002-sp4-wookieepedia-modal/plan.md)
 <!-- SPECKIT END -->

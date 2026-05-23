@@ -112,7 +112,10 @@ builder
     .AddScoped<ChatHistoryService>()
     .AddScoped<LayoutService>()
     .AddScoped<PageContextService>()
-    .AddScoped<PageControlService>();
+    .AddScoped<PageControlService>()
+    .AddScoped<GlobalCopilotToolsService>()
+    .AddScoped<WookieepediaArticleModalService>()
+    .AddGlobalCopilotTool<WookieepediaArticleToolFactory>();
 
 // Register a named HttpClient for the API service
 // SSE streaming is long-lived; the default 30s total timeout from StandardResilienceHandler kills it
@@ -134,6 +137,18 @@ builder
     // typed RateLimitedException carrying the JSON body, and lets Ask/Copilot
     // render the precise limit + retry-after instead of a generic message.
     .AddHttpMessageHandler<RateLimitMessageHandler>();
+
+// HttpClient used by the Wookieepedia article proxy (Design-043). Same-origin
+// iframe pulls article HTML from /wookieepedia/article, which calls Fandom's
+// MediaWiki action=parse API with a polite UA. Separate from the "StarWarsData"
+// client because it talks to a different host with different headers.
+builder.Services.AddHttpClient(
+    "Wookieepedia",
+    client =>
+    {
+        client.Timeout = TimeSpan.FromSeconds(15);
+    }
+);
 
 var app = builder.Build();
 
@@ -207,5 +222,9 @@ app.UseAuthorization();
 app.MapStaticAssets();
 app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
 app.MapLoginAndLogout();
+
+// Same-origin proxy serving cleaned Wookieepedia article HTML to the SP-4 modal
+// iframe. See Design-043 + WookieepediaArticleProxy.cs for the rationale.
+app.MapWookieepediaArticleProxy();
 
 app.Run();
