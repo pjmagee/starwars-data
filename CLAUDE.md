@@ -237,3 +237,8 @@ Use the attached MCP servers and skills for domain-specific guidance instead of 
 - `/mongodb-schema-design` — MongoDB schema patterns and anti-patterns.
 - `/mongodb-search-and-ai` — Atlas Search, Vector Search, and Hybrid Search guidance.
 - `/dotnet-best-practices` — .NET/C# code quality and best practices review.
+
+<!-- SPECKIT START -->
+For additional context about technologies to be used, project structure,
+shell commands, and other important information, read the current plan
+<!-- SPECKIT END -->

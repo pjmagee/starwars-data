@@ -1,0 +1,270 @@
+<!--
+Sync Impact Report
+==================
+Version change: 1.0.0 → 1.1.0
+Modified principles:
+  - V. Engineering Docs Stay in Sync — materially expanded to draw the boundary between
+    durable `eng/` knowledge and per-feature `specs/[###]/` spec-kit artifacts, and to
+    forbid migrating eng docs into specs/.
+Added sections: (none)
+Removed sections: (none)
+Templates requiring updates:
+  - .specify/templates/plan-template.md ⚠ pending (Constitution Check gates remain placeholder;
+    populated per-feature by /speckit-plan)
+  - .specify/templates/spec-template.md ✅ no change
+  - .specify/templates/tasks-template.md ✅ no change
+Follow-up TODOs:
+  - When the first feature runs /speckit-plan, populate its Constitution Check section by
+    enumerating which of the 7 principles apply (typically all of II, III, IV; others as scope dictates).
+
+---- prior history ----
+1.0.0 (2026-05-23): initial ratification — 7 principles, Architecture Constraints,
+                     Development Workflow, Governance.
+-->
+
+# StarWarsData Constitution
+
+## Core Principles
+
+### I. Library-First, Deviations Documented
+
+Standard library components are the default. Third-party libraries adopted in this repo
+(MudBlazor, MongoDB.Driver, Microsoft.Extensions.AI, Microsoft.Agents.AI, Hangfire, .NET Aspire,
+Keycloak OIDC handlers) MUST be used via their public APIs. Rolling custom HTML/CSS, bespoke
+wrappers, or abstractions that bypass the library's intended usage is forbidden by default —
+the library almost always has a parameter, variant, or extension point that covers the case.
+
+When a deviation is genuinely justified (the public API cannot meet the requirement), it MUST
+be recorded in an ADR under `eng/adr/` *before or alongside* the code change. The ADR entry
+must contain: (a) the file/location of the deviation, (b) the library component it replaces,
+(c) the concrete reason — with specifics, not "too big" — and (d) a `Revisit when:` line
+describing the condition under which the deviation could be removed. New deviations for a
+library already covered (e.g. MudBlazor in [eng/adr/004-mudblazor-deviations.md](../../eng/adr/004-mudblazor-deviations.md))
+extend that ADR's Catalogue rather than spawning a new one.
+
+**Rationale**: Undocumented deviations silently accumulate, lock the team into bespoke code,
+and make library upgrades hazardous. The ADR forces an explicit trade-off and a future exit.
+A deviation that is not documented is a bug.
+
+### II. Production Data Safety (NON-NEGOTIABLE)
+
+The `starwars-prod` database is read-only from development tooling, tests, and any agent
+context. All development writes — ETL phases, KG rebuilds, Holocron passes, ad-hoc MongoDB
+MCP operations — MUST target `starwars-dev`. The `Settings:DatabaseName` configuration
+defaults to `starwars-dev`; production deploys override via `appsettings.json` or env var
+`Settings__DatabaseName` only on the production host.
+
+Credentials for MongoDB MUST be resolved from the host's `MDB_MCP_CONNECTION_STRING` env var
+(MCP usage) or from Aspire AppHost user-secrets parameters (`Parameters:mongo-user`,
+`Parameters:mongo-password`, `Parameters:mongo-host`, `Parameters:mongo-port`). Hardcoded
+connection strings, split credential pairs across secret/var tiers, or constructing
+connection strings inline are forbidden.
+
+**Rationale**: A single accidental write to `starwars-prod` from dev tooling is a category
+of incident this constitution exists to prevent. The default-dev posture means the failure
+mode of a misconfigured tool is "wrote to dev", never "corrupted prod".
+
+### III. Test Tiering & Pre-Commit Gate
+
+Every test in `src/StarWarsData.Tests` MUST be tagged with exactly one of
+`[TestCategory(TestTiers.Unit)]`, `[TestCategory(TestTiers.Integration)]`, or
+`[TestCategory(TestTiers.Agent)]` and live in the matching `Unit/`, `Integration/`, or
+`Agent/` folder. The tiers carry hard contracts:
+
+- **Unit** — pure logic. No Docker, no env vars, no network, no Testcontainers, no OpenAI.
+  This tier is the pre-commit gate; it MUST pass in under a few seconds on a cold machine.
+- **Integration** — Testcontainers MongoDB only. Runs in CI when Docker is available.
+- **Agent** — real OpenAI key + live `starwars-dev` MongoDB. Manual / nightly only;
+  MUST NOT run in pre-commit or default CI.
+
+Fixtures live under `src/StarWarsData.Tests/Infrastructure/` and MUST be lazy-static (an
+`EnsureInitializedAsync()` plus `[ClassInitialize]` wiring). Unit-only runs MUST NOT spin
+up any container or contact OpenAI — verified by running the Unit filter on a machine with
+Docker disabled.
+
+**Rationale**: A pre-commit gate that pays Docker startup or OpenAI cost is one developers
+will silently disable. Tier discipline keeps the fast path fast and the expensive path
+opt-in. See the matrix in [CLAUDE.md](../../CLAUDE.md) for filter syntax.
+
+### IV. UI Changes Validated in a Browser (NON-NEGOTIABLE)
+
+Any change that touches rendered UI — Frontend or Admin pages, layouts, shared components,
+theming, `wwwroot/` CSS/JS, JS interop, MudBlazor parameter swaps, scoped `.razor.css` —
+MUST be validated against a running browser via the Chrome DevTools MCP
+(`mcp__chrome-devtools__*`) before the work is reported complete. Type-check passing and a
+successful build are necessary but NOT sufficient — they verify code correctness, not
+feature correctness.
+
+The validation loop is iterative, not a one-shot end-of-task check:
+
+1. After each meaningful UI change, navigate to the affected page.
+2. Snapshot the DOM and confirm the markup matches the intent.
+3. Read the console for Blazor circuit drops, JS interop errors, MudBlazor warnings —
+   fix them, do not accept them.
+4. Resize to mobile (414×896) and re-snapshot if the change touches layout.
+5. Take a screenshot for the report-back and cite the URL.
+
+If a running AppHost is not available (port collision the agent cannot resolve, auth gate
+the agent cannot pass), the report-back MUST say so explicitly. Silent omission of
+validation is forbidden. This rule applies to *every* agent that edits a UI-affecting file,
+not only the `blazor-mudblazor-expert` sub-agent.
+
+**Rationale**: This rule exists because we have observed UI regressions ship past green
+type-checks. The cost of running Chrome DevTools MCP is seconds; the cost of a broken UI
+on `main` is hours of triage.
+
+### V. Engineering Docs Stay in Sync
+
+`eng/adr/`, `eng/design/`, `eng/docs/`, and `eng/diagrams/` are load-bearing — not archival.
+When a code change alters a decision, architecture, or workflow captured in `eng/`, the
+corresponding document MUST be updated in the same PR as the code change. A doc that
+contradicts the code is a bug.
+
+**Two layers, not one — durable knowledge vs. per-feature work:**
+
+- `eng/adr/`, `eng/design/`, `eng/docs/`, `eng/diagrams/` — **durable institutional
+  knowledge** that outlives any single feature. Cross-cutting decisions (ADRs),
+  multi-PR strategic initiatives (design docs), contributor how-to guides (docs), and
+  the architecture model (diagrams).
+- `specs/[###-feature-name]/` (spec-kit) — **per-feature tactical artifacts**:
+  `spec.md` (user stories, acceptance, success criteria), `plan.md` (technical context
+  and structure for *this* feature), `tasks.md` (ordered work), and optionally
+  `checklist.md` / `research.md` / `data-model.md` / `contracts/`. Created when a
+  feature kicks off, frozen after it ships.
+
+Spec-kit artifacts MUST cite relevant `eng/adr/N` and `eng/design/M` entries as binding
+constraints (typically in the plan's Technical Context or Constitution Check). When a
+feature crystallises a new standing decision, that decision MUST graduate *out* of the
+per-feature `plan.md` and *into* a new ADR — `eng/adr/` is where rules for all future
+features live, never inside a single feature's `specs/` folder.
+
+Existing `eng/adr/` and `eng/design/` docs MUST NOT be migrated into `specs/`. They
+describe a different lifecycle (institutional, long-lived) than spec-kit's per-feature
+workspace, and the conflation would lose either the tactical detail (when migrated up)
+or the durable signal (when migrated down).
+
+- **ADRs are immutable**: changes supersede via a new numbered ADR; never rewrite history.
+- **Design docs track status**: update the status field when phases ship.
+- **LikeC4 model** (`eng/diagrams/*.c4`) MUST be updated when components, their
+  relationships, or deployment shape change.
+- When an ADR or design doc establishes a rule an agent must follow, a reference to it
+  MUST be added from the relevant section of [CLAUDE.md](../../CLAUDE.md).
+
+**Rationale**: This repo's eng docs are the only durable record of *why* decisions were
+made (legal compliance, incident post-mortems, library trade-offs). Drift between code and
+docs degrades the docs into a trap for future contributors. Keeping spec-kit and `eng/`
+on separate tracks — tactical vs. institutional — means neither layer can quietly absorb
+the other and lose the signal that justifies its existence.
+
+### VI. KG-First Data Access at Runtime
+
+Runtime services (ApiService, Frontend, Admin runtime pages) MUST read from `kg.nodes`,
+`kg.edges`, and their derived views — never from `raw.pages` or `raw.*` collections.
+The ETL pipeline writes to `raw.*` and produces `kg.*`; runtime consumes `kg.*` only.
+
+Missing or malformed fields MUST be fixed at the ETL source (the appropriate node builder
+under `Services/AI/KnowledgeGraph/NodeBuilders/`), never derived, defaulted, or constructed
+downstream in a service or controller. Soft-handling is acceptable only where the data is
+genuinely absent at source (e.g. ~0.05% kg.nodes with `contentHash: null` from stub
+infoboxes — skip the comparison, do not flag stale).
+
+**Rationale**: Runtime reads from raw data silently bypass the KG's edge quality,
+provenance, and Holocron enrichment work. Downstream field construction creates two
+sources of truth and turns every consumer into a partial re-implementation of the ETL.
+
+### VII. Global Filter Respect
+
+Every content-bearing Frontend page and component that queries the API MUST respect the
+global filter (continuity: Canon/Legends, realm: Star Wars/Real) by subscribing to
+`GlobalFilterService.OnChange` and passing the filter values via `GetContinuityQueryParam()`
+/ `GetRealmQueryParam()` to API calls. Active queries and rendered data MUST refresh when
+the filter changes.
+
+Continuity chips and badges MUST use the canonical MudBlazor theme colors:
+`Continuity.Canon → Color.Primary`, `Continuity.Legends → Color.Secondary`, otherwise
+`Color.Default`. `Color.Info`/`Color.Warning`/etc. for continuity are forbidden. See
+`ContinuityBadge.razor` and `ContinuityFilter.razor` as canonical references.
+
+**Documented exemption**: the public corpus-stats surface (`/api/stats/*` and the Frontend
+"Miscellaneous" section, per [eng/design/037-misc-site-activity-dashboard.md](../../eng/design/037-misc-site-activity-dashboard.md))
+is deliberately filter-exempt because it reports whole-corpus *infrastructure* health, not
+continuity-scoped content. This carve-out is bounded and authoritative per
+[eng/adr/009-public-readonly-corpus-stats-surface.md](../../eng/adr/009-public-readonly-corpus-stats-surface.md);
+it does NOT generalise.
+
+**Rationale**: Users expect the filter chip to mean what it says everywhere it is visible.
+Per-page filter forgetfulness is invisible until users notice content leaking across
+continuities — the discovery cost is high and trust is hard to restore.
+
+## Architecture Constraints
+
+- **AI stack**: Microsoft.Extensions.AI (`IChatClient`) + Microsoft.Agents.AI (`AIAgent`,
+  `AITool`) + OpenAI SDK. **Semantic Kernel is forbidden** — do not add SK packages.
+- **Agent classes** live under `Services/AI/Agents/<Agent>/`. Agent-scoped toolkits live at
+  `Services/AI/Agents/<Agent>/Tools/`; only cross-agent toolkits stay at
+  `Services/AI/Toolkits/`. Tool name constants always go in `ToolNames.cs`.
+- **MongoDB**: single database (`Settings.DatabaseName`) with namespaced collections
+  (`raw.*`, `timeline.*`, `kg.*`, `search.*`, `genai.*`, `chat.*`, `territory.*`,
+  `galaxy.*`, `admin.*`, `hangfire.*`). Production = `starwars-prod`, development =
+  `starwars-dev`.
+- **Authentication**: Keycloak OIDC on the Frontend. The API is internal-only; user identity
+  is forwarded via the `X-User-Id` header set by a `DelegatingHandler` from the authenticated
+  `ClaimsPrincipal`. Rationale in [eng/adr/001-internal-api-auth.md](../../eng/adr/001-internal-api-auth.md).
+- **Aspire orchestration**: when working with Aspire APIs, configuration, or orchestration
+  patterns, the Aspire docs MUST be consulted via the Aspire MCP (`mcp__aspire__search_docs`,
+  `mcp__aspire__get_doc`) before guessing at APIs. Agents that need to boot the AppHost use
+  `aspire run --isolated --detach`; never use `--isolated` with `prepare-starwars`/`deploy`.
+- **CI publish path**: public-repo CI uses `aspire publish` (template only). It MUST NOT
+  use `prepare-starwars` or `aspire deploy`, both of which resolve user-secrets and would
+  bake credentials into release artifacts.
+- **GDPR compliance**: cookie consent banner (blocks Google Analytics until accepted),
+  Privacy Policy at `/privacy`, Terms of Use at `/terms`, "Delete All My Data" and
+  "Export My Data" in Profile.
+- **Folder convention**: ApiService, Admin, and Services use feature-based organisation
+  (`Features/<FeatureName>/` or `<FeatureName>/`), not layer-based (no top-level
+  `Controllers/`, `Repositories/`).
+
+## Development Workflow
+
+- **Branch model**: each feature gets its own branch via `/speckit-git-feature`. The
+  spec-kit flow is `/speckit-constitution` (this file) → `/speckit-specify` →
+  optional `/speckit-clarify` → `/speckit-plan` → `/speckit-tasks` → optional
+  `/speckit-checklist` and `/speckit-analyze` → `/speckit-implement`.
+- **Pre-commit gate**: Unit tier MUST pass. `dotnet test --project src/StarWarsData.Tests
+  --filter "TestCategory=Unit"` is the minimum bar.
+- **CI gate**: Unit + Integration tiers. Agent tier is excluded by default.
+- **ETL operations**: trigger pipeline phases via the Aspire admin resource HTTP commands
+  (1a–9) or the Admin app's controllers — never by manual MongoDB writes that bypass the
+  builders.
+- **Library deviations**: require an ADR entry per Principle I before merge.
+- **UI changes**: require Chrome DevTools MCP validation per Principle IV before report-back.
+- **Doc sync**: any PR that changes an architectural decision, workflow, or component
+  relationship MUST include the corresponding `eng/` doc update.
+
+## Governance
+
+This constitution supersedes ad-hoc practice. When this document and a memory file,
+comment, or chat message disagree, this document wins until amended.
+
+**Amendment procedure**:
+
+1. Propose the change in a PR that modifies `.specify/memory/constitution.md` directly.
+2. Bump `Version` per semantic versioning:
+   - **MAJOR**: backward-incompatible removal or redefinition of a principle.
+   - **MINOR**: new principle or materially expanded guidance.
+   - **PATCH**: clarifications, wording, typo fixes, non-semantic refinements.
+3. Update `Last Amended` to today (ISO YYYY-MM-DD). `Ratified` is immutable.
+4. Prepend a Sync Impact Report HTML comment at the top describing what changed and
+   which downstream templates / docs need updates.
+5. Update [CLAUDE.md](../../CLAUDE.md) if the principle changes runtime agent guidance.
+
+**Compliance**:
+
+- PRs and code reviews MUST verify compliance with the principles above. Reviewers cite
+  the principle by name (e.g. "Principle IV: needs Chrome DevTools validation").
+- Complexity that conflicts with a principle MUST be justified in the `Complexity Tracking`
+  table of the feature's `plan.md`.
+- Runtime agent guidance for day-to-day work lives in [CLAUDE.md](../../CLAUDE.md) and the
+  per-domain skills in `.claude/skills/`. Those files are subordinate to this constitution.
+
+**Version**: 1.1.0 | **Ratified**: 2026-05-23 | **Last Amended**: 2026-05-23
