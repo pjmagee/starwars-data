@@ -13,29 +13,14 @@ public class RelationshipQueryTests
 
     private static EvaluatorAgent Evaluator => new(AgentFixture.EvaluatorClient);
 
-    [TestMethod]
-    public async Task FamilyTree_UsesKGLabelsAndTreeLayout()
-    {
-        var capture = new ConversationCapture();
-        await AgentFixture.RunPrompt("Family tree of Anakin Skywalker", capture);
-
-        Assert.IsTrue(capture.HasToolCall(ToolNames.GraphRAG.SearchEntities), "Should search for Anakin Skywalker");
-        Assert.IsTrue(capture.HasToolCall(ToolNames.GraphRAG.GetRelationshipTypes), "Should discover available KG edge labels");
-        Assert.IsTrue(capture.HasToolCall(ToolNames.Component.RenderGraph), "Should render a graph");
-        Assert.IsTrue(capture.HasToolCallWithArg(ToolNames.Component.RenderGraph, "tree"), "Should use layoutMode=tree for family tree");
-
-        var eval = await Evaluator.EvaluateAsync(
-            "Family tree of Anakin Skywalker",
-            capture.ToolCalls,
-            capture.FinalResponse,
-            "Should: 1) search_entities for Anakin Skywalker (Character, not Family), "
-                + "2) get_relationship_types to discover KG edge labels, "
-                + "3) render_graph with family-related labels (child_of, parent_of, partner_of, sibling_of) "
-                + "and layoutMode=tree. Root must be a Character entity."
-        );
-
-        Assert.IsTrue(eval.Score >= 3, $"Evaluator score {eval.Score}/5: {eval.Reasoning}");
-    }
+    // FamilyTree_UsesKGLabelsAndTreeLayout was removed in commit <042 Phase 5> —
+    // it asserted "Family tree of Anakin Skywalker" routes to render_graph
+    // (layoutMode=tree). Design-042 introduced the dedicated render_family_tree
+    // tool and the FAMILY-TREE ROUTING prompt block in AskAIAgent so kinship
+    // phrasing now routes to render_family_tree (NOT render_graph). The new
+    // FamilyTreeAgentRoutingTests in the same Agent/ folder cover the
+    // replacement assertion. Keeping this comment so future readers don't
+    // re-add a test that reasserts the old (now-incorrect) routing.
 
     [TestMethod]
     public async Task PoliticalHierarchy_UsesGovernmentLabels()

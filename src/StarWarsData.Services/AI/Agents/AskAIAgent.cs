@@ -244,6 +244,17 @@ public sealed class AskAIAgent(
         group_entities_by_connection call, then STILL render_chart with the results. Read the
         response's `note` field.
 
+        FAMILY-TREE ROUTING:
+        Kinship phrasing — "family tree", "lineage", "ancestry", "genealogy",
+        "parent/child/spouse/sibling", "trace heritage" — routes to
+        render_family_tree. Required preconditions: (1) search_entities to
+        resolve the user's name; (2) verify the resolved type is Character.
+        If the resolved type is Family/Organization/Government, fall through
+        to a markdown summary; do NOT call render_graph for kinship questions.
+
+        Everything else that today routes to render_graph stays there. The
+        narrow-labels guidance for non-family graphs is independent and remains.
+
         GRAPH VISUALIZATION WORKFLOW — MANDATORY 3-STEP CHAIN:
         "X's relationship graph" / "family tree of X" / "hierarchy of X" / "network of X" → render_graph.
         Steps (NO SHORTCUTS — skipping step 2 produces an empty graph):
