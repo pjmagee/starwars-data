@@ -3,7 +3,7 @@
 **Status:** Proposed
 **Date:** 2026-05-22
 **Author:** Patrick Magee + Claude
-**Related:** [Design-036 Path Graph Rendering](../036-path-graph-rendering/spec.md), [Design-011 Mobile Web UX](../011-mobile-web-ux/spec.md), [Design-041 SP-4 Page Control AGUI Frontend Tools](../041-sp-4-page-control-agui-frontend-tools/spec.md), [ADR-004 MudBlazor Deviations](../../eng/adr/004-mudblazor-deviations.md), [donatso/family-chart](https://github.com/donatso/family-chart)
+**Related:** [Design-036 Path Graph Rendering](../036-path-graph-rendering/spec.md), [Design-011 Mobile Web UX](../011-mobile-web-ux/spec.md), [Design-041 SP-4 Page Control AGUI Frontend Tools](../041-sp-4-page-control-agui-frontend-tools/spec.md), [ADR-004 MudBlazor Deviations](../../eng/adr/004-mudblazor-deviations.md), [donatso/family-chart-premium](https://github.com/donatso/family-chart-premium)
 
 ## Problem
 
@@ -33,19 +33,26 @@ Verified manually on 2026-05-22 against `https://localhost:7274/ask` ("Show me t
 
 ## Design
 
-### Library choice: donatso/family-chart
+### Library choice: donatso/family-chart-premium
 
-- **License:** MIT (verified in upstream `LICENSE.txt`).
-- **Distribution:** npm `family-chart@0.9.0`, ESM + CJS + UMD builds, ships `dist/styles/family-chart.css`. Requires `d3@7` as a peer.
-- **Data shape:** array of person objects:
-  ```
+- **License:** custom non-commercial grant (upstream `LICENSE.txt`) — free for personal, educational, hobby, or non-commercial use. This project qualifies: independent fan project, no revenue, MIT-licensed itself; the Buy Me a Coffee tip jar in the AppBar is a donation channel, not commercial use. Commercial pivot triggers a Revisit (see below).
+- **Distribution:** GitHub repo at [donatso/family-chart-premium](https://github.com/donatso/family-chart-premium); the published build artefact is `dist/family-chart.js` (UMD; `buildName: "family-chart"` in `package.json`, so the runtime global stays `f3`). Ships styles under `dist/styles/`. Requires `d3@7` as a peer (already met).
+- **Version pin:** upstream is currently `0.0.0-beta.2`. Pin a specific commit SHA when vendoring rather than tracking `main`; revisit when upstream cuts a stable release.
+- **JS API is the same** as MIT family-chart: `f3.createChart('#el', data).setCardHtml().setCardDisplay([...]); f3Chart.updateTree({initial: true})`. Read-only mode = do not invoke `.editTree()`. The server-side projection rules below are unchanged from the MIT-library plan.
+- **Data shape** (unchanged from MIT family-chart): array of person objects:
+
+  ```text
   { id: string,
     data: { gender: "M"|"F", "first name": string, "last name": string, ... },
     rels: { parents: string[], spouses: string[], children: string[] } }
   ```
+
   Bidirectional linking is mandatory — if `A.rels.spouses` includes `B`, then `B.rels.spouses` must include `A`.
-- **Mount API:** `f3.createChart('#el', data).setCardHtml().setCardDisplay([...]); f3Chart.updateTree({initial:true})`. Read-only mode = simply do not invoke `.editTree()`.
-- **Known open issues** considered: #100 (Bootstrap modal sizing — not relevant, we render in a `MudPaper`), #88 (responsive fill — we set explicit height), #98 (transition opacity left inline — minor CSS workaround if needed).
+- **Premium features we actually use** (each maps to an open question the MIT version couldn't answer):
+  - **`spouse-link-text` plugin** — labels the line between spouses (`Partner` vs `Spouse`), which lets us **stop collapsing `partner_of` into `spouses`** and instead surface the distinction visually. Closes one of the Open Questions below.
+  - **`kinship` engine plugin** — relation-aware secondary view ("show me Anakin's descendants only"; "highlight Leia's in-laws"). Removes the need for the speculative "Extended kin sidebar" we considered for `has_relative`.
+  - **Tree-filtering + layout-options** — first-class `maxDepth` per direction (ancestors vs descendants separately) and switchable layout modes. Lets the `MaxDepth` descriptor field drive the renderer directly instead of pre-trimming server-side.
+  - **Advanced card variants + dynamic card styling** — continuity badges, missing-gender placeholders, and the "synthetic stub" `Unknown Unknown` placeholder become a styled card variant rather than free-text in the data field.
 
 ### Tool: `render_family_tree`
 
@@ -180,17 +187,18 @@ New JS module at `src/StarWarsData.Frontend/wwwroot/js/family-tree.js`:
 - Exports `renderFamilyTree(containerId, data, dotNetRef)` that calls `f3.createChart`, wires the click handler to invoke the Blazor `OnPersonClicked` callback via `dotNetRef.invokeMethodAsync`, and never calls `.editTree()` (read-only).
 - Exports `destroy(containerId)` for clean tear-down on component disposal.
 
-### Vendoring family-chart locally
+### Vendoring family-chart-premium locally
 
-family-chart is checked in under `src/StarWarsData.Frontend/wwwroot/lib/family-chart/`:
+family-chart-premium is checked in under `src/StarWarsData.Frontend/wwwroot/lib/family-chart-premium/`:
 
-- `family-chart.esm.js` (or UMD `family-chart.min.js`, whichever the import pattern wires).
-- `family-chart.css`.
-- A `LICENSE.txt` copy alongside, capturing the MIT notice.
+- `family-chart.js` (UMD build from `dist/`; the file keeps its upstream name so a future swap back to MIT family-chart is a one-line path change).
+- `styles/` — the `dist/styles/` directory verbatim.
+- `LICENSE.txt` — copied verbatim from upstream. The licence requires the notice be retained in all copies, so this file is **not** optional.
+- `VERSION.txt` — one line, the upstream commit SHA we vendored from (premium publishes as `0.0.0-beta.x`; the SHA is the only stable identifier until the project leaves beta).
 
-The dependency on `d3@7` is already met — d3 ships with `d3-graph.js`. We do not pull family-chart from `unpkg` at runtime: it adds a third-party request on a logged-in surface, breaks offline dev, and bypasses our build pipeline. This is a new vendoring convention (no prior ADR covers it); if we add a second non-NuGet JS dependency, an ADR codifying the rule is in order.
+The dependency on `d3@7` is already met — d3 ships with `d3-graph.js`. We do not pull from a CDN at runtime: it adds a third-party request on a logged-in surface, breaks offline dev, and bypasses our build pipeline. This is a new vendoring convention (no prior ADR covers it); if we add a second non-NuGet JS dependency, an ADR codifying the rule is in order.
 
-Per [ADR-004](../../eng/adr/004-mudblazor-deviations.md) the principle of recording library deviations applies — but this is not a *deviation* from family-chart's public API, just a packaging choice. No ADR-004 entry needed.
+Per [ADR-004](../../eng/adr/004-mudblazor-deviations.md) the principle of recording library deviations applies — but this is not a *deviation* from family-chart-premium's public API, just a packaging choice. No ADR-004 entry needed.
 
 ### Agent prompt routing
 
@@ -212,7 +220,7 @@ Per [ADR-004](../../eng/adr/004-mudblazor-deviations.md) the principle of record
 
 #### Phase 2: Frontend component + JS interop + vendoring
 
-- Vendor family-chart under `wwwroot/lib/family-chart/`.
+- Vendor family-chart-premium under `wwwroot/lib/family-chart-premium/` (see *Vendoring* above).
 - `FamilyTreeView.razor` + `wwwroot/js/family-tree.js`.
 - Wire `Ask.razor` to render `FamilyTreeView` when the agent's descriptor is a `FamilyTreeDescriptor` (same dispatch shape as the other descriptors).
 - Mobile fallback via `MobileSummary`.
@@ -228,20 +236,22 @@ Per [ADR-004](../../eng/adr/004-mudblazor-deviations.md) the principle of record
 
 - **Extend `render_graph` with `layoutMode=FamilyTree`** — rejected. `RelationshipGraphResult` (nodes + edges with labels) and family-chart's data shape (people + rels) diverge enough that they cannot share a descriptor without one side carrying nullable fields it never uses. Two tools is cleaner than one tool with a hidden type-discriminating mode.
 - **Use d3-org-chart or react-family-tree** — rejected. d3-org-chart treats reports-to as the only relation; spouse pairing is not a first-class primitive. react-family-tree pulls React into a Blazor app that has no other React surface, doubling the JS toolchain.
-- **Build family layout from scratch in `d3-graph.js`** — rejected. Marriage clustering, generation alignment, ancestor/descendant balancing, and zoom-to-fit on irregular trees are non-trivial. family-chart already solves these, MIT-licensed, ~12k LOC. Building it ourselves is months of work for a feature with a known good off-the-shelf renderer.
-- **CDN-hosted family-chart from unpkg** — rejected. Offline dev breaks, third-party request on logged-in surface, no reproducible build, no integrity check.
+- **Build family layout from scratch in `d3-graph.js`** — rejected. Marriage clustering, generation alignment, ancestor/descendant balancing, and zoom-to-fit on irregular trees are non-trivial. family-chart-premium already solves these and ships the kinship-engine / spouse-link-text plugins we need. Building it ourselves is months of work for a feature with a known good off-the-shelf renderer.
+- **MIT [donatso/family-chart](https://github.com/donatso/family-chart) instead of the premium fork** — considered. Same JS API, same data shape, OSI-friendly licence. Rejected because the MIT version lacks the `spouse-link-text` and `kinship` plugins that close two of our Open Questions (partner-vs-spouse rendering and `has_relative` handling). The premium licence's non-commercial grant is satisfied by this project's status, so the trade is worth it. Fallback target if the project ever takes on commercial activity (see *Revisit when*).
+- **CDN-hosted family-chart-premium from unpkg** — rejected. Offline dev breaks, third-party request on logged-in surface, no reproducible build, no integrity check.
 
 ## Open questions
 
-- **`partner_of` vs `spouses[]` distinction** — family-chart only has `spouses`. Default: collapse `partner_of` into `spouses` and record the demoted relations in `limitations`. Open: do we surface partner-vs-spouse to the user as a chip on the rendered edge, or accept the loss?
-- **`has_relative` ambiguity** — covers cousins, aunts, uncles, in-laws. Default: exclude from the tree (no slot in family-chart's data model) and surface as a sidebar "Extended kin" list with the relationship label. Open: is the sidebar worth the implementation cost, or do we drop it for v1?
-- **Cycle handling** — Star Wars has clones (Boba Fett ↔ Jango Fett) and one bona-fide time-travel weirdness (Ezra's grandfather). Default: trust family-chart's behaviour; if it crashes or renders an infinite loop, fall back to the legacy `render_graph` Tree mode with a `limitations.cycleFallback=true` flag. Open: is the fallback worth wiring, or do we just document the edge case?
-- **Synthetic stubs** — when a referenced parent is missing from the BFS result set (truncated at maxNodes, or genuinely absent in kg.nodes), we emit a stub `Unknown Unknown` placeholder so family-chart doesn't crash. Open: should the stub carry the actual PageId so a click navigates somewhere, or stay a true placeholder?
+- ~~**`partner_of` vs `spouses[]` distinction**~~ **Resolved by switching to family-chart-premium.** The `spouse-link-text` plugin labels the inter-spouse line, so we keep the distinction visible: `partner_of` renders as `Partner`, `spouse_of`/`married_to` as `Spouse`. Both still live in `rels.spouses[]` for layout purposes, but the rendered label differentiates them. `limitations.demotedPartners` is no longer emitted.
+- ~~**`has_relative` ambiguity** (cousins, aunts, uncles, in-laws)~~ **Resolved by the premium `kinship` plugin.** Rather than excluding `has_relative` and building a separate sidebar, we project these edges into the kinship engine's secondary view. The agent can then route follow-up questions ("who are Leia's in-laws?") through the kinship view without leaving the family tree. `has_relative` entries land in a `kinship[]` block on the response alongside `people[]`.
+- **Cycle handling** — Star Wars has clones (Boba Fett ↔ Jango Fett) and one bona-fide time-travel weirdness (Ezra's grandfather). Default: trust family-chart-premium's behaviour; if it crashes or renders an infinite loop, fall back to the legacy `render_graph` Tree mode with a `limitations.cycleFallback=true` flag. Open: is the fallback worth wiring, or do we just document the edge case?
+- **Synthetic stubs** — when a referenced parent is missing from the BFS result set (truncated at maxNodes, or genuinely absent in kg.nodes), we emit a stub `Unknown Unknown` placeholder so the renderer doesn't crash. With premium's dynamic card styling we can render these as a distinct "Unknown ancestor" card variant so the user sees that the data, not the renderer, is the gap. Open: should the stub carry the actual PageId so a click navigates somewhere, or stay a true placeholder?
 
 ## Revisit when
 
 - A new `adopted_by` / `biological_parent_of` edge label lands in the KG ETL — at that point Phase 1's adoptive-exclusion rule becomes obsolete and the limitations chip should flip from "excluded" to "rendered with adoptive marker".
-- family-chart adds an explicit `partners[]` field distinct from `spouses[]` upstream — the `limitations.demotedPartners` workaround becomes removable.
+- **The project takes on any commercial activity** (ads, paid hosting, paid features, paid tiers — Buy Me a Coffee donations don't count). family-chart-premium's non-commercial grant lapses at that point; the project must either buy a commercial licence key or migrate to the MIT [donatso/family-chart](https://github.com/donatso/family-chart) and accept the loss of the `spouse-link-text` / `kinship` plugins (re-open the Open Questions above).
+- **family-chart-premium leaves beta** (cuts a non-`0.0.0-beta.x` release) — update `VERSION.txt` from a commit SHA to a semver pin, re-test against the new build, and audit the changelog for any data-shape changes.
 - Two or more non-NuGet JS dependencies are vendored under `wwwroot/lib/` — codify the vendoring convention in a new ADR.
 - The Character infobox schema gains structured gender (non-binary, etc.) — the default-to-`"M"` mapping becomes a bug rather than a library limitation, and the projection rule must change.
 - A second AI agent surface (beyond Ask) wants to render family trees — the descriptor + component pair should move from "Ask-specific" to a shared surface.
