@@ -403,13 +403,14 @@ public class ComponentToolkitTests
         var toolkit = new ComponentToolkit();
         var functions = toolkit.AsAIFunctions(System.Text.Json.JsonSerializerOptions.Web);
 
-        Assert.AreEqual(9, functions.Count);
+        Assert.AreEqual(10, functions.Count);
         var names = functions.Select(f => f.Name).ToHashSet();
         Assert.IsTrue(names.Contains(ToolNames.Component.RenderTable));
         Assert.IsTrue(names.Contains(ToolNames.Component.RenderDataTable));
         Assert.IsTrue(names.Contains(ToolNames.Component.RenderChart));
         Assert.IsTrue(names.Contains(ToolNames.Component.RenderGraph));
         Assert.IsTrue(names.Contains(ToolNames.Component.RenderPath));
+        Assert.IsTrue(names.Contains(ToolNames.Component.RenderFamilyTree));
         Assert.IsTrue(names.Contains(ToolNames.Component.RenderTimeline));
         Assert.IsTrue(names.Contains(ToolNames.Component.RenderInfobox));
         Assert.IsTrue(names.Contains(ToolNames.Component.RenderMarkdown));

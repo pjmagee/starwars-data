@@ -21,6 +21,7 @@ public static class ToolNames
         public const string RenderChart = "render_chart";
         public const string RenderGraph = "render_graph";
         public const string RenderPath = "render_path";
+        public const string RenderFamilyTree = "render_family_tree";
         public const string RenderTimeline = "render_timeline";
         public const string RenderInfobox = "render_infobox";
         public const string RenderMarkdown = "render_markdown";

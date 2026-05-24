@@ -26,6 +26,7 @@ public class ComponentToolkit
     public InfoboxDescriptor? InfoboxResult { get; private set; }
     public TextDescriptor? TextResult { get; private set; }
     public TimelineDescriptor? TimelineResult { get; private set; }
+    public FamilyTreeDescriptor? FamilyTreeResult { get; private set; }
 
     const string ReferencesParamDescription =
         "Source references for EVERY distinct entity represented in this visualization. "
@@ -281,6 +282,67 @@ public class ComponentToolkit
 
     [Description(
         """
+            Render a marriage-aware, generation-aligned family tree for a single
+            focal Character. USE THIS for kinship questions: "family tree", "lineage",
+            "ancestry", "genealogy", "who is X's parent/child/spouse", "trace X's
+            heritage". Spouses cluster as paired units above their kids; generations
+            align by genealogical depth, not BFS depth from the focal node.
+
+            REQUIRED PRECONDITION:
+              1. Call search_entities(query) FIRST to resolve the user's name to a
+                 PageId.
+              2. Verify the resolved entity's `type == "Character"`. If it is anything
+                 else (Family aggregate, Organization, Government, …), STOP and emit
+                 a markdown summary instead of calling this tool.
+
+            HARD ANTI-PATTERNS — do not call this tool for:
+              - A Family aggregate node (e.g. "Skywalker family"). Use search_entities
+                to disambiguate and pick the specific Character root the user named.
+              - Political hierarchies, military command chains, organization rosters,
+                or any non-kinship relationship. Use render_graph (Tree mode).
+              - Multiple roots in one tree. The tool renders ONE focal Character and
+                their genealogy. For a comparison across families, render two trees.
+
+            The tool takes NO `labels` / `enabledLabels` parameters. Family edge
+            labels are fixed server-side (parent_of, child_of, sibling_of,
+            partner_of, spouse_of, married_to, family, has_relative). Any
+            client-supplied label list is ignored.
+            """
+    )]
+    public FamilyTreeDescriptor RenderFamilyTree(
+        [Description("PageId of the focal Character (resolved via search_entities). Must resolve to a Character entity — Family/Organization/Government roots will be rejected.")] int rootEntityId,
+        [Description("Display name of the focal Character. Used as the chart caption.")] string rootEntityName,
+        [Description("Caption above the chart, e.g. \"Skywalker family tree centered on Anakin\".")] string title,
+        [Description(MobileSummaryParamDescription)] string mobileSummary,
+        [Description("Generations to expand in each direction (ancestors + descendants). Clamped to [1..5]. Default 3.")] int maxDepth = 3,
+        [Description("Optional continuity filter: Canon, Legends, or omit for both.")] string? continuity = null,
+        [Description(ReferencesParamDescription)] List<Reference>? references = null
+    )
+    {
+        // Hard-clamp maxDepth to the server-side range [1..5]. Silent clamp, not an error —
+        // mirrors the endpoint's behaviour (contracts/family-tree-endpoint.md § Query parameters).
+        var clampedDepth = Math.Clamp(maxDepth, 1, 5);
+
+        // Metadata-only descriptor. The frontend's FamilyTreeView fetches the projection
+        // from GET /api/RelationshipGraph/family-tree/{rootEntityId} using these fields,
+        // exactly the way RenderGraph hands off to AskGraphView. People/Kinship/Limitations
+        // are populated client-side after the projection lands; the tool itself does not
+        // call the endpoint or fabricate kinship data.
+        FamilyTreeResult = new FamilyTreeDescriptor
+        {
+            Title = title,
+            RootEntityId = rootEntityId,
+            RootEntityName = rootEntityName,
+            MaxDepth = clampedDepth,
+            Continuity = continuity,
+            MobileSummary = mobileSummary,
+            References = references,
+        };
+        return FamilyTreeResult;
+    }
+
+    [Description(
+        """
             Render a timeline of events. Supports two calendar modes:
 
             • Galactic (default) — in-universe BBY/ABY dates, e.g. "battles during the Clone Wars"
@@ -487,6 +549,7 @@ public class ComponentToolkit
             AIFunctionFactory.Create(RenderChart, ToolNames.Component.RenderChart, serializerOptions: serializerOptions),
             AIFunctionFactory.Create(RenderGraph, ToolNames.Component.RenderGraph, serializerOptions: serializerOptions),
             AIFunctionFactory.Create(RenderPath, ToolNames.Component.RenderPath, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(RenderFamilyTree, ToolNames.Component.RenderFamilyTree, serializerOptions: serializerOptions),
             AIFunctionFactory.Create(RenderTimeline, ToolNames.Component.RenderTimeline, serializerOptions: serializerOptions),
             AIFunctionFactory.Create(RenderInfobox, ToolNames.Component.RenderInfobox, serializerOptions: serializerOptions),
             AIFunctionFactory.Create(RenderText, ToolNames.Component.RenderMarkdown, serializerOptions: serializerOptions),
