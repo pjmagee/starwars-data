@@ -38,7 +38,7 @@ A push to `main` triggers [`.github/workflows/deploy.yml`](.github/workflows/dep
 3. `aspire publish -e Production` emits a `docker-compose.yaml` and an **unfilled** `.env.Production` template. CI never sees secrets — the artifact is grep-scanned for OpenAI keys and Mongo passwords before upload, and the build fails if anything leaks.
 4. The artifact is uploaded to the GitHub Release; the deploy host materialises real values into `.env.Production` from its own secret store and runs `docker compose --env-file .env.Production up -d`.
 
-Full contract: [eng/design/017-aspire-publish-deploy-workflow.md](eng/design/017-aspire-publish-deploy-workflow.md).
+Full contract: [specs/017-aspire-publish-deploy-workflow/spec.md](specs/017-aspire-publish-deploy-workflow/spec.md).
 
 ## More
 

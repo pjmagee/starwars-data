@@ -86,7 +86,7 @@ public sealed class AskAIAgent(
         var instructions = BuildInstructions(settings.DatabaseName);
 
         // Explicit function-invocation wiring with a hard iteration cap. Default is 40, which
-        // is far too generous for this app — see eng/design/012-ai-agent-tool-call-efficiency.md.
+        // is far too generous for this app — see specs/012-ai-agent-tool-call-efficiency/spec.md.
         // We also opt out of the agent's auto-wrapping (UseProvidedChatClientAsIs = true) so the
         // settings configured here are the ones that actually run.
         var chatClient = new ChatClientBuilder(byokClient)
@@ -132,7 +132,7 @@ public sealed class AskAIAgent(
     ///
     /// Keep this prompt SHORT. Cross-cutting rules only — anything tool-specific belongs
     /// in the <c>[Description]</c> attribute on the tool itself, where the model sees it
-    /// at the moment of decision. See eng/design/012-ai-agent-tool-call-efficiency.md.
+    /// at the moment of decision. See specs/012-ai-agent-tool-call-efficiency/spec.md.
     /// </summary>
     public static string BuildInstructions(string databaseName) => InstructionsTemplate.Replace("{DATABASE_NAME}", databaseName);
 

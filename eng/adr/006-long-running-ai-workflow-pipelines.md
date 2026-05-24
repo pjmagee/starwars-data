@@ -134,7 +134,7 @@ Per-type, not global. The workflow status enum (`HolocronJobStatus`, `CharacterT
 
 ## References
 
-- [Design-020](../design/020-holocron-async-pipeline.md) — Holocron async pipeline (canonical implementation of this ADR)
+- [Design-020](../../specs/020-holocron-async-pipeline/spec.md) — Holocron async pipeline (canonical implementation of this ADR)
 - [ADR-002](002-ai-agent-toolkits.md) — conversational agent pattern (the *short-lived* counterpart to this ADR)
 - [feedback memory `workflow_checkpoint_size`] — 16 MB ceiling and the refs-not-bodies rule
 - [feedback memory `mongo_view_pagination`] — view-with-`$lookup` pagination ban

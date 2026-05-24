@@ -181,4 +181,4 @@ Migrations handle **structural changes** that the ETL depends on or that need to
 1. Run pending migrations (`migrate.js`)
 2. Run relevant ETL phases (Admin dashboard)
 
-See [ADR-005](../../eng/adr/005-mongodb-migration-strategy.md) and [Design-010](../../eng/design/010-mongodb-migration-environment-promotion.md) for the full rationale.
+See [ADR-005](../../eng/adr/005-mongodb-migration-strategy.md) and [Design-010](../../specs/010-mongodb-migration-environment-promotion/spec.md) for the full rationale.

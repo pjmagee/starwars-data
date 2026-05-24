@@ -7,7 +7,7 @@ namespace StarWarsData.Services.KnowledgeGraph.NodeBuilders;
 /// One implementation handles each KG node type that needs type-specific extraction
 /// behaviour. <see cref="DefaultNodeBuilder"/> covers everything that doesn't.
 ///
-/// See <c>eng/design/035-kg-per-type-builders.md</c> for the rationale.
+/// See <c>specs/035-kg-per-type-builders/spec.md</c> for the rationale.
 /// </summary>
 public interface INodeBuilder
 {

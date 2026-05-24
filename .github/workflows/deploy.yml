@@ -76,7 +76,7 @@ jobs:
       # (just placeholder keys, no values). Secrets stay out of the runner environment
       # entirely. The deploy host is responsible for materializing real values from its
       # own secret store before `docker compose --env-file .env.Production up -d`.
-      # See eng/design/017-aspire-publish-deploy-workflow.md for the full contract.
+      # See specs/017-aspire-publish-deploy-workflow/spec.md for the full contract.
       - name: Publish deployment artifacts (template only, no secrets)
         run: |
           aspire publish \

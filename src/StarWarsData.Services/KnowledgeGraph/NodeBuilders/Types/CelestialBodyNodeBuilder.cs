@@ -14,7 +14,7 @@ namespace StarWarsData.Services.KnowledgeGraph.NodeBuilders.Types;
 /// (Species, System, etc.) keep <c>speaks_language</c> — those readings are
 /// correct.</para>
 ///
-/// <para>Per <c>eng/design/006-galaxy-map-timeline-mode.md</c>, future enhancement:
+/// <para>Per <c>specs/006-galaxy-map-timeline-mode/spec.md</c>, future enhancement:
 /// emit destruction events as discrete temporal markers on the galaxy map
 /// timeline (e.g. Alderaan's destruction in 0 BBY). Currently surfaces via
 /// the generic destruction-temporal field mapping.</para>

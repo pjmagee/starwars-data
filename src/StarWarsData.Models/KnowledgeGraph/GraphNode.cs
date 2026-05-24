@@ -98,7 +98,7 @@ public class GraphNode
     /// <c>kg.nodes</c> collection — Phase 1 never writes this field. Consumers that
     /// want to surface agent additions read through the enriched view; consumers that
     /// want canonical infobox-only data read the base collection. See
-    /// <c>eng/design/018-kg-enrichments-architecture.md</c>.
+    /// <c>specs/018-kg-enrichments-architecture/spec.md</c>.
     /// </summary>
     [BsonElement("enrichments")]
     [BsonIgnoreIfNull]

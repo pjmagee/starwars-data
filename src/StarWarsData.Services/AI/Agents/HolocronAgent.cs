@@ -19,7 +19,7 @@ namespace StarWarsData.Services.AI.Agents;
 /// recorded in <c>kg.events</c> as an immutable audit log, which the Stage D
 /// changelog UI will paginate over.
 ///
-/// **v1 policy** (see <c>eng/design/018-kg-enrichments-architecture.md</c>) —
+/// **v1 policy** (see <c>specs/018-kg-enrichments-architecture/spec.md</c>) —
 /// the wiki infobox is the canonical truth foundation. Holocron polishes around
 /// the edges; it adds, it never contradicts:
 ///

@@ -6,7 +6,7 @@
 
 ## Context
 
-Designs [025](../design/025-holocron-tool-using-agent.md) and [026](../design/026-holocron-orchestration-pattern.md) proposed an architectural pivot for Holocron (the Phase 2 KG enrichment agent — see [ADR-006](006-long-running-ai-workflow-pipelines.md), [Design-018](../design/018-kg-enrichments-architecture.md), [Design-020](../design/020-holocron-async-pipeline.md)). The framing was:
+Designs [025](../../specs/025-holocron-tool-using-agent/spec.md) and [026](../../specs/026-holocron-orchestration-pattern/spec.md) proposed an architectural pivot for Holocron (the Phase 2 KG enrichment agent — see [ADR-006](006-long-running-ai-workflow-pipelines.md), [Design-018](../../specs/018-kg-enrichments-architecture/spec.md), [Design-020](../../specs/020-holocron-async-pipeline/spec.md)). The framing was:
 
 - Holocron's structured-output extractor was producing low-quality proposals (Aliases stuffed with role strings, edges pointing at wrong-typed nodes, target-substitution hallucinations).
 - Each new failure mode landed a new sieve layer in the consolidator.

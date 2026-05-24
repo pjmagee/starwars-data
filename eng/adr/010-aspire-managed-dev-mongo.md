@@ -1,7 +1,7 @@
 # ADR-010: Aspire-managed MongoDB in local development
 
 **Status:** Accepted 2026-05-19
-**Context companion:** [Design-038](../design/038-developer-onboarding-snapshot.md) (resolves its Open Question 1)
+**Context companion:** [Design-038](../../specs/038-developer-onboarding-snapshot/spec.md) (resolves its Open Question 1)
 
 ## Decision
 

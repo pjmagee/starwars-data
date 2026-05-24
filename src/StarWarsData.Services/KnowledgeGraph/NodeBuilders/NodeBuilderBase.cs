@@ -15,7 +15,7 @@ namespace StarWarsData.Services.KnowledgeGraph.NodeBuilders;
 /// <see cref="OnFinalize"/>, etc.) to inject type-specific behaviour without
 /// duplicating the generic loop.
 ///
-/// See <c>eng/design/035-kg-per-type-builders.md</c> for the design rationale.
+/// See <c>specs/035-kg-per-type-builders/spec.md</c> for the design rationale.
 /// </summary>
 public abstract partial class NodeBuilderBase : INodeBuilder
 {
@@ -64,7 +64,7 @@ public abstract partial class NodeBuilderBase : INodeBuilder
             else if (!hasLabelDef && links.Count == 0)
             {
                 // Fallthrough: no semantic classification anywhere. Preserve the raw text
-                // so it isn't silently lost — see eng/design/013-kg-property-edge-duality.md.
+                // so it isn't silently lost — see specs/013-kg-property-edge-duality/spec.md.
                 if (values.Count > 0)
                     properties[label] = values;
             }

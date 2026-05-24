@@ -9,7 +9,7 @@ namespace StarWarsData.Models.Entities;
 /// Joined into <c>kg.nodes.enriched</c> at read time for active enrichments whose
 /// <see cref="ContentHashAtCreation"/> still matches the source node's current hash.
 ///
-/// See <c>eng/design/018-kg-enrichments-architecture.md</c>.
+/// See <c>specs/018-kg-enrichments-architecture/spec.md</c>.
 /// </summary>
 public sealed class NodeEnrichment
 {

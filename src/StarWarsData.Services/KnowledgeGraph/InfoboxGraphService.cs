@@ -15,7 +15,7 @@ namespace StarWarsData.Services;
 /// Owns page iteration, builder dispatch, and post-processing (edge filtering,
 /// dedup, lineage closures, indexes, view, label registry). Per-type extraction
 /// behaviour lives in <see cref="INodeBuilder"/> implementations under the
-/// <c>NodeBuilders</c> namespace — see <c>eng/design/035-kg-per-type-builders.md</c>.
+/// <c>NodeBuilders</c> namespace — see <c>specs/035-kg-per-type-builders/spec.md</c>.
 /// </summary>
 public class InfoboxGraphService
 {

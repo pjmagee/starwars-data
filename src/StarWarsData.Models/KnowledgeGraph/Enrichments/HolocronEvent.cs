@@ -10,7 +10,7 @@ namespace StarWarsData.Models.Entities;
 ///
 /// This is the collection the frontend changelog page (Stage D) reads from.
 ///
-/// See <c>eng/design/018-kg-enrichments-architecture.md</c>.
+/// See <c>specs/018-kg-enrichments-architecture/spec.md</c>.
 /// </summary>
 public sealed class HolocronEvent
 {

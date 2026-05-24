@@ -1,11 +1,13 @@
 ---
 name: adr-design-docs
-description: Author or update a numbered ADR (`eng/adr/`) or design doc (`eng/design/`) in this repo. Enforces the shared schema — filename pattern, H1, required header fields, the fixed `Status` enumeration, ISO-8601 dates, the canonical `Related:` link list, and the prescribed section skeleton. Trigger when the user says "write an ADR", "add a design doc", "new ADR/design", "update the status of …", "supersede …", or is editing a file under `eng/adr/` or `eng/design/`.
+description: Author or update a numbered ADR under `eng/adr/`, or update the header/status of a historical design narrative migrated to `specs/[NNN]-[slug]/spec.md`. Enforces the shared schema — filename pattern, H1, required header fields, the fixed `Status` enumeration, ISO-8601 dates, the canonical `Related:` link list. Trigger when the user says "write an ADR", "update the status of …", "supersede …", or is editing a file under `eng/adr/`. For NEW feature design narratives, use `/speckit-specify` (spec-kit) instead — `eng/design/` was retired in constitution v2.0.0 (2026-05-24).
 ---
 
-# ADR & Design Doc Authoring
+# ADR Authoring (and historical design-doc maintenance)
 
-The repo treats `eng/adr/` and `eng/design/` as a **living engineering knowledge base** (see `CLAUDE.md` → *Engineering Docs*). A doc that contradicts the code, or that drifts in shape from its neighbours, is a bug. This skill is the schema those docs MUST follow.
+> **2026-05-24 v2.0.0 migration**: `eng/design/` was retired. The 45 historical design docs were migrated en masse to `specs/[NNN]-[slug]/spec.md` preserving their numbering. This skill remains canonical for **ADR authoring** and for **updating the headers/status of the migrated design docs in `specs/`**. New feature design narratives should use the spec-kit workflow (`/speckit-specify` → `/speckit-plan` → `/speckit-tasks` → `/speckit-implement`). The "Design header" template below applies to the migrated docs' `spec.md` files.
+
+The repo treats `eng/adr/` and `specs/[NNN]-[slug]/spec.md` as a **living engineering knowledge base** (see `CLAUDE.md` → *Engineering Docs*). A doc that contradicts the code, or that drifts in shape from its neighbours, is a bug. This skill is the schema those docs MUST follow.
 
 **Do not invent fields, do not coin new `Status` values, do not use a date format other than ISO-8601.** When a real situation does not fit (e.g. a brand-new field is genuinely needed), stop and surface it to the user rather than freelancing — silent inconsistency is the problem this skill exists to fix.
 
@@ -14,14 +16,14 @@ The repo treats `eng/adr/` and `eng/design/` as a **living engineering knowledge
 - User asks for a new ADR or design doc — pick the matching template under `references/`.
 - User asks to update the `Status` of an existing doc — re-read this skill before editing, then change ONLY the field, keeping the rest of the file intact.
 - User asks to mark a doc `Superseded` or `Abandoned` — follow the rules in *Lifecycle transitions* below; never delete the file.
-- You are editing any file under `eng/adr/` or `eng/design/` for any reason — verify the header still conforms.
+- You are editing any file under `eng/adr/` (or a migrated design-narrative `specs/[NNN]/spec.md`) for any reason — verify the header still conforms.
 
 ## File location & filename
 
-| Doc type | Folder | Filename pattern |
+| Doc type | Location | Filename pattern |
 | --- | --- | --- |
 | ADR | `eng/adr/` | `NNN-kebab-case-title.md` |
-| Design | `eng/design/` | `NNN-kebab-case-title.md` |
+| Design (migrated 2026-05-24; new feature narratives use spec-kit) | `specs/NNN-kebab-case-title/spec.md` | dir is `NNN-kebab-case-title`, file is always `spec.md` |
 
 - `NNN` is a **3-digit zero-padded** sequential integer. Find the next free number by listing the folder; **never reuse a retired number**, even if the file was deleted or renamed.
 - Title is **lower-kebab-case**, no abbreviations beyond what's already common in the repo (`kg`, `etl`, `ui`, `api`, `mcp`, `adr` are fine).
@@ -101,7 +103,7 @@ These are the moments where header consistency breaks down most often. Follow th
 - Change `Status:` leading token to `Implemented`.
 - Append a clarification: `Implemented — YYYY-MM-DD. <one-line pointer to the code or commit>`.
 - **Do not** alter the `Date:` field — that's the doc's birthday, not the ship date.
-- If the doc is in `eng/design/` and contains an `## Open questions` section that the implementation resolved, either delete the answered questions or convert them to a *Resolved questions* note at the bottom of that section.
+- If the doc is in `specs/[NNN]/spec.md` (a migrated design narrative) and contains an `## Open questions` section that the implementation resolved, either delete the answered questions or convert them to a *Resolved questions* note at the bottom of that section.
 
 ### Implemented → Partially Implemented
 

@@ -41,7 +41,7 @@ public class GraphRAGToolkit
         // Read through the enriched view so node fetches surface active Holocron enrichments
         // alongside the base infobox-derived properties. The view is a left-join — nodes with
         // no enrichments come back with Enrichments == null/empty (no extra cost). See
-        // eng/design/018-kg-enrichments-architecture.md (Stage E1 — GraphRAGToolkit migration).
+        // specs/018-kg-enrichments-architecture/spec.md (Stage E1 — GraphRAGToolkit migration).
         _nodesCollection = db.GetCollection<GraphNode>(Collections.KgNodesEnriched);
         _galaxyYears = db.GetCollection<GalaxyYearDocument>(Collections.GalaxyYears);
         _galaxyYearsRaw = db.GetCollection<BsonDocument>(Collections.GalaxyYears);

@@ -7,7 +7,7 @@
 
 <!--
 Header rules (do not delete this comment until the doc is filled in):
-- Filename: NNN-kebab-case-title.md, NNN = next free 3-digit number in eng/design/.
+- Filename: NNN-kebab-case-title.md, NNN = next free 3-digit number in `specs/` (eng/design/ retired in constitution v2.0.0; this template now describes the `specs/[NNN]-[slug]/spec.md` header format for historical/migrated design narratives — new feature work uses /speckit-specify).
 - H1 mirrors the prefix exactly: `# Design-NNN: Title`.
 - Status leading token MUST be one of: Proposed | Accepted | Implemented |
   Partially Implemented | Reference | Superseded | Abandoned | Rejected.

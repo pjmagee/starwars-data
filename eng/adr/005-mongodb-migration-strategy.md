@@ -179,6 +179,6 @@ Rename the production database from `starwars` to `starwars-prod`. The `Database
 
 ## References
 
-- [Design-010](../design/010-mongodb-migration-environment-promotion.md) — implementation plan and deployment workflow
+- [Design-010](../../specs/010-mongodb-migration-environment-promotion/spec.md) — implementation plan and deployment workflow
 - [ADR-003](003-kg-query-architecture.md) — KG query architecture (denormalization, indexes, bidir view)
 - [src/StarWarsData.MongoDbMigrations/README.md](../../src/StarWarsData.MongoDbMigrations/README.md) — runner usage and migration inventory

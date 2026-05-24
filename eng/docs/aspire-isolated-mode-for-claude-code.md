@@ -46,7 +46,7 @@ aspire do prepare-starwars -e Production --apphost ...
 aspire deploy   -e Production            --apphost ...
 ```
 
-(See [eng/design/017-aspire-publish-deploy-workflow.md](../design/017-aspire-publish-deploy-workflow.md) for the full parameter-resolution rules.) `--isolated` would point these commands at an empty secrets store and emit `.env.<env>` files full of unfilled values — which is exactly the failure mode that leaked secrets in the [feedback_ci_no_filled_env](../../../C:/Users/patri/.claude/projects/d--Projects-pjmagee-starwars-data/memory/feedback_ci_no_filled_env.md) incident, just from the other direction.
+(See [specs/017-aspire-publish-deploy-workflow/spec.md](../../specs/017-aspire-publish-deploy-workflow/spec.md) for the full parameter-resolution rules.) `--isolated` would point these commands at an empty secrets store and emit `.env.<env>` files full of unfilled values — which is exactly the failure mode that leaked secrets in the [feedback_ci_no_filled_env](../../../C:/Users/patri/.claude/projects/d--Projects-pjmagee-starwars-data/memory/feedback_ci_no_filled_env.md) incident, just from the other direction.
 
 `--isolated` is for **`aspire run` / `aspire start`** only.
 

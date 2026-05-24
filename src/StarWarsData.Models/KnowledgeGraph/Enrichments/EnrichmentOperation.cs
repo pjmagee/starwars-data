@@ -3,7 +3,7 @@ namespace StarWarsData.Models.Entities;
 /// <summary>
 /// Kind of enrichment the Holocron agent is making to a node or edge.
 ///
-/// **v1 policy** (see <c>eng/design/018-kg-enrichments-architecture.md</c>):
+/// **v1 policy** (see <c>specs/018-kg-enrichments-architecture/spec.md</c>):
 /// the original infobox extraction is the canonical truth foundation. Holocron
 /// only adds context; it never contradicts or overwrites. The four permitted
 /// ops are strictly additive:

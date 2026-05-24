@@ -3,7 +3,7 @@
 **Status:** Accepted
 **Date:** 2026-04-30
 **Decision maker:** Patrick Magee
-**Cross-refs:** [ADR-002 AI Agent Toolkits](002-ai-agent-toolkits.md), [Design-022 Page-Aware Copilot Sidebar](../design/022-galaxy-map-copilot.md), [Design-029 Continuity-aware Agent Tools](../design/029-agent-filter-context.md)
+**Cross-refs:** [ADR-002 AI Agent Toolkits](002-ai-agent-toolkits.md), [Design-022 Page-Aware Copilot Sidebar](../../specs/022-galaxy-map-copilot/spec.md), [Design-029 Continuity-aware Agent Tools](../../specs/029-agent-filter-context/spec.md)
 
 > **Update (2026-05-18):** Option C is no longer a proposal — Phase 1 shipped on
 > the `feature/copilot-sidebar` branch (merged to `main`, commits `616ae44dd2` /
@@ -145,7 +145,7 @@ execution time. Keep Option A's prompt rule as a defence-in-depth fallback
 for any tool that hasn't yet been wired to the context.
 
 Implementation details, scope, and rollout plan live in
-[Design-029 — Continuity-aware Agent Tools](../design/029-agent-filter-context.md).
+[Design-029 — Continuity-aware Agent Tools](../../specs/029-agent-filter-context/spec.md).
 
 ## Rationale
 
@@ -179,6 +179,6 @@ Implementation details, scope, and rollout plan live in
 
 ## References
 
-- [Design-022 Page-Aware Copilot Sidebar](../design/022-galaxy-map-copilot.md) — introduced the envelope wire format
+- [Design-022 Page-Aware Copilot Sidebar](../../specs/022-galaxy-map-copilot/spec.md) — introduced the envelope wire format
 - [ADR-002 AI Agent Toolkits](002-ai-agent-toolkits.md) — toolkit organisation
-- [Design-029 Continuity-aware Agent Tools](../design/029-agent-filter-context.md) — implementation plan
+- [Design-029 Continuity-aware Agent Tools](../../specs/029-agent-filter-context/spec.md) — implementation plan

@@ -141,7 +141,7 @@ This makes `<AuthorizeView>` gates render on localhost without a Keycloak round-
 
 # Mobile UX (Design-011)
 
-[eng/design/011-mobile-web-ux.md](eng/design/011-mobile-web-ux.md) ships mobile via **CSS utilities** (`d-md-*` / `d-lg-*` / `d-none` patterns) on top of MudBlazor's native `Breakpoint` system — no separate mobile components.
+[specs/011-mobile-web-ux/spec.md](specs/011-mobile-web-ux/spec.md) ships mobile via **CSS utilities** (`d-md-*` / `d-lg-*` / `d-none` patterns) on top of MudBlazor's native `Breakpoint` system — no separate mobile components.
 
 Examples in [`MainLayout.razor`](src/StarWarsData.Frontend/Components/Layout/MainLayout.razor):
 - Line 27: `d-none d-lg-flex` — hide below large breakpoint
@@ -253,7 +253,7 @@ The cost of one extra snapshot is a tool call. The cost of shipping a Blazor cha
 | Authorization gates | `microsoft_docs_search` for "Blazor AuthorizeView"; cite URL; plus [eng/adr/001-internal-api-auth.md](eng/adr/001-internal-api-auth.md) |
 | Any page that queries the API | [Ask.razor](src/StarWarsData.Frontend/Components/Pages/Ask.razor) §filter usage; `GlobalFilterService` |
 | A deviation from MudBlazor | [eng/adr/004-mudblazor-deviations.md](eng/adr/004-mudblazor-deviations.md) — must add to catalogue |
-| Mobile layout | [eng/design/011-mobile-web-ux.md](eng/design/011-mobile-web-ux.md); MainLayout.razor `d-*` patterns |
+| Mobile layout | [specs/011-mobile-web-ux/spec.md](specs/011-mobile-web-ux/spec.md); MainLayout.razor `d-*` patterns |
 | Theming | `Theming/SwTheme.cs`, `Theming/Themes.cs`, MainLayout switcher |
 
 # Operating principles

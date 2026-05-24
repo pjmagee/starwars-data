@@ -1,7 +1,7 @@
 # StarWarsData.SnapshotRestore
 
 Developer-onboarding data snapshot — full design in
-[eng/design/038-developer-onboarding-snapshot.md](../../eng/design/038-developer-onboarding-snapshot.md).
+[specs/038-developer-onboarding-snapshot/spec.md](../../specs/038-developer-onboarding-snapshot/spec.md).
 Onboarding walkthrough: [ONBOARDING.md](../../ONBOARDING.md).
 
 Two halves:
@@ -22,4 +22,4 @@ After restore, recreate vector indexes via the Aspire `admin` commands
 are already in the restored documents).
 
 Not for recurring QA refresh — that is raw-only and lives in
-[Design-033](../../eng/design/033-prod-to-dev-data-refresh.md).
+[Design-033](../../specs/033-prod-to-dev-data-refresh/spec.md).

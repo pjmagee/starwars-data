@@ -8,7 +8,7 @@ namespace StarWarsData.Models.Entities;
 /// Stored in the <c>kg.edge_enrichments</c> collection — never collides with Phase 1's
 /// or Phase 6's writes to <c>kg.edges</c>. Joined into <c>kg.edges.enriched</c> at read time.
 ///
-/// See <c>eng/design/018-kg-enrichments-architecture.md</c>.
+/// See <c>specs/018-kg-enrichments-architecture/spec.md</c>.
 /// </summary>
 public sealed class EdgeEnrichment
 {

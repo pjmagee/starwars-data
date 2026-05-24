@@ -230,9 +230,9 @@ The guide recommends `meta.schemaVersion: 1` on documents to support future migr
 - [MongoDB as a graph database (marketing overview)](https://www.mongodb.com/resources/basics/databases/mongodb-graph-database)
 - [`$graphLookup` aggregation stage reference](https://www.mongodb.com/docs/manual/reference/operator/aggregation/graphLookup/)
 - ADR-002 (toolkits): [./002-ai-agent-toolkits.md](./002-ai-agent-toolkits.md) — how KG queries are surfaced as AI tools
-- Design-001 (temporal facets): [../design/001-temporal-facets.md](../design/001-temporal-facets.md) — node-side temporal model
-- Design-002 (edge quality): [../design/002-edge-quality.md](../design/002-edge-quality.md) — upstream noise reduction
-- Design-007 (bidirectional edges view): [../design/007-kg-bidirectional-edges-view.md](../design/007-kg-bidirectional-edges-view.md) — the view, `reverseLabel`, planned `QueryGraphAsync` rewrite
+- Design-001 (temporal facets): [specs/001-temporal-facets/spec.md](../../specs/001-temporal-facets/spec.md) — node-side temporal model
+- Design-002 (edge quality): [specs/002-edge-quality/spec.md](../../specs/002-edge-quality/spec.md) — upstream noise reduction
+- Design-007 (bidirectional edges view): [specs/007-kg-bidirectional-edges-view/spec.md](../../specs/007-kg-bidirectional-edges-view/spec.md) — the view, `reverseLabel`, planned `QueryGraphAsync` rewrite
 - Index definitions: [src/StarWarsData.Services/KnowledgeGraph/InfoboxGraphService.cs](../../src/StarWarsData.Services/KnowledgeGraph/InfoboxGraphService.cs)
 - Query service: [src/StarWarsData.Services/KnowledgeGraph/KnowledgeGraphQueryService.cs](../../src/StarWarsData.Services/KnowledgeGraph/KnowledgeGraphQueryService.cs)
 - Lineage tool: [src/StarWarsData.Services/AI/Toolkits/GraphRAGToolkit.cs](../../src/StarWarsData.Services/AI/Toolkits/GraphRAGToolkit.cs) (`GetLineage`)

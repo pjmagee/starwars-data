@@ -6,7 +6,7 @@ ships in the repo or to devs (same rule as CI: a filled prod secret must never
 leave the maintainer's machine — `feedback_ci_no_filled_env`).
 
 For *why* the snapshot exists and the transport/automation decisions, see
-[Design-038](../design/038-developer-onboarding-snapshot.md). For the
+[Design-038](../../specs/038-developer-onboarding-snapshot/spec.md). For the
 *developer* (restore) side, see [ONBOARDING.md](../../ONBOARDING.md). This doc is
 the operational how-to for the person making the snapshot.
 

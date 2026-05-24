@@ -3,11 +3,11 @@
 **Status:** Accepted
 **Date:** 2026-05-18
 **Decision maker:** Patrick Magee
-**Cross-refs:** [ADR-001 Internal API Auth](001-internal-api-auth.md), [ADR-002 Three-Project Blazor Server + Shared API](002-three-project-blazor-server-shared-api.md), [Design-037 Miscellaneous site-activity dashboard](../design/037-misc-site-activity-dashboard.md)
+**Cross-refs:** [ADR-001 Internal API Auth](001-internal-api-auth.md), [ADR-002 Three-Project Blazor Server + Shared API](002-three-project-blazor-server-shared-api.md), [Design-037 Miscellaneous site-activity dashboard](../../specs/037-misc-site-activity-dashboard/spec.md)
 
 ## Context
 
-We want curious public visitors to the **Frontend** site to see at a glance that the corpus is alive and maintained: total KG node/edge counts, total wiki article pages and article chunks, when the daily wiki sync last ran, and the most recently synced / chunked articles. See [Design-037](../design/037-misc-site-activity-dashboard.md) for the feature and UX.
+We want curious public visitors to the **Frontend** site to see at a glance that the corpus is alive and maintained: total KG node/edge counts, total wiki article pages and article chunks, when the daily wiki sync last ran, and the most recently synced / chunked articles. See [Design-037](../../specs/037-misc-site-activity-dashboard/spec.md) for the feature and UX.
 
 This raises three cross-cutting questions that outlive the feature itself:
 

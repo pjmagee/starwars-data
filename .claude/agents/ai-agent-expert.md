@@ -151,7 +151,7 @@ For new toolkit logic that doesn't require a live LLM, prefer Integration tier w
 |---|---|
 | New toolkit | `GraphRAGToolkit.cs` + `KGAnalyticsToolkit.cs` as exemplars; `ToolNames.cs` for naming convention |
 | Agent construction / tool registration | `AskAIAgent.cs` lines 37–106; the `/microsoft-agent-framework` skill |
-| Workflow executor (non-Holocron) | [Design-018](eng/design/018-kg-enrichments-architecture.md), [ADR-006](eng/adr/006-long-running-ai-workflow-pipelines.md) (the canonical long-running workflow ADR), one of the CharacterTimelines executors as a shape reference |
+| Workflow executor (non-Holocron) | [Design-018](specs/018-kg-enrichments-architecture/spec.md), [ADR-006](eng/adr/006-long-running-ai-workflow-pipelines.md) (the canonical long-running workflow ADR), one of the CharacterTimelines executors as a shape reference |
 | AGUI / streaming | `Program.cs` lines 179–228; pin AGUI preview version awareness |
 | Rate limiting | `Program.cs` lines 179–200; `Settings.cs` 105–112 |
 | Model selection / temperature / cost | `Settings.cs` 26–50 |

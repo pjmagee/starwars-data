@@ -22,7 +22,7 @@ ETL phase 1 downloads pages from MediaWiki. Phase 2 creates per-template MongoDB
 
 ## 2. Infobox → KG (nodes, edges, labels, attributes)
 
-The KG is built by **per-type builders** ([Design-035](eng/design/035-kg-per-type-builders.md), shipped 2026-04-26).
+The KG is built by **per-type builders** ([Design-035](specs/035-kg-per-type-builders/spec.md), shipped 2026-04-26).
 
 ### Layout
 - Coordinator: [src/StarWarsData.Services/KnowledgeGraph/InfoboxGraphService.cs](src/StarWarsData.Services/KnowledgeGraph/InfoboxGraphService.cs) — `BuildGraphAsync()` is the entrypoint; `RegisterAllBuilders()` wires up all 45 per-type builders.
@@ -35,8 +35,8 @@ The KG is built by **per-type builders** ([Design-035](eng/design/035-kg-per-typ
 - One builder per template type. **Do not** add ad-hoc parsing inside `InfoboxGraphService` — extend an existing builder or add a new one under `Types/`.
 - Builders emit `Node` documents (with attributes, labels) and `Edge` documents.
 - Edge quality: schema validators in moderate/warn mode are active on `kg.edges` and `kg.nodes`.
-- **Character roles are edges, not attributes** ([Design-023](eng/design/023-character-roles-as-edges.md)).
-- Property/edge duality: see [Design-013](eng/design/013-kg-property-edge-duality.md) before promoting an attribute to an edge.
+- **Character roles are edges, not attributes** ([Design-023](specs/023-character-roles-as-edges/spec.md)).
+- Property/edge duality: see [Design-013](specs/013-kg-property-edge-duality/spec.md) before promoting an attribute to an edge.
 
 ### kg.* collections (from [src/StarWarsData.Models/Settings.cs](src/StarWarsData.Models/Settings.cs) `Collections` static class)
 
@@ -55,11 +55,11 @@ The KG is built by **per-type builders** ([Design-035](eng/design/035-kg-per-typ
 | `Pages` | `raw.pages` | Wookieepedia pages (ETL only) |
 | `SearchChunks` | `search.chunks` | Chunked article text for retrieval |
 
-There's also a `kg.edges.bidir` view that materializes both edge directions ([ADR-003](eng/adr/003-kg-query-architecture.md), [Design-007 bidirectional view](eng/design/007-kg-bidirectional-edges-view.md)).
+There's also a `kg.edges.bidir` view that materializes both edge directions ([ADR-003](eng/adr/003-kg-query-architecture.md), [Design-007 bidirectional view](specs/007-kg-bidirectional-edges-view/spec.md)).
 
 ## 3. KG → enhanced KG via Holocron (background self-improvement)
 
-[Design-018](eng/design/018-kg-enrichments-architecture.md) + [Design-019](eng/design/019-kg-enrichment-ui-provenance.md) + [Design-020](eng/design/020-holocron-async-pipeline.md) define a 5-stage agentic workflow that mines `search.chunks` (article text) to fill gaps the infobox alone can't cover.
+[Design-018](specs/018-kg-enrichments-architecture/spec.md) + [Design-019](specs/019-kg-enrichment-ui-provenance/spec.md) + [Design-020](specs/020-holocron-async-pipeline/spec.md) define a 5-stage agentic workflow that mines `search.chunks` (article text) to fill gaps the infobox alone can't cover.
 
 ### Pipeline (all under [src/StarWarsData.Services/AI/Agents/Holocron/Workflows/](src/StarWarsData.Services/AI/Agents/Holocron/Workflows/))
 
@@ -74,18 +74,18 @@ Job orchestration: [src/StarWarsData.Services/AI/Agents/HolocronJobService.cs](s
 
 ### Critical Holocron gotchas
 
-- **DUPLICATED VALIDATION.** `IsFillGapValid` / `IsAnnotateValid` / `IsAddEdgeValid` exist in **both** `HolocronAgent.cs` AND `HolocronConsolidatorExecutor.cs`. Changing one without the other silently rejects valid proposals at the earlier gate. This cost a full Anakin run when [Design-021](eng/design/021-edge-bound-provenance.md) missed the consolidator copy. **When you touch validation, grep for both copies and update them together.**
+- **DUPLICATED VALIDATION.** `IsFillGapValid` / `IsAnnotateValid` / `IsAddEdgeValid` exist in **both** `HolocronAgent.cs` AND `HolocronConsolidatorExecutor.cs`. Changing one without the other silently rejects valid proposals at the earlier gate. This cost a full Anakin run when [Design-021](specs/021-edge-bound-provenance/spec.md) missed the consolidator copy. **When you touch validation, grep for both copies and update them together.**
 - **Workflow checkpoint = single Mongo doc, 16 MB max.** `Microsoft.Agents.AI.Workflows` checkpoints are one document. Don't store full chunk arrays in workflow state — store refs (IDs/hashes) and rehydrate per-batch. Use the two-layer durability pattern (framework checkpoint + per-iteration side-channel into the relevant `kg.*` collection).
 - **Chunk source: only target page.** Currently Holocron only ingests chunks from the target node's own page. Cross-page text mining is a known gap.
-- **Async pipeline + admin UI.** [Design-020](eng/design/020-holocron-async-pipeline.md) shipped per-node + global enrichment dialogs and dev-auth bypass. The canonical implementation of [ADR-006](eng/adr/006-long-running-ai-workflow-pipelines.md).
+- **Async pipeline + admin UI.** [Design-020](specs/020-holocron-async-pipeline/spec.md) shipped per-node + global enrichment dialogs and dev-auth bypass. The canonical implementation of [ADR-006](eng/adr/006-long-running-ai-workflow-pipelines.md).
 
 ## 4. Temporal KG + MongoDB layout
 
 ### Temporal facets
 
-[src/StarWarsData.Models/Timeline/TemporalFacet.cs](src/StarWarsData.Models/Timeline/TemporalFacet.cs) — 6 semantic dimensions, 2 calendars (BBY/ABY galactic + real-world), lifecycle chains. See [Design-001](eng/design/001-temporal-facets.md).
+[src/StarWarsData.Models/Timeline/TemporalFacet.cs](src/StarWarsData.Models/Timeline/TemporalFacet.cs) — 6 semantic dimensions, 2 calendars (BBY/ABY galactic + real-world), lifecycle chains. See [Design-001](specs/001-temporal-facets/spec.md).
 
-### Edge bound provenance ([Design-021](eng/design/021-edge-bound-provenance.md), shipped 2026-04-27)
+### Edge bound provenance ([Design-021](specs/021-edge-bound-provenance/spec.md), shipped 2026-04-27)
 
 Every edge's `fromYear` / `toYear` is tagged with **why** we know it via `meta.boundsSource`:
 
@@ -103,7 +103,7 @@ Every edge's `fromYear` / `toYear` is tagged with **why** we know it via `meta.b
 
 - `$graphLookup` for tree-shaped subgraph traversal (cheap, server-side).
 - BFS in C# for arbitrary-depth queries with branching/filtering needs.
-- Heavy denormalization on read (precomputed lineage closures — [Design-008](eng/design/008-kg-hierarchy-helpers.md)).
+- Heavy denormalization on read (precomputed lineage closures — [Design-008](specs/008-kg-hierarchy-helpers/spec.md)).
 
 ## How to use the MongoDB MCP
 
@@ -139,11 +139,11 @@ When the parent agent hands you a task, read at least these before proposing cha
 
 | Touching... | Read |
 |---|---|
-| A new node type | [Design-035](eng/design/035-kg-per-type-builders.md), [Design-024](eng/design/024-typed-node-builders.md), an existing similar builder under `NodeBuilders/Types/` |
-| Edge construction or quality | [Design-002](eng/design/002-edge-quality.md), [Design-013](eng/design/013-kg-property-edge-duality.md), [Design-023](eng/design/023-character-roles-as-edges.md) |
-| Edge temporal bounds | [Design-001](eng/design/001-temporal-facets.md), [Design-021](eng/design/021-edge-bound-provenance.md) |
-| KG queries / traversal | [ADR-003](eng/adr/003-kg-query-architecture.md), [Design-007 bidir view](eng/design/007-kg-bidirectional-edges-view.md), [Design-008](eng/design/008-kg-hierarchy-helpers.md) |
-| Holocron / enrichments | [Design-018](eng/design/018-kg-enrichments-architecture.md), [Design-019](eng/design/019-kg-enrichment-ui-provenance.md), [Design-020](eng/design/020-holocron-async-pipeline.md), [ADR-006](eng/adr/006-long-running-ai-workflow-pipelines.md) |
+| A new node type | [Design-035](specs/035-kg-per-type-builders/spec.md), [Design-024](specs/024-typed-node-builders/spec.md), an existing similar builder under `NodeBuilders/Types/` |
+| Edge construction or quality | [Design-002](specs/002-edge-quality/spec.md), [Design-013](specs/013-kg-property-edge-duality/spec.md), [Design-023](specs/023-character-roles-as-edges/spec.md) |
+| Edge temporal bounds | [Design-001](specs/001-temporal-facets/spec.md), [Design-021](specs/021-edge-bound-provenance/spec.md) |
+| KG queries / traversal | [ADR-003](eng/adr/003-kg-query-architecture.md), [Design-007 bidir view](specs/007-kg-bidirectional-edges-view/spec.md), [Design-008](specs/008-kg-hierarchy-helpers/spec.md) |
+| Holocron / enrichments | [Design-018](specs/018-kg-enrichments-architecture/spec.md), [Design-019](specs/019-kg-enrichment-ui-provenance/spec.md), [Design-020](specs/020-holocron-async-pipeline/spec.md), [ADR-006](eng/adr/006-long-running-ai-workflow-pipelines.md) |
 | MongoDB migrations | [ADR-005](eng/adr/005-mongodb-migration-strategy.md) |
 
 # What to report back

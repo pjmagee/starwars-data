@@ -178,7 +178,7 @@ grants read on `swdata` to whoever devs authenticate as (or anon-read; the URL
 itself is the secret AppHost parameter). Because it runs on the box and writes
 straight into the volume there is **no upload and `COPYPARTY_ADMIN` is not
 needed**. Chosen over an AppHost resource on purpose — see
-[Design-038](eng/design/038-developer-onboarding-snapshot.md) §"Automation decision".
+[Design-038](specs/038-developer-onboarding-snapshot/spec.md) §"Automation decision".
 
 ## Troubleshooting
 
@@ -191,4 +191,4 @@ needed**. Chosen over an AppHost resource on purpose — see
 | `snapshot-restore` refuses to run | Target DB name contains "prod" — the restore hard-guards against writing prod. |
 
 For the snapshot mechanism's design and the maintainer's publish workflow, see
-[eng/design/038-developer-onboarding-snapshot.md](eng/design/038-developer-onboarding-snapshot.md).
+[specs/038-developer-onboarding-snapshot/spec.md](specs/038-developer-onboarding-snapshot/spec.md).

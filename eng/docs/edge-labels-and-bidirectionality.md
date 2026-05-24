@@ -3,23 +3,23 @@
 **Status:** Research note (no code change)
 **Date:** 2026-04-29
 **Author:** Patrick Magee + Claude
-**Scope:** Grounding doc for the [Design-026](../design/026-holocron-orchestration-pattern.md) conversation. Captures the *current* end-to-end pipeline for how edge labels come into being, what bidirectionality support exists today, and how Design-026's tool-using Holocron agent intersects with that pipeline. Closes with a gaps section enumerating the changes that would be needed for fluid two-way reading.
+**Scope:** Grounding doc for the [Design-026](../../specs/026-holocron-orchestration-pattern/spec.md) conversation. Captures the *current* end-to-end pipeline for how edge labels come into being, what bidirectionality support exists today, and how Design-026's tool-using Holocron agent intersects with that pipeline. Closes with a gaps section enumerating the changes that would be needed for fluid two-way reading.
 
 **Related:**
 - [ADR-003 KG query architecture](../adr/003-kg-query-architecture.md)
 - [ADR-006 Long-running AI workflows](../adr/006-long-running-ai-workflow-pipelines.md)
-- [Design-002 Edge quality](../design/002-edge-quality.md)
-- [Design-007 KG bidirectional edges view](../design/007-kg-bidirectional-edges-view.md)
-- [Design-035 Per-type builders](../design/035-kg-per-type-builders.md)
-- [Design-008 Hierarchy helpers](../design/008-kg-hierarchy-helpers.md)
-- [Design-013 Property/edge duality](../design/013-kg-property-edge-duality.md)
-- [Design-018 KG enrichments architecture](../design/018-kg-enrichments-architecture.md)
-- [Design-019 Enrichment UI provenance](../design/019-kg-enrichment-ui-provenance.md)
-- [Design-020 Holocron async pipeline](../design/020-holocron-async-pipeline.md)
-- [Design-021 Edge bound provenance](../design/021-edge-bound-provenance.md)
-- [Design-024 Typed NodeBuilders](../design/024-typed-node-builders.md)
-- [Design-025 Tool-using Holocron agent](../design/025-holocron-tool-using-agent.md)
-- [Design-026 Holocron orchestration pattern](../design/026-holocron-orchestration-pattern.md)
+- [Design-002 Edge quality](../../specs/002-edge-quality/spec.md)
+- [Design-007 KG bidirectional edges view](../../specs/007-kg-bidirectional-edges-view/spec.md)
+- [Design-035 Per-type builders](../../specs/035-kg-per-type-builders/spec.md)
+- [Design-008 Hierarchy helpers](../../specs/008-kg-hierarchy-helpers/spec.md)
+- [Design-013 Property/edge duality](../../specs/013-kg-property-edge-duality/spec.md)
+- [Design-018 KG enrichments architecture](../../specs/018-kg-enrichments-architecture/spec.md)
+- [Design-019 Enrichment UI provenance](../../specs/019-kg-enrichment-ui-provenance/spec.md)
+- [Design-020 Holocron async pipeline](../../specs/020-holocron-async-pipeline/spec.md)
+- [Design-021 Edge bound provenance](../../specs/021-edge-bound-provenance/spec.md)
+- [Design-024 Typed NodeBuilders](../../specs/024-typed-node-builders/spec.md)
+- [Design-025 Tool-using Holocron agent](../../specs/025-holocron-tool-using-agent/spec.md)
+- [Design-026 Holocron orchestration pattern](../../specs/026-holocron-orchestration-pattern/spec.md)
 
 ## TL;DR
 
@@ -39,7 +39,7 @@
 
 ### 1.2 There is no separate "synonym table"
 
-Despite [Design-025](../design/025-holocron-tool-using-agent.md)'s framing, **today there is no `LabelSynonymTable` class anywhere in the codebase**. The conceptual synonym table exists *as a side-effect* of the multi-key-single-value shape of `FieldSemantics.Relationships` — many distinct field-label keys all map to the same canonical `Label` string:
+Despite [Design-025](../../specs/025-holocron-tool-using-agent/spec.md)'s framing, **today there is no `LabelSynonymTable` class anywhere in the codebase**. The conceptual synonym table exists *as a side-effect* of the multi-key-single-value shape of `FieldSemantics.Relationships` — many distinct field-label keys all map to the same canonical `Label` string:
 
 ```csharp
 // FieldSemantics.cs:204..216
@@ -52,7 +52,7 @@ Despite [Design-025](../design/025-holocron-tool-using-agent.md)'s framing, **to
 
 So the "synonym set" for canonical label `homeworld` is *implicit* — it's the set of `FieldSemantics.Relationships` keys whose `Label` is `"homeworld"`. There is no inverse lookup ("what canonical label do these prose verbs map to"). The closest thing in the wider system is `RelationshipAnalystToolkit.FindSimilarLabel` ([RelationshipAnalystToolkit.cs:195](../../src/StarWarsData.Services/AI/Toolkits/RelationshipAnalystToolkit.cs)), which does a runtime Levenshtein-style scan over `kg.labels` for similarity ranking — used by the Phase 6 LLM batch path to discourage label sprawl, *not* by the Phase 1 infobox extractor.
 
-This matters for [Design-025](../design/025-holocron-tool-using-agent.md): when it says "a synonym table maps natural-language predicates to canonical labels, scoped by source × target type" and shows `("worked as", Character, TitleOrPosition) → has_role`, that table **does not exist yet**. It will need to be authored from scratch, possibly seeded from the `FieldSemantics.Relationships` keys + per-type `OnFinalize` rules.
+This matters for [Design-025](../../specs/025-holocron-tool-using-agent/spec.md): when it says "a synonym table maps natural-language predicates to canonical labels, scoped by source × target type" and shows `("worked as", Character, TitleOrPosition) → has_role`, that table **does not exist yet**. It will need to be authored from scratch, possibly seeded from the `FieldSemantics.Relationships` keys + per-type `OnFinalize` rules.
 
 ### 1.3 The `LabelDefinition` record
 
@@ -72,7 +72,7 @@ public sealed record LabelDefinition(
 Two things stand out:
 
 - `Reverse` is **a string, not a back-pointer to another `LabelDefinition`**. There is no constraint that `Reverse` of "apprentice_of" exists as a *forward* canonical label elsewhere. (In practice it does — every reverse pair is also a forward key — but that's an authorial convention, not enforced by code.)
-- `ExpectedTargetTypes` drives downstream filtering (e.g. `IsPersonRelationshipLabel` and the `kg.edges` qualifier-noise drop in `InfoboxGraphService.cs:253–264`) but is **not** consulted by the Holocron pre-flight today. [Design-025](../design/025-holocron-tool-using-agent.md) wants to pull it in via `propose_edge`'s tool-side validation.
+- `ExpectedTargetTypes` drives downstream filtering (e.g. `IsPersonRelationshipLabel` and the `kg.edges` qualifier-noise drop in `InfoboxGraphService.cs:253–264`) but is **not** consulted by the Holocron pre-flight today. [Design-025](../../specs/025-holocron-tool-using-agent/spec.md) wants to pull it in via `propose_edge`'s tool-side validation.
 
 ### 1.4 What `NodeBuilderBase` actually emits
 
@@ -97,7 +97,7 @@ So `Meta.SourceFieldLabel` preserves the *original* field label ("Affiliation(s)
 
 ### 1.5 Per-type relabelling — the only place "new" labels appear
 
-[Design-024](../design/024-typed-node-builders.md) Phase A added a per-type post-processing hook. The cleanest example is `CharacterNodeBuilder` ([CharacterNodeBuilder.cs:40–78](../../src/StarWarsData.Services/KnowledgeGraph/NodeBuilders/Types/CharacterNodeBuilder.cs)):
+[Design-024](../../specs/024-typed-node-builders/spec.md) Phase A added a per-type post-processing hook. The cleanest example is `CharacterNodeBuilder` ([CharacterNodeBuilder.cs:40–78](../../src/StarWarsData.Services/KnowledgeGraph/NodeBuilders/Types/CharacterNodeBuilder.cs)):
 
 ```csharp
 protected override void OnFinalize(NodeBuilderContext ctx, GraphNode node, List<RelationshipEdge> edges)
@@ -139,9 +139,9 @@ After all builders return, [`InfoboxGraphService.BuildGraphAsync`](../../src/Sta
 1. **Type/realm enrichment** — stamp `ToType`/`ToRealm` from the node maps.
 2. **`reverseLabel` denorm** — look the edge's `Label` up in a `FieldSemantics.Relationships`-derived map and copy `Reverse` onto the edge. Edges whose label has no registered reverse leave `ReverseLabel` null — those are deliberately dropped from the bidir view's reverse branch.
 3. **Noise filter** — drop unresolved (`ToId == 0`), Year/Era targets, qualifier-as-target rows.
-4. **Lifecycle bound derivation** + `BoundsSource` stamping ([Design-021](../design/021-edge-bound-provenance.md)).
+4. **Lifecycle bound derivation** + `BoundsSource` stamping ([Design-021](../../specs/021-edge-bound-provenance/spec.md)).
 5. **Dedup** by `(FromId, ToId, Label)` — matches the unique constraint `ix_fromId_toId_label`.
-6. **Lineage closure precompute** for `HierarchyRegistry.Lineages` ([Design-008](../design/008-kg-hierarchy-helpers.md)).
+6. **Lineage closure precompute** for `HierarchyRegistry.Lineages` ([Design-008](../../specs/008-kg-hierarchy-helpers/spec.md)).
 7. **Indexes** + `BuildLabelRegistryAsync` + `EnsureBidirectionalEdgesViewAsync`.
 
 ### 1.7 The `kg.labels` registry
@@ -200,11 +200,11 @@ So when `$graphLookup` walks the view:
 - An `apprentice_of` forward edge `Anakin → Obi-Wan` shows up in the forward branch as `(Anakin, Obi-Wan, apprentice_of, forward)`.
 - The same physical edge shows up in the reverse branch as `(Obi-Wan, Anakin, master_of, reverse)`.
 
-**The reverse branch DOES relabel** — it's the whole point. The view answers "starting from Obi-Wan, who are his apprentices?" with rows whose `label = master_of` even though the underlying physical edge is `apprentice_of`. This is what lets the planned `QueryGraphAsync` rewrite ([Design-007](../design/007-kg-bidirectional-edges-view.md)) collapse the manual hop-by-hop BFS into a single `$graphLookup`.
+**The reverse branch DOES relabel** — it's the whole point. The view answers "starting from Obi-Wan, who are his apprentices?" with rows whose `label = master_of` even though the underlying physical edge is `apprentice_of`. This is what lets the planned `QueryGraphAsync` rewrite ([Design-007](../../specs/007-kg-bidirectional-edges-view/spec.md)) collapse the manual hop-by-hop BFS into a single `$graphLookup`.
 
 ### 2.2 What the view does NOT do
 
-- It does **not** carry `meta` in the reverse branch — the `$project` stage in the reverse pipeline omits it (cited explicitly as "intentional for now" in [Design-007](../design/007-kg-bidirectional-edges-view.md)).
+- It does **not** carry `meta` in the reverse branch — the `$project` stage in the reverse pipeline omits it (cited explicitly as "intentional for now" in [Design-007](../../specs/007-kg-bidirectional-edges-view/spec.md)).
 - It does **not** invent display strings — `label = master_of` in the reverse branch is still a snake_case identifier, not "is the master of".
 - It does **not** persist — every Phase 5 drops and recreates the view definition. There is no materialised `kg.edges.bidir` collection.
 - The view drops edges with no registered reverse from its reverse branch (~2.2% of edges per Design-007 stats).
@@ -248,7 +248,7 @@ So `apprentice_of` becomes "Apprentice Of" and `master_of` becomes "Master Of". 
 
 | Concern | Current state |
 |---|---|
-| Single-edge two-row view | Yes (`kg.edges.bidir`, [Design-007](../design/007-kg-bidirectional-edges-view.md)). |
+| Single-edge two-row view | Yes (`kg.edges.bidir`, [Design-007](../../specs/007-kg-bidirectional-edges-view/spec.md)). |
 | Reverse branch relabels via `reverseLabel` | Yes — that is the whole point. |
 | `inverseLabel` / `reverse` field on `kg.labels` | Only as `RelationshipLabel.Reverse` — copied verbatim from `FieldSemantics`, snake_case, no English template. |
 | `EdgeMeta.boundsSource` direction-aware | No — `Meta` isn't projected into the reverse view branch. |
@@ -283,7 +283,7 @@ Identical mechanism. Properties are gated by `FieldSemantics.Properties` (a `Has
 2. Optionally, ensure the field label appears in `TemplateFields.g.cs` (auto-generated by inventorying MongoDB).
 3. Optionally, add per-type post-processing in a `NodeBuilder.OnFinalize` if the value needs reshaping.
 
-The fallthrough at [NodeBuilderBase.cs:64–70](../../src/StarWarsData.Services/KnowledgeGraph/NodeBuilders/NodeBuilderBase.cs) preserves any unclassified scalar field as a property under its raw label — so even unknown fields land in `kg.nodes.properties` rather than being silently dropped ([Design-013](../design/013-kg-property-edge-duality.md) property/edge duality).
+The fallthrough at [NodeBuilderBase.cs:64–70](../../src/StarWarsData.Services/KnowledgeGraph/NodeBuilders/NodeBuilderBase.cs) preserves any unclassified scalar field as a property under its raw label — so even unknown fields land in `kg.nodes.properties` rather than being silently dropped ([Design-013](../../specs/013-kg-property-edge-duality/spec.md) property/edge duality).
 
 ### 3.4 New node types
 
@@ -297,7 +297,7 @@ The fallthrough at [NodeBuilderBase.cs:64–70](../../src/StarWarsData.Services/
 
 For Phase 1 deterministic data, the only "validation" is the schema validators (which permit any non-empty string label). The dedup unique index `ix_fromId_toId_label` enforces uniqueness per triple.
 
-For Phase 2 Holocron data, both `HolocronAgent.IsAddEdgeValid` ([HolocronAgent.cs:1577–1586](../../src/StarWarsData.Services/AI/Agents/HolocronAgent.cs)) and `HolocronConsolidatorExecutor.IsAddEdgeValid` ([HolocronConsolidatorExecutor.cs:512–518](../../src/StarWarsData.Services/AI/Agents/Holocron/Workflows/HolocronConsolidatorExecutor.cs)) reject any label not in `_knownLabels = InfoboxDefinitionRegistry.AllLabelDefinitions().Select(d => d.Label).ToHashSet()`. These two copies must be kept in sync — drift here cost a full Anakin run when [Design-021](../design/021-edge-bound-provenance.md) missed the consolidator copy.
+For Phase 2 Holocron data, both `HolocronAgent.IsAddEdgeValid` ([HolocronAgent.cs:1577–1586](../../src/StarWarsData.Services/AI/Agents/HolocronAgent.cs)) and `HolocronConsolidatorExecutor.IsAddEdgeValid` ([HolocronConsolidatorExecutor.cs:512–518](../../src/StarWarsData.Services/AI/Agents/Holocron/Workflows/HolocronConsolidatorExecutor.cs)) reject any label not in `_knownLabels = InfoboxDefinitionRegistry.AllLabelDefinitions().Select(d => d.Label).ToHashSet()`. These two copies must be kept in sync — drift here cost a full Anakin run when [Design-021](../../specs/021-edge-bound-provenance/spec.md) missed the consolidator copy.
 
 This is the closed-vocabulary contract today. Holocron cannot mint a label.
 
@@ -305,7 +305,7 @@ This is the closed-vocabulary contract today. Holocron cannot mint a label.
 
 ## 4. How Design-026's tool-using agent changes the picture
 
-[Design-025](../design/025-holocron-tool-using-agent.md) commits to the architecture; [Design-026](../design/026-holocron-orchestration-pattern.md) commits to the orchestration shape (concurrent fan-out of `AIAgentHostExecutor` instances over per-batch chunk sets). The seven tools come from Design-025.
+[Design-025](../../specs/025-holocron-tool-using-agent/spec.md) commits to the architecture; [Design-026](../../specs/026-holocron-orchestration-pattern/spec.md) commits to the orchestration shape (concurrent fan-out of `AIAgentHostExecutor` instances over per-batch chunk sets). The seven tools come from Design-025.
 
 ### 4.1 Read tools (no graph mutation)
 
@@ -328,7 +328,7 @@ Per Design-025 §"What we keep, what we throw away" + Design-026 §"Tool surface
 | `propose_property` | Same per-batch store. | `kg.enrichments` (operation = Add / Augment) via Apply. | N/A — properties don't have labels in the same sense. Validates `field_path` against `InfoboxDefinitionRegistry.ForTemplate(target_type).Properties` and rejects values that resolve to a node (anti-Aliases-stuffing rule). |
 | `suggest_new_label` | A new `kg.label_suggestions` collection (Design-025 §"Vocabulary-growth tool"). **Does not exist today.** | Human-review queue; promoting a suggestion to canonical is a code change to `FieldSemantics.Relationships`. | **No** — only logs the suggestion. Promotion is out-of-band. |
 
-So Design-025 explicitly makes label-vocabulary growth a first-class signal but does **not** auto-promote. The Holocron run that emits `suggest_new_label("X briefly fought alongside Y at Z", Character, Battle, …)` does not produce a usable canonical label until a human reviews the aggregated evidence in `kg.label_suggestions` and edits `FieldSemantics.Relationships`. [Design-019](../design/019-kg-enrichment-ui-provenance.md)'s per-node enrichment UI is the closest existing review surface — extending it for `kg.label_suggestions` is implied but not fleshed out.
+So Design-025 explicitly makes label-vocabulary growth a first-class signal but does **not** auto-promote. The Holocron run that emits `suggest_new_label("X briefly fought alongside Y at Z", Character, Battle, …)` does not produce a usable canonical label until a human reviews the aggregated evidence in `kg.label_suggestions` and edits `FieldSemantics.Relationships`. [Design-019](../../specs/019-kg-enrichment-ui-provenance/spec.md)'s per-node enrichment UI is the closest existing review surface — extending it for `kg.label_suggestions` is implied but not fleshed out.
 
 ### 4.3 What's NOT in Design-025 / Design-026
 
@@ -350,11 +350,11 @@ Synthesising sections 1–4: the *graph* has bidirectionality covered (the `reve
 1. **Human-reading strings on `LabelDefinition`.** Add `string ForwardReading` and `string ReverseReading` (e.g. `apprentice_of` → "is apprentice of" / `master_of` → "is master of") to `LabelDefinition`. Backfill all ~200 existing entries.
 2. **Surface those strings on `kg.labels`.** Add `forwardReading` / `reverseReading` to the `RelationshipLabel` document and `BuildLabelRegistryAsync`'s seed copy. Update the schema validators in [validators.js:53](../../src/StarWarsData.MongoDbMigrations/lib/validators.js).
 3. **A single shared formatter helper.** Today every consumer (`KnowledgeGraphQueryService`, `RelationshipAnalystToolkit`, `GraphRAGToolkit`, `GraphViewer.razor`) builds its own `forwardToReverse` / `reverseToForward` map from `FieldSemantics`. A `LabelFormatter` service that maps `(label, direction) → reading` would consolidate this and become the single read-side authority.
-4. **UI changes.** `GraphViewer.FormatLabel` and the per-node panel should consult that formatter so an inbound edge reads as "Obi-Wan **is master of** Anakin" rather than "Obi-Wan apprentice of Anakin (reverse)" or "Master Of". [Design-019](../design/019-kg-enrichment-ui-provenance.md)'s per-node panel and the Pages-side relationship list are the highest-impact spots.
+4. **UI changes.** `GraphViewer.FormatLabel` and the per-node panel should consult that formatter so an inbound edge reads as "Obi-Wan **is master of** Anakin" rather than "Obi-Wan apprentice of Anakin (reverse)" or "Master Of". [Design-019](../../specs/019-kg-enrichment-ui-provenance/spec.md)'s per-node panel and the Pages-side relationship list are the highest-impact spots.
 5. **Holocron tool surface (Design-025/026).** Two possible additions, neither currently planned:
    - `suggest_inverse_label` — when the agent invents a forward label via `suggest_new_label`, it can also propose the inverse reading; a single review step approves both directions atomically.
    - `propose_edge` could optionally accept a `reading_hint` so the LLM's phrasing intuition reaches the review queue instead of being discarded. Cost: every staged edge carries an extra free-text field; reviewers can keep or drop.
-6. **Per-type direction-specific reading.** Today's per-type relabelling ([Design-024](../design/024-typed-node-builders.md) Phase B) only acts on the forward side: `Character.affiliated_with → Religion` becomes `member_of`, but the reverse side just inherits the canonical `member_of`'s `has_member`. If the readings are introduced, they should ideally be per-source-type as well — "X is a member of the Jedi Order" reads better than "X has membership in the Jedi Order"; the inverse reading "the Jedi Order has X as a member" reads better than "the Jedi Order is member-of'd by X". This is the most authorial-effort-heavy delta, and it scales with the per-type rewrite catalogue.
+6. **Per-type direction-specific reading.** Today's per-type relabelling ([Design-024](../../specs/024-typed-node-builders/spec.md) Phase B) only acts on the forward side: `Character.affiliated_with → Religion` becomes `member_of`, but the reverse side just inherits the canonical `member_of`'s `has_member`. If the readings are introduced, they should ideally be per-source-type as well — "X is a member of the Jedi Order" reads better than "X has membership in the Jedi Order"; the inverse reading "the Jedi Order has X as a member" reads better than "the Jedi Order is member-of'd by X". This is the most authorial-effort-heavy delta, and it scales with the per-type rewrite catalogue.
 7. **Reverse-branch `meta` projection on `kg.edges.bidir`.** Currently dropped. If readings are stored in `meta.reading.forward` / `meta.reading.reverse` (as opposed to on `kg.labels`), the bidir view must learn to project them in the reverse branch with the same "use the appropriate direction" logic that `reverseLabel` already gets.
 
 None of these gaps blocks Design-026. They are an orthogonal evolution of the read layer — the *write* path already has everything it needs to enable them later.
@@ -363,6 +363,6 @@ None of these gaps blocks Design-026. They are an orthogonal evolution of the re
 
 ## Notes on what's light
 
-- The "reading" / natural-language angle gets very thin coverage in the existing docs. [Design-007](../design/007-kg-bidirectional-edges-view.md) (bidir view), [Design-013](../design/013-kg-property-edge-duality.md) (property/edge duality), and [Design-024](../design/024-typed-node-builders.md) (typed builders) all work in canonical-string-space; nobody has written a design for human-readable bidirectional rendering. If section 5 above grows into a Design-027 it will be greenfield.
-- The "synonym table" [Design-025](../design/025-holocron-tool-using-agent.md) references is conceptually the keys of `FieldSemantics.Relationships` + per-type relabel rules but is **not** a single materialised artefact today. Building it for the `find_canonical_label` tool will require either (a) authoring a fresh `LabelSynonyms.cs` or (b) deriving it programmatically — both options are open in Design-025 §"Open questions" §2.
+- The "reading" / natural-language angle gets very thin coverage in the existing docs. [Design-007](../../specs/007-kg-bidirectional-edges-view/spec.md) (bidir view), [Design-013](../../specs/013-kg-property-edge-duality/spec.md) (property/edge duality), and [Design-024](../../specs/024-typed-node-builders/spec.md) (typed builders) all work in canonical-string-space; nobody has written a design for human-readable bidirectional rendering. If section 5 above grows into a Design-027 it will be greenfield.
+- The "synonym table" [Design-025](../../specs/025-holocron-tool-using-agent/spec.md) references is conceptually the keys of `FieldSemantics.Relationships` + per-type relabel rules but is **not** a single materialised artefact today. Building it for the `find_canonical_label` tool will require either (a) authoring a fresh `LabelSynonyms.cs` or (b) deriving it programmatically — both options are open in Design-025 §"Open questions" §2.
 - The `RelationshipAnalystToolkit.UpsertLabel` LLM-driven path is the only existing in-product way to add a `kg.labels` entry without a code change. It's used by the Phase 6 batch path; it's not used by Holocron. If a future Holocron tool ever auto-promoted suggestions, this is the historical precedent — and a cautionary tale, since labels added this way have no `FieldSemantics` entry and therefore no description, target types, or reverse pair beyond what the LLM happened to write at insert time.

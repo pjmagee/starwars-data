@@ -163,7 +163,7 @@ public static class Collections
     // ── Knowledge graph enrichments (Phase 2 — Holocron agent) ──
     // Append-only agent additions to the KG, joined into the *.enriched views at read time.
     // Phase 1 (InfoboxGraphService) NEVER touches these collections — separation of writers.
-    // See eng/design/018-kg-enrichments-architecture.md.
+    // See specs/018-kg-enrichments-architecture/spec.md.
     public const string KgEnrichments = "kg.enrichments";
     public const string KgEdgeEnrichments = "kg.edge_enrichments";
     public const string KgEvents = "kg.events";

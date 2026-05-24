@@ -2,7 +2,7 @@
 
 This file is the **index** for Claude Code in this repo. Binding rules live in the **constitution** at [.specify/memory/constitution.md](.specify/memory/constitution.md) (7 numbered principles); decisions and designs live under [eng/](eng/). CLAUDE.md points at them and surfaces only per-turn operational reminders (commands, MCP names, skill names) — when CLAUDE.md and the constitution disagree, the constitution wins.
 
-**New here?** [ONBOARDING.md](ONBOARDING.md) gets a fresh clone running against real data (snapshot restore, no ETL re-run, only your own OpenAI key needed). Mechanism: [eng/design/038-developer-onboarding-snapshot.md](eng/design/038-developer-onboarding-snapshot.md).
+**New here?** [ONBOARDING.md](ONBOARDING.md) gets a fresh clone running against real data (snapshot restore, no ETL re-run, only your own OpenAI key needed). Mechanism: [specs/038-developer-onboarding-snapshot/spec.md](specs/038-developer-onboarding-snapshot/spec.md).
 
 ## Spec-Kit Workflow
 
@@ -11,17 +11,17 @@ This repo uses [GitHub Spec Kit](https://github.com/github/spec-kit) for feature
 1. `/speckit-constitution` — amend [.specify/memory/constitution.md](.specify/memory/constitution.md) (rare; cross-cutting only).
 2. `/speckit-git-feature` — create the feature branch + `specs/[###-name]/` folder.
 3. `/speckit-specify` → `/speckit-clarify` *(optional)* — write `spec.md` (user stories, acceptance, success criteria).
-4. `/speckit-plan` — write `plan.md` (technical context, structure, Constitution Check). Cite binding `eng/adr/N` and `eng/design/M` entries here.
+4. `/speckit-plan` — write `plan.md` (technical context, structure, Constitution Check). Cite binding `eng/adr/N` entries (and other `specs/M/spec.md` features) here.
 5. `/speckit-tasks` → `/speckit-checklist` / `/speckit-analyze` *(optional)* — generate ordered work.
 6. `/speckit-implement` — execute `tasks.md`.
 7. `/speckit-taskstoissues` *(optional)* — push tasks to GitHub Issues.
 
-**Two layers, not one** (Principle V):
+**Two artifact roots** (Principle V, constitution v2.0.0):
 
-- `specs/[###]/` — **per-feature tactical** artifacts (frozen after the feature ships).
-- `eng/adr/`, `eng/design/`, `eng/docs/`, `eng/diagrams/` — **durable institutional** knowledge.
+- `specs/[NNN-slug]/` — **per-feature** artifacts. Each numbered dir has `spec.md` (user stories or a historical design narrative, Status tracked); optionally `plan.md`, `tasks.md`, `research.md`, `data-model.md`, `quickstart.md`, `contracts/`, `checklists/`, `screenshots/`. New feature work uses spec-kit; historical work imported from the retired `eng/design/` (May 2026) keeps its NNN number and may only have `spec.md`.
+- `eng/adr/`, `eng/docs/`, `eng/diagrams/` — **durable institutional** knowledge (cross-feature decisions, how-to guides, architecture model).
 
-When a per-feature plan crystallises a new standing rule, **graduate it into `eng/adr/`** — never leave a rule for future features buried in one feature's `plan.md`. Existing `eng/adr/` / `eng/design/` docs MUST NOT be migrated into `specs/`.
+When a per-feature plan crystallises a new standing rule, **graduate it into `eng/adr/`** — never leave a rule for future features buried in one feature's `plan.md`.
 
 ## Authoritative References
 
@@ -35,11 +35,11 @@ When a per-feature plan crystallises a new standing rule, **graduate it into `en
 | KG-first runtime | Principle VI | Runtime reads `kg.*` only; fix missing fields at the ETL node-builder source. |
 | Global filter + continuity colours | Principle VII + [eng/adr/009-public-readonly-corpus-stats-surface.md](eng/adr/009-public-readonly-corpus-stats-surface.md) | Every content page subscribes to `GlobalFilterService.OnChange`. Canon→`Primary`, Legends→`Secondary`. |
 | Internal API auth | [eng/adr/001-internal-api-auth.md](eng/adr/001-internal-api-auth.md) | Keycloak OIDC on Frontend; `X-User-Id` header to the internal API. |
-| Aspire publish/deploy | [eng/design/017-aspire-publish-deploy-workflow.md](eng/design/017-aspire-publish-deploy-workflow.md) | `publish` (template) vs `prepare-starwars` (filled) vs `deploy`. |
+| Aspire publish/deploy | [specs/017-aspire-publish-deploy-workflow/spec.md](specs/017-aspire-publish-deploy-workflow/spec.md) | `publish` (template) vs `prepare-starwars` (filled) vs `deploy`. |
 | Running Aspire from an agent | [eng/docs/aspire-isolated-mode-for-claude-code.md](eng/docs/aspire-isolated-mode-for-claude-code.md) | Use `aspire run --isolated --detach`; never with `prepare`/`deploy`. |
-| Holocron LLM enrichment | [eng/design/018-kg-enrichments-architecture.md](eng/design/018-kg-enrichments-architecture.md) + [eng/design/020-holocron-async-pipeline.md](eng/design/020-holocron-async-pipeline.md) | Separate pass over `kg.*`; not an ETL phase. |
-| AGUI page control (SP-4) | [eng/design/041-sp-4-page-control-agui-frontend-tools.md](eng/design/041-sp-4-page-control-agui-frontend-tools.md) | Frontend tools dispatched via official `Microsoft.Agents.AI.AGUI` client. |
-| SP-4 global tool family | [eng/design/043-sp4-global-tool-family.md](eng/design/043-sp4-global-tool-family.md) | `sp4_*` prefix for tools available everywhere the sidebar mounts (sibling to per-page `<page>_*`). First member: Wookieepedia article modal. |
+| Holocron LLM enrichment | [specs/018-kg-enrichments-architecture/spec.md](specs/018-kg-enrichments-architecture/spec.md) + [specs/020-holocron-async-pipeline/spec.md](specs/020-holocron-async-pipeline/spec.md) | Separate pass over `kg.*`; not an ETL phase. |
+| AGUI page control (SP-4) | [specs/041-sp-4-page-control-agui-frontend-tools/spec.md](specs/041-sp-4-page-control-agui-frontend-tools/spec.md) | Frontend tools dispatched via official `Microsoft.Agents.AI.AGUI` client. |
+| SP-4 global tool family | [specs/043-sp4-global-tool-family/spec.md](specs/043-sp4-global-tool-family/spec.md) | `sp4_*` prefix for tools available everywhere the sidebar mounts (sibling to per-page `<page>_*`). First member: Wookieepedia article modal. |
 
 ## Engineering Docs (`eng/`)
 
@@ -48,13 +48,14 @@ The `eng/` folder is **load-bearing, not archival**. A doc that contradicts the 
 | Folder | Purpose |
 | --- | --- |
 | `eng/adr/` | Architecture Decision Records — numbered, immutable. Supersede; don't rewrite. |
-| `eng/design/` | Numbered design docs with shipped-status tracking. |
 | `eng/docs/` | How-to / reference guides. |
 | `eng/diagrams/` | LikeC4 model — update when components or deployment shape change. Syntax: `/likec4-dsl` skill. |
 | `eng/scripts/` | Engineering/ops scripts (see its `README.md`). |
 | `eng/NOTES.md` | Scratch list of external references. |
 
-When you create an ADR or design doc that establishes a rule an agent must follow, add it to the **Authoritative References** table above.
+> Per-feature design narratives that used to live in `eng/design/` were migrated to `specs/[NNN-slug]/spec.md` in v2.0.0 (constitution amendment 2026-05-24) — see the [.specify/memory/constitution.md](.specify/memory/constitution.md) Sync Impact Report for the rationale. The `Design-NNN` shorthand still refers to the same body of work; it just lives under `specs/` now.
+
+When you create an ADR or a feature spec that establishes a rule an agent must follow, add it to the **Authoritative References** table above.
 
 ## Build, Run, Test
 
@@ -69,7 +70,7 @@ dotnet test --project src/StarWarsData.Tests --filter "TestCategory=Agent"      
 dotnet test --project src/StarWarsData.Tests --filter "FullyQualifiedName~ClassName.MethodName"       # single class/method
 ```
 
-Fixtures (`src/StarWarsData.Tests/Infrastructure/`) are lazy-static and wired via `[ClassInitialize]`; assembly-cleanup in `AssemblyHooks.cs`. New tests pick a tier (`Unit/`, `Integration/`, `Agent/`) and tag with `[TestCategory(TestTiers.X)]`. Aspire publish/deploy: [Design-017](eng/design/017-aspire-publish-deploy-workflow.md). Running AppHost from an agent: [eng/docs/aspire-isolated-mode-for-claude-code.md](eng/docs/aspire-isolated-mode-for-claude-code.md).
+Fixtures (`src/StarWarsData.Tests/Infrastructure/`) are lazy-static and wired via `[ClassInitialize]`; assembly-cleanup in `AssemblyHooks.cs`. New tests pick a tier (`Unit/`, `Integration/`, `Agent/`) and tag with `[TestCategory(TestTiers.X)]`. Aspire publish/deploy: [Design-017](specs/017-aspire-publish-deploy-workflow/spec.md). Running AppHost from an agent: [eng/docs/aspire-isolated-mode-for-claude-code.md](eng/docs/aspire-isolated-mode-for-claude-code.md).
 
 ## Architecture (Index)
 
@@ -92,7 +93,7 @@ Shared libraries: **Models**, **Services** (feature-organised: `AI/Agents`, `AI/
 3. Categorised timeline events
 4. Indexes + embeddings + vector indexes
 5. AI-generated character timelines
-6. Deterministic infobox KG (`InfoboxGraphService`, per-type node builders → `kg.*`). LLM enrichment is the separate **Holocron** pass — [Design-018](eng/design/018-kg-enrichments-architecture.md) / [Design-020](eng/design/020-holocron-async-pipeline.md).
+6. Deterministic infobox KG (`InfoboxGraphService`, per-type node builders → `kg.*`). LLM enrichment is the separate **Holocron** pass — [Design-018](specs/018-kg-enrichments-architecture/spec.md) / [Design-020](specs/020-holocron-async-pipeline/spec.md).
 7. Inferred territory control (`territory.*`, `galaxy.*`).
 
 > Legacy OpenAI Batch relationship-extraction path (`RelationshipGraphBuilderService`, `/graph-builder`) removed 2026-05-18.
@@ -132,5 +133,5 @@ Spec-Kit skills: `/speckit-constitution`, `/speckit-specify`, `/speckit-clarify`
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
 shell commands, and other important information, read the current plan:
-[specs/002-sp4-wookieepedia-modal/plan.md](specs/002-sp4-wookieepedia-modal/plan.md)
+[specs/045-sp4-wookieepedia-modal/plan.md](specs/045-sp4-wookieepedia-modal/plan.md)
 <!-- SPECKIT END -->
