@@ -33,7 +33,8 @@ public sealed record FamilyTreeDescriptor(
 - `RootEntityId > 0`.
 - `MaxDepth` clamped `[1..5]` at construction (use a setter / factory; do not trust the AI agent's claim).
 - `MobileSummary` non-empty — Mobile fallback is mandatory.
-- `People` MUST contain an entry where `Id == RootEntityId.ToString()`.
+- `People`, `Kinship`, `Limitations` invariants below describe the **fully-populated descriptor as seen by the renderer**. The `render_family_tree` AI tool returns these fields at their defaults (empty `People`, null `Kinship`, default `Limitations`) — the Frontend (`FamilyTreeView.razor`) fetches the projection from `GET /api/RelationshipGraph/family-tree/{rootEntityId}` and populates them client-side. This matches the metadata-only pattern of every other `render_*` tool in `ComponentToolkit`. See [contracts/render-family-tree-tool.md § Output schema](./contracts/render-family-tree-tool.md#output-schema). The invariants below apply to the **endpoint's `FamilyTreeResponse`**, which is then merged into the descriptor by the Frontend.
+- `People` MUST contain an entry where `Id == RootEntityId.ToString()` (post-merge).
 - For every entry in `People`, `rels.spouses[]`, `rels.parents[]`, `rels.children[]` MUST reference IDs that are also in `People` (bidirectional-link invariant) OR be a synthetic stub (suffix `-stub`).
 
 ### `FamilyTreePerson`

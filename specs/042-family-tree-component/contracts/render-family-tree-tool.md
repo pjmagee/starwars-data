@@ -107,7 +107,9 @@ client-supplied label list is ignored.
 }
 ```
 
-`descriptor.people[]` / `descriptor.kinship[]` / `descriptor.limitations` are copied verbatim from the endpoint response (no LLM transformation). The tool adds `descriptor.title`, `descriptor.mobileSummary`, and resolves `descriptor.references[]` by walking each `people[].data.pageId` through the existing citation resolver (matches the other `render_*` tools).
+**Metadata-only pattern** (matches every other `render_*` tool in `ComponentToolkit` — `render_graph`, `render_path`, `render_table`, `render_infobox`, `render_timeline`, etc.). The tool returns a descriptor populated **only** with the metadata fields the LLM supplied (`title`, `rootEntityId`, `rootEntityName`, `maxDepth` clamped to `[1..5]`, `continuity`, `mobileSummary`, `references`). `descriptor.people[]` / `descriptor.kinship[]` / `descriptor.limitations` are returned at their defaults (empty list / null / default record) — the **Frontend** (`FamilyTreeView.razor`, Phase 4) fetches the projection from `GET /api/RelationshipGraph/family-tree/{rootEntityId}` at render time and populates those fields client-side.
+
+This keeps the toolkit dependency-free (`ComponentToolkit` has a zero-arg constructor and no DI on `KnowledgeGraphQueryService` / `HttpClient`) and aligns with the existing pattern. Citation resolution still works — `descriptor.references[]` is LLM-supplied (sourced from `search_entities` results) and the existing `CitationResolver` walks it downstream of the tool call.
 
 ---
 
