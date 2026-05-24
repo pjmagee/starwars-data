@@ -61,10 +61,15 @@
         }
         @if (!string.IsNullOrWhiteSpace(PageContext.CurrentSelection))
         {
-            <MudTooltip Text="@($"Your highlighted text will be sent with your next question:\n\n{PageContext.CurrentSelection}")">
+            @* OnClose renders the × affordance and is the only way to clear the
+               pinned selection — the JS watcher deliberately ignores empty
+               selectionchange events (focus shifts, click-elsewhere) so asking
+               about the selection doesn't wipe it. *@
+            <MudTooltip Text="@($"Your highlighted text will be sent with your next question. Click × to clear.\n\n{PageContext.CurrentSelection}")">
                 <MudChip T="string" Size="Size.Small" Color="Color.Tertiary" Variant="Variant.Outlined"
                          Icon="@Icons.Material.Filled.FormatQuote"
                          Style="font-size:11px;margin-left:4px;"
+                         OnClose="@OnClearSelection"
                          Text="@($"Selected: {Truncate(PageContext.CurrentSelection!, 40)}")" />
             </MudTooltip>
         }
@@ -419,6 +424,11 @@
     private void OnPageContextChanged()
     {
         InvokeAsync(StateHasChanged);
+    }
+
+    private void OnClearSelection(MudChip<string> _)
+    {
+        PageContext.SetSelection(null);
     }
 
     private async Task OnInputKeyDown(KeyboardEventArgs e)

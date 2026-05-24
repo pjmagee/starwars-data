@@ -293,10 +293,19 @@
             }
 
             // Watch document text-selection and forward it to .NET so the copilot
-            // can inject [SELECTION: "..."] into the next user message. Skips
-            // selections inside the copilot drawer itself (the user reading their
-            // own chat shouldn't loop back into context). Debounced ~250ms because
-            // selectionchange fires on every cursor movement during a drag.
+            // can inject [SELECTION: "..."] into the next user message. The pin
+            // is "sticky": once captured it persists until the user either
+            // (a) makes a new non-empty selection somewhere on the page, or
+            // (b) clicks the × on the chip in the sidebar (which calls
+            // SetSelection(null) directly from Razor — there is no JS path to
+            // clear the pin). This is deliberate: focus-shifting to the chat
+            // input or clicking elsewhere on the page collapses the browser
+            // selection and fires an empty selectionchange — we MUST ignore
+            // those, otherwise the act of asking about the selection wipes the
+            // selection. Selections inside the copilot itself are skipped so
+            // the user reading their own chat doesn't loop back into context.
+            // Debounced ~250ms because selectionchange fires on every cursor
+            // movement during a drag.
             var _swSelectionDebounce = null;
             var _swSelectionRef = null;
             var _swSelectionLast = null;
@@ -311,8 +320,13 @@
                             var sel = window.getSelection();
                             var text = sel ? String(sel).trim() : '';
 
+                            // Empty selection = browser collapsed it (focus shift,
+                            // click elsewhere). Don't disturb the pinned chip; only
+                            // the × button clears.
+                            if (!text) return;
+
                             // Don't capture selections inside the copilot itself.
-                            if (text && sel && sel.anchorNode) {
+                            if (sel && sel.anchorNode) {
                                 var node = sel.anchorNode.nodeType === 3
                                     ? sel.anchorNode.parentElement
                                     : sel.anchorNode;
@@ -329,7 +343,7 @@
                             _swSelectionLast = text;
 
                             if (_swSelectionRef) {
-                                _swSelectionRef.invokeMethodAsync('OnSelectionChanged', text || null);
+                                _swSelectionRef.invokeMethodAsync('OnSelectionChanged', text);
                             }
                         } catch { /* ignore */ }
                     }, 250);

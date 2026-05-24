@@ -57,6 +57,12 @@ public sealed class PageContextService
     /// copilot drawer itself). Updated by a global selectionchange listener
     /// registered in <c>MainLayout</c>. The copilot sidebar appends this as a
     /// <c>[SELECTION: "..."]</c> envelope to the next user message.
+    ///
+    /// Sticky: once captured, persists until the user either makes a new
+    /// non-empty selection on the page or clicks the × on the chip in the
+    /// sidebar. Browser-driven selection collapses (focus shift into the chat
+    /// input, click elsewhere) are deliberately ignored — the JS watcher in
+    /// App.razor only forwards non-empty selections.
     /// </summary>
     public string? CurrentSelection { get; private set; }
 

@@ -1,6 +1,6 @@
 # Design-022: Page-Aware Copilot Sidebar
 
-**Status:** Shipped (Phases 1–2, 2026-04-30; `d8cab0be8a`, `616ae44dd2`). `CopilotAgent` + `/copilot/stream` endpoint, `PageContextService`, `CopilotSidebar.razor`, shared `Components/Shared/Agui/` DTOs, and `PageContext.Set(...)` wired on galaxy-map, timeline, graph-explorer, knowledge-graph, search, character-timelines, tables (Phase 2). Galaxy-map deep links + agent filter context followed (Design-029/030). Phase 3 QoL (persist sidebar conversations, "continue in /ask") still pending.
+**Status:** Shipped (Phases 1–2, 2026-04-30; `d8cab0be8a`, `616ae44dd2`). `CopilotAgent` + `/copilot/stream` endpoint, `PageContextService`, `CopilotSidebar.razor`, shared `Components/Shared/Agui/` DTOs, and `PageContext.Set(...)` wired on galaxy-map, timeline, graph-explorer, knowledge-graph, search, character-timelines, tables (Phase 2). Galaxy-map deep links + agent filter context followed (Design-029/030). Page-text selection pin added 2026-05-24 (see [Update — Page-text selection pin](#update-2026-05-24--page-text-selection-pin)). Phase 3 QoL (persist sidebar conversations, "continue in /ask") still pending.
 
 > **Layout reworked 2026-05-19 (`feature/copilot-split-panel`).** The right
 > `MudDrawer` (`DrawerVariant.Temporary`) was replaced with a `MudSplitPanel`:
@@ -12,6 +12,72 @@
 > while it's open. Below the 960px Design-011 gate (a side-by-side split is
 > unusable on a phone) the copilot still falls back to the temporary drawer.
 > See the updated **1. Layout** section.
+
+## Update 2026-05-24 — Page-text selection pin
+
+Beyond the structured `PageContext` (Page / Subject / Facets), the sidebar
+also carries any **free-form text the user has highlighted on the page** so
+the agent can answer questions like "what does this mean?" without the user
+having to retype the passage. The flow:
+
+1. A global `selectionchange` listener (`swRegisterSelectionWatcher` in
+   `App.razor`, registered from `MainLayout.OnAfterRenderAsync`) reads
+   `window.getSelection()` on a 250 ms debounce.
+2. Non-empty selections outside the copilot drawer itself are forwarded to
+   `MainLayout.OnSelectionChanged` and stored on
+   `PageContextService.CurrentSelection`.
+3. The sidebar shows a dismissible **"Selected: …"** chip in the header
+   (next to the existing focus chip) and reads `CurrentSelection` at
+   submit time to append a `[SELECTION: "..."]` envelope segment alongside
+   `[PAGE:][SUBJECT:][FACETS:]`. Length-capped to 400 chars.
+
+### Pin/clear contract (the bug we fixed)
+
+The first cut wired `selectionchange` directly to `SetSelection` and
+forwarded the empty string as `null`. The browser collapses any in-page
+selection the moment focus moves into a different selection scope — which
+includes clicking into the chat's `MudTextField`. The act of asking SP-4
+about the highlighted text was therefore wiping the highlighted text from
+context before the message was sent. Empirically: select → click input →
+type → submit → SP-4 gets no `[SELECTION:]` envelope.
+
+The fix makes the pin **sticky**:
+
+- The JS watcher only forwards **non-empty** selections. Browser-driven
+  collapses (focus shift, click elsewhere on the page) are silently
+  ignored — they never reach `SetSelection`.
+- The chip is dismissible (`MudChip.OnClose` calls
+  `PageContextService.SetSelection(null)`). The × is the **only** explicit
+  clear affordance.
+- A fresh non-empty selection anywhere on the page **auto-replaces** the
+  pinned text (preferred by the user 2026-05-24 over a "lock until cleared"
+  variant — the lock felt sluggish).
+
+Updated service shape:
+
+```csharp
+public sealed class PageContextService
+{
+    public PageContext? Current { get; private set; }
+    public string?      CurrentSelection { get; private set; } // sticky pin
+    public event Action? OnChange;
+    public void Set(PageContext ctx);
+    public void Clear();
+    public void SetSelection(string? text);                    // null = clear
+}
+```
+
+**Files:** [`App.razor` § swRegisterSelectionWatcher](../../src/StarWarsData.Frontend/Components/App.razor),
+[`MainLayout.razor` § OnSelectionChanged](../../src/StarWarsData.Frontend/Components/Layout/MainLayout.razor),
+[`CopilotSidebar.razor` § Selected chip + OnClearSelection](../../src/StarWarsData.Frontend/Components/Shared/CopilotSidebar.razor),
+[`PageContextService.cs`](../../src/StarWarsData.Frontend/Services/PageContextService.cs).
+
+**Revisit when:** users start asking for selection across multiple
+non-contiguous ranges (multi-pin), or if the agent's system prompt needs
+explicit teaching about `[SELECTION:]` (today the bracket-envelope rules
+in the prompt cover any new key the sidebar adds, but a `SELECTION`-specific
+nudge — "treat as the literal passage in focus, not a free-text question
+about the passage" — may help once usage is observed).
 
 **Date:** 2026-04-28
 **Author:** Patrick Magee + Claude
