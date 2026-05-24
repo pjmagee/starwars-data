@@ -428,6 +428,215 @@ public class TextSection
     public string? SourcePageTitle { get; set; }
 }
 
+// ── Family Tree Descriptor (Design-042) ────────────────────────────────
+//
+// Wire shape: data-model.md § C# records + contracts/family-tree-endpoint.md.
+// The renderer is the vendored family-chart-premium UMD (wwwroot/lib/family-chart-premium/)
+// whose JS data contract is { id, data, rels } with literal "first name"/"last name" keys.
+// JsonPropertyName attributes preserve that spelling across the wire.
+
+[Description("A single person in a family tree, in the data shape consumed by the family-chart-premium renderer.")]
+public class FamilyTreePerson
+{
+    [JsonPropertyName("id")]
+    [Required]
+    [Description("Stringified PageId for real entries; \"{pageId}-stub\" for synthetic stubs emitted when a referenced person is missing from the result set.")]
+    public string Id { get; set; } = string.Empty;
+
+    [JsonPropertyName("data")]
+    [Required]
+    public FamilyTreePersonData Data { get; set; } = new();
+
+    [JsonPropertyName("rels")]
+    [Required]
+    public FamilyTreeRels Rels { get; set; } = new();
+}
+
+[Description("Card-visible person fields. The literal 'first name' / 'last name' keys are required by family-chart-premium's JS code.")]
+public class FamilyTreePersonData
+{
+    [JsonPropertyName("gender")]
+    [Required]
+    [Description(
+        "\"M\" or \"F\" — family-chart-premium constraint. Missing/ambiguous infobox gender defaults to \"M\" with the PageId added to limitations.missingGenders. Never propagate outside this descriptor."
+    )]
+    public string Gender { get; set; } = "M";
+
+    [JsonPropertyName("first name")]
+    [Required]
+    [Description("First name, derived by splitting the kg.nodes.name on the last whitespace.")]
+    public string FirstName { get; set; } = string.Empty;
+
+    [JsonPropertyName("last name")]
+    [Required]
+    [Description("Last name, derived by splitting the kg.nodes.name on the last whitespace. Empty string when the name is a single token (e.g. \"Yoda\").")]
+    public string LastName { get; set; } = string.Empty;
+
+    [JsonPropertyName("wikiUrl")]
+    [Description("Wookieepedia URL, copied from kg.nodes.wikiUrl.")]
+    public string? WikiUrl { get; set; }
+
+    [JsonPropertyName("imageUrl")]
+    [Description("Avatar image URL, copied from kg.nodes.imageUrl. May be null.")]
+    public string? ImageUrl { get; set; }
+
+    [JsonPropertyName("pageId")]
+    [Required]
+    [Description(
+        "The real PageId for both real entries and synthetic stubs (the stub's Id carries a -stub suffix but its PageId is the real one, so the click still navigates to /knowledge-graph/nodes/{pageId})."
+    )]
+    public int PageId { get; set; }
+}
+
+[Description("Family-chart-premium relationship arrays. Bidirectional linking is enforced server-side: every ID listed here must appear in People[].")]
+public class FamilyTreeRels
+{
+    [JsonPropertyName("parents")]
+    [Description("Stringified PageIds of parents.")]
+    public List<string>? Parents { get; set; }
+
+    [JsonPropertyName("spouses")]
+    [Description(
+        "Stringified PageIds of spouses — union of partner_of, spouse_of, married_to edges. The premium spouse-link-text plugin re-labels each rendered edge based on the underlying kg.edges label."
+    )]
+    public List<string>? Spouses { get; set; }
+
+    [JsonPropertyName("children")]
+    [Description("Stringified PageIds of children.")]
+    public List<string>? Children { get; set; }
+}
+
+[Description("A kinship entry surfaced via the premium kinship plugin — covers has_relative edges (cousins, in-laws, etc.) that don't fit family-chart's parents/spouses/children model.")]
+public class FamilyTreeKinshipEntry
+{
+    [JsonPropertyName("personId")]
+    [Required]
+    [Description("Stringified PageId of the person; must be present in People[].")]
+    public string PersonId { get; set; } = string.Empty;
+
+    [JsonPropertyName("relativeId")]
+    [Required]
+    [Description("Stringified PageId of the relative; must be present in People[].")]
+    public string RelativeId { get; set; } = string.Empty;
+
+    [JsonPropertyName("relationship")]
+    [Required]
+    [Description("Free-text relationship label from the source edge (e.g. \"Cousin\", \"Niece\"). Defaults to \"Relative\" when the edge has no qualifier.")]
+    public string Relationship { get; set; } = "Relative";
+}
+
+[Description("Metadata block describing soft-handled data shortcuts in the projection. Always present, even when empty.")]
+public class FamilyTreeLimitations
+{
+    [JsonPropertyName("missingGenders")]
+    [Required]
+    [Description("PageIds whose Gender infobox field was missing/ambiguous and defaulted to \"M\".")]
+    public List<int> MissingGenders { get; set; } = [];
+
+    [JsonPropertyName("adoptiveRelationsExcluded")]
+    [Required]
+    [Description("Relations excluded because they exist only via family-membership edges (no biological parent_of) and v1 doesn't model adoptive parents. Free-text human-readable entries.")]
+    public List<string> AdoptiveRelationsExcluded { get; set; } = [];
+
+    [JsonPropertyName("truncatedAtDepth")]
+    [Required]
+    [Description("True when the BFS hit maxNodes before exhausting maxDepth. Synthetic stubs may appear at the edge of the result set.")]
+    public bool TruncatedAtDepth { get; set; }
+
+    [JsonPropertyName("cycleFallback")]
+    [Required]
+    [Description("True when the renderer crashed or visibly looped on the input and the client should fall back to render_graph Tree mode.")]
+    public bool CycleFallback { get; set; }
+}
+
+[Description(
+    "Endpoint wire shape returned by GET /api/RelationshipGraph/family-tree/{pageId}. Separate from the AI tool's FamilyTreeDescriptor because the endpoint carries only the projection — the descriptor wraps it with title + mobileSummary + references."
+)]
+public class FamilyTreeResponse
+{
+    [JsonPropertyName("rootId")]
+    [Required]
+    [Description("Stringified PageId of the focal Character; always present in People[].")]
+    public string RootId { get; set; } = string.Empty;
+
+    [JsonPropertyName("rootName")]
+    [Required]
+    [Description("kg.nodes.name of the focal Character.")]
+    public string RootName { get; set; } = string.Empty;
+
+    [JsonPropertyName("people")]
+    [Required]
+    [MinLength(1)]
+    [Description("All persons in the tree, including the root, ancestors, descendants, spouses, and any synthetic stubs for truncated references.")]
+    public List<FamilyTreePerson> People { get; set; } = [];
+
+    [JsonPropertyName("kinship")]
+    [Description("Has_relative entries surfaced via the kinship plugin. Null/empty when there are none.")]
+    public List<FamilyTreeKinshipEntry>? Kinship { get; set; }
+
+    [JsonPropertyName("limitations")]
+    [Required]
+    public FamilyTreeLimitations Limitations { get; set; } = new();
+}
+
+[Description(
+    "Marriage-aware, generation-aligned family tree centered on a single Character. "
+        + "Use for kinship questions: \"family tree\", \"lineage\", \"ancestry\", \"genealogy\", \"parent/child/spouse/sibling\", \"trace heritage\". "
+        + "REQUIRED PRECONDITION: call search_entities first to resolve the PageId AND verify the resolved entity is a Character. "
+        + "DO NOT use this tool for Family aggregates, Organizations, Governments, military command chains, or political hierarchies — those go to render_graph (Tree mode). "
+        + "Family edge labels are fixed server-side; this tool takes no `labels` / `enabledLabels` parameters."
+)]
+public class FamilyTreeDescriptor
+{
+    [JsonPropertyName("title")]
+    [Required]
+    [Description("Descriptive title shown above the chart (e.g. \"Skywalker family tree centered on Anakin Skywalker\").")]
+    public string Title { get; set; } = string.Empty;
+
+    [JsonPropertyName("rootEntityId")]
+    [Required]
+    [Description("PageId of the focal Character (resolved via search_entities).")]
+    public int RootEntityId { get; set; }
+
+    [JsonPropertyName("rootEntityName")]
+    [Required]
+    [Description("The focal Character's display name.")]
+    public string RootEntityName { get; set; } = string.Empty;
+
+    [JsonPropertyName("maxDepth")]
+    [Description("Generations to expand in each direction (ancestors + descendants). Clamped server-side to [1..5]. Default 3.")]
+    public int MaxDepth { get; set; } = 3;
+
+    [JsonPropertyName("continuity")]
+    [Description("Optional continuity filter: Canon, Legends, or omit for both.")]
+    public string? Continuity { get; set; }
+
+    [JsonPropertyName("mobileSummary")]
+    [Required]
+    [Description(
+        "Concise markdown text summary (3-6 bullets or short paragraphs) of the family tree's key relationships, lineage, and notable members. Shown to users on narrow viewports (< 960px) where the chart cannot be rendered legibly. Always populate this — it is the only thing mobile users will see in place of the chart. Use bullet points and **bold** key entities."
+    )]
+    public string MobileSummary { get; set; } = string.Empty;
+
+    [JsonPropertyName("people")]
+    [Required]
+    [MinLength(1)]
+    [Description("Person list verbatim from the FamilyTreeResponse — copied through, not transformed.")]
+    public List<FamilyTreePerson> People { get; set; } = [];
+
+    [JsonPropertyName("kinship")]
+    [Description("Kinship list verbatim from the FamilyTreeResponse. Null/empty when there are none.")]
+    public List<FamilyTreeKinshipEntry>? Kinship { get; set; }
+
+    [JsonPropertyName("limitations")]
+    [Required]
+    public FamilyTreeLimitations Limitations { get; set; } = new();
+
+    [JsonPropertyName("references")]
+    [Description("Optional source references from wiki pages used to generate this result.")]
+    public List<Reference>? References { get; set; }
+}
+
 [Description("English-to-Aurebesh auto-converter. Write plain English — the frontend renders it as Aurebesh.")]
 public class AurebeshDescriptor
 {
