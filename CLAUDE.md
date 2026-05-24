@@ -40,6 +40,7 @@ When a per-feature plan crystallises a new standing rule, **graduate it into `en
 | Holocron LLM enrichment | [specs/018-kg-enrichments-architecture/spec.md](specs/018-kg-enrichments-architecture/spec.md) + [specs/020-holocron-async-pipeline/spec.md](specs/020-holocron-async-pipeline/spec.md) | Separate pass over `kg.*`; not an ETL phase. |
 | AGUI page control (SP-4) | [specs/041-sp-4-page-control-agui-frontend-tools/spec.md](specs/041-sp-4-page-control-agui-frontend-tools/spec.md) | Frontend tools dispatched via official `Microsoft.Agents.AI.AGUI` client. |
 | SP-4 global tool family | [specs/043-sp4-global-tool-family/spec.md](specs/043-sp4-global-tool-family/spec.md) | `sp4_*` prefix for tools available everywhere the sidebar mounts (sibling to per-page `<page>_*`). First member: Wookieepedia article modal. |
+| Family tree rendering | [specs/042-family-tree-component/spec.md](specs/042-family-tree-component/spec.md) | Kinship phrasing on `/ask` routes to `render_family_tree` (NOT `render_graph`). Renderer is vendored [family-chart-premium](https://github.com/donatso/family-chart-premium) under `wwwroot/lib/`; non-commercial licence, watermark kept. Endpoint at `GET /api/RelationshipGraph/family-tree/{pageId}`; Gender from `kg.nodes.properties["Gender"]` (Principle VI). |
 
 ## Engineering Docs (`eng/`)
 

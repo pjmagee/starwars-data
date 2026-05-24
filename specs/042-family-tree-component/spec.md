@@ -1,7 +1,7 @@
 # Design-042: Family Tree Component
 
-**Status:** Proposed
-**Date:** 2026-05-22
+**Status:** Shipped — 2026-05-24. All five implementation phases on `feature/042-family-tree-component`: foundational records (`8c96f9a472`); server-side projection + endpoint + tool registration (`486370ce6e` + `51493912b3` + `640ca4eeff`); Gender-from-`kg.nodes.properties` Principle-VI refactor (`0ad44b1e08`); frontend MVP — vendored renderer + Razor + JS interop + Chrome DevTools MCP validation (`c30a7c213f`); agent prompt routing + 3 Agent-tier tests (`fa30661fe9`). All 312 Unit+Integration tests pass; the 3 Agent-tier tests are manual per Principle III (cost OpenAI dollars). Watermark "Family Chart (Free)" present in the free-tier build, kept per upstream restriction #2 — see [screenshots/watermark-probe.md](./screenshots/watermark-probe.md).
+**Date:** 2026-05-22 (originally proposed); 2026-05-24 (shipped)
 **Author:** Patrick Magee + Claude
 **Related:** [Design-036 Path Graph Rendering](../036-path-graph-rendering/spec.md), [Design-011 Mobile Web UX](../011-mobile-web-ux/spec.md), [Design-041 SP-4 Page Control AGUI Frontend Tools](../041-sp-4-page-control-agui-frontend-tools/spec.md), [ADR-004 MudBlazor Deviations](../../eng/adr/004-mudblazor-deviations.md), [donatso/family-chart-premium](https://github.com/donatso/family-chart-premium)
 
