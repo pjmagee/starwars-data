@@ -128,7 +128,7 @@ For each `nodeId` in the visited set:
 | `Data.FirstName` / `Data.LastName` | split `kg.nodes.name` on the last whitespace; if no whitespace, use full name as `FirstName` and empty `LastName` (collision-prone, accept the imperfection — same approach as the prior MIT plan) |
 | `Data.WikiUrl` | `kg.nodes.wikiUrl` |
 | `Data.ImageUrl` | `kg.nodes.imageUrl` (may be null) |
-| `Data.Gender` | `raw.pages.infobox.Data` where `Label == "Gender"`; map `"Male"`→`"M"`, `"Female"`→`"F"`, else `"M"` + append `nodeId` to `Limitations.MissingGenders` (research.md R-5) |
+| `Data.Gender` | `kg.nodes.properties["Gender"]` (projected by the generic NodeBuilder loop via `FieldSemantics.Properties`); map `"Male"`→`"M"`, `"Female"`→`"F"`, missing key or non-binary value → `"M"` + append `nodeId` to `Limitations.MissingGenders`. See [research.md R-5](./research.md#r-5-gender-field-source-of-truth-kg-first-principle-vi-gap) — earlier draft read from `raw.pages.infobox.Data`; corrected. |
 | `Rels.Parents` | nodeIds `B` where `(B, parent_of, nodeId)` OR `(nodeId, child_of, B)` exists. Dedup. |
 | `Rels.Children` | nodeIds `B` where `(nodeId, parent_of, B)` OR `(B, child_of, nodeId)` exists. Dedup. |
 | `Rels.Spouses` | `partner_of` ∪ `spouse_of` ∪ `married_to` (both directions, dedup). Premium's `spouse-link-text` plugin renders the *label* per edge so we keep the underlying edge label on a side channel for the plugin. |
@@ -195,4 +195,4 @@ All six rules are unit-tested against the `ApiFixture` seed (Skywalker / Solo / 
 
 ## Indexes
 
-No new MongoDB indexes are required. The BFS uses the existing `kg.edges` indexes on `(from, label)` and `(to, label)` (per [Design-007 / Design-035](../035-kg-per-type-builders/spec.md)). The `raw.pages.infobox.Data.Label` read for `Gender` is one extra `findOne` per visited node — at maxNodes=200 that's 200 point queries on a `_id`-indexed collection, well within the 200 ms p95 budget.
+No new MongoDB indexes are required. The BFS uses the existing `kg.edges` indexes on `(from, label)` and `(to, label)` (per [Design-007 / Design-035](../035-kg-per-type-builders/spec.md)). The `Gender` slot is read from `kg.nodes.properties["Gender"]` inline during the node-projection pass — same in-memory document the BFS already loaded, so zero extra round-trips.

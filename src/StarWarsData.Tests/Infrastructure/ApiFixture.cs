@@ -316,21 +316,25 @@ public static class ApiFixture
     // ── kg.* seed (Design-042) ───────────────────────────────────────────────
     // Direct kg.nodes / kg.edges seed for the family-tree edge-case matrix in
     // specs/042-family-tree-component/data-model.md § Edge cases. We skip the
-    // Phase 5 builder entirely — these are projected docs verbatim. Keep in sync
-    // with the raw.pages additions above (PageIds + Continuity must match so the
-    // Gender lookup against raw.pages.infobox lands on the right row).
+    // Phase 5 builder entirely — these are projected docs verbatim. Each
+    // Character carries `properties["Gender"]` matching its raw.pages.infobox
+    // entry, because the generic NodeBuilder loop projects "Gender" via
+    // FieldSemantics.Properties. BuildFamilyTreeAsync reads from kg.nodes,
+    // not raw.pages (Principle VI). Han Solo deliberately omits Gender so
+    // the missing-gender soft-handle path stays under test.
     public static List<GraphNode> BuildKgNodeSeed() =>
         [
-            KgChar(LukePageId, "Luke Skywalker", Continuity.Legends),
-            KgChar(AnakinPageId, "Anakin Skywalker", Continuity.Legends),
-            KgChar(LeiaPageId, "Leia Organa Solo", Continuity.Legends),
-            KgChar(PadmePageId, "Padmé Amidala", Continuity.Canon),
-            KgChar(ShmiPageId, "Shmi Skywalker", Continuity.Canon),
-            // Han Solo: real KG node, but no Gender in raw.pages.infobox → triggers
-            // the missing-gender soft-handle path in BuildFamilyTreeAsync.
-            KgChar(HanSoloPageId, "Han Solo", Continuity.Canon),
-            KgChar(BenSoloPageId, "Ben Solo", Continuity.Canon),
-            KgChar(BailOrganaPageId, "Bail Organa", Continuity.Canon),
+            KgChar(LukePageId, "Luke Skywalker", Continuity.Legends, gender: "Male"),
+            KgChar(AnakinPageId, "Anakin Skywalker", Continuity.Legends, gender: "Male"),
+            KgChar(LeiaPageId, "Leia Organa Solo", Continuity.Legends, gender: "Female"),
+            KgChar(PadmePageId, "Padmé Amidala", Continuity.Canon, gender: "Female"),
+            KgChar(ShmiPageId, "Shmi Skywalker", Continuity.Canon, gender: "Female"),
+            // Han Solo: no Gender property — triggers the missing-gender soft-
+            // handle path in BuildFamilyTreeAsync (PageId appended to
+            // Limitations.MissingGenders, Data.Gender defaults to "M").
+            KgChar(HanSoloPageId, "Han Solo", Continuity.Canon, gender: null),
+            KgChar(BenSoloPageId, "Ben Solo", Continuity.Canon, gender: "Male"),
+            KgChar(BailOrganaPageId, "Bail Organa", Continuity.Canon, gender: "Male"),
             // Organa family aggregate — type=Family, NOT Character. Used as the
             // target of Leia's family-membership edge so the controller's
             // RootMustBeCharacter check has a non-Character node to reject.
@@ -345,7 +349,7 @@ public static class ApiFixture
             },
         ];
 
-    private static GraphNode KgChar(int pageId, string name, Continuity continuity) =>
+    private static GraphNode KgChar(int pageId, string name, Continuity continuity, string? gender) =>
         new()
         {
             PageId = pageId,
@@ -354,6 +358,7 @@ public static class ApiFixture
             Continuity = continuity,
             Realm = Realm.Starwars,
             WikiUrl = $"https://starwars.fandom.com/wiki/{name.Replace(' ', '_')}",
+            Properties = gender is null ? new Dictionary<string, List<string>>() : new Dictionary<string, List<string>> { ["Gender"] = [gender] },
         };
 
     public static List<RelationshipEdge> BuildKgEdgeSeed() =>

@@ -76,20 +76,21 @@ This file resolves the "NEEDS CLARIFICATION" items and library-choice questions 
 
 ## R-5: `Gender` field source-of-truth (KG-First Principle VI gap)
 
-**Decision**: Read `Gender` from `raw.pages.infobox.Data` keyed by `Label == "Gender"`. Map `"Male"` → `"M"`, `"Female"` → `"F"`, everything else (`"Non-binary"`, missing field, ambiguous value) → `"M"` + record the PageId in `limitations.missingGenders` on the response. The `"M"` default is a family-chart constraint (it requires `"M"|"F"`), not a model decision, and MUST NOT leak anywhere else in the codebase.
+**Decision (final)**: Read `Gender` from `kg.nodes.properties["Gender"]`. Map `"Male"` → `"M"`, `"Female"` → `"F"`, everything else (`"Non-binary"`, missing key, ambiguous value) → `"M"` + record the PageId in `limitations.missingGenders` on the response. The `"M"` default is a family-chart constraint (it requires `"M"|"F"`), not a model decision, and MUST NOT leak anywhere else in the codebase. **Principle VI fully honoured — no `raw.pages` read at runtime.**
 
-**Rationale**:
+> **Correction (2026-05-24, post-implementation).** This entry originally claimed `kg.nodes` did not surface a `gender` field and proposed reading from `raw.pages.infobox.Data` as a "documented Principle-VI soft-edge". That premise was wrong: `"Gender"` is listed in [`FieldSemantics.cs:29`](../../src/StarWarsData.Services/KnowledgeGraph/Definitions/FieldSemantics.cs#L29) (`FieldSemantics.Properties`), so the generic `NodeBuilderBase` loop projects it onto `kg.nodes.properties["Gender"]` for every Character (and every other template type whose [`TemplateFields.g.cs`](../../src/StarWarsData.Services/KnowledgeGraph/Definitions/TemplateFields.g.cs) lists "Gender" — Deity, Yuuzhan-Vong types, etc.). The original kg-expert implementation read from `raw.pages` and was a real Principle-VI violation; the refactor in this commit switches to `node.Properties["Gender"]` and drops the bulk raw.pages fetch from `BuildFamilyTreeAsync`. There is **no soft-edge** here, and no ETL follow-up required.
 
-- `kg.nodes` does not surface a `gender` field today. The KG ETL builder for Character (`NodeBuilders/Types/CharacterNodeBuilder.cs`) does not project gender — it treats it as an infobox-only attribute.
-- Principle VI permits soft-handling where data is "genuinely absent at source" (the kg.nodes projection is the source for runtime). We treat this as exactly that gap: the *projection* lacks gender, the *raw infobox* has it, and we read raw only to fill this one slot.
-- The proper long-term fix is an ETL change to project `gender` onto `kg.nodes` (either as a top-level field or under `properties.Gender`). Out of scope for this feature — captured as a follow-up below.
+**Rationale (revised)**:
 
-**Follow-up**: a tasks.md item for `/speckit-tasks` should record: "Project `gender` onto `kg.nodes` in the Character node builder, then switch `BuildFamilyTreeAsync` to read from kg.nodes." That's an ETL-side change in Phase 5 that this feature doesn't need to block on — but it cleans up the only Principle-VI gap.
+- `kg.nodes.properties["Gender"]` is populated by the standard NodeBuilderBase loop because the field appears in `FieldSemantics.Properties` and the relevant `TemplateFields.g.cs` template whitelists.
+- The kg.nodes BFS pass already loads every visited node — Gender is just one more key on the same document. Zero extra round-trips.
+- Soft-handling missing/non-binary values to `"M"` + `Limitations.MissingGenders` is still the right shape — but the cause is the library constraint (renderer requires `"M"|"F"`), NOT a data-availability gap.
 
 **Alternatives considered**:
 
-- **Default everyone to `"M"` with no infobox lookup** — rejected. Loses the actual gender data we have, makes every character look male in the tree, defeats the family-chart visual primitive that uses gender for card styling.
-- **Read from `kg.nodes.properties["Gender"]` if the field happens to be there** — the field is NOT there today; this is essentially a no-op. We'd still need the `raw.pages.infobox` fallback.
+- **Default everyone to `"M"` with no property lookup** — rejected. Loses the actual gender data we have; defeats family-chart's gender-based card styling.
+- ~~**Read from `kg.nodes.properties["Gender"]` if the field happens to be there**~~ — this is now the **chosen** path.
+- **Project a top-level `gender` field onto `GraphNode`** — overkill. `properties["Gender"]` is consistent with how every other scalar field is surfaced; a top-level field would be a one-off privilege.
 
 ---
 

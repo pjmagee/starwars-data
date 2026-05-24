@@ -3039,23 +3039,11 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         var visitedNodes = await _nodes.Find(Builders<GraphNode>.Filter.In(n => n.PageId, visited)).ToListAsync(ct);
         var nodeById = visitedNodes.ToDictionary(n => n.PageId);
 
-        // ── Fetch Gender from raw.pages.infobox.Data for every Character node ──
-        // R-5 (KG-First documented gap). The Character node-builder doesn't
-        // project Gender today; we read raw.pages.infobox as the one Principle-VI
-        // soft-edge. The default ("M") never propagates outside this projection.
-        var characterPageIds = visitedNodes.Where(n => n.Type == KgNodeTypes.Character).Select(n => n.PageId).ToList();
-        var genderByPageId = new Dictionary<int, string>();
-        if (characterPageIds.Count > 0)
-        {
-            var pages = _edges.Database.GetCollection<Page>(Collections.Pages);
-            var rawPages = await pages.Find(Builders<Page>.Filter.In(p => p.PageId, characterPageIds)).ToListAsync(ct);
-            foreach (var page in rawPages)
-            {
-                var (gender, knownGender) = ReadGender(page);
-                if (knownGender)
-                    genderByPageId[page.PageId] = gender;
-            }
-        }
+        // Gender comes from kg.nodes.properties["Gender"] — projected by the
+        // generic NodeBuilder loop because "Gender" is listed in
+        // FieldSemantics.Properties. Resolved inline during the projection loop
+        // below; no extra round-trip and no raw.pages read. The default ("M")
+        // never propagates outside this projection. Principle VI fully honoured.
 
         // ── Step 4 (early) — partition family-membership edges ──────────────
         // A `family` edge points from a Character to a Family aggregate node.
@@ -3147,17 +3135,9 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         foreach (var node in visitedNodes.Where(n => personPageIds.Contains(n.PageId)))
         {
             var (firstName, lastName) = SplitName(node.Name);
-            string gender;
-            if (genderByPageId.TryGetValue(node.PageId, out var resolvedGender))
-            {
-                gender = resolvedGender;
-            }
-            else
-            {
-                gender = "M";
-                if (node.Type == KgNodeTypes.Character && !limitations.MissingGenders.Contains(node.PageId))
-                    limitations.MissingGenders.Add(node.PageId);
-            }
+            var (gender, knownGender) = ReadGender(node);
+            if (!knownGender && node.Type == KgNodeTypes.Character && !limitations.MissingGenders.Contains(node.PageId))
+                limitations.MissingGenders.Add(node.PageId);
 
             var person = new FamilyTreePerson
             {
@@ -3365,18 +3345,22 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
     }
 
     /// <summary>
-    /// Read the Gender slot from raw.pages.infobox.Data per R-5. Returns
-    /// (resolved, known) where known=false signals "field missing/ambiguous,
-    /// caller should default to M and add to Limitations.MissingGenders".
+    /// Read the Gender slot from <c>kg.nodes.properties["Gender"]</c>. The
+    /// Character infobox field "Gender" is recognised in
+    /// <see cref="StarWarsData.Services.KnowledgeGraph.Definitions.FieldSemantics.Properties"/>
+    /// so the generic NodeBuilder loop projects it onto the node. Returns
+    /// <c>(resolved, known)</c> where <c>known=false</c> signals "field
+    /// missing/ambiguous, caller should default to M and add the PageId to
+    /// <see cref="FamilyTreeLimitations.MissingGenders"/>". The family-chart
+    /// renderer requires "M" or "F"; non-binary / unsupported values
+    /// soft-handle to "M" inside this method and never propagate outside.
+    /// Principle VI fully honoured — no <c>raw.pages</c> read.
     /// </summary>
-    private static (string gender, bool known) ReadGender(Page? page)
+    private static (string gender, bool known) ReadGender(GraphNode node)
     {
-        if (page?.Infobox?.Data is not { Count: > 0 } data)
+        if (!node.Properties.TryGetValue("Gender", out var values) || values is not { Count: > 0 })
             return ("M", false);
-        var genderProp = data.FirstOrDefault(p => string.Equals(p.Label, "Gender", StringComparison.OrdinalIgnoreCase));
-        if (genderProp is null)
-            return ("M", false);
-        var value = genderProp.Values?.FirstOrDefault(v => !string.IsNullOrWhiteSpace(v))?.Trim();
+        var value = values.FirstOrDefault(v => !string.IsNullOrWhiteSpace(v))?.Trim();
         if (string.IsNullOrEmpty(value))
             return ("M", false);
         if (value.Equals("Male", StringComparison.OrdinalIgnoreCase) || value.Equals("M", StringComparison.OrdinalIgnoreCase))
@@ -3384,7 +3368,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         if (value.Equals("Female", StringComparison.OrdinalIgnoreCase) || value.Equals("F", StringComparison.OrdinalIgnoreCase))
             return ("F", true);
         // Non-binary, ambiguous, unsupported → soft-handle to "M" with
-        // limitations entry per data-model.md R-5.
+        // limitations entry. Library constraint, not a model decision.
         return ("M", false);
     }
 
