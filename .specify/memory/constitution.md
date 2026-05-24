@@ -1,11 +1,14 @@
 <!--
 Sync Impact Report
 ==================
-Version change: 1.0.0 → 1.1.0
+Version change: 1.1.0 → 2.0.0 (MAJOR — backward-incompatible reversal of the
+v1.1.0 "MUST NOT migrate eng/design into specs/" rule)
 Modified principles:
-  - V. Engineering Docs Stay in Sync — materially expanded to draw the boundary between
-    durable `eng/` knowledge and per-feature `specs/[###]/` spec-kit artifacts, and to
-    forbid migrating eng docs into specs/.
+  - V. Engineering Docs Stay in Sync — rewritten. `eng/design/` retired; all 45
+    historical design docs migrated en masse to `specs/[NNN]-[slug]/spec.md`
+    preserving their original numbering. `eng/adr/`, `eng/docs/`, `eng/diagrams/`
+    remain as durable institutional knowledge. New feature work goes through
+    spec-kit and lands under `specs/`.
 Added sections: (none)
 Removed sections: (none)
 Templates requiring updates:
@@ -14,10 +17,12 @@ Templates requiring updates:
   - .specify/templates/spec-template.md ✅ no change
   - .specify/templates/tasks-template.md ✅ no change
 Follow-up TODOs:
-  - When the first feature runs /speckit-plan, populate its Constitution Check section by
-    enumerating which of the 7 principles apply (typically all of II, III, IV; others as scope dictates).
+  - None.
 
 ---- prior history ----
+1.1.0 (2026-05-23): V. Engineering Docs Stay in Sync materially expanded with
+                     the durable-vs-per-feature two-layer model and the
+                     "MUST NOT migrate" rule (now reversed in 2.0.0).
 1.0.0 (2026-05-23): initial ratification — 7 principles, Architecture Constraints,
                      Development Workflow, Governance.
 -->
@@ -115,46 +120,56 @@ on `main` is hours of triage.
 
 ### V. Engineering Docs Stay in Sync
 
-`eng/adr/`, `eng/design/`, `eng/docs/`, and `eng/diagrams/` are load-bearing — not archival.
-When a code change alters a decision, architecture, or workflow captured in `eng/`, the
-corresponding document MUST be updated in the same PR as the code change. A doc that
-contradicts the code is a bug.
+`eng/adr/`, `eng/docs/`, `eng/diagrams/`, and `specs/` are load-bearing — not archival.
+When a code change alters a decision, architecture, or workflow captured in those
+locations, the corresponding document MUST be updated in the same PR as the code
+change. A doc that contradicts the code is a bug.
 
-**Two layers, not one — durable knowledge vs. per-feature work:**
+**Two artifact roots, one direction of travel:**
 
-- `eng/adr/`, `eng/design/`, `eng/docs/`, `eng/diagrams/` — **durable institutional
-  knowledge** that outlives any single feature. Cross-cutting decisions (ADRs),
-  multi-PR strategic initiatives (design docs), contributor how-to guides (docs), and
-  the architecture model (diagrams).
-- `specs/[###-feature-name]/` (spec-kit) — **per-feature tactical artifacts**:
-  `spec.md` (user stories, acceptance, success criteria), `plan.md` (technical context
-  and structure for *this* feature), `tasks.md` (ordered work), and optionally
-  `checklist.md` / `research.md` / `data-model.md` / `contracts/`. Created when a
-  feature kicks off, frozen after it ships.
+- `eng/adr/`, `eng/docs/`, `eng/diagrams/` — **durable institutional knowledge** that
+  outlives any single feature. Cross-cutting decisions (ADRs), contributor how-to
+  guides (docs), and the architecture model (diagrams). These DO NOT carry feature
+  status or ship dates; they describe rules / patterns / how-to that apply across
+  features.
+- `specs/[NNN-slug]/` — **per-feature artifacts** owned by spec-kit. Each numbered
+  directory contains `spec.md` (user stories or a historical design narrative,
+  status tracked from Proposed → Shipped → Superseded), and optionally `plan.md`,
+  `tasks.md`, `research.md`, `data-model.md`, `quickstart.md`, `contracts/`,
+  `checklists/`, `screenshots/`. New feature work uses the spec-kit workflow
+  (`/speckit-specify` → `/speckit-plan` → `/speckit-tasks` → `/speckit-implement`);
+  historical work imported from `eng/design/` may only have `spec.md`.
 
-Spec-kit artifacts MUST cite relevant `eng/adr/N` and `eng/design/M` entries as binding
-constraints (typically in the plan's Technical Context or Constitution Check). When a
-feature crystallises a new standing decision, that decision MUST graduate *out* of the
-per-feature `plan.md` and *into* a new ADR — `eng/adr/` is where rules for all future
-features live, never inside a single feature's `specs/` folder.
+**`eng/design/` was retired in v2.0.0.** All 45 historical design docs were migrated
+en masse to `specs/[NNN]-[slug]/spec.md` preserving their original numbering. The
+`Design-NNN` shorthand still refers to the same body of work; the docs just live
+under `specs/` now. There is no longer a parallel feature-artifact root in `eng/`.
 
-Existing `eng/adr/` and `eng/design/` docs MUST NOT be migrated into `specs/`. They
-describe a different lifecycle (institutional, long-lived) than spec-kit's per-feature
-workspace, and the conflation would lose either the tactical detail (when migrated up)
-or the durable signal (when migrated down).
+Spec-kit artifacts MUST cite relevant `eng/adr/N` entries (and other `specs/N/`
+features they depend on) as binding constraints — typically in the plan's Technical
+Context or the Constitution Check section. When a feature crystallises a new
+standing decision that applies to *all* future features, that decision MUST graduate
+out of the per-feature `plan.md` and into a new ADR under `eng/adr/`. `eng/adr/` is
+where rules for all future features live; never inside a single feature's `specs/`
+folder.
 
-- **ADRs are immutable**: changes supersede via a new numbered ADR; never rewrite history.
-- **Design docs track status**: update the status field when phases ship.
+- **ADRs are immutable**: changes supersede via a new numbered ADR; never rewrite
+  history.
+- **Specs track status**: each `specs/[N]/spec.md` has a Status field — keep it
+  current as phases ship.
 - **LikeC4 model** (`eng/diagrams/*.c4`) MUST be updated when components, their
   relationships, or deployment shape change.
-- When an ADR or design doc establishes a rule an agent must follow, a reference to it
-  MUST be added from the relevant section of [CLAUDE.md](../../CLAUDE.md).
+- When an ADR or feature spec establishes a rule an agent must follow, a reference
+  to it MUST be added from the relevant section of [CLAUDE.md](../../CLAUDE.md).
 
-**Rationale**: This repo's eng docs are the only durable record of *why* decisions were
-made (legal compliance, incident post-mortems, library trade-offs). Drift between code and
-docs degrades the docs into a trap for future contributors. Keeping spec-kit and `eng/`
-on separate tracks — tactical vs. institutional — means neither layer can quietly absorb
-the other and lose the signal that justifies its existence.
+**Rationale**: The v1.x partition between `eng/design/` (alleged "durable") and
+`specs/` ("per-feature") was aspirational, not descriptive. In practice ~80% of
+`eng/design/` docs were scoped feature plans with phases, ship dates, and the same
+shape as spec-kit artifacts — making the partition meaningless and confusing for
+contributors choosing where to put new feature work. The v2.0.0 migration unifies
+on `specs/` for feature work, keeps `eng/adr/`, `eng/docs/`, `eng/diagrams/` for
+genuinely durable knowledge (rules, how-to, architecture model), and removes the
+parallel root that was duplicating effort.
 
 ### VI. KG-First Data Access at Runtime
 
@@ -186,7 +201,7 @@ Continuity chips and badges MUST use the canonical MudBlazor theme colors:
 `ContinuityBadge.razor` and `ContinuityFilter.razor` as canonical references.
 
 **Documented exemption**: the public corpus-stats surface (`/api/stats/*` and the Frontend
-"Miscellaneous" section, per [eng/design/037-misc-site-activity-dashboard.md](../../eng/design/037-misc-site-activity-dashboard.md))
+"Miscellaneous" section, per [specs/037-misc-site-activity-dashboard/spec.md](../../specs/037-misc-site-activity-dashboard/spec.md))
 is deliberately filter-exempt because it reports whole-corpus *infrastructure* health, not
 continuity-scoped content. This carve-out is bounded and authoritative per
 [eng/adr/009-public-readonly-corpus-stats-surface.md](../../eng/adr/009-public-readonly-corpus-stats-surface.md);
@@ -267,4 +282,4 @@ comment, or chat message disagree, this document wins until amended.
 - Runtime agent guidance for day-to-day work lives in [CLAUDE.md](../../CLAUDE.md) and the
   per-domain skills in `.claude/skills/`. Those files are subordinate to this constitution.
 
-**Version**: 1.1.0 | **Ratified**: 2026-05-23 | **Last Amended**: 2026-05-23
+**Version**: 2.0.0 | **Ratified**: 2026-05-23 | **Last Amended**: 2026-05-24
