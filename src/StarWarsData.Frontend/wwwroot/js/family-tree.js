@@ -148,6 +148,23 @@ export function renderFamilyTree(containerId, payload, dotNetRef) {
         console.warn('[family-tree] KinshipPlugin failed to register:', err);
     }
 
+    // Anchor the chart on the focal Character BEFORE the initial render.
+    // Without this, family-chart defaults to people[0] from the array order —
+    // which lands wherever the BFS happened to enumerate first (Breha Organa
+    // for "Anakin Skywalker family tree" in starwars-dev, because PageId
+    // 451699 < 452390). The kinship plugin's setSelfId only controls
+    // relationship-label computation; it does NOT change the chart's main
+    // person. updateMainId(rootId) does.
+    try {
+        if (typeof chart.updateMainId === 'function') {
+            chart.updateMainId(rootId);
+        } else {
+            console.warn('[family-tree] chart.updateMainId not available — chart will use array-order default.');
+        }
+    } catch (err) {
+        console.warn('[family-tree] updateMainId failed:', err);
+    }
+
     // Initial layout/render.
     try {
         if (typeof chart.updateTree === 'function') {
