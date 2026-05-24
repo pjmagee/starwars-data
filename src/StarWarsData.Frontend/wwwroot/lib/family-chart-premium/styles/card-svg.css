@@ -1,0 +1,65 @@
+.f3 svg.main_svg text {
+  fill: currentColor;
+}
+.f3 rect.card-female, .f3 .card-female .card-body-rect, .f3 .card-female .text-overflow-mask {
+  fill: var(--f3-female-color);
+}
+.f3 rect.card-male, .f3 .card-male .card-body-rect, .f3 .card-male .text-overflow-mask {
+  fill: var(--f3-male-color);
+}
+.f3 .card-genderless, .f3 .card-genderless .card-body-rect, .f3 .card-genderless .text-overflow-mask {
+  fill: var(--f3-genderless-color);
+}
+.f3 .card_add .card-body-rect {
+  fill: #3b5560;
+  stroke-width: 4px;
+  stroke: #fff;
+  cursor: pointer;
+}
+.f3 g.card_add text {
+  fill: #fff;
+}
+.f3 .card-main-outline {
+  stroke: currentColor;
+  stroke-width: 3px;
+}
+.f3 .card_family_tree rect {
+  transition: 0.3s;
+}
+.f3 .card_family_tree:hover rect {
+  transform: scale(1.1);
+}
+.f3 .card_add_relative {
+  cursor: pointer;
+  color: #fff;
+  transition: 0.3s;
+}
+.f3 .card_add_relative circle {
+  fill: rgba(0, 0, 0, 0);
+}
+.f3 .card_add_relative:hover {
+  color: black;
+}
+.f3 .card_edit.pencil_icon {
+  color: #fff;
+  transition: 0.3s;
+}
+.f3 .card_edit.pencil_icon:hover {
+  color: black;
+}
+.f3 .card_break_link, .f3 .link_upper, .f3 .link_lower, .f3 .link_particles {
+  transform-origin: 50% 50%;
+  transition: 1s;
+}
+.f3 .card_break_link {
+  color: #fff;
+}
+.f3 .card_break_link.closed .link_upper {
+  transform: translate(-140.5px, 655.6px);
+}
+.f3 .card_break_link.closed .link_upper g {
+  transform: rotate(-58deg);
+}
+.f3 .card_break_link.closed .link_particles {
+  transform: scale(0);
+}

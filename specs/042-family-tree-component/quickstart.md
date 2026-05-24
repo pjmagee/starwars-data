@@ -16,40 +16,40 @@ Dev-verification recipes for the family tree feature. Covers vendoring the JS bu
 
 ## 1. Vendor family-chart-premium
 
-One-time setup. The dist isn't on npm — it's the `dist/` directory of the GitHub repo's `main` branch.
+One-time setup. **The dist is shipped via npm, NOT in the GitHub repo.** The upstream `donatso/family-chart-premium` repo on GitHub only publishes README.md, LICENSE.txt, and package.json — no source, no compiled bundle. The actual code is in the npm tarball.
+
+The earlier plan's `gh api` recipe assumed `dist/` was visible in the repo — it isn't. Use `npm pack` instead.
 
 ```pwsh
-$repo = "donatso/family-chart-premium"
-$sha  = (gh api "repos/$repo/commits/main" --jq .sha)
 $dest = "src/StarWarsData.Frontend/wwwroot/lib/family-chart-premium"
-New-Item -ItemType Directory -Path $dest -Force | Out-Null
+$tmp  = New-TemporaryDirectory   # or `New-Item -ItemType Directory -Path $env:TEMP\fcp -Force`
+New-Item -ItemType Directory -Path $dest, "$dest/styles" -Force | Out-Null
 
-# Fetch the bundle + styles + LICENSE
-gh api "repos/$repo/contents/dist/family-chart.js?ref=$sha" --jq .content `
-  | [Convert]::FromBase64String((& { $input }) -join '') `
-  | Set-Content -Path "$dest/family-chart.js" -Encoding Byte
+Push-Location $tmp
+npm pack family-chart-premium@beta   # → family-chart-premium-0.0.0-beta.2.tgz (or newer)
+tar -xzf "family-chart-premium-*.tgz"
+Copy-Item "package/dist/family-chart.js" "$dest/family-chart.js"
+Copy-Item "package/dist/styles/*.css" "$dest/styles/"
+Copy-Item "package/LICENSE.txt" "$dest/LICENSE.txt"
+Pop-Location
 
-# Fetch the styles directory (loop because gh api returns one file at a time)
-$styleFiles = gh api "repos/$repo/contents/dist/styles?ref=$sha" --jq '.[].name'
-foreach ($f in ($styleFiles -split "`n")) {
-  gh api "repos/$repo/contents/dist/styles/$($f)?ref=$sha" --jq .content `
-    | [Convert]::FromBase64String((& { $input }) -join '') `
-    | Set-Content -Path "$dest/styles/$f" -Encoding Byte
-}
-
-gh api "repos/$repo/contents/LICENSE.txt?ref=$sha" --jq .content `
-  | [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String((& { $input }) -join '')) `
-  | Set-Content -Path "$dest/LICENSE.txt"
-
-Set-Content -Path "$dest/VERSION.txt" -Value $sha
+# VERSION.txt: record BOTH the npm tarball shasum AND the upstream commit ref
+$shasum = (npm view family-chart-premium@beta dist.shasum)
+$sha    = (gh api "repos/donatso/family-chart-premium/commits/main" --jq .sha)
+@(
+  "family-chart-premium $(npm view family-chart-premium@beta version)",
+  "npm tarball shasum: $shasum",
+  "upstream commit ref: $sha (https://github.com/donatso/family-chart-premium)",
+  "vendored: $(Get-Date -Format yyyy-MM-dd)"
+) | Set-Content -Path "$dest/VERSION.txt"
 ```
 
 After running:
 
-- `dest/family-chart.js` is the UMD bundle.
-- `dest/styles/*` is the CSS.
+- `dest/family-chart.js` is the UMD bundle (~243 KB).
+- `dest/styles/*.css` is the CSS (10 files: `family-chart.css` plus card/form/kinship/themes/variants partials).
 - `dest/LICENSE.txt` is the upstream notice verbatim (Principle I — required by restriction #3 of the licence).
-- `dest/VERSION.txt` is the upstream commit SHA we pinned to.
+- `dest/VERSION.txt` records the npm version + tarball shasum + the matching upstream commit SHA so you can correlate against the GitHub repo even though the repo doesn't carry the dist.
 
 Then add this to the `<head>` block of `App.razor`, alongside the existing d3 reference:
 

@@ -1,0 +1,240 @@
+.f3 {
+  --f3-bg-primary: rgb(33, 33, 33);
+  --f3-bg-secondary: #181818;
+  --f3-bg-tertiary: #2b2b2b;
+  --f3-text-primary: #fff;
+  --f3-text-secondary: #9d9d9d;
+  --f3-accent-primary: #007acc;
+  --f3-accent-secondary: #2b527a;
+  --f3-border-color: #313131;
+
+  --f3-female-color: rgb(196, 138, 146);
+  --f3-male-color: rgb(120, 159, 172);
+  --f3-genderless-color: #8C9296;
+
+  --f3-person-icon-color: var(--f3-text-primary);
+
+
+  background-color: var(--f3-bg-primary);
+  font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+  position: relative;
+  display: flex;
+}
+
+.f3 * {
+  box-sizing: border-box;
+}
+
+.f3 .cursor-pointer {
+  cursor: pointer;
+}
+
+.f3 svg.main_svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* mini-tree */
+.f3 div.mini-tree {
+  text-align: center;
+  position: absolute;
+  z-index: -1;
+}
+.f3 div.mini-tree svg {
+  width: 55px;
+}
+
+.f3 div.mini-tree-combined {
+  text-align: right;
+  top: -15px;
+  right: -2px;
+}
+
+
+/* links */
+.f3 path.link {
+  stroke: var(--f3-text-primary);
+  transition: stroke-width 0.2s ease-in-out;
+}
+
+.f3 path.link.f3-path-to-main {
+  stroke-width: 4px;
+}
+
+
+/* navigation */
+.f3-nav-cont {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 350px);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.f3-history-controls {
+  padding: 8px 5px 7px 9px;
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+}
+
+.f3-back-button, .f3-forward-button {
+  width: 30px;
+  height: 30px;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+  display: inline-block;
+  background-color: transparent;
+  border: none;
+  margin-right: 10px;
+  color: currentColor;
+}
+
+.f3-history-controls svg {
+  height: 100%;
+}
+
+.f3-back-button.disabled, .f3-forward-button.disabled {
+  opacity: 0.5;
+}
+
+
+
+/* modal */
+.f3-modal {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.f3-modal-content {
+  position: relative;
+  background-color: var(--f3-bg-primary);
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  width: 500px;
+  max-width: 90%;
+}
+
+.f3-modal-close {
+  color: #aaa;
+  position: absolute;
+  right: 10px;
+  top: 7px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.f3-modal-close:hover,
+.f3-modal-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+} 
+
+
+/* popup */
+.f3-popup {
+  position: fixed;
+  z-index: 2;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.8);
+}
+
+.f3-popup-content {
+  position: relative;
+  background-color: var(--f3-bg-primary);
+  border: 1px solid #888;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.f3-popup-nav {
+  height: 20px;
+}
+
+.f3-popup-content-inner {
+  width: 100%;
+  height: 100%;
+}
+
+.f3-popup-close {
+  color: #aaa;
+  position: absolute;
+  z-index: 4;
+  right: 6px;
+  top: 1px;
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.f3-popup-close:hover,
+.f3-popup-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+} 
+
+
+/* buttons */
+.f3-btn {
+  position: relative;
+  cursor: pointer;
+  padding: 5px 10px;
+
+  overflow: hidden;
+
+  border-width: 0;
+  outline: none;
+  border-radius: 3px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+  
+  background-color: var(--f3-text-primary);
+  color: var(--f3-bg-primary);
+  
+  transition: background-color .3s;
+  font-size: 14px;
+}
+
+.f3-btn:hover, .f3-btn:focus {
+  background-color: var(--f3-bg-primary);
+  color: var(--f3-text-primary);
+}
+
+
+/* colors */
+.f3-female-bg {
+  background-color: var(--f3-female-color);
+}
+
+.f3-male-bg {
+  background-color: var(--f3-male-color);
+}
+
+.f3-genderless-bg {
+  background-color: var(--f3-genderless-color);
+}
+
+.f3-female-color {
+  color: var(--f3-female-color);
+}
+
+.f3-male-color {
+  color: var(--f3-male-color);
+}
+
+.f3-genderless-color {
+  color: var(--f3-genderless-color);
+}

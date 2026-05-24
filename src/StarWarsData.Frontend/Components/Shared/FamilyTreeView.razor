@@ -1,0 +1,287 @@
+@using StarWarsData.Models.Queries
+@inject IHttpClientFactory HttpClientFactory
+@inject IJSRuntime JS
+@inject GlobalFilterService Filter
+@inject NavigationManager Nav
+@inject ILogger<FamilyTreeView> Logger
+@implements IAsyncDisposable
+
+@* Desktop: family-chart-premium renderer (md+) *@
+<div class="d-none d-md-block">
+    <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
+        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-2">
+            <MudIcon Icon="@Icons.Material.Filled.AccountTree" Color="Color.Primary" Size="Size.Small" />
+            <MudText Typo="Typo.h6" Class="me-2">@Descriptor.Title</MudText>
+            @if (!string.IsNullOrEmpty(Descriptor.Continuity))
+            {
+                <MudChip T="string" Size="Size.Small"
+                         Color="@(Descriptor.Continuity == "Canon" ? Color.Primary : (Descriptor.Continuity == "Legends" ? Color.Secondary : Color.Default))"
+                         Variant="Variant.Filled">
+                    @Descriptor.Continuity
+                </MudChip>
+            }
+        </MudStack>
+
+        @if (HasAnyLimitations())
+        {
+            <MudAlert Severity="Severity.Info" Dense="true" Class="mb-2">@LimitationsSummary()</MudAlert>
+        }
+
+        @if (_loading)
+        {
+            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="pa-4">
+                <MudProgressCircular Size="Size.Small" Indeterminate="true" Color="Color.Primary" />
+                <MudText Typo="Typo.body2" Color="Color.Secondary">Loading family tree…</MudText>
+            </MudStack>
+        }
+        else if (_error is not null)
+        {
+            <MudAlert Severity="Severity.Error">@_error</MudAlert>
+        }
+
+        @* Mount target — always rendered so the JS module can find it on first render.
+           Visibility is keyed off the loading/error state via style="display:..." rather
+           than @if, so the element exists in the DOM when OnAfterRenderAsync fires. *@
+        <div id="@_instanceId"
+             class="f3"
+             style="@($"width:100%; height:720px; {(_loading || _error is not null ? "display:none;" : "")}")">
+        </div>
+
+        <AskReferencesSection References="@Descriptor.References" />
+    </MudPaper>
+</div>
+
+@* Mobile (< md): markdown bullet summary written by the agent *@
+<div class="d-block d-md-none">
+    @if (!string.IsNullOrWhiteSpace(Descriptor.MobileSummary))
+    {
+        <MudPaper Outlined="true" Class="pa-4 mt-4" Style="width:100%">
+            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-3">
+                <MudIcon Icon="@Icons.Material.Filled.AccountTree" Color="Color.Primary" Size="Size.Small" />
+                <MudText Typo="Typo.h6">@Descriptor.Title</MudText>
+                @if (!string.IsNullOrEmpty(Descriptor.Continuity))
+                {
+                    <MudChip T="string" Size="Size.Small"
+                             Color="@(Descriptor.Continuity == "Canon" ? Color.Primary : (Descriptor.Continuity == "Legends" ? Color.Secondary : Color.Default))"
+                             Variant="Variant.Filled">
+                        @Descriptor.Continuity
+                    </MudChip>
+                }
+            </MudStack>
+            <MudMarkdown Value="@Descriptor.MobileSummary" />
+            <AskReferencesSection References="@Descriptor.References" />
+        </MudPaper>
+    }
+    else
+    {
+        <MudPaper Outlined="true" Class="pa-3 mt-3" Style="width:100%">
+            <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+                <MudIcon Icon="@Icons.Material.Filled.AccountTree" Color="Color.Secondary" />
+                <MudText Typo="Typo.body2" Color="Color.Secondary" Style="flex:1">
+                    <strong>@Descriptor.Title</strong> — family tree best viewed on desktop
+                </MudText>
+            </MudStack>
+        </MudPaper>
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public FamilyTreeDescriptor Descriptor { get; set; } = null!;
+
+    private readonly string _instanceId = $"family-tree-{Guid.NewGuid():N}";
+    private IJSObjectReference? _module;
+    private DotNetObjectReference<FamilyTreeView>? _self;
+    private bool _firstRenderCompleted;
+    private bool _loading = true;
+    private string? _error;
+    private int _loadGeneration;
+
+    // Filter subscription is sticky for the lifetime of the component.
+    private bool _subscribed;
+
+    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+
+    protected override void OnInitialized()
+    {
+        if (!_subscribed)
+        {
+            Filter.OnChange += OnFilterChanged;
+            _subscribed = true;
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+        _firstRenderCompleted = true;
+        try
+        {
+            _self = DotNetObjectReference.Create(this);
+            _module = await JS.InvokeAsync<IJSObjectReference>("import", "./js/family-tree.js");
+            await FetchAndRenderAsync();
+        }
+        catch (JSDisconnectedException)
+        {
+            // Circuit dropped during first render — nothing to do.
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "FamilyTreeView first-render initialization failed");
+            _error = $"Failed to initialize family tree renderer: {ex.Message}";
+            _loading = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task FetchAndRenderAsync()
+    {
+        var generation = ++_loadGeneration;
+        _loading = true;
+        _error = null;
+        StateHasChanged();
+
+        try
+        {
+            // Continuity: prefer the descriptor's setting (the AI tool may scope the tree
+            // intentionally), otherwise fall through to the global filter so the tree
+            // honours the user's active Canon/Legends toggle (Principle VII).
+            var continuity = !string.IsNullOrEmpty(Descriptor.Continuity)
+                ? Descriptor.Continuity
+                : Filter.GetContinuityQueryParam();
+            var realm = Filter.GetRealmQueryParam();
+
+            var qs = new List<string>
+            {
+                $"maxDepth={Math.Clamp(Descriptor.MaxDepth <= 0 ? 3 : Descriptor.MaxDepth, 1, 5)}",
+            };
+            if (!string.IsNullOrEmpty(continuity))
+                qs.Add($"continuity={Uri.EscapeDataString(continuity)}");
+            if (!string.IsNullOrEmpty(realm))
+                qs.Add($"realm={Uri.EscapeDataString(realm)}");
+
+            var url = $"api/RelationshipGraph/family-tree/{Descriptor.RootEntityId}?{string.Join("&", qs)}";
+            var response = await Http.GetFromJsonAsync<FamilyTreeResponse>(url);
+
+            if (generation != _loadGeneration) return;
+
+            if (response is null || response.People.Count == 0)
+            {
+                _error = $"No family tree data found for \"{Descriptor.RootEntityName}\".";
+                _loading = false;
+                StateHasChanged();
+                return;
+            }
+
+            // Merge the projection into the descriptor so the limitations advisory chip
+            // and the renderer see consistent state (matches the metadata-only pattern
+            // documented in contracts/render-family-tree-tool.md § Output schema).
+            Descriptor.People = response.People;
+            Descriptor.Kinship = response.Kinship;
+            Descriptor.Limitations = response.Limitations;
+
+            _loading = false;
+            StateHasChanged();
+
+            // Render via JS. _module / _self are both set in OnAfterRenderAsync.
+            if (_module is not null && _self is not null)
+            {
+                try
+                {
+                    await _module.InvokeVoidAsync("renderFamilyTree", _instanceId, response, _self);
+                }
+                catch (JSDisconnectedException)
+                {
+                    // Circuit went away mid-render — drop quietly.
+                }
+            }
+        }
+        catch (HttpRequestException httpEx)
+        {
+            if (generation != _loadGeneration) return;
+            _error = $"Failed to load family tree: {httpEx.Message}";
+            Logger.LogWarning(httpEx, "FamilyTreeView endpoint fetch failed");
+        }
+        catch (Exception ex)
+        {
+            if (generation != _loadGeneration) return;
+            _error = $"Unexpected error: {ex.Message}";
+            Logger.LogError(ex, "FamilyTreeView fetch/render failed");
+        }
+        finally
+        {
+            if (generation == _loadGeneration)
+            {
+                _loading = false;
+                StateHasChanged();
+            }
+        }
+    }
+
+    [JSInvokable]
+    public void OnPersonClicked(int pageId)
+    {
+        if (pageId <= 0) return;
+        Nav.NavigateTo($"/knowledge-graph/nodes/{pageId}");
+    }
+
+    private void OnFilterChanged()
+    {
+        // Reload the endpoint when the user flips Canon/Legends or Star Wars/Real world.
+        // Only meaningful after the first render — before that, OnAfterRenderAsync will
+        // do the initial fetch with the up-to-date filter values.
+        if (!_firstRenderCompleted) return;
+        _ = InvokeAsync(FetchAndRenderAsync);
+    }
+
+    private bool HasAnyLimitations()
+    {
+        var l = Descriptor.Limitations;
+        return l is not null && (
+            (l.MissingGenders?.Count ?? 0) > 0 ||
+            (l.AdoptiveRelationsExcluded?.Count ?? 0) > 0 ||
+            l.TruncatedAtDepth ||
+            l.CycleFallback
+        );
+    }
+
+    private string LimitationsSummary()
+    {
+        var l = Descriptor.Limitations;
+        var parts = new List<string>();
+        if ((l.MissingGenders?.Count ?? 0) > 0)
+            parts.Add($"Missing gender on {l.MissingGenders!.Count} character{(l.MissingGenders.Count == 1 ? "" : "s")}");
+        if ((l.AdoptiveRelationsExcluded?.Count ?? 0) > 0)
+            parts.Add($"{l.AdoptiveRelationsExcluded!.Count} adoptive relation{(l.AdoptiveRelationsExcluded.Count == 1 ? "" : "s")} excluded");
+        if (l.TruncatedAtDepth) parts.Add("Tree truncated at depth/node limit");
+        if (l.CycleFallback) parts.Add("Renderer fallback active — graph mode recommended");
+        return string.Join(" · ", parts);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_subscribed)
+        {
+            Filter.OnChange -= OnFilterChanged;
+            _subscribed = false;
+        }
+
+        if (_module is not null)
+        {
+            try
+            {
+                await _module.InvokeVoidAsync("destroy", _instanceId);
+            }
+            catch (JSDisconnectedException) { }
+            catch (Exception ex) { Logger.LogDebug(ex, "FamilyTreeView JS destroy failed"); }
+
+            try
+            {
+                await _module.DisposeAsync();
+            }
+            catch (JSDisconnectedException) { }
+        }
+
+        _self?.Dispose();
+    }
+}

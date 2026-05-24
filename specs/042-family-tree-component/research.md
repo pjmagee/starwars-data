@@ -10,6 +10,8 @@ This file resolves the "NEEDS CLARIFICATION" items and library-choice questions 
 
 **Decision**: Vendor `dist/family-chart.js` (UMD) under `wwwroot/lib/family-chart-premium/`. Reference it from `wwwroot/js/family-tree.js` via a plain `<script>` tag added to `App.razor` (alongside the existing `d3.v7.min.js` reference). The runtime global stays `f3` — confirmed by the upstream `package.json` `buildName: "family-chart"` and the parent MIT project's published API.
 
+**Source**: **npm tarball, not the GitHub repo.** Discovered during Phase 4: the upstream `donatso/family-chart-premium` repo on GitHub publishes only `README.md`, `LICENSE.txt`, and `package.json` — there is no `dist/` directory and no `src/`. The actual code ships exclusively via npm under `family-chart-premium@beta` (e.g. `0.0.0-beta.2`). Use `npm pack family-chart-premium@beta` rather than `gh api`. The `VERSION.txt` records both the npm tarball shasum (the authoritative identifier of the actual code) and the matching upstream main-branch commit ref (for cross-reference even though the repo doesn't carry the dist). Quickstart §1 has the canonical recipe.
+
 **Rationale**:
 
 - `package.json` declares only `"main": "dist/family-chart.js"` and `"unpkg": "dist/family-chart.min.js"` — no ESM exports field is published. UMD is the only deliverable.
@@ -20,12 +22,22 @@ This file resolves the "NEEDS CLARIFICATION" items and library-choice questions 
 
 - **Dynamic `import()` of the UMD via a blob URL** — over-engineered. UMD is meant to be `<script>`-tag-loaded; the blob detour adds no isolation since the bundle still pollutes `window.f3`.
 - **Bundle through a small esbuild step** — adds a JS build pipeline to a repo that has none. Defer until / unless a second non-NuGet JS dep arrives (already flagged in spec § Revisit when).
+- **`gh api repos/.../contents/dist/...`** — assumed by the original plan, but the dist isn't tracked in the repo. Would have to be reconstructed from npm anyway. Use `npm pack` from the start.
 
 ---
 
 ## R-2: Premium plugins (`spouse-link-text`, `kinship`) — packaged or separate imports?
 
-**Decision**: Treat both as plugins that must be enabled at chart-construction time, not as features automatically active in the base bundle. The exact API call is `f3Chart.plugin(f3.plugins.spouseLinkText({...}))` (or equivalent — verified during Phase 2 implementation, see "Verification probe" below).
+**Decision**: Treat both as plugins that must be enabled at chart-construction time, not as features automatically active in the base bundle. The canonical API (verified in Phase 4 against `dist/types/index.d.ts` in `family-chart-premium@0.0.0-beta.2`) is:
+
+```js
+chart.use(new window.f3.SpouseLinkTextPlugin({ text: (sp1, sp2) => 'Spouse' }));
+const k = new window.f3.KinshipPlugin();
+k.setSelfId(rootId);
+chart.use(k);
+```
+
+`SpouseLinkTextPlugin` and `KinshipPlugin` are exported classes on the `f3` global. `chart.use(pluginInstance)` is the registration entry point. The README's `f3.plugins.spouseLinkText({…})` shorthand is **not** on the public surface — the d.ts declarations expose the classes directly.
 
 **Rationale**:
 
@@ -78,7 +90,7 @@ This file resolves the "NEEDS CLARIFICATION" items and library-choice questions 
 
 **Decision (final)**: Read `Gender` from `kg.nodes.properties["Gender"]`. Map `"Male"` → `"M"`, `"Female"` → `"F"`, everything else (`"Non-binary"`, missing key, ambiguous value) → `"M"` + record the PageId in `limitations.missingGenders` on the response. The `"M"` default is a family-chart constraint (it requires `"M"|"F"`), not a model decision, and MUST NOT leak anywhere else in the codebase. **Principle VI fully honoured — no `raw.pages` read at runtime.**
 
-> **Correction (2026-05-24, post-implementation).** This entry originally claimed `kg.nodes` did not surface a `gender` field and proposed reading from `raw.pages.infobox.Data` as a "documented Principle-VI soft-edge". That premise was wrong: `"Gender"` is listed in [`FieldSemantics.cs:29`](../../src/StarWarsData.Services/KnowledgeGraph/Definitions/FieldSemantics.cs#L29) (`FieldSemantics.Properties`), so the generic `NodeBuilderBase` loop projects it onto `kg.nodes.properties["Gender"]` for every Character (and every other template type whose [`TemplateFields.g.cs`](../../src/StarWarsData.Services/KnowledgeGraph/Definitions/TemplateFields.g.cs) lists "Gender" — Deity, Yuuzhan-Vong types, etc.). The original kg-expert implementation read from `raw.pages` and was a real Principle-VI violation; the refactor in this commit switches to `node.Properties["Gender"]` and drops the bulk raw.pages fetch from `BuildFamilyTreeAsync`. There is **no soft-edge** here, and no ETL follow-up required.
+> **Correction (2026-05-24, post-implementation).** This entry originally claimed `kg.nodes` did not surface a `gender` field and proposed reading from `raw.pages.infobox.Data` as a "documented Principle-VI soft-edge". That premise was wrong: `"Gender"` is listed in [`FieldSemantics.cs:29`](../../src/StarWarsData.Services/KnowledgeGraph/Definitions/FieldSemantics.cs#L29) (`FieldSemantics.Properties`), so the generic `NodeBuilderBase` loop projects it onto `kg.nodes.properties["Gender"]` for every Character (and every other template type whose [`TemplateFields.g.cs`](../../src/StarWarsData.Services/KnowledgeGraph/Definitions/TemplateFields.g.cs) lists "Gender" — Deity, Yuuzhan-Vong types, etc.). The original kg-expert implementation read from `raw.pages` and was a real Principle-VI violation; the refactor in commit `<this commit>` switches to `node.Properties["Gender"]` and drops the bulk raw.pages fetch from `BuildFamilyTreeAsync`. There is **no soft-edge** here, and no ETL follow-up required.
 
 **Rationale (revised)**:
 

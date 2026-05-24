@@ -1,0 +1,59 @@
+
+.f3-autocomplete-cont {
+  position: relative;
+  display: inline-block;
+  z-index: 2;
+  font-size: 14px;
+  width: 200px;
+}
+
+.f3-autocomplete input {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: var(--f3-bg-primary);
+  color: var(--f3-text-primary);
+  padding: 10px;
+  width: 100%;
+}
+.f3-autocomplete input:focus {
+  outline: none;
+}
+
+.f3-autocomplete-toggle {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  color: var(--f3-text-primary);
+  transition: color 0.3s ease-in-out;
+  width: 20px;
+}
+
+.f3-autocomplete-items {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: none;
+  overflow-y: auto;
+  max-height: 0;
+  background-color: var(--f3-bg-primary);
+  transition: max-height 0.3s ease-in-out;
+}
+
+.f3-autocomplete.active .f3-autocomplete-items {
+  max-height: 300px;
+}
+
+.f3-autocomplete-item > div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: var(--f3-bg-primary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+.f3-autocomplete-item > div:hover, .f3-autocomplete-item.f3-selected > div {
+  background-color: var(--f3-text-primary);
+  color: var(--f3-bg-primary);
+}
+
+.f3-autocomplete-active {
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}

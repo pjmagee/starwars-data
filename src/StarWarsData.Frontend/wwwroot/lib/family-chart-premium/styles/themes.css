@@ -1,0 +1,145 @@
+/* Deep Dark Theme */
+.f3.theme-deep-dark {
+  --f3-bg-primary: #0f172a;
+  --f3-bg-secondary: #1e293b;
+  --f3-bg-tertiary: #334155;
+  --f3-text-primary: #f8fafc;
+  --f3-text-secondary: #94a3b8;
+  --f3-accent-primary: #38bdf8;
+  --f3-accent-secondary: #818cf8;
+  --f3-border-color: #334155;
+
+  --f3-female-color: rgb(196, 138, 146);
+  --f3-male-color: rgb(120, 159, 172);
+  --f3-genderless-color: #8C9296;
+}
+
+.f3.theme-deep-dark {
+  background-color: var(--f3-bg-primary);
+  background-image: radial-gradient(circle at 2px 2px, var(--f3-bg-tertiary) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+
+
+/* Light Elegant Theme */
+.f3.theme-light-elegant {
+  --f3-bg-primary: #ffffff;
+  --f3-bg-secondary: #f8fafc;
+  --f3-bg-tertiary: #f1f5f9;
+  --f3-text-primary: #0f172a;
+  --f3-text-secondary: #b5c0cf;
+  --f3-accent-primary: #2563eb;
+  --f3-accent-secondary: #3b82f6;
+  --f3-border-color: #e2e8f0;
+
+  --f3-female-color: rgb(236, 167, 188);
+  --f3-male-color: rgb(139, 184, 214);
+  --f3-genderless-color: rgb(180, 188, 201);
+
+  --f3-person-icon-color: var(--f3-bg-primary);
+}
+
+.f3.theme-light-elegant {
+  background-color: var(--f3-bg-primary);
+  background-image: radial-gradient(circle at 2px 2px, rgba(0,0,0,0.03) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+
+
+/* Midnight Violet Theme */
+.f3.theme-midnight-violet {
+  --f3-bg-primary: #12121e;
+  --f3-bg-secondary: #1a1e2e;
+  --f3-bg-tertiary: #2d334a;
+  --f3-text-primary: #d4d8e8;
+  --f3-text-secondary: #a3abc8;
+  --f3-accent-primary: #8a70ff;
+  --f3-accent-secondary: #c0b3ff;
+  --f3-border-color: #2d334a;
+
+  --f3-female-color: #b06c90;
+  --f3-male-color: #5e72a8;
+  --f3-genderless-color: #4a5568;
+}
+
+.f3.theme-midnight-violet {
+  background-color: var(--f3-bg-primary);
+  background-image: radial-gradient(circle at 2px 2px, var(--f3-bg-tertiary) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+
+
+/* Nord Frost Theme */
+.f3.theme-nord-frost {
+  --f3-bg-primary: #1f2229;
+  --f3-bg-secondary: #3b4252;
+  --f3-bg-tertiary: #434c5e;
+  --f3-text-primary: #eceff4;
+  --f3-text-secondary: #d8dee9;
+  --f3-accent-primary: #88c0d0;
+  --f3-accent-secondary: #81a1c1;
+  --f3-border-color: #4c566a;
+
+  --f3-female-color: #b48ead;
+  --f3-male-color: #5e81ac;
+  --f3-genderless-color: #d8dee9;
+}
+
+.f3.theme-nord-frost {
+  background-color: var(--f3-bg-primary);
+  background-image: radial-gradient(circle at 2px 2px, var(--f3-bg-tertiary) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+
+
+/* Soft Clay Theme */
+.f3.theme-soft-clay {
+  --f3-bg-primary: #fdfaf6;
+  --f3-bg-secondary: #f5f0e8;
+  --f3-bg-tertiary: #dfd8cf;
+  --f3-text-primary: #433422;
+  --f3-text-secondary: #a89f91;
+  --f3-accent-primary: #8d7b68;
+  --f3-accent-secondary: #af9f8d;
+  --f3-border-color: #dfd8cf;
+
+  --f3-female-color: #edb2b2;
+  --f3-male-color: #a7bed3;
+  --f3-genderless-color: #c4c1bc;
+
+  --f3-person-icon-color: var(--f3-bg-primary);
+}
+
+.f3.theme-soft-clay {
+  background-color: var(--f3-bg-primary);
+  background-image: radial-gradient(circle at 2px 2px, rgba(141, 123, 104, 0.08) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+
+
+/* Tokyo Night Theme */
+.f3.theme-tokyo-night {
+  --f3-bg-primary: #1a1b26;
+  --f3-bg-secondary: #24283b;
+  --f3-bg-tertiary: #414868;
+  --f3-text-primary: #ffffff;
+  --f3-text-secondary: #a9b1d6;
+  --f3-accent-primary: #7aa2f7;
+  --f3-accent-secondary: #bb9af7;
+  --f3-border-color: #24283b;
+
+  --f3-female-color: #f7768e;
+  --f3-male-color: #3d59a1;
+  --f3-genderless-color: #414868;
+}
+
+.f3.theme-tokyo-night {
+  background-color: var(--f3-bg-primary);
+  background-image: radial-gradient(circle at 2px 2px, var(--f3-bg-tertiary) 1px, transparent 0);
+  background-size: 32px 32px;
+}

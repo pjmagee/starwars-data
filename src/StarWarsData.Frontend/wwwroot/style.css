@@ -247,3 +247,12 @@ html[data-text-size="extra-large"] {
         border-radius: 0 !important;
     }
 }
+
+/* family-chart-premium (Design-042) — read-only renderer
+ * The premium build draws a "card-to-add" empty-slot card with an ADD button
+ * wherever a relative reference is unresolved. We surface synthetic stubs
+ * server-side (research.md R-7) so a missing person is navigable, not editable;
+ * the ADD affordance contradicts the spec's read-only non-goal. Hide it.
+ * Affected DOM: div.f3 > .cards_view > .card_cont > .card.card-to-add. */
+div.f3 .card.card-to-add { display: none !important; }
+div.f3 .f3-to-add-label { display: none !important; }

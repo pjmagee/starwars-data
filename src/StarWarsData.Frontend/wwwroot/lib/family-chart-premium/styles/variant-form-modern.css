@@ -1,0 +1,204 @@
+.f3-form-modern.f3-form-cont {
+  position: relative;
+  z-index: 6;
+  right: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  overflow: auto;
+  flex: 0 0 auto;
+  background: var(--f3-bg-secondary);
+  border-left: 1px solid var(--f3-border-color);
+  box-shadow: -4px 0 15px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.f3-form-modern.f3-form-cont.opened {
+  width: 350px;
+}
+
+.f3-form-modern .f3-form {
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+  color: var(--f3-text-primary);
+}
+
+.f3-form-modern .f3-form-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--f3-accent-primary);
+  text-align: center;
+  border-bottom: 1px solid var(--f3-border-color);
+  padding-bottom: 1rem;
+}
+
+.f3-form-modern .f3-form hr {
+  border-style: solid; 
+  border-width: thin 0 0 0;
+  opacity: 0.15;
+}
+
+.f3-form-modern .f3-form-field {
+  margin-bottom: 1.25rem;
+}
+
+.f3-form-modern .f3-form-field label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--f3-text-secondary);
+  margin-bottom: 0.5rem;
+  opacity: 1;
+}
+
+.f3-form-modern .f3-form input[type="text"],
+.f3-form-modern .f3-form textarea,
+.f3-form-modern .f3-form select {
+  width: 100%;
+  background-color: var(--f3-bg-primary);
+  border: 1px solid var(--f3-border-color);
+  border-radius: 0.5rem;
+  padding: 0.65rem 1rem;
+  color: var(--f3-text-primary);
+  font-family: inherit;
+  font-size: 0.875rem;
+  margin: 0;
+  transition: border-color 0.2s, outline 0.2s;
+}
+
+.f3-form-modern .f3-form input[type="text"]:focus,
+.f3-form-modern .f3-form textarea:focus,
+.f3-form-modern .f3-form select:focus {
+  border-color: var(--f3-accent-primary);
+  outline: 2px solid rgba(56, 189, 248, 0.2);
+  box-shadow: none;
+}
+
+.f3-form-modern .f3-radio-group {
+  display: flex;
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+
+.f3-form-modern .f3-radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--f3-text-primary);
+  cursor: pointer;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.f3-form-modern .f3-radio-group input[type="radio"] {
+  accent-color: var(--f3-accent-primary);
+  width: 1rem;
+  height: 1rem;
+}
+
+.f3-form-modern .f3-form-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: flex-end;
+}
+
+.f3-form-modern .f3-form button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  margin: 0;
+}
+
+.f3-form-modern .f3-form button[type="submit"] {
+  background: linear-gradient(135deg, var(--f3-accent-primary), var(--f3-accent-secondary));
+  color: white;
+  flex: 1;
+}
+
+.f3-form-modern .f3-cancel-btn {
+  background-color: var(--f3-bg-tertiary);
+  color: var(--f3-text-primary);
+}
+
+.f3-form-modern .f3-form .f3-delete-btn,
+.f3-form-modern .f3-form .f3-remove-relative-btn {
+  background-color: transparent;
+  border: 1px solid #ef4444;
+  color: #ef4444;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.f3-form-modern .f3-form .f3-delete-btn:hover,
+.f3-form-modern .f3-form .f3-remove-relative-btn:hover {
+  background-color: #ef4444;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.f3-form-modern .f3-close-btn {
+  position: absolute;
+  left: 1.5rem;
+  top: 1.5rem;
+  font-size: 1.5rem;
+  color: var(--f3-text-secondary);
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+.f3-form-modern .f3-close-btn:hover {
+  color: var(--f3-text-primary);
+}
+
+.f3-form-modern .f3-edit-btn,
+.f3-form-modern .f3-add-relative-btn {
+  cursor: pointer;
+  width: 27px;
+  height: 27px;
+  margin-right: 5px;
+  display: inline-block;
+  transition: transform 0.2s, opacity 0.2s;
+  opacity: 0.8;
+}
+
+.f3-form-modern .f3-edit-btn:hover,
+.f3-form-modern .f3-add-relative-btn:hover {
+  transform: translateY(-2px);
+  opacity: 1;
+}
+
+/* Info fields (Read-only data display) */
+.f3-form-modern .f3-info-field {
+  margin-bottom: 0.75rem;
+  padding: 0.8rem 1rem;
+  background: var(--f3-bg-primary);
+  border-radius: 0.5rem;
+  border: 1px solid var(--f3-border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.f3-form-modern .f3-info-field-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--f3-text-secondary);
+  font-weight: 600;
+}
+
+.f3-form-modern .f3-info-field-value {
+  font-size: 0.95rem;
+  color: var(--f3-text-primary);
+  word-break: break-all;
+  line-height: 1.4;
+}

@@ -1,0 +1,244 @@
+.f3 div.card {
+  cursor: pointer;
+  color: var(--f3-text-primary);
+  position: relative;
+  line-height: 1.2;
+}
+
+.f3 div.card-image-rect {
+  width: 200px;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.f3 div.card-image-rect .person-icon {
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  flex: 0 0 auto;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.f3 div.card-image-rect img {
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  flex: 0 0 auto;
+  padding: 5px;
+  margin-right: 10px;
+  border-radius: 8px;
+}
+
+.f3 div.card-image-rect svg {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  border-radius: 7px;
+}
+
+.f3 div.card-image-rect div.card-label {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.f3 .f3-card-duplicate-tag {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  color: rgb(255, 251, 220);
+  background-color: rgba(255, 251, 220, 0);
+  border-radius: 50%;
+  padding: 2px;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.f3 .f3-card-duplicate-hover div.card-inner {
+  transform: translate(0, -2px);
+  outline: 4px solid rgb(255, 251, 220);
+}
+
+.f3 .f3-card-duplicate-hover .f3-card-duplicate-tag {
+  background-color: rgba(255, 251, 220, .8);
+  color: #000;
+}
+
+.f3 .f3-remove-relative-active .card {
+  background-color: var(--f3-bg-primary);
+}
+
+.f3 .f3-remove-relative-active .card-inner {
+  transition: border 0.2s ease-in-out, opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+  opacity: .75;
+}
+
+.f3 .f3-remove-relative-active .card:hover .card-inner {
+  opacity: .25;
+}
+
+.f3 .f3-remove-relative-active .card-male.card-depth--1:hover .card-inner {
+  transform: translate(-8px, -8px);
+}
+
+.f3 .f3-remove-relative-active .card.card-female.card-depth--1:hover .card-inner {
+  transform: translate(8px, -8px);
+}
+
+.f3 .f3-remove-relative-active .card.card-female.card-depth-0:hover .card-inner {
+  transform: translate(8px, 0);
+}
+
+.f3 .f3-remove-relative-active .card.card-male.card-depth-0:hover .card-inner {
+  transform: translate(-8px, 0);
+}
+
+.f3 .f3-remove-relative-active .card.card-depth-1:hover .card-inner {
+  transform: translate(0, 8px);
+}
+
+.f3 .f3-remove-relative-active .card.card-main .card-inner {
+  transform: translate(0, 0)!important;
+  opacity: 1!important;
+}
+
+
+
+.f3 div.card > div {
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.8);
+}
+
+.f3 .card-inner {
+  outline: 0px solid rgba(255, 255, 255, 1);
+  transition: outline 0.5s ease-in-out;
+  overflow: hidden;
+}
+
+.f3 div.card-female .card-inner {
+  background-color: var(--f3-female-color);
+}
+.f3 div.card-male .card-inner {
+  background-color: var(--f3-male-color);
+}
+.f3 div.card-genderless .card-inner {
+  background-color: var(--f3-genderless-color);
+}
+
+.f3 div.card-new-rel .card-inner, 
+.f3 div.card-new-rel .person-icon svg {
+  background-color: var(--f3-bg-primary);
+}
+
+.f3 div.card-to-add .card-inner {
+  background-color: var(--f3-bg-primary);
+  border: 1px solid;
+}
+
+
+.f3 div.card-to-add .card-inner .card-label {
+  margin: 0 auto;
+}
+
+.f3 div.card-to-add .person-icon {
+  display: none;
+}
+
+.f3 div.card-new-rel .card-inner {
+  border-width: 1px;
+  border-style: dashed;
+  outline: 0px !important;
+}
+.f3 div.card-new-rel.card-female .card-inner, .f3 div.card-to-add.card-female .card-inner {
+  border-color: var(--f3-female-color);
+  color: var(--f3-female-color);
+}
+.f3 div.card-new-rel.card-male .card-inner, .f3 div.card-to-add.card-male .card-inner {
+  color: var(--f3-male-color);
+  border-color: var(--f3-male-color);
+}
+
+.f3 div.card-unknown .card-inner {
+  background-color: var(--f3-bg-primary);
+  border: 1px solid;
+}
+
+.f3 div.card-unknown .card-inner .card-label {
+  margin: 0 auto;
+}
+
+.f3 div.card-unknown .person-icon {
+  display: none;
+}
+
+.f3 div.card .person-icon {
+  color: var(--f3-person-icon-color);
+}
+
+.f3 div.card-new-rel.card-male .person-icon {
+  color: var(--f3-male-color);
+}
+
+.f3 div.card-new-rel.card-female .person-icon {
+  color: var(--f3-female-color);
+}
+
+.f3 div.card-new-rel .card-inner {
+  border-width: 1px;
+  border-style: dashed;
+  outline: 0px !important;
+}
+.f3 div.card-new-rel.card-female .card-inner, .f3 div.card-unknown.card-female .card-inner {
+  border-color: var(--f3-female-color);
+  color: var(--f3-female-color);
+}
+.f3 div.card-new-rel.card-male .card-inner, .f3 div.card-unknown.card-male .card-inner {
+  color: var(--f3-male-color);
+  border-color: var(--f3-male-color);
+}
+
+.f3 div.card-shell div.card-inner {
+  border: 1px dashed #fff;
+  background-color: var(--f3-bg-primary);
+}
+
+.f3 div.card:hover > div {
+  transform: translate(0, -2px);
+}
+.f3 div.card-main .card-inner, .f3 div.card:hover .card-inner {
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.8);
+}
+
+.f3 div.card-main .card-inner {
+  outline: 4px solid var(--f3-text-primary);
+}
+
+.f3 div.card-inner.f3-path-to-main {
+  outline: 4px solid var(--f3-text-primary);
+}
+
+/* mini tree card */
+.f3 .f3-mini-tree-card .card-inner {
+  border-radius: 3px;
+}
+.f3 .f3-mini-tree-card .f3-card-duplicate-tag {
+  top: 0;
+  right: 0;
+  padding: 0;
+  font-size: 9px;
+}
+
+.f3 .f3-mini-tree-card .f3-to-add-label,
+.f3 .f3-mini-tree-card .f3-unknown-label,
+.f3 .f3-mini-tree-card .person-icon {
+  display: none !important;
+}
+
+.f3 .f3-mini-tree-card.f3-card-duplicate-hover div.card-inner {
+  outline-width: 1px !important;
+}

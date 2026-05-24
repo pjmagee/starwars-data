@@ -195,6 +195,9 @@
                                 case "aurebesh" when msg.AurebeshDescriptor is not null:
                                     <AskAurebeshView Descriptor="msg.AurebeshDescriptor" />
                                     break;
+                                case "family_tree" when msg.FamilyTreeDescriptor is not null:
+                                    <FamilyTreeView Descriptor="msg.FamilyTreeDescriptor" />
+                                    break;
                             }
                         </div>
                     }
@@ -356,6 +359,7 @@
         public InfoboxDescriptor? InfoboxDescriptor { get; set; }
         public TextDescriptor? TextDescriptor { get; set; }
         public AurebeshDescriptor? AurebeshDescriptor { get; set; }
+        public FamilyTreeDescriptor? FamilyTreeDescriptor { get; set; }
     }
 
     // ── State ──
@@ -967,6 +971,7 @@
             "render_infobox" => "infobox",
             "render_markdown" => "text",
             "render_aurebesh" => "aurebesh",
+            "render_family_tree" => "family_tree",
             _ => null,
         };
         if (vizType is null) return;
@@ -1000,6 +1005,9 @@
                     break;
                 case "render_aurebesh":
                     vizMsg.AurebeshDescriptor = JsonSerializer.Deserialize<AurebeshDescriptor>(resultJson, JsonOpts);
+                    break;
+                case "render_family_tree":
+                    vizMsg.FamilyTreeDescriptor = JsonSerializer.Deserialize<FamilyTreeDescriptor>(resultJson, JsonOpts);
                     break;
             }
             _conversation.Add(vizMsg);
@@ -1201,6 +1209,7 @@
                             "timeline" => JsonSerializer.Serialize(msg.TimelineDescriptor, JsonOpts),
                             "infobox" => JsonSerializer.Serialize(msg.InfoboxDescriptor, JsonOpts),
                             "text" => JsonSerializer.Serialize(msg.TextDescriptor, JsonOpts),
+                            "family_tree" => JsonSerializer.Serialize(msg.FamilyTreeDescriptor, JsonOpts),
                             _ => null,
                         },
                         Timestamp = msg.Timestamp,
@@ -1365,6 +1374,7 @@
                                         case "timeline": vizMsg.TimelineDescriptor = JsonSerializer.Deserialize<TimelineDescriptor>(msg.VisualizationData, JsonOpts); break;
                                         case "infobox": vizMsg.InfoboxDescriptor = JsonSerializer.Deserialize<InfoboxDescriptor>(msg.VisualizationData, JsonOpts); break;
                                         case "text": vizMsg.TextDescriptor = JsonSerializer.Deserialize<TextDescriptor>(msg.VisualizationData, JsonOpts); break;
+                                        case "family_tree": vizMsg.FamilyTreeDescriptor = JsonSerializer.Deserialize<FamilyTreeDescriptor>(msg.VisualizationData, JsonOpts); break;
                                     }
                                 }
                                 _conversation.Add(vizMsg);

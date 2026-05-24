@@ -1,0 +1,243 @@
+/* White Card with Gender Stripe */
+[card-variant="gender-stripe"] .card-inner {
+  background-color: var(--f3-bg-primary) !important;
+  position: relative;
+  border: 1px solid var(--f3-text-secondary);
+  padding-left: 6px;
+}
+
+[card-variant="gender-stripe"] .card-inner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 6px;
+  z-index: 10;
+}
+
+[card-variant="gender-stripe"] div.card-female .card-inner::before {
+  background-color: var(--f3-female-color);
+}
+
+[card-variant="gender-stripe"] div.card-male .card-inner::before {
+  background-color: var(--f3-male-color);
+}
+
+[card-variant="gender-stripe"] div.card-genderless .card-inner::before {
+  background-color: var(--f3-genderless-color);
+}
+
+[card-variant="gender-stripe"] .card-new-rel .card-inner::before {
+  background: none !important;
+}
+
+
+[card-variant="gender-stripe"] div.card-main .card-inner {
+  outline: 3px solid var(--f3-text-secondary);
+}
+
+[card-variant="gender-stripe"] div.card-male .person-icon svg {
+  color: var(--f3-male-color);
+}
+[card-variant="gender-stripe"] div.card-female .person-icon svg {
+  color: var(--f3-female-color);
+}
+
+[card-variant="gender-stripe"] div.card-main .card-inner, 
+[card-variant="gender-stripe"] div.card:hover .card-inner {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04) !important;
+}
+
+
+/* Image On Top variant */
+[card-variant="image-top"] .card-inner.card-image-rect {
+  flex-direction: column !important;
+  width: 80px !important;
+  height: 120px !important;
+  align-items: stretch !important;
+}
+
+[card-variant="image-top"] .card-inner.card-image-rect img,
+[card-variant="image-top"] .card-inner.card-image-rect .person-icon {
+  width: 100% !important;
+  height: 80px !important;
+  margin-right: 0 !important;
+  padding: 0 !important;
+  border-radius: 4px 4px 0 0 !important;
+}
+
+[card-variant="image-top"] .card-inner.card-image-rect .card-label {
+  padding: 10px !important;
+  text-align: center !important;
+  flex: 1 1 auto !important;
+  justify-content: center !important;
+  height: auto !important;
+}
+
+
+
+/* Minimalist variant */
+[card-variant="minimalist"] .card-inner {
+  background: var(--f3-bg-primary) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+[card-variant="minimalist"] div.card-female .card-inner { border-color: rgba(196, 138, 146, 0.4) !important; }
+[card-variant="minimalist"] div.card-male .card-inner { border-color: rgba(120, 159, 172, 0.4) !important; }
+
+[card-variant="minimalist"] div.card-male .person-icon svg {
+  color: var(--f3-male-color);
+}
+[card-variant="minimalist"] div.card-female .person-icon svg {
+  color: var(--f3-female-color);
+}
+
+
+
+/* Profile Overlap variant */
+[card-variant="profile-overlap"] .card-inner.card-image-rect {
+  overflow: visible !important;
+  background-color: var(--f3-bg-primary) !important;
+  border: 1px solid var(--f3-border-color) !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  width: 170px !important;
+  min-height: 100px !important;
+  height: auto !important;
+}
+
+[card-variant="profile-overlap"] .card-inner.card-image-rect .person-icon,
+[card-variant="profile-overlap"] .card-inner.card-image-rect img {
+  position: absolute !important;
+  top: -45px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 85px !important;
+  height: 85px !important;
+  min-width: 85px !important;
+  border-radius: 50% !important;
+  border: 5px solid var(--f3-bg-primary) !important;
+  background-color: var(--f3-bg-primary) !important;
+  padding: 0 !important;
+  margin-right: 0 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+  z-index: 5 !important;
+  overflow: hidden !important;
+}
+
+[card-variant="profile-overlap"] .card-inner.card-image-rect .person-icon svg {
+  border-radius: 50% !important;
+  display: block !important;
+}
+
+[card-variant="profile-overlap"] .card-inner.card-image-rect .card-label {
+  padding: 50px 10px 15px 10px !important;
+  text-align: center !important;
+  width: 100% !important;
+  height: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+[card-variant="profile-overlap"] div.card-male .person-icon svg {
+  background-color: var(--f3-male-color);
+}
+[card-variant="profile-overlap"] div.card-female .person-icon svg {
+  background-color: var(--f3-female-color);
+}
+[card-variant="profile-overlap"] div.card-new-rel .person-icon svg {
+  background-color: var(--f3-bg-primary);
+}
+
+
+
+/* Soft Floating variant */
+[card-variant="soft-floating"] .card-inner {
+  border: none !important;
+  background-color: var(--f3-bg-primary) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+[card-variant="soft-floating"] div.card-female .card-inner { 
+  box-shadow: 0 10px 30px -5px rgba(196, 138, 146, 0.4) !important; 
+}
+
+[card-variant="soft-floating"] div.card-male .card-inner { 
+  box-shadow: 0 10px 30px -5px rgba(120, 159, 172, 0.4) !important; 
+}
+
+[card-variant="soft-floating"] .card-inner:hover {
+  transform: translateY(-5px) !important;
+}
+
+[card-variant="soft-floating"] div.card-male .person-icon svg {
+  color: var(--f3-male-color);
+}
+
+[card-variant="soft-floating"] div.card-female .person-icon svg {
+  color: var(--f3-female-color);
+}
+
+
+
+/* Compact Pill variant */
+[card-variant="compact-pill"] .card-inner.card-image-rect {
+  border-radius: 100px !important;
+  padding: 8px 20px 8px 10px !important;
+  background-color: var(--f3-bg-primary) !important;
+  border: 2px solid var(--f3-border-color) !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  min-width: 160px !important;
+  width: auto !important;
+  min-height: 60px !important;
+  height: 60px !important;
+  overflow: visible !important;
+}
+
+[card-variant="compact-pill"] .card-inner.card-image-rect .person-icon,
+[card-variant="compact-pill"] .card-inner.card-image-rect img {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  border-radius: 50% !important;
+  margin-right: 14px !important;
+  padding: 0 !important;
+  object-fit: cover !important;
+  flex: 0 0 auto !important;
+}
+
+[card-variant="compact-pill"] .card-inner.card-image-rect .person-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+
+[card-variant="compact-pill"] .card-inner.card-image-rect .person-icon svg {
+  border-radius: 50% !important;
+}
+
+[card-variant="compact-pill"] .card-inner.card-image-rect .card-label {
+  padding: 0 !important;
+  text-align: left !important;
+  line-height: 1.1 !important;
+  flex: 1 1 auto !important;
+  height: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+[card-variant="compact-pill"] div.card-male .person-icon svg {
+  color: var(--f3-male-color);
+}
+[card-variant="compact-pill"] div.card-female .person-icon svg {
+  color: var(--f3-female-color);
+}
