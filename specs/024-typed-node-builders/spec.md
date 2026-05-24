@@ -1,6 +1,10 @@
 # 024 — Typed NodeBuilders: per-type infobox extraction strategy
 
-Status: Shipped (Phases A–C, 2026-04-28, `ed5d53f246`). Infrastructure (`NodeBuilderContext.NodeTypeByPageId`, `EdgeMeta.SourceFieldLabel`/`SideIndex`) plus per-type overrides landed for Character (has_role + Affiliation source×target relabels), Droid, Battle/Mission/Duel/War/Campaign/Event (`ConflictSideEncoder`), Sector, Year, TitleOrPosition, CelestialBody, TelevisionEpisode, Book/ReferenceBook/ComicBook/MagazineIssue (`IsbnNormalizer`), IndividualShip/StarshipClass, Organization — each with a dedicated unit-test class under `src/StarWarsData.Tests/Unit/`.
+Status: Shipped (Phases A–C, 2026-04-28, `ed5d53f246`). Phase-D verification pending (see [Outstanding verification](#outstanding-verification)).
+
+Infrastructure (`NodeBuilderContext.NodeTypeByPageId`, `EdgeMeta.SourceFieldLabel`/`SideIndex`) plus per-type `OnFinalize` overrides landed for Character (`has_role` + Affiliation source×target relabels), Droid, Battle/Mission/Duel/War/Campaign/Event (`ConflictSideEncoder`), Sector, Year, TitleOrPosition, CelestialBody, TelevisionEpisode, Book/ReferenceBook/ComicBook/MagazineIssue (`IsbnNormalizer`), IndividualShip/StarshipClass, Organization — each with a dedicated unit-test class under `src/StarWarsData.Tests/Unit/`.
+
+The following Phase-C items shipped via `FieldSemantics` dictionary entries (no per-type override needed; builders remain stubs with explainer doc-comments): ReferenceMagazine `Featured` → `features`; Weapon/Device/Artifact/Lightsaber `Culture`/`Socio-cultural group(s)` Targets widened to `["Species","Religion","CulturalGroup"]`; Food `Race` aliased to `edible_by` and `Inedible by` → `not_edible_by`; Character Yuuzhan Vong `Domain`/`Caste` promoted to typed edges; TitleOrPosition `Powers`/`Term length` recognised as Properties.
 Date: 2026-04-28
 Author: Patrick Magee
 Cross-refs: [Design-035 — KG per-type builders](../035-kg-per-type-builders/spec.md), [Design-013 — KG property/edge duality](../013-kg-property-edge-duality/spec.md), [Design-021 — Edge bound provenance](../021-edge-bound-provenance/spec.md), [Design-023 — Character roles as edges](../023-character-roles-as-edges/spec.md) (superseded by this doc)
@@ -348,26 +352,31 @@ batch; Phase C overrides each get smaller per-type spot-checks.
 
 ## Open questions
 
-- Should the target-type lookup live on `NodeBuilderContext` (as proposed)
-  or on a separate `INodeTypeResolver` service injected into builders?
-  Argument for service: easier to mock in tests. Argument for context:
-  matches the existing pattern (`WikiUrlToPageId` is on context).
-  Default: context, for symmetry. Revisit if test ergonomics suffer.
-- How aggressive should we be about *dropping* bad-data edges (e.g. Battle
-  commander → Religion)? The survey shows ~10% of commanders edges target
-  invalid types. Mitigation could be: drop them entirely, or keep them and
-  flag with `meta.flag = "InvalidTargetType"`. Default: drop them. Revisit
-  if downstream consumers miss the data.
-- Should we add a `NodeBuilderBase.OnEdgeFiltered(edge, reason)` hook so
-  per-type drop decisions are visible in the structured logs? Probably
-  yes, for future debuggability.
+- ~~Should the target-type lookup live on `NodeBuilderContext` or on a
+  separate `INodeTypeResolver` service?~~ **Resolved (Phase A):** lives on
+  `NodeBuilderContext.NodeTypeByPageId` for symmetry with `WikiUrlToPageId`.
+  Test ergonomics have been fine — per-type builder tests construct the
+  context inline. No revisit triggered.
+- ~~How aggressive should we be about *dropping* bad-data edges (e.g.
+  Battle commander → Religion)?~~ **Resolved (Phase B):** dropped entirely
+  via `BattleNodeBuilder` / sibling builders' target-type filter. No
+  downstream consumer has flagged missing data. Revisit if the graph
+  explorer surfaces a use case for the bad-target rows.
+- **Still open:** add a `NodeBuilderBase.OnEdgeFiltered(edge, reason)`
+  hook so per-type drop decisions are visible in structured logs. Not
+  built. Today drops are silent — debuggable only by diffing a rebuild's
+  edge counts against the previous run. Worth doing before the next
+  major per-type override wave.
 
-## Verification
+## Outstanding verification
 
-Acceptance criteria, deferred per phase but cumulatively:
+The acceptance criteria below are infrastructure-complete (code is in
+place, unit tests pass) but have **not** been confirmed against a live
+`starwars-dev` Phase-5 rebuild post-ship. A single aggregation pass
+covers them all; left as a follow-up:
 
 - [ ] Phase 5 rebuild produces zero edges with `label == ""` (was up to
-      98% on ReferenceBook).
+      98% on ReferenceBook). Expectation: zero, given `IsbnNormalizer`.
 - [ ] `kg.edges` contains zero `affiliated_with` edges from Character to
       TitleOrPosition (those become `has_role`).
 - [ ] `kg.edges` contains ≥1,000 `has_role` edges (was zero from the
@@ -376,14 +385,42 @@ Acceptance criteria, deferred per phase but cumulatively:
       (`commanders1`, `commanders2`, etc.) and the side index is
       preserved in `meta.sideIndex`.
 - [ ] Sector's `has_conflict` count is ≥30 × the count of any single
-      war-named label that previously fragmented it.
+      war-named label that previously fragmented it. (Phase-B memory
+      notes a 343→3013 jump on sample data — needs full corpus confirm.)
 - [ ] Year's `has_chancellor` edge count rises from 0 to ≥hundreds.
+      (FieldSemantics survey noted 134 Chancellor edges in sample.)
 - [ ] Holocron's FillGap candidate list (during a representative run)
-      now includes the newly-typed edges.
-- [ ] Each updated `*NodeBuilder.cs` carries a doc-comment summarising
-      its per-type rules.
-- [ ] Unit tests cover at least one representative edge case per
-      override (relabel, drop, alias-collapse).
+      now includes the newly-typed edges. Requires a Holocron smoke run
+      against a re-enriched node (Anakin / Asajj).
+
+Confirmed at ship time:
+
+- [x] Each updated `*NodeBuilder.cs` carries a doc-comment summarising
+      its per-type rules (verified across the per-type builder files).
+- [x] Unit tests cover at least one representative edge case per
+      override — Phase B 130/130, Phase C 165/165 (per
+      `project_typed_node_builders_phase_b/c.md`).
+
+## Follow-ups
+
+Named in the body but not scheduled — track separately if they grow legs:
+
+- **`Meta.SideIndex` consumer** (Risks). The data is stamped on Battle/
+  Mission/Duel/War/Campaign/Event edges, but the graph explorer and
+  per-node panel still treat all sides uniformly. Until a consumer opts
+  in, "who commanded the Separatists at Geonosis?" still requires a
+  belligerent-side join.
+- **Holocron prompt tune** (Cost estimate). Estimated ~½ day. The agent's
+  prompt references canonical labels; the newly-typed edges show up
+  automatically, but a small nudge ("prefer `has_role` over
+  `affiliated_with` when role context is in the chunks") would likely
+  help precision.
+- **`OnEdgeFiltered` hook** (see Open questions). Pre-requisite for any
+  future Phase-D-style drop-decision rule.
+- **Spec-024 status-line credit for FieldSemantics-only Phase C items**
+  is already in the header; if a future per-type review surfaces more
+  pure-dictionary fixes, follow the same convention (note them in the
+  header, leave the builder a stub with an explainer doc-comment).
 
 ## Cost estimate
 
