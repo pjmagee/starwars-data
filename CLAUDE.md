@@ -133,5 +133,5 @@ Spec-Kit skills: `/speckit-constitution`, `/speckit-specify`, `/speckit-clarify`
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
 shell commands, and other important information, read the current plan:
-[specs/045-sp4-wookieepedia-modal/plan.md](specs/045-sp4-wookieepedia-modal/plan.md)
+[specs/042-family-tree-component/plan.md](specs/042-family-tree-component/plan.md)
 <!-- SPECKIT END -->
