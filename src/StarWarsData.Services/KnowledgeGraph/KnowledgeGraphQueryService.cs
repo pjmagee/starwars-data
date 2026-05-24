@@ -785,6 +785,18 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
     /// so users can land on a Knowledge Graph-rooted view of a single node.
     /// Returns <c>null</c> when no node with that PageId exists.
     /// </summary>
+    /// <summary>
+    /// Cheap (name, type) lookup for a single node, used by callers that need to
+    /// validate type before kicking off a heavier projection. Avoids the
+    /// enrichment-join cost of <see cref="GetTemporalNodeAsync"/>. Returns null
+    /// when the node doesn't exist.
+    /// </summary>
+    public async Task<(string Name, string Type)?> GetNodeNameAndTypeAsync(int pageId, CancellationToken ct = default)
+    {
+        var node = await _nodes.Find(n => n.PageId == pageId).Project(n => new { n.Name, n.Type }).FirstOrDefaultAsync(ct);
+        return node is null ? null : (node.Name, node.Type);
+    }
+
     public async Task<TemporalNodeDto?> GetTemporalNodeAsync(int pageId, CancellationToken ct = default)
     {
         var node = await _nodes.Find(n => n.PageId == pageId).FirstOrDefaultAsync(ct);
@@ -2886,6 +2898,516 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
             Direction = normalizedDirection,
             Chain = chain,
         };
+    }
+
+    // ── Family tree projection (Design-042) ────────────────────────────────
+    //
+    // BuildFamilyTreeAsync runs a kinship-bounded BFS over kg.edges, projects each
+    // visited node to a FamilyTreePerson, repairs bidirectional links, emits
+    // synthetic stubs for truncation edges, and surfaces edge cases via the
+    // FamilyTreeLimitations metadata block. Spec: data-model.md § Mongo projection
+    // rules. Bound to the family-chart-premium renderer wire shape; the controller
+    // (RelationshipGraphController) and the render_family_tree tool both consume
+    // this projection verbatim.
+
+    /// <summary>
+    /// Fixed kinship edge labels traversed by BuildFamilyTreeAsync. The set is
+    /// load-bearing — it MUST stay in sync with the labels documented in
+    /// data-model.md § Step 1, and with the kinship-classification helpers below.
+    /// </summary>
+    private static readonly string[] FamilyTreeEdgeLabels = ["parent_of", "child_of", "sibling_of", "partner_of", "spouse_of", "married_to", "family", "has_relative"];
+
+    private static readonly HashSet<string> SpouseLabels = new(StringComparer.OrdinalIgnoreCase) { "partner_of", "spouse_of", "married_to" };
+
+    public async Task<FamilyTreeResponse> BuildFamilyTreeAsync(int rootId, int maxDepth, string? continuity, string? realm, int maxNodes = 200, CancellationToken ct = default)
+    {
+        maxDepth = Math.Clamp(maxDepth, 1, 5);
+        maxNodes = Math.Clamp(maxNodes, 1, 1000);
+
+        var rootNode = await _nodes.Find(n => n.PageId == rootId).FirstOrDefaultAsync(ct);
+        var limitations = new FamilyTreeLimitations();
+
+        if (rootNode is null)
+        {
+            // Caller (controller / tool) decides whether to 404 — surface an empty
+            // response so the projection contract stays uniform.
+            return new FamilyTreeResponse
+            {
+                RootId = rootId.ToString(),
+                RootName = string.Empty,
+                People = [],
+                Kinship = null,
+                Limitations = limitations,
+            };
+        }
+
+        Continuity? continuityFilter = ParseContinuityFilter(continuity);
+        Realm? realmFilter = null;
+        if (!string.IsNullOrWhiteSpace(realm) && Enum.TryParse<Realm>(realm, true, out var rParsed))
+            realmFilter = rParsed;
+
+        // ── Step 1 — BFS the family neighbourhood ───────────────────────────
+        var visited = new HashSet<int> { rootId };
+        var frontier = new HashSet<int> { rootId };
+        // Raw kg.edges rows collected during the BFS, kept whole (label + endpoints)
+        // because Steps 2/3/4/5 each need different projections of the same row.
+        var collectedEdges = new List<RelationshipEdge>();
+        // Dedup edges by (from, to, label) — both an inbound and outbound pass at
+        // different depths can yield the same row twice when both endpoints get
+        // visited.
+        var edgeKeys = new HashSet<(int, int, string)>();
+
+        for (var depth = 0; depth < maxDepth && frontier.Count > 0 && !limitations.TruncatedAtDepth; depth++)
+        {
+            var b = Builders<RelationshipEdge>.Filter;
+
+            var commonClauses = new List<FilterDefinition<RelationshipEdge>> { b.In(e => e.Label, FamilyTreeEdgeLabels) };
+
+            if (continuityFilter is { } cont)
+                commonClauses.Add(b.Eq(e => e.Continuity, cont));
+
+            if (realmFilter is { } realmVal)
+            {
+                // Recall-biased realm filter: Unknown always passes, just like
+                // QueryGraphAsync. Family edges almost always live in Starwars realm
+                // but a few synthetic ones can carry Unknown.
+                var accepted = new[] { realmVal, Realm.Unknown };
+                commonClauses.Add(b.In(e => e.FromRealm, accepted));
+            }
+
+            var outFilter = b.And([b.In(e => e.FromId, frontier), .. commonClauses]);
+            var inFilter = b.And([b.In(e => e.ToId, frontier), .. commonClauses]);
+
+            // Bound the per-pass fetch so a Sidious-class super-hub doesn't blow
+            // through maxNodes on a single hop. Matches QueryGraphAsync's 200 ceiling.
+            var outEdges = await _edges.Find(outFilter).Limit(200).ToListAsync(ct);
+            var inEdges = await _edges.Find(inFilter).Limit(200).ToListAsync(ct);
+
+            var nextFrontier = new HashSet<int>();
+
+            void RegisterEdge(RelationshipEdge e)
+            {
+                var key = (e.FromId, e.ToId, e.Label);
+                if (edgeKeys.Add(key))
+                    collectedEdges.Add(e);
+            }
+
+            foreach (var e in outEdges)
+            {
+                RegisterEdge(e);
+                if (limitations.TruncatedAtDepth)
+                    continue;
+                if (visited.Add(e.ToId))
+                {
+                    if (visited.Count > maxNodes)
+                    {
+                        // Roll back the visit — we're not going to project this node;
+                        // it'll be emitted as a synthetic stub by Step 5.
+                        visited.Remove(e.ToId);
+                        limitations.TruncatedAtDepth = true;
+                    }
+                    else
+                    {
+                        nextFrontier.Add(e.ToId);
+                    }
+                }
+            }
+
+            foreach (var e in inEdges)
+            {
+                RegisterEdge(e);
+                if (limitations.TruncatedAtDepth)
+                    continue;
+                if (visited.Add(e.FromId))
+                {
+                    if (visited.Count > maxNodes)
+                    {
+                        visited.Remove(e.FromId);
+                        limitations.TruncatedAtDepth = true;
+                    }
+                    else
+                    {
+                        nextFrontier.Add(e.FromId);
+                    }
+                }
+            }
+
+            frontier = nextFrontier;
+        }
+
+        // ── Fetch all visited nodes in one round-trip ────────────────────────
+        var visitedNodes = await _nodes.Find(Builders<GraphNode>.Filter.In(n => n.PageId, visited)).ToListAsync(ct);
+        var nodeById = visitedNodes.ToDictionary(n => n.PageId);
+
+        // ── Fetch Gender from raw.pages.infobox.Data for every Character node ──
+        // R-5 (KG-First documented gap). The Character node-builder doesn't
+        // project Gender today; we read raw.pages.infobox as the one Principle-VI
+        // soft-edge. The default ("M") never propagates outside this projection.
+        var characterPageIds = visitedNodes.Where(n => n.Type == KgNodeTypes.Character).Select(n => n.PageId).ToList();
+        var genderByPageId = new Dictionary<int, string>();
+        if (characterPageIds.Count > 0)
+        {
+            var pages = _edges.Database.GetCollection<Page>(Collections.Pages);
+            var rawPages = await pages.Find(Builders<Page>.Filter.In(p => p.PageId, characterPageIds)).ToListAsync(ct);
+            foreach (var page in rawPages)
+            {
+                var (gender, knownGender) = ReadGender(page);
+                if (knownGender)
+                    genderByPageId[page.PageId] = gender;
+            }
+        }
+
+        // ── Step 4 (early) — partition family-membership edges ──────────────
+        // A `family` edge points from a Character to a Family aggregate node.
+        // It does NOT translate into Rels.Parents. The adoptive case (Leia ↔
+        // Organa family AND Bail ↔ Organa family, but no parent_of Bail→Leia)
+        // is detected and surfaced via AdoptiveRelationsExcluded.
+        var familyEdges = collectedEdges.Where(e => string.Equals(e.Label, "family", StringComparison.OrdinalIgnoreCase)).ToList();
+        var nonFamilyEdges = collectedEdges.Where(e => !string.Equals(e.Label, "family", StringComparison.OrdinalIgnoreCase)).ToList();
+
+        // Index existing parent_of edges (incl. their inverse via child_of) so we
+        // can recognise an adoptive (= family-only, no biological) relationship.
+        var parentChildPairs = new HashSet<(int parent, int child)>();
+        foreach (var e in nonFamilyEdges)
+        {
+            if (string.Equals(e.Label, "parent_of", StringComparison.OrdinalIgnoreCase))
+                parentChildPairs.Add((e.FromId, e.ToId));
+            else if (string.Equals(e.Label, "child_of", StringComparison.OrdinalIgnoreCase))
+                parentChildPairs.Add((e.ToId, e.FromId));
+        }
+
+        // Group family-edge endpoints by family node so we can detect "both
+        // ends are in the same family, but no parent_of links them" → adoptive.
+        var familyMembersByFamily = new Dictionary<int, List<int>>();
+        var familyNameById = new Dictionary<int, string>();
+        foreach (var e in familyEdges)
+        {
+            // The character → family edge could be stored either direction
+            // depending on the source field; we want the Family node.
+            int familyNodeId,
+                memberId;
+            string familyName;
+            if (nodeById.TryGetValue(e.ToId, out var to) && to.Type == KgNodeTypes.Family)
+            {
+                familyNodeId = e.ToId;
+                memberId = e.FromId;
+                familyName = to.Name;
+            }
+            else if (nodeById.TryGetValue(e.FromId, out var from) && from.Type == KgNodeTypes.Family)
+            {
+                familyNodeId = e.FromId;
+                memberId = e.ToId;
+                familyName = from.Name;
+            }
+            else
+            {
+                continue;
+            }
+
+            familyNameById[familyNodeId] = familyName;
+            if (!familyMembersByFamily.TryGetValue(familyNodeId, out var list))
+            {
+                list = [];
+                familyMembersByFamily[familyNodeId] = list;
+            }
+            if (!list.Contains(memberId))
+                list.Add(memberId);
+        }
+
+        foreach (var (familyNodeId, members) in familyMembersByFamily)
+        {
+            // For each (child, potential-parent) co-membership pair that has NO
+            // parent_of edge between them, surface the adoptive case. Cardinality
+            // is small (typically 2 endpoints per family in the BFS), so the
+            // quadratic scan is fine.
+            foreach (var member in members)
+            {
+                foreach (var other in members)
+                {
+                    if (member == other)
+                        continue;
+                    if (parentChildPairs.Contains((other, member)))
+                        continue; // biological parent already exists → not adoptive
+                    if (!nodeById.TryGetValue(other, out var otherNode))
+                        continue;
+                    var familyName = familyNameById[familyNodeId];
+                    var entry = $"{member}→{otherNode.Name} via {familyName}";
+                    if (!limitations.AdoptiveRelationsExcluded.Contains(entry))
+                        limitations.AdoptiveRelationsExcluded.Add(entry);
+                }
+            }
+        }
+
+        // Drop Family nodes from the People projection — they're aggregates, not
+        // persons in the family-chart sense.
+        var personPageIds = visitedNodes.Where(n => n.Type != KgNodeTypes.Family).Select(n => n.PageId).ToHashSet();
+
+        // ── Step 2 — Project each visited node to FamilyTreePerson ──────────
+        var people = new Dictionary<string, FamilyTreePerson>();
+        foreach (var node in visitedNodes.Where(n => personPageIds.Contains(n.PageId)))
+        {
+            var (firstName, lastName) = SplitName(node.Name);
+            string gender;
+            if (genderByPageId.TryGetValue(node.PageId, out var resolvedGender))
+            {
+                gender = resolvedGender;
+            }
+            else
+            {
+                gender = "M";
+                if (node.Type == KgNodeTypes.Character && !limitations.MissingGenders.Contains(node.PageId))
+                    limitations.MissingGenders.Add(node.PageId);
+            }
+
+            var person = new FamilyTreePerson
+            {
+                Id = node.PageId.ToString(),
+                Data = new FamilyTreePersonData
+                {
+                    Gender = gender,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    WikiUrl = node.WikiUrl,
+                    ImageUrl = node.ImageUrl,
+                    PageId = node.PageId,
+                },
+                Rels = new FamilyTreeRels(),
+            };
+            people[person.Id] = person;
+        }
+
+        // Populate Rels per Step 2's source-direction rules. We iterate the
+        // collected non-family edges once and dispatch to the right person.
+        foreach (var e in nonFamilyEdges)
+        {
+            // Either endpoint might be a Family node (shouldn't be, since we
+            // partitioned, but defensive). Skip has_relative entirely here —
+            // they go into the Kinship[] block (Step 3).
+            if (string.Equals(e.Label, "has_relative", StringComparison.OrdinalIgnoreCase))
+                continue;
+
+            var fromStr = e.FromId.ToString();
+            var toStr = e.ToId.ToString();
+
+            people.TryGetValue(fromStr, out var fromPerson);
+            people.TryGetValue(toStr, out var toPerson);
+
+            switch (e.Label.ToLowerInvariant())
+            {
+                case "parent_of":
+                    AddRel(fromPerson, r => r.Children ??= [], toStr);
+                    AddRel(toPerson, r => r.Parents ??= [], fromStr);
+                    break;
+                case "child_of":
+                    AddRel(fromPerson, r => r.Parents ??= [], toStr);
+                    AddRel(toPerson, r => r.Children ??= [], fromStr);
+                    break;
+                case "sibling_of":
+                    // family-chart infers siblings from shared parents — but if
+                    // the edge exists explicitly, family-chart still benefits from
+                    // having both sides in People[]. We do NOT inject sibling
+                    // entries into rels; the renderer doesn't model siblings as
+                    // a Rels key.
+                    break;
+                default:
+                    if (SpouseLabels.Contains(e.Label))
+                    {
+                        AddRel(fromPerson, r => r.Spouses ??= [], toStr);
+                        AddRel(toPerson, r => r.Spouses ??= [], fromStr);
+                    }
+                    break;
+            }
+        }
+
+        // ── Step 3 — Kinship entries (premium kinship plugin) ───────────────
+        var kinship = new List<FamilyTreeKinshipEntry>();
+        foreach (var e in nonFamilyEdges)
+        {
+            if (!string.Equals(e.Label, "has_relative", StringComparison.OrdinalIgnoreCase))
+                continue;
+            if (e.FromId == e.ToId)
+                continue; // self-edge — bad data, skip
+            // Both endpoints must be in People[] (real or stub). If a stub will
+            // be emitted by Step 5, defer the kinship entry to after Step 5.
+            kinship.Add(
+                new FamilyTreeKinshipEntry
+                {
+                    PersonId = e.FromId.ToString(),
+                    RelativeId = e.ToId.ToString(),
+                    Relationship = e.Meta?.Qualifier ?? "Relative",
+                }
+            );
+        }
+
+        // ── Step 5 — Bidirectional repair + synthetic stubs ─────────────────
+        var allReferencedIds = new HashSet<string>();
+        foreach (var p in people.Values)
+        {
+            if (p.Rels.Parents is { } parents)
+                foreach (var id in parents)
+                    allReferencedIds.Add(id);
+            if (p.Rels.Spouses is { } spouses)
+                foreach (var id in spouses)
+                    allReferencedIds.Add(id);
+            if (p.Rels.Children is { } children)
+                foreach (var id in children)
+                    allReferencedIds.Add(id);
+        }
+        foreach (var k in kinship)
+        {
+            allReferencedIds.Add(k.PersonId);
+            allReferencedIds.Add(k.RelativeId);
+        }
+
+        // Emit a synthetic stub for any referenced ID that's NOT yet in People[].
+        // Per R-7 the stub keeps the real PageId on Data.PageId so the card-click
+        // navigates to /knowledge-graph/nodes/{pageId} successfully.
+        foreach (var idStr in allReferencedIds)
+        {
+            if (people.ContainsKey(idStr))
+                continue;
+            if (!int.TryParse(idStr, out var pageId))
+                continue;
+            var stubId = $"{pageId}-stub";
+            // The stub's Id intentionally differs from the referenced id so the
+            // renderer treats it as a separate person. Walk the Rels arrays and
+            // rewrite the reference to point at the stub Id.
+            var stub = new FamilyTreePerson
+            {
+                Id = stubId,
+                Data = new FamilyTreePersonData
+                {
+                    Gender = "M",
+                    FirstName = "Unknown",
+                    LastName = "Unknown",
+                    PageId = pageId,
+                },
+                Rels = new FamilyTreeRels(),
+            };
+            people[stubId] = stub;
+            if (!limitations.MissingGenders.Contains(pageId))
+                limitations.MissingGenders.Add(pageId);
+
+            // Rewrite Rels references from "{pageId}" → "{pageId}-stub".
+            foreach (var p in people.Values.Where(p => !ReferenceEquals(p, stub)))
+            {
+                RewriteRelRef(p.Rels.Parents, idStr, stubId);
+                RewriteRelRef(p.Rels.Spouses, idStr, stubId);
+                RewriteRelRef(p.Rels.Children, idStr, stubId);
+            }
+            // Rewrite kinship references too.
+            foreach (var k in kinship)
+            {
+                if (k.PersonId == idStr)
+                    k.PersonId = stubId;
+                if (k.RelativeId == idStr)
+                    k.RelativeId = stubId;
+            }
+        }
+
+        // Bidirectional repair pass for real ↔ real pairs. Stubs already cover
+        // dangling refs; this pass guarantees that A.spouses[B] ↔ B.spouses[A]
+        // and A.parents[B] ↔ B.children[A].
+        var peopleByIdSnapshot = people.Values.ToList();
+        foreach (var p in peopleByIdSnapshot)
+        {
+            if (p.Rels.Spouses is { } spouses)
+            {
+                foreach (var spouseId in spouses)
+                {
+                    if (people.TryGetValue(spouseId, out var spouse))
+                        AddRel(spouse, r => r.Spouses ??= [], p.Id);
+                }
+            }
+            if (p.Rels.Parents is { } parents)
+            {
+                foreach (var parentId in parents)
+                {
+                    if (people.TryGetValue(parentId, out var parent))
+                        AddRel(parent, r => r.Children ??= [], p.Id);
+                }
+            }
+            if (p.Rels.Children is { } children)
+            {
+                foreach (var childId in children)
+                {
+                    if (people.TryGetValue(childId, out var child))
+                        AddRel(child, r => r.Parents ??= [], p.Id);
+                }
+            }
+        }
+
+        return new FamilyTreeResponse
+        {
+            RootId = rootId.ToString(),
+            RootName = rootNode.Name,
+            People = people.Values.ToList(),
+            Kinship = kinship.Count > 0 ? kinship : null,
+            Limitations = limitations,
+        };
+    }
+
+    /// <summary>
+    /// Split a node name on the LAST whitespace — first token (or run of tokens)
+    /// becomes FirstName, last token becomes LastName. Single-token names (e.g.
+    /// "Yoda") use the full name as FirstName and an empty LastName. The
+    /// collision-prone approach matches the prior MIT-version plan; data-model.md
+    /// accepts the imperfection.
+    /// </summary>
+    private static (string firstName, string lastName) SplitName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            return (string.Empty, string.Empty);
+        var idx = name.LastIndexOf(' ');
+        if (idx < 0)
+            return (name, string.Empty);
+        return (name[..idx].Trim(), name[(idx + 1)..].Trim());
+    }
+
+    /// <summary>
+    /// Read the Gender slot from raw.pages.infobox.Data per R-5. Returns
+    /// (resolved, known) where known=false signals "field missing/ambiguous,
+    /// caller should default to M and add to Limitations.MissingGenders".
+    /// </summary>
+    private static (string gender, bool known) ReadGender(Page? page)
+    {
+        if (page?.Infobox?.Data is not { Count: > 0 } data)
+            return ("M", false);
+        var genderProp = data.FirstOrDefault(p => string.Equals(p.Label, "Gender", StringComparison.OrdinalIgnoreCase));
+        if (genderProp is null)
+            return ("M", false);
+        var value = genderProp.Values?.FirstOrDefault(v => !string.IsNullOrWhiteSpace(v))?.Trim();
+        if (string.IsNullOrEmpty(value))
+            return ("M", false);
+        if (value.Equals("Male", StringComparison.OrdinalIgnoreCase) || value.Equals("M", StringComparison.OrdinalIgnoreCase))
+            return ("M", true);
+        if (value.Equals("Female", StringComparison.OrdinalIgnoreCase) || value.Equals("F", StringComparison.OrdinalIgnoreCase))
+            return ("F", true);
+        // Non-binary, ambiguous, unsupported → soft-handle to "M" with
+        // limitations entry per data-model.md R-5.
+        return ("M", false);
+    }
+
+    private static void AddRel(FamilyTreePerson? person, Func<FamilyTreeRels, List<string>> selector, string id)
+    {
+        if (person is null)
+            return;
+        if (string.Equals(person.Id, id, StringComparison.Ordinal))
+            return; // never self-reference
+        var list = selector(person.Rels);
+        if (!list.Contains(id))
+            list.Add(id);
+    }
+
+    private static void RewriteRelRef(List<string>? list, string oldRef, string newRef)
+    {
+        if (list is null)
+            return;
+        for (var i = 0; i < list.Count; i++)
+        {
+            if (string.Equals(list[i], oldRef, StringComparison.Ordinal))
+                list[i] = newRef;
+        }
     }
 }
 

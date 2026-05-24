@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using StarWarsData.Models.Entities;
 using StarWarsData.Models.Queries;
 using StarWarsData.Services;
 
@@ -127,4 +128,59 @@ public class RelationshipGraphController(KnowledgeGraphQueryService kg) : Contro
         [FromQuery] int maxNodes = 200,
         CancellationToken ct = default
     ) => kg.QueryGraphAsync(pageId, labels, maxDepth, continuity, onlyRoot, realm ?? universe, yearFrom, yearTo, maxNodes, ct);
+
+    /// <summary>
+    /// Marriage-aware, generation-aligned family-tree projection for a Character node.
+    /// Backs the <c>render_family_tree</c> AI tool and the <c>FamilyTreeView.razor</c>
+    /// component. Wire shape and error semantics:
+    /// <c>specs/042-family-tree-component/contracts/family-tree-endpoint.md</c>.
+    /// </summary>
+    [HttpGet("family-tree/{pageId:int}")]
+    public async Task<IActionResult> FamilyTree(
+        int pageId,
+        [FromQuery] int maxDepth = 3,
+        [FromQuery] string? continuity = null,
+        // `realm` mirrors the QueryGraph endpoint's GlobalFilterService passthrough.
+        // `universe` is the legacy alias coalesced into `realm`.
+        [FromQuery] string? realm = null,
+        [FromQuery] string? universe = null,
+        CancellationToken ct = default
+    )
+    {
+        // Validate continuity early so an unknown value short-circuits before we
+        // hit Mongo. ParseContinuityFilter inside the service silently drops
+        // unknown values; the contract for this endpoint is stricter.
+        if (!string.IsNullOrWhiteSpace(continuity) && !IsValidContinuity(continuity))
+            return BadRequest(
+                new
+                {
+                    error = "InvalidQueryParameter",
+                    name = "continuity",
+                    value = continuity,
+                }
+            );
+
+        var resolvedRealm = realm ?? universe;
+        if (!string.IsNullOrWhiteSpace(resolvedRealm) && !Enum.TryParse<Realm>(resolvedRealm, true, out _))
+            return BadRequest(
+                new
+                {
+                    error = "InvalidQueryParameter",
+                    name = "realm",
+                    value = resolvedRealm,
+                }
+            );
+
+        var nodeInfo = await kg.GetNodeNameAndTypeAsync(pageId, ct);
+        if (nodeInfo is null)
+            return NotFound(new { error = "RootNotFound", pageId });
+
+        if (!string.Equals(nodeInfo.Value.Type, KgNodeTypes.Character, StringComparison.Ordinal))
+            return BadRequest(new { error = "RootMustBeCharacter", actualType = nodeInfo.Value.Type });
+
+        var response = await kg.BuildFamilyTreeAsync(pageId, maxDepth, continuity, resolvedRealm, maxNodes: 200, ct);
+        return Ok(response);
+    }
+
+    private static bool IsValidContinuity(string value) => string.Equals(value, "Canon", StringComparison.OrdinalIgnoreCase) || string.Equals(value, "Legends", StringComparison.OrdinalIgnoreCase);
 }
