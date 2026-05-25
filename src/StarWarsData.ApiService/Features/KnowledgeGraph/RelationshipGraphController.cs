@@ -182,5 +182,55 @@ public class RelationshipGraphController(KnowledgeGraphQueryService kg) : Contro
         return Ok(response);
     }
 
+    /// <summary>
+    /// Family-tree projection anchored on a <em>Family aggregate</em> node. Resolves
+    /// the family's highest-kinship-degree Character member and delegates to the
+    /// existing projection. Backs the standalone <c>/family-trees</c> Explore page
+    /// (Design-042), where the user picks a House/Family from a MudAutocomplete
+    /// rather than naming a Character.
+    /// </summary>
+    [HttpGet("family-tree-by-family/{familyPageId:int}")]
+    public async Task<IActionResult> FamilyTreeByFamily(
+        int familyPageId,
+        [FromQuery] int maxDepth = 3,
+        [FromQuery] string? continuity = null,
+        [FromQuery] string? realm = null,
+        [FromQuery] string? universe = null,
+        CancellationToken ct = default
+    )
+    {
+        if (!string.IsNullOrWhiteSpace(continuity) && !IsValidContinuity(continuity))
+            return BadRequest(
+                new
+                {
+                    error = "InvalidQueryParameter",
+                    name = "continuity",
+                    value = continuity,
+                }
+            );
+
+        var resolvedRealm = realm ?? universe;
+        if (!string.IsNullOrWhiteSpace(resolvedRealm) && !Enum.TryParse<Realm>(resolvedRealm, true, out _))
+            return BadRequest(
+                new
+                {
+                    error = "InvalidQueryParameter",
+                    name = "realm",
+                    value = resolvedRealm,
+                }
+            );
+
+        var nodeInfo = await kg.GetNodeNameAndTypeAsync(familyPageId, ct);
+        if (nodeInfo is null)
+            return NotFound(new { error = "RootNotFound", pageId = familyPageId });
+        if (!string.Equals(nodeInfo.Value.Type, "Family", StringComparison.Ordinal))
+            return BadRequest(new { error = "RootMustBeFamily", actualType = nodeInfo.Value.Type });
+
+        var response = await kg.BuildFamilyTreeFromFamilyAsync(familyPageId, maxDepth, continuity, resolvedRealm, maxNodes: 200, ct);
+        if (response is null)
+            return NotFound(new { error = "NoMembers", pageId = familyPageId });
+        return Ok(response);
+    }
+
     private static bool IsValidContinuity(string value) => string.Equals(value, "Canon", StringComparison.OrdinalIgnoreCase) || string.Equals(value, "Legends", StringComparison.OrdinalIgnoreCase);
 }

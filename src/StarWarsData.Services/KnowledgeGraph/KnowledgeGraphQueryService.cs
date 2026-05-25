@@ -3338,6 +3338,98 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
     }
 
     /// <summary>
+    /// Family-tree projection rooted on a <em>Family aggregate</em> node rather
+    /// than a single Character. Used by the standalone <c>/family-trees</c>
+    /// page where the user picks a House/Family from a dropdown of all
+    /// Family-type nodes in the KG.
+    ///
+    /// The KG models membership via <c>Character --[family]--> Family</c>
+    /// edges, so a Family node has no kinship edges of its own — the renderer
+    /// needs a Character to anchor the tree. We pick the member with the
+    /// highest internal kinship degree (parent_of / spouse_of / sibling_of /
+    /// partner_of / married_to / child_of) as the focal and delegate to
+    /// <see cref="BuildFamilyTreeAsync"/>. The chosen focal's tree typically
+    /// covers the entire family via shared bloodlines; any members missed by
+    /// the kinship-bounded BFS are reported in
+    /// <see cref="FamilyTreeLimitations"/>'s <c>MissingGenders</c>
+    /// (those that surfaced as stubs) and are otherwise silently dropped —
+    /// flagging them properly would require a new limitations field; tracked
+    /// as a follow-up.
+    /// </summary>
+    public async Task<FamilyTreeResponse?> BuildFamilyTreeFromFamilyAsync(int familyPageId, int maxDepth, string? continuity, string? realm, int maxNodes = 200, CancellationToken ct = default)
+    {
+        // Members are the Characters with a `family` edge pointing at this
+        // Family node. The edge is stored Character → Family per the KG
+        // convention; ToId matches the family aggregate.
+        //
+        // Continuity scoping is two-staged:
+        //   1. If the caller passes an explicit `continuity` query param, use
+        //      it. (Global-filter passthrough from the /family-trees page.)
+        //   2. Otherwise fall back to the family node's own continuity — the
+        //      same Family pageId is referenced by `family` edges from BOTH
+        //      Canon and Legends Characters (the KG uses a single Family
+        //      aggregate per house), so without this guard the focal picker
+        //      would happily pick a Legends Character for a Canon-tagged
+        //      family aggregate and the downstream asymmetric rule would
+        //      then refuse to expand back into Canon, producing a tree that
+        //      mismatches what the user picked.
+        var scopeContinuity = continuity;
+        if (string.IsNullOrWhiteSpace(scopeContinuity))
+        {
+            var familyNode = await _nodes.Find(Builders<GraphNode>.Filter.Eq(n => n.PageId, familyPageId)).Project(n => new { n.Continuity }).FirstOrDefaultAsync(ct);
+            if (familyNode is not null && familyNode.Continuity != Continuity.Unknown)
+                scopeContinuity = familyNode.Continuity.ToString();
+        }
+
+        var memberClauses = new List<FilterDefinition<RelationshipEdge>>
+        {
+            Builders<RelationshipEdge>.Filter.Eq(e => e.ToId, familyPageId),
+            Builders<RelationshipEdge>.Filter.Eq(e => e.Label, "family"),
+        };
+        if (!string.IsNullOrWhiteSpace(scopeContinuity) && Enum.TryParse<Continuity>(scopeContinuity, true, out var parsedScope))
+        {
+            memberClauses.Add(Builders<RelationshipEdge>.Filter.Eq(e => e.Continuity, parsedScope));
+        }
+        var memberFilter = Builders<RelationshipEdge>.Filter.And(memberClauses);
+        var memberEdges = await _edges.Find(memberFilter).ToListAsync(ct);
+        var memberIds = memberEdges.Select(e => e.FromId).Distinct().ToList();
+        if (memberIds.Count == 0)
+            return null;
+
+        // Score each member by its internal kinship-edge count. "Internal"
+        // here just means kinship edges where the member is on either side —
+        // we'd ideally restrict to edges where *both* sides are members of
+        // the same family, but in practice this approximation picks the
+        // family's central figure (the highest-degree spouse/parent) reliably
+        // enough for a renderer focal. The kinship labels match the family
+        // tree projection (excluding the family-membership label itself).
+        var kinshipLabels = new[] { "parent_of", "child_of", "sibling_of", "partner_of", "spouse_of", "married_to" };
+        var degreeFilter = Builders<RelationshipEdge>.Filter.And(
+            Builders<RelationshipEdge>.Filter.Or(Builders<RelationshipEdge>.Filter.In(e => e.FromId, memberIds), Builders<RelationshipEdge>.Filter.In(e => e.ToId, memberIds)),
+            Builders<RelationshipEdge>.Filter.In(e => e.Label, kinshipLabels)
+        );
+        var kinshipEdges = await _edges.Find(degreeFilter).ToListAsync(ct);
+        var degree = memberIds.ToDictionary(id => id, _ => 0);
+        foreach (var e in kinshipEdges)
+        {
+            if (degree.ContainsKey(e.FromId))
+                degree[e.FromId]++;
+            if (degree.ContainsKey(e.ToId))
+                degree[e.ToId]++;
+        }
+        // Pick the highest-degree member; tie-break on lowest PageId for
+        // determinism so the chosen focal is stable across runs.
+        var focalId = memberIds.OrderByDescending(id => degree.GetValueOrDefault(id, 0)).ThenBy(id => id).First();
+
+        // Propagate the resolved continuity (caller-supplied OR family-derived)
+        // into the projection so the BFS doesn't widen out of scope after the
+        // focal pick. Without this, picking a Canon family but leaving
+        // continuity=null would still let the projection traverse Legends
+        // mirrors via the asymmetric rule's Legends → Canon allowance.
+        return await BuildFamilyTreeAsync(focalId, maxDepth, scopeContinuity, realm, maxNodes, ct);
+    }
+
+    /// <summary>
     /// Split a node name on the LAST whitespace — first token (or run of tokens)
     /// becomes FirstName, last token becomes LastName. Single-token names (e.g.
     /// "Yoda") use the full name as FirstName and an empty LastName. The

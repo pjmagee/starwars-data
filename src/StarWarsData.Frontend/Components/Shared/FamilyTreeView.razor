@@ -89,6 +89,15 @@
     [Parameter, EditorRequired]
     public FamilyTreeDescriptor Descriptor { get; set; } = null!;
 
+    /// <summary>
+    /// API route segment under <c>/api/RelationshipGraph/</c>. Defaults to
+    /// <c>family-tree</c> (focal is a Character). The standalone
+    /// <c>/family-trees</c> page passes <c>family-tree-by-family</c> so the
+    /// focal can be a Family-aggregate node.
+    /// </summary>
+    [Parameter]
+    public string EndpointPath { get; set; } = "family-tree";
+
     private readonly string _instanceId = $"family-tree-{Guid.NewGuid():N}";
     private IJSObjectReference? _module;
     private DotNetObjectReference<FamilyTreeView>? _self;
@@ -160,7 +169,11 @@
             if (!string.IsNullOrEmpty(realm))
                 qs.Add($"realm={Uri.EscapeDataString(realm)}");
 
-            var url = $"api/RelationshipGraph/family-tree/{Descriptor.RootEntityId}?{string.Join("&", qs)}";
+            // EndpointPath defaults to "family-tree" (Character focal). The
+            // /family-trees Explore page passes "family-tree-by-family" so the
+            // same renderer can target a Family-aggregate node — the server
+            // resolves the best Character focal internally.
+            var url = $"api/RelationshipGraph/{EndpointPath}/{Descriptor.RootEntityId}?{string.Join("&", qs)}";
             var response = await Http.GetFromJsonAsync<FamilyTreeResponse>(url);
 
             if (generation != _loadGeneration) return;

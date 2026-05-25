@@ -1,0 +1,162 @@
+@page "/family-trees"
+@using StarWarsData.Models.Queries
+@inject IHttpClientFactory HttpClientFactory
+@inject GlobalFilterService Filter
+@inject ILogger<FamilyTrees> Logger
+@implements IDisposable
+
+<PageTitle>Family Trees — Star Wars Data</PageTitle>
+<HeadContent>
+    <meta name="description" content="Pick any of 600+ families from the Star Wars knowledge graph (Skywalker, Organa, Tarkin, Kryze, Fett, Nightsisters, House of Tagge, San Tekka clan, …) and render a marriage-aware family tree centered on the family's central figure." />
+</HeadContent>
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="my-4 px-4">
+    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-3">
+        <MudIcon Icon="@Icons.Material.Filled.FamilyRestroom" Color="Color.Primary" />
+        <MudText Typo="Typo.h5">Family Trees</MudText>
+    </MudStack>
+
+    <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mb-3">
+        Pick a family from the knowledge graph. The renderer anchors on the family's
+        highest-kinship member and draws every relative reachable through marriage,
+        parentage, and siblings. Canon/Legends switches in the toolbar filter the
+        list and the rendered tree.
+    </MudText>
+
+    <MudAutocomplete T="EntitySearchDto"
+                     Value="_selected"
+                     ValueChanged="OnFamilySelected"
+                     SearchFunc="SearchFamilies"
+                     ToStringFunc="@(f => f is null ? string.Empty : (string.IsNullOrEmpty(f.Continuity) ? f.Name : $"{f.Name} · {f.Continuity}"))"
+                     Variant="Variant.Outlined"
+                     Margin="Margin.Dense"
+                     Placeholder="Search families — try Skywalker, Organa, Tarkin, Kryze…"
+                     Clearable="true"
+                     ResetValueOnEmptyText="true"
+                     CoerceValue="false"
+                     MaxItems="30"
+                     DebounceInterval="200"
+                     Class="mb-3" />
+
+    @if (_descriptor is not null)
+    {
+        @* Keyed on the family PageId so switching families fully tears down the
+           prior chart (the FamilyTreeView guards against double-renders, but a
+           fresh component is simpler and matches the rest of the app's reset-
+           on-selection pattern). *@
+        <FamilyTreeView @key="_descriptor.RootEntityId"
+                        Descriptor="_descriptor"
+                        EndpointPath="family-tree-by-family" />
+    }
+    else
+    {
+        <MudPaper Outlined="true" Class="pa-6 mt-4" Style="width:100%; text-align:center">
+            <MudIcon Icon="@Icons.Material.Filled.FamilyRestroom" Color="Color.Secondary" Size="Size.Large" Class="mb-2" />
+            <MudText Typo="Typo.body2" Color="Color.Secondary">
+                No family selected yet — start typing above to pick one.
+            </MudText>
+        </MudPaper>
+    }
+</MudContainer>
+
+@code {
+    private EntitySearchDto? _selected;
+    private FamilyTreeDescriptor? _descriptor;
+    private bool _subscribed;
+
+    private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
+
+    protected override void OnInitialized()
+    {
+        if (!_subscribed)
+        {
+            Filter.OnChange += OnFilterChanged;
+            _subscribed = true;
+        }
+    }
+
+    private async Task<IEnumerable<EntitySearchDto>> SearchFamilies(string? text, CancellationToken ct)
+    {
+        // The browse endpoint paginates Family nodes name-sorted. With no query
+        // string we surface the first 30 families alphabetically; with a query
+        // we forward it as the `q` filter (BrowseAsync handles substring +
+        // titles regex). Continuity follows the global filter (Principle VII).
+        try
+        {
+            var qs = new List<string> { "type=Family", "page=1", "pageSize=30" };
+            if (!string.IsNullOrWhiteSpace(text))
+                qs.Add($"q={Uri.EscapeDataString(text.Trim())}");
+            var continuity = Filter.GetContinuityQueryParam();
+            if (!string.IsNullOrEmpty(continuity))
+                qs.Add($"continuity={Uri.EscapeDataString(continuity)}");
+            var realm = Filter.GetRealmQueryParam();
+            if (!string.IsNullOrEmpty(realm))
+                qs.Add($"realm={Uri.EscapeDataString(realm)}");
+
+            var url = $"api/RelationshipGraph/browse?{string.Join("&", qs)}";
+            var result = await Http.GetFromJsonAsync<BrowseEntitiesResult>(url, ct);
+            return result?.Items ?? Enumerable.Empty<EntitySearchDto>();
+        }
+        catch (OperationCanceledException)
+        {
+            return Enumerable.Empty<EntitySearchDto>();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogWarning(ex, "Family search failed for query \"{Query}\"", text);
+            return Enumerable.Empty<EntitySearchDto>();
+        }
+    }
+
+    private void OnFamilySelected(EntitySearchDto? family)
+    {
+        _selected = family;
+        if (family is null)
+        {
+            _descriptor = null;
+            return;
+        }
+
+        // FamilyTreeView fetches via the EndpointPath we hand it. The descriptor
+        // carries the Family node's PageId as RootEntityId; the server resolves
+        // the focal Character internally and returns the standard wire shape.
+        _descriptor = new FamilyTreeDescriptor
+        {
+            Title = family.Name,
+            RootEntityId = family.Id,
+            RootEntityName = family.Name,
+            MaxDepth = 3,
+            Continuity = family.Continuity,
+        };
+    }
+
+    private void OnFilterChanged()
+    {
+        // When the user flips Canon/Legends the current selection may stop
+        // matching the filter scope. Clear it so the UI doesn't render a tree
+        // that's invisible to the active continuity. Tree-level filter changes
+        // (re-fetch on continuity flip) are already handled by FamilyTreeView.
+        if (_selected is null) return;
+        var continuity = Filter.GetContinuityQueryParam();
+        if (!string.IsNullOrEmpty(continuity)
+            && !string.IsNullOrEmpty(_selected.Continuity)
+            && !string.Equals(continuity, _selected.Continuity, StringComparison.OrdinalIgnoreCase))
+        {
+            InvokeAsync(() =>
+            {
+                _selected = null;
+                _descriptor = null;
+                StateHasChanged();
+            });
+        }
+    }
+
+    public void Dispose()
+    {
+        if (_subscribed)
+        {
+            Filter.OnChange -= OnFilterChanged;
+            _subscribed = false;
+        }
+    }
+}
