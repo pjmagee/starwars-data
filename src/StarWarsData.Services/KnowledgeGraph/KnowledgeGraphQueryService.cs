@@ -3045,86 +3045,24 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         // below; no extra round-trip and no raw.pages read. The default ("M")
         // never propagates outside this projection. Principle VI fully honoured.
 
-        // ── Step 4 (early) — partition family-membership edges ──────────────
+        // ── Step 4 — drop family-membership edges silently ──────────────────
         // A `family` edge points from a Character to a Family aggregate node.
-        // It does NOT translate into Rels.Parents. The adoptive case (Leia ↔
-        // Organa family AND Bail ↔ Organa family, but no parent_of Bail→Leia)
-        // is detected and surfaced via AdoptiveRelationsExcluded.
-        var familyEdges = collectedEdges.Where(e => string.Equals(e.Label, "family", StringComparison.OrdinalIgnoreCase)).ToList();
+        // It does NOT translate into Rels.Parents. An earlier cut tried to
+        // detect "adoptive" cases (co-membership in a family node with no
+        // parent_of between the members) and surface them via
+        // AdoptiveRelationsExcluded — but the heuristic is structurally
+        // over-broad: every pair of family members lacking a direct parent_of
+        // gets flagged, which includes siblings (Luke ↔ Leia in the Skywalker
+        // family — same generation, not adoptive), spouses (Anakin ↔ Padmé —
+        // also not adoptive), grandparents, cousins, in-laws, and so on. For
+        // the Skywalker family alone the projection produced 200+ entries,
+        // 99% of which are false positives.
+        //
+        // Without explicit `adopted_by` / `biological_parent_of` edge labels
+        // in the KG (Design-042 § Revisit when), there is no reliable rule
+        // for detecting true adoption from infobox-only data. Drop family
+        // edges silently and leave AdoptiveRelationsExcluded empty.
         var nonFamilyEdges = collectedEdges.Where(e => !string.Equals(e.Label, "family", StringComparison.OrdinalIgnoreCase)).ToList();
-
-        // Index existing parent_of edges (incl. their inverse via child_of) so we
-        // can recognise an adoptive (= family-only, no biological) relationship.
-        var parentChildPairs = new HashSet<(int parent, int child)>();
-        foreach (var e in nonFamilyEdges)
-        {
-            if (string.Equals(e.Label, "parent_of", StringComparison.OrdinalIgnoreCase))
-                parentChildPairs.Add((e.FromId, e.ToId));
-            else if (string.Equals(e.Label, "child_of", StringComparison.OrdinalIgnoreCase))
-                parentChildPairs.Add((e.ToId, e.FromId));
-        }
-
-        // Group family-edge endpoints by family node so we can detect "both
-        // ends are in the same family, but no parent_of links them" → adoptive.
-        var familyMembersByFamily = new Dictionary<int, List<int>>();
-        var familyNameById = new Dictionary<int, string>();
-        foreach (var e in familyEdges)
-        {
-            // The character → family edge could be stored either direction
-            // depending on the source field; we want the Family node.
-            int familyNodeId,
-                memberId;
-            string familyName;
-            if (nodeById.TryGetValue(e.ToId, out var to) && to.Type == KgNodeTypes.Family)
-            {
-                familyNodeId = e.ToId;
-                memberId = e.FromId;
-                familyName = to.Name;
-            }
-            else if (nodeById.TryGetValue(e.FromId, out var from) && from.Type == KgNodeTypes.Family)
-            {
-                familyNodeId = e.FromId;
-                memberId = e.ToId;
-                familyName = from.Name;
-            }
-            else
-            {
-                continue;
-            }
-
-            familyNameById[familyNodeId] = familyName;
-            if (!familyMembersByFamily.TryGetValue(familyNodeId, out var list))
-            {
-                list = [];
-                familyMembersByFamily[familyNodeId] = list;
-            }
-            if (!list.Contains(memberId))
-                list.Add(memberId);
-        }
-
-        foreach (var (familyNodeId, members) in familyMembersByFamily)
-        {
-            // For each (child, potential-parent) co-membership pair that has NO
-            // parent_of edge between them, surface the adoptive case. Cardinality
-            // is small (typically 2 endpoints per family in the BFS), so the
-            // quadratic scan is fine.
-            foreach (var member in members)
-            {
-                foreach (var other in members)
-                {
-                    if (member == other)
-                        continue;
-                    if (parentChildPairs.Contains((other, member)))
-                        continue; // biological parent already exists → not adoptive
-                    if (!nodeById.TryGetValue(other, out var otherNode))
-                        continue;
-                    var familyName = familyNameById[familyNodeId];
-                    var entry = $"{member}→{otherNode.Name} via {familyName}";
-                    if (!limitations.AdoptiveRelationsExcluded.Contains(entry))
-                        limitations.AdoptiveRelationsExcluded.Add(entry);
-                }
-            }
-        }
 
         // Drop Family nodes from the People projection — they're aggregates, not
         // persons in the family-chart sense.
@@ -3265,8 +3203,14 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                 Rels = new FamilyTreeRels(),
             };
             people[stubId] = stub;
-            if (!limitations.MissingGenders.Contains(pageId))
-                limitations.MissingGenders.Add(pageId);
+            // NOTE: do NOT append the stub's PageId to Limitations.MissingGenders.
+            // Stubs are placeholders WE generated for references that pointed
+            // outside the BFS visited set — they are not real KG nodes with
+            // genuinely-missing gender data. Padding MissingGenders with stubs
+            // produces a misleading "Missing gender on N characters" count
+            // dominated by our own artifacts. Real missing-gender entries are
+            // only added in Step 2 when a visited Character node has no
+            // Gender property.
 
             // Rewrite Rels references from "{pageId}" → "{pageId}-stub".
             foreach (var p in people.Values.Where(p => !ReferenceEquals(p, stub)))

@@ -87,7 +87,7 @@ public sealed record FamilyTreeKinshipEntry(
 ```csharp
 public sealed record FamilyTreeLimitations(
     List<int> MissingGenders,                        // PageIds defaulted to "M"
-    List<string> AdoptiveRelationsExcluded,          // "{childPageId}→{parentPageId} via {family node name}"
+    List<string> AdoptiveRelationsExcluded,          // Always empty in v1 — see Step 4 below for the rationale. Field kept on the wire for forward compatibility.
     bool TruncatedAtDepth,                           // BFS hit maxNodes before reaching maxDepth
     bool CycleFallback                               // renderer crashed/looped; fallback to render_graph Tree mode
 );
@@ -142,12 +142,13 @@ For every `has_relative` edge `(A, has_relative, B)` where both A and B are in t
 
 `has_relative` does NOT translate into `Rels.Parents`/`Children`/`Spouses` — it lives in the kinship block only.
 
-### Step 4 — `family` membership edges
+### Step 4 — `family` membership edges (dropped silently)
 
-`family` edges (e.g. `Leia` ↔ `Skywalker family`) are NOT translated into `Rels.parents` (they would create false parent-child links). Two cases:
+`family` edges (e.g. `Leia` ↔ `Skywalker family`) are NOT translated into `Rels.parents` (they would create false parent-child links). **All family-membership edges are dropped silently.** `Limitations.AdoptiveRelationsExcluded` stays empty in v1.
 
-- If the `family` node represents an *adoptive household* relationship (rare; e.g. `Leia` ↔ `Organa family` while parent_of points to Anakin/Padmé), record `"{childPageId}→{parentPageId via family node}"` in `Limitations.AdoptiveRelationsExcluded`.
-- Otherwise drop silently.
+An earlier draft tried to detect "adoptive" cases by flagging co-membership pairs in a family node where no `parent_of` existed between the members. The heuristic was structurally over-broad: every pair of family members lacking a direct biological edge gets flagged, which includes siblings (Luke ↔ Leia in the Skywalker family), spouses (Anakin ↔ Padmé), grandparents, cousins, and in-laws. Against real `starwars-dev` data the projection produced 250+ entries per character — 99% false positives — drowning the few genuine adoptive cases.
+
+Without explicit `adopted_by` / `biological_parent_of` edge labels in the KG (spec.md § Revisit when), there is no reliable rule for detecting true adoption from infobox-only data. Drop silently; revisit when proper edge labels exist.
 
 ### Step 5 — Enforce bidirectional linking
 
@@ -156,8 +157,8 @@ After step 2, scan every `(person, rels.spouses[])` pair: if `personA.spouses` i
 For references to PageIds NOT present in `People[]` (truncation or genuinely-absent kg.nodes):
 
 - Emit a synthetic stub `FamilyTreePerson` with `Id = $"{missingPageId}-stub"`, `Data.PageId = missingPageId`, `Data.Gender = "M"`, `Data.FirstName = "Unknown"`, `Data.LastName = "Unknown"`, `Rels` empty.
-- Append `missingPageId` to `Limitations.MissingGenders` (the stub is genuinely missing data).
 - The stub's PageId carries through so the card click navigates to `/knowledge-graph/nodes/{pageId}` (research.md R-7).
+- Stubs are **NOT** appended to `Limitations.MissingGenders`. They are our own placeholders for references that pointed outside the BFS visited set, not real KG nodes with missing gender data. Padding the missing-gender count with our own artifacts was misleading — only Step 2 entries (real visited Character nodes with no `Gender` property) populate `MissingGenders`.
 
 ### Step 6 — Truncation
 
@@ -189,7 +190,7 @@ All six rules are unit-tested against the `ApiFixture` seed (Skywalker / Solo / 
 | Bidirectional repair | seed has only `(Anakin, partner_of, Padmé)`, no reverse | Output has BOTH `Anakin.Spouses=[Padmé.Id]` AND `Padmé.Spouses=[Anakin.Id]` |
 | Truncation | seed truncated at maxNodes=3 | `Limitations.TruncatedAtDepth=true`; missing references emit `-stub` entries |
 | Missing gender | Character with no `Gender` infobox field | `Data.Gender="M"`, PageId in `Limitations.MissingGenders` |
-| Adoptive (Leia → Bail Organa) | `Leia` ↔ `Organa family` membership, no `parent_of` | `Bail` NOT in `Leia.Rels.Parents`; entry in `Limitations.AdoptiveRelationsExcluded` |
+| Family membership (Leia ↔ Organa family) | `Leia` ↔ `Organa family` membership, no `parent_of` Bail→Leia | `Bail` NOT in `Leia.Rels.Parents` (family edges don't translate). `Limitations.AdoptiveRelationsExcluded` stays empty — see Step 4. |
 
 ---
 

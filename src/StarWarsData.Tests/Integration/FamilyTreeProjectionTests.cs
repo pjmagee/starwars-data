@@ -112,23 +112,29 @@ public class FamilyTreeProjectionTests
     }
 
     [TestMethod]
-    public async Task AdoptiveRelation_LeiaAndBail_IsExcludedAndLogged()
+    public async Task FamilyMembership_DoesNotBecomeParentRelation()
     {
         // Leia ↔ Organa family AND Bail ↔ Organa family, but NO parent_of Bail→Leia.
-        // The adoptive case must NOT translate into Leia.Rels.Parents, and an
-        // entry must surface in Limitations.AdoptiveRelationsExcluded.
+        // The family-membership co-occurrence must NOT translate into Leia.Rels.Parents.
+        //
+        // Earlier draft also asserted that an entry surfaced in
+        // Limitations.AdoptiveRelationsExcluded. That heuristic was structurally
+        // over-broad (every pair of family members lacking a direct parent_of
+        // gets flagged, including siblings/spouses/grandparents/in-laws — 200+
+        // false positives on real starwars-dev data), so the projection no
+        // longer populates AdoptiveRelationsExcluded. Without explicit
+        // `adopted_by` edge labels in the KG (Design-042 § Revisit when),
+        // there is no reliable rule for detecting true adoption from
+        // infobox-only data. Family edges are dropped silently.
         var result = await Svc.BuildFamilyTreeAsync(ApiFixture.AnakinPageId, maxDepth: 3, continuity: null, realm: null, ct: CancellationToken.None);
 
         var leia = result.People.Single(p => p.Id == ApiFixture.LeiaPageId.ToString());
         var bailId = ApiFixture.BailOrganaPageId.ToString();
 
         if (leia.Rels.Parents is { } parents)
-            Assert.IsFalse(parents.Contains(bailId), "Bail must NOT appear in Leia.Rels.Parents — adoptive relations don't translate");
+            Assert.IsFalse(parents.Contains(bailId), "Bail must NOT appear in Leia.Rels.Parents — family-membership edges don't translate");
 
-        Assert.IsTrue(
-            result.Limitations.AdoptiveRelationsExcluded.Any(e => e.Contains($"{ApiFixture.LeiaPageId}", StringComparison.Ordinal) && e.Contains("Organa family", StringComparison.Ordinal)),
-            "Limitations.AdoptiveRelationsExcluded must contain an entry for Leia↔Bail via Organa family"
-        );
+        Assert.AreEqual(0, result.Limitations.AdoptiveRelationsExcluded.Count, "AdoptiveRelationsExcluded must stay empty — the heuristic was over-broad and is no longer populated");
     }
 
     [TestMethod]
