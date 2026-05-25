@@ -486,6 +486,12 @@ public class FamilyTreePersonData
         "The real PageId for both real entries and synthetic stubs (the stub's Id carries a -stub suffix but its PageId is the real one, so the click still navigates to /knowledge-graph/nodes/{pageId})."
     )]
     public int PageId { get; set; }
+
+    [JsonPropertyName("continuity")]
+    [Description(
+        "Canon | Legends | Unknown — copied from kg.nodes.continuity so the renderer can mark each card with the matching continuity chip per Principle VII (canonical theme colours). When the user has the global filter set to \"Both\" or the AI tool scopes the tree without a continuity constraint, the response can contain a mix of Canon and Legends nodes; this field lets the card-renderer distinguish them visually so users aren't confused by characters that have separate Canon / Legends Wookieepedia pages (e.g. \"Anakin Skywalker\" Canon vs \"Anakin Skywalker/Legends\")."
+    )]
+    public string Continuity { get; set; } = "Unknown";
 }
 
 [Description("Family-chart-premium relationship arrays. Bidirectional linking is enforced server-side: every ID listed here must appear in People[].")]

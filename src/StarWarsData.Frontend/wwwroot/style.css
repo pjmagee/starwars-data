@@ -256,3 +256,43 @@ html[data-text-size="extra-large"] {
  * Affected DOM: div.f3 > .cards_view > .card_cont > .card.card-to-add. */
 div.f3 .card.card-to-add { display: none !important; }
 div.f3 .f3-to-add-label { display: none !important; }
+
+/* Per-card Canon/Legends continuity chip (Design-042 + Principle VII).
+ * Each card renders two `.f3-card-label` rows:
+ *   1. first + last name (joined)
+ *   2. `<span class="ft-continuity-chip" data-continuity="Canon|Legends|Unknown">...</span>`
+ * Inline raw HTML is emitted by the function-form setCardDisplay entry in
+ * wwwroot/js/family-tree.js. Colour-mapping follows the canonical chip
+ * convention used elsewhere on the site:
+ *   Canon  → primary palette
+ *   Legends → secondary palette
+ *   Unknown → muted (stubs, mixed/no-filter results)
+ * Sizing matches MudBlazor's Size.Small chips for visual coherence with the
+ * Continuity / Realm chips in the AppBar filter. */
+div.f3 .ft-continuity-chip {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    line-height: 1.6;
+    margin-top: 2px;
+    border: 1px solid transparent;
+}
+div.f3 .ft-continuity-chip[data-continuity="Canon"] {
+    background-color: var(--mud-palette-primary, #594ae2);
+    color: var(--mud-palette-primary-text, #fff);
+    border-color: var(--mud-palette-primary, #594ae2);
+}
+div.f3 .ft-continuity-chip[data-continuity="Legends"] {
+    background-color: var(--mud-palette-secondary, #ff4081);
+    color: var(--mud-palette-secondary-text, #fff);
+    border-color: var(--mud-palette-secondary, #ff4081);
+}
+div.f3 .ft-continuity-chip[data-continuity="Unknown"] {
+    background-color: transparent;
+    color: var(--mud-palette-text-secondary, #757575);
+    border-color: var(--mud-palette-divider, rgba(0,0,0,0.12));
+}

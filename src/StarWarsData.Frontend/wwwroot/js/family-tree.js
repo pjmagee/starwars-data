@@ -21,17 +21,30 @@ function _safeData(payload) {
     // payload is the FamilyTreeResponse wire shape — people[] is the array
     // family-chart wants. Defensive copy + ensure required keys exist.
     const people = Array.isArray(payload?.people) ? payload.people : [];
+    // Strip the Wookieepedia "/Legends" article slug from displayed names.
+    // The kg.nodes.name for Legends-variant articles is suffixed (e.g.
+    // "Anakin Skywalker/Legends"), which the SplitName helper carried into
+    // the last-name field — so cards previously read "Anakin Skywalker/Legends".
+    // The dedicated Canon/Legends chip below now conveys that signal cleanly;
+    // the article slug is redundant on the card label. PageId / wikiUrl /
+    // continuity all still point at the correct Legends entity.
+    const stripLegendsSuffix = (s) => (typeof s === 'string' ? s.replace(/\s*\/?\s*Legends\s*$/i, '') : s);
     return people.map((p) => ({
         id: String(p.id),
         data: {
             gender: p?.data?.gender === 'F' ? 'F' : 'M',
-            'first name': p?.data?.['first name'] ?? '',
-            'last name': p?.data?.['last name'] ?? '',
+            'first name': stripLegendsSuffix(p?.data?.['first name'] ?? ''),
+            'last name': stripLegendsSuffix(p?.data?.['last name'] ?? ''),
             // Free-form extras family-chart will ignore unless we display them.
             // pageId is the integer used by the click handler.
             pageId: p?.data?.pageId ?? null,
             wikiUrl: p?.data?.wikiUrl ?? null,
             imageUrl: p?.data?.imageUrl ?? null,
+            // continuity drives the per-card Canon/Legends chip styling — see
+            // setCardDisplay below + the `.ft-continuity-chip[data-continuity=...]`
+            // CSS rules in wwwroot/style.css. Defaults to "Unknown" so the
+            // renderer doesn't blow up on stubs / partial data.
+            continuity: p?.data?.continuity ?? 'Unknown',
         },
         rels: {
             parents: Array.isArray(p?.rels?.parents) ? p.rels.parents.map(String) : [],
@@ -90,8 +103,33 @@ export function renderFamilyTree(containerId, payload, dotNetRef) {
     try {
         const card = chart.setCardHtml();
         if (typeof card.setCardDisplay === 'function') {
+            // Row 1: name (joined first + last via the array shorthand).
+            // Row 2: a function that returns inline HTML for the continuity chip.
+            //
+            // family-chart-premium's card_display normaliser (`I(e)` in the
+            // bundle) accepts three row types: function, string, and array.
+            // Each row is interpolated into `<div class="f3-card-label">...</div>`
+            // via a template literal, so a function returning raw HTML is
+            // preserved unescaped. We use that to emit a colour-coded chip:
+            // Canon  → primary palette (--mud-palette-primary)
+            // Legends → secondary palette (--mud-palette-secondary)
+            // Other  → muted default
+            //
+            // The chip element has data-continuity="Canon|Legends|Unknown"
+            // so the scoped CSS in wwwroot/style.css can colour-map per
+            // Principle VII without per-card JS work.
+            const escapeHtml = (s) => String(s ?? 'Unknown')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
             card.setCardDisplay([
                 ['first name', 'last name'],
+                (datum) => {
+                    const c = escapeHtml(datum?.data?.continuity);
+                    return `<span class="ft-continuity-chip" data-continuity="${c}">${c}</span>`;
+                },
             ]);
         }
         if (typeof card.setCardImageField === 'function') {

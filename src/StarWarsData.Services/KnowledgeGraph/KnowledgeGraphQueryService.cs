@@ -3039,6 +3039,70 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
         var visitedNodes = await _nodes.Find(Builders<GraphNode>.Filter.In(n => n.PageId, visited)).ToListAsync(ct);
         var nodeById = visitedNodes.ToDictionary(n => n.PageId);
 
+        // ── Asymmetric continuity rule (Design-042) ──────────────────────────
+        // "Canon never pulls Legends." From the focal node's perspective every
+        // edge in the projected tree has a direction (away from focal); the
+        // rule blocks the hop whenever the source is Canon and the target is
+        // Legends. The Legends → Canon direction is always permitted — that
+        // is the legitimate cross-reference that turns a Canon node into a
+        // leaf inside a Legends-rooted tree.
+        //
+        // This must be applied as a *directional* BFS rather than a
+        // symmetric edge filter, because kg.edges stores symmetric relations
+        // (spouse_of, sibling_of, …) with an arbitrary From/To. A
+        // Canon ↔ Legends spouse edge stored as `Legends → Canon` would slip
+        // past a `From == Canon && To == Legends` filter and the
+        // bidirectional reachability that follows would still drag the
+        // Legends node in. By walking from the focal and consulting the
+        // continuities of (current, neighbour) at every step we encode the
+        // rule the way the user phrased it: "Canon focal → strict Canon
+        // tree; Legends focal → Legends tree with optional Canon leaves."
+        //
+        // The walk runs on the visitedNodes / collectedEdges already loaded
+        // by the upstream BFS, so it never expands reach — it can only drop
+        // nodes. Anything pruned out (e.g. a Legends mirror only reachable
+        // from a Canon node) disappears from the projection cleanly without
+        // becoming a synthetic stub.
+        var adjacency = new Dictionary<int, List<int>>(visitedNodes.Count);
+        foreach (var e in collectedEdges)
+        {
+            if (!adjacency.TryGetValue(e.FromId, out var fromList))
+                adjacency[e.FromId] = fromList = new List<int>();
+            fromList.Add(e.ToId);
+            if (!adjacency.TryGetValue(e.ToId, out var toList))
+                adjacency[e.ToId] = toList = new List<int>();
+            toList.Add(e.FromId);
+        }
+        var reachable = new HashSet<int> { rootId };
+        var directionalQueue = new Queue<int>();
+        directionalQueue.Enqueue(rootId);
+        while (directionalQueue.Count > 0)
+        {
+            var u = directionalQueue.Dequeue();
+            var uCont = nodeById.GetValueOrDefault(u)?.Continuity ?? Continuity.Unknown;
+            if (!adjacency.TryGetValue(u, out var neighbours))
+                continue;
+            foreach (var v in neighbours)
+            {
+                var vCont = nodeById.GetValueOrDefault(v)?.Continuity ?? Continuity.Unknown;
+                if (uCont == Continuity.Canon && vCont == Continuity.Legends)
+                    continue; // Canon never pulls Legends.
+                if (reachable.Add(v))
+                    directionalQueue.Enqueue(v);
+            }
+        }
+        // Keep only edges connecting reachable nodes. We deliberately do NOT
+        // apply a second "drop Canon → Legends" filter on the edge's stored
+        // direction here: kg.edges encodes parent_of as parent → child (so a
+        // Canon parent of a Legends child is stored Canon → Legends even
+        // though the *focal-rooted* traversal hops Legends → Canon at
+        // discovery time). The directional BFS above already vets every node
+        // for legitimacy; any edge among the survivors is, by construction,
+        // a real KG relationship within the projected tree.
+        collectedEdges = collectedEdges.Where(e => reachable.Contains(e.FromId) && reachable.Contains(e.ToId)).ToList();
+        visitedNodes = visitedNodes.Where(n => reachable.Contains(n.PageId)).ToList();
+        nodeById = visitedNodes.ToDictionary(n => n.PageId);
+
         // Gender comes from kg.nodes.properties["Gender"] — projected by the
         // generic NodeBuilder loop because "Gender" is listed in
         // FieldSemantics.Properties. Resolved inline during the projection loop
@@ -3088,6 +3152,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                     WikiUrl = node.WikiUrl,
                     ImageUrl = node.ImageUrl,
                     PageId = node.PageId,
+                    Continuity = node.Continuity.ToString(),
                 },
                 Rels = new FamilyTreeRels(),
             };
@@ -3199,6 +3264,7 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                     FirstName = "Unknown",
                     LastName = "Unknown",
                     PageId = pageId,
+                    Continuity = "Unknown",
                 },
                 Rels = new FamilyTreeRels(),
             };
