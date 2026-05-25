@@ -35,6 +35,23 @@ public class RelationshipGraphController(KnowledgeGraphQueryService kg) : Contro
         CancellationToken ct = default
     ) => kg.SearchAsync(q, type, continuity, universe, ct);
 
+    /// <summary>
+    /// Unified family search for the <c>/family-trees</c> Explore page.
+    /// Matches Family-type nodes by name AND surfaces families via their
+    /// member Characters' names (so a user who only knows a first name like
+    /// "Anakin" still finds the Skywalker family). See
+    /// <see cref="KnowledgeGraphQueryService.SearchFamiliesByMemberAsync"/>
+    /// for the merge/dedupe rules and <c>MatchedVia</c> semantics.
+    /// </summary>
+    [HttpGet("families/search")]
+    public Task<List<EntitySearchDto>> SearchFamilies(
+        [FromQuery] string q,
+        [FromQuery] string? continuity = null,
+        [FromQuery] string? realm = null,
+        [FromQuery] string? universe = null,
+        CancellationToken ct = default
+    ) => kg.SearchFamiliesByMemberAsync(q, continuity, realm ?? universe, ct);
+
     [HttpGet("labels/{pageId:int}")]
     public Task<EntityLabelsResult> GetLabels(
         int pageId,

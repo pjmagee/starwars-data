@@ -27,16 +27,16 @@
                      Value="_selected"
                      ValueChanged="OnFamilySelected"
                      SearchFunc="SearchFamilies"
-                     ToStringFunc="@(f => f is null ? string.Empty : (string.IsNullOrEmpty(f.Continuity) ? f.Name : $"{f.Name} · {f.Continuity}"))"
+                     ToStringFunc="@FormatFamilyOption"
                      Variant="Variant.Outlined"
                      Margin="Margin.Dense"
-                     Placeholder="@($"Search {(_allFamilies?.Count ?? 0)} families — try Skywalker, Organa, Tarkin, Kryze… (or just scroll A–Z)")"
+                     Placeholder="@($"Search {(_allFamilies?.Count ?? 0)} families by family or character name — try Skywalker, Anakin, Boba… (or just scroll A–Z)")"
                      Clearable="true"
                      ResetValueOnEmptyText="true"
                      CoerceValue="false"
                      MaxItems="@(null)"
                      MaxHeight="520"
-                     DebounceInterval="100"
+                     DebounceInterval="150"
                      Class="mb-3" />
 
     @if (_descriptor is not null)
@@ -135,20 +135,60 @@
         }
     }
 
-    private Task<IEnumerable<EntitySearchDto>> SearchFamilies(string? text, CancellationToken ct)
+    private async Task<IEnumerable<EntitySearchDto>> SearchFamilies(string? text, CancellationToken ct)
     {
-        // Client-side substring filter over the prefetched in-memory list. Returns
-        // ALL matching entries — `MaxItems="@(null)"` on the autocomplete lets the
-        // popover render every match with internal scroll capped by MaxHeight.
-        // Sorted A–Z (already sorted by ReloadFamiliesAsync), so an empty query
-        // yields the full alphabetical list and the user can scroll through it.
-        var src = _allFamilies ?? new List<EntitySearchDto>();
+        // Two-mode search:
+        //   • Empty query → return the prefetched A–Z list (instant, no HTTP).
+        //   • Non-empty   → hit /families/search which surfaces matches BOTH
+        //     by family name AND by member-character name. Lets a user who
+        //     only knows a first name ("Anakin", "Padmé", "Boba") still find
+        //     the right family. Each hit may carry `MatchedVia` with the
+        //     character name; FormatFamilyOption surfaces it inline.
         if (string.IsNullOrWhiteSpace(text))
-            return Task.FromResult<IEnumerable<EntitySearchDto>>(src);
-        var needle = text.Trim();
-        var matches = src.Where(f => f.Name is not null
-            && f.Name.Contains(needle, StringComparison.OrdinalIgnoreCase));
-        return Task.FromResult(matches);
+        {
+            return _allFamilies ?? Enumerable.Empty<EntitySearchDto>();
+        }
+
+        try
+        {
+            var qs = new List<string> { $"q={Uri.EscapeDataString(text.Trim())}" };
+            var continuity = Filter.GetContinuityQueryParam();
+            if (!string.IsNullOrEmpty(continuity))
+                qs.Add($"continuity={Uri.EscapeDataString(continuity)}");
+            var realm = Filter.GetRealmQueryParam();
+            if (!string.IsNullOrEmpty(realm))
+                qs.Add($"realm={Uri.EscapeDataString(realm)}");
+
+            var url = $"api/RelationshipGraph/families/search?{string.Join("&", qs)}";
+            var result = await Http.GetFromJsonAsync<List<EntitySearchDto>>(url, ct);
+            return result ?? Enumerable.Empty<EntitySearchDto>();
+        }
+        catch (OperationCanceledException)
+        {
+            return Enumerable.Empty<EntitySearchDto>();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogWarning(ex, "Family search failed for query \"{Query}\"", text);
+            return Enumerable.Empty<EntitySearchDto>();
+        }
+    }
+
+    /// <summary>
+    /// Display formatter for both the input value and the popover options.
+    /// Direct hits read "Skywalker family · Canon"; character-surfaced hits
+    /// read "Skywalker family · Canon · via Anakin Skywalker" so the user can
+    /// tell which member triggered the match.
+    /// </summary>
+    private static string FormatFamilyOption(EntitySearchDto? f)
+    {
+        if (f is null) return string.Empty;
+        var parts = new List<string> { f.Name };
+        if (!string.IsNullOrEmpty(f.Continuity))
+            parts.Add(f.Continuity);
+        if (!string.IsNullOrEmpty(f.MatchedVia))
+            parts.Add($"via {f.MatchedVia}");
+        return string.Join(" · ", parts);
     }
 
     private void OnFamilySelected(EntitySearchDto? family)

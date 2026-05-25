@@ -195,6 +195,141 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
     }
 
     /// <summary>
+    /// Unified family search for the <c>/family-trees</c> Explore page. Returns
+    /// Family-type nodes matched in one of two ways:
+    /// <list type="bullet">
+    ///   <item>Direct: the Family node's own name matches <paramref name="q"/>
+    ///         (e.g. "Skywalker" → Skywalker family).</item>
+    ///   <item>Via member: a Character whose name matches <paramref name="q"/>
+    ///         has a <c>family</c> edge pointing at the Family node
+    ///         (e.g. "Anakin" → Skywalker family, with
+    ///         <see cref="EntitySearchDto.MatchedVia"/> = "Anakin Skywalker").
+    ///         A single character may surface several families; each appears
+    ///         as a separate hit with its own MatchedVia annotation, so the
+    ///         user can tell *which* member triggered the match.</item>
+    /// </list>
+    /// Direct matches are listed first (no <c>MatchedVia</c>), followed by
+    /// member matches sorted by family name. Capped at 50 hits.
+    /// </summary>
+    public async Task<List<EntitySearchDto>> SearchFamiliesByMemberAsync(string q, string? continuity, string? realm, CancellationToken ct)
+    {
+        if (string.IsNullOrWhiteSpace(q))
+            return new List<EntitySearchDto>();
+
+        var continuityFilter = ParseContinuityFilter(continuity);
+        Realm? realmFilter = realm is not null && Enum.TryParse<Realm>(realm, true, out var r) ? r : null;
+
+        // ── 1. Direct family-name matches ────────────────────────────────────
+        var directFilters = new List<FilterDefinition<GraphNode>> { Builders<GraphNode>.Filter.Eq(n => n.Type, "Family"), NameOrTitleFilter(q) };
+        if (continuityFilter is { } c1)
+            directFilters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, c1));
+        if (realmFilter is { } r1)
+            directFilters.Add(Builders<GraphNode>.Filter.In(n => n.Realm, [r1, Realm.Unknown]));
+
+        var direct = await _nodes
+            .Find(Builders<GraphNode>.Filter.And(directFilters))
+            .SortBy(n => n.Name)
+            .Limit(50)
+            .Project(n => new EntitySearchDto
+            {
+                Id = n.PageId,
+                Name = n.Name,
+                Type = n.Type,
+                Continuity = n.Continuity.ToString(),
+            })
+            .ToListAsync(ct);
+
+        // ── 2. Character-name matches → resolve to their families ────────────
+        var charFilters = new List<FilterDefinition<GraphNode>> { Builders<GraphNode>.Filter.Eq(n => n.Type, "Character"), NameOrTitleFilter(q) };
+        if (continuityFilter is { } c2)
+            charFilters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, c2));
+        if (realmFilter is { } r2)
+            charFilters.Add(Builders<GraphNode>.Filter.In(n => n.Realm, [r2, Realm.Unknown]));
+
+        var matchedChars = await _nodes
+            .Find(Builders<GraphNode>.Filter.And(charFilters))
+            .SortBy(n => n.Name)
+            .Limit(60) // bounded so a generic name like "Skywalker" doesn't explode the family lookup
+            .Project(n => new { n.PageId, n.Name })
+            .ToListAsync(ct);
+
+        var byMember = new List<EntitySearchDto>();
+        if (matchedChars.Count > 0)
+        {
+            var charIds = matchedChars.Select(m => m.PageId).ToList();
+            var charNameById = matchedChars.ToDictionary(m => m.PageId, m => m.Name);
+
+            var edges = await _edges
+                .Find(Builders<RelationshipEdge>.Filter.And(Builders<RelationshipEdge>.Filter.Eq(e => e.Label, "family"), Builders<RelationshipEdge>.Filter.In(e => e.FromId, charIds)))
+                .Project(e => new { e.FromId, e.ToId })
+                .ToListAsync(ct);
+            if (edges.Count > 0)
+            {
+                var familyIds = edges.Select(e => e.ToId).Distinct().ToList();
+                var famNodeFilters = new List<FilterDefinition<GraphNode>> { Builders<GraphNode>.Filter.In(n => n.PageId, familyIds), Builders<GraphNode>.Filter.Eq(n => n.Type, "Family") };
+                if (continuityFilter is { } c3)
+                    famNodeFilters.Add(Builders<GraphNode>.Filter.Eq(n => n.Continuity, c3));
+                if (realmFilter is { } r3)
+                    famNodeFilters.Add(Builders<GraphNode>.Filter.In(n => n.Realm, [r3, Realm.Unknown]));
+
+                var familyNodes = await _nodes
+                    .Find(Builders<GraphNode>.Filter.And(famNodeFilters))
+                    .Project(n => new
+                    {
+                        n.PageId,
+                        n.Name,
+                        n.Type,
+                        n.Continuity,
+                    })
+                    .ToListAsync(ct);
+                var familyById = familyNodes.ToDictionary(f => f.PageId);
+
+                foreach (var edge in edges)
+                {
+                    if (!familyById.TryGetValue(edge.ToId, out var fam))
+                        continue;
+                    if (!charNameById.TryGetValue(edge.FromId, out var charName))
+                        continue;
+                    byMember.Add(
+                        new EntitySearchDto
+                        {
+                            Id = fam.PageId,
+                            Name = fam.Name,
+                            Type = fam.Type,
+                            Continuity = fam.Continuity.ToString(),
+                            MatchedVia = charName,
+                        }
+                    );
+                }
+            }
+        }
+
+        // ── 3. Merge — direct hits first, then member hits; dedupe by
+        //         (familyId + matchedVia) so the same family can appear once
+        //         per distinct member-match annotation. Cap at 50 total.
+        var seen = new HashSet<(int, string?)>();
+        var merged = new List<EntitySearchDto>();
+        foreach (var d in direct)
+        {
+            if (seen.Add((d.Id, null)))
+                merged.Add(d);
+        }
+        foreach (var m in byMember.OrderBy(x => x.Name, StringComparer.OrdinalIgnoreCase).ThenBy(x => x.MatchedVia, StringComparer.OrdinalIgnoreCase))
+        {
+            // Skip member-match if the same family was already a direct hit —
+            // surfacing the same family twice (once for the name match, once
+            // for the member match) is noisy.
+            if (seen.Contains((m.Id, null)))
+                continue;
+            if (seen.Add((m.Id, m.MatchedVia)))
+                merged.Add(m);
+            if (merged.Count >= 50)
+                break;
+        }
+        return merged;
+    }
+
+    /// <summary>
     /// Returns distinct relationship labels for an entity plus the node's type
     /// and a pre-computed "default enabled" subset for the UI. Includes both:
     /// <list type="bullet">
