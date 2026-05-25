@@ -30,12 +30,13 @@
                      ToStringFunc="@(f => f is null ? string.Empty : (string.IsNullOrEmpty(f.Continuity) ? f.Name : $"{f.Name} · {f.Continuity}"))"
                      Variant="Variant.Outlined"
                      Margin="Margin.Dense"
-                     Placeholder="Search families — try Skywalker, Organa, Tarkin, Kryze…"
+                     Placeholder="@($"Search {(_allFamilies?.Count ?? 0)} families — try Skywalker, Organa, Tarkin, Kryze… (or just scroll A–Z)")"
                      Clearable="true"
                      ResetValueOnEmptyText="true"
                      CoerceValue="false"
-                     MaxItems="30"
-                     DebounceInterval="200"
+                     MaxItems="@(null)"
+                     MaxHeight="520"
+                     DebounceInterval="100"
                      Class="mb-3" />
 
     @if (_descriptor is not null)
@@ -64,6 +65,14 @@
     private FamilyTreeDescriptor? _descriptor;
     private bool _subscribed;
 
+    // Full list of Family-type KG nodes for the active continuity/realm filter,
+    // prefetched on page load so the autocomplete can scroll A–Z through every
+    // entry instantly. The server caps `browse?type=Family` at pageSize=100, so
+    // we walk pages until we hit the total — usually 6–7 requests for ~630
+    // families. Refreshed on filter change.
+    private List<EntitySearchDto>? _allFamilies;
+    private CancellationTokenSource? _loadCts;
+
     private HttpClient Http => HttpClientFactory.CreateClient("StarWarsData");
 
     protected override void OnInitialized()
@@ -75,37 +84,71 @@
         }
     }
 
-    private async Task<IEnumerable<EntitySearchDto>> SearchFamilies(string? text, CancellationToken ct)
+    protected override async Task OnInitializedAsync()
     {
-        // The browse endpoint paginates Family nodes name-sorted. With no query
-        // string we surface the first 30 families alphabetically; with a query
-        // we forward it as the `q` filter (BrowseAsync handles substring +
-        // titles regex). Continuity follows the global filter (Principle VII).
+        await ReloadFamiliesAsync();
+    }
+
+    private async Task ReloadFamiliesAsync()
+    {
+        // Cancel any in-flight prefetch from a stale filter change.
+        _loadCts?.Cancel();
+        _loadCts = new CancellationTokenSource();
+        var ct = _loadCts.Token;
+
         try
         {
-            var qs = new List<string> { "type=Family", "page=1", "pageSize=30" };
-            if (!string.IsNullOrWhiteSpace(text))
-                qs.Add($"q={Uri.EscapeDataString(text.Trim())}");
             var continuity = Filter.GetContinuityQueryParam();
-            if (!string.IsNullOrEmpty(continuity))
-                qs.Add($"continuity={Uri.EscapeDataString(continuity)}");
             var realm = Filter.GetRealmQueryParam();
-            if (!string.IsNullOrEmpty(realm))
-                qs.Add($"realm={Uri.EscapeDataString(realm)}");
+            var acc = new List<EntitySearchDto>();
+            const int pageSize = 100; // matches the server cap
+            for (var page = 1; page < 50; page++) // safety cap @ 5000 entries
+            {
+                var qs = new List<string> { "type=Family", $"page={page}", $"pageSize={pageSize}" };
+                if (!string.IsNullOrEmpty(continuity))
+                    qs.Add($"continuity={Uri.EscapeDataString(continuity)}");
+                if (!string.IsNullOrEmpty(realm))
+                    qs.Add($"realm={Uri.EscapeDataString(realm)}");
 
-            var url = $"api/RelationshipGraph/browse?{string.Join("&", qs)}";
-            var result = await Http.GetFromJsonAsync<BrowseEntitiesResult>(url, ct);
-            return result?.Items ?? Enumerable.Empty<EntitySearchDto>();
+                var url = $"api/RelationshipGraph/browse?{string.Join("&", qs)}";
+                var result = await Http.GetFromJsonAsync<BrowseEntitiesResult>(url, ct);
+                if (result?.Items is null || result.Items.Count == 0)
+                    break;
+                acc.AddRange(result.Items);
+                if (acc.Count >= result.Total)
+                    break;
+            }
+            // Name-sorted alphabetically — the browse endpoint sorts server-side
+            // but we re-sort after concat in case pages interleave at the boundary.
+            acc.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase));
+            _allFamilies = acc;
+            StateHasChanged();
         }
         catch (OperationCanceledException)
         {
-            return Enumerable.Empty<EntitySearchDto>();
+            // Filter changed again before this load finished — drop.
         }
         catch (Exception ex)
         {
-            Logger.LogWarning(ex, "Family search failed for query \"{Query}\"", text);
-            return Enumerable.Empty<EntitySearchDto>();
+            Logger.LogWarning(ex, "Family prefetch failed");
+            _allFamilies = new List<EntitySearchDto>();
         }
+    }
+
+    private Task<IEnumerable<EntitySearchDto>> SearchFamilies(string? text, CancellationToken ct)
+    {
+        // Client-side substring filter over the prefetched in-memory list. Returns
+        // ALL matching entries — `MaxItems="@(null)"` on the autocomplete lets the
+        // popover render every match with internal scroll capped by MaxHeight.
+        // Sorted A–Z (already sorted by ReloadFamiliesAsync), so an empty query
+        // yields the full alphabetical list and the user can scroll through it.
+        var src = _allFamilies ?? new List<EntitySearchDto>();
+        if (string.IsNullOrWhiteSpace(text))
+            return Task.FromResult<IEnumerable<EntitySearchDto>>(src);
+        var needle = text.Trim();
+        var matches = src.Where(f => f.Name is not null
+            && f.Name.Contains(needle, StringComparison.OrdinalIgnoreCase));
+        return Task.FromResult(matches);
     }
 
     private void OnFamilySelected(EntitySearchDto? family)
@@ -132,23 +175,29 @@
 
     private void OnFilterChanged()
     {
-        // When the user flips Canon/Legends the current selection may stop
-        // matching the filter scope. Clear it so the UI doesn't render a tree
-        // that's invisible to the active continuity. Tree-level filter changes
-        // (re-fetch on continuity flip) are already handled by FamilyTreeView.
-        if (_selected is null) return;
-        var continuity = Filter.GetContinuityQueryParam();
-        if (!string.IsNullOrEmpty(continuity)
-            && !string.IsNullOrEmpty(_selected.Continuity)
-            && !string.Equals(continuity, _selected.Continuity, StringComparison.OrdinalIgnoreCase))
+        // When the user flips Canon/Legends two things happen:
+        //   1. The prefetched family list is now wrong — refresh it so the
+        //      dropdown only shows families in the active continuity.
+        //   2. If a family was already selected and its continuity no longer
+        //      matches, drop the rendered tree (the tree itself also re-fetches
+        //      via FamilyTreeView's own filter subscription, but the descriptor
+        //      may point at a now-invisible family).
+        InvokeAsync(async () =>
         {
-            InvokeAsync(() =>
+            await ReloadFamiliesAsync();
+            if (_selected is not null)
             {
-                _selected = null;
-                _descriptor = null;
-                StateHasChanged();
-            });
-        }
+                var continuity = Filter.GetContinuityQueryParam();
+                if (!string.IsNullOrEmpty(continuity)
+                    && !string.IsNullOrEmpty(_selected.Continuity)
+                    && !string.Equals(continuity, _selected.Continuity, StringComparison.OrdinalIgnoreCase))
+                {
+                    _selected = null;
+                    _descriptor = null;
+                    StateHasChanged();
+                }
+            }
+        });
     }
 
     public void Dispose()
@@ -158,5 +207,7 @@
             Filter.OnChange -= OnFilterChanged;
             _subscribed = false;
         }
+        _loadCts?.Cancel();
+        _loadCts?.Dispose();
     }
 }
