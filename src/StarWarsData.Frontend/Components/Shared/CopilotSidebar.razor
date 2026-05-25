@@ -698,6 +698,7 @@
         "search" => "Search",
         "character-timelines" => "Character Timeline",
         "tables" => "Data Table",
+        "family-trees" => "Family Trees",
         _ => page,
     };
 
@@ -712,6 +713,8 @@
             ("galaxy-map", "System") => _systemPrompts,
             ("galaxy-map", "Sector") or ("galaxy-map", "Region") => _regionPrompts,
             ("galaxy-map", _) => _galaxyMapGenericPrompts,
+            ("family-trees", "Family") => _familyTreesSubjectPrompts,
+            ("family-trees", _) => _familyTreesGenericPrompts,
             _ => _genericPrompts,
         };
     }
@@ -749,5 +752,26 @@
     [
         "Tell me about this place.",
         "What's the history here?",
+    ];
+
+    // Empty state on /family-trees — no family picked yet. Nudge the user
+    // toward the page's superpower (search by family OR character name).
+    private static readonly string[] _familyTreesGenericPrompts =
+    [
+        "Show me the Tarkin family.",
+        "Find the family of Anakin Skywalker.",
+        "Render Bo-Katan Kryze's family tree.",
+        "Which families is Leia Organa connected to?",
+    ];
+
+    // A family is rendered. Prompts assume the agent can read the SUBJECT
+    // envelope to identify which family. Mixes drill-down ("notable members")
+    // with cross-cutting questions ("political role", "historical significance").
+    private static readonly string[] _familyTreesSubjectPrompts =
+    [
+        "Who are the notable members of this family?",
+        "What political role did this family play?",
+        "Summarise the historical significance of this family.",
+        "Show me a related family I might explore next.",
     ];
 }

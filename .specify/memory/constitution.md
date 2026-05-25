@@ -1,15 +1,16 @@
 <!--
 Sync Impact Report
 ==================
-Version change: 1.1.0 → 2.0.0 (MAJOR — backward-incompatible reversal of the
-v1.1.0 "MUST NOT migrate eng/design into specs/" rule)
-Modified principles:
-  - V. Engineering Docs Stay in Sync — rewritten. `eng/design/` retired; all 45
-    historical design docs migrated en masse to `specs/[NNN]-[slug]/spec.md`
-    preserving their original numbering. `eng/adr/`, `eng/docs/`, `eng/diagrams/`
-    remain as durable institutional knowledge. New feature work goes through
-    spec-kit and lands under `specs/`.
-Added sections: (none)
+Version change: 2.0.0 → 2.1.0 (MINOR — new principle VIII added, no breaking
+changes to existing principles)
+Modified principles: (none)
+Added sections:
+  - VIII. SP-4 Integration on Explore Pages — every page under the "Explore"
+    nav group MUST register a SubjectKind-bearing PageContext and at least one
+    PageControl action, and MUST add a per-page entry in CopilotSidebar's
+    SuggestedPrompts switch + HumanizePage label map. Three documented exemptions
+    (Search, Knowledge Graph, Graph Explorer) carve out cases where another
+    sidebar/panel already owns the agent surface.
 Removed sections: (none)
 Templates requiring updates:
   - .specify/templates/plan-template.md ⚠ pending (Constitution Check gates remain placeholder;
@@ -20,9 +21,12 @@ Follow-up TODOs:
   - None.
 
 ---- prior history ----
+2.0.0 (2026-05-24): V. Engineering Docs Stay in Sync rewritten; eng/design/
+                     retired and 45 historical design docs migrated en masse
+                     to specs/[NNN]-[slug]/spec.md preserving original numbering.
 1.1.0 (2026-05-23): V. Engineering Docs Stay in Sync materially expanded with
                      the durable-vs-per-feature two-layer model and the
-                     "MUST NOT migrate" rule (now reversed in 2.0.0).
+                     "MUST NOT migrate" rule (reversed in 2.0.0).
 1.0.0 (2026-05-23): initial ratification — 7 principles, Architecture Constraints,
                      Development Workflow, Governance.
 -->
@@ -210,6 +214,44 @@ it does NOT generalise.
 **Rationale**: Users expect the filter chip to mean what it says everywhere it is visible.
 Per-page filter forgetfulness is invisible until users notice content leaking across
 continuities — the discovery cost is high and trust is hard to restore.
+
+### VIII. SP-4 Integration on Explore Pages
+
+Every page under the **Explore** group in `NavMenu.razor` MUST integrate with SP-4 (the
+copilot sidebar) so the user can ask questions about — and act on — what they're currently
+looking at. Concretely:
+
+1. **Page context**: Inject `PageContextService` and call `PageContext.Set(new PageContext(...))`
+   on `OnInitialized` and again on every relevant state change (selection, filter, tab swap).
+   `PageContext.Clear()` MUST be called in `Dispose` / `DisposeAsync`. The `Page` slug
+   matches the route segment (e.g. `"family-trees"`, `"galaxy-map"`). When the user has
+   focused on a specific entity, populate `Subject` + `SubjectKind` + `SubjectId` so the
+   sidebar's per-subject suggestion arm fires.
+2. **Page tools**: Inject `PageControlService` and call `PageControl.Register(page, actions)`
+   from `OnAfterRender(firstRender)` with at least one `PageAction`. Tool names use the
+   `<page>_<verb>` convention (e.g. `family_trees_select_family`,
+   `knowledge_graph_set_node_filters`). The registration token is disposed in `Dispose`.
+3. **Sidebar wiring**: Add a `case` to `CopilotSidebar.SuggestedPrompts()` for the new page
+   (page-level + per-`SubjectKind` arms), define the prompt arrays, and add the page slug
+   to the `HumanizePage` label map. Generic prompts on a content page indicate missing
+   integration.
+
+**Documented exemptions** (each carves a narrow, named hole; do not generalise):
+
+- **`/search`** — the search input IS the agent surface; a parallel SP-4 conversation panel
+  would compete with the primary input.
+- **`/knowledge-graph`** — already fully integrated (it was the reference implementation);
+  noted here because the principle applies *as a check*, not a future task.
+- **`/graph-explorer`** — D3 canvas owns the entire viewport; the sidebar is hidden by
+  CSS on this page deliberately (see `MainLayout.razor`). PageContext is still published
+  so the copilot has context when the user opens it elsewhere.
+
+**Rationale**: SP-4 was the entire point of routing the agent through the page (Design-041);
+a content page that doesn't publish what the user is looking at silently degrades the agent
+to a generic FAQ. Users notice when they highlight a node and the sidebar still suggests
+"Tell me something interesting about Star Wars" — it reads as broken, not minimal. Treating
+this as a per-page chore that "we'll get to next" leaves a permanent gap; making it part of
+the Explore-page contract closes it at the source.
 
 ## Architecture Constraints
 

@@ -1,7 +1,11 @@
 @page "/family-trees"
+@using Microsoft.Extensions.AI
+@using StarWarsData.Frontend.Services
 @using StarWarsData.Models.Queries
 @inject IHttpClientFactory HttpClientFactory
 @inject GlobalFilterService Filter
+@inject PageContextService PageContext
+@inject PageControlService PageControl
 @inject ILogger<FamilyTrees> Logger
 @implements IDisposable
 
@@ -64,6 +68,7 @@
     private EntitySearchDto? _selected;
     private FamilyTreeDescriptor? _descriptor;
     private bool _subscribed;
+    private IDisposable? _pageControlRegistration;
 
     // Full list of Family-type KG nodes for the active continuity/realm filter,
     // prefetched on page load so the autocomplete can scroll A–Z through every
@@ -82,11 +87,21 @@
             Filter.OnChange += OnFilterChanged;
             _subscribed = true;
         }
+        // SP-4 page-context publish — tells the copilot sidebar the user is
+        // on /family-trees with nothing selected yet, so it surfaces the
+        // page-level suggestion prompts. Subject is republished on selection.
+        PublishPageContext();
     }
 
     protected override async Task OnInitializedAsync()
     {
         await ReloadFamiliesAsync();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+            RegisterPageControlActions();
     }
 
     private async Task ReloadFamiliesAsync()
@@ -197,6 +212,7 @@
         if (family is null)
         {
             _descriptor = null;
+            PublishPageContext();
             return;
         }
 
@@ -211,6 +227,128 @@
             MaxDepth = 3,
             Continuity = family.Continuity,
         };
+        PublishPageContext();
+    }
+
+    // ── SP-4 integration ────────────────────────────────────────────────────
+    // PageContext publishes "what the user is looking at" so the copilot
+    // sidebar can scope its suggestion prompts and any agent reasoning.
+    // PageControl registers callable tools the agent can use to drive this
+    // page without an HTTP round-trip through the global ask endpoint.
+    private void PublishPageContext()
+    {
+        var extras = new Dictionary<string, string>(StringComparer.Ordinal);
+        var filterContinuity = Filter.GetContinuityQueryParam();
+        if (!string.IsNullOrEmpty(filterContinuity))
+            extras["filterContinuity"] = filterContinuity;
+
+        if (_selected is null)
+        {
+            PageContext.Set(new PageContext(Page: "family-trees", Extras: extras.Count > 0 ? extras : null));
+            return;
+        }
+
+        if (!string.IsNullOrEmpty(_selected.Continuity))
+            extras["continuity"] = _selected.Continuity;
+
+        PageContext.Set(new PageContext(
+            Page: "family-trees",
+            Subject: _selected.Name,
+            SubjectKind: "Family",
+            SubjectId: _selected.Id,
+            Extras: extras));
+    }
+
+    private void RegisterPageControlActions()
+    {
+        var selectFamily = AIFunctionFactory.Create(
+            async (string query) =>
+            {
+                if (string.IsNullOrWhiteSpace(query))
+                    return "Provide a family or character name (e.g. 'Tarkin', 'Anakin', 'Bo-Katan').";
+                try
+                {
+                    var qs = new List<string> { $"q={Uri.EscapeDataString(query.Trim())}" };
+                    var continuity = Filter.GetContinuityQueryParam();
+                    if (!string.IsNullOrEmpty(continuity))
+                        qs.Add($"continuity={Uri.EscapeDataString(continuity)}");
+                    var realm = Filter.GetRealmQueryParam();
+                    if (!string.IsNullOrEmpty(realm))
+                        qs.Add($"realm={Uri.EscapeDataString(realm)}");
+
+                    var url = $"api/RelationshipGraph/families/search?{string.Join("&", qs)}";
+                    var hits = await Http.GetFromJsonAsync<List<EntitySearchDto>>(url);
+                    if (hits is null || hits.Count == 0)
+                        return $"No families match '{query}'. Try a different name (family OR character first/last name).";
+
+                    var pick = hits[0];
+                    await InvokeAsync(() =>
+                    {
+                        OnFamilySelected(pick);
+                        StateHasChanged();
+                    });
+
+                    var via = string.IsNullOrEmpty(pick.MatchedVia) ? "" : $" (matched via {pick.MatchedVia})";
+                    var others = hits.Count > 1 ? $" Other matches: {string.Join(", ", hits.Skip(1).Take(4).Select(h => h.Name))}." : "";
+                    return $"Selected '{pick.Name}'{via}. Rendering the family tree now.{others}";
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogWarning(ex, "family_trees_select_family failed for '{Query}'", query);
+                    return $"Could not search for '{query}': {ex.Message}";
+                }
+            },
+            name: "family_trees_select_family",
+            description: "Search for a family by name OR by one of its member characters' names and render its tree. "
+                + "Pass the user's term as-is (e.g. 'Skywalker', 'Anakin', 'Boba Fett', 'Bo-Katan Kryze'). The page picks the "
+                + "top match and updates the rendered tree. Returns a summary of what was selected and lists other matches "
+                + "the user could pick instead.");
+
+        var clearSelection = AIFunctionFactory.Create(
+            () =>
+            {
+                InvokeAsync(() =>
+                {
+                    OnFamilySelected(null);
+                    StateHasChanged();
+                });
+                return "Cleared the family selection. The page now shows the empty state.";
+            },
+            name: "family_trees_clear_selection",
+            description: "Clear the currently-rendered family tree. Use when the user says \"start over\" or \"clear\".");
+
+        var describeCurrent = AIFunctionFactory.Create(
+            () =>
+            {
+                if (_selected is null)
+                    return "No family is currently selected. Use family_trees_select_family with a name to render one.";
+                var cont = string.IsNullOrEmpty(_selected.Continuity) ? "" : $" ({_selected.Continuity})";
+                return $"Currently rendering: {_selected.Name}{cont} — KG node #{_selected.Id}. "
+                    + "The server resolved the family's highest-kinship Character member as the focal and built a "
+                    + "marriage-aware, generation-aligned tree around them.";
+            },
+            name: "family_trees_describe_current",
+            description: "Read out which family is currently rendered on the page (name, continuity, KG node id). "
+                + "Use when the user asks \"what am I looking at\" or \"which family is this\".");
+
+        var actions = new PageAction[]
+        {
+            new(selectFamily, Label: "Pick a family by family or character name",
+                Example: "show me the Tarkin family"),
+            new(clearSelection, Label: "Clear the current family",
+                Example: "clear the tree"),
+            new(describeCurrent, Label: "Read out the current selection",
+                Example: "which family is on screen?"),
+        };
+
+        try
+        {
+            _pageControlRegistration = PageControl.Register("family-trees", actions);
+        }
+        catch (InvalidOperationException ex)
+        {
+            Logger.LogWarning(ex, "PageControlService already had a registration; family-trees page tools unavailable this circuit.");
+        }
     }
 
     private void OnFilterChanged()
@@ -237,6 +375,9 @@
                     StateHasChanged();
                 }
             }
+            // Re-publish so the copilot sees the new filterContinuity facet
+            // (and the dropped subject if the selection was cleared).
+            PublishPageContext();
         });
     }
 
@@ -249,5 +390,7 @@
         }
         _loadCts?.Cancel();
         _loadCts?.Dispose();
+        _pageControlRegistration?.Dispose();
+        PageContext.Clear();
     }
 }

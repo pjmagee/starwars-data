@@ -34,6 +34,7 @@ When a per-feature plan crystallises a new standing rule, **graduate it into `en
 | UI validation | Principle IV | Every UI-touching change MUST be validated via Chrome DevTools MCP before report-back. |
 | KG-first runtime | Principle VI | Runtime reads `kg.*` only; fix missing fields at the ETL node-builder source. |
 | Global filter + continuity colours | Principle VII + [eng/adr/009-public-readonly-corpus-stats-surface.md](eng/adr/009-public-readonly-corpus-stats-surface.md) | Every content page subscribes to `GlobalFilterService.OnChange`. Canon→`Primary`, Legends→`Secondary`. |
+| SP-4 on Explore pages | Principle VIII (constitution v2.1.0) | Every Explore-group page registers a `PageContext` (with `SubjectKind` on selection), at least one `PageControl` action, and a `CopilotSidebar.SuggestedPrompts` case. Documented exemptions: `/search`, `/knowledge-graph` (reference impl), `/graph-explorer`. |
 | Internal API auth | [eng/adr/001-internal-api-auth.md](eng/adr/001-internal-api-auth.md) | Keycloak OIDC on Frontend; `X-User-Id` header to the internal API. |
 | Aspire publish/deploy | [specs/017-aspire-publish-deploy-workflow/spec.md](specs/017-aspire-publish-deploy-workflow/spec.md) | `publish` (template) vs `prepare-starwars` (filled) vs `deploy`. |
 | Running Aspire from an agent | [eng/docs/aspire-isolated-mode-for-claude-code.md](eng/docs/aspire-isolated-mode-for-claude-code.md) | Use `aspire run --isolated --detach`; never with `prepare`/`deploy`. |
