@@ -7,9 +7,19 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Aspire.MongoDB.Driver.v3" Version="9.5.2" />
-    <PackageReference Include="Microsoft.Agents.AI.Hosting.AGUI.AspNetCore" Version="1.0.0-preview.260311.1" />
+    <!--
+      AGUI hosting bumped 2026-05-26 from 1.0.0-preview.260311.1 → 1.6.2-preview.260521.1 to
+      match the AGUI client (1.6.2-preview.260521.1) on the Frontend. The old hosting predated
+      the "reasoning" AGUI role (PR #1996 family-tree work in Mar 2026 didn't add it; PR #5193
+      and follow-ups did). When gpt-5.4-mini emits reasoning tokens and the client re-posts
+      message history on the next turn including TextReasoningContent, the new client serialises
+      it as AGUIReasoningMessage (role:"reasoning"). The old server's AGUIMessageJsonConverter
+      threw on the unknown role, breaking any second-turn after a frontend tool ran. See
+      feedback_agui_versions_align_*. Holds the same MapAGUI(string, AIAgent) overload we use.
+    -->
+    <PackageReference Include="Microsoft.Agents.AI.Hosting.AGUI.AspNetCore" Version="1.6.2-preview.260521.1" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.8" />
-    <PackageReference Include="Microsoft.Agents.AI.OpenAI" Version="1.6.1" />
+    <PackageReference Include="Microsoft.Agents.AI.OpenAI" Version="1.6.2" />
     <PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="10.6.0" />
     <PackageReference Include="ModelContextProtocol" Version="1.3.0" />
     <PackageReference Include="OpenAI" Version="2.10.0" />

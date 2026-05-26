@@ -91,6 +91,7 @@ public sealed class CopilotAgent(
 
         var guardrailLogger = loggerFactory.CreateLogger("StarWarsTopicGuardrail");
         var budgetLogger = loggerFactory.CreateLogger("CopilotToolCallBudget");
+        var clientToolBridgeLogger = loggerFactory.CreateLogger("CopilotClientToolBridge");
 
         var agentOptions = new ChatClientAgentOptions
         {
@@ -98,11 +99,22 @@ public sealed class CopilotAgent(
             UseProvidedChatClientAsIs = true,
         };
 
+        // ClientToolBridge MUST sit OUTERMOST so it can rewrite ChatOptions.Tools before
+        // any other middleware sees them. AGUI hosting hands frontend tools to the agent
+        // via ChatClientAgentRunOptions.ChatOptions.Tools as AIFunctionDeclaration
+        // instances; FIC inside ChatClientAgent terminates the loop on the first
+        // declaration-only tool, which drops sibling server-tool invocations and leaks
+        // orphan FCCs to the browser. The bridge swaps each declaration for an invocable
+        // no-op stub that signals Terminate=true, so the iteration completes cleanly
+        // with all server tools invoked + the client tool's FCC streamed to the browser
+        // for local execution. See ClientToolBridgeMiddleware.cs for the full root-cause
+        // walkthrough.
         return chatClient
             .AsAIAgent(agentOptions)
             .AsBuilder()
             .UseToolCallBudget(softWarnAt: 6, hardLimit: 10, logger: budgetLogger)
             .UseStarWarsTopicGuardrail(classifierClient, aiStatus, guardrailLogger)
+            .UseClientToolBridge(clientToolBridgeLogger)
             .Build();
     }
 
