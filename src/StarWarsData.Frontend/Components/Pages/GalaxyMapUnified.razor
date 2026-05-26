@@ -889,10 +889,16 @@
     }
 
     @* ══════════ EVENT ARTICLE DETAIL POPOVER ══════════ *@
+    @* right offset accounts for the SP-4 copilot drawer (420px wide, Persistent
+       at lg+, MainLayout.razor) so the popup isn't hidden behind it. Falls back
+       to 16px when the drawer is closed/hidden or on narrow viewports where the
+       drawer is Temporary and doesn't push content. *@
     @if (_hoveredEvent is not null)
     {
+        var copilotPushing = !Layout.HideCopilot && Layout.CopilotOpen;
+        var rightOffset = copilotPushing ? "calc(420px + 16px)" : "16px";
         <div class="event-detail-panel" id="event-detail-panel"
-             style="position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:310;width:420px;resize:both;overflow:auto;min-width:300px;min-height:200px;max-width:80vw;max-height:80vh;"
+             style="position:fixed;right:@rightOffset;top:50%;transform:translateY(-50%);z-index:310;width:420px;resize:both;overflow:auto;min-width:300px;min-height:200px;max-width:80vw;max-height:80vh;"
              @onclick:stopPropagation="true">
             <MudPaper Elevation="20" Style="background:rgba(20,20,40,0.98);backdrop-filter:blur(12px);height:100%;display:flex;flex-direction:column;overflow:hidden;">
                 <div class="drag-handle" style="display:flex;justify-content:space-between;align-items:center;padding:8px 8px 8px 16px;border-bottom:1px solid rgba(255,255,255,0.08);flex-shrink:0;"
@@ -1289,10 +1295,13 @@
     protected override async Task OnInitializedAsync()
     {
         GlobalFilterService.OnChange += OnFilterChanged;
+        Layout.OnChange += OnLayoutChanged;
         await LoadData();
         PublishPageContext();
         RegisterPageControlActions();
     }
+
+    void OnLayoutChanged() => InvokeAsync(StateHasChanged);
 
     IDisposable? _pageControlRegistration;
 
@@ -2483,6 +2492,7 @@
     public async ValueTask DisposeAsync()
     {
         Layout.SetFullscreen(false);
+        Layout.OnChange -= OnLayoutChanged;
         PageContext.Clear();
         _pageControlRegistration?.Dispose();
         GlobalFilterService.OnChange -= OnFilterChanged;
