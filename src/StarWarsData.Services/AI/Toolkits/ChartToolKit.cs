@@ -542,17 +542,34 @@ public class ComponentToolkit
     // our descriptor POCOs) can fail argument binding and M.E.AI substitutes a raw
     // 'Error: Function failed.' string which AGUI hosting then writes raw to the wire
     // and the AGUI client chokes on. See backend-tool-rendering tutorial.
-    public List<AITool> AsAIFunctions(JsonSerializerOptions serializerOptions) =>
+    //
+    // We additionally layer scalar coercion on top (number/bool→string, string/null→double)
+    // because the model emits years-as-numbers in xAxisLabels/labels and numeric cells in
+    // data-table rows — both of which STJ rejects by default, reproducing the exact same
+    // Design-041 'malformed response' failure. See ComponentToolkitJsonCoercion.
+    //
+    // Coercion handles the COMMON model-arg-shape mismatches so the tools BIND and render.
+    // The remaining safety net (any un-anticipated shape that still throws degrades to a JSON
+    // error result instead of an unquoted 'Error: Function failed' string that breaks the AGUI
+    // wire) lives in ToolCallBudgetMiddleware — the function-invocation middleware that
+    // provably wraps every tool call. (An AIFunction-subclass wrapper here does NOT fire in the
+    // AGUI/FIC invocation path, so the middleware is the reliable chokepoint.) See
+    // ComponentToolkitJsonCoercion and ToolCallBudgetMiddleware's render_* catch.
+    public List<AITool> AsAIFunctions(JsonSerializerOptions serializerOptions)
+    {
+        var tolerantOptions = ComponentToolkitJsonCoercion.CreateTolerant(serializerOptions);
+        return
         [
-            AIFunctionFactory.Create(RenderTable, ToolNames.Component.RenderTable, serializerOptions: serializerOptions),
-            AIFunctionFactory.Create(RenderDataTable, ToolNames.Component.RenderDataTable, serializerOptions: serializerOptions),
-            AIFunctionFactory.Create(RenderChart, ToolNames.Component.RenderChart, serializerOptions: serializerOptions),
-            AIFunctionFactory.Create(RenderGraph, ToolNames.Component.RenderGraph, serializerOptions: serializerOptions),
-            AIFunctionFactory.Create(RenderPath, ToolNames.Component.RenderPath, serializerOptions: serializerOptions),
-            AIFunctionFactory.Create(RenderFamilyTree, ToolNames.Component.RenderFamilyTree, serializerOptions: serializerOptions),
-            AIFunctionFactory.Create(RenderTimeline, ToolNames.Component.RenderTimeline, serializerOptions: serializerOptions),
-            AIFunctionFactory.Create(RenderInfobox, ToolNames.Component.RenderInfobox, serializerOptions: serializerOptions),
-            AIFunctionFactory.Create(RenderText, ToolNames.Component.RenderMarkdown, serializerOptions: serializerOptions),
-            AIFunctionFactory.Create(RenderAurebesh, ToolNames.Component.RenderAurebesh, serializerOptions: serializerOptions),
+            AIFunctionFactory.Create(RenderTable, ToolNames.Component.RenderTable, serializerOptions: tolerantOptions),
+            AIFunctionFactory.Create(RenderDataTable, ToolNames.Component.RenderDataTable, serializerOptions: tolerantOptions),
+            AIFunctionFactory.Create(RenderChart, ToolNames.Component.RenderChart, serializerOptions: tolerantOptions),
+            AIFunctionFactory.Create(RenderGraph, ToolNames.Component.RenderGraph, serializerOptions: tolerantOptions),
+            AIFunctionFactory.Create(RenderPath, ToolNames.Component.RenderPath, serializerOptions: tolerantOptions),
+            AIFunctionFactory.Create(RenderFamilyTree, ToolNames.Component.RenderFamilyTree, serializerOptions: tolerantOptions),
+            AIFunctionFactory.Create(RenderTimeline, ToolNames.Component.RenderTimeline, serializerOptions: tolerantOptions),
+            AIFunctionFactory.Create(RenderInfobox, ToolNames.Component.RenderInfobox, serializerOptions: tolerantOptions),
+            AIFunctionFactory.Create(RenderText, ToolNames.Component.RenderMarkdown, serializerOptions: tolerantOptions),
+            AIFunctionFactory.Create(RenderAurebesh, ToolNames.Component.RenderAurebesh, serializerOptions: tolerantOptions),
         ];
+    }
 }

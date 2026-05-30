@@ -177,6 +177,32 @@ public sealed class ToolCallBudgetMiddleware
             if (argsJson.Length > 1200)
                 argsJson = argsJson[..1200] + "...";
             _logger.LogError(ex, "ToolCall #{Count} {ToolName} threw: {Message}; args={Args}", count, name, ex.Message, argsJson);
+
+            // SAFETY NET (Design-041): a render_* tool that throws — almost always an
+            // argument-binding mismatch on a shape the model invented (years-as-numbers,
+            // BCE ISO dates, numeric/bool table cells, nested objects where a scalar was
+            // expected) — must NOT propagate. If it does, M.E.AI substitutes an unquoted
+            // 'Error: Function failed…' string that AGUI hosting writes raw to the wire,
+            // and AGUIChatClient's strict JsonElement parse chokes on it, killing the whole
+            // turn with the "malformed response" banner. Instead we swallow the throw for
+            // render_* tools and return a structured JSON error (via BlockedResult, which
+            // takes AGUI hosting's JSON serialization path). The model sees a parseable
+            // failed-render result and can retry with a corrected shape; the turn survives.
+            // Non-render tools keep the original rethrow — their failures are real bugs we
+            // want surfaced, not model-arg-shape noise.
+            var inner = ex is System.Reflection.TargetInvocationException { InnerException: { } tie } ? tie : ex;
+            if (name.StartsWith("render_", StringComparison.Ordinal))
+            {
+                context.Terminate = true;
+                return new BlockedResult(
+                    $"The {name} tool could not render the arguments provided ({inner.Message}). "
+                        + "This is usually a value-shape mismatch — e.g. years sent as numbers or dates "
+                        + "instead of plain string labels, or numeric/boolean cells in a string table. "
+                        + "Do NOT retry the same render call. Either retry once with corrected argument shapes "
+                        + "(string labels, numeric data arrays, ISO dates only for real-world publication dates) "
+                        + "or summarise the result in render_markdown instead."
+                );
+            }
             throw;
         }
 
