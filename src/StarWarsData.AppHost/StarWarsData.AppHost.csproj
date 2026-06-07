@@ -9,12 +9,12 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.Keycloak" Version="13.3.5-preview.1.26270.6" />
-    <PackageReference Include="Aspire.Hosting.Docker" Version="13.3.5" />
-    <PackageReference Include="Aspire.Hosting.MongoDB" Version="13.3.5" />
+    <PackageReference Include="Aspire.Hosting.Docker" Version="13.4.2" />
+    <PackageReference Include="Aspire.Hosting.MongoDB" Version="13.4.2" />
     <!-- Float transitive MongoDB.Driver up so Snappier 1.3.1+/SharpCompress override apply. -->
-    <PackageReference Include="MongoDB.Driver" Version="3.8.1" />
-    <!-- Direct override: MongoDB.Driver's transitive SharpCompress 0.30.1 is flagged (GHSA-6c8g-7p36-r338). 0.48.1 is safe and satisfies the >=0.30.1 constraint. -->
-    <PackageReference Include="SharpCompress" Version="0.48.1" />
+    <PackageReference Include="MongoDB.Driver" Version="3.9.0" />
+    <!-- Direct override: float SharpCompress to the stable 1.0.0 release required by Aspire.Hosting.MongoDB 13.4.2+ (supersedes old GHSA-6c8g-7p36-r338 advisory). -->
+    <PackageReference Include="SharpCompress" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StarWarsData.Admin\StarWarsData.Admin.csproj" />

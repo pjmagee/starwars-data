@@ -9,6 +9,12 @@ using StarWarsData.Models.Entities;
 
 namespace StarWarsData.Services;
 
+// AGUI package's SerializeResultContent emits bare string results raw/unquoted;
+// the client-side DeserializeResultIfAvailable then does JsonSerializer.Deserialize<JsonElement>
+// on that raw content with no try/catch, crashing on any non-JSON string.
+// Returning a record forces serialization through the object arm (valid JSON).
+public sealed record WikiSearchResult(string Markdown);
+
 /// <summary>
 /// Agent Framework context provider that exposes an on-demand wiki search tool.
 /// Uses MongoDB regex text search against the Pages collection.
@@ -33,7 +39,8 @@ public sealed class StarWarsWikiSearchProvider : MessageAIContextProvider
                 "keyword_search",
                 "Keyword search over wiki page titles and content. Fast, no AI cost. "
                     + "Best for exact name lookups and specific title matches. "
-                    + "For WHY/HOW/EXPLAIN questions, use semantic_search instead — it understands meaning."
+                    + "For WHY/HOW/EXPLAIN questions, use semantic_search instead — it understands meaning. "
+                    + "Returns a WikiSearchResult with a Markdown field containing the article excerpts."
             ),
         ];
     }
@@ -49,7 +56,7 @@ public sealed class StarWarsWikiSearchProvider : MessageAIContextProvider
         return new(new AIContext { Tools = _tools });
     }
 
-    public async Task<string> SearchAsync(string query, CancellationToken ct)
+    public async Task<WikiSearchResult> SearchAsync(string query, CancellationToken ct)
     {
         _logger?.LogInformation("Wiki search: {Query}", query);
 
@@ -72,7 +79,7 @@ public sealed class StarWarsWikiSearchProvider : MessageAIContextProvider
         if (docs.Count == 0)
         {
             _logger?.LogInformation("Wiki search returned no results for: {Query}", query);
-            return "No wiki pages found for that query.";
+            return new WikiSearchResult("No wiki pages found for that query.");
         }
 
         var sb = new StringBuilder();
@@ -142,6 +149,6 @@ public sealed class StarWarsWikiSearchProvider : MessageAIContextProvider
         }
 
         _logger?.LogInformation("Wiki search returned {Count} results for: {Query}", docs.Count, query);
-        return sb.ToString();
+        return new WikiSearchResult(sb.ToString());
     }
 }

@@ -17,12 +17,12 @@
       threw on the unknown role, breaking any second-turn after a frontend tool ran. See
       feedback_agui_versions_align_*. Holds the same MapAGUI(string, AIAgent) overload we use.
     -->
-    <PackageReference Include="Microsoft.Agents.AI.Hosting.AGUI.AspNetCore" Version="1.6.2-preview.260521.1" />
+    <PackageReference Include="Microsoft.Agents.AI.Hosting.AGUI.AspNetCore" Version="1.9.0-preview.260603.1" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.8" />
-    <PackageReference Include="Microsoft.Agents.AI.OpenAI" Version="1.6.2" />
+    <PackageReference Include="Microsoft.Agents.AI.OpenAI" Version="1.9.0" />
     <PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="10.6.0" />
-    <PackageReference Include="ModelContextProtocol" Version="1.3.0" />
-    <PackageReference Include="OpenAI" Version="2.10.0" />
+    <PackageReference Include="ModelContextProtocol" Version="1.4.0" />
+    <PackageReference Include="OpenAI" Version="2.11.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StarWarsData.Models\StarWarsData.Models.csproj" />

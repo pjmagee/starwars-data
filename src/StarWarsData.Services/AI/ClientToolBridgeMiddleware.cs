@@ -15,7 +15,7 @@ namespace StarWarsData.Services;
 /// call ("No tool output found for function call call_X").
 ///
 /// <para>
-/// AGUI hosting (1.6.2) advertises browser-side tools to the LLM as
+/// AGUI hosting (1.9.0-preview — root cause still unfixed upstream as of 1.9.0) advertises browser-side tools to the LLM as
 /// <see cref="AIFunctionDeclaration"/>s — declarations without bodies — via
 /// <c>RunAgentInput.Tools.AsAITools()</c>. When OpenAI emits FCCs for one server tool
 /// AND one client tool in the same iteration, M.E.AI's FIC sees the declaration-only
