@@ -74,6 +74,16 @@ dotnet test --project src/StarWarsData.Tests --filter "FullyQualifiedName~ClassN
 
 Fixtures (`src/StarWarsData.Tests/Infrastructure/`) are lazy-static and wired via `[ClassInitialize]`; assembly-cleanup in `AssemblyHooks.cs`. New tests pick a tier (`Unit/`, `Integration/`, `Agent/`) and tag with `[TestCategory(TestTiers.X)]`. Aspire publish/deploy: [Design-017](specs/017-aspire-publish-deploy-workflow/spec.md). Running AppHost from an agent: [eng/docs/aspire-isolated-mode-for-claude-code.md](eng/docs/aspire-isolated-mode-for-claude-code.md).
 
+## Updating NuGet Packages
+
+`Directory.Build.props` sets `TreatWarningsAsErrors=true`, so any NuGetAudit hit (NU1902/NU1903) on a transitive package hard-fails `dotnet restore` for the whole solution — this has happened before and looks like a mysterious total restore failure rather than "package X is outdated." When bumping packages, in order:
+
+1. Bump direct `PackageReference` versions per-project (no central package management — each `.csproj` under `src/` pins its own).
+2. **AGUI alignment**: `Microsoft.Agents.AI`, `.Workflows`, `.OpenAI`, `.AGUI` (Frontend client), `.Hosting.AGUI.AspNetCore` (ApiService hosting) must all move together to the same release — see the version-history comments in `StarWarsData.Frontend.csproj` and `StarWarsData.ApiService.csproj`. Mismatched versions break the AGUI wire protocol on the second turn of a chat.
+3. **Re-validate every manual override/pin comment** (`grep -n "Direct override" src/**/*.csproj`) against the live advisory feed (`api.nuget.org/v3/vulnerabilities/index.json`, gzip-encoded) instead of assuming last time's fix still applies or blindly jumping to latest-major — a pin may now be redundant (natural transitive resolution already clears the advisory) or a "latest" version may be a breaking major that isn't source/binary compatible with the package that transitively requires it (e.g. `Microsoft.OpenApi` 3.x breaks `Microsoft.AspNetCore.OpenApi`'s source generator; don't assume `MessagePack` 3.x is safe with the current `StreamJsonRpc` either).
+4. **MudBlazor MCP server version**: the `mudblazor` MCP entries in `.mcp.json` and `.vscode/mcp.json` hardcode `--version X.Y.Z` pointing at a local `MudMCP` checkout — bump both to match the new `MudBlazor` package version whenever it changes, or the MCP's component docs/examples drift from what's actually installed.
+5. Confirm clean: `dotnet restore src/StarWarsData.slnx --force` (zero warnings — a `NU1902`/`NU1903` warning here means step 3 isn't done), full `dotnet build`, and the `Unit` test tier.
+
 ## Architecture (Index)
 
 Five runtime components under `src/`:

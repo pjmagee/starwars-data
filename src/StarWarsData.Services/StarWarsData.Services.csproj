@@ -12,19 +12,17 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AngleSharp" Version="1.5.0" />
-    <PackageReference Include="Microsoft.Agents.AI.Workflows" Version="1.9.0" />
-    <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="10.0.8" />
-    <PackageReference Include="Microsoft.Agents.AI" Version="1.9.0" />
-    <PackageReference Include="Microsoft.Agents.AI.OpenAI" Version="1.9.0" />
+    <PackageReference Include="AngleSharp" Version="1.5.2" />
+    <PackageReference Include="Microsoft.Agents.AI.Workflows" Version="1.13.0" />
+    <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="10.0.9" />
+    <PackageReference Include="Microsoft.Agents.AI" Version="1.13.0" />
+    <PackageReference Include="Microsoft.Agents.AI.OpenAI" Version="1.13.0" />
     <PackageReference Include="ModelContextProtocol" Version="1.4.0" />
     <PackageReference Include="MongoDB.Driver" Version="3.9.0" />
-    <!-- Direct override: float SharpCompress to 1.0.0 (supersedes old GHSA-6c8g-7p36-r338 advisory; 1.0.0 required by Aspire.Hosting.MongoDB 13.4.2+). -->
-    <PackageReference Include="SharpCompress" Version="1.0.0" />
-    <PackageReference Include="OpenAI" Version="2.11.0" />
-    <PackageReference Include="OpenTelemetry.Api" Version="1.15.3" />
+    <PackageReference Include="OpenAI" Version="2.12.0" />
+    <PackageReference Include="OpenTelemetry.Api" Version="1.16.0" />
     <PackageReference Include="Polly.Extensions.Http" Version="3.0.0" />
-    <PackageReference Include="ReverseMarkdown" Version="5.3.0" />
+    <PackageReference Include="ReverseMarkdown" Version="5.4.0" />
     <PackageReference Include="System.CommandLine.Hosting" Version="0.4.0-alpha.25306.1" />
   </ItemGroup>
   <ItemGroup>

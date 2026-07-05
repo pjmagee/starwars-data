@@ -7,16 +7,16 @@
     <NoWarn>$(NoWarn);EXTEXP0001;RZ2001</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Aspire.Keycloak.Authentication" Version="13.3.5-preview.1.26270.6" />
+    <PackageReference Include="Aspire.Keycloak.Authentication" Version="13.4.6-preview.1.26319.6" />
     <PackageReference Include="Keycloak.AuthServices.Authorization" Version="3.0.0" />
     <!--
-      AGUI client bumped 2026-05-26 from 1.6.1-preview.260514.1 → 1.6.2-preview.260521.1 to stay
+      AGUI client bumped 2026-07-05 from 1.9.0-preview.260603.1 → 1.13.0-preview.260703.1 to stay
       in lock-step with Microsoft.Agents.AI.Hosting.AGUI.AspNetCore on the server (and the
-      transitive Microsoft.Agents.AI 1.6.2). The client/server protocol pieces (AGUIChatMessageExtensions,
+      transitive Microsoft.Agents.AI 1.13.0). The client/server protocol pieces (AGUIChatMessageExtensions,
       AGUIMessageJsonConverter, AGUIRoles) MUST be on the same minor version — see feedback_agui_versions_align_*.
     -->
-    <PackageReference Include="Microsoft.Agents.AI.AGUI" Version="1.9.0-preview.260603.1" />
-    <PackageReference Include="MudBlazor" Version="9.5.0" />
+    <PackageReference Include="Microsoft.Agents.AI.AGUI" Version="1.13.0-preview.260703.1" />
+    <PackageReference Include="MudBlazor" Version="9.6.0" />
     <PackageReference Include="MudBlazor.Markdown" Version="9.0.0" />
     <PackageReference Include="Z.Blazor.Diagrams" Version="3.0.4.1" />
   </ItemGroup>
