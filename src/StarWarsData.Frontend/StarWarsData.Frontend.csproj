@@ -16,7 +16,9 @@
       AGUIMessageJsonConverter, AGUIRoles) MUST be on the same minor version — see feedback_agui_versions_align_*.
     -->
     <PackageReference Include="Microsoft.Agents.AI.AGUI" Version="1.13.0-preview.260703.1" />
-    <PackageReference Include="MudBlazor" Version="9.6.0" />
+    <!-- Direct pin: AGUI client depends on AI.Abstractions >= 10.8.2; 10.8.2 unpublished — see Models.csproj. -->
+    <PackageReference Include="Microsoft.Extensions.AI.Abstractions" Version="10.8.3" />
+    <PackageReference Include="MudBlazor" Version="9.8.0" />
     <PackageReference Include="MudBlazor.Markdown" Version="9.0.0" />
     <PackageReference Include="Z.Blazor.Diagrams" Version="3.0.4.1" />
   </ItemGroup>
