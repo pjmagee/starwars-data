@@ -83,21 +83,6 @@ public static class ToolNames
         public const string GetRelationshipsByCategory = "get_relationships_by_category";
     }
 
-    /// <summary>
-    /// <see cref="RelationshipAnalystToolkit"/> — internal tools for the offline
-    /// relationship-graph batch builder. Not exposed to the user-facing Ask AI agent.
-    /// </summary>
-    public static class RelationshipAnalyst
-    {
-        public const string GetPageContent = "get_page_content";
-        public const string GetLinkedPages = "get_linked_pages";
-        public const string GetExistingLabels = "get_existing_labels";
-        public const string FindSimilarLabel = "find_similar_label";
-        public const string GetEntityEdges = "get_entity_edges";
-        public const string StoreEdges = "store_edges";
-        public const string MarkProcessed = "mark_processed";
-        public const string SkipPage = "skip_page";
-    }
 
     /// <summary>Wiki / external search tools registered outside the toolkit classes.</summary>
     public static class Wiki

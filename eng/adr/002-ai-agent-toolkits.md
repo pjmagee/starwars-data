@@ -67,13 +67,12 @@ and an `AsAIFunctions()` method that yields `AITool` instances via
 | `KGAnalyticsToolkit`         | KG-backed aggregation for charts      | 16         | JSON numeric data                          |
 | `DataExplorerToolkit`        | Raw `Pages` / infobox fallback        | 10         | JSON facts                                 |
 | `ComponentToolkit`           | Frontend render descriptors           | 8          | `TableDescriptor`, `ChartDescriptor`, etc. |
-| `RelationshipAnalystToolkit` | ETL-time edge extraction (not in Ask) | 8          | JSON                                       |
 | Ad-hoc (`keyword_search`)    | Wiki keyword fallback                 | 1          | JSON                                       |
 | MongoDB MCP (filtered)       | Raw `find`, `aggregate`, `count`      | 3          | MCP tool results                           |
 
 Only the **first four** toolkits plus `keyword_search` and the MCP tools are wired
-into the Ask AI agent. `RelationshipAnalystToolkit` powers a separate ETL-time
-extraction agent and is registered through its own path.
+into the Ask AI agent. Offline relationship extraction is no longer a toolkit path;
+edges come from deterministic InfoboxGraph ETL (and Holocron where applicable).
 
 ### Tool categories and agent flow
 
