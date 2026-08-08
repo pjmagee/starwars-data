@@ -33,18 +33,10 @@ builder.Services.AddControllers();
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 builder.Services.AddMudServices();
 
-builder
-    .Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
-    .AddEnvironmentVariables(prefix: "ASPNETCORE_")
-    .AddEnvironmentVariables();
-
 builder.AddMongoDBClient(connectionName: "mongodb");
 
 builder
-    .Services.AddOptions()
-    .Configure<SettingsOptions>(builder.Configuration.GetSection(SettingsOptions.Settings))
-    .AddLogging()
+    .Services.Configure<SettingsOptions>(builder.Configuration.GetSection(SettingsOptions.Settings))
     .AddSingleton<OpenAiStatusService>()
     .AddSingleton<MongoDefinitions>()
     .AddSingleton<CollectionFilters>()
@@ -146,6 +138,8 @@ if (hangfireEnabled)
 }
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 app.UseStaticFiles();
 app.UseAntiforgery();

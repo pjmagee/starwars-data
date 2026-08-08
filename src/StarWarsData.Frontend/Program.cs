@@ -152,6 +152,8 @@ builder.Services.AddHttpClient(
 
 var app = builder.Build();
 
+app.MapDefaultEndpoints();
+
 // Route MudBlazor's internal lifecycle exceptions to our ILogger so they don't
 // silently disappear. Without this hook, anything MudBlazor catches inside its
 // own components (theme provider JS interop, dialog/snackbar lifecycle, etc.)
