@@ -1,10 +1,12 @@
 # 003 — AI Game Master: Star Wars 5e RPG
 
-**Status:** Partially shipped — SW5e data models only. The `Sw5e*` rule DTOs exist at [src/StarWarsData.Models/RPG/](../../src/StarWarsData.Models/RPG/) (Species, Class, Archetype, Equipment, Power, Monster, Background, etc.). No `GameMasterToolkit`, no `game.*` collections/services, no `/rpg` UI, and no character-creation/combat flow have been built. The interactive GM (Phases 1–5) remains a proposal.  
+**Status:** Proposed — no runtime or model surface shipped. The unreferenced `Sw5e*` rule DTOs previously under `src/StarWarsData.Models/RPG/` were removed (issue #10 / Principle V). No `GameMasterToolkit`, no `game.*` collections/services, no `/rpg` UI, and no character-creation/combat flow exist yet.  
 **Created:** 2026-04-03  
 **Author:** Patrick Magee + Claude
 
-> **Update (2026-05-18, audit):** Verified against code. Only the SW5e reference data models landed (committed in the vertical-slice restructure, `c6eccae7cd`). Phase 1+ runtime (toolkit, agent, persistence, UI) is not implemented.
+> **Update (2026-05-18, audit):** Verified against code. Only the SW5e reference data models had landed (committed in the vertical-slice restructure, `c6eccae7cd`). Phase 1+ runtime (toolkit, agent, persistence, UI) was not implemented.
+>
+> **Update (2026-08-08, issue #10):** Those models-only DTOs were deleted as unreferenced dead code (Principle V). Spec status reset to **Proposed** — nothing for this feature is shipped.
 
 ## Vision
 
