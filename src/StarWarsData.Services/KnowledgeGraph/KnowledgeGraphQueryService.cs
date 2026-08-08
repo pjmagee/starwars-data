@@ -1767,7 +1767,6 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
                     Evidence = e.Evidence,
                     SourcePageId = e.SourcePageId,
                     Continuity = e.Continuity,
-                    PairId = e.PairId,
                     CreatedAt = e.CreatedAt,
                     FromYear = e.FromYear,
                     ToYear = e.ToYear,

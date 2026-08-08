@@ -44,10 +44,6 @@ public class SettingsOptions
 
     public IEnumerable<string> TimelineCollections { get; set; } = [];
 
-    /// <summary>
-    /// The model to use for relationship extraction (high-volume, low-cost)
-    /// </summary>
-    public string RelationshipAnalystModel { get; set; } = "gpt-5.4-mini";
 
     // ── Holocron agent (Phase 2 — Design-018) ──
 

@@ -20,7 +20,6 @@ public static class RelationshipEdgeBsonFields
     public const string Evidence = "evidence";
     public const string SourcePageId = "sourcePageId";
     public const string Continuity = "continuity";
-    public const string PairId = "pairId";
     public const string CreatedAt = "createdAt";
     public const string FromYear = "fromYear";
     public const string ToYear = "toYear";

@@ -7,8 +7,6 @@ namespace StarWarsData.Models.Entities;
 /// A single directed edge in the relationship graph.
 /// The deterministic infobox ETL (<see cref="InfoboxGraphService"/>) writes a single directed
 /// edge per relationship; the reverse is synthesized at query time via the label registry.
-/// The LLM-driven path (<see cref="AI.Toolkits.RelationshipAnalystToolkit"/>) writes forward +
-/// reverse edges sharing the same <see cref="PairId"/> for dedup/cleanup.
 /// Cached <c>fromName/fromType/toName/toType</c> are immutable per ETL run (Phase 5 is full-replace).
 /// </summary>
 public class RelationshipEdge
@@ -85,13 +83,6 @@ public class RelationshipEdge
     [BsonRepresentation(BsonType.String)]
     public Continuity Continuity { get; set; } = Continuity.Unknown;
 
-    /// <summary>
-    /// Shared between a forward/reverse edge pair written by the LLM extraction path for dedup/cleanup.
-    /// Null on deterministic edges (InfoboxGraphService only writes one direction).
-    /// </summary>
-    [BsonElement("pairId"), BsonIgnoreIfNull]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string? PairId { get; set; }
 
     [BsonElement("createdAt")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

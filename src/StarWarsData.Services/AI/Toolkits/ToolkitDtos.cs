@@ -192,31 +192,3 @@ public sealed record PageDateMatchDto(int Id, string Name, List<string>? Date, s
 public sealed record LabelPageCountDto(string Label, int PageCount);
 
 public sealed record LinkLabelDetailDto(string Label, int LinkCount, List<string> SampleLinks);
-
-// ===== RelationshipAnalystToolkit =====
-
-public sealed record InfoboxLinkDto(string Text, string Href);
-
-public sealed record InfoboxRowWithLinksDto(string Label, List<string> Values, List<InfoboxLinkDto> Links);
-
-public sealed record PageContentDto(
-    int? PageId,
-    string? Title,
-    string? Type,
-    string? Continuity,
-    string? ImageUrl,
-    string? WikiUrl,
-    List<InfoboxRowWithLinksDto>? Infobox,
-    string? Content,
-    string? Error = null
-);
-
-public sealed record LinkedPageDto(int PageId, string Name, string Type, string Continuity);
-
-public sealed record SimilarLabelDto(string Label, string? Reverse, string? Description, int UsageCount, double Score);
-
-public sealed record StoredEdgeDto(int ToId, string ToName, string ToType, string Label, double Weight, string Evidence);
-
-public sealed record StoreEdgesResultDto(int Inserted, int Total);
-
-public sealed record StatusDto(string Status, int PageId, string? Reason = null);

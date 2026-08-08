@@ -59,21 +59,6 @@ builder
         var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
         return new OpenAIClient(new ApiKeyCredential(settings.OpenAiKey), new OpenAIClientOptions { NetworkTimeout = TimeSpan.FromMinutes(5) });
     })
-    .AddSingleton<RelationshipAnalystToolkit>(sp =>
-    {
-        var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
-        var mongoClient = sp.GetRequiredService<IMongoClient>();
-        return new RelationshipAnalystToolkit(mongoClient, settings.DatabaseName);
-    })
-    .AddKeyedSingleton<IChatClient>(
-        "relationship-analyst",
-        (sp, _) =>
-        {
-            var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
-            var openAiClient = sp.GetRequiredService<OpenAIClient>();
-            return new ChatClientBuilder(openAiClient.GetResponsesClient().AsIChatClient(settings.RelationshipAnalystModel)).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build();
-        }
-    )
     .AddSingleton<CharacterTimelineChatClient>(sp =>
     {
         var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;

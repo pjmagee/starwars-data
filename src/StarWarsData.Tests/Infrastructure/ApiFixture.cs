@@ -34,15 +34,11 @@ public static class ApiFixture
     private static MongoDbContainer? _container;
     private static IMongoClient? _mongoClient;
     private static RecordService? _recordService;
-    private static RelationshipAnalystToolkit? _toolkit;
     private static KnowledgeGraphQueryService? _kgQuery;
 
     public static IMongoClient MongoClient => _mongoClient ?? throw new InvalidOperationException("ApiFixture not initialized — call EnsureInitializedAsync from [ClassInitialize]");
 
     public static RecordService RecordService => _recordService ?? throw new InvalidOperationException("ApiFixture not initialized — call EnsureInitializedAsync from [ClassInitialize]");
-
-    public static RelationshipAnalystToolkit RelationshipAnalystToolkit =>
-        _toolkit ?? throw new InvalidOperationException("ApiFixture not initialized — call EnsureInitializedAsync from [ClassInitialize]");
 
     public static KnowledgeGraphQueryService KnowledgeGraphQueryService =>
         _kgQuery ?? throw new InvalidOperationException("ApiFixture not initialized — call EnsureInitializedAsync from [ClassInitialize]");
@@ -90,7 +86,6 @@ public static class ApiFixture
 
             _mongoClient = client;
             _recordService = new RecordService(NullLogger<RecordService>.Instance, settings, client);
-            _toolkit = new RelationshipAnalystToolkit(client, DatabaseName);
             _kgQuery = new KnowledgeGraphQueryService(client, settings);
             _container = container;
         }
@@ -108,7 +103,6 @@ public static class ApiFixture
         _container = null;
         _mongoClient = null;
         _recordService = null;
-        _toolkit = null;
     }
 
     public static List<Page> BuildSeedData() =>
