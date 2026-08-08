@@ -32,19 +32,11 @@ builder.Services.AddAGUI();
 builder.Services.AddResponseCaching();
 builder.Services.AddMemoryCache();
 
-builder
-    .Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
-    .AddEnvironmentVariables(prefix: "ASPNETCORE_")
-    .AddEnvironmentVariables();
-
 builder.AddMongoDBClient(connectionName: "mongodb");
 
 #pragma warning disable CS8634 // McpClient registration is intentionally nullable
 builder
-    .Services.AddOptions()
-    .Configure<SettingsOptions>(builder.Configuration.GetSection(SettingsOptions.Settings))
-    .AddLogging()
+    .Services.Configure<SettingsOptions>(builder.Configuration.GetSection(SettingsOptions.Settings))
     .AddHttpContextAccessor()
     .AddDataProtection()
     .Services.AddSingleton<OpenAiStatusService>()
@@ -96,7 +88,6 @@ builder
         var settingsOptions = serviceProvider.GetRequiredService<IOptions<SettingsOptions>>();
         return new OpenAIClient(new ApiKeyCredential(settingsOptions.Value.OpenAiKey), new OpenAIClientOptions { NetworkTimeout = TimeSpan.FromMinutes(5) });
     })
-    .AddSingleton<CollectionFilters>()
     .AddSingleton<KnowledgeGraphQueryService>()
     .AddSingleton<SemanticSearchService>()
     .AddSingleton<KeywordSearchService>()
@@ -156,21 +147,14 @@ builder
     .AddKeyedSingleton<AIAgent>("ask-ai", (sp, _) => sp.GetRequiredService<AskAIAgent>().Build())
     .AddKeyedSingleton<AIAgent>("copilot", (sp, _) => sp.GetRequiredService<CopilotAgent>().Build());
 
-builder.Services.AddCors(options =>
-{
-    // API is internal-only (not exposed to the internet). Only the Blazor Server
-    // frontend can reach it. See eng/adr/001-internal-api-auth.md for rationale.
-    options.AddDefaultPolicy(policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-});
-
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
-app.UseCors();
 
 app.UseHttpsRedirection();
 

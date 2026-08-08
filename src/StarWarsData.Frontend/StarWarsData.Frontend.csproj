@@ -25,17 +25,4 @@
     <ProjectReference Include="..\StarWarsData.ServiceDefaults\StarWarsData.ServiceDefaults.csproj" />
     <ProjectReference Include="..\StarWarsData.Models\StarWarsData.Models.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Update="appsettings.json">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="appsettings.Development.json">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <DependentUpon>appsettings.json</DependentUpon>
-    </Content>
-  </ItemGroup>
 </Project>

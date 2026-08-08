@@ -39,7 +39,6 @@ var apiService = builder
     .WithExternalHttpEndpoints()
     .WithEnvironment("Settings__OpenAiKey", openApi)
     .WithEnvironment("Settings__DatabaseName", starwarsDb)
-    .WithEnvironment("Settings__HangfireEnabled", "true")
     // Holocron is a billed LLM pass — default ON. The literal here is overridden
     // in ConfigureComposeFile to ${HOLOCRON_ENABLED:-true} so prod can still kill
     // it via the hand-maintained .env (HOLOCRON_ENABLED=false) without a redeploy.
