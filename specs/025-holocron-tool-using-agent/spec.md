@@ -1,6 +1,6 @@
 # Design-025: Holocron as a tool-using agent (vs. structured-output workflow)
 
-**Status:** Superseded — pivot rejected. See [ADR-007](../../eng/adr/007-holocron-hardening-over-rewrite.md). Phase A.1 read tools shipped as a foundation but are not wired into any agent; the v1.x structured-output extractor was hardened instead via v1.4.0 → v1.7.0.
+**Status:** Superseded — pivot rejected. See [ADR-007](../../eng/adr/007-holocron-hardening-over-rewrite.md). Phase A.1 read-tool foundation was later removed as unwired dead weight (issue #9; lives in git history only); the v1.x structured-output extractor was hardened instead via v1.4.0 → v1.7.0.
 **Date:** 2026-04-28
 **Author:** Patrick Magee + Claude
 **Related:** [Design-018 KG enrichments architecture](../018-kg-enrichments-architecture/spec.md), [Design-020 Holocron async pipeline](../020-holocron-async-pipeline/spec.md), [Design-021 Edge bound provenance](../021-edge-bound-provenance/spec.md), [Design-023 Character roles as edges](../023-character-roles-as-edges/spec.md), [Design-024 Typed NodeBuilders](../024-typed-node-builders/spec.md), [ADR-006 Long-running AI workflow pipelines](../../eng/adr/006-long-running-ai-workflow-pipelines.md), [ADR-007 Hardening over rewriting](../../eng/adr/007-holocron-hardening-over-rewrite.md)
@@ -11,8 +11,8 @@ The pivot proposed below was tested against real audit data and **rejected**. Th
 
 **What shipped from this design:**
 
-- `Services/AI/Agents/Holocron/Tools/HolocronReadToolkit.cs` — the four read tools (`resolve_entity`, `find_canonical_label`, `check_existing_edges`, `get_template_schema`) plus `HolocronToolDtos.cs`. 14 unit + 11 integration tests cover them. **Not wired to any agent.**
-- `find_canonical_label` is a thin LINQ filter over `FieldSemantics.Relationships` — no synonym table. The `LabelSynonymTable` was prototyped, tested, then deleted after the architecture-wide pushback that this was over-engineering.
+- ~~`Services/AI/Agents/Holocron/Tools/HolocronReadToolkit.cs`~~ — Phase A.1 read tools (`resolve_entity`, `find_canonical_label`, `check_existing_edges`, `get_template_schema`) plus DTOs/tests were removed as unwired dead weight in issue #9; see git history / ADR-007.
+- The `LabelSynonymTable` was prototyped, tested, then deleted after the architecture-wide pushback that this was over-engineering (before the rest of the Phase A.1 surface was removed in issue #9).
 
 **What did NOT ship:**
 

@@ -83,25 +83,10 @@ public static class ToolNames
         public const string GetRelationshipsByCategory = "get_relationships_by_category";
     }
 
-
     /// <summary>Wiki / external search tools registered outside the toolkit classes.</summary>
     public static class Wiki
     {
         public const string KeywordSearch = "keyword_search";
     }
 
-    /// <summary>
-    /// Holocron v2 tool-using-agent surface (Design-025 / Design-026). These tools are
-    /// internal to the Holocron extraction agent — they are NOT registered with the
-    /// user-facing Ask AI agent. The read tools resolve entities, look up canonical
-    /// labels, inspect existing edges, and surface per-template schemas; the write
-    /// tools (Phase A.3) will stage proposals into the per-batch staging store.
-    /// </summary>
-    public static class Holocron
-    {
-        public const string ResolveEntity = "resolve_entity";
-        public const string FindCanonicalLabel = "find_canonical_label";
-        public const string CheckExistingEdges = "check_existing_edges";
-        public const string GetTemplateSchema = "get_template_schema";
-    }
 }
