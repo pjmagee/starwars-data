@@ -159,22 +159,6 @@ var app = builder.Build();
 var mudLogger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("MudBlazor");
 MudBlazor.MudGlobal.UnhandledExceptionHandler = ex => mudLogger.LogError(ex, "MudBlazor unhandled exception");
 
-app.MapGet(
-        "/debug/claims",
-        (ClaimsPrincipal user) =>
-        {
-            return Results.Json(
-                user.Claims.Select(c => new
-                {
-                    c.Type,
-                    c.Value,
-                    c.ValueType,
-                })
-            );
-        }
-    )
-    .RequireAuthorization();
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
