@@ -261,19 +261,6 @@
 
             var response = await Api.GetAsync(qs);
 
-            if (response.StatusCode == System.Net.HttpStatusCode.TooManyRequests)
-            {
-                var body = await response.Content.ReadFromJsonAsync<RateLimitResponse>();
-                var retryMinutes = Math.Ceiling((body?.RetryAfterSeconds ?? 1800) / 60.0);
-                var limit = body?.Limit ?? (body?.IsAuthenticated == true ? 10 : 3);
-
-                _rateLimited = true;
-                _rateLimitMessage = body?.IsAuthenticated == true
-                    ? $"You have used all {limit} of your search requests. Try again in {retryMinutes:0} minutes. Add your own OpenAI API key in your Profile to remove this limit."
-                    : $"Anonymous users are limited to {limit} searches per window. Try again in {retryMinutes:0} minutes. Sign in for more, or add your own OpenAI API key for unlimited access.";
-                return;
-            }
-
             if (!response.IsSuccessStatusCode)
             {
                 _searchError = response.StatusCode switch
@@ -287,6 +274,16 @@
 
             var result = await response.Content.ReadFromJsonAsync<SearchResponse>(JsonOptions);
             _results = result?.Results ?? [];
+        }
+        catch (RateLimitedException ex)
+        {
+            var retryMinutes = Math.Ceiling((ex.RetryAfterSeconds ?? 1800) / 60.0);
+            var limit = ex.Limit ?? (ex.IsAuthenticated == true ? 10 : 3);
+
+            _rateLimited = true;
+            _rateLimitMessage = ex.IsAuthenticated == true
+                ? $"You have used all {limit} of your search requests. Try again in {retryMinutes:0} minutes. Add your own OpenAI API key in your Profile to remove this limit."
+                : $"Anonymous users are limited to {limit} searches per window. Try again in {retryMinutes:0} minutes. Sign in for more, or add your own OpenAI API key for unlimited access.";
         }
         catch (Exception ex)
         {
@@ -325,12 +322,6 @@
         PageContext.Clear();
         GlobalFilterService.OnChange -= OnGlobalFilterChanged;
     }
-
-    record RateLimitResponse(
-        [property: JsonPropertyName("limit")] int? Limit,
-        [property: JsonPropertyName("isAuthenticated")] bool? IsAuthenticated,
-        [property: JsonPropertyName("retryAfterSeconds")] int? RetryAfterSeconds
-    );
 
     record SearchResponse(
         [property: JsonPropertyName("query")] string Query,
