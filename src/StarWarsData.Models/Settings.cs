@@ -214,10 +214,6 @@ public static class Collections
     public const string ChatSessions = "chat.sessions";
     public const string UserSettings = "chat.user_settings";
 
-    // ── Territory control ──
-    public const string TerritorySnapshots = "territory.snapshots";
-    public const string TerritoryYears = "territory.years";
-
     // ── Unified galaxy map ──
     public const string GalaxyYears = "galaxy.years";
 

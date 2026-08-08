@@ -1,7 +1,7 @@
 # Design: Galaxy Map — Current Architecture
 
 **Status:** Reference (current state)
-**Date:** 2026-04-05
+**Date:** 2026-08-08
 **Companion docs:** [001-temporal-facets.md](../001-temporal-facets/spec.md), [034-galaxy-map-temporal.md](../034-galaxy-map-temporal/spec.md)
 
 This document describes how the Galaxy Map page is built, served, and rendered **today**. It is a snapshot of current state — future improvements live in `034-galaxy-map-temporal.md`.
@@ -13,7 +13,7 @@ The Galaxy Map is a single Blazor page ([GalaxyMapUnified.razor](../../src/StarW
 | Mode | Purpose | Primary data |
 | --- | --- | --- |
 | **Explore** | Navigate the galaxy geographically. Drill overview → region → grid cell → system → planet. Keyword and semantic search jump the viewport to a specific grid cell and open a detail panel. | Static geography (regions, sectors, grid, systems/planets) derived from Wookieepedia infoboxes via `raw.pages`. |
-| **Timeline** | Scrub year-by-year through galactic history. Faction control shades regions; era bands and event density drive a playback bar. | Pre-baked per-year snapshots from `galaxy.years` + event/territory overlays. |
+| **Timeline** | Scrub year-by-year through galactic history. Faction control shades regions; era bands and event density drive a playback bar. | Pre-baked per-year snapshots from `galaxy.years` (region control + event heatmap embedded). |
 
 Mode switching is client-side — the D3 module (`js/galaxy-map-unified.js`) keeps the same scene graph and swaps the temporal overlay layer on/off.
 
@@ -35,36 +35,37 @@ Services (StarWarsData.Services/GalaxyMap)
   GalaxyMapReadService.cs      ← reads galaxy.years (runtime, zero aggregation)
   MapService.cs                ← geography, viewport systems, keyword + semantic search
   GalaxyMapETLService.cs       ← writes galaxy.years (ETL Phase 8)
-  TerritoryInferenceService.cs ← writes territory.* (ETL Phase 7)
   GalacticRegions.cs           ← canonical region-name normaliser
   FactionColorPalette.cs       ← deterministic faction colouring
 ```
 
-DI registration for the ETL service is in [Admin/Program.cs:57](../../src/StarWarsData.Admin/Program.cs#L57). The ETL is triggered via [AdminController.BuildGalaxyMap](../../src/StarWarsData.Admin/Features/Admin/AdminController.cs#L496) and exposed as an Aspire HTTP command ("8. Build Galaxy Map") from [AppHost/Program.cs:226](../../src/StarWarsData.AppHost/Program.cs#L226).
+Shared DTOs for region control and overview metadata live in [TerritorySnapshot.cs](../../src/StarWarsData.Models/GalaxyMap/TerritorySnapshot.cs) (`TerritoryRegionControl`, `TerritoryFactionControl`, `TerritoryEra`, `TerritoryKeyEvent`, `TerritoryFactionInfo`) and are embedded into `GalaxyYearDocument` / `GalaxyOverviewDocument`.
+
+DI registration for the ETL service is in [Admin/Program.cs](../../src/StarWarsData.Admin/Program.cs). The ETL is triggered via [AdminController.BuildGalaxyMap](../../src/StarWarsData.Admin/Features/Admin/AdminController.cs) and exposed as an Aspire HTTP command ("8. Build Galaxy Map") from [AppHost/Program.cs](../../src/StarWarsData.AppHost/Program.cs).
 
 ## MongoDB collections
 
-All collections live in the `starwars` (prod) / `starwars-dev` (dev) database. Namespacing follows the project convention (`raw.*`, `kg.*`, `timeline.*`, `galaxy.*`, `territory.*`).
+All collections live in the `starwars` (prod) / `starwars-dev` (dev) database. Namespacing follows the project convention (`raw.*`, `kg.*`, `timeline.*`, `galaxy.*`).
 
 ### Read at runtime (per page request)
 
 | Collection | Purpose | Used by |
 | --- | --- | --- |
-| `galaxy.years` | Single collection storing both `GalaxyYearDocument` (one per year) and a single `GalaxyOverviewDocument` (`_id: "overview"`) with factions, eras, available-years list. Timeline mode events are embedded directly in each year document, so no separate event-lens API is needed at runtime. | `GalaxyMapReadService` → all overview/year/factions reads. |
+| `galaxy.years` | Single collection storing both `GalaxyYearDocument` (one per year) and a single `GalaxyOverviewDocument` (`_id: "overview"`) with factions, eras, available-years list. Timeline mode events and region control are embedded directly in each year document, so no separate event-lens or territory API is needed at runtime. | `GalaxyMapReadService` → all overview/year/factions reads. |
 | `raw.pages` | Source Wookieepedia pages with infobox data. Queried for `Grid square`, `Region`, `System`, `CelestialBody` infobox templates to build the static geography overlay and resolve viewport systems. Also feeds keyword search. | `MapService`. |
 | `search.chunks` | Embedded article chunks for semantic search. | `MapService.SemanticSearchGridAsync` (Explore search → `api/galaxy-map/search?semantic=true`). |
 
-`territory.years` and `territory.snapshots` are written by Phase 7 (`TerritoryInferenceService`) and consumed **only** by Phase 8 (`GalaxyMapETLService`), which folds territory data into `galaxy.years` at build time. They have no runtime readers.
+There are **no** `territory.*` collections in the live pipeline. An earlier `TerritoryInferenceService` path that wrote `territory.snapshots` / `territory.years` was deleted (issue #7, 2026-08-08); `GalaxyMapETLService` already recomputed region control itself and never read those intermediates.
 
 ### Written by the ETL (not read at runtime)
 
 | Collection | Read by ETL | Written by |
 | --- | --- | --- |
-| `kg.nodes` | `GalaxyMapETLService`, `TerritoryInferenceService` — governments, eras, systems, planets, factions, events (any node with a `StartYear`). | Phase 6 (KG builder). |
-| `kg.edges` | `GalaxyMapETLService`, `TerritoryInferenceService` — `in_region`, `affiliated_with` (with `FromYear`/`ToYear`), plus full adjacency list for BFS location resolution. | Phase 6. |
+| `kg.nodes` | `GalaxyMapETLService` — governments, eras, systems, planets, factions, events (any node with a `StartYear`). | Phase 5 (KG builder). |
+| `kg.edges` | `GalaxyMapETLService` — `in_region`, `affiliated_with` (with `FromYear`/`ToYear`), plus full adjacency list for BFS location resolution. | Phase 5. |
 | `raw.pages` | `GalaxyMapETLService` — reads infobox `Grid square` + `Region` values to build `planetToGrid` / `nameToGrid` lookups and resolves faction pages for icons/wiki URLs. | Phase 1. |
 
-Collection name constants live in [Collections](../../src/StarWarsData.Models/Settings.cs) (`GalaxyYears`, `TerritoryYears`, `TerritorySnapshots`, `KgNodes`, `KgEdges`, `Pages`, `SearchChunks`).
+Collection name constants live in [Collections](../../src/StarWarsData.Models/Settings.cs) (`GalaxyYears`, `KgNodes`, `KgEdges`, `Pages`, `SearchChunks`).
 
 ## HTTP API surface
 
@@ -88,7 +89,7 @@ Before the 2026-04-05 refactor the feature exposed four controllers (`GalaxyMap/
 
 Entry point: [GalaxyMapETLService.BuildGalaxyMapAsync](../../src/StarWarsData.Services/GalaxyMap/GalaxyMapETLService.cs).
 
-Depends on: Phase 1 (raw pages), Phase 6 (KG nodes + edges), Phase 7 (territory snapshots, optional — baked into `galaxy.years` via `TerritoryInferenceService`).
+Depends on: Phase 1 (raw pages), Phase 5 (KG nodes + edges). No intermediate territory collections.
 
 Steps:
 
@@ -100,7 +101,7 @@ Steps:
 6. **Collect all years** from governments + events, then for each year compute `ComputeRegionControls` by filtering `temporalAffiliations` on `fromYear <= year <= toYear`.
 7. **Write `galaxy.years`**: one `GalaxyYearDocument` per year + one `GalaxyOverviewDocument` with factions, eras, available years.
 
-The ETL is idempotent — `galaxy.years` is dropped and rebuilt each run. On a full rebuild it also regenerates `territory.*` via `TerritoryInferenceService` (Phase 7) which reuses `kg.edges` temporal bounds, battle outcomes, and government lifecycle facets to produce per-event snapshots.
+The ETL is idempotent — `galaxy.years` is dropped and rebuilt each run. Region control is computed inline by `ComputeRegionControls`; there is no separate territory-inference phase.
 
 ## Rendering (frontend)
 
@@ -115,8 +116,8 @@ The ETL is idempotent — `galaxy.years` is dropped and rebuilt each run. On a f
 
 1. **Pre-baked per-year snapshots.** Runtime queries never aggregate across years; they read a single document from `galaxy.years`. This keeps Timeline scrubbing instant at the cost of an ETL dependency after any KG change.
 2. **One page, two modes, one controller.** A single D3 scene graph is reused across modes, and a single `GalaxyMapUnifiedController` exposes the entire HTTP surface. Any feature that can't be served from `galaxy.years` (geography, viewport systems, search) delegates to `MapService`; everything temporal delegates to `GalaxyMapReadService`.
-3. **Geography from `raw.pages`, not KG.** Grid coordinates live on Wookieepedia infoboxes and are read directly from `raw.pages`. The KG is used only for temporal and relational data (who controlled what, and when). If Phase 1 changes, geography changes; if Phase 6 changes, territory/events change.
-4. **Territory is folded into `galaxy.years`.** `territory.years` and `territory.snapshots` exist only as ETL intermediates. The Phase 8 build reads them once and embeds the results into each year document so the runtime has a single source of truth.
+3. **Geography from `raw.pages`, not KG.** Grid coordinates live on Wookieepedia infoboxes and are read directly from `raw.pages`. The KG is used only for temporal and relational data (who controlled what, and when). If Phase 1 changes, geography changes; if Phase 5 changes, territory/events change.
+4. **Region control lives only in `galaxy.years`.** `GalaxyMapETLService.ComputeRegionControls` writes faction control directly into each year document. Former `territory.*` intermediate collections and `TerritoryInferenceService` were removed once it was confirmed they had zero callers and were never read by the galaxy-map build.
 5. **Unified search endpoint.** Keyword and semantic search share `/search?q=&semantic=` rather than two separate routes with divergent parameter names — the Explore UI toggles `semantic` when the user flips the switch. Timeline mode intentionally does not expose search.
 
 ## Known gaps (tracked in 003)

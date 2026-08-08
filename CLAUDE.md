@@ -96,19 +96,20 @@ Five runtime components under `src/`:
 
 Shared libraries: **Models**, **Services** (feature-organised: `AI/Agents`, `AI/Toolkits`, `KnowledgeGraph`, `CharacterTimelines`, `GalaxyMap`, `Search`, `Chat`, `Pages`, `RPG`, `Timeline`, `User`, …), **ServiceDefaults**.
 
-**MongoDB**: single DB (`Settings.DatabaseName`) with namespaced collections `raw.*`, `timeline.*`, `kg.*`, `search.*`, `genai.*`, `chat.*`, `territory.*`, `galaxy.*`, `admin.*`, `hangfire.*`. Connection assembled from AppHost parameters; MCP usage via host `MDB_MCP_CONNECTION_STRING`. Opt-in Aspire-managed dev Mongo via `Parameters:use-local-mongo=true` ([ADR-010](eng/adr/010-aspire-managed-dev-mongo.md)). See Principle II.
+**MongoDB**: single DB (`Settings.DatabaseName`) with namespaced collections `raw.*`, `timeline.*`, `kg.*`, `search.*`, `genai.*`, `chat.*`, `galaxy.*`, `admin.*`, `hangfire.*`. Connection assembled from AppHost parameters; MCP usage via host `MDB_MCP_CONNECTION_STRING`. Opt-in Aspire-managed dev Mongo via `Parameters:use-local-mongo=true` ([ADR-010](eng/adr/010-aspire-managed-dev-mongo.md)). See Principle II.
 
-**ETL phases** (triggered via admin endpoints / Aspire HTTP commands):
+**ETL phases** (triggered via admin endpoints / Aspire HTTP commands; numbers match AppHost/Admin dashboard):
 
 1. Download Wookieepedia pages → `raw.*`
 2. MongoDB views per infobox template type
-3. Categorised timeline events
-4. Indexes + embeddings + vector indexes
-5. AI-generated character timelines
-6. Deterministic infobox KG (`InfoboxGraphService`, per-type node builders → `kg.*`). LLM enrichment is the separate **Holocron** pass — [Design-018](specs/018-kg-enrichments-architecture/spec.md) / [Design-020](specs/020-holocron-async-pipeline/spec.md).
-7. Inferred territory control (`territory.*`, `galaxy.*`).
+3. Categorised timeline events (+ indexes)
+4. Article chunks + embeddings + vector indexes
+5. Deterministic infobox KG (`InfoboxGraphService`, per-type node builders → `kg.*`). LLM enrichment is the separate **Holocron** pass — [Design-018](specs/018-kg-enrichments-architecture/spec.md) / [Design-020](specs/020-holocron-async-pipeline/spec.md).
+6. AI-generated character timelines
+8. Galaxy map build (`GalaxyMapETLService` → `galaxy.years` only). Computes region control, event heatmap, and trade routes directly from `kg.*` + `raw.pages`; there is no separate `territory.*` inference phase or intermediate collection.
+9. Refresh Ask page suggestions
 
-> Legacy OpenAI Batch relationship-extraction path (`RelationshipGraphBuilderService`, `/graph-builder`) removed 2026-05-18.
+> Legacy OpenAI Batch relationship-extraction path (`RelationshipGraphBuilderService`, `/graph-builder`) removed 2026-05-18. Former Phase 7 (`TerritoryInferenceService` / `territory.*`) deleted 2026-08-08 — superseded by Phase 8 recomputing region control into `galaxy.years`.
 
 **Hangfire recurring jobs**: daily wiki sync (03:00 UTC), KG rebuild (04:00), article chunking (05:00), OpenAI spend (04:30), Holocron (06:00, gated by `HolocronEnabled`); weekly Ask suggestions (Sun 03:00).
 

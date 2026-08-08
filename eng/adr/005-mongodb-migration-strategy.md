@@ -6,7 +6,7 @@
 
 ## Context
 
-The application uses MongoDB with a single unified database (`starwars`) containing ~20 namespaced collections (`raw.*`, `kg.*`, `timeline.*`, `search.*`, `genai.*`, `chat.*`, `territory.*`, `galaxy.*`, `admin.*`, `suggestions.*`). There are two environments:
+The application uses MongoDB with a single unified database (`starwars`) containing ~20 namespaced collections (`raw.*`, `kg.*`, `timeline.*`, `search.*`, `genai.*`, `chat.*`, `galaxy.*`, `admin.*`, `suggestions.*`). There are two environments:
 
 | Environment | Current DB name | Purpose |
 | --- | --- | --- |
