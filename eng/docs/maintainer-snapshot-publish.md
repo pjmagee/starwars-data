@@ -16,7 +16,7 @@ A single gzip archive produced by `mongodump` of **`starwars-prod`**, excluding
 user/operational data:
 
 - **Included:** `raw.*`, `kg.*`, `timeline.*`, `search.*` (incl. embedding
-  vectors), `galaxy.*`, `genai.*`, `territory.*` — everything needed to run the
+  vectors), `galaxy.*`, `genai.*` — everything needed to run the
   app without re-running ETL or spending OpenAI credit.
 - **Excluded:** `chat.*` (user conversations), `admin.*`, `hangfire.*` — for
   privacy/GDPR and size.

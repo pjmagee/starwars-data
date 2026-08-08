@@ -319,7 +319,7 @@ This loop is the durability story: enrichments are never lost, only invalidated 
 | 4 | [KnowledgeGraphQueryService](../../src/StarWarsData.Services/KnowledgeGraph/KnowledgeGraphQueryService.cs) | Medium | Swap both. This is the central read API; once it migrates, anything routed through it inherits enrichments. |
 | 5 | [TimelineService](../../src/StarWarsData.Services/Timeline/TimelineService.cs) + [KgTimelineBuilderService](../../src/StarWarsData.Services/Timeline/KgTimelineBuilderService.cs) | Medium | Temporal facets are sensitive — apply precedence policy (infobox wins on specific values; Holocron only fills gaps). |
 | 6 | [PageDiscoveryExecutor](../../src/StarWarsData.Services/CharacterTimelines/Workflows/PageDiscoveryExecutor.cs) + [CharacterTimelineService](../../src/StarWarsData.Services/CharacterTimelines/CharacterTimelineService.cs) | Low | Read-only graph walk; benefits from enrichments. |
-| 7 | [GalaxyMapETLService](../../src/StarWarsData.Services/GalaxyMap/GalaxyMapETLService.cs) + [TerritoryInferenceService](../../src/StarWarsData.Services/GalaxyMap/TerritoryInferenceService.cs) | Medium | Pre-compute consumes enriched data; output `galaxy.years` becomes stale on every enrichment change. Accept daily-lag pattern initially. |
+| 7 | [GalaxyMapETLService](../../src/StarWarsData.Services/GalaxyMap/GalaxyMapETLService.cs) | Medium | Pre-compute consumes enriched data; output `galaxy.years` becomes stale on every enrichment change. Accept daily-lag pattern initially. |
 | 8 | [MapService](../../src/StarWarsData.Services/GalaxyMap/MapService.cs) | Low–medium | Frontend galaxy map. User-visible changes — coordinate UI flag for "show agent-enhanced data". |
 | 9 | [ChartToolKit](../../src/StarWarsData.Services/AI/Toolkits/ChartToolKit.cs) | Low | Reads via the analytics path; inherits #2's choice. |
 
@@ -333,7 +333,7 @@ Each migration PR is small (a `Collections.X` constant swap plus prompt/policy a
 
 **1. Edge enrichment + 3-writer overlap.** `kg.edges` already has two writers: `InfoboxGraphService` (delete-and-reinsert) and `RelationshipGraphBuilderService` (upsert by `sourcePageId`). Adding Holocron to `kg.edge_enrichments` makes a third concern. The strict separation in this design (Holocron writes a *different collection*, the enriched view joins) sidesteps the race entirely. **No edge writer ever touches another writer's collection.**
 
-**2. ETL invalidation cascade.** `galaxy.years` and `territory.years` are pre-computed snapshots derived from KG state. When Holocron writes an enrichment, those snapshots become stale. Three options, all imperfect:
+**2. ETL invalidation cascade.** `galaxy.years` is a pre-computed snapshot derived from KG state. When Holocron writes an enrichment, that snapshot becomes stale. Three options, all imperfect:
 
 - *Trigger ETL on every enrichment write.* Chatty; expensive; ETL takes ~minutes.
 - *Mark stale + lazy rebuild on read.* Adds read-path complexity.

@@ -4,65 +4,18 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace StarWarsData.Models.Entities;
 
 /// <summary>
-/// A snapshot of galactic territory control at a specific year.
-/// Each document represents one faction's control over one galactic region in one year.
+/// One galactic region's faction control mix for a single year.
+/// Embedded in <see cref="GalaxyYearDocument.Regions"/> by <c>GalaxyMapETLService</c>.
 /// </summary>
-public class TerritorySnapshot
-{
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string? Id { get; set; }
-
-    /// <summary>Year in sort-key format (negative = BBY, positive = ABY).</summary>
-    [BsonElement("year")]
-    public int Year { get; set; }
-
-    /// <summary>Galactic region name (e.g. "Core Worlds", "Outer Rim Territories").</summary>
-    [BsonElement("region")]
-    public string Region { get; set; } = string.Empty;
-
-    /// <summary>Controlling faction name (e.g. "Galactic Empire", "New Republic").</summary>
-    [BsonElement("faction")]
-    public string Faction { get; set; } = string.Empty;
-
-    /// <summary>Control strength 0.0–1.0 (1.0 = full control, 0.5 = contested).</summary>
-    [BsonElement("control")]
-    public double Control { get; set; } = 1.0;
-
-    /// <summary>Whether this region is actively contested between factions.</summary>
-    [BsonElement("contested")]
-    public bool Contested { get; set; }
-
-    /// <summary>Hex color for the faction (e.g. "#ff0000").</summary>
-    [BsonElement("color")]
-    public string Color { get; set; } = string.Empty;
-
-    /// <summary>Brief note about what happened (e.g. "Post-Battle of Endor fragmentation").</summary>
-    [BsonElement("note")]
-    public string? Note { get; set; }
-}
-
-/// <summary>
-/// API response: all faction controls for a single year.
-/// </summary>
-public class TerritoryYearResponse
-{
-    public int Year { get; set; }
-    public string YearDisplay { get; set; } = string.Empty;
-    public string? Era { get; set; }
-    public string? EraDescription { get; set; }
-    public List<string> EraConflicts { get; set; } = [];
-    public List<string> EraImportantEvents { get; set; } = [];
-    public List<TerritoryRegionControl> Regions { get; set; } = [];
-    public List<TerritoryKeyEvent> KeyEvents { get; set; } = [];
-}
-
 public class TerritoryRegionControl
 {
     public string Region { get; set; } = string.Empty;
     public List<TerritoryFactionControl> Factions { get; set; } = [];
 }
 
+/// <summary>
+/// A single faction's control share within a region for a year.
+/// </summary>
 public class TerritoryFactionControl
 {
     public string Faction { get; set; } = string.Empty;
@@ -73,20 +26,8 @@ public class TerritoryFactionControl
 }
 
 /// <summary>
-/// API response: overview of available territory data.
+/// Era band metadata embedded in <see cref="GalaxyOverviewDocument.Eras"/>.
 /// </summary>
-public class TerritoryOverview
-{
-    public int MinYear { get; set; }
-    public int MaxYear { get; set; }
-    public List<string> Factions { get; set; } = [];
-    public List<string> Regions { get; set; } = [];
-    public List<TerritoryEra> Eras { get; set; } = [];
-
-    /// <summary>Sorted list of years that have territory snapshot data (sparse).</summary>
-    public List<int> AvailableYears { get; set; } = [];
-}
-
 public class TerritoryEra
 {
     public string Name { get; set; } = string.Empty;
@@ -105,6 +46,9 @@ public class TerritoryEra
     public Continuity Continuity { get; set; } = Continuity.Unknown;
 }
 
+/// <summary>
+/// Key-event DTO retained for territory/timeline overlays (year-scoped narrative markers).
+/// </summary>
 public class TerritoryKeyEvent
 {
     public int Year { get; set; }
@@ -116,4 +60,23 @@ public class TerritoryKeyEvent
     public string? Region { get; set; }
     public int? Col { get; set; }
     public int? Row { get; set; }
+}
+
+/// <summary>
+/// Pre-computed faction metadata — baked into the galaxy overview document
+/// (<see cref="GalaxyOverviewDocument.Factions"/>) by <c>GalaxyMapETLService</c>.
+/// </summary>
+public class TerritoryFactionInfo
+{
+    [BsonElement("name")]
+    public string Name { get; set; } = string.Empty;
+
+    [BsonElement("color")]
+    public string Color { get; set; } = string.Empty;
+
+    [BsonElement("wikiUrl")]
+    public string? WikiUrl { get; set; }
+
+    [BsonElement("iconUrl")]
+    public string? IconUrl { get; set; }
 }
