@@ -1,9 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <LangVersion>preview</LangVersion>
     <NoWarn>$(NoWarn);EXTEXP0001;RZ2001</NoWarn>
   </PropertyGroup>
   <ItemGroup>

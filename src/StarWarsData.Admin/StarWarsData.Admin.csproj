@@ -1,10 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <LangVersion>preview</LangVersion>
-  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Aspire.MongoDB.Driver.v3" Version="9.5.2" />
     <PackageReference Include="MudBlazor" Version="9.8.0" />
