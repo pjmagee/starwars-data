@@ -30,9 +30,8 @@ public class UserIdDelegatingHandler(IHttpContextAccessor httpContextAccessor) :
                 request.Headers.Add("X-User-Id", userId);
 
                 var roles = httpContext
-                    .User.FindAll(ClaimTypes.Role)
+                    .User.FindAll("roles")
                     .Select(c => c.Value)
-                    .Concat(httpContext.User.FindAll("role").Select(c => c.Value))
                     .Distinct();
                 var rolesHeader = string.Join(",", roles);
                 if (!string.IsNullOrEmpty(rolesHeader))
