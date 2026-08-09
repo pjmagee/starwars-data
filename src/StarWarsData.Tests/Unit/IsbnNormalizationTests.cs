@@ -2,16 +2,15 @@ using MongoDB.Bson;
 using StarWarsData.Models.Entities;
 using StarWarsData.Services.KnowledgeGraph.Definitions;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders;
-using StarWarsData.Services.KnowledgeGraph.NodeBuilders.Types;
 
 namespace StarWarsData.Tests.Unit;
 
 /// <summary>
 /// Design-024 Phase C — C3: ISBN normalisation across the four book-shaped
-/// builders (<see cref="BookNodeBuilder"/>, <see cref="ReferenceBookNodeBuilder"/>,
-/// <see cref="ComicBookNodeBuilder"/>, <see cref="MagazineIssueNodeBuilder"/>).
+/// builders (Book / ReferenceBook / ComicBook / MagazineIssue via
+/// <see cref="DefaultNodeBuilder"/> + <see cref="IsbnNormalizer"/>).
 /// Wikipedia's template emits ISBN with no field label (empty string) — the
-/// per-type <c>OnFinalize</c> renames <c>properties[""]</c> to
+/// parameterized <c>OnFinalize</c> renames <c>properties[""]</c> to
 /// <c>properties["ISBN"]</c> via <see cref="IsbnNormalizer"/>.
 /// </summary>
 [TestClass]
@@ -67,7 +66,7 @@ public class IsbnNormalizationTests
     public void Book_EmptyLabelRow_NormalizedToIsbn()
     {
         var ctx = BuildBookCtxWithEmptyLabelIsbn(KgNodeTypes.Book);
-        var result = new BookNodeBuilder().Build(ctx);
+        var result = new DefaultNodeBuilder(KgNodeTypes.Book, IsbnNormalizer.NormalizeEmptyLabelToIsbn).Build(ctx);
 
         Assert.IsTrue(result.Node.Properties.ContainsKey("ISBN"), "ISBN key must be created from empty-label row.");
         Assert.IsFalse(result.Node.Properties.ContainsKey(""), "Empty-string key must be removed.");
@@ -78,7 +77,7 @@ public class IsbnNormalizationTests
     public void ReferenceBook_EmptyLabelRow_NormalizedToIsbn()
     {
         var ctx = BuildBookCtxWithEmptyLabelIsbn(KgNodeTypes.ReferenceBook);
-        var result = new ReferenceBookNodeBuilder().Build(ctx);
+        var result = new DefaultNodeBuilder(KgNodeTypes.ReferenceBook, IsbnNormalizer.NormalizeEmptyLabelToIsbn).Build(ctx);
 
         Assert.IsTrue(result.Node.Properties.ContainsKey("ISBN"));
         Assert.IsFalse(result.Node.Properties.ContainsKey(""));
@@ -88,7 +87,7 @@ public class IsbnNormalizationTests
     public void ComicBook_EmptyLabelRow_NormalizedToIsbn()
     {
         var ctx = BuildBookCtxWithEmptyLabelIsbn(KgNodeTypes.ComicBook);
-        var result = new ComicBookNodeBuilder().Build(ctx);
+        var result = new DefaultNodeBuilder(KgNodeTypes.ComicBook, IsbnNormalizer.NormalizeEmptyLabelToIsbn).Build(ctx);
 
         Assert.IsTrue(result.Node.Properties.ContainsKey("ISBN"));
         Assert.IsFalse(result.Node.Properties.ContainsKey(""));
@@ -98,7 +97,7 @@ public class IsbnNormalizationTests
     public void MagazineIssue_EmptyLabelRow_NormalizedToIsbn()
     {
         var ctx = BuildBookCtxWithEmptyLabelIsbn(KgNodeTypes.MagazineIssue);
-        var result = new MagazineIssueNodeBuilder().Build(ctx);
+        var result = new DefaultNodeBuilder(KgNodeTypes.MagazineIssue, IsbnNormalizer.NormalizeEmptyLabelToIsbn).Build(ctx);
 
         Assert.IsTrue(result.Node.Properties.ContainsKey("ISBN"));
         Assert.IsFalse(result.Node.Properties.ContainsKey(""));
@@ -135,7 +134,7 @@ public class IsbnNormalizationTests
             NodeTypeByPageId: new Dictionary<int, string>()
         );
 
-        var result = new BookNodeBuilder().Build(ctx);
+        var result = new DefaultNodeBuilder(KgNodeTypes.Book, IsbnNormalizer.NormalizeEmptyLabelToIsbn).Build(ctx);
         Assert.IsFalse(result.Node.Properties.ContainsKey("ISBN"));
         Assert.IsFalse(result.Node.Properties.ContainsKey(""));
     }

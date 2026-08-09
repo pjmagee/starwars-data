@@ -10,8 +10,8 @@ namespace StarWarsData.Tests.Unit;
 /// Design-024 Phase C — covers field-promotion changes that live entirely in
 /// <see cref="FieldSemantics"/> (no per-type override needed). C4 (ReferenceMagazine
 /// Featured), C8 (Food Race / Inedible by), C9 (Character Domain / Caste).
-/// These run through <see cref="UnknownNodeBuilder"/> for the types we don't
-/// have explicit per-type builders for; the generic loop classifies them via
+/// These run through <see cref="DefaultNodeBuilder"/> for the types we don't
+/// have dedicated real-logic builders for; the generic loop classifies them via
 /// the global FieldSemantics dictionary.
 /// </summary>
 [TestClass]
@@ -63,8 +63,8 @@ public class PhaseCFieldSemanticsTests
     public void ReferenceMagazine_Featured_PromotesToFeatures()
     {
         var ctx = BuildCtx(KgNodeTypes.ReferenceMagazine, "Featured", "Boba Fett", KgNodeTypes.Character);
-        // ReferenceMagazine has no dedicated builder; UnknownNodeBuilder runs the generic loop.
-        var result = new UnknownNodeBuilder().Build(ctx);
+        // ReferenceMagazine has no dedicated real-logic builder; DefaultNodeBuilder runs the generic loop.
+        var result = new DefaultNodeBuilder(KgNodeTypes.ReferenceMagazine).Build(ctx);
         Assert.AreEqual(1, result.Edges.Count);
         Assert.AreEqual("features", result.Edges[0].Label);
     }
@@ -75,7 +75,7 @@ public class PhaseCFieldSemanticsTests
     {
         // "Race" on Food semantically duplicates "Edible by" — both target Species.
         var ctx = BuildCtx(KgNodeTypes.Food, "Race", "Wookiee", KgNodeTypes.Species);
-        var result = new UnknownNodeBuilder().Build(ctx);
+        var result = new DefaultNodeBuilder(KgNodeTypes.Food).Build(ctx);
         Assert.AreEqual(1, result.Edges.Count);
         Assert.AreEqual("edible_by", result.Edges[0].Label);
     }
@@ -84,7 +84,7 @@ public class PhaseCFieldSemanticsTests
     public void Food_InedibleBy_PromotesToNotEdibleBy()
     {
         var ctx = BuildCtx(KgNodeTypes.Food, "Inedible by", "Hutt", KgNodeTypes.Species);
-        var result = new UnknownNodeBuilder().Build(ctx);
+        var result = new DefaultNodeBuilder(KgNodeTypes.Food).Build(ctx);
         Assert.AreEqual(1, result.Edges.Count);
         Assert.AreEqual("not_edible_by", result.Edges[0].Label);
     }
