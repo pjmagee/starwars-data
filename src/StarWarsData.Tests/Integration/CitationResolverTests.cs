@@ -5,14 +5,15 @@ using StarWarsData.Models;
 using StarWarsData.Models.Entities;
 using StarWarsData.Services.AI.Citations;
 using StarWarsData.Services.AI.RequestContext;
-using Testcontainers.MongoDb;
+using StarWarsData.Tests.Infrastructure;
 
 namespace StarWarsData.Tests.Integration;
 
 /// <summary>
 /// Design-030 Phases 2 + 4 — <see cref="CitationResolver"/> against a real
-/// MongoDB container. Owns its own container so seeded kg.* docs can't pollute
-/// the shared <see cref="Infrastructure.ApiFixture"/> dataset.
+/// MongoDB container. Uses a class-scoped database name on the shared
+/// <see cref="MongoContainerFixture"/> so seeded kg.* docs can't pollute the
+/// shared <see cref="ApiFixture"/> dataset.
 /// </summary>
 [TestClass]
 [TestCategory(TestTiers.Integration)]
@@ -21,27 +22,25 @@ public class CitationResolverTests
 {
     private const string Db = "test-starwars-citations";
 
-    private static MongoDbContainer _container = null!;
     private static IMongoClient _client = null!;
     private static readonly CurrentRequestContext Ctx = new();
 
     [ClassInitialize]
     public static async Task ClassSetup(TestContext _)
     {
-        _container = new MongoDbBuilder("mongo:8").Build();
-        await _container.StartAsync();
-        _client = new MongoClient(_container.GetConnectionString());
-        var db = _client.GetDatabase(Db);
+        await MongoContainerFixture.EnsureInitializedAsync();
+        _client = MongoContainerFixture.Client;
+        var db = MongoContainerFixture.GetDatabase(Db);
 
         await db.GetCollection<GraphNode>(Collections.KgNodes)
             .InsertManyAsync(
                 [
-                    Node(10, "Yavin 4", KgNodeTypes.CelestialBody, "https://wiki/Yavin_4"),
-                    Node(11, "Korriban", KgNodeTypes.CelestialBody, continuity: Continuity.Legends),
-                    Node(20, "Battle of Yavin", KgNodeTypes.Battle),
-                    Node(30, "Luke Skywalker", KgNodeTypes.Character),
-                    Node(40, "Han Solo", KgNodeTypes.Character),
-                    Node(50, "Boba Fett", KgNodeTypes.Character), // no spatial edge
+                    MongoContainerFixture.Node(10, "Yavin 4", KgNodeTypes.CelestialBody, "https://wiki/Yavin_4"),
+                    MongoContainerFixture.Node(11, "Korriban", KgNodeTypes.CelestialBody, continuity: Continuity.Legends),
+                    MongoContainerFixture.Node(20, "Battle of Yavin", KgNodeTypes.Battle),
+                    MongoContainerFixture.Node(30, "Luke Skywalker", KgNodeTypes.Character),
+                    MongoContainerFixture.Node(40, "Han Solo", KgNodeTypes.Character),
+                    MongoContainerFixture.Node(50, "Boba Fett", KgNodeTypes.Character), // no spatial edge
                 ]
             );
 
@@ -59,13 +58,6 @@ public class CitationResolverTests
         // collections — slim citation card surfaces Node / Location / Wiki only
         // (Design-041 follow-up). Timeline and Holocron remain reachable from
         // the KG node detail page itself.
-    }
-
-    [ClassCleanup]
-    public static async Task ClassTeardown()
-    {
-        if (_container is not null)
-            await _container.DisposeAsync();
     }
 
     private static CitationResolver NewResolver()
@@ -140,17 +132,6 @@ public class CitationResolverTests
         Assert.IsNull(r.Links.Wiki);
         Assert.IsNull(r.Links.GalaxyMap);
     }
-
-    private static GraphNode Node(int id, string name, string type, string? wikiUrl = null, Continuity continuity = Continuity.Canon) =>
-        new()
-        {
-            PageId = id,
-            Name = name,
-            Type = type,
-            Continuity = continuity,
-            Realm = Realm.Starwars,
-            WikiUrl = wikiUrl,
-        };
 
     private static RelationshipEdge Edge(int fromId, int toId, string label, string toType, Continuity continuity, double weight) =>
         new()

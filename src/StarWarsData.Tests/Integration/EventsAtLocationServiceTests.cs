@@ -5,14 +5,15 @@ using MongoDB.Driver;
 using StarWarsData.Models;
 using StarWarsData.Models.Entities;
 using StarWarsData.Services;
-using Testcontainers.MongoDb;
+using StarWarsData.Tests.Infrastructure;
 
 namespace StarWarsData.Tests.Integration;
 
 /// <summary>
 /// Design-032 — <see cref="EventsAtLocationService"/> against a real MongoDB
-/// container. Owns its own container so seeded kg.* docs can't pollute the
-/// shared <see cref="Infrastructure.ApiFixture"/> dataset.
+/// container. Uses a class-scoped database name on the shared
+/// <see cref="MongoContainerFixture"/> so seeded kg.* docs can't pollute the
+/// shared <see cref="ApiFixture"/> dataset.
 /// </summary>
 [TestClass]
 [TestCategory(TestTiers.Integration)]
@@ -22,30 +23,28 @@ public class EventsAtLocationServiceTests
     private const string Db = "test-starwars-events-at-loc";
     private const int Yavin4 = 100; // a CelestialBody we attach events to
 
-    private static MongoDbContainer _container = null!;
     private static IMongoClient _client = null!;
     private static EventsAtLocationService _service = null!;
 
     [ClassInitialize]
     public static async Task ClassSetup(TestContext _)
     {
-        _container = new MongoDbBuilder("mongo:8").Build();
-        await _container.StartAsync();
-        _client = new MongoClient(_container.GetConnectionString());
+        await MongoContainerFixture.EnsureInitializedAsync();
+        _client = MongoContainerFixture.Client;
 
-        var nodes = _client.GetDatabase(Db).GetCollection<GraphNode>(Collections.KgNodes);
-        var edges = _client.GetDatabase(Db).GetCollection<RelationshipEdge>(Collections.KgEdges);
+        var nodes = MongoContainerFixture.GetDatabase(Db).GetCollection<GraphNode>(Collections.KgNodes);
+        var edges = MongoContainerFixture.GetDatabase(Db).GetCollection<RelationshipEdge>(Collections.KgEdges);
 
         await nodes.InsertManyAsync(
             [
-                Node(Yavin4, "Yavin 4", KgNodeTypes.CelestialBody),
-                Node(1, "Battle of Yavin", KgNodeTypes.Battle, "https://wiki/Battle_of_Yavin"),
-                Node(2, "Evacuation of Yavin 4", KgNodeTypes.Mission),
-                Node(3, "Duel on Yavin 4", KgNodeTypes.Duel),
-                Node(4, "Legends Skirmish", KgNodeTypes.Battle, continuity: Continuity.Legends),
-                Node(5, "Jedi Praxeum", KgNodeTypes.Structure), // non-event source
-                Node(6, "Undated Raid", KgNodeTypes.Battle),
-                Node(200, "Yavin system", KgNodeTypes.System),
+                MongoContainerFixture.Node(Yavin4, "Yavin 4", KgNodeTypes.CelestialBody),
+                MongoContainerFixture.Node(1, "Battle of Yavin", KgNodeTypes.Battle, "https://wiki/Battle_of_Yavin"),
+                MongoContainerFixture.Node(2, "Evacuation of Yavin 4", KgNodeTypes.Mission),
+                MongoContainerFixture.Node(3, "Duel on Yavin 4", KgNodeTypes.Duel),
+                MongoContainerFixture.Node(4, "Legends Skirmish", KgNodeTypes.Battle, continuity: Continuity.Legends),
+                MongoContainerFixture.Node(5, "Jedi Praxeum", KgNodeTypes.Structure), // non-event source
+                MongoContainerFixture.Node(6, "Undated Raid", KgNodeTypes.Battle),
+                MongoContainerFixture.Node(200, "Yavin system", KgNodeTypes.System),
             ]
         );
 
@@ -70,13 +69,6 @@ public class EventsAtLocationServiceTests
         );
 
         _service = new EventsAtLocationService(NullLogger<EventsAtLocationService>.Instance, Options.Create(new SettingsOptions { DatabaseName = Db }), _client);
-    }
-
-    [ClassCleanup]
-    public static async Task ClassTeardown()
-    {
-        if (_container is not null)
-            await _container.DisposeAsync();
     }
 
     [TestMethod]
@@ -158,17 +150,6 @@ public class EventsAtLocationServiceTests
         var canon = await _service.GetEventsAtAsync(200, Continuity.Canon);
         Assert.IsFalse(canon!.Events.Any(e => e.PageId == 4), "Legends Skirmish hidden under Canon even via roll-up");
     }
-
-    private static GraphNode Node(int id, string name, string type, string? wikiUrl = null, Continuity continuity = Continuity.Canon) =>
-        new()
-        {
-            PageId = id,
-            Name = name,
-            Type = type,
-            Continuity = continuity,
-            Realm = Realm.Starwars,
-            WikiUrl = wikiUrl,
-        };
 
     private static RelationshipEdge Edge(int fromId, int toId, string label, string fromType, string fromName, int? year, Continuity continuity = Continuity.Canon) =>
         new()

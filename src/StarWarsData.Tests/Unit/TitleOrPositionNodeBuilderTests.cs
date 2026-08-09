@@ -1,8 +1,7 @@
-using MongoDB.Bson;
 using StarWarsData.Models.Entities;
-using StarWarsData.Services.KnowledgeGraph.Definitions;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders.Types;
+using StarWarsData.Tests.Infrastructure;
 
 namespace StarWarsData.Tests.Unit;
 
@@ -17,45 +16,8 @@ namespace StarWarsData.Tests.Unit;
 [TestCategory(TestTiers.Unit)]
 public class TitleOrPositionNodeBuilderTests
 {
-    static NodeBuilderContext BuildCtx(string fieldLabel, string targetType)
-    {
-        const int targetPageId = 200;
-        const string targetTitle = "Galactic Senate";
-        const string targetUrl = "/wiki/Galactic_Senate";
-        var dataItems = new BsonArray
-        {
-            new BsonDocument
-            {
-                { InfoboxBsonFields.Label, fieldLabel },
-                {
-                    InfoboxBsonFields.Values,
-                    new BsonArray { targetTitle }
-                },
-                {
-                    InfoboxBsonFields.Links,
-                    new BsonArray
-                    {
-                        new BsonDocument { { InfoboxBsonFields.Content, targetTitle }, { InfoboxBsonFields.Href, targetUrl } },
-                    }
-                },
-            },
-        };
-
-        return new NodeBuilderContext(
-            PageId: 100,
-            Title: "Senator",
-            Type: KgNodeTypes.TitleOrPosition,
-            Continuity: Continuity.Canon,
-            Realm: Realm.Starwars,
-            ContentHash: null,
-            WikiUrl: "/wiki/Senator",
-            ImageUrl: null,
-            DataItems: dataItems,
-            Definition: InfoboxDefinitionRegistry.ForTemplate(KgNodeTypes.TitleOrPosition),
-            WikiUrlToPageId: new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase) { [targetUrl] = targetPageId, [targetTitle] = targetPageId },
-            NodeTypeByPageId: new Dictionary<int, string> { [targetPageId] = targetType }
-        );
-    }
+    static NodeBuilderContext BuildCtx(string fieldLabel, string targetType) =>
+        NodeBuilderContexts.SingleLinkedField(KgNodeTypes.TitleOrPosition, fieldLabel, "Galactic Senate", targetType, sourceTitle: "Senator");
 
     [TestMethod]
     [DataRow("Organization", KgNodeTypes.Organization)]

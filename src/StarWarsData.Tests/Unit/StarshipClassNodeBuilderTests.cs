@@ -1,8 +1,7 @@
-using MongoDB.Bson;
 using StarWarsData.Models.Entities;
-using StarWarsData.Services.KnowledgeGraph.Definitions;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders.Types;
+using StarWarsData.Tests.Infrastructure;
 
 namespace StarWarsData.Tests.Unit;
 
@@ -14,48 +13,8 @@ namespace StarWarsData.Tests.Unit;
 [TestCategory(TestTiers.Unit)]
 public class StarshipClassNodeBuilderTests
 {
-    static (NodeBuilderContext ctx, StarshipClassNodeBuilder builder) BuildAffiliationCase(string targetType)
-    {
-        const int targetPageId = 200;
-        const string targetTitle = "Sith Order";
-        const string targetUrl = "/wiki/Sith_Order";
-
-        var dataItems = new BsonArray
-        {
-            new BsonDocument
-            {
-                { InfoboxBsonFields.Label, "Affiliation" },
-                {
-                    InfoboxBsonFields.Values,
-                    new BsonArray { targetTitle }
-                },
-                {
-                    InfoboxBsonFields.Links,
-                    new BsonArray
-                    {
-                        new BsonDocument { { InfoboxBsonFields.Content, targetTitle }, { InfoboxBsonFields.Href, targetUrl } },
-                    }
-                },
-            },
-        };
-
-        var ctx = new NodeBuilderContext(
-            PageId: 100,
-            Title: "Sith infiltrator",
-            Type: KgNodeTypes.StarshipClass,
-            Continuity: Continuity.Canon,
-            Realm: Realm.Starwars,
-            ContentHash: null,
-            WikiUrl: "/wiki/Sith_infiltrator",
-            ImageUrl: null,
-            DataItems: dataItems,
-            Definition: InfoboxDefinitionRegistry.ForTemplate(KgNodeTypes.StarshipClass),
-            WikiUrlToPageId: new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase) { [targetUrl] = targetPageId, [targetTitle] = targetPageId },
-            NodeTypeByPageId: new Dictionary<int, string> { [targetPageId] = targetType }
-        );
-
-        return (ctx, new StarshipClassNodeBuilder());
-    }
+    static (NodeBuilderContext ctx, StarshipClassNodeBuilder builder) BuildAffiliationCase(string targetType) =>
+        (NodeBuilderContexts.SingleLinkedField(KgNodeTypes.StarshipClass, "Affiliation", "Sith Order", targetType, sourceTitle: "Sith infiltrator"), new StarshipClassNodeBuilder());
 
     [TestMethod]
     [DataRow(KgNodeTypes.Religion)]

@@ -22,16 +22,16 @@ namespace StarWarsData.Tests.Integration;
 public sealed class HolocronJobIdUniqueIndexTests
 {
     [ClassInitialize]
-    public static async Task ClassSetup(TestContext _) => await CheckpointStoreFixture.EnsureInitializedAsync();
+    public static async Task ClassSetup(TestContext _) => await MongoContainerFixture.EnsureInitializedAsync();
 
     /// <summary>
     /// Use a fresh DB name per test so the indexes from one test don't bleed into the next —
-    /// CheckpointStoreFixture's primary DB is reused by other tests.
+    /// MongoContainerFixture's primary DB is reused by other tests.
     /// </summary>
     static IMongoDatabase NewDb()
     {
         var dbName = $"holocron-idx-{Guid.NewGuid():N}";
-        return CheckpointStoreFixture.Client.GetDatabase(dbName);
+        return MongoContainerFixture.Client.GetDatabase(dbName);
     }
 
     /// <summary>

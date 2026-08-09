@@ -1,8 +1,7 @@
-using MongoDB.Bson;
 using StarWarsData.Models.Entities;
-using StarWarsData.Services.KnowledgeGraph.Definitions;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders.Types;
+using StarWarsData.Tests.Infrastructure;
 
 namespace StarWarsData.Tests.Unit;
 
@@ -14,47 +13,8 @@ namespace StarWarsData.Tests.Unit;
 [TestCategory(TestTiers.Unit)]
 public class OrganizationNodeBuilderTests
 {
-    static (NodeBuilderContext ctx, OrganizationNodeBuilder builder) BuildLeaderCase(string targetType, string targetTitle = "Some Leader")
-    {
-        const int targetPageId = 200;
-        var targetUrl = $"/wiki/{targetTitle.Replace(' ', '_')}";
-
-        var dataItems = new BsonArray
-        {
-            new BsonDocument
-            {
-                { InfoboxBsonFields.Label, "Leader(s)" },
-                {
-                    InfoboxBsonFields.Values,
-                    new BsonArray { targetTitle }
-                },
-                {
-                    InfoboxBsonFields.Links,
-                    new BsonArray
-                    {
-                        new BsonDocument { { InfoboxBsonFields.Content, targetTitle }, { InfoboxBsonFields.Href, targetUrl } },
-                    }
-                },
-            },
-        };
-
-        var ctx = new NodeBuilderContext(
-            PageId: 100,
-            Title: "Test Org",
-            Type: KgNodeTypes.Organization,
-            Continuity: Continuity.Canon,
-            Realm: Realm.Starwars,
-            ContentHash: null,
-            WikiUrl: "/wiki/Test_Org",
-            ImageUrl: null,
-            DataItems: dataItems,
-            Definition: InfoboxDefinitionRegistry.ForTemplate(KgNodeTypes.Organization),
-            WikiUrlToPageId: new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase) { [targetUrl] = targetPageId, [targetTitle] = targetPageId },
-            NodeTypeByPageId: new Dictionary<int, string> { [targetPageId] = targetType }
-        );
-
-        return (ctx, new OrganizationNodeBuilder());
-    }
+    static (NodeBuilderContext ctx, OrganizationNodeBuilder builder) BuildLeaderCase(string targetType, string targetTitle = "Some Leader") =>
+        (NodeBuilderContexts.SingleLinkedField(KgNodeTypes.Organization, "Leader(s)", targetTitle, targetType, sourceTitle: "Test Org"), new OrganizationNodeBuilder());
 
     [TestMethod]
     public void LedBy_TargetIsOrganization_EdgeDropped()

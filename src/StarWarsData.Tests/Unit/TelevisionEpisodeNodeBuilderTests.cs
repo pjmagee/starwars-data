@@ -1,8 +1,7 @@
-using MongoDB.Bson;
 using StarWarsData.Models.Entities;
-using StarWarsData.Services.KnowledgeGraph.Definitions;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders.Types;
+using StarWarsData.Tests.Infrastructure;
 
 namespace StarWarsData.Tests.Unit;
 
@@ -16,45 +15,8 @@ namespace StarWarsData.Tests.Unit;
 [TestCategory(TestTiers.Unit)]
 public class TelevisionEpisodeNodeBuilderTests
 {
-    static NodeBuilderContext BuildCtx(string fieldLabel, string targetTitle, string targetType)
-    {
-        const int targetPageId = 200;
-        var targetUrl = $"/wiki/{targetTitle.Replace(' ', '_')}";
-
-        var dataItems = new BsonArray
-        {
-            new BsonDocument
-            {
-                { InfoboxBsonFields.Label, fieldLabel },
-                {
-                    InfoboxBsonFields.Values,
-                    new BsonArray { targetTitle }
-                },
-                {
-                    InfoboxBsonFields.Links,
-                    new BsonArray
-                    {
-                        new BsonDocument { { InfoboxBsonFields.Content, targetTitle }, { InfoboxBsonFields.Href, targetUrl } },
-                    }
-                },
-            },
-        };
-
-        return new NodeBuilderContext(
-            PageId: 100,
-            Title: "Test Episode",
-            Type: KgNodeTypes.TelevisionEpisode,
-            Continuity: Continuity.Canon,
-            Realm: Realm.Real,
-            ContentHash: null,
-            WikiUrl: "/wiki/Test_Episode",
-            ImageUrl: null,
-            DataItems: dataItems,
-            Definition: InfoboxDefinitionRegistry.ForTemplate(KgNodeTypes.TelevisionEpisode),
-            WikiUrlToPageId: new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase) { [targetUrl] = targetPageId, [targetTitle] = targetPageId },
-            NodeTypeByPageId: new Dictionary<int, string> { [targetPageId] = targetType }
-        );
-    }
+    static NodeBuilderContext BuildCtx(string fieldLabel, string targetTitle, string targetType) =>
+        NodeBuilderContexts.SingleLinkedField(KgNodeTypes.TelevisionEpisode, fieldLabel, targetTitle, targetType, sourceTitle: "Test Episode", realm: Realm.Real);
 
     [TestMethod]
     public void GuestStar_PromotesToFeaturedActor()

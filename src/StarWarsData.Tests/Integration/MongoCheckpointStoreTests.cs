@@ -11,9 +11,9 @@ namespace StarWarsData.Tests.Integration;
 public class MongoCheckpointStoreTests
 {
     [ClassInitialize]
-    public static async Task ClassSetup(TestContext _) => await CheckpointStoreFixture.EnsureInitializedAsync();
+    public static async Task ClassSetup(TestContext _) => await MongoContainerFixture.EnsureInitializedAsync();
 
-    private static MongoCheckpointStore CreateStore() => new(CheckpointStoreFixture.Client, CheckpointStoreFixture.DbName);
+    private static MongoCheckpointStore CreateStore() => new(MongoContainerFixture.Client, MongoContainerFixture.CheckpointDbName);
 
     [TestMethod]
     public async Task CreateAndRetrieve_RoundTrips()

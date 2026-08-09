@@ -1,8 +1,7 @@
-using MongoDB.Bson;
 using StarWarsData.Models.Entities;
-using StarWarsData.Services.KnowledgeGraph.Definitions;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders.Types;
+using StarWarsData.Tests.Infrastructure;
 
 namespace StarWarsData.Tests.Unit;
 
@@ -15,45 +14,8 @@ namespace StarWarsData.Tests.Unit;
 [TestCategory(TestTiers.Unit)]
 public class SectorNodeBuilderTests
 {
-    static NodeBuilderContext BuildSectorCtx(string fieldLabel, string targetType = "Battle")
-    {
-        const int targetPageId = 200;
-        const string targetTitle = "Some War";
-        const string targetUrl = "/wiki/Some_War";
-        var dataItems = new BsonArray
-        {
-            new BsonDocument
-            {
-                { InfoboxBsonFields.Label, fieldLabel },
-                {
-                    InfoboxBsonFields.Values,
-                    new BsonArray { targetTitle }
-                },
-                {
-                    InfoboxBsonFields.Links,
-                    new BsonArray
-                    {
-                        new BsonDocument { { InfoboxBsonFields.Content, targetTitle }, { InfoboxBsonFields.Href, targetUrl } },
-                    }
-                },
-            },
-        };
-
-        return new NodeBuilderContext(
-            PageId: 100,
-            Title: "Test Sector",
-            Type: KgNodeTypes.Sector,
-            Continuity: Continuity.Canon,
-            Realm: Realm.Starwars,
-            ContentHash: null,
-            WikiUrl: "/wiki/Test_Sector",
-            ImageUrl: null,
-            DataItems: dataItems,
-            Definition: InfoboxDefinitionRegistry.ForTemplate(KgNodeTypes.Sector),
-            WikiUrlToPageId: new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase) { [targetUrl] = targetPageId, [targetTitle] = targetPageId },
-            NodeTypeByPageId: new Dictionary<int, string> { [targetPageId] = targetType }
-        );
-    }
+    static NodeBuilderContext BuildSectorCtx(string fieldLabel, string targetType = "Battle") =>
+        NodeBuilderContexts.SingleLinkedField(KgNodeTypes.Sector, fieldLabel, "Some War", targetType, sourceTitle: "Test Sector");
 
     [TestMethod]
     [DataRow("Yuuzhan Vong War")]

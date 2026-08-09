@@ -1,8 +1,8 @@
 using MongoDB.Bson;
 using StarWarsData.Models.Entities;
-using StarWarsData.Services.KnowledgeGraph.Definitions;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders.Types;
+using StarWarsData.Tests.Infrastructure;
 
 namespace StarWarsData.Tests.Unit;
 
@@ -24,19 +24,13 @@ public class NodeBuilderInfrastructureTests
     {
         var nodeTypeByPageId = new Dictionary<int, string> { [42] = KgNodeTypes.Character, [43] = KgNodeTypes.TitleOrPosition };
 
-        var ctx = new NodeBuilderContext(
-            PageId: 1,
-            Title: "Test",
-            Type: KgNodeTypes.Character,
-            Continuity: Continuity.Canon,
-            Realm: Realm.Starwars,
-            ContentHash: "hash-1",
-            WikiUrl: "/wiki/Test",
-            ImageUrl: null,
-            DataItems: new BsonArray(),
-            Definition: InfoboxDefinitionRegistry.ForTemplate(KgNodeTypes.Character),
-            WikiUrlToPageId: new Dictionary<string, int>(),
-            NodeTypeByPageId: nodeTypeByPageId
+        var ctx = NodeBuilderContexts.FromDataItems(
+            KgNodeTypes.Character,
+            new BsonArray(),
+            sourceTitle: "Test",
+            sourcePageId: 1,
+            contentHash: "hash-1",
+            nodeTypeByPageId: nodeTypeByPageId
         );
 
         Assert.IsNotNull(ctx.NodeTypeByPageId);
@@ -76,19 +70,13 @@ public class NodeBuilderInfrastructureTests
             },
         };
 
-        var ctx = new NodeBuilderContext(
-            PageId: sourcePageId,
-            Title: "Luke Skywalker",
-            Type: KgNodeTypes.Character,
-            Continuity: Continuity.Canon,
-            Realm: Realm.Starwars,
-            ContentHash: null,
-            WikiUrl: "/wiki/Luke_Skywalker",
-            ImageUrl: null,
-            DataItems: dataItems,
-            Definition: InfoboxDefinitionRegistry.ForTemplate(KgNodeTypes.Character),
-            WikiUrlToPageId: new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase) { [targetUrl] = targetPageId, [targetTitle] = targetPageId },
-            NodeTypeByPageId: new Dictionary<int, string> { [targetPageId] = KgNodeTypes.Character }
+        var ctx = NodeBuilderContexts.FromDataItems(
+            KgNodeTypes.Character,
+            dataItems,
+            sourceTitle: "Luke Skywalker",
+            sourcePageId: sourcePageId,
+            wikiUrlToPageId: new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase) { [targetUrl] = targetPageId, [targetTitle] = targetPageId },
+            nodeTypeByPageId: new Dictionary<int, string> { [targetPageId] = KgNodeTypes.Character }
         );
 
         var builder = new CharacterNodeBuilder();
@@ -134,19 +122,13 @@ public class NodeBuilderInfrastructureTests
             },
         };
 
-        var ctx = new NodeBuilderContext(
-            PageId: sourcePageId,
-            Title: "Luke Skywalker",
-            Type: KgNodeTypes.Character,
-            Continuity: Continuity.Canon,
-            Realm: Realm.Starwars,
-            ContentHash: null,
-            WikiUrl: "/wiki/Luke_Skywalker",
-            ImageUrl: null,
-            DataItems: dataItems,
-            Definition: InfoboxDefinitionRegistry.ForTemplate(KgNodeTypes.Character),
-            WikiUrlToPageId: new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase) { [targetUrl] = targetPageId, [targetTitle] = targetPageId },
-            NodeTypeByPageId: new Dictionary<int, string> { [targetPageId] = KgNodeTypes.Character }
+        var ctx = NodeBuilderContexts.FromDataItems(
+            KgNodeTypes.Character,
+            dataItems,
+            sourceTitle: "Luke Skywalker",
+            sourcePageId: sourcePageId,
+            wikiUrlToPageId: new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase) { [targetUrl] = targetPageId, [targetTitle] = targetPageId },
+            nodeTypeByPageId: new Dictionary<int, string> { [targetPageId] = KgNodeTypes.Character }
         );
 
         var builder = new CharacterNodeBuilder();

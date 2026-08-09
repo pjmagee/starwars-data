@@ -6,14 +6,13 @@ using StarWarsData.Models;
 using StarWarsData.Models.Entities;
 using StarWarsData.Services;
 using StarWarsData.Tests.Infrastructure;
-using Testcontainers.MongoDb;
 
 namespace StarWarsData.Tests.Integration;
 
 /// <summary>
 /// Integration tests for <see cref="ArticleChunkingService"/> against a real MongoDB container.
-/// Uses its own dedicated container so a failed chunking write cannot pollute the shared
-/// <see cref="ApiFixture"/> seed dataset.
+/// Uses a class-scoped database name on the shared <see cref="MongoContainerFixture"/> so a
+/// failed chunking write cannot pollute the shared <see cref="ApiFixture"/> seed dataset.
 /// </summary>
 [TestClass]
 [TestCategory(TestTiers.Integration)]
@@ -22,7 +21,6 @@ public class ArticleChunkingIntegrationTests
 {
     private const string TestDatabaseName = "test-starwars-chunking";
 
-    private static MongoDbContainer _container = null!;
     private static IMongoClient _mongoClient = null!;
     private static ArticleChunkingService _service = null!;
     private static FakeEmbeddingGenerator _embedder = null!;
@@ -30,22 +28,13 @@ public class ArticleChunkingIntegrationTests
     [ClassInitialize]
     public static async Task ClassSetup(TestContext _)
     {
-        _container = new MongoDbBuilder("mongo:8").Build();
-        await _container.StartAsync();
-
-        _mongoClient = new MongoClient(_container.GetConnectionString());
+        await MongoContainerFixture.EnsureInitializedAsync();
+        _mongoClient = MongoContainerFixture.Client;
         _embedder = new FakeEmbeddingGenerator();
 
         var settings = Options.Create(new SettingsOptions { DatabaseName = TestDatabaseName });
 
         _service = new ArticleChunkingService(NullLogger<ArticleChunkingService>.Instance, settings, _mongoClient, _embedder, new OpenAiStatusService(NullLogger<OpenAiStatusService>.Instance));
-    }
-
-    [ClassCleanup]
-    public static async Task ClassTeardown()
-    {
-        if (_container is not null)
-            await _container.DisposeAsync();
     }
 
     private static IMongoCollection<BsonDocument> Pages => _mongoClient.GetDatabase(TestDatabaseName).GetCollection<BsonDocument>(Collections.Pages);

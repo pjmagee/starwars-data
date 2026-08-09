@@ -1,8 +1,7 @@
-using MongoDB.Bson;
 using StarWarsData.Models.Entities;
-using StarWarsData.Services.KnowledgeGraph.Definitions;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders.Types;
+using StarWarsData.Tests.Infrastructure;
 
 namespace StarWarsData.Tests.Unit;
 
@@ -14,48 +13,8 @@ namespace StarWarsData.Tests.Unit;
 [TestCategory(TestTiers.Unit)]
 public class IndividualShipNodeBuilderTests
 {
-    static (NodeBuilderContext ctx, IndividualShipNodeBuilder builder) BuildAffiliationCase(string targetType)
-    {
-        const int targetPageId = 200;
-        const string targetTitle = "501st Legion";
-        const string targetUrl = "/wiki/501st_Legion";
-
-        var dataItems = new BsonArray
-        {
-            new BsonDocument
-            {
-                { InfoboxBsonFields.Label, "Affiliation" },
-                {
-                    InfoboxBsonFields.Values,
-                    new BsonArray { targetTitle }
-                },
-                {
-                    InfoboxBsonFields.Links,
-                    new BsonArray
-                    {
-                        new BsonDocument { { InfoboxBsonFields.Content, targetTitle }, { InfoboxBsonFields.Href, targetUrl } },
-                    }
-                },
-            },
-        };
-
-        var ctx = new NodeBuilderContext(
-            PageId: 100,
-            Title: "Devastator",
-            Type: KgNodeTypes.IndividualShip,
-            Continuity: Continuity.Canon,
-            Realm: Realm.Starwars,
-            ContentHash: null,
-            WikiUrl: "/wiki/Devastator",
-            ImageUrl: null,
-            DataItems: dataItems,
-            Definition: InfoboxDefinitionRegistry.ForTemplate(KgNodeTypes.IndividualShip),
-            WikiUrlToPageId: new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase) { [targetUrl] = targetPageId, [targetTitle] = targetPageId },
-            NodeTypeByPageId: new Dictionary<int, string> { [targetPageId] = targetType }
-        );
-
-        return (ctx, new IndividualShipNodeBuilder());
-    }
+    static (NodeBuilderContext ctx, IndividualShipNodeBuilder builder) BuildAffiliationCase(string targetType) =>
+        (NodeBuilderContexts.SingleLinkedField(KgNodeTypes.IndividualShip, "Affiliation", "501st Legion", targetType, sourceTitle: "Devastator"), new IndividualShipNodeBuilder());
 
     [TestMethod]
     [DataRow("Military_unit")]
