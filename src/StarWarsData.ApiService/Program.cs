@@ -1,29 +1,18 @@
-using System.ClientModel;
 using Microsoft.Agents.AI;
 using Microsoft.Agents.AI.Hosting.AGUI.AspNetCore;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Options;
 using ModelContextProtocol.Client;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Conventions;
-using MongoDB.Bson.Serialization.IdGenerators;
-using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 using OpenAI;
 using StarWarsData.Models;
 using StarWarsData.ServiceDefaults;
 using StarWarsData.Services;
 using StarWarsData.Services.AI.Agents;
-using StarWarsData.Services.AI.Agents.CharacterTimelines;
 using StarWarsData.Services.AI.Citations;
 using StarWarsData.Services.AI.RequestContext;
 
 var builder = WebApplication.CreateBuilder(args);
-
-BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
-BsonSerializer.RegisterIdGenerator(typeof(Guid), GuidGenerator.Instance);
-ConventionRegistry.Register("EnumAsString", new ConventionPack { new EnumRepresentationConvention(BsonType.String) }, _ => true);
 
 builder.AddServiceDefaults();
 builder.Services.AddControllers();
@@ -33,14 +22,13 @@ builder.Services.AddResponseCaching();
 builder.Services.AddMemoryCache();
 
 builder.AddMongoDBClient(connectionName: "mongodb");
+builder.AddStarWarsDataCore();
 
 #pragma warning disable CS8634 // McpClient registration is intentionally nullable
 builder
-    .Services.Configure<SettingsOptions>(builder.Configuration.GetSection(SettingsOptions.Settings))
-    .AddHttpContextAccessor()
+    .Services.AddHttpContextAccessor()
     .AddDataProtection()
-    .Services.AddSingleton<OpenAiStatusService>()
-    .AddSingleton<AskRateLimiter>()
+    .Services.AddSingleton<AskRateLimiter>()
     .AddSingleton<SearchRateLimiter>()
     .AddSingleton<UserSettingsService>()
     .AddSingleton<CorpusStatsService>()
@@ -61,35 +49,12 @@ builder
             logger
         );
     })
-    .AddSingleton<MongoDefinitions>()
-    .AddSingleton<CollectionFilters>()
-    .AddSingleton<TemplateHelper>()
-    .AddScoped<RecordService>()
-    .AddScoped<TimelineService>()
     .AddScoped<MapService>()
     .AddScoped<EventsAtLocationService>()
     .AddScoped<GalaxyMapReadService>()
     .AddScoped<ICitationResolver, CitationResolver>()
     .AddScoped<CurrentRequestContext>()
     .AddScoped<ICurrentRequestContext>(sp => sp.GetRequiredService<CurrentRequestContext>())
-    // CharacterTimelineService is needed for read endpoints (list/get/search)
-    // The ChatClient is only used by GenerateTimelineAsync (called from Admin app)
-    .AddSingleton<CharacterTimelineChatClient>(sp =>
-    {
-        var settingsOptions = sp.GetRequiredService<IOptions<SettingsOptions>>();
-        var openAiClient = sp.GetRequiredService<OpenAIClient>();
-        var inner = new ChatClientBuilder(openAiClient.GetResponsesClient().AsIChatClient(settingsOptions.Value.CharacterTimelineModel)).Build();
-        return new CharacterTimelineChatClient(inner);
-    })
-    .AddScoped<CharacterTimelineService>()
-    .AddSingleton<CharacterTimelineTracker>()
-    .AddSingleton<OpenAIClient>(serviceProvider =>
-    {
-        var settingsOptions = serviceProvider.GetRequiredService<IOptions<SettingsOptions>>();
-        return new OpenAIClient(new ApiKeyCredential(settingsOptions.Value.OpenAiKey), new OpenAIClientOptions { NetworkTimeout = TimeSpan.FromMinutes(5) });
-    })
-    .AddSingleton<KnowledgeGraphQueryService>()
-    .AddSingleton<SemanticSearchService>()
     .AddSingleton<KeywordSearchService>()
     .AddSingleton<OpenAiSpendQueryService>()
     .AddSingleton<StarWarsData.Services.Suggestions.SuggestionService>()
@@ -112,7 +77,6 @@ builder
     .AddSingleton<IChatClient>(sp =>
         new ChatClientBuilder(sp.GetRequiredService<OpenAIClient>().GetResponsesClient().AsIChatClient("gpt-5.4-mini")).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build()
     )
-    .AddSingleton<IEmbeddingGenerator<string, Embedding<float>>>(sp => sp.GetRequiredService<OpenAIClient>().GetEmbeddingClient("text-embedding-3-small").AsIEmbeddingGenerator())
     .AddKeyedSingleton<McpClient?>(
         "mongodb-mcp",
         (sp, _) =>
