@@ -1,8 +1,8 @@
-using MongoDB.Bson;
 using StarWarsData.Models.Entities;
-using StarWarsData.Services.KnowledgeGraph.Definitions;
+using MongoDB.Bson;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders.Types;
+using StarWarsData.Tests.Infrastructure;
 
 namespace StarWarsData.Tests.Unit;
 
@@ -17,45 +17,8 @@ namespace StarWarsData.Tests.Unit;
 [TestCategory(TestTiers.Unit)]
 public class CharacterNodeBuilderTests
 {
-    static (NodeBuilderContext ctx, CharacterNodeBuilder builder) BuildAffiliationCase(string targetType, string targetTitle = "Target", int targetPageId = 200)
-    {
-        var targetUrl = $"/wiki/{targetTitle}";
-        var dataItems = new BsonArray
-        {
-            new BsonDocument
-            {
-                { InfoboxBsonFields.Label, "Affiliation(s)" },
-                {
-                    InfoboxBsonFields.Values,
-                    new BsonArray { targetTitle }
-                },
-                {
-                    InfoboxBsonFields.Links,
-                    new BsonArray
-                    {
-                        new BsonDocument { { InfoboxBsonFields.Content, targetTitle }, { InfoboxBsonFields.Href, targetUrl } },
-                    }
-                },
-            },
-        };
-
-        var ctx = new NodeBuilderContext(
-            PageId: 100,
-            Title: "Anakin",
-            Type: KgNodeTypes.Character,
-            Continuity: Continuity.Canon,
-            Realm: Realm.Starwars,
-            ContentHash: null,
-            WikiUrl: "/wiki/Anakin",
-            ImageUrl: null,
-            DataItems: dataItems,
-            Definition: InfoboxDefinitionRegistry.ForTemplate(KgNodeTypes.Character),
-            WikiUrlToPageId: new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase) { [targetUrl] = targetPageId, [targetTitle] = targetPageId },
-            NodeTypeByPageId: new Dictionary<int, string> { [targetPageId] = targetType }
-        );
-
-        return (ctx, new CharacterNodeBuilder());
-    }
+    static (NodeBuilderContext ctx, CharacterNodeBuilder builder) BuildAffiliationCase(string targetType, string targetTitle = "Target", int targetPageId = 200) =>
+        (NodeBuilderContexts.SingleLinkedField(KgNodeTypes.Character, "Affiliation(s)", targetTitle, targetType, sourceTitle: "Anakin", targetPageId: targetPageId), new CharacterNodeBuilder());
 
     [TestMethod]
     [DataRow(KgNodeTypes.TitleOrPosition, "has_role")]
@@ -115,19 +78,12 @@ public class CharacterNodeBuilderTests
             },
         };
 
-        var ctx = new NodeBuilderContext(
-            PageId: 100,
-            Title: "Anakin",
-            Type: KgNodeTypes.Character,
-            Continuity: Continuity.Canon,
-            Realm: Realm.Starwars,
-            ContentHash: null,
-            WikiUrl: "/wiki/Anakin",
-            ImageUrl: null,
-            DataItems: dataItems,
-            Definition: InfoboxDefinitionRegistry.ForTemplate(KgNodeTypes.Character),
-            WikiUrlToPageId: new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase) { ["/wiki/Yoda"] = 200, ["Yoda"] = 200 },
-            NodeTypeByPageId: new Dictionary<int, string> { [200] = KgNodeTypes.TitleOrPosition }
+        var ctx = NodeBuilderContexts.FromDataItems(
+            KgNodeTypes.Character,
+            dataItems,
+            sourceTitle: "Anakin",
+            wikiUrlToPageId: new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase) { ["/wiki/Yoda"] = 200, ["Yoda"] = 200 },
+            nodeTypeByPageId: new Dictionary<int, string> { [200] = KgNodeTypes.TitleOrPosition }
         );
 
         var result = new CharacterNodeBuilder().Build(ctx);

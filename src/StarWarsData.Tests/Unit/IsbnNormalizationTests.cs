@@ -1,7 +1,7 @@
 using MongoDB.Bson;
 using StarWarsData.Models.Entities;
-using StarWarsData.Services.KnowledgeGraph.Definitions;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders;
+using StarWarsData.Tests.Infrastructure;
 
 namespace StarWarsData.Tests.Unit;
 
@@ -46,20 +46,7 @@ public class IsbnNormalizationTests
             },
         };
 
-        return new NodeBuilderContext(
-            PageId: 100,
-            Title: "Test Book",
-            Type: nodeType,
-            Continuity: Continuity.Canon,
-            Realm: Realm.Real,
-            ContentHash: null,
-            WikiUrl: "/wiki/Test_Book",
-            ImageUrl: null,
-            DataItems: dataItems,
-            Definition: InfoboxDefinitionRegistry.ForTemplate(nodeType),
-            WikiUrlToPageId: new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase),
-            NodeTypeByPageId: new Dictionary<int, string>()
-        );
+        return NodeBuilderContexts.FromDataItems(nodeType, dataItems, sourceTitle: "Test Book", realm: Realm.Real);
     }
 
     [TestMethod]
@@ -119,20 +106,7 @@ public class IsbnNormalizationTests
             },
         };
 
-        var ctx = new NodeBuilderContext(
-            PageId: 100,
-            Title: "Test Book",
-            Type: KgNodeTypes.Book,
-            Continuity: Continuity.Canon,
-            Realm: Realm.Real,
-            ContentHash: null,
-            WikiUrl: "/wiki/Test_Book",
-            ImageUrl: null,
-            DataItems: dataItems,
-            Definition: InfoboxDefinitionRegistry.ForTemplate(KgNodeTypes.Book),
-            WikiUrlToPageId: new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase),
-            NodeTypeByPageId: new Dictionary<int, string>()
-        );
+        var ctx = NodeBuilderContexts.FromDataItems(KgNodeTypes.Book, dataItems, sourceTitle: "Test Book", realm: Realm.Real);
 
         var result = new DefaultNodeBuilder(KgNodeTypes.Book, IsbnNormalizer.NormalizeEmptyLabelToIsbn).Build(ctx);
         Assert.IsFalse(result.Node.Properties.ContainsKey("ISBN"));

@@ -1,8 +1,8 @@
-using MongoDB.Bson;
 using StarWarsData.Models.Entities;
-using StarWarsData.Services.KnowledgeGraph.Definitions;
+using MongoDB.Bson;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders.Types;
+using StarWarsData.Tests.Infrastructure;
 
 namespace StarWarsData.Tests.Unit;
 
@@ -16,23 +16,15 @@ namespace StarWarsData.Tests.Unit;
 [TestCategory(TestTiers.Unit)]
 public class ConflictSideEncoderTests
 {
-    static NodeBuilderContext BuildBattleContext(BsonArray dataItems, IDictionary<int, string> nodeTypeByPageId, IDictionary<string, int> wikiUrlToPageId)
-    {
-        return new NodeBuilderContext(
-            PageId: 1,
-            Title: "Battle of Geonosis",
-            Type: KgNodeTypes.Battle,
-            Continuity: Continuity.Canon,
-            Realm: Realm.Starwars,
-            ContentHash: null,
-            WikiUrl: "/wiki/Battle_of_Geonosis",
-            ImageUrl: null,
-            DataItems: dataItems,
-            Definition: InfoboxDefinitionRegistry.ForTemplate(KgNodeTypes.Battle),
-            WikiUrlToPageId: new Dictionary<string, int>(wikiUrlToPageId, StringComparer.OrdinalIgnoreCase),
-            NodeTypeByPageId: new Dictionary<int, string>(nodeTypeByPageId)
+    static NodeBuilderContext BuildBattleContext(BsonArray dataItems, IDictionary<int, string> nodeTypeByPageId, IDictionary<string, int> wikiUrlToPageId) =>
+        NodeBuilderContexts.FromDataItems(
+            KgNodeTypes.Battle,
+            dataItems,
+            sourceTitle: "Battle of Geonosis",
+            sourcePageId: 1,
+            wikiUrlToPageId: new Dictionary<string, int>(wikiUrlToPageId, StringComparer.OrdinalIgnoreCase),
+            nodeTypeByPageId: new Dictionary<int, string>(nodeTypeByPageId)
         );
-    }
 
     [TestMethod]
     [DataRow("commanders1", 1)]

@@ -12,7 +12,7 @@ public static class AssemblyHooks
     public static async Task GlobalCleanup()
     {
         await ApiFixture.DisposeAsync();
-        await CheckpointStoreFixture.DisposeAsync();
+        await MongoContainerFixture.DisposeAsync();
         await AgentFixture.DisposeAsync();
     }
 }

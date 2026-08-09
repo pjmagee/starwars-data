@@ -1,8 +1,7 @@
-using MongoDB.Bson;
 using StarWarsData.Models.Entities;
-using StarWarsData.Services.KnowledgeGraph.Definitions;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders.Types;
+using StarWarsData.Tests.Infrastructure;
 
 namespace StarWarsData.Tests.Unit;
 
@@ -16,50 +15,10 @@ namespace StarWarsData.Tests.Unit;
 [TestCategory(TestTiers.Unit)]
 public class CelestialBodyNodeBuilderTests
 {
-    static (NodeBuilderContext ctx, CelestialBodyNodeBuilder builder) BuildLanguageCase(string targetType)
-    {
-        const int targetPageId = 200;
-        const string targetTitle = "Basic";
-        const string targetUrl = "/wiki/Galactic_Basic_Standard";
-
-        // CelestialBody's actual field name is "Primary language(s)" — see TemplateFields.g.cs.
-        // FieldSemantics maps it (and "Language", "Language(s)") all to speaks_language.
-        var dataItems = new BsonArray
-        {
-            new BsonDocument
-            {
-                { InfoboxBsonFields.Label, "Primary language(s)" },
-                {
-                    InfoboxBsonFields.Values,
-                    new BsonArray { targetTitle }
-                },
-                {
-                    InfoboxBsonFields.Links,
-                    new BsonArray
-                    {
-                        new BsonDocument { { InfoboxBsonFields.Content, targetTitle }, { InfoboxBsonFields.Href, targetUrl } },
-                    }
-                },
-            },
-        };
-
-        var ctx = new NodeBuilderContext(
-            PageId: 100,
-            Title: "Tatooine",
-            Type: KgNodeTypes.CelestialBody,
-            Continuity: Continuity.Canon,
-            Realm: Realm.Starwars,
-            ContentHash: null,
-            WikiUrl: "/wiki/Tatooine",
-            ImageUrl: null,
-            DataItems: dataItems,
-            Definition: InfoboxDefinitionRegistry.ForTemplate(KgNodeTypes.CelestialBody),
-            WikiUrlToPageId: new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase) { [targetUrl] = targetPageId, [targetTitle] = targetPageId },
-            NodeTypeByPageId: new Dictionary<int, string> { [targetPageId] = targetType }
-        );
-
-        return (ctx, new CelestialBodyNodeBuilder());
-    }
+    // CelestialBody's actual field name is "Primary language(s)" — see TemplateFields.g.cs.
+    // FieldSemantics maps it (and "Language", "Language(s)") all to speaks_language.
+    static (NodeBuilderContext ctx, CelestialBodyNodeBuilder builder) BuildLanguageCase(string targetType) =>
+        (NodeBuilderContexts.SingleLinkedField(KgNodeTypes.CelestialBody, "Primary language(s)", "Basic", targetType, sourceTitle: "Tatooine"), new CelestialBodyNodeBuilder());
 
     [TestMethod]
     public void Language_ToLanguageTarget_RelabelsToHasLanguage()
