@@ -65,7 +65,7 @@
                     <MudTd>
                         <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
                             <MudProgressCircular Indeterminate="true" Size="Size.Small" Color="Color.Primary" Style="width:14px;height:14px" />
-                            <MudChip T="string" Size="Size.Small" Color="@StageColor(row.Stage)">@row.Stage</MudChip>
+                            <MudChip T="string" Size="Size.Small" Color="@HolocronUi.StageColor(row.Stage)">@row.Stage</MudChip>
                         </MudStack>
                     </MudTd>
                     <MudTd>
@@ -90,7 +90,7 @@
                         </MudTooltip>
                     </MudTd>
                     <MudTd>
-                        <MudText Typo="Typo.caption" Color="Color.Secondary">@FormatRelative(row.StartedAt)</MudText>
+                        <MudText Typo="Typo.caption" Color="Color.Secondary">@KnowledgeGraphFormatters.FormatRelativeTime(row.StartedAt)</MudText>
                     </MudTd>
                     <MudTd>@row.ProposalsExtracted</MudTd>
                     <MudTd>
@@ -141,15 +141,15 @@
                 </HeaderContent>
                 <RowTemplate Context="job">
                     <MudTd>
-                        <MudChip T="string" Size="Size.Small" Color="@StatusColor(job.Status)">@job.Status</MudChip>
+                        <MudChip T="string" Size="Size.Small" Color="@HolocronUi.StatusColor(job.Status)">@job.Status</MudChip>
                     </MudTd>
                     <MudTd>
                         <MudLink Href="@($"/knowledge-graph/nodes/{job.PageId}")" Underline="Underline.Hover" @onclick:stopPropagation>@job.NodeName</MudLink>
                     </MudTd>
                     <MudTd>
-                        <MudText Typo="Typo.caption" Color="Color.Secondary">@FormatRelative(job.StartedAt ?? job.CreatedAt)</MudText>
+                        <MudText Typo="Typo.caption" Color="Color.Secondary">@KnowledgeGraphFormatters.FormatRelativeTime(job.StartedAt ?? job.CreatedAt)</MudText>
                     </MudTd>
-                    <MudTd>@FormatDuration(job)</MudTd>
+                    <MudTd>@HolocronUi.FormatDuration(job)</MudTd>
                     <MudTd>
                         <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
                             <MudText Typo="Typo.body2">@job.ChunksProcessedNew</MudText>
@@ -262,72 +262,6 @@
         _cts.Dispose();
     }
 
-    static Color StageColor(HolocronJobStatus stage) => stage switch
-    {
-        HolocronJobStatus.Queued => Color.Default,
-        HolocronJobStatus.Discovering => Color.Info,
-        HolocronJobStatus.Bundling => Color.Secondary,
-        HolocronJobStatus.Extracting => Color.Primary,
-        HolocronJobStatus.Consolidating => Color.Tertiary,
-        HolocronJobStatus.Applying => Color.Warning,
-        HolocronJobStatus.Completed => Color.Success,
-        HolocronJobStatus.Failed => Color.Error,
-        _ => Color.Default,
-    };
-
-    static Color StatusColor(HolocronJobStatus status) => status switch
-    {
-        HolocronJobStatus.Completed => Color.Success,
-        HolocronJobStatus.Failed => Color.Error,
-        HolocronJobStatus.Queued => Color.Default,
-        _ => Color.Primary,
-    };
-
-    static string FormatRelative(DateTime dt)
-    {
-        var diff = DateTime.UtcNow - dt;
-        if (diff.TotalSeconds < 60) return $"{(int)diff.TotalSeconds}s ago";
-        if (diff.TotalMinutes < 60) return $"{(int)diff.TotalMinutes}m ago";
-        if (diff.TotalHours < 24) return $"{(int)diff.TotalHours}h ago";
-        if (diff.TotalDays < 30) return $"{(int)diff.TotalDays}d ago";
-        return dt.ToString("yyyy-MM-dd");
-    }
-
-    static string FormatDuration(HolocronJobRow job)
-    {
-        if (job.StartedAt is null) return "—";
-        var end = job.CompletedAt ?? DateTime.UtcNow;
-        var d = end - job.StartedAt.Value;
-        if (d.TotalSeconds < 60) return $"{d.TotalSeconds:0.0}s";
-        if (d.TotalMinutes < 60) return $"{d.TotalMinutes:0.0}m";
-        return $"{d.TotalHours:0.0}h";
-    }
-
     public sealed record HolocronActiveRow(string? JobId, int PageId, string? NodeName, HolocronJobStatus Stage, string Message, DateTime StartedAt, int CurrentStep, int TotalSteps, int ProposalsExtracted, int EnrichmentsApplied);
 
-    public sealed record HolocronJobsPageResponse(List<HolocronJobRow> Items, int Total, int Page, int PageSize);
-
-    public sealed record HolocronJobRow(
-        string Id,
-        int PageId,
-        string NodeName,
-        HolocronJobStatus Status,
-        string TriggeredBy,
-        string AgentVersion,
-        string ModelId,
-        DateTime CreatedAt,
-        DateTime? StartedAt,
-        DateTime? CompletedAt,
-        int ChunksDiscovered,
-        int ChunksProcessedNew,
-        int ChunksSkippedUnchanged,
-        int TotalBatches,
-        int CompletedBatches,
-        int ProposalsExtracted,
-        int EnrichmentsApplied,
-        int DuplicatesDropped,
-        int EvidenceFailures,
-        int PreflightRejects,
-        string? Error
-    );
 }

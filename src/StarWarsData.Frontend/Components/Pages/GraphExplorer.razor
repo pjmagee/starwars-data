@@ -243,7 +243,7 @@
             // Only re-fetch the graph when the run reached a terminal state during this
             // dialog session — if the user closed mid-run the workflow keeps running and
             // the graph would just show stale data anyway.
-            if (result is { Canceled: false, Data: StarWarsData.Frontend.Components.Shared.HolocronProgressDialog.HolocronStatusResponse status }
+            if (result is { Canceled: false, Data: HolocronStatusResponse status }
                 && status.Stage is HolocronJobStatus.Completed)
             {
                 await LoadGraph();

@@ -134,33 +134,20 @@ internal sealed class HolocronApplyExecutor : Executor<string, string>
         foreach (var p in consolidated.NodeProposals)
         {
             var key = p.FieldPath;
-            var hasExisting = node.Properties.TryGetValue(key, out var existing) && existing is not null && existing.Count > 0;
-
-            EnrichmentOperation op;
-            List<string> finalValues;
-            if (hasExisting)
-            {
-                finalValues = p.Values.Where(v => !string.IsNullOrWhiteSpace(v) && !existing!.Contains(v, StringComparer.OrdinalIgnoreCase)).ToList();
-                if (finalValues.Count == 0)
-                    continue; // every proposed value already present — silent dedup
-                op = EnrichmentOperation.Augment;
-            }
-            else
-            {
-                finalValues = p.Values.Where(v => !string.IsNullOrWhiteSpace(v)).ToList();
-                if (finalValues.Count == 0)
-                    continue;
-                op = EnrichmentOperation.Add;
-            }
+            node.Properties.TryGetValue(key, out var existing);
+            var decided = HolocronPreflight.DecideNodeOp(p.Values, existing);
+            if (decided is null)
+                continue; // every proposed value blank or already present — silent dedup
+            var (op, finalValues) = decided.Value;
 
             var doc = new NodeEnrichment
             {
                 PageId = _pageId,
                 FieldPath = key,
                 Operation = op,
-                Value = ToBsonValue(finalValues),
+                Value = HolocronPreflight.ToBsonValue(finalValues),
                 Claim = p.Claim,
-                Evidence = p.Evidence.Select(e => BuildEvidence(e)).ToList(),
+                Evidence = p.Evidence.Select(e => HolocronPreflight.BuildEvidence(e.SourcePageId, e.ChunkId, e.Excerpt, e.RelevanceScore)).ToList(),
                 LlmReasoning = p.Reasoning,
                 ContentHashAtCreation = node.ContentHash,
                 Status = EnrichmentStatus.Active,
@@ -177,7 +164,7 @@ internal sealed class HolocronApplyExecutor : Executor<string, string>
                     EnrichmentId = doc.Id,
                     PageId = doc.PageId,
                     FieldPath = doc.FieldPath,
-                    Summary = $"Holocron {op.ToString().ToLowerInvariant()} `{doc.FieldPath}` on {node.Name}: {Truncate(doc.Claim, 200)}",
+                    Summary = $"Holocron {op.ToString().ToLowerInvariant()} `{doc.FieldPath}` on {node.Name}: {HolocronPreflight.Truncate(doc.Claim, 200)}",
                     TriggeredBy = _triggeredBy,
                     AgentVersion = HolocronAgent.AgentVersion,
                     JobId = _jobId,
@@ -200,9 +187,9 @@ internal sealed class HolocronApplyExecutor : Executor<string, string>
             if (!string.IsNullOrWhiteSpace(p.Description))
                 value["description"] = p.Description.Trim();
 
-            var doc = BuildEdgeEnrichment(p.FromId, p.ToId, p.Label, EnrichmentOperation.Annotate, value, p.Claim, p.Evidence.Select(BuildEvidence).ToList(), p.Reasoning, fromHash, toHash);
+            var doc = HolocronPreflight.BuildEdgeEnrichment(p.FromId, p.ToId, p.Label, EnrichmentOperation.Annotate, value, p.Claim, p.Evidence.Select(e => HolocronPreflight.BuildEvidence(e.SourcePageId, e.ChunkId, e.Excerpt, e.RelevanceScore)).ToList(), p.Reasoning, fromHash, toHash, HolocronAgent.AgentVersion, _settings.HolocronModel, _jobId);
             edgeInserts.Add(doc);
-            events.Add(BuildEdgeEvent(doc, EnrichmentOperation.Annotate));
+            events.Add(HolocronPreflight.BuildEdgeEvent(doc, EnrichmentOperation.Annotate, HolocronAgent.AgentVersion, _triggeredBy, _jobId));
         }
 
         // ── 4. FillGap edge proposals ──────────────────────────────────────
@@ -218,9 +205,9 @@ internal sealed class HolocronApplyExecutor : Executor<string, string>
             if (p.ToYear.HasValue)
                 value["toYear"] = p.ToYear.Value;
 
-            var doc = BuildEdgeEnrichment(p.FromId, p.ToId, p.Label, EnrichmentOperation.FillGap, value, p.Claim, p.Evidence.Select(BuildEvidence).ToList(), p.Reasoning, fromHash, toHash);
+            var doc = HolocronPreflight.BuildEdgeEnrichment(p.FromId, p.ToId, p.Label, EnrichmentOperation.FillGap, value, p.Claim, p.Evidence.Select(e => HolocronPreflight.BuildEvidence(e.SourcePageId, e.ChunkId, e.Excerpt, e.RelevanceScore)).ToList(), p.Reasoning, fromHash, toHash, HolocronAgent.AgentVersion, _settings.HolocronModel, _jobId);
             edgeInserts.Add(doc);
-            events.Add(BuildEdgeEvent(doc, EnrichmentOperation.FillGap));
+            events.Add(HolocronPreflight.BuildEdgeEvent(doc, EnrichmentOperation.FillGap, HolocronAgent.AgentVersion, _triggeredBy, _jobId));
         }
 
         // ── 5. Add edge proposals ──────────────────────────────────────────
@@ -238,9 +225,9 @@ internal sealed class HolocronApplyExecutor : Executor<string, string>
             if (p.Weight.HasValue)
                 value["weight"] = p.Weight.Value;
 
-            var doc = BuildEdgeEnrichment(p.FromId, p.ToId, p.Label, EnrichmentOperation.Add, value, p.Claim, p.Evidence.Select(BuildEvidence).ToList(), p.Reasoning, fromHash, toHash);
+            var doc = HolocronPreflight.BuildEdgeEnrichment(p.FromId, p.ToId, p.Label, EnrichmentOperation.Add, value, p.Claim, p.Evidence.Select(e => HolocronPreflight.BuildEvidence(e.SourcePageId, e.ChunkId, e.Excerpt, e.RelevanceScore)).ToList(), p.Reasoning, fromHash, toHash, HolocronAgent.AgentVersion, _settings.HolocronModel, _jobId);
             edgeInserts.Add(doc);
-            events.Add(BuildEdgeEvent(doc, EnrichmentOperation.Add));
+            events.Add(HolocronPreflight.BuildEdgeEvent(doc, EnrichmentOperation.Add, HolocronAgent.AgentVersion, _triggeredBy, _jobId));
         }
 
         // ── 6. Persist ─────────────────────────────────────────────────────
@@ -384,60 +371,4 @@ internal sealed class HolocronApplyExecutor : Executor<string, string>
         }
     }
 
-    EdgeEnrichment BuildEdgeEnrichment(
-        int fromId,
-        int toId,
-        string label,
-        EnrichmentOperation op,
-        BsonDocument value,
-        string claim,
-        List<EnrichmentEvidence> evidence,
-        string reasoning,
-        string fromHash,
-        string toHash
-    ) =>
-        new()
-        {
-            FromId = fromId,
-            ToId = toId,
-            Label = label,
-            Operation = op,
-            Value = value,
-            Claim = claim,
-            Evidence = evidence,
-            LlmReasoning = reasoning,
-            ContentHashAtCreation = $"{fromHash}|{toHash}",
-            Status = EnrichmentStatus.Active,
-            AppliedAt = DateTime.UtcNow,
-            AgentVersion = HolocronAgent.AgentVersion,
-            ModelId = _settings.HolocronModel,
-            JobId = _jobId,
-        };
-
-    HolocronEvent BuildEdgeEvent(EdgeEnrichment doc, EnrichmentOperation op) =>
-        new()
-        {
-            EventType = HolocronEventType.EdgeEnrichmentCreated,
-            EnrichmentId = doc.Id,
-            FromId = doc.FromId,
-            ToId = doc.ToId,
-            Label = doc.Label,
-            Summary = $"Holocron {op.ToString().ToLowerInvariant()} edge `{doc.Label}` from {doc.FromId} to {doc.ToId}: {Truncate(doc.Claim, 200)}",
-            TriggeredBy = _triggeredBy,
-            AgentVersion = HolocronAgent.AgentVersion,
-            JobId = _jobId,
-        };
-
-    static EnrichmentEvidence BuildEvidence(HolocronEvidencePayload p) =>
-        new()
-        {
-            SourcePageId = p.SourcePageId ?? 0,
-            ChunkId = p.ChunkId,
-            Excerpt = string.IsNullOrEmpty(p.Excerpt) ? string.Empty : (p.Excerpt.Length > 1000 ? p.Excerpt[..1000] : p.Excerpt),
-            RelevanceScore = p.RelevanceScore,
-        };
-
-    static BsonValue ToBsonValue(List<string> values) => values.Count == 1 ? new BsonString(values[0]) : new BsonArray(values);
-
-    static string Truncate(string s, int max) => s.Length > max ? s[..max] + "…" : s;
 }

@@ -8,6 +8,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using StarWarsData.Models;
 using StarWarsData.Models.Entities;
+using StarWarsData.Services.AI.Agents.Holocron;
 using StarWarsData.Services.KnowledgeGraph.Definitions;
 
 namespace StarWarsData.Services.AI.Agents;
@@ -863,7 +864,7 @@ public sealed class HolocronAgent
         {
             foreach (var f in node.TemporalFacets.OrderBy(f => f.Semantic))
             {
-                sb.AppendFormat("- {0} ({1}): year={2}, text=\"{3}\"\n", f.Semantic, f.Calendar, f.Year?.ToString() ?? "null", Truncate(f.Text, 80));
+                sb.AppendFormat("- {0} ({1}): year={2}, text=\"{3}\"\n", f.Semantic, f.Calendar, f.Year?.ToString() ?? "null", HolocronPreflight.Truncate(f.Text, 80));
             }
         }
         sb.Append('\n');
@@ -923,7 +924,7 @@ public sealed class HolocronAgent
                     e.ToYear?.ToString() ?? "null"
                 );
                 if (e.Meta is not null && (!string.IsNullOrWhiteSpace(e.Meta.Qualifier) || !string.IsNullOrWhiteSpace(e.Meta.RawValue)))
-                    sb.AppendFormat(", existing qualifier=\"{0}\"", Truncate(e.Meta.Qualifier ?? e.Meta.RawValue ?? string.Empty, 80));
+                    sb.AppendFormat(", existing qualifier=\"{0}\"", HolocronPreflight.Truncate(e.Meta.Qualifier ?? e.Meta.RawValue ?? string.Empty, 80));
                 sb.Append(")\n");
             }
         }
@@ -964,7 +965,7 @@ public sealed class HolocronAgent
         sb.Append('\n');
 
         // Pairs already connected — explicit "do NOT Add to these" hint. Direction-agnostic.
-        var connectedPairs = allEdges.Select(e => NodePairKey(e.FromId, e.ToId)).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+        var connectedPairs = allEdges.Select(e => HolocronPreflight.NodePairKey(e.FromId, e.ToId)).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
         sb.Append("## Pairs already connected — do NOT propose Add edges between these pairs\n\n");
         if (connectedPairs.Count == 0)
         {
@@ -1051,7 +1052,7 @@ public sealed class HolocronAgent
         foreach (var c in list)
         {
             sb.AppendFormat("**chunkId: {0}** (PageId={1}, page=\"{2}\", section: {3})\n", c.Id, c.PageId, c.Title, string.IsNullOrEmpty(c.Section) ? c.Heading : c.Section);
-            sb.AppendLine(Truncate(c.Text, _settings.HolocronMaxChunkExcerptLength));
+            sb.AppendLine(HolocronPreflight.Truncate(c.Text, _settings.HolocronMaxChunkExcerptLength));
 
             // Surface the wiki-linked entities that appear inline in this chunk's text.
             // The agent can use any of these PageIds as a target for `addEdges` proposals
@@ -1076,8 +1077,6 @@ public sealed class HolocronAgent
         }
     }
 
-    static string Truncate(string s, int max) => s.Length > max ? s[..max] + "…" : s;
-
     // ── Pre-flight + apply ────────────────────────────────────────────────
 
     async Task<(int Created, int EvidenceFailures)> ApplyProposalsAsync(HolocronContext context, HolocronProposalsBatch batch, string triggeredBy, CancellationToken ct)
@@ -1093,15 +1092,15 @@ public sealed class HolocronAgent
         // `affiliated_with` between the same pair (different label = bypassed an early
         // tuple-only check but produced two parallel edges in the graph viewer).
         // See Design-018 v1 policy.
-        var existingEdgeKeys = context.OutgoingEdges.Concat(context.IncomingEdges).Select(e => EdgeKey(e.FromId, e.ToId, e.Label)).ToHashSet(StringComparer.OrdinalIgnoreCase);
-        var existingNodePairs = context.OutgoingEdges.Concat(context.IncomingEdges).Select(e => NodePairKey(e.FromId, e.ToId)).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var existingEdgeKeys = context.OutgoingEdges.Concat(context.IncomingEdges).Select(e => HolocronPreflight.EdgeKey(e.FromId, e.ToId, e.Label)).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var existingNodePairs = context.OutgoingEdges.Concat(context.IncomingEdges).Select(e => HolocronPreflight.NodePairKey(e.FromId, e.ToId)).ToHashSet(StringComparer.OrdinalIgnoreCase);
         var existingActiveEdgeEnrichments = await _edgeEnrichments
             .Find(
                 Builders<EdgeEnrichment>.Filter.Eq(e => e.Status, EnrichmentStatus.Active)
                     & (Builders<EdgeEnrichment>.Filter.Eq(e => e.FromId, context.Node.PageId) | Builders<EdgeEnrichment>.Filter.Eq(e => e.ToId, context.Node.PageId))
             )
             .ToListAsync(ct);
-        var enrichmentNodePairs = existingActiveEdgeEnrichments.Select(e => NodePairKey(e.FromId, e.ToId)).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var enrichmentNodePairs = existingActiveEdgeEnrichments.Select(e => HolocronPreflight.NodePairKey(e.FromId, e.ToId)).ToHashSet(StringComparer.OrdinalIgnoreCase);
 
         // Validate chunk citations once: pull every chunkId mentioned across all four
         // arrays and confirm they exist in search.chunks. The four evidence record types
@@ -1139,7 +1138,7 @@ public sealed class HolocronAgent
         // The agent never sees an "operation" choice, so it can't get it wrong.
         foreach (var prop in batch.NodeProposals)
         {
-            if (!ValidateEvidence(prop.Evidence?.Select(e => (e.SourcePageId, e.ChunkId)), validPageIds, validChunkIds))
+            if (!HolocronPreflight.HasValidEvidence(prop.Evidence?.Select(e => (e.SourcePageId, e.ChunkId)), validPageIds, validChunkIds))
             {
                 evidenceFailures++;
                 continue;
@@ -1152,35 +1151,20 @@ public sealed class HolocronAgent
 
             // Strip "properties." prefix if present — agent may emit either form.
             var key = prop.FieldPath.StartsWith("properties.", StringComparison.OrdinalIgnoreCase) ? prop.FieldPath["properties.".Length..] : prop.FieldPath;
-            var hasExisting = context.Node.Properties.TryGetValue(key, out var existing) && existing is not null && existing.Count > 0;
-
-            EnrichmentOperation op;
-            List<string> finalValues;
-            if (hasExisting)
-            {
-                // Augment: dedupe against existing list (case-insensitive). Skip if all
-                // proposed values were already present.
-                finalValues = prop.Values.Where(v => !string.IsNullOrWhiteSpace(v) && !existing!.Contains(v, StringComparer.OrdinalIgnoreCase)).ToList();
-                if (finalValues.Count == 0)
-                    continue;
-                op = EnrichmentOperation.Augment;
-            }
-            else
-            {
-                finalValues = prop.Values.Where(v => !string.IsNullOrWhiteSpace(v)).ToList();
-                if (finalValues.Count == 0)
-                    continue;
-                op = EnrichmentOperation.Add;
-            }
+            context.Node.Properties.TryGetValue(key, out var existing);
+            var decided = HolocronPreflight.DecideNodeOp(prop.Values, existing);
+            if (decided is null)
+                continue;
+            var (op, finalValues) = decided.Value;
 
             var doc = new NodeEnrichment
             {
                 PageId = context.Node.PageId,
                 FieldPath = key,
                 Operation = op,
-                Value = ToBsonValue(finalValues),
+                Value = HolocronPreflight.ToBsonValue(finalValues),
                 Claim = prop.Claim,
-                Evidence = prop.Evidence!.Select(e => BuildEvidence(e.SourcePageId, e.ChunkId, e.Excerpt, e.RelevanceScore)).ToList(),
+                Evidence = prop.Evidence!.Select(e => HolocronPreflight.BuildEvidence(e.SourcePageId, e.ChunkId, e.Excerpt, e.RelevanceScore)).ToList(),
                 LlmReasoning = prop.Reasoning,
                 ContentHashAtCreation = context.Node.ContentHash!,
                 Status = EnrichmentStatus.Active,
@@ -1196,7 +1180,7 @@ public sealed class HolocronAgent
                     EnrichmentId = doc.Id,
                     PageId = doc.PageId,
                     FieldPath = doc.FieldPath,
-                    Summary = $"Holocron {op.ToString().ToLowerInvariant()} `{doc.FieldPath}` on {context.Node.Name}: {Truncate(doc.Claim, 200)}",
+                    Summary = $"Holocron {op.ToString().ToLowerInvariant()} `{doc.FieldPath}` on {context.Node.Name}: {HolocronPreflight.Truncate(doc.Claim, 200)}",
                     TriggeredBy = triggeredBy,
                     AgentVersion = AgentVersion,
                 }
@@ -1206,12 +1190,12 @@ public sealed class HolocronAgent
         // ── Annotate edge proposals ────────────────────────────────────────
         foreach (var prop in batch.AnnotateEdges)
         {
-            if (!ValidateEvidence(prop.Evidence?.Select(e => (e.SourcePageId, e.ChunkId)), validPageIds, validChunkIds))
+            if (!HolocronPreflight.HasValidEvidence(prop.Evidence?.Select(e => (e.SourcePageId, e.ChunkId)), validPageIds, validChunkIds))
             {
                 evidenceFailures++;
                 continue;
             }
-            if (!IsAnnotateValid(context, prop, existingEdgeKeys))
+            if (!HolocronPreflight.IsAnnotateValid(context.Node.PageId, prop.FromId, prop.ToId, prop.Label, prop.Role, prop.Qualifier, prop.Description, existingEdgeKeys))
                 continue;
 
             var fromHash = await ResolveEndpointHashAsync(context, prop.FromId, ct);
@@ -1227,31 +1211,33 @@ public sealed class HolocronAgent
             if (!string.IsNullOrWhiteSpace(prop.Description))
                 value["description"] = prop.Description.Trim();
 
-            var doc = BuildEdgeEnrichment(
+            var doc = HolocronPreflight.BuildEdgeEnrichment(
                 prop.FromId,
                 prop.ToId,
                 prop.Label,
                 EnrichmentOperation.Annotate,
                 value,
                 prop.Claim,
-                prop.Evidence!.Select(e => BuildEvidence(e.SourcePageId, e.ChunkId, e.Excerpt, e.RelevanceScore)).ToList(),
+                prop.Evidence!.Select(e => HolocronPreflight.BuildEvidence(e.SourcePageId, e.ChunkId, e.Excerpt, e.RelevanceScore)).ToList(),
                 prop.Reasoning,
                 fromHash,
-                toHash
+                toHash,
+                AgentVersion,
+                _settings.HolocronModel
             );
             edgeInserts.Add(doc);
-            events.Add(BuildEdgeCreatedEvent(doc, EnrichmentOperation.Annotate, triggeredBy));
+            events.Add(HolocronPreflight.BuildEdgeEvent(doc, EnrichmentOperation.Annotate, AgentVersion, triggeredBy));
         }
 
         // ── FillGap edge proposals ─────────────────────────────────────────
         foreach (var prop in batch.FillGapEdges)
         {
-            if (!ValidateEvidence(prop.Evidence?.Select(e => (e.SourcePageId, e.ChunkId)), validPageIds, validChunkIds))
+            if (!HolocronPreflight.HasValidEvidence(prop.Evidence?.Select(e => (e.SourcePageId, e.ChunkId)), validPageIds, validChunkIds))
             {
                 evidenceFailures++;
                 continue;
             }
-            if (!IsFillGapValid(context, prop, existingEdgeKeys))
+            if (!HolocronPreflight.IsFillGapValid(context.Node.PageId, prop.FromId, prop.ToId, prop.Label, prop.FromYear, prop.ToYear, context.OutgoingEdges.Concat(context.IncomingEdges)))
                 continue;
 
             var fromHash = await ResolveEndpointHashAsync(context, prop.FromId, ct);
@@ -1265,31 +1251,33 @@ public sealed class HolocronAgent
             if (prop.ToYear.HasValue)
                 value["toYear"] = prop.ToYear.Value;
 
-            var doc = BuildEdgeEnrichment(
+            var doc = HolocronPreflight.BuildEdgeEnrichment(
                 prop.FromId,
                 prop.ToId,
                 prop.Label,
                 EnrichmentOperation.FillGap,
                 value,
                 prop.Claim,
-                prop.Evidence!.Select(e => BuildEvidence(e.SourcePageId, e.ChunkId, e.Excerpt, e.RelevanceScore)).ToList(),
+                prop.Evidence!.Select(e => HolocronPreflight.BuildEvidence(e.SourcePageId, e.ChunkId, e.Excerpt, e.RelevanceScore)).ToList(),
                 prop.Reasoning,
                 fromHash,
-                toHash
+                toHash,
+                AgentVersion,
+                _settings.HolocronModel
             );
             edgeInserts.Add(doc);
-            events.Add(BuildEdgeCreatedEvent(doc, EnrichmentOperation.FillGap, triggeredBy));
+            events.Add(HolocronPreflight.BuildEdgeEvent(doc, EnrichmentOperation.FillGap, AgentVersion, triggeredBy));
         }
 
         // ── Add edge proposals ─────────────────────────────────────────────
         foreach (var prop in batch.AddEdges)
         {
-            if (!ValidateEvidence(prop.Evidence?.Select(e => (e.SourcePageId, e.ChunkId)), validPageIds, validChunkIds))
+            if (!HolocronPreflight.HasValidEvidence(prop.Evidence?.Select(e => (e.SourcePageId, e.ChunkId)), validPageIds, validChunkIds))
             {
                 evidenceFailures++;
                 continue;
             }
-            if (!IsAddEdgeValid(context, prop, existingNodePairs, enrichmentNodePairs))
+            if (!HolocronPreflight.IsAddEdgeValid(context.Node.PageId, prop.FromId, prop.ToId, prop.Label, _knownLabels, existingNodePairs, enrichmentNodePairs))
                 continue;
 
             var fromHash = await ResolveEndpointHashAsync(context, prop.FromId, ct);
@@ -1305,20 +1293,22 @@ public sealed class HolocronAgent
             if (prop.Weight.HasValue)
                 value["weight"] = prop.Weight.Value;
 
-            var doc = BuildEdgeEnrichment(
+            var doc = HolocronPreflight.BuildEdgeEnrichment(
                 prop.FromId,
                 prop.ToId,
                 prop.Label,
                 EnrichmentOperation.Add,
                 value,
                 prop.Claim,
-                prop.Evidence!.Select(e => BuildEvidence(e.SourcePageId, e.ChunkId, e.Excerpt, e.RelevanceScore)).ToList(),
+                prop.Evidence!.Select(e => HolocronPreflight.BuildEvidence(e.SourcePageId, e.ChunkId, e.Excerpt, e.RelevanceScore)).ToList(),
                 prop.Reasoning,
                 fromHash,
-                toHash
+                toHash,
+                AgentVersion,
+                _settings.HolocronModel
             );
             edgeInserts.Add(doc);
-            events.Add(BuildEdgeCreatedEvent(doc, EnrichmentOperation.Add, triggeredBy));
+            events.Add(HolocronPreflight.BuildEdgeEvent(doc, EnrichmentOperation.Add, AgentVersion, triggeredBy));
         }
 
         if (nodeInserts.Count > 0)
@@ -1331,121 +1321,11 @@ public sealed class HolocronAgent
         return (nodeInserts.Count + edgeInserts.Count, evidenceFailures);
     }
 
-    EdgeEnrichment BuildEdgeEnrichment(
-        int fromId,
-        int toId,
-        string label,
-        EnrichmentOperation op,
-        BsonDocument value,
-        string claim,
-        List<EnrichmentEvidence> evidence,
-        string reasoning,
-        string fromHash,
-        string toHash
-    ) =>
-        new()
-        {
-            FromId = fromId,
-            ToId = toId,
-            Label = label,
-            Operation = op,
-            Value = value,
-            Claim = claim,
-            Evidence = evidence,
-            LlmReasoning = reasoning,
-            ContentHashAtCreation = $"{fromHash}|{toHash}",
-            Status = EnrichmentStatus.Active,
-            AppliedAt = DateTime.UtcNow,
-            AgentVersion = AgentVersion,
-            ModelId = _settings.HolocronModel,
-        };
-
-    static HolocronEvent BuildEdgeCreatedEvent(EdgeEnrichment doc, EnrichmentOperation op, string triggeredBy) =>
-        new()
-        {
-            EventType = HolocronEventType.EdgeEnrichmentCreated,
-            EnrichmentId = doc.Id,
-            FromId = doc.FromId,
-            ToId = doc.ToId,
-            Label = doc.Label,
-            Summary = $"Holocron {op.ToString().ToLowerInvariant()} edge `{doc.Label}` from {doc.FromId} to {doc.ToId}: {Truncate(doc.Claim, 200)}",
-            TriggeredBy = triggeredBy,
-            AgentVersion = AgentVersion,
-        };
-
     async Task<string?> ResolveEndpointHashAsync(HolocronContext context, int pageId, CancellationToken ct) =>
         pageId == context.Node.PageId ? context.Node.ContentHash : await GetContentHashAsync(pageId, ct);
 
-    static bool ValidateEvidence(IEnumerable<(int? SourcePageId, string? ChunkId)>? evidence, HashSet<int> validPageIds, HashSet<string> validChunkIds)
-    {
-        if (evidence is null)
-            return false;
-        // At least ONE evidence item must resolve to a real source.
-        foreach (var ev in evidence)
-        {
-            if (ev.SourcePageId is { } pid && pid > 0 && validPageIds.Contains(pid))
-                return true;
-            if (!string.IsNullOrEmpty(ev.ChunkId) && validChunkIds.Contains(ev.ChunkId))
-                return true;
-        }
-        return false;
-    }
-
-    bool IsAnnotateValid(HolocronContext context, AnnotateEdgeProposal prop, HashSet<string> existingEdgeKeys)
-    {
-        if (prop.FromId <= 0 || prop.ToId <= 0 || string.IsNullOrWhiteSpace(prop.Label))
-            return false;
-        if (prop.FromId != context.Node.PageId && prop.ToId != context.Node.PageId)
-            return false;
-        // Annotate targets an existing edge — the agent must have copied (fromId, toId, label)
-        // from the candidate list. If not, reject (the user prompt told them the rule).
-        if (!existingEdgeKeys.Contains(EdgeKey(prop.FromId, prop.ToId, prop.Label)))
-            return false;
-        // At least one of role / qualifier / description must carry signal.
-        return !string.IsNullOrWhiteSpace(prop.Role) || !string.IsNullOrWhiteSpace(prop.Qualifier) || !string.IsNullOrWhiteSpace(prop.Description);
-    }
-
-    bool IsFillGapValid(HolocronContext context, FillGapEdgeProposal prop, HashSet<string> existingEdgeKeys)
-    {
-        if (prop.FromId <= 0 || prop.ToId <= 0 || string.IsNullOrWhiteSpace(prop.Label))
-            return false;
-        if (prop.FromId != context.Node.PageId && prop.ToId != context.Node.PageId)
-            return false;
-        if (!existingEdgeKeys.Contains(EdgeKey(prop.FromId, prop.ToId, prop.Label)))
-            return false;
-        if (!prop.FromYear.HasValue && !prop.ToYear.HasValue)
-            return false;
-        // At least one proposed bound must be applicable to the existing edge:
-        //   - filling a NULL bound, OR
-        //   - refining a Lifecycle/Unknown-sourced bound (Phase 5 lifecycle fallback,
-        //     soft upper bound — see Design-021).
-        // Bounds tagged Infobox are hard — never overwrite them.
-        return context
-            .OutgoingEdges.Concat(context.IncomingEdges)
-            .Where(e => e.FromId == prop.FromId && e.ToId == prop.ToId && string.Equals(e.Label, prop.Label, StringComparison.OrdinalIgnoreCase))
-            .Any(e => (prop.FromYear.HasValue && IsBoundRefinable(e, isFrom: true)) || (prop.ToYear.HasValue && IsBoundRefinable(e, isFrom: false)));
-    }
-
-    /// <summary>
-    /// True when the targeted bound on <paramref name="edge"/> is either null or
-    /// explicitly tagged <see cref="EdgeBoundsSource.Lifecycle"/>. Untagged
-    /// (<see cref="EdgeBoundsSource.Unknown"/>) bounds with a non-null value are
-    /// treated as **hard**: we don't know how they were derived, so the safe
-    /// assumption is they came from the infobox and must not be overwritten.
-    /// Migration 0015 retroactively tags every existing edge so the Unknown
-    /// case shouldn't survive the next deploy. See Design-021.
-    /// </summary>
-    static bool IsBoundRefinable(RelationshipEdge edge, bool isFrom)
-    {
-        var existing = isFrom ? edge.FromYear : edge.ToYear;
-        if (!existing.HasValue)
-            return true;
-        var src = edge.Meta?.BoundsSource ?? EdgeBoundsSource.Unknown;
-        return src is EdgeBoundsSource.Lifecycle;
-    }
-
     /// <summary>True when <paramref name="edge"/> has at least one refinable bound (null or Lifecycle/Unknown).</summary>
-    static bool IsFillGapCandidate(RelationshipEdge edge) => IsBoundRefinable(edge, isFrom: true) || IsBoundRefinable(edge, isFrom: false);
+    static bool IsFillGapCandidate(RelationshipEdge edge) => HolocronPreflight.IsBoundRefinable(edge, isFrom: true) || HolocronPreflight.IsBoundRefinable(edge, isFrom: false);
 
     /// <summary>
     /// Format a single bound for the FillGap candidate list, annotating its provenance so
@@ -1473,8 +1353,8 @@ public sealed class HolocronAgent
     /// </summary>
     static string DescribeFillScope(RelationshipEdge edge)
     {
-        var fromRefinable = IsBoundRefinable(edge, isFrom: true);
-        var toRefinable = IsBoundRefinable(edge, isFrom: false);
+        var fromRefinable = HolocronPreflight.IsBoundRefinable(edge, isFrom: true);
+        var toRefinable = HolocronPreflight.IsBoundRefinable(edge, isFrom: false);
         return (fromRefinable, toRefinable) switch
         {
             (true, true) => "fill or refine either or both",
@@ -1483,47 +1363,6 @@ public sealed class HolocronAgent
             _ => "(unreachable — both bounds hard)",
         };
     }
-
-    bool IsAddEdgeValid(HolocronContext context, AddEdgeProposal prop, HashSet<string> existingNodePairs, HashSet<string> enrichmentNodePairs)
-    {
-        if (prop.FromId <= 0 || prop.ToId <= 0 || string.IsNullOrWhiteSpace(prop.Label))
-            return false;
-        if (prop.FromId != context.Node.PageId && prop.ToId != context.Node.PageId)
-            return false;
-        // Label must be in the canonical registry — no inventing synonyms. Add is the
-        // only path that introduces a new label on a new edge, so this check is the
-        // load-bearing safety net.
-        if (!_knownLabels.Contains(prop.Label))
-        {
-            _logger.LogInformation("HolocronAgent: rejecting Add edge — label `{Label}` is not in the canonical registry. Proposed: {FromId} -> {ToId}", prop.Label, prop.FromId, prop.ToId);
-            return false;
-        }
-        // Pair must have NO existing edge in either direction with any label, and no
-        // active Add-edge enrichment between the same pair. See class comment on the
-        // unordered-pair rule.
-        var pair = NodePairKey(prop.FromId, prop.ToId);
-        return !existingNodePairs.Contains(pair) && !enrichmentNodePairs.Contains(pair);
-    }
-
-    static string EdgeKey(int from, int to, string label) => $"{from}-{to}-{label.ToLowerInvariant()}";
-
-    /// <summary>
-    /// Direction-agnostic node-pair key: <c>min(a,b)-max(a,b)</c>. Two edges with the
-    /// same pair of endpoints (in either direction) collapse to the same key. Used by
-    /// the Add-edge pre-flight to reject any edge between an already-connected pair.
-    /// </summary>
-    static string NodePairKey(int a, int b) => a < b ? $"{a}-{b}" : $"{b}-{a}";
-
-    static EnrichmentEvidence BuildEvidence(int? sourcePageId, string? chunkId, string excerpt, double? relevanceScore) =>
-        new()
-        {
-            SourcePageId = sourcePageId ?? 0,
-            ChunkId = chunkId,
-            Excerpt = string.IsNullOrEmpty(excerpt) ? string.Empty : (excerpt.Length > 1000 ? excerpt[..1000] : excerpt),
-            RelevanceScore = relevanceScore,
-        };
-
-    static BsonValue ToBsonValue(List<string> values) => values.Count == 1 ? new BsonString(values[0]) : new BsonArray(values);
 
     async Task<string?> GetContentHashAsync(int pageId, CancellationToken ct) => await _nodes.Find(n => n.PageId == pageId).Project(n => n.ContentHash).FirstOrDefaultAsync(ct);
 
