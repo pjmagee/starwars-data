@@ -151,183 +151,100 @@ var admin = builder
     .WithHttpCommand(
         path: "/api/admin/download/pages",
         displayName: "1a. Download Pages",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "Downloads raw wiki pages into raw.pages collection.",
-            IconName = "ArrowDownload",
-            IsHighlighted = false,
-        }
+        commandOptions: Etl("Downloads raw wiki pages into raw.pages collection.", "ArrowDownload")
     )
     .WithHttpCommand(
         path: "/api/admin/download/pages/incremental",
         displayName: "1b. Incremental Sync",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "Re-downloads only pages changed since last sync. Runs daily at 03:00 UTC automatically.",
-            IconName = "ArrowSync",
-            IsHighlighted = false,
-        }
+        commandOptions: Etl("Re-downloads only pages changed since last sync. Runs daily at 03:00 UTC automatically.", "ArrowSync")
     )
     // ── Phase 2: Template views ──
     .WithHttpCommand(
         path: "/api/admin/mongo/create-template-views",
         displayName: "2. Create Template Views",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "Creates MongoDB views per infobox template type (Character, Planet, etc.). Requires Phase 1.",
-            IconName = "TableMultiple",
-            IsHighlighted = false,
-        }
+        commandOptions: Etl("Creates MongoDB views per infobox template type (Character, Planet, etc.). Requires Phase 1.", "TableMultiple")
     )
     // ── Phase 3: Timeline events + indexes ──
     .WithHttpCommand(
         path: "/api/admin/mongo/create-timeline-events-from-kg",
         displayName: "3a. Build Timeline Events (from KG)",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description =
-                "Rebuilds timeline.* collections from kg.nodes — both galactic (BBY/ABY) and real-world (CE publication) facets — joined with raw.pages for info-panel properties. Requires the knowledge graph to be built.",
-            IconName = "Timeline",
-            IsHighlighted = true,
-        }
+        commandOptions: Etl(
+            "Rebuilds timeline.* collections from kg.nodes — both galactic (BBY/ABY) and real-world (CE publication) facets — joined with raw.pages for info-panel properties. Requires the knowledge graph to be built.",
+            "Timeline",
+            highlighted: true
+        )
     )
     .WithHttpCommand(
         path: "/api/admin/mongo/ensure-indexes",
         displayName: "3b. Create Indexes",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "Creates indexes on Pages and timeline event collections for query performance.",
-            IconName = "DatabaseSearch",
-            IsHighlighted = false,
-        }
+        commandOptions: Etl("Creates indexes on Pages and timeline event collections for query performance.", "DatabaseSearch")
     )
     // ── All Indexes (convenience: runs all index steps in sequence) ──
     .WithHttpCommand(
         path: "/api/admin/mongo/ensure-all-indexes",
         displayName: "Ensure All Indexes",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "Runs ALL index creation in sequence: pages → chunks → vector search. Safe to re-run.",
-            IconName = "DatabaseSearch",
-            IsHighlighted = true,
-        }
+        commandOptions: Etl("Runs ALL index creation in sequence: pages → chunks → vector search. Safe to re-run.", "DatabaseSearch", highlighted: true)
     )
     // ── Phase 4: Article chunks + embeddings ──
     .WithHttpCommand(
         path: "/api/admin/mongo/create-embeddings",
         displayName: "4a. Run Article Chunking",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "Chunks articles and generates OpenAI embeddings. Requires OpenAI key and Phase 1.",
-            IconName = "Sparkle",
-            IsHighlighted = false,
-        }
+        commandOptions: Etl("Chunks articles and generates OpenAI embeddings. Requires OpenAI key and Phase 1.", "Sparkle")
     )
     .WithHttpCommand(
         path: "/api/admin/mongo/ensure-chunk-indexes",
         displayName: "4b. Ensure Chunk Indexes",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "Creates indexes on article chunk collections.",
-            IconName = "DatabaseSearch",
-            IsHighlighted = false,
-        }
+        commandOptions: Etl("Creates indexes on article chunk collections.", "DatabaseSearch")
     )
     .WithHttpCommand(
         path: "/api/admin/mongo/create-index-embeddings",
         displayName: "4c. Create Vector Indexes",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "Creates MongoDB Atlas vector search indexes on embeddings. Run after 4a.",
-            IconName = "DatabaseSearch",
-            IsHighlighted = false,
-        }
+        commandOptions: Etl("Creates MongoDB Atlas vector search indexes on embeddings. Run after 4a.", "DatabaseSearch")
     )
     // ── Phase 5: Knowledge Graph (deterministic) ──
     .WithHttpCommand(
         path: "/api/admin/mongo/build-infobox-graph",
         displayName: "5. Build Infobox Graph",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "Builds deterministic knowledge graph (kg.nodes + kg.edges) from infobox data. No LLM needed. Requires Phase 1.",
-            IconName = "AccountTree",
-            IsHighlighted = false,
-        }
+        commandOptions: Etl("Builds deterministic knowledge graph (kg.nodes + kg.edges) from infobox data. No LLM needed. Requires Phase 1.", "AccountTree")
     )
     // ── Phase 6: AI Character Timelines ──
     .WithHttpCommand(
         path: "/api/admin/mongo/create-character-timelines",
         displayName: "6. Build Character Timelines",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "Uses AI to generate rich timeline events for each character. Requires Phase 1 and OpenAI key.",
-            IconName = "PersonTimeline",
-            IsHighlighted = false,
-        }
+        commandOptions: Etl("Uses AI to generate rich timeline events for each character. Requires Phase 1 and OpenAI key.", "PersonTimeline")
     )
     // ── Phase 8: Unified Galaxy Map ──
     .WithHttpCommand(
         path: "/api/admin/mongo/build-galaxy-map",
         displayName: "8. Build Galaxy Map",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "Pre-computes galaxy.years with territory control, event heatmap, and trade routes from the knowledge graph. Requires Phase 1 + 5.",
-            IconName = "GlobeSearch",
-            IsHighlighted = false,
-        }
+        commandOptions: Etl("Pre-computes galaxy.years with territory control, event heatmap, and trade routes from the knowledge graph. Requires Phase 1 + 5.", "GlobeSearch")
     )
     // ── Phase 9: Ask page suggestions (KG-backed dynamic prompts) ──
     .WithHttpCommand(
         path: "/api/admin/mongo/refresh-ask-suggestions",
         displayName: "9. Refresh Ask Suggestions",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description = "AI agent explores the knowledge graph and generates Ask page example questions. Runs weekly (Sundays 03:00 UTC).",
-            IconName = "LightbulbFilament",
-            IsHighlighted = false,
-        }
+        commandOptions: Etl("AI agent explores the knowledge graph and generates Ask page example questions. Runs weekly (Sundays 03:00 UTC).", "LightbulbFilament")
     )
     // ── Operational: OpenAI billing sync ──
     .WithHttpCommand(
         path: "/api/admin/openai/sync-spend",
         displayName: "Sync OpenAI Spend",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description =
-                "Pulls the last 90 days of OpenAI org spend from /v1/organization/costs and upserts admin.spend_daily (powers the public /costs page). Runs daily 04:30 UTC; trigger here to refresh on demand. Requires Settings.OpenAiAdminKey.",
-            IconName = "Money",
-            IsHighlighted = false,
-        }
+        commandOptions: Etl(
+            "Pulls the last 90 days of OpenAI org spend from /v1/organization/costs and upserts admin.spend_daily (powers the public /costs page). Runs daily 04:30 UTC; trigger here to refresh on demand. Requires Settings.OpenAiAdminKey.",
+            "Money"
+        )
     )
     // ── Dev QA: pull fresh raw content from prod (Design-033) ──
     .WithHttpCommand(
         path: "/api/admin/sync/prod-to-dev/recent",
         displayName: "↩ Pull Prod → Dev (raw, last 14d)",
-        commandOptions: new HttpCommandOptions
-        {
-            Method = HttpMethod.Post,
-            Description =
-                "Copies raw.pages changed in prod within the last 14 days into the dev "
+        commandOptions: Etl(
+            "Copies raw.pages changed in prod within the last 14 days into the dev "
                 + "database via a server-side $merge. Read-only against prod; refuses to run "
                 + "if target is starwars-prod. Run Phase 5 → 3a → 4a afterward to rebuild "
                 + "dev's derived data.",
-            IconName = "DatabaseArrowDown",
-            IsHighlighted = false,
-        }
+            "DatabaseArrowDown"
+        )
     );
 
 var frontend = builder
@@ -366,20 +283,16 @@ builder
 
             service.Labels["net.unraid.docker.managed"] = "composeman";
 
-            // Keycloak admin secret is injected at deploy time via the host's KEYCLOAK_ADMIN_SECRET env var
-            // (rather than via the AppHost parameter system, so it never lands in the published .env).
-            if (name is "apiservice")
-            {
-                service.Environment ??= [];
-                service.Environment["Settings__KeycloakAdminClientSecret"] = "${KEYCLOAK_ADMIN_SECRET:-}";
-                // Billed LLM pass — on by default; set HOLOCRON_ENABLED=false in the
-                // host's prod .env to kill it without a code change/redeploy.
-                service.Environment["Settings__HolocronEnabled"] = "${HOLOCRON_ENABLED:-true}";
-            }
-
             switch (name)
             {
                 case "apiservice":
+                    // Keycloak admin secret is injected at deploy time via the host's KEYCLOAK_ADMIN_SECRET env var
+                    // (rather than via the AppHost parameter system, so it never lands in the published .env).
+                    service.Environment ??= [];
+                    service.Environment["Settings__KeycloakAdminClientSecret"] = "${KEYCLOAK_ADMIN_SECRET:-}";
+                    // Billed LLM pass — on by default; set HOLOCRON_ENABLED=false in the
+                    // host's prod .env to kill it without a code change/redeploy.
+                    service.Environment["Settings__HolocronEnabled"] = "${HOLOCRON_ENABLED:-true}";
                     service.Ports = ["${APISERVICE_HOST_PORT:-9080}:${APISERVICE_PORT}"];
                     service.Labels["net.unraid.docker.icon"] = "https://raw.githubusercontent.com/pjmagee/starwars-data/main/.github/icons/api.png";
                     service.Labels["net.unraid.docker.webui"] = "http://[IP]:[PORT:${APISERVICE_PORT}]/swagger";
@@ -423,3 +336,10 @@ if (mongoLocal is not null)
 }
 
 builder.Build().Run();
+
+static HttpCommandOptions Etl(string description, string icon, bool highlighted = false) => new()
+{
+    Description = description,
+    IconName = icon,
+    IsHighlighted = highlighted,
+};
