@@ -1,7 +1,5 @@
 using System.Security.Claims;
-using System.Text.Json;
 using Keycloak.AuthServices.Authorization;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
@@ -36,8 +34,6 @@ builder
         options.KeepAliveInterval = TimeSpan.FromSeconds(15);
     });
 
-// builder.Services.AddTransient<IClaimsTransformation, KeycloakRolesClaimsTransformation>();
-
 builder
     .Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
     .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -56,45 +52,13 @@ builder
             options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             options.TokenValidationParameters.NameClaimType = "preferred_username";
             options.TokenValidationParameters.RoleClaimType = "roles";
-            options.Events = new OpenIdConnectEvents
-            {
-                OnTokenValidated = context =>
-                {
-                    if (context.Principal?.Identity is not ClaimsIdentity identity)
-                        return Task.CompletedTask;
-
-                    // Avoid duplicates
-                    if (identity.Claims.Any(c => c.Type == "roles"))
-                        return Task.CompletedTask;
-
-                    var realmAccess = identity.FindFirst("realm_access")?.Value;
-                    if (!string.IsNullOrWhiteSpace(realmAccess))
-                    {
-                        using var doc = JsonDocument.Parse(realmAccess);
-
-                        if (doc.RootElement.TryGetProperty("roles", out var rolesElement) && rolesElement.ValueKind == JsonValueKind.Array)
-                        {
-                            foreach (var role in rolesElement.EnumerateArray())
-                            {
-                                var value = role.GetString();
-                                if (!string.IsNullOrWhiteSpace(value))
-                                {
-                                    identity.AddClaim(new Claim("roles", value));
-                                }
-                            }
-                        }
-                    }
-
-                    return Task.CompletedTask;
-                },
-            };
         }
     );
 
 builder
     .Services.AddKeycloakAuthorization(options =>
     {
-        options.RoleClaimType = ClaimTypes.Role;
+        options.RoleClaimType = "roles";
         options.RolesResource = "starwars-frontend";
         options.EnableRolesMapping = RolesClaimTransformationSource.All;
     })
@@ -181,8 +145,8 @@ app.UseAuthentication();
 // the real OIDC flow remains the only way in.
 //
 // The principal carries the same claim shape the real login produces
-// (`preferred_username`, `roles`) so downstream code (the X-User-Id DelegatingHandler,
-// Keycloak roles transformation) doesn't need a special case.
+// (`preferred_username`, `roles`) so downstream code (the X-User-Id DelegatingHandler)
+// doesn't need a special case.
 if (app.Environment.IsDevelopment())
 {
     app.Use(
