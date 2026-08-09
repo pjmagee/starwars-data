@@ -42,9 +42,6 @@ public class SettingsOptions
     /// </summary>
     public string CharacterTimelineModel { get; set; } = "gpt-5.4";
 
-    public IEnumerable<string> TimelineCollections { get; set; } = [];
-
-
     // ── Holocron agent (Phase 2 — Design-018) ──
 
     /// <summary>

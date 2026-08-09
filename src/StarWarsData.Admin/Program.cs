@@ -1,15 +1,9 @@
-using System.ClientModel;
 using Hangfire;
 using Hangfire.Mongo;
 using Hangfire.Mongo.Migration.Strategies;
 using Hangfire.Mongo.Migration.Strategies.Backup;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Options;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Conventions;
-using MongoDB.Bson.Serialization.IdGenerators;
-using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 using MudBlazor.Services;
 using OpenAI;
@@ -17,15 +11,8 @@ using StarWarsData.Admin.Components;
 using StarWarsData.Models;
 using StarWarsData.ServiceDefaults;
 using StarWarsData.Services;
-using StarWarsData.Services.AI.Agents.CharacterTimelines;
 
 var builder = WebApplication.CreateBuilder(args);
-
-BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
-BsonSerializer.RegisterIdGenerator(typeof(Guid), GuidGenerator.Instance);
-
-// Ensure all enums are serialized as strings (not integers) across all documents
-ConventionRegistry.Register("EnumAsString", new ConventionPack { new EnumRepresentationConvention(BsonType.String) }, _ => true);
 
 builder.AddServiceDefaults();
 
@@ -34,34 +21,13 @@ builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 builder.Services.AddMudServices();
 
 builder.AddMongoDBClient(connectionName: "mongodb");
+builder.AddStarWarsDataCore();
 
 builder
-    .Services.Configure<SettingsOptions>(builder.Configuration.GetSection(SettingsOptions.Settings))
-    .AddSingleton<OpenAiStatusService>()
-    .AddSingleton<MongoDefinitions>()
-    .AddSingleton<CollectionFilters>()
-    .AddSingleton<TemplateHelper>()
-    .AddScoped<RecordService>()
-    .AddScoped<TimelineService>()
-    .AddScoped<KgTimelineBuilderService>()
+    .Services.AddScoped<KgTimelineBuilderService>()
     .AddScoped<GalaxyMapETLService>()
     .AddScoped<InfoboxGraphService>()
-    .AddSingleton<OpenAIClient>(sp =>
-    {
-        var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
-        return new OpenAIClient(new ApiKeyCredential(settings.OpenAiKey), new OpenAIClientOptions { NetworkTimeout = TimeSpan.FromMinutes(5) });
-    })
-    .AddSingleton<CharacterTimelineChatClient>(sp =>
-    {
-        var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
-        var openAiClient = sp.GetRequiredService<OpenAIClient>();
-        var inner = new ChatClientBuilder(openAiClient.GetResponsesClient().AsIChatClient(settings.CharacterTimelineModel)).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build();
-        return new CharacterTimelineChatClient(inner);
-    })
-    .AddScoped<CharacterTimelineService>()
-    .AddSingleton<CharacterTimelineTracker>()
     .AddScoped<ArticleChunkingService>()
-    .AddSingleton<KnowledgeGraphQueryService>()
     .AddSingleton<IChatClient>(sp =>
     {
         var settings = sp.GetRequiredService<IOptions<SettingsOptions>>().Value;
@@ -72,16 +38,10 @@ builder
             .Build();
     })
     .AddScoped<StarWarsData.Services.AI.Agents.SuggestionAgent>()
-    // SemanticSearchService is needed by the daily Holocron pass for vector-similar chunk
-    // gathering. It's optional (HolocronAgent has a nullable injection) so its absence
-    // wouldn't break the agent — but since we already have IEmbeddingGenerator wired below
-    // for ArticleChunkingService, registering it costs nothing and unlocks vector context.
-    .AddSingleton<StarWarsData.Services.SemanticSearchService>()
     .AddScoped<StarWarsData.Services.AI.Agents.HolocronAgent>()
     .AddSingleton<JobToggleService>()
     .AddSingleton<ProdToDevSyncService>()
-    .AddSingleton<PageDownloader>()
-    .AddSingleton<IEmbeddingGenerator<string, Embedding<float>>>(sp => sp.GetRequiredService<OpenAIClient>().GetEmbeddingClient("text-embedding-3-small").AsIEmbeddingGenerator());
+    .AddSingleton<PageDownloader>();
 
 builder.Services.AddHttpClient<PageDownloader>(
     (serviceProvider, client) =>
