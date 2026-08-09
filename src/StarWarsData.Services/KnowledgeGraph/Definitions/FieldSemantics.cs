@@ -476,7 +476,7 @@ internal static class FieldSemantics
         ["Sector capital"] = new("has_capital", "capital_of", "Sector capital", ["City", "CelestialBody"], "political"),
         ["Subsectors"] = new("has_subsector", "parent_sector", "Subsectors of this sector", ["Sector"], "location"),
         ["Stations"] = new("has_space_station", "orbits", "Space stations in this sector", ["SpaceStation"], "military"),
-        // Year typed-leader fields (YearNodeBuilder): Year pages list named leadership
+        // Year typed-leader fields (DefaultNodeBuilder for Year): Year pages list named leadership
         // positions held during that year. Survey: 134 Chancellor, 43 Chief, 25 Head edges.
         ["Chancellor"] = new("has_chancellor", "chancellor_of", "Chancellor in office", ["Character", "Person"], "political"),
         ["Head"] = new("has_head", "head_of", "Head of state in office", ["Character", "Person"], "political"),

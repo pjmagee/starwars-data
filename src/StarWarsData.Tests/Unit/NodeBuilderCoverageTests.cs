@@ -1,42 +1,39 @@
 using System.Reflection;
 using StarWarsData.Models.Entities;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders;
-using StarWarsData.Services.KnowledgeGraph.NodeBuilders.Types;
 
 namespace StarWarsData.Tests.Unit;
 
 /// <summary>
-/// Asserts the `KgNodeTypes` constants stay in lockstep with the registered
-/// `INodeBuilder` implementations. Catches three classes of drift:
+/// Asserts the <see cref="KgNodeTypes"/> constants stay in lockstep with the
+/// real registration list from <see cref="NodeBuilderRegistry"/>. Catches three
+/// classes of drift:
 ///
 /// <list type="number">
 ///   <item><b>Constant without builder</b> — adding <c>KgNodeTypes.Foo</c> without
-///   creating a <c>FooNodeBuilder</c> silently routes <c>Foo</c>-typed nodes to
-///   <see cref="UnknownNodeBuilder"/>. Test fails on the missing builder.</item>
-///   <item><b>Builder without constant</b> — creating a <c>FooNodeBuilder</c> with a
-///   <c>NodeType</c> string that isn't backed by a <see cref="KgNodeTypes"/>
-///   constant means the builder works but is referred to by raw string
-///   everywhere — the case of the dead <c>MilitaryNodeBuilder</c> (Phase C)
-///   that returned <c>"Military"</c> instead of <c>"Military_unit"</c>.</item>
-///   <item><b>Mismatched constant value</b> — every <c>NodeType</c> property must
-///   resolve to a <c>KgNodeTypes</c> constant (so renaming the corpus is one
-///   place). A literal string in <c>NodeType</c> would break this.</item>
+///   registering a builder silently routes <c>Foo</c>-typed nodes to the Unknown
+///   <see cref="DefaultNodeBuilder"/>. Test fails on the missing registration.</item>
+///   <item><b>Registered builder without constant</b> — a <c>NodeType</c> string
+///   that isn't backed by a <see cref="KgNodeTypes"/> constant means the builder
+///   works but is referred to by raw string everywhere (the case of the dead
+///   <c>MilitaryNodeBuilder</c> that returned <c>"Military"</c> instead of
+///   <c>"Military_unit"</c>).</item>
+///   <item><b>Mismatched constant value</b> — every registered <c>NodeType</c>
+///   must resolve to a <c>KgNodeTypes</c> constant value.</item>
 /// </list>
 ///
-/// This test is deliberately reflection-based rather than database-aware; it
-/// catches the structural problem (constant↔builder mapping) without requiring
-/// a Mongo connection. Coverage of "every type with corpus instances has a
-/// builder" is impossible without DB access; we trust periodic surveys for that
-/// (see Design-024 Appendix A).
+/// Registration is the single source of truth (not reflection over concrete
+/// classes) because <see cref="DefaultNodeBuilder"/> is parameterized and has
+/// no parameterless constructor.
 /// </summary>
 [TestClass]
 [TestCategory(TestTiers.Unit)]
 public class NodeBuilderCoverageTests
 {
     /// <summary>
-    /// Constants intentionally without a per-type builder. Empty for now —
-    /// every public string constant in <see cref="KgNodeTypes"/> currently has
-    /// a registered builder. Add to this set if a constant is purely a
+    /// Constants intentionally without a registered builder. Every public string
+    /// constant in <see cref="KgNodeTypes"/> currently has a registered builder
+    /// except the set below. Add to this set if a constant is purely a
     /// reference-only type (e.g. used as an edge-target classifier but never
     /// expected to be a primary node template).
     /// </summary>
@@ -44,8 +41,8 @@ public class NodeBuilderCoverageTests
     {
         // KgNodeTypes.Language is referenced as a target type by edges from
         // CelestialBody / Species / System but rarely appears as a primary
-        // node template in raw.pages. Generic loop handles it via
-        // UnknownNodeBuilder if a Language node ever lands as a template.
+        // node template in raw.pages. Generic loop handles it via the Unknown
+        // DefaultNodeBuilder if a Language node ever lands as a template.
         KgNodeTypes.Language,
         // KgNodeTypes.Religion + KgNodeTypes.Deity — same shape, primarily
         // used as edge-target classifiers.
@@ -88,35 +85,41 @@ public class NodeBuilderCoverageTests
         Assert.IsTrue(
             missing.Count == 0,
             $"The following KgNodeTypes constants have no registered NodeBuilder and are not in ConstantsWithoutBuilders: {string.Join(", ", missing)}.\n"
-                + "Either: (a) create the missing NodeBuilder under NodeBuilders/Types/ and register it in InfoboxGraphService.RegisterAllBuilders, OR (b) add the constant to ConstantsWithoutBuilders with a justifying comment."
+                + "Either: (a) register a DefaultNodeBuilder (or real-logic builder) in NodeBuilderRegistry.CreateBuilders, OR (b) add the constant to ConstantsWithoutBuilders with a justifying comment."
         );
     }
 
     [TestMethod]
-    public void Every_NodeBuilder_NodeType_is_a_KgNodeTypes_constant_value()
+    public void Every_registered_builder_NodeType_is_a_KgNodeTypes_constant_value()
     {
         var allConstantValues = new HashSet<string>(GetKgNodeTypesConstants(), StringComparer.OrdinalIgnoreCase);
-        var nodeBuilderTypes = GetAllNodeBuilderClassTypes();
+        var builders = NodeBuilderRegistry.CreateBuilders();
 
         var unbacked = new List<string>();
-        foreach (var t in nodeBuilderTypes)
+        foreach (var (key, builder) in builders)
         {
-            // Skip abstract bases and the catch-all UnknownNodeBuilder
-            if (t.IsAbstract || t == typeof(UnknownNodeBuilder))
-                continue;
-
-            var instance = (INodeBuilder)Activator.CreateInstance(t)!;
-            if (!allConstantValues.Contains(instance.NodeType))
-            {
-                unbacked.Add($"{t.Name} → NodeType=\"{instance.NodeType}\"");
-            }
+            // Unknown is intentionally registered as the catch-all and IS a KgNodeTypes constant.
+            if (!allConstantValues.Contains(builder.NodeType))
+                unbacked.Add($"{builder.GetType().Name}(key={key}) → NodeType=\"{builder.NodeType}\"");
         }
 
         Assert.IsTrue(
             unbacked.Count == 0,
-            $"The following NodeBuilders have a NodeType not backed by a KgNodeTypes constant: {string.Join("; ", unbacked)}.\n"
-                + "Add a constant to KgNodeTypes and reference it from NodeType (avoid raw string literals)."
+            $"The following registered builders have a NodeType not backed by a KgNodeTypes constant: {string.Join("; ", unbacked)}.\n"
+                + "Add a constant to KgNodeTypes and reference it from the registration (avoid raw string literals)."
         );
+    }
+
+    [TestMethod]
+    public void Registry_keys_match_each_builder_NodeType()
+    {
+        var builders = NodeBuilderRegistry.CreateBuilders();
+        var mismatches = builders
+            .Where(kv => !string.Equals(kv.Key, kv.Value.NodeType, StringComparison.Ordinal))
+            .Select(kv => $"key=\"{kv.Key}\" vs NodeType=\"{kv.Value.NodeType}\"")
+            .ToList();
+
+        Assert.IsTrue(mismatches.Count == 0, $"Registry key/NodeType mismatches: {string.Join("; ", mismatches)}");
     }
 
     static IEnumerable<string> GetKgNodeTypesConstants()
@@ -125,41 +128,9 @@ public class NodeBuilderCoverageTests
         return fields.Select(f => (string)f.GetRawConstantValue()!).Where(v => !string.IsNullOrEmpty(v));
     }
 
-    static IEnumerable<Type> GetAllNodeBuilderClassTypes()
-    {
-        var nodeBuilderInterface = typeof(INodeBuilder);
-        return nodeBuilderInterface.Assembly.GetTypes().Where(t => nodeBuilderInterface.IsAssignableFrom(t) && t.IsClass && !t.IsAbstract);
-    }
-
     /// <summary>
-    /// Reflectively instantiates every concrete <see cref="INodeBuilder"/>
-    /// subclass in the Services assembly and returns the set of
-    /// <see cref="INodeBuilder.NodeType"/> values they declare. This mirrors
-    /// what <c>InfoboxGraphService.RegisterAllBuilders</c> does at runtime —
-    /// the registration list IS the source of truth, so any builder that
-    /// exists but isn't registered will appear in the missing set on the
-    /// first test above.
+    /// Consults the real registration list — the same factory
+    /// <see cref="T:StarWarsData.Services.InfoboxGraphService"/> uses at runtime.
     /// </summary>
-    static HashSet<string> GetAllRegisteredNodeBuilderTypes()
-    {
-        var registered = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        foreach (var t in GetAllNodeBuilderClassTypes())
-        {
-            // Include UnknownNodeBuilder since it IS registered in
-            // InfoboxGraphService.RegisterAllBuilders as the catch-all,
-            // and KgNodeTypes.Unknown maps to it.
-            try
-            {
-                var instance = (INodeBuilder)Activator.CreateInstance(t)!;
-                registered.Add(instance.NodeType);
-            }
-            catch (MissingMethodException)
-            {
-                // Builder requires constructor args — skip in this reflection pass.
-                // Callers wanting to assert against such builders should mock or
-                // adapt the test.
-            }
-        }
-        return registered;
-    }
+    static HashSet<string> GetAllRegisteredNodeBuilderTypes() => new(NodeBuilderRegistry.CreateBuilders().Keys, StringComparer.OrdinalIgnoreCase);
 }

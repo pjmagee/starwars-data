@@ -2,12 +2,11 @@ using MongoDB.Bson;
 using StarWarsData.Models.Entities;
 using StarWarsData.Services.KnowledgeGraph.Definitions;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders;
-using StarWarsData.Services.KnowledgeGraph.NodeBuilders.Types;
 
 namespace StarWarsData.Tests.Unit;
 
 /// <summary>
-/// Design-024 Phase B for <see cref="YearNodeBuilder"/>.
+/// Design-024 Phase B for Year nodes (via <see cref="DefaultNodeBuilder"/>).
 /// Verifies <c>Chancellor</c> / <c>Head</c> / <c>Chief</c> are picked up as
 /// typed-leader edges via direct FieldSemantics entries (no override needed —
 /// the generic loop classifies them).
@@ -62,7 +61,7 @@ public class YearNodeBuilderTests
     public void TypedLeaderField_EmitsTypedEdge(string fieldLabel, string expectedLabel)
     {
         var ctx = BuildYearCtx(fieldLabel);
-        var result = new YearNodeBuilder().Build(ctx);
+        var result = new DefaultNodeBuilder(KgNodeTypes.Year).Build(ctx);
         Assert.AreEqual(1, result.Edges.Count);
         Assert.AreEqual(expectedLabel, result.Edges[0].Label);
     }

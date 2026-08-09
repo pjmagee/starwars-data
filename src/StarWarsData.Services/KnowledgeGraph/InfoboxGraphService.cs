@@ -6,7 +6,6 @@ using StarWarsData.Models;
 using StarWarsData.Models.Entities;
 using StarWarsData.Services.KnowledgeGraph.Definitions;
 using StarWarsData.Services.KnowledgeGraph.NodeBuilders;
-using StarWarsData.Services.KnowledgeGraph.NodeBuilders.Types;
 
 namespace StarWarsData.Services;
 
@@ -36,120 +35,12 @@ public class InfoboxGraphService
         _labels = db.GetCollection<RelationshipLabel>(Collections.KgLabels);
         _logger = logger;
 
-        _unknownBuilder = new UnknownNodeBuilder();
-        _builders = new Dictionary<string, INodeBuilder>(StringComparer.OrdinalIgnoreCase);
-        RegisterAllBuilders();
+        _builders = NodeBuilderRegistry.CreateBuilders();
+        if (!_builders.TryGetValue(KgNodeTypes.Unknown, out var unknownBuilder))
+            throw new InvalidOperationException("NodeBuilderRegistry must register a builder for KgNodeTypes.Unknown.");
+        _unknownBuilder = unknownBuilder;
     }
 
-    /// <summary>
-    /// Register every <see cref="INodeBuilder"/> implementation explicitly. The
-    /// dispatch is exhaustive across <see cref="KgNodeTypes"/> — pages whose
-    /// template type doesn't match a registered builder fall back to
-    /// <see cref="UnknownNodeBuilder"/>. Adding a new node type means: add a
-    /// constant to <see cref="KgNodeTypes"/>, create the builder under
-    /// <c>NodeBuilders/Types/</c>, and add a single line here.
-    /// </summary>
-    void RegisterAllBuilders()
-    {
-        // People
-        RegisterBuilder(new CharacterNodeBuilder());
-        RegisterBuilder(new PersonNodeBuilder());
-        RegisterBuilder(new FamilyNodeBuilder());
-        RegisterBuilder(new SpeciesNodeBuilder());
-
-        // Geography / Places
-        RegisterBuilder(new CelestialBodyNodeBuilder());
-        RegisterBuilder(new LocationNodeBuilder());
-        RegisterBuilder(new CityNodeBuilder());
-        RegisterBuilder(new StructureNodeBuilder());
-        RegisterBuilder(new SystemNodeBuilder());
-        RegisterBuilder(new SectorNodeBuilder());
-        RegisterBuilder(new RegionNodeBuilder());
-        RegisterBuilder(new NebulaNodeBuilder());
-
-        // Geography / Astronomy (additional)
-        RegisterBuilder(new StarNodeBuilder());
-        RegisterBuilder(new PlantNodeBuilder());
-
-        // Politics / Military
-        RegisterBuilder(new GovernmentNodeBuilder());
-        RegisterBuilder(new OrganizationNodeBuilder());
-        RegisterBuilder(new CompanyNodeBuilder());
-        // The previous MilitaryNodeBuilder used KgNodeTypes.Military ("Military")
-        // which never matched any corpus row — actual type is "Military_unit".
-        // Replaced by MilitaryUnitNodeBuilder during the typed-NodeBuilders cleanup.
-        RegisterBuilder(new MilitaryUnitNodeBuilder());
-        RegisterBuilder(new FleetNodeBuilder());
-
-        // Events / Conflict
-        RegisterBuilder(new BattleNodeBuilder());
-        RegisterBuilder(new WarNodeBuilder());
-        RegisterBuilder(new CampaignNodeBuilder());
-        RegisterBuilder(new MissionNodeBuilder());
-        RegisterBuilder(new DuelNodeBuilder());
-        RegisterBuilder(new ElectionNodeBuilder());
-        RegisterBuilder(new EventNodeBuilder());
-        RegisterBuilder(new TreatyNodeBuilder());
-        RegisterBuilder(new EraNodeBuilder());
-        RegisterBuilder(new YearNodeBuilder());
-
-        // Vehicles / Ships
-        RegisterBuilder(new StarshipNodeBuilder());
-        RegisterBuilder(new StarshipClassNodeBuilder());
-        RegisterBuilder(new IndividualShipNodeBuilder());
-        RegisterBuilder(new SpaceStationNodeBuilder());
-        RegisterBuilder(new VehicleNodeBuilder());
-        RegisterBuilder(new AirVehicleNodeBuilder());
-        RegisterBuilder(new GroundVehicleNodeBuilder());
-        RegisterBuilder(new RepulsorliftVehicleNodeBuilder());
-        RegisterBuilder(new TradeRouteNodeBuilder());
-
-        // Things
-        RegisterBuilder(new WeaponNodeBuilder());
-        RegisterBuilder(new LightsaberNodeBuilder());
-        RegisterBuilder(new DeviceNodeBuilder());
-        RegisterBuilder(new ArtifactNodeBuilder());
-        RegisterBuilder(new DroidNodeBuilder());
-        RegisterBuilder(new DroidSeriesNodeBuilder());
-        RegisterBuilder(new SubstanceNodeBuilder());
-        RegisterBuilder(new FoodNodeBuilder());
-        RegisterBuilder(new ClothingNodeBuilder());
-        RegisterBuilder(new ArmorNodeBuilder());
-
-        // Qualifier nodes
-        RegisterBuilder(new TitleOrPositionNodeBuilder());
-        RegisterBuilder(new ForcePowerNodeBuilder());
-        RegisterBuilder(new LightsaberFormNodeBuilder());
-
-        // Media — narrative
-        RegisterBuilder(new BookNodeBuilder());
-        RegisterBuilder(new ShortStoryNodeBuilder());
-        RegisterBuilder(new AudiobookNodeBuilder());
-        RegisterBuilder(new MovieNodeBuilder());
-        RegisterBuilder(new ComicNodeBuilder());
-        RegisterBuilder(new ComicStoryNodeBuilder());
-        RegisterBuilder(new ComicCollectionNodeBuilder());
-        RegisterBuilder(new GameNodeBuilder());
-        RegisterBuilder(new AdventureNodeBuilder());
-        RegisterBuilder(new ExpansionPackNodeBuilder());
-
-        // Media — periodicals + reference
-        // Phase C: per-type overrides for book-shaped types (ISBN normalisation)
-        // and TelevisionEpisode (Timeline-suffix collapse, Guest star promotion).
-        RegisterBuilder(new ReferenceBookNodeBuilder());
-        RegisterBuilder(new ComicBookNodeBuilder());
-        RegisterBuilder(new ComicMagazineNodeBuilder());
-        RegisterBuilder(new MagazineIssueNodeBuilder());
-        RegisterBuilder(new MagazineArticleNodeBuilder());
-        RegisterBuilder(new ReferenceMagazineNodeBuilder());
-        RegisterBuilder(new TelevisionEpisodeNodeBuilder());
-        RegisterBuilder(new IuMediaNodeBuilder());
-
-        // Catch-all for unrecognised template types
-        RegisterBuilder(_unknownBuilder);
-    }
-
-    void RegisterBuilder(INodeBuilder builder) => _builders[builder.NodeType] = builder;
 
     /// <summary>
     /// Build the knowledge graph from all pages with infoboxes.
@@ -159,15 +50,10 @@ public class InfoboxGraphService
     {
         _logger.LogInformation("InfoboxGraph: starting graph build from infobox data...");
 
-        var wikiUrlToPageId = await BuildWikiUrlLookupAsync(ct);
+        // Single pre-pass: wiki URL/title → PageId (edge target resolution) and
+        // PageId → NodeType (Design-024 Phase A source × target-type relabel rules).
+        var (wikiUrlToPageId, nodeTypeByPageId) = await BuildLookupsAsync(ct);
         _logger.LogInformation("InfoboxGraph: {Count} wiki URL → PageId mappings", wikiUrlToPageId.Count);
-
-        // Per Design-024 Phase A: per-type OnFinalize overrides need to know the KG node
-        // type of every edge target so they can apply source × target-type relabel rules
-        // (e.g. Affiliation: Character → TitleOrPosition becomes has_role). Build a
-        // PageId → NodeType lookup in a single pre-pass so the dict is available to the
-        // first builder invocation.
-        var nodeTypeByPageId = await BuildNodeTypeByPageIdLookupAsync(ct);
         _logger.LogInformation("InfoboxGraph: {Count} pageId → NodeType mappings", nodeTypeByPageId.Count);
 
         var filter = Builders<Page>.Filter.Ne(p => p.Infobox, null);
@@ -453,13 +339,9 @@ public class InfoboxGraphService
         var template = infoboxDoc.Contains(InfoboxBsonFields.Template) && !infoboxDoc[InfoboxBsonFields.Template].IsBsonNull ? infoboxDoc[InfoboxBsonFields.Template].AsString : null;
         var imageUrl = infoboxDoc.Contains(InfoboxBsonFields.ImageUrl) && !infoboxDoc[InfoboxBsonFields.ImageUrl].IsBsonNull ? infoboxDoc[InfoboxBsonFields.ImageUrl].AsString : null;
 
-        var type = KgNodeTypes.Unknown;
-        if (template is not null)
-        {
-            var idx = template.LastIndexOf(':');
-            if (idx >= 0)
-                type = template[(idx + 1)..];
-        }
+        // Colon-less templates fall back to Unknown (dispatch-safe). The lookup
+        // pre-pass uses the raw string as fallback so historical type maps stay intact.
+        var type = template is not null ? ParseTemplateType(template, fallbackWhenNoColon: KgNodeTypes.Unknown) : KgNodeTypes.Unknown;
 
         var dataItems = infoboxDoc.Contains(InfoboxBsonFields.Data) && infoboxDoc[InfoboxBsonFields.Data].IsBsonArray ? infoboxDoc[InfoboxBsonFields.Data].AsBsonArray : new BsonArray();
 
@@ -719,15 +601,46 @@ public class InfoboxGraphService
     }
 
     /// <summary>
-    /// Build a lookup from wiki URL AND title → PageId so we can resolve link targets.
-    /// Infobox links may use URLs that don't exactly match the page's stored wikiUrl
-    /// (redirects, disambiguation, URL encoding differences), so we also match by title.
+    /// Extract the KG node type from an infobox template string.
+    /// Templates are typically <c>Template:Battle</c>; the type is the suffix after
+    /// the last colon. When no colon is present, <paramref name="fallbackWhenNoColon"/>
+    /// is returned — callers that want corpus-parity with the historical pageId→type
+    /// lookup pass the raw template; callers that want dispatch-safe defaults pass
+    /// <see cref="KgNodeTypes.Unknown"/>.
     /// </summary>
-    async Task<Dictionary<string, int>> BuildWikiUrlLookupAsync(CancellationToken ct)
+    internal static string ParseTemplateType(string template, string fallbackWhenNoColon)
     {
-        var lookup = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        var idx = template.LastIndexOf(':');
+        return idx >= 0 ? template[(idx + 1)..] : fallbackWhenNoColon;
+    }
 
-        var cursor = await _pages.Find(FilterDefinition<Page>.Empty).Project(Builders<Page>.Projection.Include(p => p.PageId).Include(p => p.Title).Include(p => p.WikiUrl)).ToCursorAsync(ct);
+    /// <summary>
+    /// Single pre-pass over all pages building both lookups the graph build needs:
+    /// <list type="bullet">
+    ///   <item><c>urlToPageId</c> — wiki URL AND title → PageId for link-target resolution
+    ///   (always filled when the field is present).</item>
+    ///   <item><c>typeByPageId</c> — PageId → KG node type, filled only when an infobox
+    ///   template is present. Used by per-type <c>OnFinalize</c> overrides (Design-024
+    ///   Phase A) for source × target-type relabel rules.</item>
+    /// </list>
+    /// Colon-less templates keep the raw string in <c>typeByPageId</c> (historical
+    /// lookup behaviour); <see cref="TryBuildContext"/> defaults those to Unknown.
+    /// </summary>
+    async Task<(Dictionary<string, int> UrlToPageId, Dictionary<int, string> TypeByPageId)> BuildLookupsAsync(CancellationToken ct)
+    {
+        var urlToPageId = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        var typeByPageId = new Dictionary<int, string>();
+
+        var cursor = await _pages
+            .Find(FilterDefinition<Page>.Empty)
+            .Project(
+                Builders<Page>
+                    .Projection.Include(p => p.PageId)
+                    .Include(p => p.Title)
+                    .Include(p => p.WikiUrl)
+                    .Include(PageBsonFields.InfoboxTemplate)
+            )
+            .ToCursorAsync(ct);
 
         while (await cursor.MoveNextAsync(ct))
         {
@@ -738,52 +651,30 @@ public class InfoboxGraphService
                 var title = doc.Contains(PageBsonFields.Title) ? doc[PageBsonFields.Title].AsString : null;
 
                 if (wikiUrl is not null)
-                    lookup.TryAdd(wikiUrl, pageId);
+                    urlToPageId.TryAdd(wikiUrl, pageId);
 
                 if (title is not null)
-                    lookup.TryAdd(title, pageId);
-            }
-        }
+                    urlToPageId.TryAdd(title, pageId);
 
-        return lookup;
-    }
-
-    /// <summary>
-    /// Build a lookup from PageId → KG node type by projecting the infobox template
-    /// from each page that has one. Resolves the same way <see cref="TryBuildContext"/>
-    /// does at the per-page level: <c>Template</c> is split on its last <c>:</c> and the
-    /// suffix is the type name (e.g. <c>"Template:Battle"</c> → <c>"Battle"</c>).
-    ///
-    /// Used by per-type <c>OnFinalize</c> overrides (Design-024 Phase A) to apply
-    /// source × target-type relabel rules. Pages without infoboxes are excluded — they
-    /// don't become KG nodes, so per-type rules can't target them.
-    /// </summary>
-    async Task<Dictionary<int, string>> BuildNodeTypeByPageIdLookupAsync(CancellationToken ct)
-    {
-        var lookup = new Dictionary<int, string>();
-
-        var filter = Builders<Page>.Filter.Ne(p => p.Infobox, null);
-        var cursor = await _pages.Find(filter).Project(Builders<Page>.Projection.Include(p => p.PageId).Include(PageBsonFields.InfoboxTemplate)).ToCursorAsync(ct);
-
-        while (await cursor.MoveNextAsync(ct))
-        {
-            foreach (var doc in cursor.Current)
-            {
-                var pageId = doc[MongoFields.Id].AsInt32;
-                if (!doc.Contains(PageBsonFields.Infobox))
+                if (!doc.Contains(PageBsonFields.Infobox) || doc[PageBsonFields.Infobox].IsBsonNull)
                     continue;
+
                 var infoboxDoc = doc[PageBsonFields.Infobox].AsBsonDocument;
-                var template = infoboxDoc.Contains(InfoboxBsonFields.Template) && !infoboxDoc[InfoboxBsonFields.Template].IsBsonNull ? infoboxDoc[InfoboxBsonFields.Template].AsString : null;
+                var template =
+                    infoboxDoc.Contains(InfoboxBsonFields.Template) && !infoboxDoc[InfoboxBsonFields.Template].IsBsonNull
+                        ? infoboxDoc[InfoboxBsonFields.Template].AsString
+                        : null;
                 if (template is null)
                     continue;
-                var idx = template.LastIndexOf(':');
-                var type = idx >= 0 ? template[(idx + 1)..] : template;
+
+                // Historical lookup kept the raw string for colon-less templates.
+                var type = ParseTemplateType(template, fallbackWhenNoColon: template);
                 if (!string.IsNullOrEmpty(type))
-                    lookup[pageId] = type;
+                    typeByPageId[pageId] = type;
             }
         }
 
-        return lookup;
+        return (urlToPageId, typeByPageId);
     }
 
     /// <summary>
