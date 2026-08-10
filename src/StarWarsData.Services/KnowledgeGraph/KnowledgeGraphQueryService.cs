@@ -1981,61 +1981,8 @@ public class KnowledgeGraphQueryService(IMongoClient mongoClient, IOptions<Setti
 
         var results = await _edges.Database.GetCollection<BsonDocument>(Collections.KgEdges).Aggregate<BsonDocument>(pipeline).ToListAsync(ct);
 
-        return results.Select(d => (name: d[MongoFields.Id]["name"].AsString, id: d[MongoFields.Id]["id"].AsInt32, count: d["count"].AsInt32)).ToList();
-    }
-
-    /// <summary>
-    /// Count nodes grouped by a property value.
-    /// E.g. "Characters grouped by species" or "Starships grouped by manufacturer".
-    /// </summary>
-    public async Task<List<BsonDocument>> CountNodesByPropertiesAsync(string entityType, List<string> properties, string? continuity, int maxSources, int limit, CancellationToken ct = default)
-    {
-        limit = Math.Clamp(limit, 1, 50);
-        maxSources = Math.Clamp(maxSources, 1, 25);
-
-        var match = new BsonDocument(GraphNodeBsonFields.Type, entityType);
-        if (ParseContinuityFilter(continuity) is { } cont)
-            match[GraphNodeBsonFields.Continuity] = cont.ToString();
-
-        // Build $group _id from multiple properties
-        var groupId = new BsonDocument();
-        foreach (var prop in properties)
-            groupId[prop] = new BsonDocument("$ifNull", new BsonArray { $"$properties.{prop}", "Unknown" });
-
-        var group = new BsonDocument
-        {
-            [MongoFields.Id] = groupId,
-            ["count"] = new BsonDocument("$sum", 1),
-            ["sources"] = new BsonDocument(
-                "$push",
-                new BsonDocument
-                {
-                    { "pageId", "$" + MongoFields.Id },
-                    { "title", "$" + GraphNodeBsonFields.Name },
-                    { "wikiUrl", "$" + GraphNodeBsonFields.WikiUrl },
-                }
-            ),
-        };
-
-        var pipeline = new List<BsonDocument>
-        {
-            new("$match", match),
-            new("$group", group),
-            new("$sort", new BsonDocument("count", -1)),
-            new("$limit", limit),
-            new(
-                "$project",
-                new BsonDocument
-                {
-                    { MongoFields.Id, 1 },
-                    { "count", 1 },
-                    { "sources", new BsonDocument("$slice", new BsonArray { "$sources", maxSources }) },
-                }
-            ),
-        };
-
-        return await _nodes.Database.GetCollection<BsonDocument>(Collections.KgNodes).Aggregate<BsonDocument>(pipeline.ToArray()).ToListAsync(ct);
-    }
+       return results.Select(d => (name: d[MongoFields.Id]["name"].AsString, id: d[MongoFields.Id]["id"].AsInt32, count: d["count"].AsInt32)).ToList();
+   }
 
     public async Task<List<(string value, int count, List<NodeRefDto> sources)>> CountNodesByPropertyAsync(
         string entityType,

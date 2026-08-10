@@ -45,9 +45,23 @@ public class GraphRAGToolkit
         _nodesCollection = db.GetCollection<GraphNode>(Collections.KgNodesEnriched);
         _galaxyYears = db.GetCollection<GalaxyYearDocument>(Collections.GalaxyYears);
         _galaxyYearsRaw = db.GetCollection<BsonDocument>(Collections.GalaxyYears);
-    }
+   }
 
-    static KgTemporalFacetDto ToFacetDto(Models.Entities.TemporalFacet f, bool includeOrder = false) => new(f.Field, f.Semantic, f.Calendar, f.Year, f.Text, includeOrder ? f.Order : null);
+   static KgTemporalFacetDto ToFacetDto(Models.Entities.TemporalFacet f, bool includeOrder = false) => new(f.Field, f.Semantic, f.Calendar, f.Year, f.Text, includeOrder ? f.Order : null);
+
+    /// <summary>
+    /// Shared CSV PageId parser used by get_entity_properties and get_entity_timeline.
+    /// </summary>
+    static List<int> ParseIds(string csv, int max)
+    {
+        return csv
+            .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .Select(s => int.TryParse(s, out var id) ? id : (int?)null)
+            .Where(id => id.HasValue)
+            .Select(id => id!.Value)
+            .Take(max)
+            .ToList();
+    }
 
     /// <summary>
     /// Compact projection of <see cref="Models.Entities.NodeEnrichment"/> into the
@@ -180,13 +194,7 @@ public class GraphRAGToolkit
     )]
     public async Task<List<KgNodeDetailDto>> GetEntityProperties([Description("Comma-separated PageIds (e.g. '12345' or '12345,67890,11111'). Max 20.")] string entityIds)
     {
-        var ids = entityIds
-            .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-            .Select(s => int.TryParse(s, out var id) ? id : (int?)null)
-            .Where(id => id.HasValue)
-            .Select(id => id!.Value)
-            .Take(20)
-            .ToList();
+        var ids = ParseIds(entityIds, 20);
 
         if (ids.Count == 0)
             return [new KgNodeDetailDto(null, null, null, null, null, null, null, null, null, null, Error: "No valid PageIds provided.")];
@@ -616,13 +624,7 @@ public class GraphRAGToolkit
     )]
     public async Task<List<EntityTimelineDto>> GetEntityTimeline([Description("Comma-separated PageIds (e.g. '12345' or '12345,67890'). Max 10.")] string entityIds)
     {
-        var ids = entityIds
-            .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-            .Select(s => int.TryParse(s, out var id) ? id : (int?)null)
-            .Where(id => id.HasValue)
-            .Select(id => id!.Value)
-            .Take(10)
-            .ToList();
+        var ids = ParseIds(entityIds, 10);
 
         if (ids.Count == 0)
             return [new EntityTimelineDto(null, null, null, null, null, null, null, null, null, null, Error: "No valid PageIds provided.")];

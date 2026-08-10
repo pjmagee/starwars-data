@@ -42,7 +42,7 @@ public class AskAiPipelineTests
             "How many Force powers are light side vs dark side vs universal? Show as a bar chart.",
             capture.ToolCalls,
             capture.FinalResponse,
-            "Should: 1) use count_nodes_by_property (or count_nodes_by_properties) over ForcePower entities grouped by the "
+            "Should: 1) use count_nodes_by_property over ForcePower entities grouped by the "
                 + "Alignment property, 2) render_chart with chartType=Bar showing alignment categories "
                 + "and values sourced from the aggregation. The KG has more Alignment values than just light/dark/"
                 + "universal — including all alignment categories returned by the tool is correct behaviour, "

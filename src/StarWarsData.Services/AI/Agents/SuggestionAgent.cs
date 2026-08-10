@@ -7,6 +7,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using StarWarsData.Models;
 using StarWarsData.Models.Entities;
+using StarWarsData.Services;
 
 namespace StarWarsData.Services.AI.Agents;
 
@@ -56,7 +57,7 @@ public sealed class SuggestionAgent(IMongoClient mongoClient, IOptions<SettingsO
 
         var tools = new List<AITool>();
         // Exclude semantic_search — it requires SemanticSearchService which isn't available in Admin.
-        tools.AddRange(graphRAG.AsAIFunctions(serializerOptions).Where(t => t.Name != "semantic_search"));
+        tools.AddRange(graphRAG.AsAIFunctions(serializerOptions).Where(t => t.Name != ToolNames.GraphRAG.SemanticSearch));
         tools.AddRange(kgAnalytics.AsAIFunctions(serializerOptions));
 
         var all = new List<GeneratedSuggestion>();
