@@ -1,0 +1,33 @@
+@namespace StarWarsData.Frontend.Components.Shared.Holocron
+@if (Entries is { Count: > 0 })
+{
+    <MudExpansionPanels Class="@Class" Elevation="0">
+        <MudExpansionPanel Text="@($"Activity log ({Entries.Count} events)")" Expanded="Expanded">
+            <div style="@($"max-height:{MaxHeightPx}px; overflow-y:auto")">
+                <MudStack Spacing="0">
+                    @foreach (var entry in Entries.AsEnumerable().Reverse().Take(MaxEntries))
+                    {
+                        <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center"
+                                  Class="px-2 py-1" Style="border-bottom:1px solid var(--mud-palette-divider)">
+                            <MudIcon Icon="@HolocronUi.CategoryIcon(entry.Category)" Size="Size.Small" Color="@HolocronUi.CategoryColor(entry.Category)" />
+                            <MudText Typo="Typo.caption" Style="font-family:monospace; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">
+                                @entry.Summary
+                            </MudText>
+                            <MudText Typo="Typo.caption" Color="Color.Secondary" Style="flex-shrink:0">
+                                @entry.Timestamp.ToString("HH:mm:ss")
+                            </MudText>
+                        </MudStack>
+                    }
+                </MudStack>
+            </div>
+        </MudExpansionPanel>
+    </MudExpansionPanels>
+}
+
+@code {
+    [Parameter] public IReadOnlyList<HolocronActivityLogEntry>? Entries { get; set; }
+    [Parameter] public bool Expanded { get; set; }
+    [Parameter] public int MaxEntries { get; set; } = 80;
+    [Parameter] public int MaxHeightPx { get; set; } = 280;
+    [Parameter] public string? Class { get; set; } = "mt-3";
+}

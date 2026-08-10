@@ -182,7 +182,7 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
             .ToList();
 
         var dedupedAddEdges = raw
-            .AddEdges.GroupBy(p => NodePairKey(p.FromId, p.ToId))
+            .AddEdges.GroupBy(p => HolocronPreflight.NodePairKey(p.FromId, p.ToId))
             .Select(g =>
             {
                 var canonical = g.OrderByDescending(p => p.Evidence.Count).ThenByDescending(p => p.Reasoning?.Length ?? 0).First();
@@ -240,15 +240,15 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
         // existingNodePairs. To make the F5 (Add-on-existing-pair) check authoritative we
         // also query kg.edges for the full set of pairs touching _pageId.
         var existingEdges = outEdges.Concat(inEdges).ToList();
-        var existingEdgeKeys = existingEdges.Select(e => $"{e.FromId}-{e.ToId}-{e.Label.ToLowerInvariant()}").ToHashSet(StringComparer.OrdinalIgnoreCase);
-        var existingNodePairs = existingEdges.Select(e => NodePairKey(e.FromId, e.ToId)).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var existingEdgeKeys = existingEdges.Select(e => HolocronPreflight.EdgeKey(e.FromId, e.ToId, e.Label)).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var existingNodePairs = existingEdges.Select(e => HolocronPreflight.NodePairKey(e.FromId, e.ToId)).ToHashSet(StringComparer.OrdinalIgnoreCase);
 
         var allTargetEdges = await Edges
             .Find(Builders<RelationshipEdge>.Filter.Or(Builders<RelationshipEdge>.Filter.Eq(e => e.FromId, _pageId), Builders<RelationshipEdge>.Filter.Eq(e => e.ToId, _pageId)))
             .Project(e => new { e.FromId, e.ToId })
             .ToListAsync(ct);
         foreach (var e in allTargetEdges)
-            existingNodePairs.Add(NodePairKey(e.FromId, e.ToId));
+            existingNodePairs.Add(HolocronPreflight.NodePairKey(e.FromId, e.ToId));
 
         // (c) Active edge enrichments touching the target — Add proposals must avoid these too.
         var activeEdgeEnrichments = await EdgeEnrichments
@@ -257,7 +257,7 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
                     & (Builders<EdgeEnrichment>.Filter.Eq(e => e.FromId, _pageId) | Builders<EdgeEnrichment>.Filter.Eq(e => e.ToId, _pageId))
             )
             .ToListAsync(ct);
-        var enrichmentNodePairs = activeEdgeEnrichments.Select(e => NodePairKey(e.FromId, e.ToId)).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var enrichmentNodePairs = activeEdgeEnrichments.Select(e => HolocronPreflight.NodePairKey(e.FromId, e.ToId)).ToHashSet(StringComparer.OrdinalIgnoreCase);
 
         // Template-scoped allowed-properties set. The target node's Type is the
         // template name; intersect with FieldSemantics.Properties so Phase E only
@@ -275,7 +275,7 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
         var survivingAnnotates = new List<HolocronAnnotateProposal>();
         foreach (var p in dedupedAnnotates)
         {
-            if (!HasValidEvidence(p.Evidence, validPageIds, validChunkIds))
+            if (!HolocronPreflight.HasValidEvidence(p.Evidence?.Select(e => (e.SourcePageId, e.ChunkId)), validPageIds, validChunkIds))
             {
                 evidenceFailures++;
                 await RecordAnnotateAuditAsync(p, "rejected_evidence", "Cited chunkId / sourcePageId not found", ct);
@@ -287,7 +287,7 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
                 await RecordAnnotateAuditAsync(p, "rejected_preflight_hedge", "Claim or reasoning contained hedge-word pattern (HolocronConsolidator.HallucinationPattern)", ct);
                 continue;
             }
-            if (!IsAnnotateValid(p, existingEdgeKeys))
+            if (!HolocronPreflight.IsAnnotateValid(_pageId, p.FromId, p.ToId, p.Label, p.Role, p.Qualifier, p.Description, existingEdgeKeys))
             {
                 preflightRejects++;
                 await RecordAnnotateAuditAsync(p, "rejected_preflight_other", "Failed IsAnnotateValid: missing target edge / fromId / label / context fields", ct);
@@ -301,7 +301,7 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
         var survivingFillGaps = new List<HolocronFillGapProposal>();
         foreach (var p in dedupedFillGaps)
         {
-            if (!HasValidEvidence(p.Evidence, validPageIds, validChunkIds))
+            if (!HolocronPreflight.HasValidEvidence(p.Evidence?.Select(e => (e.SourcePageId, e.ChunkId)), validPageIds, validChunkIds))
             {
                 evidenceFailures++;
                 await RecordFillGapAuditAsync(p, "rejected_evidence", "Cited chunkId / sourcePageId not found", ct);
@@ -313,7 +313,7 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
                 await RecordFillGapAuditAsync(p, "rejected_preflight_hedge", "Claim or reasoning contained hedge-word pattern", ct);
                 continue;
             }
-            if (!IsFillGapValid(p, existingEdges))
+            if (!HolocronPreflight.IsFillGapValid(_pageId, p.FromId, p.ToId, p.Label, p.FromYear, p.ToYear, existingEdges))
             {
                 preflightRejects++;
                 await RecordFillGapAuditAsync(p, "rejected_preflight_other", "Failed IsFillGapValid: target edge missing or bound not refinable per Design-021", ct);
@@ -340,7 +340,7 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
         var survivingAddEdges = new List<HolocronAddEdgeProposal>();
         foreach (var p in dedupedAddEdges)
         {
-            if (!HasValidEvidence(p.Evidence, validPageIds, validChunkIds))
+            if (!HolocronPreflight.HasValidEvidence(p.Evidence?.Select(e => (e.SourcePageId, e.ChunkId)), validPageIds, validChunkIds))
             {
                 evidenceFailures++;
                 await RecordAddAuditAsync(p, "rejected_evidence", "Cited chunkId / sourcePageId not found", ct);
@@ -352,7 +352,7 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
                 await RecordAddAuditAsync(p, "rejected_preflight_hedge", "Claim or reasoning contained hedge-word pattern", ct);
                 continue;
             }
-            if (!IsAddEdgeValid(p, existingNodePairs, enrichmentNodePairs, addEdgeTargetTypes))
+            if (!HolocronPreflight.IsAddEdgeValid(_pageId, p.FromId, p.ToId, p.Label, _knownLabels, existingNodePairs, enrichmentNodePairs, addEdgeTargetTypes, _expectedTargetsByLabel))
             {
                 preflightRejects++;
                 var targetType = addEdgeTargetTypes.GetValueOrDefault(p.ToId, string.Empty);
@@ -368,7 +368,7 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
         var survivingNodeProps = new List<HolocronNodeProposalPayload>();
         foreach (var p in dedupedNodeProps)
         {
-            if (!HasValidEvidence(p.Evidence, validPageIds, validChunkIds))
+            if (!HolocronPreflight.HasValidEvidence(p.Evidence?.Select(e => (e.SourcePageId, e.ChunkId)), validPageIds, validChunkIds))
             {
                 evidenceFailures++;
                 await RecordPropertyAuditAsync(p, "rejected_evidence", "Cited chunkId / sourcePageId not found", ct);
@@ -563,95 +563,6 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
         return $"Consolidated {rawTotal} → {consolidatedTotal} for {node.Name}";
     }
 
-    // ── Pre-flight helpers (mirror HolocronAgent.ApplyProposalsAsync's checks) ──
-
-    static bool HasValidEvidence(List<HolocronEvidencePayload> evidence, HashSet<int> validPageIds, HashSet<string> validChunkIds)
-    {
-        foreach (var ev in evidence)
-        {
-            if (ev.SourcePageId is { } pid && pid > 0 && validPageIds.Contains(pid))
-                return true;
-            if (!string.IsNullOrEmpty(ev.ChunkId) && validChunkIds.Contains(ev.ChunkId))
-                return true;
-        }
-        return false;
-    }
-
-    bool IsAnnotateValid(HolocronAnnotateProposal p, HashSet<string> existingEdgeKeys)
-    {
-        if (p.FromId <= 0 || p.ToId <= 0 || string.IsNullOrWhiteSpace(p.Label))
-            return false;
-        if (p.FromId != _pageId && p.ToId != _pageId)
-            return false;
-        if (!existingEdgeKeys.Contains($"{p.FromId}-{p.ToId}-{p.Label.ToLowerInvariant()}"))
-            return false;
-        return !string.IsNullOrWhiteSpace(p.Role) || !string.IsNullOrWhiteSpace(p.Qualifier) || !string.IsNullOrWhiteSpace(p.Description);
-    }
-
-    bool IsFillGapValid(HolocronFillGapProposal p, List<RelationshipEdge> existingEdges)
-    {
-        if (p.FromId <= 0 || p.ToId <= 0 || string.IsNullOrWhiteSpace(p.Label))
-            return false;
-        if (p.FromId != _pageId && p.ToId != _pageId)
-            return false;
-        if (!p.FromYear.HasValue && !p.ToYear.HasValue)
-            return false;
-        // Per Design-021: a proposed bound is applicable if the matching edge's existing
-        // bound is either null OR explicitly Lifecycle-tagged (Phase 5 lifecycle-fallback,
-        // soft upper bound, refinable). Untagged (Unknown) and Infobox bounds are hard.
-        // This must mirror HolocronAgent.IsBoundRefinable so the consolidator's pre-flight
-        // doesn't reject what the agent path would accept.
-        return existingEdges.Any(e =>
-            e.FromId == p.FromId
-            && e.ToId == p.ToId
-            && string.Equals(e.Label, p.Label, StringComparison.OrdinalIgnoreCase)
-            && ((p.FromYear.HasValue && IsBoundRefinable(e, isFrom: true)) || (p.ToYear.HasValue && IsBoundRefinable(e, isFrom: false)))
-        );
-    }
-
-    /// <summary>
-    /// Mirrors <c>HolocronAgent.IsBoundRefinable</c> (Design-021). A bound is refinable
-    /// when it's null, or when it carries an explicit <see cref="EdgeBoundsSource.Lifecycle"/>
-    /// tag (Phase 5 fallback, soft upper bound). Untagged (Unknown) and Infobox bounds are
-    /// treated as hard and are not touched by FillGap.
-    /// </summary>
-    static bool IsBoundRefinable(RelationshipEdge edge, bool isFrom)
-    {
-        var existing = isFrom ? edge.FromYear : edge.ToYear;
-        if (!existing.HasValue)
-            return true;
-        var src = edge.Meta?.BoundsSource ?? EdgeBoundsSource.Unknown;
-        return src is EdgeBoundsSource.Lifecycle;
-    }
-
-    bool IsAddEdgeValid(HolocronAddEdgeProposal p, HashSet<string> existingNodePairs, HashSet<string> enrichmentNodePairs, IReadOnlyDictionary<int, string> targetTypes)
-    {
-        if (p.FromId <= 0 || p.ToId <= 0 || string.IsNullOrWhiteSpace(p.Label))
-            return false;
-        if (p.FromId != _pageId && p.ToId != _pageId)
-            return false;
-        if (!_knownLabels.Contains(p.Label))
-            return false;
-
-        // Type-constraint: if the canonical label declares specific target types, the
-        // actual target must match one of them. Catches `has_role → Character` and
-        // similar agent confusions where the label semantically demands a particular
-        // node type but the agent grabbed a wrong-typed entity from the linked-entities
-        // hint section. When Targets is empty (rare), skip the check — historical
-        // labels without declared Targets are permissive by design.
-        if (_expectedTargetsByLabel.TryGetValue(p.Label, out var expected) && expected.Count > 0)
-        {
-            var targetType = targetTypes.GetValueOrDefault(p.ToId, string.Empty);
-            if (string.IsNullOrEmpty(targetType) || !expected.Contains(targetType))
-                return false;
-        }
-
-        var pair = NodePairKey(p.FromId, p.ToId);
-        return !existingNodePairs.Contains(pair) && !enrichmentNodePairs.Contains(pair);
-    }
-
-    static string NodePairKey(int a, int b) => a < b ? $"{a}-{b}" : $"{b}-{a}";
-
     /// <summary>
     /// Merge evidence lists from multiple "duplicate" proposals into a single deduped
     /// list. Dedup key: chunkId when present (most evidence has one), else
@@ -689,7 +600,7 @@ internal sealed class HolocronConsolidatorExecutor : Executor<string, string>
         // Type-mismatch first — most actionable signal when the label has declared targets.
         if (_expectedTargetsByLabel.TryGetValue(p.Label, out var expected) && expected.Count > 0 && !string.IsNullOrEmpty(targetType) && !expected.Contains(targetType))
             return ("target_type", $"Target node type '{targetType}' not in label '{p.Label}' ExpectedTargetTypes [{string.Join(", ", expected)}]");
-        var pair = NodePairKey(p.FromId, p.ToId);
+        var pair = HolocronPreflight.NodePairKey(p.FromId, p.ToId);
         if (existingNodePairs.Contains(pair))
             return ("dup_pair", "Pair already has a Phase 1 / cached edge — would create a parallel relationship");
         if (enrichmentNodePairs.Contains(pair))

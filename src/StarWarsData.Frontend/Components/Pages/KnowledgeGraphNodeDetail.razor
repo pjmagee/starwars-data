@@ -312,7 +312,7 @@
             var result = await dialog.Result;
 
             var finished = false;
-            if (result is { Canceled: false, Data: HolocronProgressDialog.HolocronStatusResponse status })
+            if (result is { Canceled: false, Data: HolocronStatusResponse status })
             {
                 finished = status.Stage is HolocronJobStatus.Completed or HolocronJobStatus.Failed;
             }
