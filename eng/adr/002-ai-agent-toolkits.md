@@ -45,7 +45,7 @@ culminating in:
 
 ```csharp
 return chatClient
-    .AsAIAgent(instructions: AskAIAgent.BuildInstructions(databaseName), tools: tools)
+    .AsAIAgent(instructions: AskAIAgent.Instructions, tools: tools)
     .AsBuilder()
     .UseStarWarsTopicGuardrail(classifierClient, aiStatus, guardrailLogger)
     .Build();
@@ -195,7 +195,7 @@ quality is part of the product. Conventions:
   [src/StarWarsData.ApiService/Program.cs](../../src/StarWarsData.ApiService/Program.cs)
 - Toolkits:
   [src/StarWarsData.Services/AI/Toolkits/](../../src/StarWarsData.Services/AI/Toolkits/)
-- Agent instructions: [src/StarWarsData.Services/AI/Agents/AskAIAgent.cs](../../src/StarWarsData.Services/AI/Agents/AskAIAgent.cs) (`BuildInstructions(databaseName)`)
+- Agent instructions: [src/StarWarsData.Services/AI/Agents/AskAIAgent.cs](../../src/StarWarsData.Services/AI/Agents/AskAIAgent.cs) (`Instructions`)
 - Microsoft Agent Framework overview: <https://learn.microsoft.com/agent-framework/overview/agent-framework-overview>
 - Microsoft Agent Framework .NET repo: <https://github.com/microsoft/agent-framework/tree/main/dotnet>
 - Related: [ADR-001: Internal API Authentication](./001-internal-api-auth.md)
