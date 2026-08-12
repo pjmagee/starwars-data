@@ -10,6 +10,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using OpenAI;
 using StarWarsData.Models;
+using StarWarsData.Services.AI;
 
 namespace StarWarsData.Services.AI.Agents;
 
@@ -64,26 +65,10 @@ public sealed class AskAIAgent(
         tools.AddRange(dataExplorer.AsAIFunctions(serializerOptions));
         tools.AddRange(graphRAG.AsAIFunctions(serializerOptions));
         tools.AddRange(kgAnalytics.AsAIFunctions(serializerOptions));
-        tools.Add(
-            AIFunctionFactory.Create(
-                (string query, CancellationToken ct) => wikiSearchProvider.SearchAsync(query, ct),
-                "keyword_search",
-                """
-                Keyword search over wiki page titles and content. Fast, no AI cost.
-                Best for exact name lookups. For why/how/explain questions, use semantic_search instead.
-                """,
-                serializerOptions: serializerOptions
-            )
-        );
+        AgentToolCatalog.AddKeywordSearch(tools, wikiSearchProvider, serializerOptions);
+        AgentToolCatalog.AddMcpReadTools(tools, mcpClient);
 
-        if (mcpClient is not null)
-        {
-            var allowedMcpTools = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "find", "aggregate", "count" };
-            var mcpTools = mcpClient.ListToolsAsync().GetAwaiter().GetResult();
-            tools.AddRange(mcpTools.Select(t => t.WithName(t.Name.Replace('-', '_'))).Where(t => allowedMcpTools.Contains(t.Name)).Cast<AITool>());
-        }
-
-        var instructions = BuildInstructions(settings.DatabaseName);
+        var instructions = Instructions;
 
         // Explicit function-invocation wiring with a hard iteration cap. Default is 40, which
         // is far too generous for this app — see specs/012-ai-agent-tool-call-efficiency/spec.md.
@@ -106,7 +91,7 @@ public sealed class AskAIAgent(
             .Build();
 
         // Lightweight classifier client for topic guardrail (always uses server key)
-        var classifierClient = new ChatClientBuilder(openAiClient.GetResponsesClient().AsIChatClient("gpt-5.4-mini")).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build();
+        var classifierClient = AgentToolCatalog.CreateClassifier(openAiClient);
 
         var guardrailLogger = loggerFactory.CreateLogger("StarWarsTopicGuardrail");
         var budgetLogger = loggerFactory.CreateLogger("ToolCallBudget");
@@ -134,7 +119,11 @@ public sealed class AskAIAgent(
     /// in the <c>[Description]</c> attribute on the tool itself, where the model sees it
     /// at the moment of decision. See specs/012-ai-agent-tool-call-efficiency/spec.md.
     /// </summary>
-    public static string BuildInstructions(string databaseName) => InstructionsTemplate.Replace("{DATABASE_NAME}", databaseName);
+    /// <summary>
+    /// The system prompt used by the Ask AI agent (and test fixtures).
+    /// Parameterless because the {DATABASE_NAME} token is no longer present in the template.
+    /// </summary>
+    public static string Instructions => InstructionsTemplate;
 
     const string InstructionsTemplate = """
         You are a Star Wars data assistant with access to a knowledge graph of 166,000+ entities
@@ -173,7 +162,7 @@ public sealed class AskAIAgent(
                                    get_relationships_by_category, traverse_graph
              Family tree / relationship graph / hierarchy / network (VISUAL)
                                  → search_entities → get_relationship_types → render_graph
-             Counts & charts     → count_nodes_by_property, count_nodes_by_properties,
+             Counts & charts     → count_nodes_by_property,
                                    count_related_entities, group_entities_by_connection,
                                    count_property_for_related_entities, top_connected_entities
              Temporal            → find_entities_by_year, get_entity_timeline, get_galaxy_year,

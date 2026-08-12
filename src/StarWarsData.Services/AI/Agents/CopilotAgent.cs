@@ -9,6 +9,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using OpenAI;
 using StarWarsData.Models;
+using StarWarsData.Services.AI;
 
 namespace StarWarsData.Services.AI.Agents;
 
@@ -54,26 +55,10 @@ public sealed class CopilotAgent(
         var tools = new List<AITool>();
         tools.AddRange(graphRAG.AsAIFunctions(serializerOptions));
         tools.AddRange(kgAnalytics.AsAIFunctions(serializerOptions));
-        tools.Add(
-            AIFunctionFactory.Create(
-                (string query, CancellationToken ct) => wikiSearchProvider.SearchAsync(query, ct),
-                "keyword_search",
-                """
-                Keyword search over wiki page titles and content. Fast, no AI cost.
-                Best for exact name lookups. For why/how/explain questions, use semantic_search instead.
-                """,
-                serializerOptions: serializerOptions
-            )
-        );
+        AgentToolCatalog.AddKeywordSearch(tools, wikiSearchProvider, serializerOptions);
+        AgentToolCatalog.AddMcpReadTools(tools, mcpClient);
 
-        if (mcpClient is not null)
-        {
-            var allowedMcpTools = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "find", "aggregate", "count" };
-            var mcpTools = mcpClient.ListToolsAsync().GetAwaiter().GetResult();
-            tools.AddRange(mcpTools.Select(t => t.WithName(t.Name.Replace('-', '_'))).Where(t => allowedMcpTools.Contains(t.Name)).Cast<AITool>());
-        }
-
-        var instructions = BuildInstructions(settings.DatabaseName);
+        var instructions = Instructions;
 
         // Lower iteration cap than AskAI — the copilot's job is concise prose answers,
         // not a multi-step render workflow. If it can't answer in 8 iterations, the
@@ -87,7 +72,7 @@ public sealed class CopilotAgent(
             .UseOpenTelemetry(configure: t => t.EnableSensitiveData = true)
             .Build();
 
-        var classifierClient = new ChatClientBuilder(openAiClient.GetResponsesClient().AsIChatClient("gpt-5.4-mini")).UseOpenTelemetry(configure: t => t.EnableSensitiveData = true).Build();
+        var classifierClient = AgentToolCatalog.CreateClassifier(openAiClient);
 
         var guardrailLogger = loggerFactory.CreateLogger("StarWarsTopicGuardrail");
         var budgetLogger = loggerFactory.CreateLogger("CopilotToolCallBudget");
@@ -120,9 +105,12 @@ public sealed class CopilotAgent(
 
     /// <summary>
     /// Render the Copilot agent's system prompt. Public for parity with
-    /// <see cref="AskAIAgent.BuildInstructions(string)"/> — same pattern, different prompt.
+    /// <see cref="AskAIAgent.Instructions"/> — same pattern, different prompt.
     /// </summary>
-    public static string BuildInstructions(string databaseName) => InstructionsTemplate.Replace("{DATABASE_NAME}", databaseName);
+    /// <summary>
+    /// The system prompt used by the Copilot agent (sibling to AskAIAgent.Instructions).
+    /// </summary>
+    public static string Instructions => InstructionsTemplate;
 
     const string InstructionsTemplate = """
         You are the Star Wars Data copilot — a contextual reading assistant inside a

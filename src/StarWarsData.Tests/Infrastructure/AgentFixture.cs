@@ -8,6 +8,7 @@ using MongoDB.Driver;
 using OpenAI;
 using StarWarsData.Models;
 using StarWarsData.Services;
+using StarWarsData.Services.AI;
 using StarWarsData.Services.AI.Agents;
 
 namespace StarWarsData.Tests.Infrastructure;
@@ -98,13 +99,7 @@ public static class AgentFixture
             tools.AddRange(dataExplorer.AsAIFunctions(serializerOptions));
             tools.AddRange(graphRag.AsAIFunctions(serializerOptions));
             tools.AddRange(kgAnalytics.AsAIFunctions(serializerOptions));
-            tools.Add(
-                AIFunctionFactory.Create(
-                    (string query, CancellationToken ct) => wikiSearchProvider.SearchAsync(query, ct),
-                    ToolNames.Wiki.KeywordSearch,
-                    "Keyword search over wiki page titles and content. For conceptual questions use semantic_search."
-                )
-            );
+            AgentToolCatalog.AddKeywordSearch(tools, wikiSearchProvider, serializerOptions);
 
             _openAiClient = openAiClient;
             _mongoClient = mongoClient;
@@ -156,7 +151,7 @@ public static class AgentFixture
         {
             ChatOptions = new ChatOptions
             {
-                Instructions = AskAIAgent.BuildInstructions(DatabaseName),
+                Instructions = AskAIAgent.Instructions,
                 Tools = Tools,
                 Temperature = 0f,
             },

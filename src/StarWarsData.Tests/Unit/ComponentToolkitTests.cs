@@ -369,35 +369,6 @@ public class ComponentToolkitTests
     }
 
     [TestMethod]
-    public void OnlyOneResultIsSet_PerToolCall()
-    {
-        var toolkit = new ComponentToolkit();
-
-        toolkit.RenderChart("Bar", "Test", ["A"], series: [new ChartSeries { Name = "S", Data = [1] }]);
-
-        Assert.IsNotNull(toolkit.ChartResult);
-        Assert.IsNull(toolkit.TableResult);
-        Assert.IsNull(toolkit.DataTableResult);
-        Assert.IsNull(toolkit.GraphResult);
-        Assert.IsNull(toolkit.InfoboxResult);
-        Assert.IsNull(toolkit.TextResult);
-        Assert.IsNull(toolkit.TimelineResult);
-    }
-
-    [TestMethod]
-    public void SequentialCalls_OverwritePreviousResult()
-    {
-        var toolkit = new ComponentToolkit();
-
-        toolkit.RenderChart("Bar", "First", ["A"], series: [new ChartSeries { Name = "S", Data = [1] }]);
-        Assert.AreEqual("First", toolkit.ChartResult!.Title);
-
-        toolkit.RenderChart("Pie", "Second", labels: ["A"], series: [new ChartSeries { Name = "S", Data = [1] }]);
-        Assert.AreEqual("Second", toolkit.ChartResult!.Title);
-        Assert.AreEqual(AskChartType.Pie, toolkit.ChartResult!.ChartType);
-    }
-
-    [TestMethod]
     public void AsAIFunctions_ReturnsAllToolDefinitions()
     {
         var toolkit = new ComponentToolkit();

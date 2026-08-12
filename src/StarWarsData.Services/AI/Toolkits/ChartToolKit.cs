@@ -19,15 +19,6 @@ namespace StarWarsData.Services;
 /// </summary>
 public class ComponentToolkit
 {
-    public TableDescriptor? TableResult { get; private set; }
-    public DataTableDescriptor? DataTableResult { get; private set; }
-    public ChartDescriptor? ChartResult { get; private set; }
-    public GraphDescriptor? GraphResult { get; private set; }
-    public InfoboxDescriptor? InfoboxResult { get; private set; }
-    public TextDescriptor? TextResult { get; private set; }
-    public TimelineDescriptor? TimelineResult { get; private set; }
-    public FamilyTreeDescriptor? FamilyTreeResult { get; private set; }
-
     const string ReferencesParamDescription =
         "Source references for EVERY distinct entity represented in this visualization. "
         + "PREFERRED shape: pass ONLY the entity's `pageId` (verbatim from a KG tool result — search_entities, "
@@ -64,7 +55,7 @@ public class ComponentToolkit
         [Description(MobileSummaryParamDescription)] string mobileSummary = ""
     )
     {
-        TableResult = new TableDescriptor
+        return new TableDescriptor
         {
             Title = title,
             Collection = infoboxType,
@@ -74,7 +65,6 @@ public class ComponentToolkit
             MobileSummary = mobileSummary,
             References = references,
         };
-        return TableResult;
     }
 
     [Description(
@@ -93,7 +83,7 @@ public class ComponentToolkit
         [Description(MobileSummaryParamDescription)] string mobileSummary = ""
     )
     {
-        DataTableResult = new DataTableDescriptor
+        return new DataTableDescriptor
         {
             Title = title,
             Columns = columns,
@@ -101,7 +91,6 @@ public class ComponentToolkit
             MobileSummary = mobileSummary,
             References = references,
         };
-        return DataTableResult;
     }
 
     [Description(
@@ -134,7 +123,7 @@ public class ComponentToolkit
         if (!Enum.TryParse<AskChartType>(chartType, ignoreCase: true, out var parsedType))
             parsedType = AskChartType.Bar;
 
-        ChartResult = new ChartDescriptor
+        return new ChartDescriptor
         {
             Title = title,
             ChartType = parsedType,
@@ -145,7 +134,6 @@ public class ComponentToolkit
             MobileSummary = mobileSummary,
             References = references,
         };
-        return ChartResult;
     }
 
     [Description(
@@ -209,7 +197,7 @@ public class ComponentToolkit
         if (parsedMode == GraphLayoutMode.Path)
             parsedMode = GraphLayoutMode.Force;
 
-        GraphResult = new GraphDescriptor
+        return new GraphDescriptor
         {
             Title = title,
             RootEntityId = rootEntityId,
@@ -222,7 +210,6 @@ public class ComponentToolkit
             MobileSummary = mobileSummary,
             References = references,
         };
-        return GraphResult;
     }
 
     [Description(
@@ -245,7 +232,7 @@ public class ComponentToolkit
         [Description(MobileSummaryParamDescription)] string mobileSummary = ""
     )
     {
-        GraphResult = new GraphDescriptor
+        return new GraphDescriptor
         {
             Title = title,
             RootEntityId = fromEntityId,
@@ -277,7 +264,6 @@ public class ComponentToolkit
             },
             References = references,
         };
-        return GraphResult;
     }
 
     [Description(
@@ -328,7 +314,7 @@ public class ComponentToolkit
         // exactly the way RenderGraph hands off to AskGraphView. People/Kinship/Limitations
         // are populated client-side after the projection lands; the tool itself does not
         // call the endpoint or fabricate kinship data.
-        FamilyTreeResult = new FamilyTreeDescriptor
+        return new FamilyTreeDescriptor
         {
             Title = title,
             RootEntityId = rootEntityId,
@@ -338,7 +324,6 @@ public class ComponentToolkit
             MobileSummary = mobileSummary,
             References = references,
         };
-        return FamilyTreeResult;
     }
 
     [Description(
@@ -390,7 +375,7 @@ public class ComponentToolkit
             _ => null,
         };
 
-        TimelineResult = new TimelineDescriptor
+        return new TimelineDescriptor
         {
             Title = title,
             Categories = categories,
@@ -404,7 +389,6 @@ public class ComponentToolkit
             MobileSummary = mobileSummary,
             References = references,
         };
-        return TimelineResult;
     }
 
     [Description(
@@ -421,14 +405,13 @@ public class ComponentToolkit
         [Description(MobileSummaryParamDescription)] string mobileSummary = ""
     )
     {
-        InfoboxResult = new InfoboxDescriptor
+        return new InfoboxDescriptor
         {
             Title = title,
             PageIds = pageIds,
             MobileSummary = mobileSummary,
             References = references,
         };
-        return InfoboxResult;
     }
 
     [Description(
@@ -473,13 +456,12 @@ public class ComponentToolkit
                 section.Content = SanitizeMarkdown(section.Content);
         }
 
-        TextResult = new TextDescriptor
+        return new TextDescriptor
         {
             Title = title,
             Sections = sections,
             References = references,
         };
-        return TextResult;
     }
 
     /// <summary>

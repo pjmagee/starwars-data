@@ -91,68 +91,6 @@ public class KGAnalyticsToolkit
 
     [Description(
         """
-            Count nodes grouped by MULTIPLE properties simultaneously, with the contributing
-            source nodes attached to every row so the agent can cite them in `references`.
-            Each row contains the property combination, a count, and a `sources` array of
-            up to `maxSources` contributing nodes (pageId + title + wikiUrl). Use these wikiUrls
-            to populate `references` on render_chart / render_data_table — never invent citations.
-
-            Example: 'Starship classes with manufacturer, count, and example ships' →
-                entityType='Starship', properties=['Class', 'Manufacturer']
-
-            ONE call returns all combinations — never loop through entities individually.
-            Best for: render_data_table with multi-column grouping.
-            """
-    )]
-    public async Task<List<Dictionary<string, object>>> CountNodesByProperties(
-        [Description("Entity type to aggregate (e.g. Starship, Character, CelestialBody)")] string entityType,
-        [Description("Property names to group by (e.g. ['Class', 'Manufacturer']). Case-sensitive.")] List<string> properties,
-        [Description("Max contributing source nodes attached per row (default 5, max 25). Use 1 if you only need a single citation per row.")] int maxSources = 5,
-        [Description("Max results (default 30, max 50)")] int limit = 30,
-        [Description(ContinuityParamDescription)] string? continuity = null
-    )
-    {
-        var results = await _kg.CountNodesByPropertiesAsync(entityType, properties, continuity, maxSources, limit);
-
-        return results
-            .Select(doc =>
-            {
-                var row = new Dictionary<string, object>();
-                var id = doc["_id"].AsBsonDocument;
-                foreach (var prop in properties)
-                {
-                    var val = id.GetValue(prop, BsonNull.Value);
-                    row[prop] =
-                        val.IsBsonNull ? "Unknown"
-                        : val.IsBsonArray ? string.Join(", ", val.AsBsonArray.Select(v => v.AsString))
-                        : val.AsString;
-                }
-                row["count"] = doc["count"].AsInt32;
-                row["sources"] = ReadSourcesFromDoc(doc);
-                return row;
-            })
-            .ToList();
-    }
-
-    static List<NodeRefDto> ReadSourcesFromDoc(BsonDocument doc)
-    {
-        if (!doc.Contains("sources") || doc["sources"].IsBsonNull)
-            return [];
-        return doc["sources"]
-            .AsBsonArray.Select(s =>
-            {
-                var sd = s.AsBsonDocument;
-                return new NodeRefDto(
-                    PageId: sd.GetValue("pageId", 0).ToInt32(),
-                    Title: sd.GetValue("title", "").IsBsonNull ? "" : sd["title"].AsString,
-                    WikiUrl: sd.GetValue("wikiUrl", BsonNull.Value).IsBsonNull ? null : sd["wikiUrl"].AsString
-                );
-            })
-            .ToList();
-    }
-
-    [Description(
-        """
             PRIMARY TOOL for property aggregation on the KG. Call this for ANY property you want
             to group entities by — it's safe to call even if you're not sure whether the field
             is a true scalar or a link-bearing field that's been promoted to an edge. The

@@ -45,7 +45,7 @@ culminating in:
 
 ```csharp
 return chatClient
-    .AsAIAgent(instructions: AskAIAgent.BuildInstructions(databaseName), tools: tools)
+    .AsAIAgent(instructions: AskAIAgent.Instructions, tools: tools)
     .AsBuilder()
     .UseStarWarsTopicGuardrail(classifierClient, aiStatus, guardrailLogger)
     .Build();
@@ -107,11 +107,10 @@ new features should target the KG, not legacy timeline collections.
 
 ### Descriptor-based rendering
 
-Render tools return **descriptors**, not rendered HTML. The frontend
-(Blazor + MudBlazor) reads `TableDescriptor`, `ChartDescriptor`, `GraphDescriptor`,
-`TimelineDescriptor`, `InfoboxDescriptor`, `TextDescriptor`, `AurebeshDescriptor`
-off the `ComponentToolkit` state and paints them. The agent never emits raw HTML
-or JSX, which keeps the contract between model and UI small and auditable.
+Render tools return **descriptors** directly (the return value of the `render_*` call), not rendered HTML. The frontend
+(Blazor + MudBlazor) receives the `TableDescriptor`, `ChartDescriptor`, `GraphDescriptor`,
+`TimelineDescriptor`, `InfoboxDescriptor`, `TextDescriptor`, `AurebeshDescriptor` from the tool result
+and paints them. The agent never emits raw HTML or JSX, which keeps the contract between model and UI small and auditable.
 
 ## Documentation conventions for tools
 
@@ -169,8 +168,8 @@ quality is part of the product. Conventions:
   `UseAIContextProviders` for conditional tool surfacing, or adopt
   routing/handoff patterns from Agent Framework.
 - Tools that return JSON strings are not strongly typed on the return side. We
-  accept this because the frontend only consumes typed descriptors from
-  `ComponentToolkit`; everything else is LLM input.
+  accept this because the frontend only consumes typed descriptors returned by the
+  render tools; everything else is LLM input.
 - `[Description]` lives in attributes rather than XML docs, so IDE hover
   tooltips on toolkit methods are noisier than typical. This is the price of
   keeping the model-facing text next to the parameter declaration.
@@ -196,7 +195,7 @@ quality is part of the product. Conventions:
   [src/StarWarsData.ApiService/Program.cs](../../src/StarWarsData.ApiService/Program.cs)
 - Toolkits:
   [src/StarWarsData.Services/AI/Toolkits/](../../src/StarWarsData.Services/AI/Toolkits/)
-- Agent instructions: [src/StarWarsData.Services/AI/Agents/AskAIAgent.cs](../../src/StarWarsData.Services/AI/Agents/AskAIAgent.cs) (`BuildInstructions(databaseName)`)
+- Agent instructions: [src/StarWarsData.Services/AI/Agents/AskAIAgent.cs](../../src/StarWarsData.Services/AI/Agents/AskAIAgent.cs) (`Instructions`)
 - Microsoft Agent Framework overview: <https://learn.microsoft.com/agent-framework/overview/agent-framework-overview>
 - Microsoft Agent Framework .NET repo: <https://github.com/microsoft/agent-framework/tree/main/dotnet>
 - Related: [ADR-001: Internal API Authentication](./001-internal-api-auth.md)

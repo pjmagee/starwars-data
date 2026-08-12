@@ -44,11 +44,51 @@ public class DataExplorerToolkit(IMongoClient mongoClient, IOptions<SettingsOpti
 
     static BsonDocument WithTemplate(string infoboxType, BsonDocument extra)
     {
-        var filter = TemplateFilter(infoboxType);
-        foreach (var el in extra)
-            filter[el.Name] = el.Value;
-        return filter;
+       var filter = TemplateFilter(infoboxType);
+       foreach (var el in extra)
+           filter[el.Name] = el.Value;
+       return filter;
+   }
+
+    private async Task<List<BsonDocument>> FindProjectedAsync(BsonDocument filter, int limit, params string[] keepLabels)
+    {
+        var keep = new List<string> { InfoboxFieldLabels.Titles };
+        keep.AddRange(keepLabels.Where(l => !string.IsNullOrWhiteSpace(l)));
+
+        var dataFilter = new BsonDocument(
+            "$filter",
+            new BsonDocument
+            {
+                { "input", "$" + PageBsonFields.InfoboxData },
+                { "as", "d" },
+                { "cond", new BsonDocument("$in", new BsonArray { "$$d.Label", new BsonArray(keep) }) },
+            }
+        );
+
+        var projection = new BsonDocument
+        {
+            { MongoFields.Id, 1 },
+            { PageBsonFields.Continuity, 1 },
+            { PageBsonFields.WikiUrl, 1 },
+            { InfoboxBsonFields.Data, dataFilter },
+        };
+
+        return await Pages
+            .Find(filter)
+            .Limit(limit)
+            .Project(projection)
+            .ToListAsync();
     }
+
+    static string GetTitle(BsonArray data) =>
+        data.OfType<BsonDocument>()
+            .FirstOrDefault(x => x[InfoboxBsonFields.Label].AsString == InfoboxFieldLabels.Titles)
+            ?[InfoboxBsonFields.Values].AsBsonArray.FirstOrDefault()?.AsString ?? "";
+
+    static List<string> GetLabelValues(BsonArray data, string label) =>
+        data.OfType<BsonDocument>()
+            .FirstOrDefault(x => x[InfoboxBsonFields.Label].AsString == label)
+            ?[InfoboxBsonFields.Values].AsBsonArray.Select(v => v.AsString).ToList() ?? [];
 
     [Description(
         """
@@ -78,34 +118,11 @@ public class DataExplorerToolkit(IMongoClient mongoClient, IOptions<SettingsOpti
         if (NormalizeContinuity(continuity) is { } cont)
             filter[PageBsonFields.Continuity] = cont;
 
-        var docs = await Pages
-            .Find(filter)
-            .Limit(limit)
-            .Project(
-                new BsonDocument
-                {
-                    { MongoFields.Id, 1 },
-                    { PageBsonFields.Continuity, 1 },
-                    { PageBsonFields.WikiUrl, 1 },
-                    {
-                        InfoboxBsonFields.Data,
-                        new BsonDocument(
-                            "$filter",
-                            new BsonDocument
-                            {
-                                { "input", "$" + PageBsonFields.InfoboxData },
-                                { "as", "d" },
-                                { "cond", new BsonDocument("$eq", new BsonArray { "$$d.Label", InfoboxFieldLabels.Titles }) },
-                            }
-                        )
-                    },
-                }
-            )
-            .ToListAsync();
+        var docs = await FindProjectedAsync(filter, limit);
 
         return docs.Select(d => new PageSummaryDto(
                 Id: d[MongoFields.Id].AsInt32,
-                Name: d[InfoboxBsonFields.Data].AsBsonArray.FirstOrDefault()?[InfoboxBsonFields.Values].AsBsonArray.FirstOrDefault()?.AsString ?? "",
+                Name: GetTitle(d[InfoboxBsonFields.Data].AsBsonArray),
                 Continuity: d.Contains(PageBsonFields.Continuity) ? d[PageBsonFields.Continuity].AsString : "",
                 WikiUrl: d.Contains(PageBsonFields.WikiUrl) ? d[PageBsonFields.WikiUrl].AsString : ""
             ))
@@ -225,48 +242,15 @@ public class DataExplorerToolkit(IMongoClient mongoClient, IOptions<SettingsOpti
         if (NormalizeContinuity(continuity) is { } cont)
             filter[PageBsonFields.Continuity] = cont;
 
-        var docs = await Pages
-            .Find(filter)
-            .Limit(limit)
-            .Project(
-                new BsonDocument
-                {
-                    { MongoFields.Id, 1 },
-                    { PageBsonFields.Continuity, 1 },
-                    { PageBsonFields.WikiUrl, 1 },
-                    {
-                        InfoboxBsonFields.Data,
-                        new BsonDocument(
-                            "$filter",
-                            new BsonDocument
-                            {
-                                { "input", "$" + PageBsonFields.InfoboxData },
-                                { "as", "d" },
-                                {
-                                    "cond",
-                                    new BsonDocument(
-                                        "$in",
-                                        new BsonArray
-                                        {
-                                            "$$d.Label",
-                                            new BsonArray { InfoboxFieldLabels.Titles, label },
-                                        }
-                                    )
-                                },
-                            }
-                        )
-                    },
-                }
-            )
-            .ToListAsync();
+        var docs = await FindProjectedAsync(filter, limit, label);
 
         var results = docs.Select(d =>
             {
-                var data = d[InfoboxBsonFields.Data].AsBsonArray.OfType<BsonDocument>().ToList();
+                var data = d[InfoboxBsonFields.Data].AsBsonArray;
                 return new PageMatchDto(
                     Id: d[MongoFields.Id].AsInt32,
-                    Name: data.FirstOrDefault(x => x[InfoboxBsonFields.Label].AsString == InfoboxFieldLabels.Titles)?[InfoboxBsonFields.Values].AsBsonArray.FirstOrDefault()?.AsString ?? "",
-                    MatchValue: data.FirstOrDefault(x => x[InfoboxBsonFields.Label].AsString == label)?[InfoboxBsonFields.Values].AsBsonArray.Select(v => v.AsString).ToList(),
+                    Name: GetTitle(data),
+                    MatchValue: GetLabelValues(data, label),
                     Continuity: d.Contains(PageBsonFields.Continuity) ? d[PageBsonFields.Continuity].AsString : "",
                     WikiUrl: d.Contains(PageBsonFields.WikiUrl) ? d[PageBsonFields.WikiUrl].AsString : ""
                 );
@@ -426,48 +410,15 @@ public class DataExplorerToolkit(IMongoClient mongoClient, IOptions<SettingsOpti
         if (NormalizeContinuity(continuity) is { } cont)
             filter[PageBsonFields.Continuity] = cont;
 
-        var docs = await Pages
-            .Find(filter)
-            .Limit(limit)
-            .Project(
-                new BsonDocument
-                {
-                    { MongoFields.Id, 1 },
-                    { PageBsonFields.Continuity, 1 },
-                    { PageBsonFields.WikiUrl, 1 },
-                    {
-                        InfoboxBsonFields.Data,
-                        new BsonDocument(
-                            "$filter",
-                            new BsonDocument
-                            {
-                                { "input", "$" + PageBsonFields.InfoboxData },
-                                { "as", "d" },
-                                {
-                                    "cond",
-                                    new BsonDocument(
-                                        "$in",
-                                        new BsonArray
-                                        {
-                                            "$$d.Label",
-                                            new BsonArray { InfoboxFieldLabels.Titles, dateLabel },
-                                        }
-                                    )
-                                },
-                            }
-                        )
-                    },
-                }
-            )
-            .ToListAsync();
+        var docs = await FindProjectedAsync(filter, limit, dateLabel);
 
         return docs.Select(d =>
             {
-                var data = d[InfoboxBsonFields.Data].AsBsonArray.OfType<BsonDocument>().ToList();
+                var data = d[InfoboxBsonFields.Data].AsBsonArray;
                 return new PageDateMatchDto(
                     Id: d[MongoFields.Id].AsInt32,
-                    Name: data.FirstOrDefault(x => x[InfoboxBsonFields.Label].AsString == InfoboxFieldLabels.Titles)?[InfoboxBsonFields.Values].AsBsonArray.FirstOrDefault()?.AsString ?? "",
-                    Date: data.FirstOrDefault(x => x[InfoboxBsonFields.Label].AsString == dateLabel)?[InfoboxBsonFields.Values].AsBsonArray.Select(v => v.AsString).ToList(),
+                    Name: GetTitle(data),
+                    Date: GetLabelValues(data, dateLabel),
                     Continuity: d.Contains(PageBsonFields.Continuity) ? d[PageBsonFields.Continuity].AsString : "",
                     WikiUrl: d.Contains(PageBsonFields.WikiUrl) ? d[PageBsonFields.WikiUrl].AsString : ""
                 );
@@ -514,34 +465,11 @@ public class DataExplorerToolkit(IMongoClient mongoClient, IOptions<SettingsOpti
         if (NormalizeContinuity(continuity) is { } cont)
             filter[PageBsonFields.Continuity] = cont;
 
-        var docs = await Pages
-            .Find(filter)
-            .Limit(limit)
-            .Project(
-                new BsonDocument
-                {
-                    { MongoFields.Id, 1 },
-                    { PageBsonFields.Continuity, 1 },
-                    { PageBsonFields.WikiUrl, 1 },
-                    {
-                        InfoboxBsonFields.Data,
-                        new BsonDocument(
-                            "$filter",
-                            new BsonDocument
-                            {
-                                { "input", "$" + PageBsonFields.InfoboxData },
-                                { "as", "d" },
-                                { "cond", new BsonDocument("$eq", new BsonArray { "$$d.Label", InfoboxFieldLabels.Titles }) },
-                            }
-                        )
-                    },
-                }
-            )
-            .ToListAsync();
+        var docs = await FindProjectedAsync(filter, limit);
 
         return docs.Select(d => new PageSummaryDto(
                 Id: d[MongoFields.Id].AsInt32,
-                Name: d[InfoboxBsonFields.Data].AsBsonArray.OfType<BsonDocument>().FirstOrDefault()?[InfoboxBsonFields.Values].AsBsonArray.FirstOrDefault()?.AsString ?? "",
+                Name: GetTitle(d[InfoboxBsonFields.Data].AsBsonArray),
                 Continuity: d.Contains(PageBsonFields.Continuity) ? d[PageBsonFields.Continuity].AsString : "",
                 WikiUrl: d.Contains(PageBsonFields.WikiUrl) ? d[PageBsonFields.WikiUrl].AsString : ""
             ))
