@@ -94,7 +94,27 @@ builder.Services.AddHangfire(
 
 if (hangfireEnabled)
 {
-    builder.Services.AddHangfireServer();
+    builder.Services.AddHangfireServer(options =>
+    {
+        // Hangfire's default is min(ProcessorCount * 5, 20), and every worker polls
+        // hangfire.jobGraph on its own timer whether or not there is work. On the
+        // deployed host (24 CPUs visible, no cgroup limit) that landed on the cap of
+        // 20 workers and produced a measured 800 findAndModify calls per 10 minutes
+        // against an empty queue — 40% of ALL trace spans the service emitted.
+        //
+        // 4 is sized for the on-demand ETL phases in AdminController (which enqueue
+        // ~20 distinct jobs), not for the six recurring jobs, which are daily and
+        // run one at a time. Dropping to 2 would save a further ~80 polls per 10
+        // minutes, which is noise next to the notifications tail that remains.
+        options.WorkerCount = 4;
+
+        // Only affects DELAYED and RECURRING jobs. Jobs enqueued from the admin UI
+        // are picked up through the tailed notifications collection, so they still
+        // start immediately — this does not make manual ETL triggers feel slower.
+        // Every poll costs a distributed lock acquire + release, and 15-second
+        // precision is meaningless for jobs that run once a day.
+        options.SchedulePollingInterval = TimeSpan.FromMinutes(1);
+    });
 }
 
 var app = builder.Build();
